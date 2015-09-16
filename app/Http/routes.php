@@ -16,5 +16,14 @@ Route::get('/', function () {
 });
 
 
-Route::get('/admin/documentupload', 'DocumentAdminController@create');
-Route::post('/admin/documentupload', 'DocumentAdminController@store');
+
+//list of admin functions
+Route::get('/admin', function(){
+	return view('admin.index');
+});
+//upload a file
+Route::get('/admin/document/create', 'DocumentAdminController@create');
+Route::post('/admin/document/create', 'DocumentAdminController@store');
+//add a folder
+Route::get('/admin/folder/create', 'FolderAdminController@create');
+Route::post('/admin/folder/create', 'FolderAdminController@store');
