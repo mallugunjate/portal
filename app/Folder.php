@@ -14,4 +14,10 @@ class Folder extends Model
     	$folders = Folder::all();
         return $folders;
     }
+
+    public static function getFolderName($id)
+    {
+    	$folder = Folder::find($id);
+    	return $folder->name;
+    }
 }

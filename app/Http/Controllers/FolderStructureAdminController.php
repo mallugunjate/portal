@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Folder;
 use App\FolderStructure;
 
-class FolderStructureController extends Controller
+class FolderStructureAdminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,28 +19,10 @@ class FolderStructureController extends Controller
     public function index()
     {
         $folders = Folder::all();
-        // $folderStruct = FolderStructure::all();
-        $folderarray = array();
-
-        foreach($folders as $folder){
-
-            $folderarray[$folder->id] = $folder->name;
-            $childern = FolderStructure::getChildern($folder->id);
-
-            if(count($childern) > 0){
-                $childarray = array();
-                foreach($childern as $child){
-                    array_push($childarray, array($child->child => Folder::getFolderName(intval($child->child))));    
-                }
-
-                $folderarray[$folder->name] = $childarray;
-            }
-
-            
-        }
-
+        $folderStruct = FolderStructure::all();
         return view('admin.view-folder-structure')
-            ->with('folders', $folderarray);      
+            ->with('folders', $folders)
+            ->with('folderStruct', $folderStruct);
     }
 
     /**
@@ -50,7 +32,9 @@ class FolderStructureController extends Controller
      */
     public function create()
     {
-        //
+        $folders = Folder::getFolders();
+        return view('admin.define-folder-relationship')
+            ->with('folders', $folders);
     }
 
     /**
@@ -61,7 +45,15 @@ class FolderStructureController extends Controller
      */
     public function store(Request $request)
     {
-        //
+            $relationshipdetails = array(
+                'parent' => $request->get('parent'),
+                'child' => $request->get('child')
+            );
+
+            $folderstruct = FolderStructure::create($relationshipdetails);
+            $folderstruct->save();
+
+            return "Relationship established: '" . $request->get('child') . "' is child of '" . $request->get('parent') . "'.";
     }
 
     /**

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Folder;
+use App\FolderStructure;
 
 class FolderAdminController extends Controller
 {
