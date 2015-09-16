@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('/admin/documentupload', 'DocumentAdminController@create');
+Route::post('/admin/documentupload', 'DocumentAdminController@store');
