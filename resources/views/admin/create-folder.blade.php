@@ -1,7 +1,7 @@
 <p>create a folder</p>
 
 
-{!! Form::open(array('action' => 'FolderAdminController@store', 'files' => true, 'class' => 'form-horizontal', 'role' => 'form')) !!}
+{!! Form::open(array('action' => 'FolderAdminController@store', 'files' => false, 'class' => 'form-horizontal', 'role' => 'form')) !!}
                     
 
 

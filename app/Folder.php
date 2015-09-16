@@ -8,4 +8,10 @@ class Folder extends Model
 {
     protected $table = 'folders';
     protected $fillable = array('name');
+
+    public static function getFolders()
+    {
+    	$folders = Folder::all();
+        return $folders;
+    }
 }

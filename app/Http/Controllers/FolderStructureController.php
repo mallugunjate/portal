@@ -7,8 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Folder;
+use App\FolderStructure;
 
-class FolderAdminController extends Controller
+class FolderStructureController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +18,11 @@ class FolderAdminController extends Controller
      */
     public function index()
     {
-        //
+        $folders = Folder::all();
+        $folderStruct = FolderStructure::all();
+        return view('admin.view-folder-structure')
+            ->with('folders', $folders)
+            ->with('folderStruct', $folderStruct);
     }
 
     /**
@@ -27,7 +32,9 @@ class FolderAdminController extends Controller
      */
     public function create()
     {
-        return view('admin.create-folder');
+        $folders = Folder::getFolders();
+        return view('admin.define-folder-relationship')
+            ->with('folders', $folders);
     }
 
     /**
@@ -38,15 +45,15 @@ class FolderAdminController extends Controller
      */
     public function store(Request $request)
     {
-            $folderdetails = array(
-                'name' => $request->get('foldername')
+            $relationshipdetails = array(
+                'parent' => $request->get('parent'),
+                'child' => $request->get('child')
             );
 
-            $folder = Folder::create($folderdetails);
-            $folder->save();
+            $folderstruct = FolderStructure::create($relationshipdetails);
+            $folderstruct->save();
 
-            return "Folder '" . $request->get('foldername') . "' created";
-
+            return "Relationship established: '" . $request->get('child') . "' is child of '" . $request->get('parent') . "'.";
     }
 
     /**
