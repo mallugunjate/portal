@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Document;
+use App\Folder;
+use App\FileFolder;
 
 class DocumentAdminController extends Controller
 {
@@ -27,7 +29,9 @@ class DocumentAdminController extends Controller
      */
     public function create()
     {
-        return view('admin.document-upload');
+        $folders = Folder::all();
+        return view('admin.document-upload')
+            ->with('folders', $folders);
     }
 
     /**
@@ -41,7 +45,7 @@ class DocumentAdminController extends Controller
         $extension = $request->file('document')->getClientOriginalExtension();
         $originalName = $request->file('document')->getClientOriginalName();
         $modifiedName = str_replace(" ", "_", $originalName);
-        $modifiedName = str_replace(".", "_", $originalName);
+        $modifiedName = str_replace(".", "_", $modifiedName);
 
         $directory = public_path() . '/files';
         $uniqueHash = sha1(time() . time());
@@ -52,27 +56,39 @@ class DocumentAdminController extends Controller
         if ($upload_success) {
             $documentdetails = array(
                 'filename'          => $filename,
-                'title'             => $request->get('title'),
-                'description'       => $request->get('description')
+                // 'title'             => $request->get('title'),
+                'title' => 'something',
+                //'description'       => $request->get('description')
+                'description'       => 'who cares'
             );
 
             $document = Document::create($documentdetails);
             $document->save();
+            $lastInsertedId= $document->id;
+
+            $documentfolderdetails = array(
+                'document_id' => $lastInsertedId,
+                'folder_struct_id' => $request->get('folderselected')
+            );
+           
+            $documentfolder = FileFolder::create($documentfolderdetails);
+            $documentfolder->save();
+        }
 
             // $t = "Awesome!";
             // $r = "Your new document has been created! <a href='/admin/photos'>Back to Photos</a>";
             // return view('admin/confirmation')
             //     ->with('response_title', $t)
             //     ->with('response', $r);
-            return "file uploaded";
-        } else {
-            // $t = "Um...";
-            // $r = "Something bad happened. <a href='/admin/photos'>Back to Photos</a>";
-            // return View::make('admin/confirmation')
-            //     ->with('response_title', $t)
-            //     ->with('response', $r);
-            return "it didn't work";
-        }
+            //return "file uploaded";
+        // } else {
+        //     // $t = "Um...";
+        //     // $r = "Something bad happened. <a href='/admin/photos'>Back to Photos</a>";
+        //     // return View::make('admin/confirmation')
+        //     //     ->with('response_title', $t)
+        //     //     ->with('response', $r);
+        //     return "it didn't work";
+        // }
     }
 
     /**

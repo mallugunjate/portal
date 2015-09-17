@@ -19,7 +19,7 @@ class FileFolder extends Migration
             $table->timestamps();
 
             $table->foreign('document_id')->references('id')->on('documents')->onDelete('cascade');
-            $table->foreign('folder_struct_id')->references('id')->on('folder_struct')->onDelete('cascade');
+            // $table->foreign('folder_struct_id')->references('id')->on('folder_struct')->onDelete('cascade');
         });
     }
 
