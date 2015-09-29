@@ -11,10 +11,11 @@
                             <input type="text" class="form-control" id="foldername" name="foldername" value="">
                         </div>
      
-                        
+                        <div class="form-group">
+                            <input type="checkbox" name="subfolder" value="1">
+                            <label>Is this a subfolder?</label>
+                        </div>
                         <div class="form-group">  
-
-                            
                             
                             <div class="col-sm-5 pull-right">
                                

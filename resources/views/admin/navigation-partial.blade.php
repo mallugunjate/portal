@@ -1,14 +1,30 @@
 @if(count($nav["children"]) >0 )
-	<li> {{$nav["label"]}} 
+	<li id={{$nav["id"]}}> {{$nav["label"]}} 
 	<ul>
 	@foreach ($nav["children"] as $child)
 	<?php $nav = $navigation[$child["child_id"]] ?>
 	@include('admin.navigation-partial')
 	@endforeach 
+
 	</ul>
 	</li>
+
+@elseif ( isset($nav["weeks"]) && count($nav["weeks"] > 0) )
+	<li id={{$nav["id"]}}> {{$nav["label"]}} 
+		<ul>
+			@foreach ($nav["weeks"]  as $week )
+			<li id = {{$week["week_id"]}} > {{ "week " . $week["week"] }}
+				<ul>
+					
+				</ul>
+			</li>
+			@endforeach
+		</ul>
+	</li>	
+	
+
 @else
-	<li>{{ $nav["label"] }} 
+	<li class="folder" id={{$nav["id"]}}>{{ $nav["label"] }} 
 		<ul></ul>
 	</li>
 @endif

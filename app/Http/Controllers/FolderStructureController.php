@@ -21,6 +21,7 @@ class FolderStructureController extends Controller
            
 
         $navigation = FolderStructure::getNavigationStructure();
+        // $weeksFolders = FolderStructure::getWeekWindow(7);
         return view('admin.view-folder-structure')
             ->with('navigation', $navigation);
     }

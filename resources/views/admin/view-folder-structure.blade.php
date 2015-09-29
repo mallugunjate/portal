@@ -15,7 +15,6 @@
 		
 		@if ( $nav["is_child"] == 0)
 			
-			
 			@include('admin.navigation-partial', ['navigation' =>$navigation, 'currentnode' => $nav])
 			
 		@endif
@@ -27,6 +26,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/tree.js"></script>
+<script type="text/javascript" src="/js/folderStructure.js" ></script>
 <script>
 	$(document).ready(function(){
 		$(".tree").treed({openedClass : 'glyphicon glyphicon-folder-open', closedClass : 'glyphicon glyphicon-folder-close'});

@@ -3,18 +3,15 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
+// use Years; 
 
 class FolderStructure extends Model
 {
     protected $table = 'folder_struct';
     protected $fillable = array('parent', 'child');
 
-    public static function getChildern($id)
-    {
-    	$childern = FolderStructure::where('parent', $id)->get();
-    	return $childern;
-    }	
-
+    	
     public static function getNavigationStructure()
     {
     	$rootFolders = Folder::where('is_child', 0)->orderBy('id', 'desc')->get();
@@ -62,9 +59,34 @@ class FolderStructure extends Model
                 $navigation[$currentNode->id]["is_child"] = $currentNode->is_child ;
                 $navigation[$currentNode->id]["children"] = [];
             }
+
+            if ($currentNode->has_weeks) {
+                $windowSize = $currentNode->week_window_size;
+                $weekWindow = FolderStructure::getWeekWindow($currentNode->id, $windowSize);
+                $counter = 0;
+                foreach ($weekWindow as $week) {
+                   
+                   $navigation[$currentNode->id]["weeks"][$counter] = [];
+                   $navigation[$currentNode->id]["weeks"][$counter]["week_id"] = $week->id;
+                   $navigation[$currentNode->id]["weeks"][$counter]["week"]= $week->week_number;
+                   $counter++;
+                }
+            }
             
             $navCounter++;   
         }
-        return $navigation;
+        return ( $navigation);
+    }
+
+    
+
+    public static function getWeekWindow($parent_id, $windowSize)   
+    {
+        Week::generateWeekFolders($parent_id);
+        $currentWeek = Week::getCurrentWeek($parent_id);
+
+        $weekWindow = Week::getWeekWindow($currentWeek, $windowSize);
+        return ($weekWindow);
+        
     }
 }

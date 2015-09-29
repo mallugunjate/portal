@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateFoldersTable extends Migration
+class CreateFiscalYearTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,12 @@ class UpdateFoldersTable extends Migration
      */
     public function up()
     {
-        Schema::table('folders', function($table){
-            $table->boolean('is_child');
+        Schema::create('years', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('year');
+            $table->string('start');
+            $table->string('end');
+            $table->timestamps();
         });
     }
 
@@ -24,8 +28,6 @@ class UpdateFoldersTable extends Migration
      */
     public function down()
     {
-        Schema::table('folders', function($table){
-            $table->dropColumn('is_child');
-        });
+        Schema::drop('years');
     }
 }
