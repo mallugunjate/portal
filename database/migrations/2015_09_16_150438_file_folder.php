@@ -15,7 +15,7 @@ class FileFolder extends Migration
         Schema::create('file_folder', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('document_id')->unsigned();
-            $table->integer('folder_struct_id')->unsigned();
+            $table->integer('folder_id')->unsigned();
             $table->timestamps();
 
             $table->foreign('document_id')->references('id')->on('documents')->onDelete('cascade');

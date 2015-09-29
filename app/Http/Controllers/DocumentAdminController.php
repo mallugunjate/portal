@@ -29,9 +29,11 @@ class DocumentAdminController extends Controller
      */
     public function create()
     {
+        $packageHash = sha1(time() . time());
         $folders = Folder::all();
         return view('admin.document-upload')
-            ->with('folders', $folders);
+            ->with('folders', $folders)
+            ->with('packageHash', $packageHash);
     }
 
     /**
@@ -42,6 +44,7 @@ class DocumentAdminController extends Controller
      */
     public function store(Request $request)
     {
+
         $extension = $request->file('document')->getClientOriginalExtension();
         $originalName = $request->file('document')->getClientOriginalName();
         $modifiedName = str_replace(" ", "_", $originalName);
@@ -55,11 +58,11 @@ class DocumentAdminController extends Controller
 
         if ($upload_success) {
             $documentdetails = array(
+                'original_filename' => $originalName,
                 'filename'          => $filename,
-                // 'title'             => $request->get('title'),
-                'title' => 'something',
-                //'description'       => $request->get('description')
-                'description'       => 'who cares'
+                'upload_package_id' => $request->get('upload_package_id'),
+                'title'             => "no title",
+                'description'       => "no description"
             );
 
             $document = Document::create($documentdetails);
@@ -68,7 +71,7 @@ class DocumentAdminController extends Controller
 
             $documentfolderdetails = array(
                 'document_id' => $lastInsertedId,
-                'folder_struct_id' => $request->get('folderselected')
+                'folder_id' => $request->get('folder_id')
             );
            
             $documentfolder = FileFolder::create($documentfolderdetails);
@@ -90,6 +93,54 @@ class DocumentAdminController extends Controller
         //     return "it didn't work";
         // }
     }
+
+    /**
+     * Show form to updata meta data for specific group of files.
+     *
+     * @param  Request $request
+     * @return Response
+     */
+    public function showMetaDataForm(Request $request)
+    {
+        $package = $request->get('package');
+
+        $documents = Document::where('upload_package_id', $package)->get();
+
+       return view('admin.add-document-meta-data')
+             ->with('documents', $documents);
+            
+    }    
+
+    /**
+     * Updata meta data for specific files.
+     *
+     * @param  Request $request
+     * @return Response
+     */
+    public function updateMetaData(Request $request)
+    {
+        $file_id = $request->get('file_id');
+        $title = $request->get('title');
+        $description = $request->get('description');
+
+
+        $metadata = array(
+            'title' => $title,
+            'description' => $description
+        );
+
+        $document = Document::find($file_id);
+        $document->update($metadata);
+        
+        // DB::table('documents')->where('id', $file_id)
+        //     ->update(['title' => $title, 'description' => $description]);
+
+        //$documents = Document::where('upload_package_id', $package)->get();
+
+        // return view('admin.add-document-meta-data')
+        //      ->with('documents', $documents);
+            
+    }       
 
     /**
      * Display the specified resource.

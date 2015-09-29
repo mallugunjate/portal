@@ -14,6 +14,8 @@ class Documents extends Migration
     {
         Schema::create('documents', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('upload_package_id');    
+            $table->string('original_filename');
             $table->string('filename');
             $table->text('title');
             $table->text('description');
