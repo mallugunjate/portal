@@ -123,7 +123,6 @@ class DocumentAdminController extends Controller
         $title = $request->get('title');
         $description = $request->get('description');
 
-
         $metadata = array(
             'title' => $title,
             'description' => $description
@@ -131,15 +130,7 @@ class DocumentAdminController extends Controller
 
         $document = Document::find($file_id);
         $document->update($metadata);
-        
-        // DB::table('documents')->where('id', $file_id)
-        //     ->update(['title' => $title, 'description' => $description]);
 
-        //$documents = Document::where('upload_package_id', $package)->get();
-
-        // return view('admin.add-document-meta-data')
-        //      ->with('documents', $documents);
-            
     }       
 
     /**
