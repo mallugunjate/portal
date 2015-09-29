@@ -1,7 +1,7 @@
 <p>define a parent/child folder relation</p>
 
 
-{!! Form::open(array('action' => 'FolderStructureController@store', 'files' => false, 'class' => 'form-horizontal', 'role' => 'form')) !!}
+{!! Form::open(array('action' => 'FolderStructureAdminController@store', 'files' => false, 'class' => 'form-horizontal', 'role' => 'form')) !!}
                     
         <div class="form-group">
             <label for="parent">Parent Folder</label>

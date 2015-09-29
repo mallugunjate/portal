@@ -34,6 +34,8 @@ Route::get('/admin/folder/create', 'FolderAdminController@create');
 Route::post('/admin/folder/create', 'FolderAdminController@store');
 //view folder structure
 Route::get('/admin/folderstructure/view', 'FolderStructureController@index');
+
 //define a folder relationship
-Route::get('/admin/folderstructure/create', 'FolderStructureAdnminController@create');
+Route::get('/admin/folderstructure/create', 'FolderStructureAdminController@create');
 Route::post('/admin/folderstructure/create', 'FolderStructureAdminController@store');
+

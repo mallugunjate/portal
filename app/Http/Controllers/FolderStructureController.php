@@ -18,30 +18,14 @@ class FolderStructureController extends Controller
      */
     public function index()
     {
-        $folders = Folder::all();
-        // $folderStruct = FolderStructure::all();
-        $folderarray = array();
+           
 
-        foreach($folders as $folder){
-
-            $folderarray[$folder->id] = $folder->name;
-            $childern = FolderStructure::getChildern($folder->id);
-
-            if(count($childern) > 0){
-                $childarray = array();
-                foreach($childern as $child){
-                    array_push($childarray, array($child->child => Folder::getFolderName(intval($child->child))));    
-                }
-
-                $folderarray[$folder->name] = $childarray;
-            }
-
-            
-        }
-
+        $navigation = FolderStructure::getNavigationStructure();
+        // $weeksFolders = FolderStructure::getWeekWindow(7);
         return view('admin.view-folder-structure')
-            ->with('folders', $folderarray);      
+            ->with('navigation', $navigation);
     }
+
 
     /**
      * Show the form for creating a new resource.

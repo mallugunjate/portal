@@ -19,6 +19,7 @@ class FolderStructureAdminController extends Controller
     public function index()
     {
         $folders = Folder::all();
+       
         $folderStruct = FolderStructure::all();
         return view('admin.view-folder-structure')
             ->with('folders', $folders)
