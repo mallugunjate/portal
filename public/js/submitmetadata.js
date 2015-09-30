@@ -6,11 +6,14 @@ $(document).ready(function() {
         var fileIdVal = $(this).attr('data-id');
         var titleVal = $("#title"+fileIdVal).val();
         var descriptionVal = $("#description"+fileIdVal).val();
-       // var selector = "#comment"+commentidVal;
+        var selector = "#metadataform"+fileIdVal;
+        var check = "#checkmark"+fileIdVal;
 
         $.post("/admin/document/add-meta-data",{ file_id: fileIdVal, title: titleVal, description: descriptionVal, _token:token })
             .done( function(data){
-              //  $(selector).closest('tr').fadeOut(2000);
+                console.log('stuff happpend');
+                //$(selector).closest('.glyphicon-ok').fadeIn(1000);
+                $(check).fadeIn(1000);
             });
         return false;
     });
