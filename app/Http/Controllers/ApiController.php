@@ -11,8 +11,12 @@ use App\Document;
 class ApiController extends Controller
 {
     
-    public function getNavigation()
+    public function getNavigation(Request $request)
     {
+        $banner_id = $request->get('banner_id');
+        if (isset($banner_id)) {
+            
+        }
         return FolderStructure::getNavigationStructure();
 
     }

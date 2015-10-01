@@ -22,7 +22,7 @@ class DocumentAdminController extends Controller
     {
         $banner_id = $request->get('banner_id');
 
-        $navigation = FolderStructure::getNavigationStructure($banner_id );
+        $navigation = FolderStructure::getNavigationStructure($banner_id);
 
         $packageHash = sha1(time() . time());
         $folders = Folder::all();
