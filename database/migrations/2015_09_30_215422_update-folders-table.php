@@ -12,10 +12,13 @@ class UpdateFoldersTable extends Migration
      */
     public function up()
     {
-        Schema::table('folders', function ($table) {
+         Schema::table('folders', function ($table) {
             $table->boolean('is_child');
             $table->boolean('has_weeks')->after('is_child');
             $table->integer('week_window_size')->after('has_weeks');
+            $table->integer('banner_id')->unsigned()->after('week_window_size');
+
+            $table->foreign('banner_id')->references('id')->on('banners')->onDelete('cascade');
         }); 
     }
 
@@ -30,6 +33,8 @@ class UpdateFoldersTable extends Migration
             $table->dropColumn('is_child');
             $table->dropColumn('has_weeks');
             $table->dropColumn('week_window_size');
+            $table->dropColumn('banner_id');
         });
+
     }
 }

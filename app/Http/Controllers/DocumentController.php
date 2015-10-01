@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Document;
 
 class DocumentController extends Controller
 {
@@ -14,9 +15,10 @@ class DocumentController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $documents = Document::getDocuments($request);
+        return $documents;
     }
 
     /**

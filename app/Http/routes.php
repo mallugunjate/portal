@@ -33,9 +33,21 @@ Route::post('/admin/document/add-meta-data', 'DocumentAdminController@updateMeta
 Route::get('/admin/folder/create', 'FolderAdminController@create');
 Route::post('/admin/folder/create', 'FolderAdminController@store');
 //view folder structure
-Route::get('/admin/folderstructure/view', 'FolderStructureController@index');
+// Route::get('/admin/folderstructure/view', 'FolderStructureController@index');
 
 //define a folder relationship
 Route::get('/admin/folderstructure/create', 'FolderStructureAdminController@create');
 Route::post('/admin/folderstructure/create', 'FolderStructureAdminController@store');
 
+//admin home
+Route::get('/admin/home', 'DocumentAdminController@index');
+
+//view documents :: need to modify this
+Route::get('/documents', 'DocumentController@index');
+
+
+//Api routes
+
+Route::get('/api/navigation', 'ApiController@getNavigation');
+Route::get('/api/files', 'ApiController@getFilesInFolder');
+Route::get('api/file/{id}', 'ApiController@getFileById');

@@ -18,12 +18,7 @@ class FolderStructureAdminController extends Controller
      */
     public function index()
     {
-        $folders = Folder::all();
        
-        $folderStruct = FolderStructure::all();
-        return view('admin.view-folder-structure')
-            ->with('folders', $folders)
-            ->with('folderStruct', $folderStruct);
     }
 
     /**
@@ -46,15 +41,8 @@ class FolderStructureAdminController extends Controller
      */
     public function store(Request $request)
     {
-            $relationshipdetails = array(
-                'parent' => $request->get('parent'),
-                'child' => $request->get('child')
-            );
-
-            $folderstruct = FolderStructure::create($relationshipdetails);
-            $folderstruct->save();
-
-            return "Relationship established: '" . $request->get('child') . "' is child of '" . $request->get('parent') . "'.";
+        FolderStructure::createFolderStructure($request);
+        return "Relationship established: '" . $request->get('child') . "' is child of '" . $request->get('parent') . "'.";
     }
 
     /**

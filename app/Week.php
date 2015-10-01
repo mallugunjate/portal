@@ -44,10 +44,6 @@ class Week extends Model
     	$weekEnds   = $weekEnds->addDays(6);
     
     	for ($i = 1; $i<= $totalWeeks ; $i++) {
-    		// echo $weekStarts;
-    		// echo ("Start week " . $i . " : " . $weekStarts->toDateString() . "<br>");
-    		// echo ("End week " . $i . " : " . $weekEnds->toDateString() . "<br>" );
-            // echo (" Year : " . $currentYear->year . "<br>");
     		Week::create([
     				'week_number' => $i,
     				'start_date'  => $weekStarts->toDateString(),

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFiscalYearTable extends Migration
+class CreateBannersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,9 @@ class CreateFiscalYearTable extends Migration
      */
     public function up()
     {
-        Schema::create('years', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('year');
-            $table->string('start');
-            $table->string('end');
+        Schema::create('banners', function (Blueprint $table) {
+            $table->increments('id')->unsigned();
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ class CreateFiscalYearTable extends Migration
      */
     public function down()
     {
-        Schema::drop('years');
+        Schema::drop('banners');
     }
 }

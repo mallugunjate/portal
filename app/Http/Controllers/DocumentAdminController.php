@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Document;
 use App\Folder;
 use App\FileFolder;
+use App\FolderStructure;
 
 class DocumentAdminController extends Controller
 {
@@ -17,9 +18,19 @@ class DocumentAdminController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $banner_id = $request->get('banner_id');
+
+        $navigation = FolderStructure::getNavigationStructure($banner_id );
+
+        $packageHash = sha1(time() . time());
+        $folders = Folder::all();
+
+        return view('admin.view-document-structure')
+            ->with('navigation', $navigation)
+            ->with('folders', $folders)
+            ->with('packageHash', $packageHash);
     }
 
     /**
@@ -44,54 +55,7 @@ class DocumentAdminController extends Controller
      */
     public function store(Request $request)
     {
-
-        $extension = $request->file('document')->getClientOriginalExtension();
-        $originalName = $request->file('document')->getClientOriginalName();
-        $modifiedName = str_replace(" ", "_", $originalName);
-        $modifiedName = str_replace(".", "_", $modifiedName);
-
-        $directory = public_path() . '/files';
-        $uniqueHash = sha1(time() . time());
-        $filename  = $modifiedName . "_" . $uniqueHash . "." . $extension;
-
-        $upload_success = $request->file('document')->move($directory, $filename); //move and rename file        
-
-        if ($upload_success) {
-            $documentdetails = array(
-                'original_filename' => $originalName,
-                'filename'          => $filename,
-                'upload_package_id' => $request->get('upload_package_id'),
-                'title'             => "no title",
-                'description'       => "no description"
-            );
-
-            $document = Document::create($documentdetails);
-            $document->save();
-            $lastInsertedId= $document->id;
-
-            $documentfolderdetails = array(
-                'document_id' => $lastInsertedId,
-                'folder_id' => $request->get('folder_id')
-            );
-           
-            $documentfolder = FileFolder::create($documentfolderdetails);
-            $documentfolder->save();
-        }
-
-            // $t = "Awesome!";
-            // $r = "Your new document has been created! <a href='/admin/photos'>Back to Photos</a>";
-            // return view('admin/confirmation')
-            //     ->with('response_title', $t)
-            //     ->with('response', $r);
-            //return "file uploaded";
-        // } else {
-        //     // $t = "Um...";
-        //     // $r = "Something bad happened. <a href='/admin/photos'>Back to Photos</a>";
-        //     // return View::make('admin/confirmation')
-        //     //     ->with('response_title', $t)
-        //     //     ->with('response', $r);
-        //     return "it didn't work";
-        // }
+        Document::storeDocument($request);    
     }
 
     /**

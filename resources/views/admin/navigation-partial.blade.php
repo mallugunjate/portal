@@ -13,7 +13,7 @@
 	<li id={{$nav["id"]}}> {{$nav["label"]}} 
 		<ul>
 			@foreach ($nav["weeks"]  as $week )
-			<li id = {{$week["week_id"]}} > {{ "week " . $week["week"] }}
+			<li class="folder" id = {{$week["week_id"]}}  data-isWeek = true> {{ "week " . $week["week"] }}
 				<ul>
 					
 				</ul>
@@ -24,7 +24,7 @@
 	
 
 @else
-	<li class="folder" id={{$nav["id"]}}>{{ $nav["label"] }} 
+	<li class="folder" id={{$nav["id"]}} data-isWeek = false>{{ $nav["label"] }} 
 		<ul></ul>
 	</li>
 @endif

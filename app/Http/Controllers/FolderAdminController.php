@@ -39,20 +39,8 @@ class FolderAdminController extends Controller
      */
     public function store(Request $request)
     {
-            if ( null !==  $request->get('subfolder')) {
-                $is_child = $request->get('subfolder');
-            }
-            else{
-                $is_child = 0;
-            }
-            $folderdetails = array(
-                'name'      => $request->get('foldername'),
-                'is_child'  => $is_child
-            );
-
-            $folder = Folder::create($folderdetails);
-            $folder->save();
-
+            
+            Folder::storeFolder($request);
             return "Folder '" . $request->get('foldername') . "' created";
 
     }

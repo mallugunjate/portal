@@ -1,10 +1,9 @@
 <?php
 
 namespace App;
-
+use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
-// use Years; 
 
 class FolderStructure extends Model
 {
@@ -12,9 +11,20 @@ class FolderStructure extends Model
     protected $fillable = array('parent', 'child');
 
     	
-    public static function getNavigationStructure()
+    public static function getNavigationStructure($banner_id = null)
     {
-    	$rootFolders = Folder::where('is_child', 0)->orderBy('id', 'desc')->get();
+    	if (! $banner_id == null ) {
+            $rootFolders = Folder::where('is_child', 0)
+                                ->where('banner_id', $banner_id)
+                                ->orderBy('id', 'desc')
+                                ->get();
+        }
+        else{
+            $rootFolders = Folder::where('is_child', 0)
+                                ->orderBy('id', 'desc')
+                                ->get();
+        }
+
         $nav = new \SplStack();
         foreach ($rootFolders   as $rootFolder) {
             $nav->push($rootFolder);
@@ -75,7 +85,7 @@ class FolderStructure extends Model
             
             $navCounter++;   
         }
-        return ( $navigation);
+        return  ( $navigation);
     }
 
     
@@ -89,4 +99,22 @@ class FolderStructure extends Model
         return ($weekWindow);
         
     }
+
+    public static function createFolderStructure(Request $request)
+    {   
+        $relationshipdetails = array(
+            'parent' => $request->get('parent'),
+            'child' => $request->get('child')
+        );
+
+        $folderstruct = FolderStructure::create($relationshipdetails);
+        $folderstruct->save();
+
+        $parent = Folder::find($request->get('parent'));
+        $parent["has_child"] = 1;
+        $parent->save();
+
+        return;
+    }
+    
 }
