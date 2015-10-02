@@ -14,10 +14,9 @@ class Document extends Model
     protected $table = 'documents';
     protected $fillable = array('upload_package_id', 'original_filename', 'filename', 'title', 'description');
 
-    public static function getDocuments(Request $request)
+    public static function getDocuments($folder_id, $isWeek)
     {
-    	$folder_id = $request->get('folder');
-        $isWeek  = $request->get('isWeekFolder');
+    	
 
         if (isset($folder_id)) {
             

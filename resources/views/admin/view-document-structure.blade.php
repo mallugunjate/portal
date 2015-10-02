@@ -50,15 +50,7 @@
 
 		$("#banner_id").on("change", function() {
         var banner_id = $("#banner_id option:selected").val();
-        window.location = "/admin/home?banner_id=" + banner_id
-        // $.ajax({
-        //   url: "/admin/home",
-        //   data : {banner_id : banner_id}
-        // })
-        // .done(function(data){
-        //   console.log(data);
-        // })
-
+        window.location = "/admin/home?banner_id=" + banner_id;
     });
 	});
 	// HTML heavily inspired by http://blueimp.github.io/jQuery-File-Upload/ -->

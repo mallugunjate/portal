@@ -105,7 +105,7 @@ class DocumentAdminController extends Controller
      */
     public function show($id)
     {
-        //
+        return Document::find($id);
     }
 
     /**
@@ -116,7 +116,8 @@ class DocumentAdminController extends Controller
      */
     public function edit($id)
     {
-        //
+        $document = Document::find($id);
+        return view('admin.document-edit-meta-data')->with('document', $document);
     }
 
     /**
@@ -128,7 +129,17 @@ class DocumentAdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $title = $request->get('title');
+        $description = $request->get('description');
+
+        $metadata = array(
+            'title' => $title,
+            'description' => $description
+        );
+
+        $document = Document::find($id);
+        $document->update($metadata);
+        return ;
     }
 
     /**
@@ -137,8 +148,9 @@ class DocumentAdminController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        //
+        Document::find($id)->delete();
+        return ;
     }
 }

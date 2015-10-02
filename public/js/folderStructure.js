@@ -10,6 +10,10 @@ $(".folder").click(function(){
 		}
 	)
 	.done(function(data){
+		fillTable(data)
+	});
+	
+	var fillTable = function(data){
 
 		console.log(data)
 		console.log(data.folder[0])
@@ -17,12 +21,14 @@ $(".folder").click(function(){
 			if( !(data.folder[0] === null) ) {
 				$("#folder-title h2").html("Week " + data.folder[0].week_number)
 				$("#folder-title").attr('data-folderId', data.folder[0].id)
+				$("#folder-title").attr('data-isWeekFolder', true)
 			}	
 		}
 		else {
 			if( !(data.folder[0] === null) ) {
 				$("#folder-title h2").html(data.folder[0].name);
 				$("#folder-title").attr('data-folderId', data.folder[0].id)
+				$("#folder-title").attr('data-isWeekFolder', false)
 			}	
 		}
 		
@@ -32,21 +38,40 @@ $(".folder").click(function(){
 		$('#file-table').append('<tr> <th> Title </th>'+
 									' <th> Description </th>'+
 									' <th> Folder </th>'+
-									' <th> Uploaded At </th>  </tr>');
+									' <th> Uploaded At </th>'+
+									' <th> Action </th> </tr>');
 		if( !(data.files[0] === null) ) {
 			var files = data.files[0]
 			console.log(files)
 			_.each(files, function(i){
-				// console.log(i)
 				$('#file-table').append('<tr> <td>'+ i.title +'</td>'+
 											' <td>'+ i.description +'</td>'+
 											' <td> </td>'+
-											' <td>'+ i.created_at +'</td>  </tr>')
-				// console.log(i.original_filename)
-			})
+											' <td>'+ i.created_at +'</td>'+
+											' <td> '+
+												'<a href="/admin/document/'+ i.id +'/edit"> Edit </a> '+
+												'<a class="deleteFile" id="'+ i.id +'" > Delete </a>'+
+											'</td> </tr>')
+			});
 
 		}
 		
 		
-	})
+	}
+
+	
+	$("body").on("click", ".deleteFile", function(e) {
+		e.preventDefault();
+		if (confirm('Are you sure you want to delete this file?')) {
+		    $(this).closest('tr').fadeOut(500);
+			$.ajax({
+			    url: '/admin/document/'+ this.id,
+			    type: 'DELETE',
+			    data : {	
+			    			_token : $('[name=_token').val()
+					   }
+
+			});
+		} 
+	});
 })

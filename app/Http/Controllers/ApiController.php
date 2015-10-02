@@ -21,12 +21,12 @@ class ApiController extends Controller
 
     }
 
-    public function getFilesInFolder(Request $request)
+    public function getDocumentsInFolder(Request $request)
     {
         return Document::getDocuments($request);
     }
 
-    public function getFileById($fileId)
+    public function getDocumentById($fileId)
     {
         return Document::getDocumentById($fileId);  
     }

@@ -27,6 +27,14 @@ Route::post('/admin/document/create', 'DocumentAdminController@store');
 //metadata
 Route::get('/admin/document/add-meta-data', 'DocumentAdminController@showMetaDataForm');
 Route::post('/admin/document/add-meta-data', 'DocumentAdminController@updateMetaData');
+//delete a file
+Route::delete('/admin/document/{id}', 'DocumentAdminController@destroy');
+//edit a file
+Route::get('/admin/document/{id}/edit', 'DocumentAdminController@edit');
+Route::put('/admin/document/{id}', 'DocumentAdminController@update');
+//get a file
+Route::get('/admin/document/{id}', 'DocumentAdminController@show');
+
 
 //FOLDERS
 //add a folder
@@ -45,9 +53,8 @@ Route::get('/admin/home', 'DocumentAdminController@index');
 //view documents :: need to modify this
 Route::get('/documents', 'DocumentController@index');
 
-
 //Api routes
 
 Route::get('/api/navigation', 'ApiController@getNavigation');
-Route::get('/api/files', 'ApiController@getFilesInFolder');
-Route::get('api/file/{id}', 'ApiController@getFileById');
+Route::get('/api/document', 'ApiController@getDocumentsInFolder');
+Route::get('api/document/{id}', 'ApiController@getDocumentById');
