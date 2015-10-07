@@ -40,9 +40,14 @@ Route::get('/admin/document/{id}', 'DocumentAdminController@show');
 //add a folder
 Route::get('/admin/folder/create', 'FolderAdminController@create');
 Route::post('/admin/folder/create', 'FolderAdminController@store');
-//view folder structure
-// Route::get('/admin/folderstructure/view', 'FolderStructureController@index');
+Route::get('admin/folder/{id}/edit', 'FolderAdminController@edit');
+Route::put('admin/folder/{id}', 'FolderAdminController@update');
+Route::delete('/admin/folder/{id}', 'FolderAdminController@destroy');
 
+
+//FOLDER STRUCTURE
+//view folder structure
+Route::get('/admin/folderstructure', 'FolderStructureAdminController@index');
 //define a folder relationship
 Route::get('/admin/folderstructure/create', 'FolderStructureAdminController@create');
 Route::post('/admin/folderstructure/create', 'FolderStructureAdminController@store');

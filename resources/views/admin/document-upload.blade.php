@@ -2,7 +2,7 @@
 <div class="container" id="container">
    <div id="actions" class="row">
     {!! csrf_field() !!}
-    <input type="hidden" name="upload_package_id" value="{{ $packageHash }}" />
+    <input type="hidden" name="upload_package_id"  id="upload_package_id" value="{{ $packageHash }}" />
     <input type="hidden" name="folder_id" value="3" />
 
       <div class="col-lg-7">

@@ -71,6 +71,32 @@ $(".folder").click(function(){
 			    			_token : $('[name=_token').val()
 					   }
 
+			})
+			.done(function(data) {
+				console.log(data);
+			});
+		} 
+	});
+
+	$("body").on("click", ".deleteFolder", function(e) {
+		e.preventDefault();
+		if (confirm('Are you sure you want to delete this folder?')) {
+		    
+			$.ajax({
+			    url: '/admin/folder/'+ $(this).attr('data-folder-id'),
+			    type: 'DELETE',
+			    data : {	
+			    			_token : $('[name=_token').val(),
+			    			
+
+					   }
+
+			})
+			.done(function(data){
+				console.log(data)
+				// if (data === null) {
+				// 	alert('Folder cannot be deleted. Delete inner folders first.')
+				// }
 			});
 		} 
 	});

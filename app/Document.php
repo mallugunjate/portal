@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use App\Week;
 use App\Folder;
+use App\FileFolder;
 
 
 class Document extends Model
@@ -114,5 +115,31 @@ class Document extends Model
             return $document;
         }
         return [];
+    }
+
+    public static function deleteDocument($id)
+    {
+        FileFolder::where('document_id', $id)->delete();
+        Document::find($id)->delete();
+        return;
+    }
+
+    public static function updateMetaData(Request $request, $id=null)
+    {
+        if (!isset($id)) {
+            $id = $request->get('file_id');
+        }
+        
+        $title = $request->get('title');
+        $description = $request->get('description');
+
+        $metadata = array(
+            'title' => $title,
+            'description' => $description
+        );
+
+        $document = Document::find($id);
+        $document->update($metadata);
+        return;
     }
 }

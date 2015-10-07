@@ -6,6 +6,8 @@ namespace App;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 
+use App\FolderStructure;
+
 class Folder extends Model
 {
     protected $table = 'folders';
@@ -63,5 +65,27 @@ class Folder extends Model
         $folder->save();
 
         return; 
+    }
+
+    public static function deleteFolder($id)
+    {
+        
+
+        $files = FileFolder::where('folder_id', $id)->get();
+
+        if (count($files)>0) {
+            foreach ($files as $file) {
+                Document::where('id', $file->document_id)->delete();
+            }  
+            FileFolder::where('folder_id', $id)->delete();
+
+        }
+
+        FolderStructure::where('child', $id)->delete();
+        Folder::find($id)->delete();        
+
+        return "deleted";
+        
+
     }
 }

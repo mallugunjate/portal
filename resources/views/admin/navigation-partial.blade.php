@@ -15,7 +15,6 @@
 			@foreach ($nav["weeks"]  as $week )
 			<li class="folder" id = {{$week["week_id"]}}  data-isWeek = true> {{ "week " . $week["week"] }}
 				<ul>
-					
 				</ul>
 			</li>
 			@endforeach
@@ -24,8 +23,9 @@
 	
 
 @else
-	<li class="folder" id={{$nav["id"]}} data-isWeek = false>{{ $nav["label"] }} 
-		<ul></ul>
+	<li class="folder" id={{$nav["id"]}} data-isWeek = false>{{ $nav["label"] }}	 	
+		<ul>
+		</ul>
 	</li>
 @endif
 	

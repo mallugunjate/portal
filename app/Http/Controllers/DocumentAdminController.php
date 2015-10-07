@@ -27,7 +27,7 @@ class DocumentAdminController extends Controller
         $packageHash = sha1(time() . time());
         $folders = Folder::all();
 
-        return view('admin.view-document-structure')
+        return view('admin.document-view')
             ->with('navigation', $navigation)
             ->with('folders', $folders)
             ->with('packageHash', $packageHash);
@@ -70,7 +70,7 @@ class DocumentAdminController extends Controller
 
         $documents = Document::where('upload_package_id', $package)->get();
 
-       return view('admin.add-document-meta-data')
+        return view('admin.add-document-meta-data')
              ->with('documents', $documents);
             
     }    
@@ -83,17 +83,8 @@ class DocumentAdminController extends Controller
      */
     public function updateMetaData(Request $request)
     {
-        $file_id = $request->get('file_id');
-        $title = $request->get('title');
-        $description = $request->get('description');
-
-        $metadata = array(
-            'title' => $title,
-            'description' => $description
-        );
-
-        $document = Document::find($file_id);
-        $document->update($metadata);
+        Document::updateMetaData($request);
+        return action('DocumentAdminController@index');
 
     }       
 
@@ -129,17 +120,8 @@ class DocumentAdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $title = $request->get('title');
-        $description = $request->get('description');
-
-        $metadata = array(
-            'title' => $title,
-            'description' => $description
-        );
-
-        $document = Document::find($id);
-        $document->update($metadata);
-        return ;
+        Document::updateMetaData($request, $id);
+        return redirect()->action('DocumentAdminController@index');
     }
 
     /**
@@ -148,9 +130,9 @@ class DocumentAdminController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id, Request $request)
+    public function destroy($id)
     {
-        Document::find($id)->delete();
-        return ;
+        $deleteDocument = Document::deleteDocument($id);
+        return $deleteDocument ;
     }
 }

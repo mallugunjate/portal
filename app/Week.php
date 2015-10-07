@@ -25,7 +25,6 @@ class Week extends Model
 
     public static function generateWeekFolders($parent_id)
     {
-        // echo "parent_id in generate weeks " . $parent_id;
     	$currentYear = Year::getCurrentYear();
         $weekFolder = Week::where('year', $currentYear->year)->where('parent_id', $parent_id)->first();
     	

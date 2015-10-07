@@ -18,7 +18,8 @@ class FolderStructureAdminController extends Controller
      */
     public function index()
     {
-       
+       $navigation = FolderStructure::getNavigationStructure();
+       return view('admin.folderstructure-view')->with('navigation', $navigation);
     }
 
     /**
