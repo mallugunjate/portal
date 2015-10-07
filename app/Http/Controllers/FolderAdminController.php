@@ -68,26 +68,10 @@ class FolderAdminController extends Controller
     public function edit($id)
     {
         $folder = Folder::find($id);
-        $child_folders = [];
-        if ($folder->has_child == 1) {
-            $children = FolderStructure::where('parent', $folder->id)->get();
-            foreach ($children as $child) {
-                $child_folders[$child->child] = Folder::find($child->child);
-            }
-            
-            if ($folder->has_weeks == 1) {
-                return view('admin.folder-edit')->with('folder', $folder)
-                                                ->with('children', $children)
-                                                ->with('child_folders', $child_folders)
-                                                ->with('has_weeks', true);
-            }
-            return view('admin.folder-edit')->with('folder', $folder)
-                                            ->with('children', $children)
-                                            ->with('child_folders', $child_folders);
-        }
+        $params =  Folder::getFolderDetails($id);
         
-        
-        return view('admin.folder-edit')->with('folder', $folder);
+        return view('admin.folder-edit')->with('folder', $folder)
+                                        ->with('params', $params);
         
         
     }

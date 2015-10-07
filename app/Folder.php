@@ -5,7 +5,7 @@ namespace App;
 
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Support\Collection;
 use App\FolderStructure;
 
 class Folder extends Model
@@ -87,5 +87,31 @@ class Folder extends Model
         return "deleted";
         
 
+    }
+
+    public static function getFolderDetails($id)
+    {
+        
+        $folder = Folder::find($id);
+        
+        $params = [];
+        if ($folder->has_child == 1) {
+
+            
+            if ($folder->has_weeks == 1) {
+                $params = ["param_name" => "has_weeks", "param_value" => true];
+            }
+            else{
+                $child_folders = [];
+                $children = FolderStructure::where('parent', $folder->id)->get();
+                foreach ($children as $child) {
+                    $child_folders[$child->child] = Folder::find($child->child);   
+                }
+                $params = [ "param_name"=>"has_children", "param_value"=>$child_folders];
+            }
+            
+        }
+        return ( $params );
+        
     }
 }

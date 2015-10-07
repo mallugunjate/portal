@@ -13,7 +13,7 @@
 <body>
   <div id="admin-container" class= "col-md-10 ">
     <div class="row">
-          <select id="banner_id" name="banner_id">
+          <select id="banner_id" name="banner_id" class="form-control">
               <option > Choose Banner</option>
               <option value="1">Sportchek</option>
               <option value="2">Atmosphere</option>
