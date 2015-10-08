@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use App\FolderStructure;
 
+
 class Folder extends Model
 {
     protected $table = 'folders';
@@ -113,5 +114,76 @@ class Folder extends Model
         }
         return ( $params );
         
+    }
+
+
+    public static function editFolderDetails($params)
+    {
+        
+        $folder = Folder::find($params["id"]);
+
+        $update = [];
+        $update ["name"] = $params["name"] ;
+        
+
+        //add child
+        if (isset($params["children"])) {
+            $update["has_child"] = 1;
+            Folder::createChildren($params["children"], $folder);
+        }
+
+        //add weeks
+        elseif (isset($params["weekWindowSize"])) {
+            $update = [
+                'has_weeks' => 1,
+                'week_window_size' => $params["weekWindowSize"],
+                'has_child' => 1                
+            ];
+        }
+
+        //remove weeks
+        elseif (isset($params["removeWeeks"])) {
+            Folder::removeWeeks($params["id"]);
+            $update = [
+                'has_weeks' => 0,
+                'week_window_size' => 0,
+                'has_child' => 0                
+            ];      
+        }
+
+        $folder->update($update);   
+    }
+
+
+
+    public static function createChildren($children, $parent)
+    {
+        foreach ($children as $child) {
+                $folder = Folder::create([
+                        'name' => $child,
+                        'is_child' => 1,
+                        'banner_id'=>$parent->banner_id
+                    ]);
+                FolderStructure::create([
+                        'parent' => $parent->id,
+                        'child'  => $folder->id
+                    ]);
+            }
+    }
+
+    public static function removeWeeks($id)
+    {
+        $weeks = Week::where('parent_id',$id)->get();
+            foreach ($weeks as $week) {
+                $documentsInFolder = FileFolder::where('folder_id', $week->id)->get();
+                if ($documentsInFolder) {
+                    foreach ($documentsInFolder as $doc) {
+                        Document::where('id', $doc->document_id)->delete();
+                        FileFolder::where('folder_id', $doc->folder_id)->delete();
+                    }
+                }
+                Week::where('id', $week->id)->delete();
+                unset($documentsInFolder);
+            }
     }
 }

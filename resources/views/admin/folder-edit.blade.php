@@ -25,7 +25,7 @@
                     </div>
                 @endforeach
                 <div class="form-group">
-                    <button class="btn btn-default add-child">Add Child</button>
+                    <button class="btn btn-default addChild">Add Child</button>
                 </div>
             
             @elseif($params["param_name"] == "has_weeks")

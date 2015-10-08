@@ -1,5 +1,5 @@
 
-$("body").on('click', '.add-child', function(e){
+$("body").on('click', '.addChild', function(e){
     e.preventDefault();
     $(this).parent().append('<input type="text" name="child[]"><br>')
 })
@@ -36,7 +36,7 @@ $("body").on("click", ".deleteFolder", function(){
 $("#addWeek").on("click", function(e){
     e.preventDefault()
     $("#addWeekContainer").empty()
-    $("#addWeekContainer").append('<input type="number" name="week_window_size" id="weekFolder" placeholder="Week Window Size" class="form-control"><br>')
+    $("#addWeekContainer").append('<input type="number" name="weekWindowSize" id="weekFolder" placeholder="Week Window Size" class="form-control"><br>')
     $("#addFolderContainer").empty()
 })
 $("#addFolder").on('click', function(e){

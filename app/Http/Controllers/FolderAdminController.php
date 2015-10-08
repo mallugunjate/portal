@@ -85,69 +85,14 @@ class FolderAdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // dd($request->all());
+        
         $name = $request->get('name');
-        
-        $update = [
-            'name' => $name
-        ];
-        $folder = Folder::find($id);
-        $folder->update($update);
-
-        //add child
         $children = $request->get('child');
-        if (isset($children)) {
-            foreach ($children as $child) {
-                $folder = Folder::create([
-                        'name' => $child,
-                        'is_child' => 1,
-                        'banner_id'=>$folder->banner_id
-                    ]);
-                FolderStructure::create([
-                        'parent' => $id,
-                        'child'  => $folder->id
-                    ]);
-            }
-        }
-        //add weeks
-        $week_window_size = $request->get("week_window_size");
-        if (isset($week_window_size)) {
-            $update = [
-                'has_weeks' => 1,
-                'week_window_size' => $week_window_size,
-                'has_child' => 1                
-
-            ];
-            $folder->update($update);
-        }
-
-        //remove weeks
+        $weekWindowSize = $request->get('weekWindowSize');
         $removeWeeks = $request->get('removeWeeks');
-        if (isset($removeWeeks)) {
-            //delete week folder
-            $weeks = Week::where('parent_id',$id)->get();
-            foreach ($weeks as $week) {
-                $documentsInFolder = FileFolder::where('folder_id', $week->id)->get();
-                if ($documentsInFolder) {
-                    foreach ($documentsInFolder as $doc) {
-                        Document::where('id', $doc->document_id)->delete();
-                        FileFolder::where('folder_id', $doc->folder_id)->delete();
-                    }
-                }
-                Week::where('id', $week->id)->delete();
-                unset($documentsInFolder);
-            }
-            //update folders table
-            $update = [
-                'has_weeks' => 0,
-                'week_window_size' => 0,
-                'has_child' => 0                
-
-            ];
-            $folder->update($update);
-        }
-
         
+
+        $editFolder = Folder::editFolderDetails(compact('id', 'name', 'children', 'weekWindowSize', 'removeWeeks'));
 
         return redirect()->action('FolderStructureAdminController@index');
     }
