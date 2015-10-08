@@ -12,13 +12,13 @@
         
 
         {!! Form::open(array('action' => 'FolderAdminController@store', 'files' => false, 'class' => 'form-horizontal', 'role' => 'form')) !!}
-             Banner:
-            <select id="banner_id" name="banner_id">
+             
+            <select id="banner_id" name="banner_id" class="form-control">
                 <option value="1">Sportchek</option>
                 <option value="2">Atmosphere</option>
             </select>               
             <div class="col-md-8 col-sm-offset-1">
-            <h2>create a folder</h2>
+            <h2>Create Folder</h2>
 
             <div class="row">
                 <div class="form-group col-md-6 col-md-offset-1">

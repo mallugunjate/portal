@@ -16,10 +16,16 @@ class FolderStructureAdminController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-       $navigation = FolderStructure::getNavigationStructure();
-       return view('admin.folderstructure-view')->with('navigation', $navigation);
+        $banner_id  = $request->get('banner_id');
+        if (isset($banner_id)) {
+            $navigation = FolderStructure::getNavigationStructure($banner_id);
+        }
+        else {
+            $navigation = FolderStructure::getNavigationStructure();
+        }
+        return view('admin.folderstructure-view')->with('navigation', $navigation);
     }
 
     /**

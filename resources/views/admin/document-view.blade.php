@@ -5,9 +5,22 @@
 	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="/css/tree.css">
 	<link rel="stylesheet" type="text/css" href="/css/dz.css">
-    <link rel="stylesheet" type="text/css" href="/css/dropzone.css">
+  <link rel="stylesheet" type="text/css" href="/css/dropzone.css">
 	<link rel="stylesheet" type="text/css" href="/css/document-upload.css">
-
+  <style type="text/css">
+    #file-uploader {
+      border: thin solid #e9e9e9;
+      height:600px;
+    }
+    #watermark {
+     position:relative;
+     top:250px;
+     text-align:center;
+     font-size: 30px;
+     z-index:1;
+     color:#e9e9e9;
+    }
+  </style>
 
 </head>
 <body>
@@ -28,6 +41,7 @@
   				@include('admin.document-table')
   			</div>
   			<div id="file-uploader">
+          <div id="watermark">Drag and drop documents here</div>
   				@include('admin.document-upload')
   			</div>
 
@@ -53,6 +67,7 @@
         var banner_id = $("#banner_id option:selected").val();
         window.location = "/admin/home?banner_id=" + banner_id;
     });
+
 	});  
 
 </script>
