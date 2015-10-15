@@ -38,11 +38,14 @@
         init: function() {
 
             this.on("success", function(file, response) {
-                
             });
         }
 
       });
+      myDropzone.on("drop", function(e) {
+        $("#watermark").hide();
+      })
+    
 
       myDropzone.on("addedfile", function(file) {
         // Hookup the start button
@@ -79,4 +82,6 @@
       };
       document.querySelector("#actions .cancel").onclick = function() {
         myDropzone.removeAllFiles(true);
-      };
+        $("#watermark").show();
+      }
+

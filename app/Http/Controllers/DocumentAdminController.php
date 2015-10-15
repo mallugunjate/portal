@@ -10,6 +10,7 @@ use App\Document;
 use App\Folder;
 use App\FileFolder;
 use App\FolderStructure;
+use App\Banner;
 
 class DocumentAdminController extends Controller
 {
@@ -22,15 +23,32 @@ class DocumentAdminController extends Controller
     {
         $banner_id = $request->get('banner_id');
 
-        $navigation = FolderStructure::getNavigationStructure($banner_id);
+        if(isset($banner_id)) {
+            
+            $banner = Banner::where('id', $banner_id)->first();
+        }
+        else{
+            $banner = Banner::where('id', 1)->first();
+        }
+
+        $navigation = FolderStructure::getNavigationStructure($banner->id);
 
         $packageHash = sha1(time() . time());
+
         $folders = Folder::all();
+
+        $defaultFolder = $request->get('parent');
+
+        if (!isset($defaultFolder)) {
+            $defaultFolder = null;
+        }
 
         return view('admin.document-view')
             ->with('navigation', $navigation)
             ->with('folders', $folders)
-            ->with('packageHash', $packageHash);
+            ->with('packageHash', $packageHash)
+            ->with('banner', $banner)
+            ->with('defaultFolder' , $defaultFolder);
     }
 
     /**
@@ -105,10 +123,18 @@ class DocumentAdminController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function edit($id)
+    public function edit($id, Request $request)
     {
         $document = Document::find($id);
-        return view('admin.document-edit-meta-data')->with('document', $document);
+        $banner_id = $request->get('banner_id');
+        if (isset($banner_id)) {
+            $banner = Banner::find($banner_id);
+        }
+        else {
+            $banner = Banner::find(1);
+        }
+        return view('admin.document-edit-meta-data')->with('document', $document)
+                                                    ->with('banner', $banner);
     }
 
     /**
@@ -120,8 +146,11 @@ class DocumentAdminController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
         Document::updateMetaData($request, $id);
-        return redirect()->action('DocumentAdminController@index');
+        $parent = FileFolder::where('document_id', $id)->first()->folder_id;
+        $banner_id = $request->get('banner_id');
+        return redirect()->action('DocumentAdminController@index', ['banner_id'=> $banner_id, 'parent'=>$parent]);
     }
 
     /**

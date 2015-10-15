@@ -1,22 +1,29 @@
-$(".folder").click(function(){
-	// console.log(this);
-	$.ajax(
-		{
-			url : '/documents',
-			data : {
-						folder : this.id,
-						isWeekFolder : $(this).attr("data-isweek")
-				   }
-		}
-	)
-	.done(function(data){
-		fillTable(data)
+	$(".folder").click(function(){
+		// console.log(this);
+		$.ajax(
+			{
+				url : '/documents',
+				data : {
+							folder : this.id,
+							isWeekFolder : $(this).attr("data-isweek")
+					   }
+			}
+		)
+		.done(function(data){
+			fillTable(data)
+		});
 	});
 	
 	var fillTable = function(data){
 
-		console.log(data)
-		console.log(data.folder[0])
+		$("#file-container").removeClass('hidden').addClass('visible');
+		$("#file-uploader").removeClass('hidden').addClass('visible');
+		$("#empty-container").removeClass('visible').addClass('hidden');
+
+		var banner_id = $("input[name='banner_id']").val();
+		console.log(banner_id);
+		console.log(data);
+		console.log(data.folder[0]);
 		if ( data.type == "week") {
 			if( !(data.folder[0] === null) ) {
 				$("#folder-title h2").html("Week " + data.folder[0].week_number)
@@ -49,7 +56,7 @@ $(".folder").click(function(){
 											' <td> </td>'+
 											' <td>'+ i.created_at +'</td>'+
 											' <td> '+
-												'<a href="/admin/document/'+ i.id +'/edit"> Edit </a> '+
+												'<a href="/admin/document/'+ i.id +'/edit?banner_id='+ banner_id +'"> Edit </a> '+
 												'<a class="deleteFile" id="'+ i.id +'" > Delete </a>'+
 											'</td> </tr>')
 			});
@@ -61,6 +68,7 @@ $(".folder").click(function(){
 
 	
 	$("body").on("click", ".deleteFile", function(e) {
+		console.log("file delete requested");
 		e.preventDefault();
 		if (confirm('Are you sure you want to delete this file?')) {
 		    $(this).closest('tr').fadeOut(500);
@@ -78,26 +86,26 @@ $(".folder").click(function(){
 		} 
 	});
 
-	$("body").on("click", ".deleteFolder", function(e) {
-		e.preventDefault();
-		if (confirm('Are you sure you want to delete this folder?')) {
+	// $("body").on("click", ".deleteFolder", function(e) {
+	// 	console.log("folder delete requested");
+	// 	e.preventDefault(); 
+	// 	if (confirm('Are you sure you want to delete this folder?')) {
 		    
-			$.ajax({
-			    url: '/admin/folder/'+ $(this).attr('data-folder-id'),
-			    type: 'DELETE',
-			    data : {	
-			    			_token : $('[name=_token').val(),
+	// 		$.ajax({
+	// 		    url: '/admin/folder/'+ $(this).attr('data-folder-id'),
+	// 		    type: 'DELETE',
+	// 		    data : {	
+	// 		    			_token : $('[name=_token').val(),
 			    			
+	// 				   }
 
-					   }
+	// 		})
+	// 		.done(function(data){
+	// 			console.log(data)
+	// 			// if (data === null) {
+	// 			// 	alert('Folder cannot be deleted. Delete inner folders first.')
+	// 			// }
+	// 		});
+	// 	} 
+	// });
 
-			})
-			.done(function(data){
-				console.log(data)
-				// if (data === null) {
-				// 	alert('Folder cannot be deleted. Delete inner folders first.')
-				// }
-			});
-		} 
-	});
-})

@@ -2,12 +2,64 @@
 <head>
 	<title></title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <style type="text/css">
+        form {
+            border: thin solid #e9e9e9;
+            margin-top: 25px;
+            padding: 20px;
+        }
+        .form-title{
+            padding-top:20px;
+            font-size:22px;
+            font-weight: bold;
+        }
+        .deleteFolder{
+
+        }
+
+    </style>
 </head>
 <body>
-	<div class="col-md-6">
-	{!! Form::model($folder, ['action' => ['FolderAdminController@update', 'id'=>$folder->id], 'method' => 'PUT']) !!}    
-		<h2>Update Folder</h2>
+    <!-- navbar begins -->
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand">
+              @if(isset($banner))
+              <span>{{$banner->name}}</span>
+              @endif
+            </a>
+            
+          </div>
+          
+        <ul class="nav navbar-nav">
+          <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Banner <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/admin/home?banner_id=1">Sportchek</a></li>
+                <li><a href="/admin/home?banner_id=2">Atmosphere</a></li>
+              </ul>
+          </li>
+        </ul>
+          
+        </div>
+        
+      </nav>
+      <!-- navbar ends-->
 
+	<div class="col-md-10 col-md-offset-1">
+	{!! Form::model($folder, ['action' => ['FolderAdminController@update', 'id'=>$folder->id], 'method' => 'PUT']) !!}    
+		<input type="hidden" name="banner_id" value={{$banner->id}}>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <span class="form-title">Update Folder - {{$folder->name}}</span>
+            </div>
+            <div class="col-md-1 col-md-offset-1">    
+                @if(empty($params))
+                    <button class="deleteFolder btn btn-danger" id="{{$folder->id}}">Delete Folder </button>
+                @endif
+            </div>
+        </div>
         <div class="form-group">
             {!! Form::label('name', 'Name') !!}
             {!! Form::text('name', $folder->name, ['class'=>'form-control']) !!}
@@ -23,6 +75,7 @@
                         {{ $child["name"] }}
                         <a class="btn btn-default editFolder" href="/admin/folder/{{$child['id']}}/edit"> Edit </a>
                     </div>
+
                 @endforeach
                 <div class="form-group">
                     <button class="btn btn-default addChild">Add Child</button>
@@ -47,8 +100,11 @@
             </div>
         @endif
 
-
-        {!! Form::submit('Update Folder!', ['class'=> 'col-md-2 form-control']) !!}
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4 ">
+                {!! Form::submit('Update Folder!', ['class'=> 'form-control btn-success']) !!}
+            </div>
+        </div>
        
 
     {!! Form::close() !!}

@@ -1,42 +1,53 @@
 
 @if(count($nav["children"]) >0 )
-	<li id={{$nav["id"]}}> {{$nav["label"]}} 
-	<a class="btn btn-default editFolder" href="/admin/folder/{{$nav['id']}}/edit" >Edit</a> 
-	<!-- <a class="btn btn-default deleteFolder" data-folderId="{{$nav['id']}}">Delete</a> -->
-	<ul>
+	<div class="folder" id={{$nav["id"]}} data-isWeek = false>
+	
+		<a class="editFolder fa fa-pencil" href="/admin/folder/{{$nav['id']}}/edit?banner_id={{$banner->id}}" >
+	
+			<div class="folder-name">
+				{{$nav["label"]}} 
+			</div>
+	 	</a>
+		<ul>
 
-	@foreach ($nav["children"] as $child)
-	<?php $nav = $navigation[$child["child_id"]] ?>
-	@include('admin.folderstructure-partial')
-	@endforeach 
+		@foreach ($nav["children"] as $child)
+		<?php $nav = $navigation[$child["child_id"]] ?>
+		@include('admin.folderstructure-partial')
+		@endforeach 
 
-	</ul>
-	</li>
+		</ul>
+	</div>
 
 @elseif ( isset($nav["weeks"]) && count($nav["weeks"] > 0) )
-	<li id={{$nav["id"]}}> {{$nav["label"]}} 
+	<div class="folder" id={{$nav["id"]}} data-isWeek = false> 
+		<a class="editFolder fa fa-pencil" href="/admin/folder/{{$nav['id']}}/edit?banner_id={{$banner->id}}" >
+			<div class="folder-name">
+				{{$nav["label"]}} 
+			</div>
+		</a>
 		<!-- <a class="deleteFolder" href="" data-folder-id={{$nav["id"]}} >Delete</a> -->
-		<a class="btn btn-default editFolder" href="/admin/folder/{{$nav['id']}}/edit" >Edit</a>
 
-		<ul>
+		<div>
 			@foreach ($nav["weeks"]  as $week )
-			<li class="folder" id = {{$week["week_id"]}}  data-isWeek = true> {{ "week " . $week["week"] }}
-				<ul>
-					
-				</ul>
-			</li>
+			<ul class="folder" id = {{$week["week_id"]}}  data-isWeek = true> 
+				<div class="fa folder-name">
+					{{ "Week " . $week["week"] }}
+				</div>
+			</ul>
 			@endforeach
-		</ul>
-	</li>	
+		</div>
+	</div>	
 	
 
 @else
-	<li class="folder" id={{$nav["id"]}} data-isWeek = false>{{ $nav["label"] }}
-		<a class="btn btn-default editFolder" href="/admin/folder/{{$nav['id']}}/edit" >Edit</a>
-		<a class="btn btn-default deleteFolder" data-folderId="{{$nav['id']}}">Delete</a>
-		<ul>		
-		</ul>
-	</li>
+	<div class="folder" id={{$nav["id"]}} data-isWeek = false>
+		<a class="editFolder fa fa-pencil" href="/admin/folder/{{$nav['id']}}/edit?banner_id={{$banner->id}}" >
+		<div class="folder-name"> 
+			{{ $nav["label"] }}
+		</div>
+		</a>
+		<!-- <a class="btn btn-default deleteFolder" data-folderId="{{$nav['id']}}">Delete</a> -->
+	</div>
 @endif
 	
 

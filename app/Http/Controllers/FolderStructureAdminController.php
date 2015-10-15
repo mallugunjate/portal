@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Folder;
 use App\FolderStructure;
+use App\Banner;
 
 class FolderStructureAdminController extends Controller
 {
@@ -20,12 +21,16 @@ class FolderStructureAdminController extends Controller
     {
         $banner_id  = $request->get('banner_id');
         if (isset($banner_id)) {
-            $navigation = FolderStructure::getNavigationStructure($banner_id);
+            $banner = Banner::where('id', $banner_id)->first();
         }
         else {
-            $navigation = FolderStructure::getNavigationStructure();
-        }
-        return view('admin.folderstructure-view')->with('navigation', $navigation);
+            $banner = Banner::where('id', 1)->first();
+        }  
+
+        $navigation = FolderStructure::getNavigationStructure($banner->id);
+        return view('admin.folderstructure-view')->with('navigation', $navigation)
+                                                     ->with('banner', $banner);     
+                                                
     }
 
     /**
@@ -49,7 +54,8 @@ class FolderStructureAdminController extends Controller
     public function store(Request $request)
     {
         FolderStructure::createFolderStructure($request);
-        return "Relationship established: '" . $request->get('child') . "' is child of '" . $request->get('parent') . "'.";
+        //return "Relationship established: '" . $request->get('child') . "' is child of '" . $request->get('parent') . "'.";
+        return redirect()->action('FolderStructureAdminController@index');
     }
 
     /**

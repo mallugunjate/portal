@@ -9,17 +9,46 @@
 
    </head>
    <body>
-        
+        <!-- navbar begins -->
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand">
+                    @if(isset($banner))
+                        <span>{{$banner->name}}</span>
+                    @endif
+                </a>
+                
+            </div>
+            
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Banner <span class="caret"></span></a>
+                  <ul class="dropdown-menu" id="banner">
+                    <li><a href="" data-banner-id="1">Sportchek</a></li>
+                    <li><a href="" data-banner-id="2">Atmosphere</a></li>
+                  </ul>
+                </li>
+            </ul>
+            
+            </div>
+         
+        </nav>
+        <!-- navbar ends-->
+
+        <div class="col-md-10">
 
         {!! Form::open(array('action' => 'FolderAdminController@store', 'files' => false, 'class' => 'form-horizontal', 'role' => 'form')) !!}
-             
-            <select id="banner_id" name="banner_id" class="form-control">
+            <input type="text" name="banner_id" id="banner_id" class="hidden"> 
+            <!-- <select id="banner_id" name="banner_id" class="form-control">
                 <option value="1">Sportchek</option>
                 <option value="2">Atmosphere</option>
-            </select>               
+            </select> -->               
             <div class="col-md-8 col-sm-offset-1">
             <h2>Create Folder</h2>
-
+            @if(isset($banner))
+                <input name='banner_id' value={{$banner->id}} type="hidden">
+            @endif
             <div class="row">
                 <div class="form-group col-md-6 col-md-offset-1">
                     <label for="foldername">Folder Name</label>
@@ -68,8 +97,21 @@
             </div>
             </div>            
         {!! Form::close() !!}
+        </div>
    </body>
    <script type="text/javascript">
+        
+        $("#banner li a").click(function(e){
+
+            e.preventDefault();
+            console.log($(this).attr("data-banner-id"));
+            $("#banner_id").val($(this).attr("data-banner-id"));
+            $(".navbar-brand").empty()
+            $(".navbar-brand").append("<span>" + $(this).text() + "</span>")
+          
+
+        });
+
         $("#has_weeks").on("change", function(){
             if ($(this).is(':checked')) {
                $("#week_window_size").parent().removeClass("hidden").addClass("visible");
@@ -78,6 +120,8 @@
                 $("#week_window_size").parent().removeClass("visible").addClass("hidden");
             }
         })
+
+
 
 
    </script>

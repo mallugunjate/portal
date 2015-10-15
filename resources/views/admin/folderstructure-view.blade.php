@@ -2,35 +2,71 @@
 <head>
 	<title></title>
        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+       <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
+       <style type="text/css">
+       	.folder-name{
+			display:inline-block;
+			color:#222222;
+			font-size: 14px;
+			font: Helvetica ;
+			text-transform: capitalize;	
+			line-height: 25px;
+		}
+
+       </style>
 </head>
 <body>
+	<!-- navbar begins -->
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	    	<a class="navbar-brand">
+		    	@if(isset($banner))
+		    	<span>{{$banner->name}}</span> 
+		    	@endif
+	    	</a>
+	    	
+	    </div>
+	    
+		<ul class="nav navbar-nav">
+			<li class="dropdown">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Banner <span class="caret"></span></a>
+	          <ul class="dropdown-menu">
+	            <li><a href="/admin/folderstructure?banner_id=1">Sportchek</a></li>
+	            <li><a href="/admin/folderstructure?banner_id=2">Atmosphere</a></li>
+	          </ul>
+	        </li>
+	    </ul>
+	    
+	    <ul class="nav navbar-nav navbar-right">
+        	<li><a href="/admin/folder/create?banner_id={{$banner->id}}">Add New Category</a></li>
+    	</ul>
+	    </div>
+	  
+	</nav>
+	<!-- navbar ends-->
 	<div class="col-md-10 col-md-offset-1">
 		<div class="row">
 			<div class="col-md-4" >
-				<h3>Folder Structure</h3>	
+				<h3>Document Categories</h3>	
 			</div>
-			<div class="col-md-4 col-md-offset-4" >
-				<select id="banner_id" class="form-control">
-					<option>Select Banner</option>
-					<option value="1">Sportchek</option>
-					<option value="2">Atmosphere</option>
-				</select>
-			</div>
+			
 		</div>
 		<div class="row">
-			<ul class="tree">
+			<div >
 				{!! csrf_field() !!}
+
 				@foreach ($navigation as $nav) 
 					
 					@if ( $nav["is_child"] == 0)
 						
-						@include('admin.folderstructure-partial', ['navigation' =>$navigation, 'currentnode' => $nav])
+						@include('admin.folderstructure-partial', ['navigation' =>$navigation, 'currentnode' => $nav, 'banner' => $banner])
 						
 					@endif
 
 
 				@endforeach
-			</ul>
+			</div>
 		</div>
 	</div>
 </body>
@@ -43,7 +79,7 @@
 		e.preventDefault();
 		if (confirm('Are you sure you want to delete this folder?')) {
 		    console.log($(this).attr('data-folderId'))
-		    $(this).closest('li').fadeOut(500)
+		    $(this).closest('div').fadeOut(500)
 			$.ajax({
 			    url: '/admin/folder/'+ $(this).attr('data-folderId'),
 			    type: 'DELETE',
@@ -57,12 +93,6 @@
 			});
 		}
 	})  
-
-	$("#banner_id").on("change", function(){
-		var banner_id = this.value;
-		window.location = '/admin/folderstructure?banner_id='+banner_id
-		
-	});
 
 
 </script>

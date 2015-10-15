@@ -65,12 +65,13 @@ class Folder extends Model
         $folder = Folder::create($folderdetails);
         $folder->save();
 
-        return; 
+        return $banner_id; 
     }
 
     public static function deleteFolder($id)
     {
         
+        $banner_id = Folder::find($id)->banner_id;
 
         $files = FileFolder::where('folder_id', $id)->get();
 
@@ -79,15 +80,21 @@ class Folder extends Model
                 Document::where('id', $file->document_id)->delete();
             }  
             FileFolder::where('folder_id', $id)->delete();
-
         }
 
-        FolderStructure::where('child', $id)->delete();
-        Folder::find($id)->delete();        
-
-        return "deleted";
+        $parentChildStructure = FolderStructure::where('child', $id)->first();
         
-
+        if(isset($parentChildStructure)) {
+            $parent = Folder::where('id', $parentChildStructure->parent)->first();
+            $parent["has_child"] = 0;
+            $parent->save();
+            $parentChildStructure->delete();
+    
+        }
+        
+        Folder::find($id)->delete();        
+        return $banner_id;
+        
     }
 
     public static function getFolderDetails($id)
@@ -151,7 +158,11 @@ class Folder extends Model
             ];      
         }
 
+
         $folder->update($update);   
+        $banner_id = $folder->banner_id;
+        // dd($banner_id);
+        return $banner_id;
     }
 
 

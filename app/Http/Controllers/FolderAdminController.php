@@ -11,6 +11,7 @@ use App\FolderStructure;
 use App\Week;
 use App\FileFolder;
 use App\Document;
+use App\Banner;
 
 class FolderAdminController extends Controller
 {
@@ -29,9 +30,17 @@ class FolderAdminController extends Controller
      *
      * @return Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('admin.create-folder');
+        $banner_id = $request->get('banner_id');
+
+        if (isset($banner_id)) {
+            $banner = Banner::where('id', $banner_id)->first();
+        }
+        else{
+            $banner = Banner::where('id' , 1);
+        }
+        return view('admin.create-folder')->with('banner', $banner);
     }
 
     /**
@@ -43,8 +52,8 @@ class FolderAdminController extends Controller
     public function store(Request $request)
     {
             
-        Folder::storeFolder($request);
-        return "Folder '" . $request->get('foldername') . "' created";
+        $banner_id = Folder::storeFolder($request);
+        return redirect()->action('FolderStructureAdminController@index', ['banner_id' => $banner_id]);
 
     }
 
@@ -65,13 +74,21 @@ class FolderAdminController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function edit($id)
+    public function edit($id, Request $request)
     {
         $folder = Folder::find($id);
         $params =  Folder::getFolderDetails($id);
         
+        $banner_id = $request->get('banner_id');
+        if (isset($banner_id)) {
+            $banner = Banner::find($banner_id);
+        }
+        else {
+            $banner = Banner::find(1);
+        }
         return view('admin.folder-edit')->with('folder', $folder)
-                                        ->with('params', $params);
+                                        ->with('params', $params)
+                                        ->with('banner', $banner);
         
         
     }
@@ -92,9 +109,9 @@ class FolderAdminController extends Controller
         $removeWeeks = $request->get('removeWeeks');
         
 
-        $editFolder = Folder::editFolderDetails(compact('id', 'name', 'children', 'weekWindowSize', 'removeWeeks'));
+        $banner_id = Folder::editFolderDetails(compact('id', 'name', 'children', 'weekWindowSize', 'removeWeeks'));
 
-        return redirect()->action('FolderStructureAdminController@index');
+        return redirect()->action('FolderStructureAdminController@index', ['banner_id'=> $banner_id]);
     }
 
     /**
@@ -110,8 +127,7 @@ class FolderAdminController extends Controller
         if (count($children)) {
             return "Delete inner Folders first";
         }
-        $deleteFolder = Folder::deleteFolder($id);
-        // return "hello";
-        return $deleteFolder;
+        $banner_id = Folder::deleteFolder($id);
+        return $banner_id;
     }
 }
