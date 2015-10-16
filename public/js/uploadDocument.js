@@ -68,8 +68,10 @@
       myDropzone.on("queuecomplete", function(progress) {
         document.querySelector("#total-progress").style.opacity = "0";
 
-        var upload_package_id = $("#upload_package_id").val()
-        var metadatalink = $("<a class='button' href='/admin/document/add-meta-data?package="+upload_package_id+"'>Add Title and Description for these Files</a>");
+        var upload_package_id = $("#upload_package_id").val();
+        var banner_id = $('input[name="banner_id"]').val();
+        var folder_id = $("#folder-title").attr('data-folderid');
+        var metadatalink = $("<a class='button' href='/admin/document/add-meta-data?package="+upload_package_id+"&banner_id="+ banner_id +"&parent="+ folder_id +"'>Add Title and Description for these Files</a>");
         $(metadatalink).appendTo("#file-uploader #container");
 
       });

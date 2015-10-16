@@ -37,8 +37,8 @@
       transition: opacity 0.3s linear;
     }
 
-    /* Hide the delete button initially */
-    #previews .file-row .delete {
+    /* Hide the start and cancel button for single file */
+    #previews .file-row .cancel , #previews .file-row .start{
       display: none;
     }
 

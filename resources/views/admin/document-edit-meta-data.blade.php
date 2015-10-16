@@ -16,16 +16,6 @@
         
       </div>
       
-    <!-- <ul class="nav navbar-nav">
-      <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Banner <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="/admin/home?banner_id=1">Sportchek</a></li>
-            <li><a href="/admin/home?banner_id=2">Atmosphere</a></li>
-          </ul>
-      </li>
-    </ul> -->
-      
     </div>
     
   </nav>

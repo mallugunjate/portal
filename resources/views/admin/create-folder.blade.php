@@ -11,28 +11,15 @@
    <body>
         <!-- navbar begins -->
         <nav class="navbar navbar-default">
-          <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand">
-                    @if(isset($banner))
-                        <span>{{$banner->name}}</span>
-                    @endif
-                </a>
-                
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand">
+                        @if(isset($banner))
+                            <span>{{$banner->name}}</span>
+                        @endif
+                    </a>
+                </div>
             </div>
-            
-            <ul class="nav navbar-nav">
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Banner <span class="caret"></span></a>
-                  <ul class="dropdown-menu" id="banner">
-                    <li><a href="" data-banner-id="1">Sportchek</a></li>
-                    <li><a href="" data-banner-id="2">Atmosphere</a></li>
-                  </ul>
-                </li>
-            </ul>
-            
-            </div>
-         
         </nav>
         <!-- navbar ends-->
 

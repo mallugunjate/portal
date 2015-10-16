@@ -39,13 +39,15 @@
 	    </ul>
 	    
 	    <ul class="nav navbar-nav navbar-right">
-        	<li><a href="/admin/folder/create?banner_id={{$banner->id}}">Add New Category</a></li>
+        	<li><a href="/admin/home?banner_id={{$banner->id}}">View File Listing</a></li>
     	</ul>
 	    </div>
 	  
 	</nav>
 	<!-- navbar ends-->
 	<div class="col-md-10 col-md-offset-1">
+		
+		<a class="btn btn-default" href="/admin/folder/create?banner_id={{$banner->id}}">Add New Folder</a>
 		<div class="row">
 			<div class="col-md-4" >
 				<h3>Document Categories</h3>	

@@ -16,12 +16,12 @@ class FolderStructure extends Model
     	if (! $banner_id == null ) {
             $rootFolders = Folder::where('is_child', 0)
                                 ->where('banner_id', $banner_id)
-                                ->orderBy('id', 'desc')
+                                ->orderBy('name', 'desc')
                                 ->get();
         }
         else{
             $rootFolders = Folder::where('is_child', 0)
-                                ->orderBy('id', 'desc')
+                                ->orderBy('name', 'desc')
                                 ->get();
         }
 
@@ -50,15 +50,24 @@ class FolderStructure extends Model
             if ( !$childNodes->isEmpty()) {
                         
                 $counter = 0;
+                $children = [];
                 foreach ($childNodes as $childNode) {
-
                    $child = Folder::where('id', $childNode->child)->first();
-                   
+                   array_push($children, $child);
+                }
+               
+               usort($children, function($a, $b)
+                {
+                    return strcmp($a->name, $b->name);
+                });
+
+               foreach ($children as $child) {
                    $nav->push($child);
                    $navigation[$currentNode->id]["children"][$counter] = [];
                    $navigation[$currentNode->id]["children"][$counter]["child_id"] = $child->id;
                    $counter++;
-                }
+               }
+               unset($children);
                 
             }
             else{

@@ -86,10 +86,22 @@ class DocumentAdminController extends Controller
     {
         $package = $request->get('package');
 
+        $banner_id = $request->get('banner_id');
+        if (isset($banner_id)) {
+            $banner = Banner::where('id', $banner_id)->first(); 
+        }
+        else{
+            $banner = Banner::where('id', 1)->first();
+        }
+
+        $parent = $request->get('parent');
+
         $documents = Document::where('upload_package_id', $package)->get();
 
         return view('admin.add-document-meta-data')
-             ->with('documents', $documents);
+             ->with('documents', $documents)
+             ->with('banner', $banner)
+             ->with('folder_id', $parent);
             
     }    
 

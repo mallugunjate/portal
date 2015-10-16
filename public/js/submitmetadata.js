@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    $(document).on('click','.meta-data-add',function(){
+    var updateDocument = $(document).on('click','.meta-data-add',function(){
 
         var token = $('meta[name="csrf-token"]').attr('content');
         var fileIdVal = $(this).attr('data-id');
@@ -16,6 +16,19 @@ $(document).ready(function() {
                 $(check).fadeIn(1000);
             });
         return false;
+    });
+
+    $(".meta-data-done").on("click", function(){
+        var banner_id = $("input[name='banner_id']").val();
+        var folder_id = $("input[name='folder_id']").val()
+        window.location ='/admin/home?banner_id='+banner_id+'&parent='+folder_id;
+    });
+
+    $(".meta-data-add-all").on("click", function(){
+        var updateButtons = $(".meta-data-add");
+        for (var i=0 ; i<updateButtons.length; i++) {
+            updateButtons[i].click();
+        }
     });
 
 });

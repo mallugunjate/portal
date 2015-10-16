@@ -50,19 +50,16 @@
           </ul>
       </li>
     </ul>
+    <ul class="nav navbar-nav navbar-right">
+          <li><a href="/admin/folderstructure?banner_id={{$banner->id}}">Edit Folders</a></li>
+      </ul>
       
     </div>
     
   </nav>
   <!-- navbar ends-->
   <div id="admin-container" class= "col-md-10 ">
-    <!-- <div class="row">
-          <select id="banner_id" name="banner_id" class="form-control">
-              <option > Choose Banner</option>
-              <option value="1">Sportchek</option>
-              <option value="2">Atmosphere</option>
-          </select>    
-    </div> -->
+    <input type="hidden" name="banner_id" value="{{$banner->id}}">
   	<div class="row">
   		<div class="col-md-2 navigation-container">
   			@include('admin.navigation-view', ['navigation'=>$navigation])
@@ -119,10 +116,6 @@
       });
 
     }
-		// $("#banner_id").on("change", function() {
-  //       var banner_id = $("#banner_id option:selected").val();
-  //       window.location = "/admin/home?banner_id=" + banner_id;
-  //   });
 
 	});  
 

@@ -44,7 +44,6 @@
 		$('#file-table').empty();
 		$('#file-table').append('<tr> <th> Title </th>'+
 									' <th> Description </th>'+
-									' <th> Folder </th>'+
 									' <th> Uploaded At </th>'+
 									' <th> Action </th> </tr>');
 		if( !(data.files[0] === null) ) {
@@ -53,11 +52,10 @@
 			_.each(files, function(i){
 				$('#file-table').append('<tr> <td>'+ i.title +'</td>'+
 											' <td>'+ i.description +'</td>'+
-											' <td> </td>'+
 											' <td>'+ i.created_at +'</td>'+
 											' <td> '+
-												'<a href="/admin/document/'+ i.id +'/edit?banner_id='+ banner_id +'"> Edit </a> '+
-												'<a class="deleteFile" id="'+ i.id +'" > Delete </a>'+
+												'<a class="btn btn-warning" href="/admin/document/'+ i.id +'/edit?banner_id='+ banner_id +'"> Edit </a> '+
+												'<a class="deleteFile btn btn-danger" id="'+ i.id +'" > Delete </a>'+
 											'</td> </tr>')
 			});
 

@@ -24,23 +24,12 @@
         <div class="container-fluid">
           <div class="navbar-header">
             <a class="navbar-brand">
-             <!--  @if(isset($banner))
+              @if(isset($banner))
               <span>{{$banner->name}}</span>
-              @endif -->
+              @endif
             </a>
-            
+            <input type="hidden" name="folder_id" value="{{$folder_id}}">
           </div>
-          
-        <ul class="nav navbar-nav">
-          <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Banner <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="/admin/home?banner_id=1">Sportchek</a></li>
-                <li><a href="/admin/home?banner_id=2">Atmosphere</a></li>
-              </ul>
-          </li>
-        </ul>
-          
         </div>
         
       </nav>
@@ -51,44 +40,65 @@
           <h4>Edit the meta data for the files just uploaded</h4>
           </div>
       </div>
-      <div >
+
+      <input type="hidden" name="banner_id" value="{{$banner->id}}">
+      <input type="hidden" name="fo_id" value="{{$banner->id}}">
+
       <div class="row well">
     	@foreach($documents as $doc)
     		
     			
-    			<form id="metadataform{{ $doc->id }}" class="col-md-10">
+    			<form id="metadataform{{ $doc->id }}">
     				
-            <div class="row">
+            <!-- <div class="row">
             <label >{{ $doc->original_filename }}</label><br /> 
-            </div>
+            </div> -->
 
             <input type="hidden" name="file_id" value="{{ $doc->id }}">
     				
             
-            <div class="row">
-              <div class="col-md-5">
+            <div class="row" >
+              <div class="col-md-3">
+                <label>Filename</label><br>
+                <label >{{ $doc->original_filename }}</label>
+              </div>
+              
+              <div class="col-md-3 ">
                 <label >Title</label>
                 <input type="text" class="form-control" name="title{{ $doc->id }}" id="title{{ $doc->id }}" value="{{$doc->original_filename}}">
   		        </div>
 
-              <div class="col-md-5">
+              <div class="col-md-4">
                 <label >Description</label>
                 <input class="form-control" type="text" name="description{{ $doc->id }}" id="description{{ $doc->id }}">
   		        </div>
 
-              
               <div class="col-md-2">
                 <br>
                 <button type="submit" class="meta-data-add btn btn-success" data-id="{{ $doc->id }}">Update</button>
-      				  <span class="glyphicon glyphicon-ok" id="checkmark{{ $doc->id }}" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-ok" id="checkmark{{ $doc->id }}" aria-hidden="true"></span>
               </div>
-            </div>
+
+            </div>  
 
     			</form>
 
         
     	@endforeach
-      </div>
+      
+      </div> <!-- well ends -->
+      <div class="row"  >
+          <div class="col-md-1 col-md-offset-10">
+              <br>
+              <button type="submit" class="meta-data-done btn btn-warning">Done</button>
+              <span id="checkmark{{ $doc->id }}" aria-hidden="true"></span>
+          </div>
+          
+          <div class="col-md-1">
+            <br>
+            <button type="submit" class="meta-data-add-all btn btn-success" data-id="{{ $doc->id }}">Update All</button>
+            <span class="glyphicon glyphicon-ok" id="checkmark{{ $doc->id }}" aria-hidden="true"></span>
+          </div>
       </div>
     </div>
 </body>
