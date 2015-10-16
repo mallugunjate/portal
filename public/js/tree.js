@@ -21,7 +21,18 @@ $.fn.extend({
             branch.prepend("<i class='indicator glyphicon " + closedClass + "'></i>");
             branch.addClass('branch');
             branch.on('click', function (e) {
-                if (this == e.target) {
+                if (this == e.target) {                    
+                    //close all other folders
+                    $(".indicator").removeClass('glyphicon-folder-open').addClass('glyphicon-folder-close')
+                    
+                    if (!$(this).hasClass('parent-folder')) {
+
+                        $(this).closest('.parent-folder').children('i').removeClass('glyphicon-folder-close').addClass('glyphicon-folder-open');
+
+                    }
+                    else{
+                        $(this).closest('.parent-folder').children('i').toggleClass(openedClass + " " + closedClass);
+                    }
                     var icon = $(this).children('i:first');
                     icon.toggleClass(openedClass + " " + closedClass);
                     $(this).children().children().toggle();

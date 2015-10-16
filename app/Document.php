@@ -139,6 +139,6 @@ class Document extends Model
         );
 
         $document = Document::find($id);
-        return $document->update($metadata);
+        $document->update($metadata);
     }
 }

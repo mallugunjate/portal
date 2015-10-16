@@ -50,7 +50,7 @@
 		<a class="btn btn-default" href="/admin/folder/create?banner_id={{$banner->id}}">Add New Folder</a>
 		<div class="row">
 			<div class="col-md-4" >
-				<h3>Document Categories</h3>	
+				<h3>Folders</h3>	
 			</div>
 			
 		</div>

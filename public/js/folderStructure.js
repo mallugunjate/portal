@@ -1,5 +1,6 @@
 	$(".folder").click(function(){
-		// console.log(this);
+		// console.log($(this).closest('li'));
+
 		$.ajax(
 			{
 				url : '/documents',
@@ -21,9 +22,9 @@
 		$("#empty-container").removeClass('visible').addClass('hidden');
 
 		var banner_id = $("input[name='banner_id']").val();
-		console.log(banner_id);
-		console.log(data);
-		console.log(data.folder[0]);
+		// console.log(banner_id);
+		// console.log(data);
+		// console.log(data.folder[0]);
 		if ( data.type == "week") {
 			if( !(data.folder[0] === null) ) {
 				$("#folder-title h2").html("Week " + data.folder[0].week_number)
