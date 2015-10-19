@@ -119,6 +119,12 @@ class Folder extends Model
             }
             
         }
+        else {
+            $documents = FileFolder::where('folder_id', $folder->id)->get();
+            if (count($documents) >0) {
+                $params = ["param_name" =>"has_documents", "param_value" => true];
+            } 
+        }
         return ( $params );
         
     }

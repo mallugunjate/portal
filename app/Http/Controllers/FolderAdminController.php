@@ -77,6 +77,7 @@ class FolderAdminController extends Controller
     public function edit($id, Request $request)
     {
         $folder = Folder::find($id);
+
         $params =  Folder::getFolderDetails($id);
         
         $banner_id = $request->get('banner_id');

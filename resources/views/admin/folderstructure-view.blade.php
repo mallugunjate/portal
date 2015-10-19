@@ -8,7 +8,7 @@
 			display:inline-block;
 			color:#222222;
 			font-size: 14px;
-			font: Helvetica ;
+			font-family: Helvetica, ariel, sans-serif ;
 			text-transform: capitalize;	
 			line-height: 25px;
 		}

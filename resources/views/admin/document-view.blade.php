@@ -7,25 +7,6 @@
 	<link rel="stylesheet" type="text/css" href="/css/dz.css">
   <link rel="stylesheet" type="text/css" href="/css/dropzone.css">
 	<link rel="stylesheet" type="text/css" href="/css/document-upload.css">
-  <style type="text/css">
-    #file-uploader {
-      border: thin solid #e9e9e9;
-      min-height:350px;
-    }
-    #watermark {
-     position:relative;
-     top:150px;
-     text-align:center;
-     font-size: 30px;
-     z-index:1;
-     color:#e9e9e9;
-    }
-    .navigation-container{
-      border-right:thin solid #e9e9e9;
-      height: 100%;
-    }
-  </style>
-
 </head>
 <body>
   <!-- navbar begins -->
@@ -64,7 +45,7 @@
   		<div class="col-md-2 navigation-container">
   			@include('admin.navigation-view', ['navigation'=>$navigation])
   		</div>
-  		<div class="col-md-9 col-md-offset-1">
+  		<div class="col-md-10 content-container">
         <div id="empty-container" class="visible">
           <h4>Select a folder to view</h4>
         </div>

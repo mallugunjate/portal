@@ -9,10 +9,10 @@ $(document).ready(function() {
         var selector = "#metadataform"+fileIdVal;
         var check = "#checkmark"+fileIdVal;
 
+        console.log(fileIdVal, titleVal, descriptionVal, selector)
         $.post("/admin/document/add-meta-data",{ file_id: fileIdVal, title: titleVal, description: descriptionVal, _token:token })
             .done( function(data){
-                console.log('stuff happpend');
-                //$(selector).closest('.glyphicon-ok').fadeIn(1000);
+                console.log('meta data saved');
                 $(check).fadeIn(1000);
             });
         return false;

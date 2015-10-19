@@ -114,7 +114,6 @@ class DocumentAdminController extends Controller
     public function updateMetaData(Request $request)
     {
         Document::updateMetaData($request);
-        return action('DocumentAdminController@index');
 
     }       
 

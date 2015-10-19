@@ -5,17 +5,17 @@
     <input type="hidden" name="upload_package_id"  id="upload_package_id" value="{{ $packageHash }}" />
     <input type="hidden" name="folder_id" value="3" />
 
-      <div class="col-lg-7">
+      <div class="col-lg-7 file-actions">
         <!-- The fileinput-button span is used to style the file input field as button -->
         <span class="btn btn-success fileinput-button dz-clickable">
             <i class="glyphicon glyphicon-plus"></i>
             <span>Add files...</span>
         </span>
-        <button type="submit" class="btn btn-primary start">
+        <button type="submit" class="btn btn-primary start disabled">
             <i class="glyphicon glyphicon-upload"></i>
             <span>Start upload</span>
         </button>
-        <button type="reset" class="btn btn-warning cancel">
+        <button type="reset" class="btn btn-warning cancel disabled">
             <i class="glyphicon glyphicon-ban-circle"></i>
             <span>Cancel upload</span>
         </button>

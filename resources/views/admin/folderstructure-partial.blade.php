@@ -43,7 +43,7 @@
 	<div class="folder" id={{$nav["id"]}} data-isWeek = false>
 		<a class="editFolder fa fa-pencil" href="/admin/folder/{{$nav['id']}}/edit?banner_id={{$banner->id}}" >
 		<div class="folder-name"> 
-			{{ $nav["label"] }}
+			{{$nav["label"]}}
 		</div>
 		</a>
 		<!-- <a class="btn btn-default deleteFolder" data-folderId="{{$nav['id']}}">Delete</a> -->

@@ -13,7 +13,7 @@ use App\FileFolder;
 class Document extends Model
 {
     protected $table = 'documents';
-    protected $fillable = array('upload_package_id', 'original_filename', 'filename', 'title', 'description');
+    protected $fillable = array('upload_package_id', 'original_filename','original_extension', 'filename', 'title', 'description');
 
     public static function getDocuments($folder_id, $isWeek)
     {
@@ -65,7 +65,7 @@ class Document extends Model
 
         $directory = public_path() . '/files';
         $uniqueHash = sha1(time() . time());
-        $filename  = $metadata["modifiedName"] . "_" . $uniqueHash . "." . $metadata["extension"];
+        $filename  = $metadata["modifiedName"] . "_" . $uniqueHash . "." . $metadata["originalExtension"];
 
         $upload_success = $request->file('document')->move($directory, $filename); //move and rename file        
 
@@ -73,6 +73,7 @@ class Document extends Model
             $documentdetails = array(
                 'original_filename' => $metadata["originalName"],
                 'filename'          => $filename,
+                'original_extension'=> $metadata["originalExtension"],
                 'upload_package_id' => $request->get('upload_package_id'),
                 'title'             => "no title",
                 'description'       => "no description"
@@ -103,7 +104,7 @@ class Document extends Model
         $response = [];
         $response["originalName"] = $originalName;
         $response["modifiedName"] = $modifiedName;
-        $response["extension"]    = $extension;
+        $response["originalExtension"] = $extension;
 
         return $response;
     }
@@ -119,13 +120,17 @@ class Document extends Model
 
     public static function deleteDocument($id)
     {
+        
         FileFolder::where('document_id', $id)->delete();
-        Document::find($id)->delete();
+        $document = Document::find($id);
+        unlink(public_path('files/'.$document->filename));
+        $document->delete();
         return;
     }
 
     public static function updateMetaData(Request $request, $id=null)
     {
+        
         if (!isset($id)) {
             $id = $request->get('file_id');
         }
@@ -140,5 +145,6 @@ class Document extends Model
 
         $document = Document::find($id);
         $document->update($metadata);
+
     }
 }

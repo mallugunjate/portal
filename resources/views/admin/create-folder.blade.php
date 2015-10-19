@@ -19,18 +19,18 @@
                         @endif
                     </a>
                 </div>
+                 <ul class="nav navbar-nav navbar-right">
+                <li><a href="/admin/folderstructure?banner_id={{$banner->id}}">Back to Folder Listing</a></li>
+            </ul>
             </div>
+           
         </nav>
         <!-- navbar ends-->
 
         <div class="col-md-10">
 
         {!! Form::open(array('action' => 'FolderAdminController@store', 'files' => false, 'class' => 'form-horizontal', 'role' => 'form')) !!}
-            <input type="text" name="banner_id" id="banner_id" class="hidden"> 
-            <!-- <select id="banner_id" name="banner_id" class="form-control">
-                <option value="1">Sportchek</option>
-                <option value="2">Atmosphere</option>
-            </select> -->               
+            <input type="text" name="banner_id" id="banner_id" class="hidden">               
             <div class="col-md-8 col-sm-offset-1">
             <h2>Create Folder</h2>
             @if(isset($banner))

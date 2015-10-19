@@ -43,11 +43,12 @@
 
 
 		$('#file-table').empty();
-		$('#file-table').append('<tr> <th> Title </th>'+
+		
+		if( !(data.files[0] === null) ) {
+			$('#file-table').append('<tr> <th> Title </th>'+
 									' <th> Description </th>'+
 									' <th> Uploaded At </th>'+
 									' <th> Action </th> </tr>');
-		if( !(data.files[0] === null) ) {
 			var files = data.files[0]
 			console.log(files)
 			_.each(files, function(i){
