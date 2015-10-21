@@ -12,5 +12,54 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('site.index');
 });
+
+//list of admin functions
+Route::get('/admin', function(){
+	return view('admin.index');
+});
+
+//FILES
+//upload a file
+Route::get('/admin/document/create', 'DocumentAdminController@create');
+Route::post('/admin/document/create', 'DocumentAdminController@store');
+//metadata
+Route::get('/admin/document/add-meta-data', 'DocumentAdminController@showMetaDataForm');
+Route::post('/admin/document/add-meta-data', 'DocumentAdminController@updateMetaData');
+//delete a file
+Route::delete('/admin/document/{id}', 'DocumentAdminController@destroy');
+//edit a file
+Route::get('/admin/document/{id}/edit', 'DocumentAdminController@edit');
+Route::put('/admin/document/{id}', 'DocumentAdminController@update');
+//get a file
+Route::get('/admin/document/{id}', 'DocumentAdminController@show');
+
+
+//FOLDERS
+//add a folder
+Route::get('/admin/folder/create', 'FolderAdminController@create');
+Route::post('/admin/folder/create', 'FolderAdminController@store');
+Route::get('admin/folder/{id}/edit', 'FolderAdminController@edit');
+Route::put('admin/folder/{id}', 'FolderAdminController@update');
+Route::delete('/admin/folder/{id}', 'FolderAdminController@destroy');
+
+
+//FOLDER STRUCTURE
+//view folder structure
+Route::get('/admin/folderstructure', 'FolderStructureAdminController@index');
+//define a folder relationship
+Route::get('/admin/folderstructure/create', 'FolderStructureAdminController@create');
+Route::post('/admin/folderstructure/create', 'FolderStructureAdminController@store');
+
+//admin home
+Route::get('/admin/home', 'DocumentAdminController@index');
+
+//view documents :: need to modify this
+Route::get('/documents', 'DocumentController@index');
+
+//Api routes
+
+Route::get('/api/v1/navigation', 'Api\V1\ApiController@getNavigation');
+Route::get('/api/v1/document', 'Api\V1\ApiController@getDocumentsInFolder');
+Route::get('api/v1/document/{id}', 'Api\V1\ApiController@getDocumentById');

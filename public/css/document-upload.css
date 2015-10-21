@@ -1,0 +1,83 @@
+ html, body {
+      height: 100%;
+    }
+    #actions {
+      margin-top: -6em;
+    }
+    /*#actions .start, #actions .cancel {
+      display: none;
+    }*/
+    #previews{
+      margin-top: 4em;
+    }
+
+    /* Mimic table appearance */
+    div.table {
+      display: table;
+    }
+    div.table .file-row {
+      display: table-row;
+    }
+    div.table .file-row > div {
+      display: table-cell;
+      vertical-align: top;
+      border-top: 1px solid #ddd;
+      padding: 8px;
+    }
+    div.table .file-row:nth-child(odd) {
+      background: #f9f9f9;
+    }
+
+
+
+    /* The total progress gets shown by event listeners */
+    #total-progress {
+      opacity: 0;
+      transition: opacity 0.3s linear;
+    }
+
+    /* Hide the progress bar when finished */
+    #previews .file-row.dz-success .progress {
+      opacity: 0;
+      transition: opacity 0.3s linear;
+    }
+
+    /* Hide the start and cancel button for single file */
+    #previews .file-row .cancel , #previews .file-row .start{
+      display: none;
+    }
+
+    /* Hide the start and cancel buttons and show the delete button */
+
+    #previews .file-row.dz-success .start,
+    #previews .file-row.dz-success .cancel {
+      display: none;
+    }
+    #previews .file-row.dz-success .delete {
+      display: block;
+    }
+
+    .next-action{
+      float:right;
+      margin-bottom: 10px;
+    }
+    #file-uploader {
+      min-height:350px;
+      background-color: #eee;
+      margin-top: 8em;
+      margin-bottom: 2em;
+    }
+    #watermark {
+     position:relative;
+     top:150px;
+     text-align:center;
+     font-size: 30px;
+     z-index:1;
+     color:#fff;
+    }
+    .content-container{
+      border-left:thin solid #e9e9e9;
+      padding: 0 5em;
+      min-height: 450px;
+    }
+
