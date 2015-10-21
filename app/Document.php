@@ -8,14 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 use App\Week;
 use App\Folder;
 use App\FileFolder;
+use Carbon\Carbon;
 
 
 class Document extends Model
 {
     protected $table = 'documents';
-    protected $fillable = array('upload_package_id', 'original_filename','original_extension', 'filename', 'title', 'description');
+    protected $fillable = array('upload_package_id', 'original_filename','original_extension', 'filename', 'title', 'description', 'start', 'end');
 
-    public static function getDocuments($folder_id, $isWeek)
+    public static function getDocuments($folder_id, $isWeek, $forApi=null, $time=null)
     {
     	
 
@@ -38,13 +39,22 @@ class Document extends Model
                 $response["folder"] = [];
                 array_push($response["folder"], $folder);
             }
-
-            $files = \DB::table('file_folder')
+            
+            if ($forApi) {
+                $files = \DB::table('file_folder')
+                            ->join('documents', 'file_folder.document_id', '=', 'documents.id')
+                            ->where('file_folder.folder_id', '=', $folder_id)
+                            ->where('documents.start', '<=', Carbon::now() )
+                            ->select('documents.*')
+                            ->get();  
+            }
+            else{
+                $files = \DB::table('file_folder')
                             ->join('documents', 'file_folder.document_id', '=', 'documents.id')
                             ->where('file_folder.folder_id', '=', $folder_id)
                             ->select('documents.*')
-                            ->get();        
-                
+                            ->get();            
+            }
             $response["files"] = [];
             if (count($files) > 0) {
                  array_push($response["files"], $files); 
@@ -137,10 +147,14 @@ class Document extends Model
         
         $title = $request->get('title');
         $description = $request->get('description');
+        $start = $request->get('start');
+        $end = $request->get('end');
 
         $metadata = array(
-            'title' => $title,
-            'description' => $description
+            'title'       => $title,
+            'description' => $description,
+            'start'       => $start,
+            'end'         => $end
         );
 
         $document = Document::find($id);

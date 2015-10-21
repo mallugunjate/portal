@@ -78,6 +78,7 @@ class Folder extends Model
         if (count($files)>0) {
             foreach ($files as $file) {
                 Document::where('id', $file->document_id)->delete();
+                unlink(public_path()."/files/".$file->filename);
             }  
             FileFolder::where('folder_id', $id)->delete();
         }

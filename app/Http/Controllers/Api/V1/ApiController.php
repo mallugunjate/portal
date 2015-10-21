@@ -8,26 +8,40 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\FolderStructure;
 use App\Document;
+use App\Folder;
+use App\Week;
 
 class ApiController extends Controller
 {
-     public function getNavigation(Request $request)
+     public function getNavigation($id)
     {
-        $banner_id = $request->get('banner_id');
-        if (isset($banner_id)) {
-            
+        $banner_id = $id;
+        return FolderStructure::getNavigationStructure($banner_id);
+
+    }
+
+    public function getDocumentsInFolder($id)
+    {
+        $folder_id = $id;
+        
+        $isWeek = null;
+        if (Folder::where('id', '=', $folder_id)->exists()) {
+            $isWeek = false;
         }
-        return FolderStructure::getNavigationStructure();
+        else if(Week::where('id', $folder_id)->exists()) {
+            $isWeek = true;
+        }
+
+        $forApi = true;
+
+        // $time = urldecode($request->get('time'));
+
+        return Document::getDocuments($folder_id, $isWeek, $forApi);
 
     }
 
-    public function getDocumentsInFolder(Request $request)
+    public function getDocumentById($id)
     {
-        return Document::getDocuments($request);
-    }
-
-    public function getDocumentById($fileId)
-    {
-        return Document::getDocumentById($fileId);  
+        return Document::getDocumentById($id);
     }
 }

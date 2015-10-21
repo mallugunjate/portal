@@ -6,14 +6,26 @@ $(document).ready(function() {
         var fileIdVal = $(this).attr('data-id');
         var titleVal = $("#title"+fileIdVal).val();
         var descriptionVal = $("#description"+fileIdVal).val();
+        var start = $("#start"+fileIdVal).val();
+        var end =  $("#end"+fileIdVal).val();
         var selector = "#metadataform"+fileIdVal;
         var check = "#checkmark"+fileIdVal;
 
-        console.log(fileIdVal, titleVal, descriptionVal, selector)
-        $.post("/admin/document/add-meta-data",{ file_id: fileIdVal, title: titleVal, description: descriptionVal, _token:token })
+        console.log(fileIdVal, titleVal, descriptionVal, selector, start, end)
+       
+        if (start == "") {
+            
+            $("#start"+fileIdVal).parent().css("border", 'thin solid red');
+            $('.error').remove()
+            $("#start"+fileIdVal).closest('.col-md-2').append("<div class='row error'><div class='col-md-2'> *Required </div></div>")            
+            return false;
+
+        }
+        $.post("/admin/document/add-meta-data",{ file_id: fileIdVal, title: titleVal, description: descriptionVal, start : start, end:end, _token:token })
             .done( function(data){
-                console.log('meta data saved');
                 $(check).fadeIn(1000);
+                $("#start"+fileIdVal).parent().css("border", 'none');
+                $('.error').remove()
             });
         return false;
     });

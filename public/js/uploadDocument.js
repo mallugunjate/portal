@@ -43,6 +43,9 @@ myDropzone.on("drop", function (e) {
 
 myDropzone.on("addedfile", function (file) {
     // Hookup the start button
+      $("#watermark").hide();
+      $('#actions .start').removeClass('disabled');
+      $('#actions .cancel').removeClass('disabled');
       file.previewElement.querySelector(".start").onclick = function () {
         myDropzone.enqueueFile(file);
       };
@@ -82,6 +85,6 @@ document.querySelector("#actions .cancel").onclick = function () {
     myDropzone.removeAllFiles(true);
     $("#watermark").show();
     $('#actions .start').addClass('disabled');
-  $('#actions .cancel').addClass('disabled');
+    $('#actions .cancel').addClass('disabled');
 };
 

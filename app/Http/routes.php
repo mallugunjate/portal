@@ -60,6 +60,6 @@ Route::get('/documents', 'DocumentController@index');
 
 //Api routes
 
-Route::get('/api/v1/navigation', 'Api\V1\ApiController@getNavigation');
-Route::get('/api/v1/document', 'Api\V1\ApiController@getDocumentsInFolder');
-Route::get('api/v1/document/{id}', 'Api\V1\ApiController@getDocumentById');
+Route::get('/api/v1/banner/{id}/navigation', 'Api\V1\ApiController@getNavigation');
+Route::get('/api/v1/folder/{id}', 'Api\V1\ApiController@getDocumentsInFolder');
+Route::get('/api/v1/document/{id}', 'Api\V1\ApiController@getDocumentById');

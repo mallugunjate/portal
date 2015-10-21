@@ -26,7 +26,9 @@
     line-height:2em;
     color:#369;
     font-weight:700;
-    position:relative
+    position:relative;
+    cursor:pointer;
+
 }
 .tree ul li:before {
     content:"";

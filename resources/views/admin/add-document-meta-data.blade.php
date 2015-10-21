@@ -10,8 +10,6 @@
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/js/moment.js"></script>
-<!--     // <script type="text/javascript" src="/js/transition.js"></script>
-    // <script type="text/javascript" src="/js/collapse.js"></script> -->
     <script type="text/javascript" src="/js/bootstrap-datetimepicker.min.js"></script>
 
     <script src="/js/submitmetadata.js"></script>    
@@ -93,50 +91,25 @@
   		        </div>
 
               <div class="col-md-2">
-                <!-- <input class="form-control" type="text" name="start" value=""> -->
                 <div class="form-group">
-                  <div class='input-group date' id='datetimepicker1-{{$doc->id}}'>
-                      <input type='text' class="form-control" />
+                  <div class='input-group date startdate' id='datetimepicker1-{{$doc->id}}'>
+                      <input type='text' class="form-control" name="start" id="start{{$doc->id}}"/>
                       <span class="input-group-addon">
                           <span class="glyphicon glyphicon-calendar"></span>
                       </span>
                   </div>
                 </div>
-                <script type="text/javascript">
-                  $(function () {
-                      console.log(new Date())
-                      $("#datetimepicker1-"+{{$doc->id}}).datetimepicker({
-                        format: "yyyy-mm-dd hh:ii",
-                        autoclose: true,
-                        todayBtn: true,
-                        pickerPosition: "bottom-left",
-                        initialDate: new Date()
-                      });  
-                  });
-              </script>
               </div>
 
               <div class="col-md-2">
-                <!-- <input class="form-control" type="text" name="end" value=""> -->
                 <div class="form-group">
-                  <div class='input-group date' id='datetimepicker2-{{$doc->id}}'>
-                      <input type='text' class="form-control" />
+                  <div class='input-group date enddate' id='datetimepicker2-{{$doc->id}}'>
+                      <input type='text' class="form-control" name="end" id="end{{$doc->id}}"/>
                       <span class="input-group-addon">
                           <span class="glyphicon glyphicon-calendar"></span>
                       </span>
                   </div>
                 </div>
-                 <script type="text/javascript">
-                  $(function () {
-
-                      $("#datetimepicker2-"+{{$doc->id}}).datetimepicker({
-                        format: "yyyy-mm-dd hh:ii",
-                        autoclose: true,
-                        todayBtn: true,
-                        pickerPosition: "bottom-left"
-                      });  
-                  });
-              </script>
               </div>
               
               <div class="col-md-2">
@@ -166,7 +139,19 @@
           </div>
       </div>
     </div>
-    
+    <script type="text/javascript">
+         $(function () {
+            $(".startdate").datetimepicker({
+              format: "YYYY-MM-DD HH:mm:ss",
+              defaultDate : new Date()
+            });
+              
+            $(".endDate").datetimepicker({
+              format: "YYYY-MM-DD HH:mm:ss"
+            });
+        });
+    </script>
 </body>
+
 
 </html>

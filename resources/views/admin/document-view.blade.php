@@ -70,11 +70,14 @@
 <script type="text/javascript" src="/js/folderStructure.js" ></script>
 <script src="/js/dropzone.js"></script>
 <script type="text/javascript" src="/js/uploadDocument.js"></script>
+<script type="text/javascript" src="/js/moment.js"></script>
 
 
 <script>
 	$(document).ready(function() {
 
+    var now = moment().format('YYYY-MM-DD H:mm:ss');
+    console.log(now);
     $(".dropdown-toggle").dropdown();
 		$(".tree").treed({openedClass : 'glyphicon glyphicon-folder-open', closedClass : 'glyphicon glyphicon-folder-close'});
     
