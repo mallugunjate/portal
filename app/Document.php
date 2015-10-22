@@ -161,4 +161,19 @@ class Document extends Model
         $document->update($metadata);
 
     }
+
+    public static function getRecentDocuments($days)
+    {
+        $fromDate =  Carbon::today()->subDays($days);
+        $documents = Document::where('start', '>=', $fromDate)->orderBy('start','desc')->get();
+        foreach ($documents as $document) {
+            $folder_id = FileFolder::where('document_id',$document->id)->first()->folder_id;
+            $folder_details = Folder::where('id', $folder_id)->get();
+            $document["folder_details"] = $folder_details;
+            unset($folder_id);
+            unset($folder_details);
+
+        }
+        return $documents;
+    }
 }

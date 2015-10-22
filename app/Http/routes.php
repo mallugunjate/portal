@@ -63,3 +63,4 @@ Route::get('/documents', 'DocumentController@index');
 Route::get('/api/v1/banner/{id}/navigation', 'Api\V1\ApiController@getNavigation');
 Route::get('/api/v1/folder/{id}', 'Api\V1\ApiController@getDocumentsInFolder');
 Route::get('/api/v1/document/{id}', 'Api\V1\ApiController@getDocumentById');
+Route::get('/api/v1/document/recent/{days}', 'Api\V1\ApiController@getRecentDocuments');
