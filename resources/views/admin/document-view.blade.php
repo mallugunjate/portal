@@ -3,12 +3,14 @@
 	<title></title>
 	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
 	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="/css/tree.css">
+	<link rel="stylesheet" type="text/css" href="/css/jquery-ui.theme.min.css">
+  <link rel="stylesheet" type="text/css" href="/css/tree.css">
 	<link rel="stylesheet" type="text/css" href="/css/dz.css">
   <link rel="stylesheet" type="text/css" href="/css/dropzone.css">
 	<link rel="stylesheet" type="text/css" href="/css/document-upload.css">
+
 </head>
-<body>
+<body class="container-fluid">
   <!-- navbar begins -->
   <nav class="navbar navbar-default">
     <div class="container-fluid">
@@ -39,13 +41,16 @@
     
   </nav>
   <!-- navbar ends-->
-  <div id="admin-container" class= "col-md-10 ">
+  <div id="admin-container" >
     <input type="hidden" name="banner_id" value="{{$banner->id}}">
-  	<div class="row">
-  		<div class="col-md-2 navigation-container">
-  			@include('admin.navigation-view', ['navigation'=>$navigation])
+  	<!-- <div class="row"> -->
+  		<div class="navigation-container">
+  			<!-- <div class="ui-widget-content"> -->
+        @include('admin.navigation-view', ['navigation'=>$navigation])
+       
   		</div>
-  		<div class="col-md-10 content-container">
+  		<div class="content-container">
+        
         <div id="empty-container" class="visible">
           <h4>Select a folder to view</h4>
         </div>
@@ -57,27 +62,27 @@
           <div id="watermark">Drag and drop documents here</div>
   				@include('admin.document-upload')
   			</div>
+        
 
   		</div>
 
-  	</div>
+  	<!-- </div> -->
   </div>
 </body>
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/jquery-ui.min.js"></script>
 <script type="text/javascript" src= "/js/underscore-1.8.3.js"></script>
 <script type="text/javascript" src="/js/tree.js"></script>
 <script type="text/javascript" src="/js/folderStructure.js" ></script>
 <script src="/js/dropzone.js"></script>
 <script type="text/javascript" src="/js/uploadDocument.js"></script>
-<script type="text/javascript" src="/js/moment.js"></script>
+<!-- <script type="text/javascript" src="/js/moment.js"></script> -->
 
 
 <script>
 	$(document).ready(function() {
 
-    var now = moment().format('YYYY-MM-DD H:mm:ss');
-    console.log(now);
     $(".dropdown-toggle").dropdown();
 		$(".tree").treed({openedClass : 'glyphicon glyphicon-folder-open', closedClass : 'glyphicon glyphicon-folder-close'});
     
@@ -101,6 +106,21 @@
 
     }
 
+    
+    $( ".navigation-container" ).resizable(
+          { 
+            // maxWidth: 225, 
+            // minWidth: 175,
+            // alsoResizeReverse: ".content-container",
+            // handles : 'e,w',
+          //   resize: function( event, ui ) {
+          //     ui.size.width = Math.round( ui.size.width / 30 ) * 30;
+          //     // ui.size.height = ui.size.height;
+          // } 
+            
+          });
+
+         
 	});  
 
 </script>

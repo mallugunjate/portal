@@ -12,6 +12,12 @@
 			text-transform: capitalize;	
 			line-height: 25px;
 		}
+		.add-folder{
+			color: #222222;
+		}
+		.glyphicon-plus-sign{
+			color:#228B22;
+		}
 
        </style>
 </head>
@@ -47,7 +53,7 @@
 	<!-- navbar ends-->
 	<div class="col-md-10 col-md-offset-1">
 		
-		<a class="btn btn-default" href="/admin/folder/create?banner_id={{$banner->id}}">Add New Folder</a>
+		
 		<div class="row">
 			<div class="col-md-4" >
 				<h3>Folders</h3>	
@@ -55,6 +61,8 @@
 			
 		</div>
 		<div class="row">
+			<i class="glyphicon glyphicon-plus-sign"></i>
+			<a class="add-folder" href="/admin/folder/create?banner_id={{$banner->id}}">Add New Folder</a>
 			<div >
 				{!! csrf_field() !!}
 

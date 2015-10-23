@@ -3,7 +3,7 @@
 	<title></title>
 </head>
 <body>
-	<ul class="tree">
+	<ul class="tree" id="navigation-structure">
 		{!! csrf_field() !!}
 		@foreach ($navigation as $nav) 
 			

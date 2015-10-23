@@ -24,10 +24,10 @@
     margin:0;
     padding:0 1em;
     line-height:2em;
-    color:#369;
-    font-weight:700;
+    color:#444;
     position:relative;
     cursor:pointer;
+    white-space: nowrap;
 
 }
 .tree ul li:before {
@@ -49,14 +49,15 @@
 }
 .indicator {
     margin-right:5px;
+    /*color:#444444;*/
 }
 .tree li a {
     text-decoration: none;
-    color:#369;
+    color:#444;
 }
 .tree li button, .tree li button:active, .tree li button:focus {
     text-decoration: none;
-    color:#369;
+    color:#444;
     border:none;
     background:transparent;
     margin:0px 0px 0px 0px;
