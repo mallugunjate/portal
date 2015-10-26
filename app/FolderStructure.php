@@ -79,15 +79,7 @@ class FolderStructure extends Model
                unset($children);
                 
             }
-            else{
-
-                $navigation[$currentNode->id] = [];
-                $navigation[$currentNode->id]["label"] = $currentNode->name;
-                $navigation[$currentNode->id]["id"] = $currentNode->id ;
-                $navigation[$currentNode->id]["is_child"] = $currentNode->is_child ;
-                $navigation[$currentNode->id]["parent_id"] = $parentNode->parent;
-                $navigation[$currentNode->id]["children"] = [];
-            }
+            
 
             if ($currentNode->has_weeks) {
                 $windowSize = $currentNode->week_window_size;
