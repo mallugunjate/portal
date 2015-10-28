@@ -194,9 +194,21 @@ class Document extends Model
                             ->get();
 
         foreach ($documents as $document) {
-            $folder_id = FileFolder::where('document_id',$document->id)->first()->folder_id;
-            $folder_details = Folder::where('id', $folder_id)->get();
-            //how to get the folder_details in case it is a week folder
+            
+            $global_folder_id = FileFolder::where('document_id',$document->id)->first()->folder_id;
+
+            $global_folder_details =  \DB::table('folder_ids')->where('id', $global_folder_id)->first();
+            $folder_id = $global_folder_details->folder_id;
+            $folder_type = $global_folder_details->folder_type;
+
+
+            if ($folder_type == 'folder') {
+                $folder_details = Folder::where('id', $folder_id)->get();
+            }
+            else{
+                $folder_details  = Week::where('id', $folder_id)->get();
+            }
+
             $document["folder_details"] = $folder_details;
             unset($folder_id);
             unset($folder_details);

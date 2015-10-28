@@ -24,14 +24,6 @@ class ApiController extends Controller
     {
         $folder_id = $id;
         
-        // $isWeek = null;
-        // if (Folder::where('id', '=', $folder_id)->exists()) {
-        //     $isWeek = false;
-        // }
-        // else if(Week::where('id', $folder_id)->exists()) {
-        //     $isWeek = true;
-        // }
-
         $isweek = $isWeek;
 
         $forApi = true;
