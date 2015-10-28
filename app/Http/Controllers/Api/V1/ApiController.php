@@ -20,21 +20,21 @@ class ApiController extends Controller
 
     }
 
-    public function getDocumentsInFolder($id)
+    public function getDocumentsInFolder($id, $isWeek)
     {
         $folder_id = $id;
         
-        $isWeek = null;
-        if (Folder::where('id', '=', $folder_id)->exists()) {
-            $isWeek = false;
-        }
-        else if(Week::where('id', $folder_id)->exists()) {
-            $isWeek = true;
-        }
+        // $isWeek = null;
+        // if (Folder::where('id', '=', $folder_id)->exists()) {
+        //     $isWeek = false;
+        // }
+        // else if(Week::where('id', $folder_id)->exists()) {
+        //     $isWeek = true;
+        // }
+
+        $isweek = $isWeek;
 
         $forApi = true;
-
-        // $time = urldecode($request->get('time'));
 
         return Document::getDocuments($folder_id, $isWeek, $forApi);
 

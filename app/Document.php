@@ -16,16 +16,21 @@ class Document extends Model
     protected $table = 'documents';
     protected $fillable = array('upload_package_id', 'original_filename','original_extension', 'filename', 'title', 'description', 'start', 'end', 'banner_id');
 
-    public static function getDocuments($folder_id, $isWeek, $forApi=null, $time=null)
+    public static function getDocuments($folder_id, $isWeek, $forApi=null)
     {
-    	
 
         if (isset($folder_id)) {
             
+
             $response = [];
             if($isWeek == "true"){
 
                 $response["type"] = "week"; 
+                
+                $global_folder_id = \DB::table('folder_ids')->where('folder_id', $folder_id )
+                                                            ->where('folder_type', 'week')
+                                                            ->first()->id;
+                
                 $folder = Week::where('id', $folder_id)->first();
                 
                 $response["folder"] = [];
@@ -34,6 +39,11 @@ class Document extends Model
             else{
 
                 $response["type"] = "folder";
+
+                $global_folder_id = \DB::table('folder_ids')->where('folder_id', $folder_id )
+                                                            ->where('folder_type', 'folder')
+                                                            ->first()->id;
+
                 $folder = Folder::where('id', $folder_id)->first();    
                 
                 $response["folder"] = [];
@@ -43,7 +53,7 @@ class Document extends Model
             if ($forApi) {
                 $files = \DB::table('file_folder')
                             ->join('documents', 'file_folder.document_id', '=', 'documents.id')
-                            ->where('file_folder.folder_id', '=', $folder_id)
+                            ->where('file_folder.folder_id', '=', $global_folder_id)
                             ->where('documents.start', '<=', Carbon::now() )
                             ->select('documents.*')
                             ->get();  
@@ -51,7 +61,7 @@ class Document extends Model
             else{
                 $files = \DB::table('file_folder')
                             ->join('documents', 'file_folder.document_id', '=', 'documents.id')
-                            ->where('file_folder.folder_id', '=', $folder_id)
+                            ->where('file_folder.folder_id', '=', $global_folder_id)
                             ->select('documents.*')
                             ->get();            
             }
@@ -94,9 +104,21 @@ class Document extends Model
             $document->save();
             $lastInsertedId= $document->id;
 
+            $isWeekFolder = $request->get('isWeekFolder');
+            $folder_type = "folder"; 
+            if ($isWeekFolder == "true") {
+                $folder_type = "week";
+            }
+            
+
+            $folder_id = $request->get('folder_id');
+            $global_folder_id = \DB::table('folder_ids')->where('folder_id', $folder_id)
+                                                        ->where('folder_type', $folder_type)
+                                                        ->first()->id;
+
             $documentfolderdetails = array(
                 'document_id' => $lastInsertedId,
-                'folder_id' => $request->get('folder_id')
+                'folder_id' => $global_folder_id
             );
            
             $documentfolder = FileFolder::create($documentfolderdetails);
@@ -174,6 +196,7 @@ class Document extends Model
         foreach ($documents as $document) {
             $folder_id = FileFolder::where('document_id',$document->id)->first()->folder_id;
             $folder_details = Folder::where('id', $folder_id)->get();
+            //how to get the folder_details in case it is a week folder
             $document["folder_details"] = $folder_details;
             unset($folder_id);
             unset($folder_details);

@@ -65,6 +65,11 @@ class Folder extends Model
         $folder = Folder::create($folderdetails);
         $folder->save();
 
+        \DB::table('folder_ids')->insert([
+                'folder_id'    => $folder->id,
+                'folder_type'  => 'folder' 
+            ]);
+
         return $banner_id; 
     }
 
@@ -93,7 +98,10 @@ class Folder extends Model
     
         }
         
-        Folder::find($id)->delete();        
+        $folder = Folder::find($id)->delete();  
+
+        \DB::table('folder_ids')->where('folder_id', $id)->where('folder_type', 'folder')->delete();
+
         return $banner_id;
         
     }
@@ -168,7 +176,7 @@ class Folder extends Model
 
         $folder->update($update);   
         $banner_id = $folder->banner_id;
-        // dd($banner_id);
+
         return $banner_id;
     }
 
@@ -186,6 +194,10 @@ class Folder extends Model
                         'parent' => $parent->id,
                         'child'  => $folder->id
                     ]);
+                \DB::table('folder_ids')->insert([
+                    'folder_id'    => $folder->id,
+                    'folder_type'  => 'folder' 
+                ]);
             }
     }
 
@@ -193,6 +205,8 @@ class Folder extends Model
     {
         $weeks = Week::where('parent_id',$id)->get();
             foreach ($weeks as $week) {
+                
+                //delete documentsin folder
                 $documentsInFolder = FileFolder::where('folder_id', $week->id)->get();
                 if ($documentsInFolder) {
                     foreach ($documentsInFolder as $doc) {
@@ -200,7 +214,9 @@ class Folder extends Model
                         FileFolder::where('folder_id', $doc->folder_id)->delete();
                     }
                 }
+                //delete week folders
                 Week::where('id', $week->id)->delete();
+                \DB::table('folder_ids')->where('folder_id', $week->id)->where('folder_type', 'week')->delete();
                 unset($documentsInFolder);
             }
     }

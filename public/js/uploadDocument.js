@@ -28,6 +28,7 @@ var myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
         formData.append("folder_id", $('#folder-title').attr('data-folderid'));
         formData.append("upload_package_id", $('[name=upload_package_id').val());
         formData.append("banner_id", $('[name=banner_id]').val());
+        formData.append("isWeekFolder", $('#folder-title').attr('data-isweekfolder') )
     },
     init: function () {
       this.on("success", function (file, response) {
