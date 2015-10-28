@@ -57,10 +57,10 @@ class Document extends Model
             }
             $response["files"] = [];
             if (count($files) > 0) {
-                 array_push($response["files"], $files); 
+                 $response["files"] =  $files;
             }
             else{
-                array_push($response["files"], null);
+                $response["files"] = null;
             }
             return $response;
             
