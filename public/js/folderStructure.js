@@ -44,7 +44,7 @@
 
 		$('#file-table').empty();
 		
-		if( !(data.files[0] === null) ) {
+		if( !(data.files === null) ) {
 			$('#file-table').append('<thead>'+
 									'<tr> <th> Title </th>'+
 									' <th> Description </th>'+
@@ -52,7 +52,7 @@
 									' <th> Start </th>' +
 									' <th> End </th>' +
 									' <th> Action </th> </tr></thead>');
-			var files = data.files[0]
+			var files = data.files
 			console.log(files)
 			$('#file-table').append('<tbody>');
 			_.each(files, function(i){
