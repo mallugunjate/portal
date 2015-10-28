@@ -28,7 +28,19 @@
     div.table .file-row:nth-child(odd) {
       background: #f9f9f9;
     }
-
+    
+    thead th {
+        background-repeat: no-repeat;
+        background-position: right center;
+    }
+    thead th.up {
+        padding-right: 20px;
+        background-image: url(data:image/gif;base64,R0lGODlhFQAEAIAAACMtMP///yH5BAEAAAEALAAAAAAVAAQAAAINjI8Bya2wnINUMopZAQA7);
+    }
+    thead th.down {
+        padding-right: 20px;
+        background-image: url(data:image/gif;base64,R0lGODlhFQAEAIAAACMtMP///yH5BAEAAAEALAAAAAAVAAQAAAINjB+gC+jP2ptn0WskLQA7);
+    }
 
 
     /* The total progress gets shown by event listeners */
@@ -79,6 +91,8 @@
     .admin-container{
       position:relative;
     }
+
+    /* Navigation Style */   
     .navigation-container{
       min-width:10%;
       width:15%;
@@ -94,7 +108,6 @@
     }
     .content-container{
       float:left;
-      /*border:thin solid #e9e9e9;*/
       min-height: 450px;
       width: 75%;
       padding: 1.5em;

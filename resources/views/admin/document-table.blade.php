@@ -2,7 +2,7 @@
 	<div id="folder-title" data-folderId= "" data-isWeekFolder = "">
 		<h2></h2>
 	</div>
-	<table class="table" id="file-table"> 
+	<table class="table tablesorter" id="file-table"> 
 		<!-- <tr>
 			<th>Title</th>
 			<th>Description</th>

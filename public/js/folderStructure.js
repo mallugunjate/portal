@@ -45,14 +45,16 @@
 		$('#file-table').empty();
 		
 		if( !(data.files[0] === null) ) {
-			$('#file-table').append('<tr> <th> Title </th>'+
+			$('#file-table').append('<thead>'+
+									'<tr> <th> Title </th>'+
 									' <th> Description </th>'+
 									' <th> Uploaded At </th>'+
-									' <th> Start Date </th>' +
-									' <th> End Date </th>' +
-									' <th> Action </th> </tr>');
+									' <th> Start </th>' +
+									' <th> End </th>' +
+									' <th> Action </th> </tr></thead>');
 			var files = data.files[0]
 			console.log(files)
+			$('#file-table').append('<tbody>');
 			_.each(files, function(i){
 				$('#file-table').append('<tr> <td>'+ i.title +'</td>'+
 											' <td>'+ i.description +'</td>'+
@@ -63,6 +65,13 @@
 												'<a class="btn btn-xs btn-warning" href="/admin/document/'+ i.id +'/edit?banner_id='+ banner_id +'"> Edit </a> '+
 												'<a class="deleteFile btn btn-xs btn-danger" id="'+ i.id +'" > Delete </a>'+
 											'</td> </tr>')
+			});
+			$('#file-table').append('</tbody>');
+			$("#file-table").tablesorter({
+				sortReset : true,
+    			// headerTemplate : '{icon}{content}',,
+    			cssAsc: 'up',
+        		cssDesc: 'down'
 			});
 
 		}

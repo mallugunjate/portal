@@ -77,7 +77,7 @@
 <script type="text/javascript" src="/js/folderStructure.js" ></script>
 <script src="/js/dropzone.js"></script>
 <script type="text/javascript" src="/js/uploadDocument.js"></script>
-<!-- <script type="text/javascript" src="/js/moment.js"></script> -->
+<script type="text/javascript" src="/js/tablesorter.min.js"></script>
 
 
 <script>
@@ -107,18 +107,7 @@
     }
 
     
-    $( ".navigation-container" ).resizable(
-          { 
-            // maxWidth: 225, 
-            // minWidth: 175,
-            // alsoResizeReverse: ".content-container",
-            // handles : 'e,w',
-          //   resize: function( event, ui ) {
-          //     ui.size.width = Math.round( ui.size.width / 30 ) * 30;
-          //     // ui.size.height = ui.size.height;
-          // } 
-            
-          });
+    $( ".navigation-container" ).resizable();
 
          
 	});  

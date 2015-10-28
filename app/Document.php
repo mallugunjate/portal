@@ -14,7 +14,7 @@ use Carbon\Carbon;
 class Document extends Model
 {
     protected $table = 'documents';
-    protected $fillable = array('upload_package_id', 'original_filename','original_extension', 'filename', 'title', 'description', 'start', 'end');
+    protected $fillable = array('upload_package_id', 'original_filename','original_extension', 'filename', 'title', 'description', 'start', 'end', 'banner_id');
 
     public static function getDocuments($folder_id, $isWeek, $forApi=null, $time=null)
     {
@@ -86,7 +86,8 @@ class Document extends Model
                 'original_extension'=> $metadata["originalExtension"],
                 'upload_package_id' => $request->get('upload_package_id'),
                 'title'             => "no title",
-                'description'       => "no description"
+                'description'       => "no description",
+                'banner_id'         => intval($request->get('banner_id'))
             );
 
             $document = Document::create($documentdetails);
@@ -162,10 +163,14 @@ class Document extends Model
 
     }
 
-    public static function getRecentDocuments($days)
+    public static function getRecentDocuments($banner_id, $days)
     {
         $fromDate =  Carbon::today()->subDays($days);
-        $documents = Document::where('start', '>=', $fromDate)->orderBy('start','desc')->get();
+        $documents = Document::where('start', '>=', $fromDate)
+                            ->where('banner_id', $banner_id)    
+                            ->orderBy('start','desc')
+                            ->get();
+
         foreach ($documents as $document) {
             $folder_id = FileFolder::where('document_id',$document->id)->first()->folder_id;
             $folder_details = Folder::where('id', $folder_id)->get();

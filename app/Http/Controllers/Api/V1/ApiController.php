@@ -45,8 +45,8 @@ class ApiController extends Controller
         return Document::getDocumentById($id);
     }
 
-    public function getRecentDocuments($numberOfDays)
+    public function getRecentDocuments($banner_id, $numberOfDays)
     {
-        return Document::getRecentDocuments($numberOfDays);
+        return Document::getRecentDocuments($banner_id, $numberOfDays);
     }
 }

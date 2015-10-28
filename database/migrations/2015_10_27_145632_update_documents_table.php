@@ -14,6 +14,11 @@ class UpdateDocumentsTable extends Migration
     {
         Schema::table("documents", function ($table) {
             $table->string('original_extension')->after('original_filename');
+            $table->string('start');
+            $table->string('end');
+            $table->integer('banner_id')->unsigned()->after('description');
+            $table->foreign('banner_id')->references('id')->on('banners')->onDelete('cascade');
+
         });
     }
 
@@ -24,8 +29,11 @@ class UpdateDocumentsTable extends Migration
      */
     public function down()
     {
-         Schema::table("documents", function ($table) {
+        Schema::table("documents", function ($table) {
             $table->dropColumn('original_extension');
+            $table->dropColumn('start');
+            $table->dropColumn('end');
+            $table->dropColumn('banner_id');
         });
     }
 }
