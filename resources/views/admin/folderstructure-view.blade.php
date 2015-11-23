@@ -14,6 +14,7 @@
 		}
 		.add-folder{
 			color: #222222;
+			cursor: pointer;
 		}
 		.glyphicon-plus-sign{
 			color:#228B22;
@@ -62,9 +63,11 @@
 				<span> Add New Folder </span>
 			</div>
 			<div class="row">
-				<div id="form-container" class="col-md-3 input-group"></div>
+				 {!! Form::open(array('action' => 'FolderAdminController@store', 'files' => false, 'class' => 'form-horizontal', 'role' => 'form')) !!}
+					{!! csrf_field() !!}
+					<div id="form-container" class="col-md-3 input-group"></div>
+				{!! Form::close() !!}
 			</div>
-			<!-- <a class="add-folder" href="/admin/folder/create?banner_id={{$banner->id}}">Add New Folder</a> -->
 			<div class="row">
 				{!! csrf_field() !!}
 
@@ -85,37 +88,16 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-
-
-	// $("body").on("click", ".deleteFolder", function(e) {
-	// 	e.preventDefault();
-	// 	if (confirm('Are you sure you want to delete this folder?')) {
-	// 	    console.log($(this).attr('data-folderId'))
-	// 	    $(this).closest('div').fadeOut(500)
-	// 		$.ajax({
-	// 		    url: '/admin/folder/'+ $(this).attr('data-folderId'),
-	// 		    type: 'DELETE',
-	// 		    data : {	
-	// 		    			_token : $('[name=_token').val()
-	// 				   }
-
-	// 		})
-	// 		.done(function(data){
-	// 			console.log(data)
-	// 		});
-	// 	}
-	// })  
+ 
 
 	$(".add-folder").on("click", function() {
 		$("#form-container").empty();
-		$("#form-container").append('<input class="form-control" type="text" name="foldername" placeholder="folder-name">'+
-									'<span class="input-group-btn create-folder"><button class="btn btn-default" type="button">Add</button></span>');
+		$("#form-container").append('<input class="form-control" type="text" name="foldername" placeholder="Folder Name">'+
+									'<span class="input-group-btn create-folder"><button class="btn btn-default" type="submit">Add</button></span>');
 	})
 	
 
-	$("body").on("click", ".create-folder", function() {
-		$("")
-	})
+	
 
 </script>
 </html>

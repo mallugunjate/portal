@@ -112,9 +112,7 @@
     <script type="text/javascript" src="/js/editFolder.js"></script>
     <script type="text/javascript">
         $(function () {
-            // $(".disabled-button-container button").removeAttr('disabled');
             $('.disabled-button-container').tooltip()
-            // $(".disabled-button-container button").attr('disabled', 'disabled-button-container');
         })
     </script>
 </body>
