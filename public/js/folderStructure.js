@@ -69,7 +69,6 @@
 			$('#file-table').append('</tbody>');
 			$("#file-table").tablesorter({
 				sortReset : true,
-    			// headerTemplate : '{icon}{content}',,
     			cssAsc: 'up',
         		cssDesc: 'down'
 			});

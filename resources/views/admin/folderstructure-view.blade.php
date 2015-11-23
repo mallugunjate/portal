@@ -53,17 +53,19 @@
 	<!-- navbar ends-->
 	<div class="col-md-10 col-md-offset-1">
 		
-		
-		<div class="row">
-			<div class="col-md-4" >
-				<h3>Folders</h3>	
-			</div>
+		<h3>Folders</h3>	
+
+		<div >
 			
-		</div>
-		<div class="row">
-			<i class="glyphicon glyphicon-plus-sign"></i>
-			<a class="add-folder" href="/admin/folder/create?banner_id={{$banner->id}}">Add New Folder</a>
-			<div >
+			<div class="add-folder row">
+				<i class="glyphicon glyphicon-plus-sign"></i>
+				<span> Add New Folder </span>
+			</div>
+			<div class="row">
+				<div id="form-container" class="col-md-3 input-group"></div>
+			</div>
+			<!-- <a class="add-folder" href="/admin/folder/create?banner_id={{$banner->id}}">Add New Folder</a> -->
+			<div class="row">
 				{!! csrf_field() !!}
 
 				@foreach ($navigation as $nav) 
@@ -85,25 +87,35 @@
 <script type="text/javascript">
 
 
-	$("body").on("click", ".deleteFolder", function(e) {
-		e.preventDefault();
-		if (confirm('Are you sure you want to delete this folder?')) {
-		    console.log($(this).attr('data-folderId'))
-		    $(this).closest('div').fadeOut(500)
-			$.ajax({
-			    url: '/admin/folder/'+ $(this).attr('data-folderId'),
-			    type: 'DELETE',
-			    data : {	
-			    			_token : $('[name=_token').val()
-					   }
+	// $("body").on("click", ".deleteFolder", function(e) {
+	// 	e.preventDefault();
+	// 	if (confirm('Are you sure you want to delete this folder?')) {
+	// 	    console.log($(this).attr('data-folderId'))
+	// 	    $(this).closest('div').fadeOut(500)
+	// 		$.ajax({
+	// 		    url: '/admin/folder/'+ $(this).attr('data-folderId'),
+	// 		    type: 'DELETE',
+	// 		    data : {	
+	// 		    			_token : $('[name=_token').val()
+	// 				   }
 
-			})
-			.done(function(data){
-				console.log(data)
-			});
-		}
-	})  
+	// 		})
+	// 		.done(function(data){
+	// 			console.log(data)
+	// 		});
+	// 	}
+	// })  
 
+	$(".add-folder").on("click", function() {
+		$("#form-container").empty();
+		$("#form-container").append('<input class="form-control" type="text" name="foldername" placeholder="folder-name">'+
+									'<span class="input-group-btn create-folder"><button class="btn btn-default" type="button">Add</button></span>');
+	})
+	
+
+	$("body").on("click", ".create-folder", function() {
+		$("")
+	})
 
 </script>
 </html>

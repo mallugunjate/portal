@@ -216,4 +216,49 @@ class Document extends Model
         }
         return $documents;
     }
+
+    public static function getArchivedDocuments($folder_id)
+    {
+        $folder = Folder::find($folder_id);
+        $archivedDocuments = [];
+        if($folder->has_weeks == 1) {
+            $weeksInFolder = Week::where('parent_id', $folder_id)->get();
+            $counter = 0;
+            foreach ($weeksInFolder as $weekInFolder) {
+                $weekFolderId = $weekInFolder->id;
+                $global_folder_id = \DB::table('folder_ids')->where('folder_id', $weekFolderId)
+                                                            ->where('folder_type', 'week')
+                                                            ->first()->id;
+                $docs = FileFolder::where('folder_id', $global_folder_id)->get();
+                if(count($docs)>0) {
+                    $archivedDocuments[$counter]["folder"] = $weekInFolder;
+                    $archivedDocuments[$counter]["number_of_documents"] = count($docs);
+                    // $archivedDocuments[$counter]["docs"] = $docs;
+                    $archivedDocuments[$counter]["doc_ids"] = [];
+                    foreach ($docs as $doc) {
+                        // $doc_details = Document::where('id', $doc->document_id)->first();
+                        array_push($archivedDocuments[$counter]["doc_ids"], $doc->document_id);
+                        unset($doc_details);
+                    }
+                    
+                    $counter++;    
+                }
+                
+            }
+            return $archivedDocuments;
+        }     
+        
+        
+        else{
+            $global_folder_id = \DB::table('folder_ids')->where('folder_id', $folder_id)
+                                                            ->where('folder_type', 'folder')
+                                                            ->first()->id;
+            $docs = FileFolder::where('folder_id', $global_folder_id)->get();
+            $archivedDocuments[0]["folder"] = $folder;
+            $archivedDocuments[0]["number_of_documents"] = count($docs);
+            $archivedDocuments[0]["docs"] = $docs;
+            return $archivedDocuments;
+
+        }
+    }
 }

@@ -20,11 +20,11 @@ class ApiController extends Controller
 
     }
 
-    public function getDocumentsInFolder($id, $isWeek)
+    public function getDocumentsInFolder($id, Request $request)
     {
         $folder_id = $id;
         
-        $isweek = $isWeek;
+        $isWeek = $request->get('isWeeek');
 
         $forApi = true;
 
@@ -40,5 +40,11 @@ class ApiController extends Controller
     public function getRecentDocuments($banner_id, $numberOfDays)
     {
         return Document::getRecentDocuments($banner_id, $numberOfDays);
+    }
+    public function getArchivedDocuments($id, Request $request)
+    {
+        $folder_id = $id;
+        $isWeek = $request->get('isWeek');
+        return Document::getArchivedDocuments($folder_id);
     }
 }
