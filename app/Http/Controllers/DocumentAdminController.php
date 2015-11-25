@@ -98,7 +98,7 @@ class DocumentAdminController extends Controller
 
         $documents = Document::where('upload_package_id', $package)->get();
 
-        return view('admin.add-document-meta-data')
+        return view('admin.document-add-meta-data')
              ->with('documents', $documents)
              ->with('banner', $banner)
              ->with('folder_id', $parent);

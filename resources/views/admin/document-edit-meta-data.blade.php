@@ -2,7 +2,7 @@
 <head>
 	<title></title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap-datetimepicker.min.css">
+  <link rel="stylesheet" type="text/css" href="/css/vendor/bootstrap-datetimepicker.min.css">
 
 </head>
 <body>
@@ -69,8 +69,8 @@
     </div>
      <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/js/moment.js"></script>
-    <script type="text/javascript" src="/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="/js/vendor/moment.js"></script>
+    <script type="text/javascript" src="/js/vendor/bootstrap-datetimepicker.min.js"></script>
 
     <script type="text/javascript">
       $(document).ready(function () {

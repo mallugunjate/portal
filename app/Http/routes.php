@@ -68,5 +68,5 @@ Route::get('/api/v1/folder/{id}', 'Api\V1\ApiController@getDocumentsInFolder');
 Route::get('/api/v1/document/{id}', 'Api\V1\ApiController@getDocumentById');
 //get recent documents
 Route::get('/api/v1/banner/{id}/document/recent/{days}', 'Api\V1\ApiController@getRecentDocuments');
-//get all douments for folder with weeks : query parameter (boolean)isWeek e.g. ?isWeek=false 
+//get all douments in a folder 
 Route::get('/api/v1/folder/{id}/archived', 'Api\V1\ApiController@getArchivedDocuments');

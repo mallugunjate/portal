@@ -41,10 +41,9 @@ class ApiController extends Controller
     {
         return Document::getRecentDocuments($banner_id, $numberOfDays);
     }
-    public function getArchivedDocuments($id, Request $request)
+    public function getArchivedDocuments($id)
     {
         $folder_id = $id;
-        $isWeek = $request->get('isWeek');
         return Document::getArchivedDocuments($folder_id);
     }
 }

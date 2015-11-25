@@ -3,11 +3,12 @@
 	<title></title>
 	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
 	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="/css/jquery-ui.theme.min.css">
-  <link rel="stylesheet" type="text/css" href="/css/tree.css">
-	<link rel="stylesheet" type="text/css" href="/css/dz.css">
-  <link rel="stylesheet" type="text/css" href="/css/dropzone.css">
-	<link rel="stylesheet" type="text/css" href="/css/document-upload.css">
+	<link rel="stylesheet" type="text/css" href="/css/vendor/jquery-ui.theme.min.css">
+  <link rel="stylesheet" type="text/css" href="/css/custom/tree.css">
+	<link rel="stylesheet" type="text/css" href="/css/vendor/dz.css">
+  <link rel="stylesheet" type="text/css" href="/css/vendor/dropzone.css">
+	<link rel="stylesheet" type="text/css" href="/css/custom/document-upload.css">
+  <link rel="stylesheet" type="text/css" href="/css/vendor/lightbox.css">
 
 </head>
 <body class="container-fluid">
@@ -71,13 +72,14 @@
 </body>
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/js/jquery-ui.min.js"></script>
-<script type="text/javascript" src= "/js/underscore-1.8.3.js"></script>
-<script type="text/javascript" src="/js/tree.js"></script>
-<script type="text/javascript" src="/js/folderStructure.js" ></script>
-<script src="/js/dropzone.js"></script>
-<script type="text/javascript" src="/js/uploadDocument.js"></script>
-<script type="text/javascript" src="/js/tablesorter.min.js"></script>
+<script type="text/javascript" src="/js/vendor/jquery-ui.min.js"></script>
+<script type="text/javascript" src= "/js/vendor/underscore-1.8.3.js"></script>
+<script type="text/javascript" src="/js/custom/tree.js"></script>
+<script type="text/javascript" src="/js/custom/folderStructure.js" ></script>
+<script type="text/javascript" src="/js/vendor/dropzone.js"></script>
+<script type="text/javascript" src="/js/custom/uploadDocument.js"></script>
+<script type="text/javascript" src="/js/vendor/tablesorter.min.js"></script>
+<script type="text/javascript" src="/js/vendor/lightbox.min.js"></script>
 
 
 <script>

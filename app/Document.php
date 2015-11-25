@@ -120,7 +120,8 @@ class Document extends Model
                 'document_id' => $lastInsertedId,
                 'folder_id' => $global_folder_id
             );
-           
+            
+            Document::createDocumentThumbnail($filename);
             $documentfolder = FileFolder::create($documentfolderdetails);
             $documentfolder->save();
         }
@@ -237,7 +238,7 @@ class Document extends Model
                     $archivedDocuments[$counter]["doc_ids"] = [];
                     foreach ($docs as $doc) {
                         // $doc_details = Document::where('id', $doc->document_id)->first();
-                        array_push($archivedDocuments[$counter]["doc_ids"], $doc->document_id);
+                        array_push($archivedDocuments[$counter]["doc_ids"], $doc);
                         unset($doc_details);
                     }
                     
@@ -260,5 +261,19 @@ class Document extends Model
             return $archivedDocuments;
 
         }
+    }
+
+    public static function createDocumentThumbnail($filename)
+    {
+
+        $im = new \Imagick();
+        $im->readimage(public_path().'/files/'. $filename.'[0]'); 
+        // $imagick->resizeImage($width, $height, $filterType, $blur, $bestFit);
+        $im->resizeImage(600,700, 0, 2, true);
+        $im->setImageFormat('jpeg');    
+        $im->writeImage(public_path().'/thumb/'.$filename.'.jpg'); 
+        $im->clear(); 
+        $im->destroy();
+
     }
 }
