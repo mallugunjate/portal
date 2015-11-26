@@ -15,10 +15,63 @@ Route::get('/', function () {
     return view('site.index');
 });
 
+
+
+//Authentication Routes
+Route::get('/login', 'Auth\AuthController@getLogin');
+Route::post('/login', 'Auth\AuthController@postLogin');
+Route::get('/logout', 'Auth\AuthController@getLogout');
+
+
+//Registration Routes
+// Route::get('/auth/register', 'Auth\AuthController@getRegister');
+Route::get('/register', 'Auth\AuthController@getRegister');
+Route::post('/register', 'Auth\AuthController@postRegister');
+Route::get('/activate/{activation_code}', 'Auth\AuthController@activateAccount');
+Route::get('/approve/{activation_code}', 'Auth\AuthController@approveAccount');
+
+
+//Password reset routes
+Route::controllers([
+
+	'password' => 'Auth\PasswordController',
+
+]);
+
+
 //list of admin functions
 Route::get('/admin', function(){
 	return view('admin.index');
 });
+
+
+
+
+//App routes
+Route::get('/home', function () {
+	
+	return view('home');
+
+});
+
+Route::get('/dashboard', 'Dashboard\DashboardController@index');
+
+//profile routes
+Route::get('/profile/create', 'Profile\ProfileController@create');
+Route::post('/profile/store', 'Profile\ProfileController@store');
+Route::delete('/profile/experience/{$experience}' , [ 'as'=>'experience.destroy' , 'uses'=>"Profile\ExperienceController@destroy"] );
+
+
+//wireframes
+//USER LOGIN AND SIGNUP
+Route::get('wireframe', function() { return view('wireframes/index'); });
+Route::get('wireframe/login', function() { return view('auth/login'); });
+Route::get('wireframe/signup', function() { return view('auth/register'); });
+Route::get('wireframe/reset', function() { return view('auth/passwordreset'); });
+Route::get('wireframe/dashboard', function() { return view('wireframes/dashboard'); });
+
+
+
 
 //FILES
 //upload a file

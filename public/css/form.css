@@ -1,0 +1,27 @@
+body{
+	
+}
+.fieldset-border{
+	padding:30px !important;
+	border:20px !important;
+	border: 1px solid #7c7c7c !important;
+}
+.legend-border{
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  font-size: 21px;
+  line-height: inherit;
+  color: #333333;
+  border: 0;
+  border-bottom: 1px solid #e9e9e9;
+}
+
+.form-inline > * {
+   margin:5px 3px;
+}
+  
+.profile_picture_thumb{
+  height: 200px;
+}

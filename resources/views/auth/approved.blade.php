@@ -1,0 +1,1 @@
+Thank you! The user has been approved. 

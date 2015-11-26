@@ -3,7 +3,7 @@
     <head>
         <title>Laravel</title>
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+        <link href="//fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
 
         <style>
             html, body {
@@ -22,7 +22,7 @@
             .container {
                 text-align: center;
                 display: table-cell;
-                vertical-align: middle;
+                vertical-align: top;
             }
 
             .content {
@@ -31,14 +31,19 @@
             }
 
             .title {
-                font-size: 96px;
+                font-size: 40px;
             }
+            .content{
+                font-size: 16px;
+            }
+
         </style>
     </head>
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">Laravel 5</div>
+                <div class="title">Welcome</div>
+                <div class="content">This will be the landing page. Could have login/something else</div>
             </div>
         </div>
     </body>
