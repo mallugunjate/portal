@@ -8,26 +8,42 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\FolderStructure;
 use App\Document;
+use App\Folder;
+use App\Week;
 
 class ApiController extends Controller
 {
-     public function getNavigation(Request $request)
+     public function getNavigation($id)
     {
-        $banner_id = $request->get('banner_id');
-        if (isset($banner_id)) {
-            
-        }
-        return FolderStructure::getNavigationStructure();
+        $banner_id = $id;
+        return FolderStructure::getNavigationStructure($banner_id);
 
     }
 
-    public function getDocumentsInFolder(Request $request)
+    public function getDocumentsInFolder($id, Request $request)
     {
-        return Document::getDocuments($request);
+        $folder_id = $id;
+        
+        $isWeek = $request->get('isWeeek');
+
+        $forApi = true;
+
+        return Document::getDocuments($folder_id, $isWeek, $forApi);
+
     }
 
-    public function getDocumentById($fileId)
+    public function getDocumentById($id)
     {
-        return Document::getDocumentById($fileId);  
+        return Document::getDocumentById($id);
+    }
+
+    public function getRecentDocuments($banner_id, $numberOfDays)
+    {
+        return Document::getRecentDocuments($banner_id, $numberOfDays);
+    }
+    public function getArchivedDocuments($id)
+    {
+        $folder_id = $id;
+        return Document::getArchivedDocuments($folder_id);
     }
 }

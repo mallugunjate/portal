@@ -2,7 +2,7 @@
 <head>
 	<title></title>
        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-       <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
+       <link rel="stylesheet" type="text/css" href="/css/vendor/font-awesome.min.css">
        <style type="text/css">
        	.folder-name{
 			display:inline-block;
@@ -11,6 +11,13 @@
 			font-family: Helvetica, ariel, sans-serif ;
 			text-transform: capitalize;	
 			line-height: 25px;
+		}
+		.add-folder{
+			color: #222222;
+			cursor: pointer;
+		}
+		.glyphicon-plus-sign{
+			color:#228B22;
 		}
 
        </style>
@@ -47,15 +54,21 @@
 	<!-- navbar ends-->
 	<div class="col-md-10 col-md-offset-1">
 		
-		<a class="btn btn-default" href="/admin/folder/create?banner_id={{$banner->id}}">Add New Folder</a>
-		<div class="row">
-			<div class="col-md-4" >
-				<h3>Folders</h3>	
-			</div>
+		<h3>Folders</h3>	
+
+		<div >
 			
-		</div>
-		<div class="row">
-			<div >
+			<div class="add-folder row">
+				<i class="glyphicon glyphicon-plus-sign"></i>
+				<span> Add New Folder </span>
+			</div>
+			<div class="row">
+				 {!! Form::open(array('action' => 'FolderAdminController@store', 'files' => false, 'class' => 'form-horizontal', 'role' => 'form')) !!}
+					{!! csrf_field() !!}
+					<div id="form-container" class="col-md-3 input-group"></div>
+				{!! Form::close() !!}
+			</div>
+			<div class="row">
 				{!! csrf_field() !!}
 
 				@foreach ($navigation as $nav) 
@@ -73,29 +86,18 @@
 	</div>
 </body>
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script type="text/javascript">
+ 
 
+	$(".add-folder").on("click", function() {
+		$("#form-container").empty();
+		$("#form-container").append('<input class="form-control" type="text" name="foldername" placeholder="Folder Name">'+
+									'<span class="input-group-btn create-folder"><button class="btn btn-default" type="submit">Add</button></span>');
+	})
+	
 
-	$("body").on("click", ".deleteFolder", function(e) {
-		e.preventDefault();
-		if (confirm('Are you sure you want to delete this folder?')) {
-		    console.log($(this).attr('data-folderId'))
-		    $(this).closest('div').fadeOut(500)
-			$.ajax({
-			    url: '/admin/folder/'+ $(this).attr('data-folderId'),
-			    type: 'DELETE',
-			    data : {	
-			    			_token : $('[name=_token').val()
-					   }
-
-			})
-			.done(function(data){
-				console.log(data)
-			});
-		}
-	})  
-
+	
 
 </script>
 </html>

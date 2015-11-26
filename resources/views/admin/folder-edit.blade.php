@@ -51,6 +51,10 @@
             <div class="col-md-1 col-md-offset-1">    
                 @if(empty($params))
                     <button class="deleteFolder btn btn-danger" id="{{$folder->id}}">Delete Folder </button>
+                @else
+                <div class="disabled-button-container" data-toggle="tooltip" data-placement="right"  title="Only empty folders can be deleted">
+                    <a class="btn btn-danger" id="{{$folder->id}}" disabled="disabled"  >Delete Folder </a>
+                </div>
                 @endif
             </div>
         </div>
@@ -103,9 +107,14 @@
 
     {!! Form::close() !!}
     </div>
-    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/js/editFolder.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/custom/editFolder.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('.disabled-button-container').tooltip()
+        })
+    </script>
 </body>
 </html>
 

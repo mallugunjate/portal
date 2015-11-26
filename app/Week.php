@@ -43,7 +43,7 @@ class Week extends Model
     	$weekEnds   = $weekEnds->addDays(6);
     
     	for ($i = 1; $i<= $totalWeeks ; $i++) {
-    		Week::create([
+    		$weekFolder = Week::create([
     				'week_number' => $i,
     				'start_date'  => $weekStarts->toDateString(),
     			 	'end_date'	  => $weekEnds->toDateString(),
@@ -51,6 +51,12 @@ class Week extends Model
                     'parent_id'	  => $parent_id
 
     			]);
+
+            \DB::table('folder_ids')->insert([
+                'folder_id'    => $weekFolder->id,
+                'folder_type'  => 'week' 
+            ]);
+            
     		$weekStarts = $weekStarts->addDays(7);
     		$weekEnds   = $weekEnds->addDays(7); 
     	}

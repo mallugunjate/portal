@@ -27,9 +27,12 @@ var myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
         formData.append("_token", $('[name=_token').val()); // Laravel expect the token post value to be named _token by default
         formData.append("folder_id", $('#folder-title').attr('data-folderid'));
         formData.append("upload_package_id", $('[name=upload_package_id').val());
+        formData.append("banner_id", $('[name=banner_id]').val());
+        formData.append("isWeekFolder", $('#folder-title').attr('data-isweekfolder') )
     },
     init: function () {
       this.on("success", function (file, response) {
+        console.log(response)
         });
     } 
 
@@ -43,6 +46,9 @@ myDropzone.on("drop", function (e) {
 
 myDropzone.on("addedfile", function (file) {
     // Hookup the start button
+      $("#watermark").hide();
+      $('#actions .start').removeClass('disabled');
+      $('#actions .cancel').removeClass('disabled');
       file.previewElement.querySelector(".start").onclick = function () {
         myDropzone.enqueueFile(file);
       };
@@ -67,9 +73,9 @@ myDropzone.on("queuecomplete", function (progress) {
     var banner_id = $('input[name="banner_id"]').val();
     var folder_id = $("#folder-title").attr('data-folderid');
     $(".file-row .delete").hide();
-    window.location = '/admin/document/add-meta-data?package=' + upload_package_id + "&banner_id=" + banner_id + "&parent=" + folder_id;
-    // var metadatalink = $("<a class='btn btn-default next-action' href='/admin/document/add-meta-data?package="+upload_package_id+"&banner_id="+ banner_id +"&parent="+ folder_id +"'> Next >> Review Documents</a>");
-    // $(metadatalink).appendTo("#file-uploader #container");
+    // window.location = '/admin/document/add-meta-data?package=' + upload_package_id + "&banner_id=" + banner_id + "&parent=" + folder_id;
+    var metadatalink = $("<a class='btn btn-default next-action' href='/admin/document/add-meta-data?package="+upload_package_id+"&banner_id="+ banner_id +"&parent="+ folder_id +"'> Next >> Review Documents</a>");
+    $(metadatalink).appendTo("#file-uploader #container");
 });
 
 // Setup the buttons for all transfers
@@ -82,6 +88,13 @@ document.querySelector("#actions .cancel").onclick = function () {
     myDropzone.removeAllFiles(true);
     $("#watermark").show();
     $('#actions .start').addClass('disabled');
-  $('#actions .cancel').addClass('disabled');
+    $('#actions .cancel').addClass('disabled');
 };
 
+myDropzone.on('removedfile', function(file) {
+  if( $("#previews").has(".file-row").length < 1 ) {
+    $("#watermark").show();
+    $('#actions .start').addClass('disabled');
+    $('#actions .cancel').addClass('disabled');
+  }
+});

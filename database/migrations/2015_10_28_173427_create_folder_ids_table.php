@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateDocumentsTable extends Migration
+class CreateFolderIdsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,11 @@ class UpdateDocumentsTable extends Migration
      */
     public function up()
     {
-        Schema::table("documents", function ($table) {
-            $table->string('original_extension')->after('original_filename');
+        Schema::create('folder_ids', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('folder_id');
+            $table->string('folder_type');
+            $table->timestamps();
         });
     }
 
@@ -24,8 +27,6 @@ class UpdateDocumentsTable extends Migration
      */
     public function down()
     {
-         Schema::table("documents", function ($table) {
-            $table->dropColumn('original_extension');
-        });
+        Schema::drop('folder_ids');
     }
 }

@@ -42,6 +42,15 @@ class FolderStructure extends Model
             $navigation[$currentNode->id]["id"] = $currentNode->id;
             $navigation[$currentNode->id]["is_child"] = $currentNode->is_child;
 
+            $parentNode = FolderStructure::where('child', $currentNode->id)->first();
+
+            if (! $parentNode == null ) {
+                $navigation[$currentNode->id]["parent_id"] = $parentNode->parent;
+            }
+            else {
+                $navigation[$currentNode->id]["parent_id"] = null;
+            }
+
             $childNodes = FolderStructure::where('parent', $currentNode->id)
                                         ->orderBy('created_at', 'desc')
                                         ->get();
@@ -71,11 +80,7 @@ class FolderStructure extends Model
                 
             }
             else{
-
-                $navigation[$currentNode->id] = [];
-                $navigation[$currentNode->id]["label"] = $currentNode->name;
-                $navigation[$currentNode->id]["id"] = $currentNode->id ;
-                $navigation[$currentNode->id]["is_child"] = $currentNode->is_child ;
+                
                 $navigation[$currentNode->id]["children"] = [];
             }
 

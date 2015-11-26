@@ -13,6 +13,7 @@ class UpdateFoldersTable extends Migration
     public function up()
     {
          Schema::table('folders', function ($table) {
+            $table->boolean('has_child');
             $table->boolean('is_child');
             $table->boolean('has_weeks')->after('is_child');
             $table->integer('week_window_size')->after('has_weeks');
@@ -30,6 +31,7 @@ class UpdateFoldersTable extends Migration
     public function down()
     {
         Schema::table('folders', function ($table) {
+            $table->removeColumn('has_child');
             $table->dropColumn('is_child');
             $table->dropColumn('has_weeks');
             $table->dropColumn('week_window_size');
