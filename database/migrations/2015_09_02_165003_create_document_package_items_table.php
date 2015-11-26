@@ -19,7 +19,7 @@ class CreateDocumentPackageItemsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('document_package_id')->references('id')->on('document_package')->onDelete('cascade');
-            $table->foreign('document_id')->references('id')->on('document')->onDelete('cascade');
+            $table->foreign('document_id')->references('id')->on('documents')->onDelete('cascade');
             
         });
     }
