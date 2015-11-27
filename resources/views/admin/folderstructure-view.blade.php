@@ -1,8 +1,8 @@
 <html>
 <head>
 	<title></title>
-       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-       <link rel="stylesheet" type="text/css" href="/css/vendor/font-awesome.min.css">
+       <link rel="stylesheet" href="/css/bootstrap.min.css">
+       <link rel="stylesheet" type="text/css" href="/fonts/font-awesome/css/font-awesome.min.css">
        <style type="text/css">
        	.folder-name{
 			display:inline-block;
@@ -85,8 +85,8 @@
 		</div>
 	</div>
 </body>
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
 <script type="text/javascript">
  
 

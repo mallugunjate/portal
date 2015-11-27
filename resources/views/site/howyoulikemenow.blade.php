@@ -32,7 +32,7 @@
 
         <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-        <script type="text/javascript" charset="utf-8" src="/jquery.tubular.1.0.1/js/jquery.tubular.1.0.js"></script> 
+        <script type="text/javascript" charset="utf-8" src="/js/vendor/jquery.tubular.1.0.1/js/jquery.tubular.1.0.js"></script> 
 
         <script type="text/javascript">
            $( document ).ready(function() {

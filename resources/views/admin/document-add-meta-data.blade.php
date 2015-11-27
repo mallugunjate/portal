@@ -3,16 +3,16 @@
 <head>
     <title>Update Meta Data</title>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
     <link rel="stylesheet" type="text/css" href="/css/vendor/bootstrap-datetimepicker.min.css">
 
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/js/vendor/moment.js"></script>
     <script type="text/javascript" src="/js/vendor/bootstrap-datetimepicker.min.js"></script>
-
     <script type="text/javascript" src="/js/custom/submitmetadata.js"></script>    
+
     <style>
     .glyphicon-ok{
     	color: #0c0; 

@@ -271,7 +271,7 @@ class Document extends Model
         // $imagick->resizeImage($width, $height, $filterType, $blur, $bestFit);
         $im->resizeImage(600,700, 0, 2, true);
         $im->setImageFormat('jpeg');    
-        $im->writeImage(public_path().'/thumb/'.$filename.'.jpg'); 
+        $im->writeImage(public_path().'/images/documents/thumb/'.$filename.'.jpg'); 
         $im->clear(); 
         $im->destroy();
 
