@@ -20,7 +20,8 @@ class DocumentController extends Controller
         $folder_id = $request->get('folder');
         $isWeek  = $request->get('isWeekFolder');
         $documents = Document::getDocuments($folder_id, $isWeek);
-        return $documents;
+        return view('site.documents.index')
+            ->with('documents', $documents);
     }
 
     /**

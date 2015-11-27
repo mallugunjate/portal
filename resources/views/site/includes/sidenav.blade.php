@@ -39,7 +39,7 @@
 
 
                 <li class="">
-                    <a href="index.html"><i class="fa fa-file"></i> <span class="nav-label">Documents</span></a>
+                    <a href="/documents"><i class="fa fa-file"></i> <span class="nav-label">Documents</span></a>
                 </li>
 
                 <li class="">

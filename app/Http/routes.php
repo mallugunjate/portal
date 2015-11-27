@@ -14,7 +14,7 @@
 Route::get('/', 'Dashboard\DashboardController@index');
 
 
-Route::get('/documents', 'Documents\DocumentController@index');
+Route::get('/documents', 'Document\DocumentController@index');
 
 
 

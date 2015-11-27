@@ -9,7 +9,7 @@ class DashboardController extends Controller
 
     public function index()
     {
-        return view('site/dashboard/dashboard');
+        return view('site.dashboard.index');
     }
 
 
