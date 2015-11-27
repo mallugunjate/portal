@@ -62,7 +62,7 @@
 											' <td>'+ i.start +'</td>' +
 											' <td>'+ i.end +'</td>' +
 											' <td> '+
-												'<a class="btn btn-xs btn-primary" data-lightbox= "'+i.title+'"  href="/thumb/'+ i.filename +'.jpg"> Preview </a> '+
+												'<a class="btn btn-xs btn-primary" data-lightbox= "'+i.title+'"  href="/images/documents/thumb/'+ i.filename +'.jpg"> Preview </a> '+
 												'<a class="btn btn-xs btn-warning" href="/admin/document/'+ i.id +'/edit?banner_id='+ banner_id +'"> Edit </a> '+
 												'<a class="deleteFile btn btn-xs btn-danger" id="'+ i.id +'" > Delete </a>'+
 											'</td> </tr>')
