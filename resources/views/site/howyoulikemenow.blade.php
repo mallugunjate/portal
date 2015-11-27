@@ -23,9 +23,9 @@
 
         <div class="container" id="wrapper">
 
-        <div class="jumbotron">
+{{--         <div class="jumbotron">
             <h1>How you like me now?</h1>
-        </div>
+        </div> --}}
 <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/sVzvRsl4rEM?autoplay=1" frameborder="0" allowfullscreen></iframe>
  -->
         </div>

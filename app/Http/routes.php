@@ -11,9 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('site.index');
+Route::get('/howyoulikemenow', function () {
+    return view('site.howyoulikemenow');
 });
+
+Route::get('/', 'Dashboard\DashboardController@index');
 
 
 
