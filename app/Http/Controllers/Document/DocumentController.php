@@ -1,16 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Document;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Folder;
-use App\FolderStructure;
-use App\Banner;
+use App\Document;
 
-class FolderStructureAdminController extends Controller
+class DocumentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,18 +17,10 @@ class FolderStructureAdminController extends Controller
      */
     public function index(Request $request)
     {
-        $banner_id  = $request->get('banner_id');
-        if (isset($banner_id)) {
-            $banner = Banner::where('id', $banner_id)->first();
-        }
-        else {
-            $banner = Banner::where('id', 1)->first();
-        }  
-
-        $navigation = FolderStructure::getNavigationStructure($banner->id);
-        return view('admin.folderstructure-view')->with('navigation', $navigation)
-                                                     ->with('banner', $banner);     
-                                                
+        $folder_id = $request->get('folder');
+        $isWeek  = $request->get('isWeekFolder');
+        $documents = Document::getDocuments($folder_id, $isWeek);
+        return $documents;
     }
 
     /**
@@ -40,9 +30,7 @@ class FolderStructureAdminController extends Controller
      */
     public function create()
     {
-        $folders = Folder::getFolders();
-        return view('admin.define-folder-relationship')
-            ->with('folders', $folders);
+        //
     }
 
     /**
@@ -53,9 +41,7 @@ class FolderStructureAdminController extends Controller
      */
     public function store(Request $request)
     {
-        FolderStructure::createFolderStructure($request);
-        //return "Relationship established: '" . $request->get('child') . "' is child of '" . $request->get('parent') . "'.";
-        return redirect()->action('FolderStructureAdminController@index');
+        //
     }
 
     /**

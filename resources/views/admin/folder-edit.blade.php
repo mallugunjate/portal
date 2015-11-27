@@ -42,7 +42,7 @@
       <!-- navbar ends-->
 
 	<div class="col-md-10 col-md-offset-1">
-	{!! Form::model($folder, ['action' => ['FolderAdminController@update', 'id'=>$folder->id], 'method' => 'PUT']) !!}    
+	{!! Form::model($folder, ['action' => ['Document\FolderAdminController@update', 'id'=>$folder->id], 'method' => 'PUT']) !!}    
 		<input type="hidden" name="banner_id" value={{$banner->id}}>
         <div class="row">
             <div class="col-md-6 col-md-offset-3">

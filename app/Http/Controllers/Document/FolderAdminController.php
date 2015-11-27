@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Document;
 
 use Illuminate\Http\Request;
 
@@ -53,7 +53,7 @@ class FolderAdminController extends Controller
     {
             
         $banner_id = Folder::storeFolder($request);
-        return redirect()->action('FolderStructureAdminController@index', ['banner_id' => $banner_id]);
+        return redirect()->action('Document\FolderStructureAdminController@index', ['banner_id' => $banner_id]);
 
     }
 
@@ -112,7 +112,7 @@ class FolderAdminController extends Controller
 
         $banner_id = Folder::editFolderDetails(compact('id', 'name', 'children', 'weekWindowSize', 'removeWeeks'));
 
-        return redirect()->action('FolderStructureAdminController@index', ['banner_id'=> $banner_id]);
+        return redirect()->action('Document\FolderStructureAdminController@index', ['banner_id'=> $banner_id]);
     }
 
     /**

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Document;
 
 use Illuminate\Http\Request;
 
@@ -162,7 +162,7 @@ class DocumentAdminController extends Controller
         Document::updateMetaData($request, $id);
         $parent = FileFolder::where('document_id', $id)->first()->folder_id;
         $banner_id = $request->get('banner_id');
-        return redirect()->action('DocumentAdminController@index', ['banner_id'=> $banner_id, 'parent'=>$parent]);
+        return redirect()->action('Document\DocumentAdminController@index', ['banner_id'=> $banner_id, 'parent'=>$parent]);
     }
 
     /**

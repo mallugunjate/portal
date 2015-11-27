@@ -63,7 +63,7 @@
 				<span> Add New Folder </span>
 			</div>
 			<div class="row">
-				 {!! Form::open(array('action' => 'FolderAdminController@store', 'files' => false, 'class' => 'form-horizontal', 'role' => 'form')) !!}
+				 {!! Form::open(array('action' => 'Document\FolderAdminController@store', 'files' => false, 'class' => 'form-horizontal', 'role' => 'form')) !!}
 					{!! csrf_field() !!}
 					<div id="form-container" class="col-md-3 input-group"></div>
 				{!! Form::close() !!}

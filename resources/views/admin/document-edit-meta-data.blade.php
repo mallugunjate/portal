@@ -27,7 +27,7 @@
   </nav>
   <!-- navbar ends-->
 	<div class="col-md-6">
-	{!! Form::model($document, ['action' => ['DocumentAdminController@update', 'id'=>$document->id], 'method' => 'PUT']) !!}    
+	{!! Form::model($document, ['action' => ['Document\DocumentAdminController@update', 'id'=>$document->id], 'method' => 'PUT']) !!}    
 		<h2>Update Document</h2>
         <input type="hidden" name="banner_id" value="{{$banner->id}}">
 

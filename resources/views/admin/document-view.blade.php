@@ -47,8 +47,10 @@
   	<!-- <div class="row"> -->
   		<div class="navigation-container">
   			<!-- <div class="ui-widget-content"> -->
+        <h4>Folders</h4>
         @include('admin.navigation-view', ['navigation'=>$navigation])
-       
+       <h4>Packages</h4>
+       Packages Go here...
   		</div>
   		<div class="content-container">
         

@@ -75,41 +75,46 @@ Route::get('wireframe/dashboard', function() { return view('wireframes/dashboard
 
 //FILES
 //upload a file
-Route::get('/admin/document/create', 'DocumentAdminController@create');
-Route::post('/admin/document/create', 'DocumentAdminController@store');
+Route::get('/admin/document/create', 'Document\DocumentAdminController@create');
+Route::post('/admin/document/create', 'Document\DocumentAdminController@store');
 //metadata
-Route::get('/admin/document/add-meta-data', 'DocumentAdminController@showMetaDataForm');
-Route::post('/admin/document/add-meta-data', 'DocumentAdminController@updateMetaData');
+Route::get('/admin/document/add-meta-data', 'Document\DocumentAdminController@showMetaDataForm');
+Route::post('/admin/document/add-meta-data', 'Document\DocumentAdminController@updateMetaData');
 //delete a file
-Route::delete('/admin/document/{id}', 'DocumentAdminController@destroy');
+Route::delete('/admin/document/{id}', 'Document\DocumentAdminController@destroy');
 //edit a file
-Route::get('/admin/document/{id}/edit', 'DocumentAdminController@edit');
-Route::put('/admin/document/{id}', 'DocumentAdminController@update');
+Route::get('/admin/document/{id}/edit', 'Document\DocumentAdminController@edit');
+Route::put('/admin/document/{id}', 'Document\DocumentAdminController@update');
 //get a file
-Route::get('/admin/document/{id}', 'DocumentAdminController@show');
+Route::get('/admin/document/{id}', 'Document\DocumentAdminController@show');
 
 
 //FOLDERS
 //add a folder
-Route::get('/admin/folder/create', 'FolderAdminController@create');
-Route::post('/admin/folder/create', 'FolderAdminController@store');
-Route::get('admin/folder/{id}/edit', 'FolderAdminController@edit');
-Route::put('admin/folder/{id}', 'FolderAdminController@update');
-Route::delete('/admin/folder/{id}', 'FolderAdminController@destroy');
+// Route::get('/admin/folder/create', 'Document\FolderAdminController@create');
+// Route::post('/admin/folder/create', 'Document\FolderAdminController@store');
+// Route::get('admin/folder/{id}/edit', 'Document\FolderAdminController@edit');
+// Route::put('admin/folder/{id}', 'Document\FolderAdminController@update');
+// Route::delete('/admin/folder/{id}', 'Document\FolderAdminController@destroy');
+Route::resource('/admin/folder', 'Document\FolderAdminController');
 
 
 //FOLDER STRUCTURE
 //view folder structure
-Route::get('/admin/folderstructure', 'FolderStructureAdminController@index');
+Route::get('/admin/folderstructure', 'Document\FolderStructureAdminController@index');
 //define a folder relationship
-Route::get('/admin/folderstructure/create', 'FolderStructureAdminController@create');
-Route::post('/admin/folderstructure/create', 'FolderStructureAdminController@store');
+Route::get('/admin/folderstructure/create', 'Document\FolderStructureAdminController@create');
+Route::post('/admin/folderstructure/create', 'Document\FolderStructureAdminController@store');
 
 //admin home
-Route::get('/admin/home', 'DocumentAdminController@index');
+Route::get('/admin/home', 'Document\DocumentAdminController@index');
 
 //view documents :: need to modify this
-Route::get('/documents', 'DocumentController@index');
+Route::get('/documents', 'Document\DocumentController@index');
+
+
+//PACKAGES
+Route::resource('/admin/package', 'Document\PackageController');
 
 //Api routes
 
