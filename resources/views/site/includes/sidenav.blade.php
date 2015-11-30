@@ -1,6 +1,6 @@
             <ul class="nav metismenu" id="side-menu">
                 <li class="nav-header">
-                    <div class="dropdown profile-element"> <span>
+{{--                     <div class="dropdown profile-element"> <span>
                             <img alt="image" class="img-circle" src="/wireframes/img/profile_small.jpg" />
                              </span>
                         <a data-toggle="dropdown" class="" href="#">
@@ -10,7 +10,7 @@
                              <span class="text-muted text-xs block">Sr. Web Developer</span><br />
                              <a href="profile"><span class="text-muted text-xs"> <i class="fa fa-user"></i> My Profile</span></a>   |   
                              <a href="/wireframe/login"><span class="text-muted text-xs"> <i class="fa fa-sign-out"></i> Log out</span></a>
-                    </div>
+                    </div> --}}
                     <div class="logo-element">
                         E
                     </div>

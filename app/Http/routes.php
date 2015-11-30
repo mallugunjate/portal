@@ -57,6 +57,9 @@ Route::get('/home', function () {
 
 Route::get('/dashboard', 'Dashboard\DashboardController@index');
 
+Route::get('/calendar', 'Calendar\CalendarController@index');
+
+
 //profile routes
 Route::get('/profile/create', 'Profile\ProfileController@create');
 Route::post('/profile/store', 'Profile\ProfileController@store');
