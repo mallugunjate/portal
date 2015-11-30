@@ -3,7 +3,7 @@
 	<ul>
 	@foreach ($nav["children"] as $child)
 	<?php $nav = $navigation[$child["child_id"]] ?>
-	@include('admin.navigation-partial')
+	@include('admin.package.file-folder-structure-partial')
 	@endforeach 
 
 	</ul>
@@ -14,8 +14,12 @@
 		<ul>
 			@foreach ($nav["weeks"]  as $week )
 			<li class="folder" id = {{$week["global_id"]}}  data-isWeek = true> {{ "week " . $week["week"] }}
-				<ul>
-				</ul>
+				@if(isset($navigation[$week["global_id"]]["documents"]))
+					@foreach($navigation[$week["global_id"]]["documents"] as $doc)
+						<br>
+						<input type="checkbox" name="package_files[]" value={{$doc->id}} data-filename={{$doc->filename}}> {{$doc->original_filename}}
+					@endforeach
+				@endif
 			</li>
 			@endforeach
 		</ul>
@@ -24,10 +28,13 @@
 
 @else
 	<li class="folder" id={{$nav["id"]}} data-isWeek = false>{{ $nav["label"] }}	 	
+		@if(isset($nav["documents"]))
+			@foreach($nav["documents"] as $doc)
+				<br>
+				<input type="checkbox" name="package_files[]" value= {{$doc->id}} data-filename={{$doc->filename}}>  {{$doc->original_filename}}
+			@endforeach
+		@endif
 		<ul>
 		</ul>
 	</li>
-@endif
-	
-
-			
+@endif		

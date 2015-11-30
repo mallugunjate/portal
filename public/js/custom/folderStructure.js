@@ -17,25 +17,25 @@
 	
 	var fillTable = function(data){
 
+		console.log( data );
+
 		$("#file-container").removeClass('hidden').addClass('visible');
 		$("#file-uploader").removeClass('hidden').addClass('visible');
 		$("#empty-container").removeClass('visible').addClass('hidden');
 
 		var banner_id = $("input[name='banner_id']").val();
-		// console.log(banner_id);
-		console.log(data);
-		// console.log(data.folder[0]);
+		
 		if ( data.type == "week") {
-			if( !(data.folder[0] === null) ) {
-				$("#folder-title h2").html("Week " + data.folder[0].week_number)
-				$("#folder-title").attr('data-folderId', data.folder[0].id)
+			if( !(data.folder === null) ) {
+				$("#folder-title h2").html("Week " + data.folder.week_number)
+				$("#folder-title").attr('data-folderId', data.folder.global_folder_id)
 				$("#folder-title").attr('data-isWeekFolder', true)
 			}	
 		}
 		else {
-			if( !(data.folder[0] === null) ) {
-				$("#folder-title h2").html(data.folder[0].name);
-				$("#folder-title").attr('data-folderId', data.folder[0].id)
+			if( !(data.folder === null) ) {
+				$("#folder-title h2").html(data.folder.name);
+				$("#folder-title").attr('data-folderId', data.folder.global_folder_id)
 				$("#folder-title").attr('data-isWeekFolder', false)
 			}	
 		}

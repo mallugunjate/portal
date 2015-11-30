@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Document;
+use App\FolderStructure;
+use App\FileFolder;
 
 class PackageController extends Controller
 {
@@ -24,9 +27,15 @@ class PackageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('admin.package.create');
+        $banner_id = $request['banner_id'];
+        $fileFolderStructure = FileFolder::getFileFolderStructure($banner_id);
+        
+        return view('admin.package.create')
+                    ->with('banner_id', $banner_id)
+                    ->with('navigation', $fileFolderStructure);
+                    
     }
 
     /**
@@ -37,7 +46,7 @@ class PackageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return ($request["documents"]);
     }
 
     /**

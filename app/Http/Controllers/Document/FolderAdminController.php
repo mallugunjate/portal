@@ -76,7 +76,9 @@ class FolderAdminController extends Controller
      */
     public function edit($id, Request $request)
     {
-        $folder = Folder::find($id);
+        $folder_id = \DB::table('folder_ids')->where('id', $id)->first()->folder_id;
+        
+        $folder = Folder::find($folder_id);
 
         $params =  Folder::getFolderDetails($id);
         
