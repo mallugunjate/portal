@@ -1,6 +1,6 @@
             <ul class="nav metismenu" id="side-menu">
                 <li class="nav-header">
-                    <div class="dropdown profile-element"> <span>
+{{--                     <div class="dropdown profile-element"> <span>
                             <img alt="image" class="img-circle" src="/wireframes/img/profile_small.jpg" />
                              </span>
                         <a data-toggle="dropdown" class="" href="#">
@@ -10,20 +10,26 @@
                              <span class="text-muted text-xs block">Sr. Web Developer</span><br />
                              <a href="profile"><span class="text-muted text-xs"> <i class="fa fa-user"></i> My Profile</span></a>   |   
                              <a href="/wireframe/login"><span class="text-muted text-xs"> <i class="fa fa-sign-out"></i> Log out</span></a>
-                    </div>
+                    </div> --}}
                     <div class="logo-element">
                         E
                     </div>
                 </li>
                 <li class="active">
-                    <a href="/wireframe/dashboard"><i class="fa fa-home"></i> <span class="nav-label">Home</span></a>
+                    <a href="/"><i class="fa fa-home"></i> <span class="nav-label">Dashboard</span></a>
                 </li>
 
                 <li class="">
-                    <a href="index.html"><i class="fa fa-bullhorn"></i> <span class="nav-label">Communications</span> <span class="label label-primary pull-right">2</span></a>
-                </li>
+                    <a href="/communications"><i class="fa fa-bullhorn"></i> <span class="nav-label">Communications</span> <span class="label label-primary pull-right">2</span></a>
+                </li>                
 
-                <li>
+                <li class="">
+                    <a href="/documents"><i class="fa fa-file"></i> <span class="nav-label">Documents</span></a>
+                </li>                
+
+
+
+{{--                 <li>
                     <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">Messages </span><span class="label label-warning pull-right">5</span></a>
                     <ul class="nav nav-second-level collapse">
                         <li><a href="mailbox.html">Inbox</a></li>
@@ -31,61 +37,59 @@
                         <li><a href="mail_compose.html">Compose email</a></li>
                         <li><a href="email_template.html">Email templates</a></li>
                     </ul>
-                </li>                
+                </li>     --}}            
 
                 <li class="">
-                    <a href="index.html"><i class="fa fa-calendar"></i> <span class="nav-label">Calendar</span></a>
+                    <a href="/calendar"><i class="fa fa-calendar"></i> <span class="nav-label">Calendar</span></a>
                 </li>
 
 
-                <li class="">
-                    <a href="index.html"><i class="fa fa-file"></i> <span class="nav-label">Documents</span></a>
-                </li>
 
-                <li class="">
+
+{{--                 <li class="">
                     <a href="index.html"><i class="fa fa-check-square-o"></i> <span class="nav-label">Tasks</span></a>
-                </li>                
+                </li>        --}}         
 
-                <li>
+{{--                 <li>
                     <a href="#"><i class="fa fa-shopping-cart"></i> <span class="nav-label">My Store</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li><a href="graph_flot.html">Store Profile</a></li>
                         <li><a href="graph_morris.html">Store Staff</a></li>
                     </ul>
-                </li>
+                </li> --}}
 
-                <li>
+{{--                 <li>
                     <a href="#"><i class="fa fa-futbol-o"></i> <span class="nav-label">My Activities</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li><a href="graph_flot.html">Activity Profile</a></li>
                         <li><a href="graph_morris.html">Log an Activity</a></li>
                         <li><a href="graph_morris.html">Coaches for Communities</a></li>
                     </ul>
-                </li>      
+                </li>     --}}  
 
-                <li>
+{{--                 <li>
                     <a href="#"><i class="fa fa-rocket"></i> <span class="nav-label">My Career</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li><a href="graph_flot.html">My Store Profile</a></li>
                         <li><a href="graph_morris.html">My Store Staff</a></li>
                     </ul>
-                </li>   
-
+                </li>    --}}
+{{-- 
                 <li>
                     <a href="#"><i class="fa fa-certificate"></i> <span class="nav-label">My Training</span></a>
-                </li>
+                </li> --}}
 
-                <li>
+{{--                 <li>
                     <a href=""><i class="fa fa-lightbulb-o"></i> <span class="nav-label">Idea Factory</span></a>
-                </li>
+                </li> --}}
 
-                <li>
+{{--                 <li>
                     <a href="#"><i class="fa fa-comments-o"></i> <span class="nav-label">Neighbourhoods</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li><a href="graph_flot.html">Jumpstart <span class="label label-primary pull-right">12</span></a></li>
                         <li><a href="graph_morris.html">Living Healthy <span class="label label-primary pull-right">27</span></a></li>
                     </ul>
-                </li>                                            
+                </li>    --}}                                         
 <!--
                 <li>
                     <a href="metrics.html"><i class="fa fa-pie-chart"></i> <span class="nav-label">Metrics</span> <span class="label label-primary pull-right">NEW</span> </a>
