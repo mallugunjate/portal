@@ -106,10 +106,11 @@ class Folder extends Model
         
     }
 
-    public static function getFolderDetails($id)
+    public static function getFolderDetails($global_folder_id)
     {
-        
-        $folder = Folder::find($id);
+        $global_folder = \DB::table('folder_ids')->where('id', $global_folder_id)->first();
+
+        $folder = Folder::find($global_folder->folder_id);
         
         $params = [];
         if ($folder->has_child == 1) {

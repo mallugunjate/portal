@@ -37,18 +37,23 @@ class FolderStructure extends Model
             
             $currentNode = $nav->pop();
              
-            $navigation[$currentNode->id] =[];
-            $navigation[$currentNode->id]["label"] = $currentNode->name;
-            $navigation[$currentNode->id]["id"] = $currentNode->id;
-            $navigation[$currentNode->id]["is_child"] = $currentNode->is_child;
+            $globalFolderId = \DB::table('folder_ids')->where('folder_id', $currentNode->id )
+                                                            ->where('folder_type', 'folder')
+                                                            ->first()->id;
+                                                             
+            $navigation[$globalFolderId] =[];
+            $navigation[$globalFolderId]["label"] = $currentNode->name;
+            $navigation[$globalFolderId]["id"] = $globalFolderId;
+
+            $navigation[$globalFolderId]["is_child"] = $currentNode->is_child;
 
             $parentNode = FolderStructure::where('child', $currentNode->id)->first();
 
             if (! $parentNode == null ) {
-                $navigation[$currentNode->id]["parent_id"] = $parentNode->parent;
+                $navigation[$globalFolderId]["parent_id"] = $parentNode->parent;
             }
             else {
-                $navigation[$currentNode->id]["parent_id"] = null;
+                $navigation[$globalFolderId]["parent_id"] = null;
             }
 
             $childNodes = FolderStructure::where('parent', $currentNode->id)
@@ -72,8 +77,11 @@ class FolderStructure extends Model
 
                foreach ($children as $child) {
                    $nav->push($child);
-                   $navigation[$currentNode->id]["children"][$counter] = [];
-                   $navigation[$currentNode->id]["children"][$counter]["child_id"] = $child->id;
+                   $navigation[$globalFolderId]["children"][$counter] = [];
+                   $globalChildId = \DB::table('folder_ids')->where('folder_id', $child->id )
+                                                            ->where('folder_type', 'folder')
+                                                            ->first()->id;
+                   $navigation[$globalFolderId]["children"][$counter]["child_id"] = $globalChildId;
                    $counter++;
                }
                unset($children);
@@ -81,7 +89,7 @@ class FolderStructure extends Model
             }
             else{
                 
-                $navigation[$currentNode->id]["children"] = [];
+                $navigation[$globalFolderId]["children"] = [];
             }
 
             if ($currentNode->has_weeks) {
@@ -90,9 +98,12 @@ class FolderStructure extends Model
                 $counter = 0;
                 foreach ($weekWindow as $week) {
                    
-                   $navigation[$currentNode->id]["weeks"][$counter] = [];
-                   $navigation[$currentNode->id]["weeks"][$counter]["week_id"] = $week->id;
-                   $navigation[$currentNode->id]["weeks"][$counter]["week"]= $week->week_number;
+                   $navigation[$globalFolderId]["weeks"][$counter] = [];
+                   $navigation[$globalFolderId]["weeks"][$counter]["week_id"] = $week->id;
+                   $navigation[$globalFolderId]["weeks"][$counter]["week"]= $week->week_number;
+                   $navigation[$globalFolderId]["weeks"][$counter]["global_id"] = \DB::table('folder_ids')->where('folder_id', $week->id )
+                                                                                                        ->where('folder_type', 'week')
+                                                                                                        ->first()->id;
                    $counter++;
                 }
             }

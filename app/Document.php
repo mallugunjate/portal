@@ -16,40 +16,29 @@ class Document extends Model
     protected $table = 'documents';
     protected $fillable = array('upload_package_id', 'original_filename','original_extension', 'filename', 'title', 'description', 'start', 'end', 'banner_id');
 
-    public static function getDocuments($folder_id, $isWeek, $forApi=null)
+    public static function getDocuments($global_folder_id, $forApi=null)
     {
-
-        if (isset($folder_id)) {
+        if (isset($global_folder_id)) {
             
-
+            $global_folder_details = \DB::table('folder_ids')->where('id', $global_folder_id )->first();                                                            
+            $folder_type = $global_folder_details->folder_type;
+            $folder_id = $global_folder_details->folder_id;
             $response = [];
-            if($isWeek == "true"){
+            $response["folder"] = [];
 
-                $response["type"] = "week"; 
-                
-                $global_folder_id = \DB::table('folder_ids')->where('folder_id', $folder_id )
-                                                            ->where('folder_type', 'week')
-                                                            ->first()->id;
-                
-                $folder = Week::where('id', $folder_id)->first();
-                
-                $response["folder"] = [];
-                array_push($response["folder"], $folder);
+            if ($folder_type == "week") {
+                $response["type"] = "week";
+                $week = Week::where('id', $folder_id)->first();
+                $week->global_folder_id = $global_folder_id;
+                $response["folder"] = $week;
+
             }
-            else{
-
+            if ($folder_type == "folder") {
                 $response["type"] = "folder";
-
-                $global_folder_id = \DB::table('folder_ids')->where('folder_id', $folder_id )
-                                                            ->where('folder_type', 'folder')
-                                                            ->first()->id;
-
-                $folder = Folder::where('id', $folder_id)->first();    
-                
-                $response["folder"] = [];
-                array_push($response["folder"], $folder);
+                $folder = Folder::where('id', $folder_id)->first();
+                $folder->global_folder_id = $global_folder_id;
+                $response["folder"] = $folder;
             }
-            
             if ($forApi) {
                 $files = \DB::table('file_folder')
                             ->join('documents', 'file_folder.document_id', '=', 'documents.id')
@@ -65,6 +54,7 @@ class Document extends Model
                             ->select('documents.*')
                             ->get();            
             }
+            
             $response["files"] = [];
             if (count($files) > 0) {
                  $response["files"] =  $files;
@@ -73,9 +63,11 @@ class Document extends Model
                 $response["files"] = null;
             }
             return $response;
-            
+
         }
+
         return [];
+
     } 
 
     public static function storeDocument($request)
@@ -111,10 +103,7 @@ class Document extends Model
             }
             
 
-            $folder_id = $request->get('folder_id');
-            $global_folder_id = \DB::table('folder_ids')->where('folder_id', $folder_id)
-                                                        ->where('folder_type', $folder_type)
-                                                        ->first()->id;
+            $global_folder_id = $request->get('folder_id');
 
             $documentfolderdetails = array(
                 'document_id' => $lastInsertedId,

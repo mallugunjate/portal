@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+
     'CreateActivitiesTable' => $baseDir . '/database/migrations/future/2015_08_05_203634_create_activities_table.php',
     'CreateActivityLevelsTable' => $baseDir . '/database/migrations/future/2015_08_05_210403_create_activity_levels_table.php',
     'CreateBannersTable' => $baseDir . '/database/migrations/2015_09_30_213442_create-banners-table.php',
@@ -113,6 +114,7 @@ return array(
     'Hamcrest\\Type\\IsString' => $vendorDir . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Type/IsString.php',
     'Hamcrest\\Util' => $vendorDir . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Util.php',
     'Hamcrest\\Xml\\HasXPath' => $vendorDir . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Xml/HasXPath.php',
+    'Help' => $baseDir . '/database/migrations/2015_11_30_222504_help.php',
     'IlluminateQueueClosure' => $vendorDir . '/laravel/framework/src/Illuminate/Queue/IlluminateQueueClosure.php',
     'PHPUnit_Exception' => $vendorDir . '/phpunit/phpunit/src/Exception.php',
     'PHPUnit_Extensions_GroupTestSuite' => $vendorDir . '/phpunit/phpunit/src/Extensions/GroupTestSuite.php',
@@ -549,5 +551,6 @@ return array(
     'TestCase' => $baseDir . '/tests/TestCase.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
     'UpdateDocumentsTable' => $baseDir . '/database/migrations/2015_10_27_145632_update_documents_table.php',
+    'UpdateFileFolderTable' => $baseDir . '/database/migrations/2015_11_30_201910_update_file_folder_table.php',
     'UpdateFoldersTable' => $baseDir . '/database/migrations/2015_09_30_215422_update-folders-table.php',
 );
