@@ -37,6 +37,8 @@ return array(
     'CreateWeeksTable' => $baseDir . '/database/migrations/2015_09_28_215144_create-weeks-table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
     'Documents' => $baseDir . '/database/migrations/2015_09_02_150403_documents.php',
+    'EventTypesTableSeeder' => $baseDir . '/database/seeds/EventTypesTableSeeder.php',
+    'EventsTableSeeder' => $baseDir . '/database/seeds/EventsTableSeeder.php',
     'FileFolder' => $baseDir . '/database/migrations/2015_09_16_150438_file_folder.php',
     'File_Iterator' => $vendorDir . '/phpunit/php-file-iterator/src/Iterator.php',
     'File_Iterator_Facade' => $vendorDir . '/phpunit/php-file-iterator/src/Facade.php',
