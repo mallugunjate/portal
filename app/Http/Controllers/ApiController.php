@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
-use App\FolderStructure;
-use App\Document;
+use App\Models\Document\FolderStructure;
+use App\Models\Document\Document;
 
 class ApiController extends Controller
 {

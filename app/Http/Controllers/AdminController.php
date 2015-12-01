@@ -1,25 +1,52 @@
 <?php
 
-namespace App\Http\Controllers\Document;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Models\Document\Document;
+use App\Models\Banner;
 use App\Models\Document\FolderStructure;
-use App\Models\Document\FileFolder;
+use App\Models\Document\Folder;
 
-class PackageController extends Controller
+class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $banner_id = $request->get('banner_id');
+
+        if(isset($banner_id)) {
+            
+            $banner = Banner::where('id', $banner_id)->first();
+        }
+        else{
+            $banner = Banner::where('id', 1)->first();
+        }
+
+        $navigation = FolderStructure::getNavigationStructure($banner->id);
+
+        $packageHash = sha1(time() . time());
+
+        $folders = Folder::all();
+
+        $defaultFolder = $request->get('parent');
+
+        if (!isset($defaultFolder)) {
+            $defaultFolder = null;
+        }
+
+        return view('admin.document-view')
+            ->with('navigation', $navigation)
+            ->with('folders', $folders)
+            ->with('packageHash', $packageHash)
+            ->with('banner', $banner)
+            ->with('defaultFolder' , $defaultFolder);
     }
 
     /**
@@ -27,15 +54,9 @@ class PackageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-        $banner_id = $request['banner_id'];
-        $fileFolderStructure = FileFolder::getFileFolderStructure($banner_id);
-        
-        return view('admin.package.create')
-                    ->with('banner_id', $banner_id)
-                    ->with('navigation', $fileFolderStructure);
-                    
+        //
     }
 
     /**
@@ -46,7 +67,7 @@ class PackageController extends Controller
      */
     public function store(Request $request)
     {
-        return ($request["documents"]);
+        //
     }
 
     /**

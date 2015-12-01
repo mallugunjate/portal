@@ -1,6 +1,7 @@
 <?php
 
-namespace App;
+namespace App\Models\Document;
+
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;

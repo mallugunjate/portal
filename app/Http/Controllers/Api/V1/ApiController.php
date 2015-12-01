@@ -6,10 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\FolderStructure;
-use App\Document;
-use App\Folder;
-use App\Week;
+use App\Models\Document\FolderStructure;
+use App\Models\Document\Document;
+use App\Models\Document\Folder;
+use App\Models\Document\Week;
 
 class ApiController extends Controller
 {

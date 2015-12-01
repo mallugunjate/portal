@@ -94,12 +94,6 @@ Route::get('/admin/document/{id}', 'Document\DocumentAdminController@show');
 
 
 //FOLDERS
-//add a folder
-// Route::get('/admin/folder/create', 'Document\FolderAdminController@create');
-// Route::post('/admin/folder/create', 'Document\FolderAdminController@store');
-// Route::get('admin/folder/{id}/edit', 'Document\FolderAdminController@edit');
-// Route::put('admin/folder/{id}', 'Document\FolderAdminController@update');
-// Route::delete('/admin/folder/{id}', 'Document\FolderAdminController@destroy');
 Route::resource('/admin/folder', 'Document\FolderAdminController');
 
 
@@ -111,10 +105,10 @@ Route::get('/admin/folderstructure/create', 'Document\FolderStructureAdminContro
 Route::post('/admin/folderstructure/create', 'Document\FolderStructureAdminController@store');
 
 //admin home
-Route::get('/admin/home', 'Document\DocumentAdminController@index');
+Route::get('/admin/home', 'AdminController@index');
 
 //view documents :: need to modify this
-Route::get('/documents', 'Document\DocumentController@index');
+Route::get('/documents', 'Document\DocumentAdminController@index');
 
 
 //PACKAGES

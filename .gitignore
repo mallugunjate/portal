@@ -1,4 +1,5 @@
 /public/files
+/public/images/documents/thumb
 /node_modules
 Homestead.yaml
 Homestead.json
