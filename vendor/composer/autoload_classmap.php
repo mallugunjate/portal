@@ -6,14 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-<<<<<<< HEAD
-    'CreateActivitiesTable' => $baseDir . '/database/migrations/2015_08_05_203634_create_activities_table.php',
-    'CreateActivityLevelsTable' => $baseDir . '/database/migrations/2015_08_05_210403_create_activity_levels_table.php',
-    'CreateBannersTable' => $baseDir . '/database/migrations/2015_09_30_213442_create-banners-table.php',
-    'CreateCareerPathsTable' => $baseDir . '/database/migrations/2015_08_05_210456_create_career_paths_table.php',
-    'CreateDocumentPackagePivotTable' => $baseDir . '/database/migrations/2015_11_27_175201_create_document_package_pivot_table.php',
-    'CreateEducationLevelTable' => $baseDir . '/database/migrations/2015_08_21_151222_create_education_level_table.php',
-=======
+
     'CreateActivitiesTable' => $baseDir . '/database/migrations/future/2015_08_05_203634_create_activities_table.php',
     'CreateActivityLevelsTable' => $baseDir . '/database/migrations/future/2015_08_05_210403_create_activity_levels_table.php',
     'CreateBannersTable' => $baseDir . '/database/migrations/2015_09_30_213442_create-banners-table.php',
@@ -22,7 +15,6 @@ return array(
     'CreateEducationLevelTable' => $baseDir . '/database/migrations/future/2015_08_21_151222_create_education_level_table.php',
     'CreateEventTypesTable' => $baseDir . '/database/migrations/2015_11_30_210139_create_event_types_table.php',
     'CreateEventsTable' => $baseDir . '/database/migrations/2015_11_30_222337_create_events_table.php',
->>>>>>> 277bd80064bdd244a8e018a5e4150908626e3a4c
     'CreateFiscalYearTable' => $baseDir . '/database/migrations/2015_09_28_215143_create-fiscal-year-table.php',
     'CreateFolderIdsTable' => $baseDir . '/database/migrations/2015_10_28_173427_create_folder_ids_table.php',
     'CreateHoodMembersTable' => $baseDir . '/database/migrations/future/2015_09_03_165002_create_hood_members_table.php',
