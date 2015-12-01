@@ -265,4 +265,51 @@ class Document extends Model
         $im->destroy();
 
     }
+
+    public static function getFolderPathForDocument($id)
+    {
+        
+        $parent_global_id = FileFolder::where('document_id', $id)->first()->folder_id;
+        $parent = \DB::table('folder_ids')->where('id', $parent_global_id)->first();
+        $path = [];
+        array_push($path, $parent);
+        $finalPath = "";
+        while (!empty($path)) {
+
+            $currentFolder = array_pop($path);
+            
+            if ($currentFolder->folder_type ==  'week') {
+                $parent_id = Week::where('id', $currentFolder->folder_id)->first()->parent_id;
+                $parent = \DB::table('folder_ids')->where('id', $parent_id)->first();
+                array_push($path, $parent);
+
+            }
+            else if ($currentFolder->folder_type == 'folder') {
+                $folder_struct = FolderStructure::where('child', $currentFolder->folder_id)->first();
+                if( $folder_struct) {
+
+                    $parent_id = $folder_struct->parent;
+                    var_dump($parent_id);   
+                    $parent = $parent = \DB::table('folder_ids')->where('folder_id', $parent_id)->where('folder_type', 'folder' )->first(); 
+                    //folder_id would be replace with id when folder_struct gets updated to store global_folder_id
+                    $finalPath = Folder::where('id', $currentFolder->folder_id)->first()->name ."/". $finalPath;
+                    echo("folder structure found");
+                    array_push($path, $parent);
+
+                }
+                else{
+                    $parent = Folder::where('id', $currentFolder->folder_id)->first();
+                    $finalPath = $parent->name ."/".$finalPath;
+                    echo("folder structure not found");
+                    break;
+
+                }
+                
+                var_dump($path);
+            }   
+            dd($finalPath); 
+        }
+        
+
+    }
 }

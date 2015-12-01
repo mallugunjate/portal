@@ -99,3 +99,27 @@
 		} 
 	});
 
+
+	$(".package").click(function(){
+		var package_id = $(this).attr('id');
+		console.log(package_id);
+		$.ajax(
+			{
+				url : '/admin/package/' + package_id
+			}
+		)
+		.done(function(data){
+			showPackage(data)
+		});
+
+	})
+
+	var showPackage = function(package){
+		$("#package-viewer").removeClass('hidden').addClass('visible');
+		$("#empty-container").removeClass('visible').addClass('hidden');
+
+		$("#package-viewer #package-name").empty();
+		$("#package-viewer #package-name").append('<h4>' + package.package_screen_name + '</h4>');
+		$("#package-viewer #package-files").text('files will appear here');	
+	}
+

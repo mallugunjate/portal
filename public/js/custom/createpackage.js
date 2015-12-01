@@ -12,6 +12,9 @@ $(document).ready(function(){
 
 	$("#create-package").on("click", function(){
 		var document_ids = [];
+		var package_name = $('input[name="package_name"]').val();
+		var banner_id = $('input[name="banner_id"]').val();
+		console.log("banner_id : " +banner_id);
 		var counter = 0;
 		$(".selected-files").each(function(){
 			
@@ -23,9 +26,10 @@ $(document).ready(function(){
 		$.ajax({
 			method : "POST",
 			url : "/admin/package",
-			data : { "_token" : $('[name="_token"]').val(), "documents" : document_ids },
+			data : { "_token" : $('[name="_token"]').val(), "documents" : document_ids, "package_name" :  package_name, 'banner_id' : banner_id},
 		}).done(function( data ){
 			console.log(data);
+			window.location = '/admin/home?banner_id=' + banner_id;
 		});
 	});
 })

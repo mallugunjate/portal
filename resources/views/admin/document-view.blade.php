@@ -44,13 +44,15 @@
   <!-- navbar ends-->
   <div id="admin-container" >
     <input type="hidden" name="banner_id" value="{{$banner->id}}">
-  	<!-- <div class="row"> -->
+    <!-- <div class="row"> -->
   		<div class="navigation-container">
   			<!-- <div class="ui-widget-content"> -->
         <h4>Folders</h4>
         @include('admin.navigation-view', ['navigation'=>$navigation])
        <h4>Packages</h4>
-       Packages Go here...
+        <a href="/admin/package/create?banner_id={{$banner->id}}"> Create New Package</a>
+        <br>
+        @include('admin.package.list', ['packages'=>$packages])
   		</div>
   		<div class="content-container">
         
@@ -61,6 +63,9 @@
           <input type="hidden" name="default_folder" value={{$defaultFolder}}>
   				@include('admin.document-table')
   			</div>
+        <div id="package-viewer" class="hidden">
+          @include('admin.package.view')
+        </div>
   			<div id="file-uploader" class="hidden">
           <div id="watermark">Drag and drop documents here</div>
   				@include('admin.document-upload')

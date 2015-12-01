@@ -95,7 +95,7 @@ class FolderStructure extends Model
 
             if ($currentNode->has_weeks) {
                 $windowSize = $currentNode->week_window_size;
-                $weekWindow = FolderStructure::getWeekWindow($currentNode->id, $windowSize);
+                $weekWindow = FolderStructure::getWeekWindow($globalFolderId, $windowSize);
                 $counter = 0;
                 foreach ($weekWindow as $week) {
                    
