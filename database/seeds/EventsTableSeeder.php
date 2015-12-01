@@ -16,15 +16,37 @@ class EventsTableSeeder extends Seeder
         $faker = Faker\Factory::create();
 
         for($i = 0; $i < 100; $i++) {
-        
-        //  $customers = Customer::create(array(
+            
+            $times = $this->fakeStartEndTimes();
+            $start = $times["start"];
+            $end = $times["end"];
+
+      
+
             DB::table('events')->insert(array(
                 'title' => $faker->sentence,
-                'description' => $faker->sentences,
-                'event_type' => $faker->randomDigit,
-                'start' => $faker->dateTimeBetween($startDate = 'now', $endDate = '+ 3 momnths'),
-                'end' => $faker->dateTimeBetween($startDate = 'now', $endDate = '+ 3 months')
+                'description' => $faker->paragraph(3),
+                'event_type' => $faker->numberBetween(1,9),
+                'start' => $start,
+                'end' => $end
             ));
         }
     }
+
+    public function fakeStartEndTimes()
+    {
+        $most_past = time() - (30 * 24 * 60 * 60); 
+        $most_future = time() + (30 * 24 * 60 * 60); 
+
+        $starttime = rand($most_past, $most_future);
+        $endtime = rand($most_past, $most_future);
+
+        if($starttime > $endtime){
+            $endtime = rand($starttime, $most_future);
+        }
+
+        $times = array("start" => $starttime, "end" => $endtime);
+        return $times;
+    }
+
 }
