@@ -15,7 +15,14 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
 
         // $this->call(UserTableSeeder::class);
+        // 
+        $this->call(EventTypesTableSeeder::class);
+        $this->command->info('Event Types Table seeded!');
+
+        $this->call(EventsTableSeeder::class);
+        $this->command->info('Events Table seeded!');
 
         Model::reguard();
     }
+ 
 }
