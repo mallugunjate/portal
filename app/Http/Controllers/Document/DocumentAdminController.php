@@ -21,34 +21,10 @@ class DocumentAdminController extends Controller
      */
     public function index(Request $request)
     {
-        $banner_id = $request->get('banner_id');
+        $folder_id = $request->get('folder');
+        $documents = Document::getDocuments($folder_id);
+        return $documents;
 
-        if(isset($banner_id)) {
-            
-            $banner = Banner::where('id', $banner_id)->first();
-        }
-        else{
-            $banner = Banner::where('id', 1)->first();
-        }
-
-        $navigation = FolderStructure::getNavigationStructure($banner->id);
-
-        $packageHash = sha1(time() . time());
-
-        $folders = Folder::all();
-
-        $defaultFolder = $request->get('parent');
-
-        if (!isset($defaultFolder)) {
-            $defaultFolder = null;
-        }
-
-        return view('admin.document-view')
-            ->with('navigation', $navigation)
-            ->with('folders', $folders)
-            ->with('packageHash', $packageHash)
-            ->with('banner', $banner)
-            ->with('defaultFolder' , $defaultFolder);
     }
 
     /**
