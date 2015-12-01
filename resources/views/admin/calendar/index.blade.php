@@ -5,7 +5,7 @@
 
 
 <table>
-
+<meta name="csrf-token" content="{!! csrf_token() !!}"/>
 <tr>
 	<td>id</td>
 	<td>title</td>
@@ -23,10 +23,23 @@
 
 	<td><a href="/admin/calendar/show/{{ $event->id }}">view</a></td>
 	<td><a href="/admin/calendar/edit/{{ $event->id }}">edit</a></td>
-	<td><a href="/admin/calendar/delete/{{ $event->id }}">delete</a></td>
+	<td><span data-event="{{ $event->id }}" id="event{{$event->id}}" class="pull-right event-delete btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete</span></td>
 </tr>
 @endforeach
 
 </table>
 
+
 {!! $events->render() !!}
+
+<script src="/js/jquery-2.1.1.min.js"></script>
+
+<script type="text/javascript">
+	$.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+});
+</script>
+
+<script src="/js/custom/deleteEvent.js"></script>

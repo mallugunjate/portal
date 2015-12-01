@@ -120,7 +120,7 @@ Route::get('/admin/calendar', 'Calendar\CalendarController@adminIndex');
 Route::get('/admin/calendar/new', 'Calendar\CalendarController@create');
 Route::get('/admin/calendar/show/{id}', 'Calendar\CalendarController@show');
 Route::get('/admin/calendar/edit/{id}', 'Calendar\CalendarController@edit');
-Route::get('/admin/calendar/delete/{id}', 'Calendar\CalendarController@destroy');
+Route::post('/admin/calendar/delete', 'Calendar\CalendarController@destroy');
 
 
 

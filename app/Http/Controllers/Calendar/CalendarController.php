@@ -100,8 +100,11 @@ class CalendarController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy( Request $request )
     {
-        return view('admin.calendar.delete');
+        // $id = Request::input('event_id');
+        $id = $request['event_id'];
+        $event = Event::find($id);
+        $event->delete();
     }
 }
