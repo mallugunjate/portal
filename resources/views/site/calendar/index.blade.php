@@ -187,7 +187,7 @@ $(function() { // document ready
       right: 'month,agendaWeek,agendaDay'
     },
     defaultDate: '2014-11-12',
-    editable: true,
+    editable: false,
     eventLimit: true, // allow "more" link when too many events
     events: [
       {
