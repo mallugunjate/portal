@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Document\Document;
 use App\Models\Document\FolderStructure;
 use App\Models\Document\FileFolder;
+use App\Models\Document\Package;
 
 class PackageController extends Controller
 {
@@ -46,7 +47,7 @@ class PackageController extends Controller
      */
     public function store(Request $request)
     {
-        return ($request["documents"]);
+        Package::storePackage($request);
     }
 
     /**
