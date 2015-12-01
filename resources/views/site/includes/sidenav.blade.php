@@ -13,7 +13,7 @@
                     </div> --}}
 
                     <div class="logo-element">
-                        E
+                        P
                     </div>
                 </li>
 
@@ -34,7 +34,10 @@
                 <li>
                 @endif 
                     <a href="/communications"><i class="fa fa-bullhorn"></i> <span class="nav-label">Communications</span> <span class="label label-primary pull-right">2</span></a>
-                </li>                
+                </li>            
+
+
+                    
 
                 @if (Request::is('documents'))
                 <li class="active">

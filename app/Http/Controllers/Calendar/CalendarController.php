@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Models\Event\Event;
+use App\Models\Event\EventTypes;
+
 class CalendarController extends Controller
 {
     /**
@@ -18,6 +21,20 @@ class CalendarController extends Controller
     {
         return view('site.calendar.index');
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function adminIndex()
+    {
+        //get all of the events
+        //$events = Event::all();
+        $events = Event::paginate(15);
+        return view('admin.calendar.index')
+            ->with('events', $events);
+    }    
 
     /**
      * Show the form for creating a new resource.
@@ -38,6 +55,7 @@ class CalendarController extends Controller
     public function store(Request $request)
     {
         //
+        return view('admin.calendar.index');
     }
 
     /**
@@ -48,7 +66,7 @@ class CalendarController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('admin.calendar.show');
     }
 
     /**
@@ -59,7 +77,9 @@ class CalendarController extends Controller
      */
     public function edit($id)
     {
-        //
+        $event = Event::find($id);
+        return view('admin.calendar.edit')
+            ->with('event', $event);
     }
 
     /**
@@ -82,6 +102,6 @@ class CalendarController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return view('admin.calendar.delete');
     }
 }
