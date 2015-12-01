@@ -17,8 +17,8 @@ class CreateEventsTable extends Migration
             $table->mediumText('title');    
             $table->longText('description');
             $table->integer('event_type')->references('id')->on('event_types');
-            $table->dateTime('start');
-            $table->dateTime('end');
+            $table->integer('start');
+            $table->integer('end'); 
             $table->softDeletes();
             $table->timestamps();
         });
