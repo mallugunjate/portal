@@ -6,12 +6,12 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Folder;
-use App\FolderStructure;
-use App\Week;
-use App\FileFolder;
-use App\Document;
-use App\Banner;
+use App\Models\Document\Folder;
+use App\Models\Document\FolderStructure;
+use App\Models\Document\Week;
+use App\Models\Document\FileFolder;
+use App\Models\Document\Document;
+use App\Models\Banner;
 
 class FolderAdminController extends Controller
 {

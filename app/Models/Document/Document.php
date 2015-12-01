@@ -1,13 +1,13 @@
 <?php
 
-namespace App;
+namespace App\Models\Document;
 
 
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
-use App\Week;
-use App\Folder;
-use App\FileFolder;
+use App\Models\Document\Week;
+use App\Models\Document\Folder;
+use App\Models\Document\FileFolder;
 use Carbon\Carbon;
 
 

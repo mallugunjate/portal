@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Document;
-use App\FolderStructure;
-use App\FileFolder;
+use App\Models\Document\Document;
+use App\Models\Document\FolderStructure;
+use App\Models\Document\FileFolder;
 
 class PackageController extends Controller
 {

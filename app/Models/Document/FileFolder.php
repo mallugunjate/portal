@@ -1,8 +1,9 @@
 <?php
 
-namespace App;
+namespace App\Models\Document;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Document\FolderStructure;
 
 class FileFolder extends Model
 {

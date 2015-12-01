@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Folder;
-use App\FolderStructure;
-use App\Banner;
+use App\Models\Document\Folder;
+use App\Models\Document\FolderStructure;
+use App\Models\Banner;
 
 class FolderStructureAdminController extends Controller
 {

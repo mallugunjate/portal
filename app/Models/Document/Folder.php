@@ -1,12 +1,12 @@
 <?php
 
-namespace App;
+namespace App\Models\Document;
 
 
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
-use App\FolderStructure;
+use App\Models\Document\FolderStructure;
 
 
 class Folder extends Model
