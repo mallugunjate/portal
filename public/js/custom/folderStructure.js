@@ -22,6 +22,7 @@
 		$("#file-container").removeClass('hidden').addClass('visible');
 		$("#file-uploader").removeClass('hidden').addClass('visible');
 		$("#empty-container").removeClass('visible').addClass('hidden');
+		$("#package-viewer").removeClass('visible').addClass('hidden');
 
 		var banner_id = $("input[name='banner_id']").val();
 		
@@ -109,17 +110,27 @@
 			}
 		)
 		.done(function(data){
-			showPackage(data)
+			console.log(data);
+			showPackage(data);
 		});
 
 	})
 
-	var showPackage = function(package){
+	var showPackage = function(docPackage){
+
 		$("#package-viewer").removeClass('hidden').addClass('visible');
 		$("#empty-container").removeClass('visible').addClass('hidden');
 
 		$("#package-viewer #package-name").empty();
-		$("#package-viewer #package-name").append('<h4>' + package.package_screen_name + '</h4>');
-		$("#package-viewer #package-files").text('files will appear here');	
+		$("#package-viewer #package-details").empty();
+		$("#package-viewer #package-name").append('<h4>' + docPackage.package.package_screen_name + '</h4>');
+		_.each(docPackage.documentDetails, function(index){
+			$("#package-viewer #package-details").append(	'<div class="package-files">' +
+														'<div class="package-filename"> Filename : ' + index.filename + '</div>' +
+														'<div class="package-filepath"> File Location : ' + index.folder_path + '</div>' +
+														'<div class="package-timestamp"> Uploaded At : ' + index.created_at + '</div>' +
+														'</div>'
+														);
+		});
 	}
 

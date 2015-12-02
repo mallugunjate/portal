@@ -68,7 +68,12 @@ class PackageController extends Controller
      */
     public function show($id)
     {
-        Package::getPackageDetails($id);
+        $response = [];
+        $response["package"] = Package::find($id);
+        $response["documentDetails"] = Package::getPackageDocumentDetails($id);
+
+        return ($response);
+
     }
 
     /**

@@ -9,6 +9,7 @@
   <link rel="stylesheet" type="text/css" href="/css/vendor/dropzone.css">
 	<link rel="stylesheet" type="text/css" href="/css/custom/document-upload.css">
   <link rel="stylesheet" type="text/css" href="/css/vendor/lightbox.css">
+  <link rel="stylesheet" type="text/css" href="/css/custom/package.css">
 
 </head>
 <body class="container-fluid">

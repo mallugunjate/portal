@@ -1,0 +1,14 @@
+#package-name h4{
+	text-transform: uppercase;
+}
+.package-files{
+	font-size: 16px;
+	margin: 10px 0 10px 0;
+}
+.package-filepath{
+	font-size: 12px;
+}
+.package-timestamp{
+	font-size: 12px;
+}
+

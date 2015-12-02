@@ -275,12 +275,13 @@ class Document extends Model
         array_push($path, $parent);
         $finalPath = "";
         while (!empty($path)) {
-
             $currentFolder = array_pop($path);
             
             if ($currentFolder->folder_type ==  'week') {
-                $parent_id = Week::where('id', $currentFolder->folder_id)->first()->parent_id;
+                $weekFolder = Week::where('id', $currentFolder->folder_id)->first(); 
+                $parent_id = $weekFolder->parent_id;
                 $parent = \DB::table('folder_ids')->where('id', $parent_id)->first();
+                $finalPath = "week" . $weekFolder->week_number . "/" . $finalPath;
                 array_push($path, $parent);
 
             }
@@ -289,27 +290,23 @@ class Document extends Model
                 if( $folder_struct) {
 
                     $parent_id = $folder_struct->parent;
-                    var_dump($parent_id);   
-                    $parent = $parent = \DB::table('folder_ids')->where('folder_id', $parent_id)->where('folder_type', 'folder' )->first(); 
+                    $parent = $parent = \DB::table('folder_ids')->where('folder_id', $parent_id)->where('folder_type', 'folder')->first(); 
                     //folder_id would be replace with id when folder_struct gets updated to store global_folder_id
                     $finalPath = Folder::where('id', $currentFolder->folder_id)->first()->name ."/". $finalPath;
-                    echo("folder structure found");
                     array_push($path, $parent);
-
+                    continue;
                 }
                 else{
                     $parent = Folder::where('id', $currentFolder->folder_id)->first();
                     $finalPath = $parent->name ."/".$finalPath;
-                    echo("folder structure not found");
                     break;
 
                 }
                 
-                var_dump($path);
+                // var_dump($path);
             }   
-            dd($finalPath); 
         }
         
-
+        return ($finalPath);
     }
 }

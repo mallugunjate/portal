@@ -52,9 +52,8 @@ class Package extends Model
     	return $packages;
     }
 
-    public static function getPackageDetails($id)
+    public static function getPackageDocumentDetails($id)
     {
-    	$package = Package::find(intval($id));
 
     	$document_package_list = DocumentPackage::where('package_id', $id)->get();
     	$documents = [];
@@ -64,6 +63,6 @@ class Package extends Model
     		$document["folder_path"] = $path;
     		array_push($documents, $document);
     	}
-    	dd($documents);
+    	return ( $documents );
     }
 }
