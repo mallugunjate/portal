@@ -57,7 +57,7 @@ Route::get('/home', function () {
 
 Route::get('/dashboard', 'Dashboard\DashboardController@index');
 
-Route::get('/calendar', 'Calendar\CalendarController@index');
+// Route::get('/calendar', 'Calendar\CalendarController@index');
 
 
 //profile routes
@@ -116,11 +116,12 @@ Route::resource('/admin/package', 'Document\PackageController');
 
 
 //CALENDAR ADMIN
-Route::get('/admin/calendar', 'Calendar\CalendarController@adminIndex');
-Route::get('/admin/calendar/new', 'Calendar\CalendarController@create');
-Route::get('/admin/calendar/show/{id}', 'Calendar\CalendarController@show');
-Route::get('/admin/calendar/edit/{id}', 'Calendar\CalendarController@edit');
-Route::post('/admin/calendar/delete', 'Calendar\CalendarController@destroy');
+Route::resource('/admin/calendar', 'Calendar\CalendarAdminController');
+// Route::get('/admin/calendar', 'Calendar\CalendarController@adminIndex');
+// Route::get('/admin/calendar/create', 'Calendar\CalendarController@create');
+// Route::get('/admin/calendar/show/{id}', 'Calendar\CalendarController@show');
+// Route::get('/admin/calendar/edit/{id}', 'Calendar\CalendarController@edit');
+// Route::post('/admin/calendar/delete', 'Calendar\CalendarController@destroy');
 
 
 

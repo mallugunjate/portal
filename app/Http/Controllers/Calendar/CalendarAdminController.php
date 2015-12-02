@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Event\Event;
 use App\Models\Event\EventTypes;
 
-class CalendarController extends Controller
+class CalendarAdminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,22 +19,11 @@ class CalendarController extends Controller
      */
     public function index()
     {
-        return view('site.calendar.index');
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function adminIndex()
-    {
-        //get all of the events
-        //$events = Event::all();
+        // return view('site.calendar.index');
         $events = Event::paginate(15);
         return view('admin.calendar.index')
             ->with('events', $events);
-    }    
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -100,10 +89,10 @@ class CalendarController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy( Request $request )
+    public function destroy( $id )
     {
         // $id = Request::input('event_id');
-        $id = $request['event_id'];
+        // $id = $request['event_id'];
         $event = Event::find($id);
         $event->delete();
     }
