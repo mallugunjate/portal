@@ -117,12 +117,6 @@ Route::resource('/admin/package', 'Document\PackageController');
 
 //CALENDAR ADMIN
 Route::resource('/admin/calendar', 'Calendar\CalendarAdminController');
-// Route::get('/admin/calendar', 'Calendar\CalendarController@adminIndex');
-// Route::get('/admin/calendar/create', 'Calendar\CalendarController@create');
-// Route::get('/admin/calendar/show/{id}', 'Calendar\CalendarController@show');
-// Route::get('/admin/calendar/edit/{id}', 'Calendar\CalendarController@edit');
-// Route::post('/admin/calendar/delete', 'Calendar\CalendarController@destroy');
-
 
 
 //Api routes
