@@ -1,4 +1,6 @@
-#package-name h4{
+.package-title, .package-details-title{
+	font-size: 18px;
+	font-weight: bold;
 	text-transform: uppercase;
 }
 .package-files{
@@ -11,4 +13,12 @@
 .package-timestamp{
 	font-size: 12px;
 }
-
+.edit-package-details {
+	margin-bottom:10px;
+}
+.file-listing {
+	border: thin solid #e9e9e9;
+}
+#files-staged-to-remove input{
+	display:none;
+}

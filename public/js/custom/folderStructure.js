@@ -103,14 +103,12 @@
 
 	$(".package").click(function(){
 		var package_id = $(this).attr('id');
-		console.log(package_id);
 		$.ajax(
 			{
 				url : '/admin/package/' + package_id
 			}
 		)
 		.done(function(data){
-			console.log(data);
 			showPackage(data);
 		});
 
@@ -123,10 +121,13 @@
 
 		$("#package-viewer #package-name").empty();
 		$("#package-viewer #package-details").empty();
-		$("#package-viewer #package-name").append('<h4>' + docPackage.package.package_screen_name + '</h4>');
+		$("#package-viewer #package-name").append(	'<div class="package-title">' + docPackage.package.package_screen_name + '</div>' +
+													'<div class="package-timestamp"> Last Updated : ' + docPackage.package.updated_at + '</div>');
+		$("#edit-package").attr('href', '/admin/package/'+ docPackage.package.id +'/edit?banner_id=1')
+		$("#package-viewer #package-details").append('<div class="package-details-title"> Files Included </div>')
 		_.each(docPackage.documentDetails, function(index){
-			$("#package-viewer #package-details").append(	'<div class="package-files">' +
-														'<div class="package-filename"> Filename : ' + index.original_filename + '</div>' +
+			$("#package-viewer #package-details").append('<div class="package-files">' +
+														'<div class="package-filename"> ' + index.original_filename + '</div>' +
 														'<div class="package-filepath"> File Location : ' + index.folder_path + '</div>' +
 														'<div class="package-timestamp"> Uploaded At : ' + index.created_at + '</div>' +
 														'</div>'

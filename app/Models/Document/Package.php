@@ -41,11 +41,6 @@ class Package extends Model
     	return;
     }
 
-    public static function editPackage($id, Request $request)
-    {
-
-    }
-
     public static function getAllPackages($banner_id)
     {
     	$packages = Package::where('banner_id', $banner_id)->get();
@@ -64,5 +59,31 @@ class Package extends Model
     		array_push($documents, $document);
     	}
     	return ( $documents );
+    }
+
+    public static function updatepackage(Request $request, $id)
+    {
+        $package = Package::find($id);
+        $package["package_screen_name"] = $request["package_name"];
+        
+        $remove_documents = $request["remove_document"];    
+        if (isset($remove_documents)) {
+            foreach ($remove_documents as $remove) {
+               DocumentPackage::where('document_id', intval($remove))->delete();
+            }
+        }
+        
+
+        $add_documents = $request["package_files"];
+        if (isset($add_documents)) {
+            foreach ($add_documents as $add) {
+                DocumentPackage::create([
+                    'document_id'   => intval($add),
+                    'package_id'    => $id    
+                ]);
+            }
+        }
+        $package->save();
+        return;
     }
 }

@@ -21,6 +21,7 @@ class PackageController extends Controller
      */
     public function index(Request $request)
     {
+        $banner_id = $request["banner_id"];
         $packages = Package::getAllPackages($banner_id);
         return $packages;
     }
@@ -82,9 +83,23 @@ class PackageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, Request $request)
     {
-        //
+        $package = Package::find($id);
+        $documentDetails = Package::getPackageDocumentDetails($id);
+        $banner_id = $request['banner_id'];
+        if (isset($banner_id)) {
+            $banner = Banner::where('id', $banner_id)->first();
+        }
+        else {
+            $banner = Banner::where('id', 1)->first();
+        }  
+
+        $fileFolderStructure = FileFolder::getFileFolderStructure($banner_id);
+        return view('admin.package.edit')->with('package', $package)
+                                        ->with('documentDetails', $documentDetails)
+                                        ->with('banner', $banner)
+                                        ->with('navigation', $fileFolderStructure);
     }
 
     /**
@@ -96,7 +111,8 @@ class PackageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Package::updatePackage($request, $id);
+        return redirect()->action('AdminController@index', ['banner_id' => $request["banner_id"]]);;
     }
 
     /**

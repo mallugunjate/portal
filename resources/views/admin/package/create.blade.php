@@ -52,7 +52,7 @@
 
 		@endforeach
 		<input class="btn btn-default" type="button" id="add-files" value="Add Files" />
-		<div id="files">
+		<div id="files-selected">
 			<p>Files To be added:</p>
 
 		</div>

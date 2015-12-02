@@ -1,12 +1,12 @@
 $(document).ready(function(){
 
 	$('#add-files').on('click', function(){
-		console.log("1");
 		$('input[name^="package_files"]').each(function(){
 			if($(this).is(":checked")){
-				$("#files").append('<ul class="selected-files" data-fileid='+ $(this).val() +'>'+$(this).attr("data-filename")+'</ul>')
+				$("#files-selected").append('<ul class="selected-files" data-fileid='+ $(this).val() +'>'+$(this).attr("data-filename")+'</ul>')
 			}
 		});
+
 		
 	});
 
@@ -31,5 +31,21 @@ $(document).ready(function(){
 			console.log(data);
 			window.location = '/admin/home?banner_id=' + banner_id;
 		});
+	});
+
+
+	$("#add-more-files").on('click', function(){
+		$(".file-listing").toggleClass('hidden');
+	})
+
+	$(".remove-file").on('click', function(){
+		var document_id = $(this).attr('data-document-id');
+		$(this).parent().fadeOut(500);
+		$("#files-staged-to-remove").append('<input name=remove_document[] value='+ document_id +'>')
+	});
+
+	$("#package-update").on('click', function(){
+		var add_documents = [];
+		var remove_documents = [];
 	});
 })

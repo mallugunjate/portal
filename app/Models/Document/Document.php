@@ -302,8 +302,6 @@ class Document extends Model
                     break;
 
                 }
-                
-                // var_dump($path);
             }   
         }
         
