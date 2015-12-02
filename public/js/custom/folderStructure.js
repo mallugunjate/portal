@@ -126,7 +126,7 @@
 		$("#package-viewer #package-name").append('<h4>' + docPackage.package.package_screen_name + '</h4>');
 		_.each(docPackage.documentDetails, function(index){
 			$("#package-viewer #package-details").append(	'<div class="package-files">' +
-														'<div class="package-filename"> Filename : ' + index.filename + '</div>' +
+														'<div class="package-filename"> Filename : ' + index.original_filename + '</div>' +
 														'<div class="package-filepath"> File Location : ' + index.folder_path + '</div>' +
 														'<div class="package-timestamp"> Uploaded At : ' + index.created_at + '</div>' +
 														'</div>'
