@@ -85,6 +85,9 @@
 			<div id="files-selected" >
 				<p>Files To be added:</p>
 			</div>
+			<div id="files-selected-to-add">
+
+			</div>
 		</div>
 		
 

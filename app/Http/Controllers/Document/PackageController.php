@@ -11,6 +11,7 @@ use App\Models\Document\FolderStructure;
 use App\Models\Document\FileFolder;
 use App\Models\Document\Package;
 use App\Models\Banner;
+use App\Models\Document\DocumentPackage;
 
 class PackageController extends Controller
 {
@@ -123,6 +124,8 @@ class PackageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DocumentPackage::where('package_id', $id)->delete();
+        Package::find($id)->delete();
+        return;
     }
 }

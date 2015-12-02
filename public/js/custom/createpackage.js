@@ -40,12 +40,10 @@ $(document).ready(function(){
 
 	$(".remove-file").on('click', function(){
 		var document_id = $(this).attr('data-document-id');
-		$(this).parent().fadeOut(500);
+		$(this).parent().fadeOut(200);
 		$("#files-staged-to-remove").append('<input name=remove_document[] value='+ document_id +'>')
 	});
 
-	$("#package-update").on('click', function(){
-		var add_documents = [];
-		var remove_documents = [];
-	});
+
+
 })

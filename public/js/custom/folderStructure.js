@@ -124,6 +124,7 @@
 		$("#package-viewer #package-name").append(	'<div class="package-title">' + docPackage.package.package_screen_name + '</div>' +
 													'<div class="package-timestamp"> Last Updated : ' + docPackage.package.updated_at + '</div>');
 		$("#edit-package").attr('href', '/admin/package/'+ docPackage.package.id +'/edit?banner_id=1')
+		$("#delete-package").attr('data-package-id', docPackage.package.id);
 		$("#package-viewer #package-details").append('<div class="package-details-title"> Files Included </div>')
 		_.each(docPackage.documentDetails, function(index){
 			$("#package-viewer #package-details").append('<div class="package-files">' +
@@ -134,4 +135,20 @@
 														);
 		});
 	}
+
+
+	$("#delete-package").on('click', function(e){
+		e.preventDefault();
+		var package_id = $(this).attr('data-package-id');
+		console.log(package_id);
+		$.ajax({
+			method : "DELETE",
+			url : "/admin/package/" + package_id,
+			data : { "_token" : $('[name="_token"]').val()}
+		}).done(function( data ){
+			console.log(data);
+			var banner_id = $("input[name='banner_id']").val();
+			window.location = '/admin/home?banner_id=' + banner_id;
+		});
+	});
 
