@@ -10,23 +10,29 @@ class Package extends Model
 {
     protected $table = 'packages';
 
-    protected $fillable = ['id', 'package_screen_name', 'package_name', 'banner_id'];
+    protected $fillable = ['id', 'package_screen_name', 'package_name', 'is_hidden', 'start', 'end', 'banner_id'];
 
     public static function storePackage(Request $request)
     {
-    	$documents = $request["documents"];
-    	$package_screen_name = $request["package_name"];
+        $documents = $request["package_files"];
     	
+        $package_screen_name = $request["package_name"];
     	$package_name = preg_replace('/\s+/', '_' , $package_screen_name);
     	$timestamp = sha1(time()*time());
     	$package_name .= "_".$timestamp ;
     	
-    	$banner_id = $request["banner_id"];
+    	$start = strtotime($request["start"]);
+        $end = strtotime($request["end"]);
+        $is_hidden = $request["is_hidden"];
+        $banner_id = $request["banner_id"];
+
     	$package = Package::create([
     			'package_screen_name' 	=> $package_screen_name,
     			'package_name'			=> $package_name,
-    			'banner_id'				=> $banner_id
-
+    			'banner_id'				=> $banner_id,
+                'start'                 => $start,
+                'end'                   => $end,
+                'is_hidden'             => $is_hidden
     		]);
 
     	$package_id = $package->id;
@@ -63,9 +69,22 @@ class Package extends Model
 
     public static function updatepackage(Request $request, $id)
     {
+        // dd($request->all());
         $package = Package::find($id);
         $package["package_screen_name"] = $request["package_name"];
+
+        $package["start"] = strtotime($request["start"]);
+        $package["end"] = strtotime($request["end"]);
         
+        $is_hidden = $request["is_hidden"];
+        if (isset($is_hidden)) {
+            $package["is_hidden"] = $is_hidden;
+        }
+        else{
+            $package["is_hidden"] = 0;
+        }
+        $package->save();
+
         $remove_documents = $request["remove_document"];    
         if (isset($remove_documents)) {
             foreach ($remove_documents as $remove) {
@@ -83,7 +102,7 @@ class Package extends Model
                 ]);
             }
         }
-        $package->save();
+        
         return;
     }
 }

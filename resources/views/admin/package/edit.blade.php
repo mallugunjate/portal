@@ -37,7 +37,7 @@
 	<!-- navbar ends-->
 	<div class="col-md-10 col-md-offset-1">
 
-		 {!! Form::model($package, ['action' => ['Document\PackageController@update', 'id'=>$package->id], 'method' => 'PATCH']) !!}
+		{!! Form::model($package, ['action' => ['Document\PackageController@update', 'id'=>$package->id], 'method' => 'PATCH']) !!}
 		<input type="hidden" name="banner_id" value="{{$banner->id}}">
 		<h3>Edit Package : {{$package->package_screen_name}}</h3> 
 
@@ -46,6 +46,28 @@
 			<input type="text" name="package_name"  value="{{$package->package_screen_name}}">
 
 		</div>
+
+		<div>
+			Start :
+			<div class="input-group date" id="datetimepicker1">
+	          {!! Form::text('start', $package->start , ['class'=>'form-control',  'required']) !!}
+	          <span class="input-group-addon">
+	              <span class="glyphicon glyphicon-calendar"></span>
+	          </span>      
+	        </div>
+        </div>
+        <div>
+			End :
+			<div class="input-group date" id="datetimepicker2">
+	          {!! Form::text('end', $package->end, ['class'=>'form-control',  'required']) !!}
+	          <span class="input-group-addon">
+	              <span class="glyphicon glyphicon-calendar"></span>
+	          </span>      
+	        </div>
+        </div>
+        <div>
+        	Package hidden from Store : <input type="checkbox" value=1 name="is_hidden" @if($package->is_hidden) {{"checked"}} @endif>
+        </div>
 
 		<div class="existing-files row">
 			<div class="title">Existing Files</div>
@@ -100,9 +122,20 @@
 		</div>
 		{!! Form::close() !!}
 	</div>
+<script type="text/javascript">
+	var start = {{$package->start}}
+	var end = {{$package->end}}
+</script>
 
 <script type="text/javascript" src="/js/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/custom/createpackage.js"></script>
+<script type="text/javascript" src="/js/vendor/moment.js"></script>
+<script type="text/javascript" src="/js/vendor/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript">
+	$(".date").datetimepicker({
+	          format: 'YYYY-MM-DD HH:mm:ss'
+	});
+</script>
 </body>
 </html>

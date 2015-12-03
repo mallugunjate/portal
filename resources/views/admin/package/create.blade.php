@@ -35,35 +35,71 @@
 	  </nav>
 	<!-- navbar ends-->
 	<div class="col-md-10 col-md-offset-1">
+		
+		{!! Form::open( ['action' => ['Document\PackageController@store'], 'method'=>'POST']) !!}
 		<input type="hidden" name="banner_id" value="{{$banner->id}}">
 		<h3>Create Package</h3> 
-
-		<h5>Choose Files</h5>
-		@foreach ($navigation as $nav) 
-					
-			@if (isset($nav["is_child"]) && ($nav["is_child"] == 0) )
-				
-				@include('admin.package.file-folder-structure-partial', ['navigation' =>$navigation, 'currentnode' => $nav])
-				
-			@endif
-
-
-
-
-		@endforeach
-		<input class="btn btn-default" type="button" id="add-files" value="Add Files" />
-		<div id="files-selected">
-			<p>Files To be added:</p>
-
+		<div>
+			Package Name: <input type="text" name="package_name" >
 		</div>
-		Package Name: <input type="text" name="package_name">
+		<div>
+			Start :
+			<div class="input-group date" id="datetimepicker1">
+	          {!! Form::text('start', null, ['class'=>'form-control',  'required']) !!}
+	          <span class="input-group-addon">
+	              <span class="glyphicon glyphicon-calendar"></span>
+	          </span>      
+	        </div>
+        </div>
+        <div>
+			End :
+			<div class="input-group date" id="datetimepicker2">
+	          {!! Form::text('end', null, ['class'=>'form-control',  'required']) !!}
+	          <span class="input-group-addon">
+	              <span class="glyphicon glyphicon-calendar"></span>
+	          </span>      
+	        </div>
+        </div>
+        <div>
+        	Package hidden from store : <input type="checkbox" value=1 name="is_hidden">
+        </div>
 
-		{!! csrf_field() !!}
-		<input class="btn btn-default" type="button" id="create-package" value="Create Package" />
+        <div>
+			<h5>Choose Files</h5>
+			@foreach ($navigation as $nav) 
+						
+				@if (isset($nav["is_child"]) && ($nav["is_child"] == 0) )
+					
+					@include('admin.package.file-folder-structure-partial', ['navigation' =>$navigation, 'currentnode' => $nav])
+					
+				@endif
+
+			@endforeach
+		
+
+			<input class="btn btn-default" type="button" id="add-files" value="Add Files" />
+			<div id="files-selected">
+				<p>Files To be added:</p>
+
+			</div>
+		
+		</div>
+		
+		<button type="submit"> Create Package</button>
+		{!! Form::close() !!}
 	</div>
+
 
 <script type="text/javascript" src="/js/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/custom/createpackage.js"></script>
+<script type="text/javascript" src="/js/vendor/moment.js"></script>
+<script type="text/javascript" src="/js/vendor/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript">
+	$(".date").datetimepicker({
+          format: 'YYYY-MM-DD HH:mm:ss'
+    });
+
+</script>
 </body>
 </html>

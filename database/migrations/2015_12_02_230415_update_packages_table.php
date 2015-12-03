@@ -13,9 +13,11 @@ class UpdatePackagesTable extends Migration
     public function up()
     {
         Schema::table('packages', function (Blueprint $table) {
-            $table->integer('banner_id')->unsigned()->after('package_name');
-            $table->dropColumn('is_hidden');
+            $table->integer('start')->after('package_name');
+            $table->integer('end')->after('start');
+            $table->integer('banner_id')->unsigned()->after('is_hidden');
             $table->foreign('banner_id')->references('id')->on('banners')->onDelete('cascade');
+
         });
     }
 
@@ -28,6 +30,8 @@ class UpdatePackagesTable extends Migration
     {
         Schema::table('packages', function (Blueprint $table) {
             $table->dropColumn('banner_id');
+            $table->dropColumn('start');
+            $table->dropColumn('end');
         });
     }
 }
