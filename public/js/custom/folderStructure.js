@@ -22,6 +22,7 @@
 		$("#file-container").removeClass('hidden').addClass('visible');
 		$("#file-uploader").removeClass('hidden').addClass('visible');
 		$("#empty-container").removeClass('visible').addClass('hidden');
+		$("#package-viewer").removeClass('visible').addClass('hidden');
 
 		var banner_id = $("input[name='banner_id']").val();
 		
@@ -97,5 +98,60 @@
 				console.log(data);
 			});
 		} 
+	});
+
+
+	$(".package").click(function(){
+		var package_id = $(this).attr('id');
+		$.ajax(
+			{
+				url : '/admin/package/' + package_id
+			}
+		)
+		.done(function(data){
+			showPackage(data);
+		});
+
+	})
+
+	var showPackage = function(docPackage){
+
+		$("#package-viewer").removeClass('hidden').addClass('visible');
+		$("#empty-container").removeClass('visible').addClass('hidden');
+		$("#file-container").removeClass('visible').addClass('hidden');
+		$("#file-uploader").removeClass('visible').addClass('hidden');
+
+		$("#package-viewer #package-name").empty();
+		$("#package-viewer #package-details").empty();
+		$("#package-viewer #package-name").append(	'<div class="package-title">' + docPackage.package.package_screen_name + '</div>' +
+													'<div class="package-timestamp"> Last Updated : ' + docPackage.package.updated_at + '</div>');
+										
+		$("#edit-package").attr('href', '/admin/package/'+ docPackage.package.id +'/edit?banner_id=1')
+		$("#delete-package").attr('data-package-id', docPackage.package.id);
+		$("#package-viewer #package-details").append('<div class="package-details-title"> Files Included </div>')
+		_.each(docPackage.documentDetails, function(index){
+			$("#package-viewer #package-details").append('<div class="package-files">' +
+														'<div class="package-filename"> ' + index.original_filename + '</div>' +
+														'<div class="package-filepath"> File Location : ' + index.folder_path + '</div>' +
+														'<div class="package-timestamp"> Uploaded At : ' + index.created_at + '</div>' +
+														'</div>'
+														);
+		});
+	}
+
+
+	$("#delete-package").on('click', function(e){
+		e.preventDefault();
+		var package_id = $(this).attr('data-package-id');
+		console.log(package_id);
+		$.ajax({
+			method : "DELETE",
+			url : "/admin/package/" + package_id,
+			data : { "_token" : $('[name="_token"]').val()}
+		}).done(function( data ){
+			console.log(data);
+			var banner_id = $("input[name='banner_id']").val();
+			window.location = '/admin/home?banner_id=' + banner_id;
+		});
 	});
 

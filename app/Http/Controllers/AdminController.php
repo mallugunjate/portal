@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Banner;
 use App\Models\Document\FolderStructure;
 use App\Models\Document\Folder;
+use App\Models\Document\Package;
 
 class AdminController extends Controller
 {
@@ -31,6 +32,8 @@ class AdminController extends Controller
 
         $navigation = FolderStructure::getNavigationStructure($banner->id);
 
+        $packages = Package::getAllPackages($banner->id);
+
         $packageHash = sha1(time() . time());
 
         $folders = Folder::all();
@@ -46,6 +49,7 @@ class AdminController extends Controller
             ->with('folders', $folders)
             ->with('packageHash', $packageHash)
             ->with('banner', $banner)
+            ->with('packages', $packages)
             ->with('defaultFolder' , $defaultFolder);
     }
 

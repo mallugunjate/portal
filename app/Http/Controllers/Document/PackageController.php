@@ -10,6 +10,8 @@ use App\Models\Document\Document;
 use App\Models\Document\FolderStructure;
 use App\Models\Document\FileFolder;
 use App\Models\Document\Package;
+use App\Models\Banner;
+use App\Models\Document\DocumentPackage;
 
 class PackageController extends Controller
 {
@@ -18,9 +20,11 @@ class PackageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $banner_id = $request["banner_id"];
+        $packages = Package::getAllPackages($banner_id);
+        return $packages;
     }
 
     /**
@@ -31,10 +35,17 @@ class PackageController extends Controller
     public function create(Request $request)
     {
         $banner_id = $request['banner_id'];
+        if (isset($banner_id)) {
+            $banner = Banner::where('id', $banner_id)->first();
+        }
+        else {
+            $banner = Banner::where('id', 1)->first();
+        }  
+
         $fileFolderStructure = FileFolder::getFileFolderStructure($banner_id);
         
         return view('admin.package.create')
-                    ->with('banner_id', $banner_id)
+                    ->with('banner', $banner)
                     ->with('navigation', $fileFolderStructure);
                     
     }
@@ -48,6 +59,7 @@ class PackageController extends Controller
     public function store(Request $request)
     {
         Package::storePackage($request);
+        return;
     }
 
     /**
@@ -58,7 +70,12 @@ class PackageController extends Controller
      */
     public function show($id)
     {
-        //
+        $response = [];
+        $response["package"] = Package::find($id);
+        $response["documentDetails"] = Package::getPackageDocumentDetails($id);
+
+        return ($response);
+
     }
 
     /**
@@ -67,9 +84,23 @@ class PackageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, Request $request)
     {
-        //
+        $package = Package::find($id);
+        $documentDetails = Package::getPackageDocumentDetails($id);
+        $banner_id = $request['banner_id'];
+        if (isset($banner_id)) {
+            $banner = Banner::where('id', $banner_id)->first();
+        }
+        else {
+            $banner = Banner::where('id', 1)->first();
+        }  
+
+        $fileFolderStructure = FileFolder::getFileFolderStructure($banner_id);
+        return view('admin.package.edit')->with('package', $package)
+                                        ->with('documentDetails', $documentDetails)
+                                        ->with('banner', $banner)
+                                        ->with('navigation', $fileFolderStructure);
     }
 
     /**
@@ -81,7 +112,8 @@ class PackageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Package::updatePackage($request, $id);
+        return redirect()->action('AdminController@index', ['banner_id' => $request["banner_id"]]);;
     }
 
     /**
@@ -92,6 +124,8 @@ class PackageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DocumentPackage::where('package_id', $id)->delete();
+        Package::find($id)->delete();
+        return;
     }
 }
