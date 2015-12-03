@@ -55,9 +55,12 @@
     @else
     <li>
     @endif
-        <a href="/calendar"><i class="fa fa-calendar"></i> <span class="nav-label">Calendar</span></a>
+        <a href="/calendar"><i class="fa fa-calendar"></i> <span class="nav-label">Calendar</span><span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level collapse">
+            <li><a href="#">Add a New Event</a></li>
+            <li><a href="#">Manage Event Types</a></li>
+        </ul>
     </li>
-
 
 {{--                 <li>
         <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">Messages </span><span class="label label-warning pull-right">5</span></a>
