@@ -108,15 +108,15 @@
 										@foreach($events as $event)
 										<tr>
 											<td>{{ $event->id }}</td>
-											<td>{{ $event->title }}</td>
-											<td>{{ $event->description }}</td>
+											<td><a href="/admin/calendar/{{ $event->id }}/edit">{{ $event->title }}</a></td>
+											<td>{{ mb_strimwidth($event->description, 0, 100, "...") }}</td>
 											<td><script>convertDate( {{ $event->start }} );</script></td>
 											<td><script>convertDate( {{ $event->end }} );</script></td>
 
 											<td>
 
-												<a href="/admin/calendar/show/{{ $event->id }}" class="btn btn-white btn-sm"><i class="fa fa-eye"></i></a>
-												<a href="/admin/calendar/edit/{{ $event->id }}" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i></a>
+												
+
 												<a data-event="{{ $event->id }}" id="event{{$event->id}}" class="event-delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
 
 											</td>

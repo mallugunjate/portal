@@ -35,7 +35,7 @@
         </li> --}}
 
                 <li>
-                    <a href="login.html">
+                    <a href="/admin">
                         <i class="fa fa-sign-out"></i> Log out
                     </a>
                 </li>
