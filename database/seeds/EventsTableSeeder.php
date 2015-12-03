@@ -21,8 +21,6 @@ class EventsTableSeeder extends Seeder
             $start = $times["start"];
             $end = $times["end"];
 
-      
-
             DB::table('events')->insert(array(
                 'title' => $faker->sentence,
                 'description' => $faker->paragraph(3),

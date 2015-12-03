@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     @section('title', 'Calendar')
@@ -68,9 +68,12 @@
                                             <div class="col-sm-10"><input type="text" class="form-control" value="{{ $event->title }}"></div>
                                         </div>
 
+                                        {{-- <div class="summernote"></div> --}}
+
                                         <div class="form-group"><label class="col-sm-2 control-label">Description</label>
                                             <div class="col-sm-10">
-                                                <div class="summernote">{{ $event->description }}</div>
+                                                <textarea class="form-control" rows="5">{{ $event->description }}</textarea>
+                                                
                                             </div>
                                         </div>
 
@@ -91,7 +94,7 @@
 
                                         <div class="form-group">
 
-                                                <label class="col-sm-2 control-label">Event Start &amp; End</label>
+                                                <label class="col-sm-2 control-label">Start &amp; End</label>
 
                                                 <div class="col-sm-10">
                                                     <div class="input-daterange input-group" id="datepicker">
@@ -143,11 +146,22 @@
                     });
 
 
-                            $(document).ready(function(){
+                   //  $(document).ready(function(){
 
-                                $('.summernote').summernote();
+                   //      $('.summernote').summernote({
+                   //        toolbar: [
+                   //          //[groupname, [button list]]
+                             
+                   //          ['style', ['bold', 'italic', 'underline', 'clear']],
+                   //          ['font', ['strikethrough', 'superscript', 'subscript']],
+                   //          ['fontsize', ['fontsize']],
+                   //          ['color', ['color']],
+                   //          ['para', ['ul', 'ol', 'paragraph']],
+                   //          ['height', ['height']],
+                   //        ]
+                   //      });
 
-                           });
+                   // });
 
 
 

@@ -14,7 +14,7 @@
         </div>
     </nav>
 
-        <div id="page-wrapper" class="gray-bg sidebar-content">
+        <div id="page-wrapper" class="gray-bg">
         <div class="row border-bottom">
         <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0"  style="">
         <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>

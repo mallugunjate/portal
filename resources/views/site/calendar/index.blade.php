@@ -195,6 +195,15 @@ $(function() { // document ready
         start: '2014-11-01'
       },
       {
+        title: 'Some Event',
+        start: '2014-11-01'
+      },  
+      {
+        title: 'multiday Event',
+        start: '2014-11-01',
+        end: '2014-11-05'
+      },                
+      {
         title: 'Long Event',
         start: '2014-11-07',
         end: '2014-11-10'

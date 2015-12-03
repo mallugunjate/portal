@@ -14,6 +14,7 @@ class CreateEventsTable extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->increments('id')->unsigned();
+            $table->integer('banner')->references('id')->on('banners');
             $table->mediumText('title');    
             $table->longText('description');
             $table->integer('event_type')->references('id')->on('event_types');
