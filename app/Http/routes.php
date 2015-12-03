@@ -118,6 +118,9 @@ Route::resource('/admin/package', 'Document\PackageController');
 //CALENDAR ADMIN
 Route::resource('/admin/calendar', 'Calendar\CalendarAdminController');
 
+//Event Types
+Route::resource('/admin/eventtypes', 'Calendar\EventTypesAdminController');
+
 
 //Api routes
 
