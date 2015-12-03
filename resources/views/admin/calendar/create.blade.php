@@ -4,17 +4,7 @@
 <head>
     @section('title', 'Calendar')
     @include('admin.includes.head')
-    <link rel="stylesheet" type="text/css" href="/css/plugins/fullcalendar/fullcalendar.css">
-    <link rel="stylesheet" type="text/css" href="/css/plugins/fullcalendar/fullcalendar.print.css">
 
-	<script type="text/javascript">
-		function convertDate(t)
-		{
-			var d = new Date(0); // The 0 there is the key, which sets the date to the epoch
-			d.setUTCSeconds(t);
-			document.write(d);
-		}
-	</script>
 	<meta name="csrf-token" content="{!! csrf_token() !!}"/>
 </head>
 
@@ -42,7 +32,7 @@
                             <a href="/admin/calendar">Calendar</a>
                         </li>
                         <li class="active">
-                            <strong>Edit an Event</strong>
+                            <strong>Create an Event</strong>
                         </li>
                     </ol>
                 </div>
@@ -56,9 +46,9 @@
 		                <div class="col-lg-12">
 		                    <div class="ibox">
 		                        <div class="ibox-title">
-		                            <h5>Edit Event: {{ $event->title }}</h5>
+		                            <h5>New Event</h5>
 		                            <div class="ibox-tools">
-		                                <a href="/admin/calendar/create" class="btn btn-primary" role="button"><i class="fa fa-plus"></i> Add New Event</a>
+		                               {{--  <a href="/admin/calendar/create" class="btn btn-primary" role="button"><i class="fa fa-plus"></i> Add New Event</a> --}}
                                         
 		                            </div>
 		                        </div>
@@ -66,7 +56,7 @@
 
                                     <form method="get" class="form-horizontal">
                                         <div class="form-group"><label class="col-sm-2 control-label">Title</label>
-                                            <div class="col-sm-10"><input type="text" class="form-control" value="{{ $event->title }}"></div>
+                                            <div class="col-sm-10"><input type="text" class="form-control" value=""></div>
                                         </div>
 
                                         <div class="form-group"><label class="col-sm-2 control-label">Event Type</label>
@@ -75,11 +65,9 @@
 
                                                 <select class="form-control">
                                                     @foreach($event_types_list as $e)
-                                                        @if( $e->id == $event->event_type )
-                                                            <option value="{{ $e->id }}" selected>{{ $e->event_type}}</option>
-                                                        @else
+                                                       
                                                             <option value="{{ $e->id }}">{{ $e->event_type}}</option>
-                                                        @endif
+                                                       
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -89,7 +77,7 @@
 
                                         <div class="form-group"><label class="col-sm-2 control-label">Description</label>
                                             <div class="col-sm-10">
-                                                <textarea class="form-control" rows="5">{{ $event->description }}</textarea>
+                                                <textarea class="form-control" rows="5"></textarea>
                                                 
                                             </div>
                                         </div>
@@ -115,9 +103,9 @@
 
                                                 <div class="col-sm-10">
                                                     <div class="input-daterange input-group" id="datepicker">
-                                                        <input type="text" class="input-sm form-control" name="start" value="{{ $event->start }}" />
+                                                        <input type="text" class="input-sm form-control" name="start" value="" />
                                                         <span class="input-group-addon">to</span>
-                                                        <input type="text" class="input-sm form-control" name="end" value="{{ $event->end }}" />
+                                                        <input type="text" class="input-sm form-control" name="end" value="" />
                                                     </div>
                                                 </div>
                                         </div>
@@ -127,7 +115,7 @@
                                         <div class="form-group">
                                             <div class="col-sm-4 col-sm-offset-2">
                                                 <a class="btn btn-white" href="/admin/calendar"><i class="fa fa-close"></i> Cancel</a>
-                                                <button class="btn btn-primary" type="submit"><i class="fa fa-check"></i> Save changes</button>
+                                                <button class="btn btn-primary" type="submit"><i class="fa fa-check"></i> Create New Event</button>
 
                                             </div>
                                         </div>

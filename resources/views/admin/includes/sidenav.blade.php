@@ -57,7 +57,7 @@
     @endif
         <a href="/calendar"><i class="fa fa-calendar"></i> <span class="nav-label">Calendar</span><span class="fa arrow"></span></a>
         <ul class="nav nav-second-level collapse">
-            <li><a href="#">Add a New Event</a></li>
+            <li><a href="/admin/calendar/create">Add a New Event</a></li>
             <li><a href="#">Manage Event Types</a></li>
         </ul>
     </li>

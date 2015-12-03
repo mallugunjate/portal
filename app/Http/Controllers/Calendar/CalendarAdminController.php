@@ -8,7 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Models\Event\Event;
-use App\Models\Event\EventTypes;
+use App\Models\Event\EventType;
 
 class CalendarAdminController extends Controller
 {
@@ -32,7 +32,9 @@ class CalendarAdminController extends Controller
      */
     public function create()
     {
-        //
+        $event_types_list = EventType::all();
+        return view('admin.calendar.create')
+            ->with('event_types_list', $event_types_list);
     }
 
     /**
@@ -67,8 +69,13 @@ class CalendarAdminController extends Controller
     public function edit($id)
     {
         $event = Event::find($id);
+        $event_type = EventType::find($id);
+        $event_types_list = EventType::all();
+
         return view('admin.calendar.edit')
-            ->with('event', $event);
+            ->with('event', $event)
+            ->with('event_type', $event_type)
+            ->with('event_types_list', $event_types_list);
     }
 
     /**
