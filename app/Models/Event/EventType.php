@@ -10,5 +10,5 @@ class EventType extends Model
 	use SoftDeletes;
     protected $table = 'event_types';
     protected $dates = ['deleted_at'];
-    protected $fillables = ['event_type'];
+    protected $fillable = ['event_type'];
 }

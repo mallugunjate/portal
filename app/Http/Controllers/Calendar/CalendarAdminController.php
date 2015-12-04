@@ -98,8 +98,6 @@ class CalendarAdminController extends Controller
      */
     public function destroy( $id )
     {
-        // $id = Request::input('event_id');
-        // $id = $request['event_id'];
         $event = Event::find($id);
         $event->delete();
     }

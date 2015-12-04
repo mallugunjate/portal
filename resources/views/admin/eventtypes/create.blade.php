@@ -56,7 +56,7 @@
 
                                     <form method="get" class="form-horizontal">
                                         <div class="form-group"><label class="col-sm-2 control-label">Event Type Name</label>
-                                            <div class="col-sm-10"><input type="text" class="form-control" value=""></div>
+                                            <div class="col-sm-10"><input type="text" class="form-control" name="event_type" id="event_type" value=""></div>
                                         </div>
 
 
@@ -65,7 +65,7 @@
                                         <div class="form-group">
                                             <div class="col-sm-4 col-sm-offset-2">
                                                 <a class="btn btn-white" href="/admin/calendar"><i class="fa fa-close"></i> Cancel</a>
-                                                <button class="btn btn-primary" type="submit"><i class="fa fa-check"></i> Create New Event</button>
+                                                <button class="eventtype-create btn btn-primary" type="submit"><i class="fa fa-check"></i> Create New Event</button>
 
                                             </div>
                                         </div>
@@ -96,7 +96,7 @@
 					});
 				</script>
 
-				<script src="/js/custom/deleteEvent.js"></script>
+				<script src="/js/custom/addEventType.js"></script>
 
 				@include('site.includes.bugreport')
 

@@ -86,7 +86,7 @@
 
 											<td>{{ $event->id }}</td>
 											<td><a href="/admin/calendar/{{ $event->id }}/edit">{{ $event->title }}</a></td>
-											<td>{{ mb_strimwidth($event->description, 0, 100, "...") }}</td>
+											<td>{{ mb_strimwidth($event->description, 0, 50, "...") }}</td>
 											<td>{{ $event->start }}</td>
 											<td>{{ $event->end }}</td>
 

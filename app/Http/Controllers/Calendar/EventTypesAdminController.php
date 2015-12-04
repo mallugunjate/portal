@@ -44,7 +44,12 @@ class EventTypesAdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $eventTypeDetails = array(
+            'event_type' => $request['event_type'],
+        );
+
+        $eventType = EventType::create($eventTypeDetails);
+        $eventType->save();
     }
 
     /**
