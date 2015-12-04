@@ -54,16 +54,17 @@
 		                        </div>
 		                        <div class="ibox-content">
 
-                                    <form method="get" class="form-horizontal">
+                                    <form method="get" class="form-horizontal" id="createNewEventForm">
+                                        <input type="hidden" name="banner" id="banner" value="1">
                                         <div class="form-group"><label class="col-sm-2 control-label">Title</label>
-                                            <div class="col-sm-10"><input type="text" class="form-control" value=""></div>
+                                            <div class="col-sm-10"><input type="text" id="title" name="title" class="form-control" value=""></div>
                                         </div>
 
                                         <div class="form-group"><label class="col-sm-2 control-label">Event Type</label>
                                             <div class="col-sm-10">
                                                 {{-- <input type="text" class="form-control" value="{{ $event_type->event_type }}"> --}}
 
-                                                <select class="form-control">
+                                                <select class="form-control" id="event_type" name="event_type">
                                                     @foreach($event_types_list as $e)
                                                        
                                                             <option value="{{ $e->id }}">{{ $e->event_type}}</option>
@@ -77,7 +78,7 @@
 
                                         <div class="form-group"><label class="col-sm-2 control-label">Description</label>
                                             <div class="col-sm-10">
-                                                <textarea class="form-control" rows="5"></textarea>
+                                                <textarea class="form-control" rows="5" id="description" name="description"></textarea>
                                                 
                                             </div>
                                         </div>
@@ -103,9 +104,9 @@
 
                                                 <div class="col-sm-10">
                                                     <div class="input-daterange input-group" id="datepicker">
-                                                        <input type="text" class="input-sm form-control" name="start" value="" />
+                                                        <input type="text" class="input-sm form-control" name="start" id="start" value="" />
                                                         <span class="input-group-addon">to</span>
-                                                        <input type="text" class="input-sm form-control" name="end" value="" />
+                                                        <input type="text" class="input-sm form-control" name="end" id="end" value="" />
                                                     </div>
                                                 </div>
                                         </div>
@@ -115,7 +116,7 @@
                                         <div class="form-group">
                                             <div class="col-sm-4 col-sm-offset-2">
                                                 <a class="btn btn-white" href="/admin/calendar"><i class="fa fa-close"></i> Cancel</a>
-                                                <button class="btn btn-primary" type="submit"><i class="fa fa-check"></i> Create New Event</button>
+                                                <button class="event-create btn btn-primary" type="submit"><i class="fa fa-check"></i> Create New Event</button>
 
                                             </div>
                                         </div>
@@ -151,30 +152,9 @@
                         autoclose: true
                     });
 
-
-                   //  $(document).ready(function(){
-
-                   //      $('.summernote').summernote({
-                   //        toolbar: [
-                   //          //[groupname, [button list]]
-                             
-                   //          ['style', ['bold', 'italic', 'underline', 'clear']],
-                   //          ['font', ['strikethrough', 'superscript', 'subscript']],
-                   //          ['fontsize', ['fontsize']],
-                   //          ['color', ['color']],
-                   //          ['para', ['ul', 'ol', 'paragraph']],
-                   //          ['height', ['height']],
-                   //        ]
-                   //      });
-
-                   // });
-
-
-
-
 				</script>
 
-				<script src="/js/custom/deleteEvent.js"></script>
+				<script src="/js/custom/addEvent.js"></script>
 
 				@include('site.includes.bugreport')
 

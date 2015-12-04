@@ -45,8 +45,17 @@ class CalendarAdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        return view('admin.calendar.index');
+        $eventDetails = array(
+            'banner' => $request['banner'],
+            'title' => $request['title'],
+            'event_type' => $request['event_type'],
+            'description' => $request['description'],
+            'start' => $request['start'],
+            'end' => $request['end'],
+        );
+
+        $event = Event::create($eventDetails);
+        $event->save();
     }
 
     /**

@@ -7,7 +7,10 @@ $(document).on('click','.event-delete',function(){
 	    url: '/admin/calendar/'+eventidVal,
 	    type: 'DELETE',
 	    success: function(result) {
-	        $(selector).closest('tr').fadeOut(1000);
+	       $(selector).closest('tr').fadeOut( "slow", function() {
+    			// Animation complete.
+  			});
+	        
 	    }
 	});
 

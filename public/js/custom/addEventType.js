@@ -2,8 +2,6 @@ $(document).on('click','.eventtype-create',function(){
   
     var eventTypeName = $("#event_type").val();
 
-    console.log(eventTypeName);
-
 	$.ajax({
 	    url: '/admin/eventtypes',
 	    type: 'POST',
