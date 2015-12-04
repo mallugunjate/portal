@@ -19,7 +19,9 @@ class EventTypesAdminController extends Controller
      */
     public function index()
     {
-        //
+        $eventtypes = EventType::all();
+        return view('admin.eventtypes.index')
+           ->with('eventtypes', $eventtypes);
     }
 
     /**
@@ -29,7 +31,9 @@ class EventTypesAdminController extends Controller
      */
     public function create()
     {
-        //
+        $event_types_list = EventType::all();
+        return view('admin.eventtypes.create')
+            ->with('event_types_list', $event_types_list);
     }
 
     /**
@@ -85,6 +89,9 @@ class EventTypesAdminController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // $id = Request::input('event_id');
+        // $id = $request['event_id'];
+        $eventtype = EventType::find($id);
+        $eventtype->delete();
     }
 }

@@ -1,19 +1,20 @@
 <ul class="nav metismenu" id="side-menu">
     <li class="nav-header">
-{{--                     <div class="dropdown profile-element"> <span>
+        <div class="dropdown profile-element"> 
+            {{-- <span>
                 <img alt="image" class="img-circle" src="/wireframes/img/profile_small.jpg" />
-                 </span>
+            </span> --}}
             <a data-toggle="dropdown" class="" href="#">
                 <span class="clear">
-                    <span class="block m-t-xs"> <strong class="font-bold">Brent Garner</strong>
+                    <span class="block m-t-xs"> <strong class="font-bold">Admin</strong>
                  </span>
-                 <span class="text-muted text-xs block">Sr. Web Developer</span><br />
+{{--                  <span class="text-muted text-xs block">Sr. Web Developer</span><br />
                  <a href="profile"><span class="text-muted text-xs"> <i class="fa fa-user"></i> My Profile</span></a>   |
-                 <a href="/wireframe/login"><span class="text-muted text-xs"> <i class="fa fa-sign-out"></i> Log out</span></a>
-        </div> --}}
+                 <a href="/wireframe/login"><span class="text-muted text-xs"> <i class="fa fa-sign-out"></i> Log out</span></a> --}}
+        </div>
 
         <div class="logo-element">
-            P
+            A
         </div>
     </li>
 
@@ -50,15 +51,16 @@
 
 
     <!-- CALENDAR NAV -->
-    @if (Request::is('calendar'))
+    @if (Request::is('admin/calendar/*') || Request::is('admin/calendar') || Request::is('admin/eventtypes') || Request::is('admin/eventtypes/*') ) 
     <li class="active">
     @else
     <li>
     @endif
-        <a href="/calendar"><i class="fa fa-calendar"></i> <span class="nav-label">Calendar</span><span class="fa arrow"></span></a>
+        <a href="/admin/calendar"><i class="fa fa-calendar"></i> <span class="nav-label">Calendar</span><span class="fa arrow"></span></a>
         <ul class="nav nav-second-level collapse">
+            <li><a href="/admin/calendar">Manage Events</a></li>
             <li><a href="/admin/calendar/create">Add a New Event</a></li>
-            <li><a href="#">Manage Event Types</a></li>
+            <li><a href="/admin/eventtypes">Manage Event Types</a></li>
         </ul>
     </li>
 

@@ -32,7 +32,7 @@
                             <a>Calendar</a>
                         </li>
                         <li class="active">
-                            <strong>Manage Events</strong>
+                            <strong>Manage Event Types</strong>
                         </li>
                     </ol>
                 </div>
@@ -46,21 +46,21 @@
 		                <div class="col-lg-12">
 		                    <div class="ibox">
 		                        <div class="ibox-title">
-		                            <h5>Event List</h5>
+		                            <h5>Event Types</h5>
 		                            <div class="ibox-tools">
-		                                <a href="/admin/calendar/create" class="btn btn-primary btn"><i class="fa fa-plus"></i> Add New Event</a>
+		                                <a href="/admin/eventtypes/create" class="btn btn-primary btn"><i class="fa fa-plus"></i> Add New Event Type</a>
 		                            </div>
 		                        </div>
 		                        <div class="ibox-content">
 
 		                            <div class="m-b-lg">
 
-		                                <div class="input-group">
+{{-- 		                                <div class="input-group">
 		                                    <input type="text" placeholder="Search event by title..." class=" form-control">
 		                                    <span class="input-group-btn">
 		                                        <button type="button" class="btn btn-white"> Search</button>
 		                                    </span>
-		                                </div>
+		                                </div> --}}
 
 	
 
@@ -73,26 +73,21 @@
 
 										<tr>
 											<td>id</td>
-											<td>Title</td>
-											<td>Description</td>
-											<td>Start</td>
-											<td>End</td>
+											<td>Event Type</td>
 											<td></td>
 
 										</tr>
-										@foreach($events as $event)
+										@foreach($eventtypes as $et)
 										<tr>
 
 
-											<td>{{ $event->id }}</td>
-											<td><a href="/admin/calendar/{{ $event->id }}/edit">{{ $event->title }}</a></td>
-											<td>{{ mb_strimwidth($event->description, 0, 100, "...") }}</td>
-											<td>{{ $event->start }}</td>
-											<td>{{ $event->end }}</td>
+											<td>{{ $et->id }}</td>
+											<td><a href="/admin/eventtypes/{{ $et->id }}/edit">{{ $et->event_type }}</a></td>
+
 
 											<td>
 
-												<a data-event="{{ $event->id }}" id="event{{$event->id}}" class="event-delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+												<a data-eventtype="{{ $et->id }}" id="eventtype{{$et->id}}" class="eventtype-delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
 
 											</td>
 										</tr>
@@ -100,7 +95,7 @@
 
 										</table>
 
-										{!! $events->render() !!}
+{{-- 										{!! $events->render() !!} --}}
 
 		                            </div>
 		                        </div>
@@ -125,7 +120,7 @@
 
 				</script>
 
-				<script src="/js/custom/deleteEvent.js"></script>
+				<script src="/js/custom/deleteEventType.js"></script>
 
 				@include('site.includes.bugreport')
 
