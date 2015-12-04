@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Calendar;
 
+// use Validator;
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
 use App\Models\Event\Event;
 use App\Models\Event\EventType;
 
@@ -45,6 +44,19 @@ class CalendarAdminController extends Controller
      */
     public function store(Request $request)
     {
+
+        // $validator = Validator::make($request->all(), [
+        //     'banner' => 'required',
+        //     'title' => 'required',
+        //     'start' => 'required'
+        // ]);
+
+        // if ($validator->fails()) {
+        //     return redirect('/admin/calendar/create')
+        //         ->withErrors($validator)
+        //         ->withInput();
+        // }
+
         $eventDetails = array(
             'banner' => $request['banner'],
             'title' => $request['title'],

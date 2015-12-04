@@ -53,7 +53,16 @@
 		                            </div>
 		                        </div>
 		                        <div class="ibox-content">
-
+                                    @if (count($errors) > 0)
+                                        <div class="alert alert-danger">
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
+                                    
                                     <form method="get" class="form-horizontal" id="createNewEventForm">
                                         <input type="hidden" name="banner" id="banner" value="1">
                                         <div class="form-group"><label class="col-sm-2 control-label">Title</label>
@@ -86,18 +95,6 @@
                                         <div class="hr-line-dashed"></div>
 
 
-                                        <!-- <div class="form-group" id="data_5">
-                                            <label class="col-sm-2 control-label">Event Start &amp; End</label>
-
-                                            <div class="input-daterange input-group" id="datepicker">
-
-                                                <span class="input-group-addon">to</span>
-
-                                            </div>
-                                        </div> -->
-
-
-
                                         <div class="form-group">
 
                                                 <label class="col-sm-2 control-label">Start &amp; End</label>
@@ -114,7 +111,7 @@
                                         <div class="hr-line-dashed"></div>
 
                                         <div class="form-group">
-                                            <div class="col-sm-4 col-sm-offset-2">
+                                            <div class="col-sm-10 col-sm-offset-2">
                                                 <a class="btn btn-white" href="/admin/calendar"><i class="fa fa-close"></i> Cancel</a>
                                                 <button class="event-create btn btn-primary" type="submit"><i class="fa fa-check"></i> Create New Event</button>
 
@@ -147,6 +144,7 @@
 					});
 
                     $('.input-daterange').datepicker({
+                         format: 'yyyy-mm-dd',
                         keyboardNavigation: false,
                         forceParse: false,
                         autoclose: true
