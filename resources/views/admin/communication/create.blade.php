@@ -40,6 +40,9 @@
 		{!! Form::open( ['action' => ['Communication\CommunicationAdminController@store'], 'method'=>'POST']) !!}
 
 		<div>
+			<input type="hidden" name="banner_id" value={{$banner->id}} >
+		</div>
+		<div>
 			{!! Form::label('subject', 'Subject') !!}
 			{!! Form::input('text', 'subject', null,  ['class'=>'form-control']) !!}
 		</div>
@@ -105,7 +108,7 @@
 		            </div>
 		            <div class="modal-footer">
 		                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		                <button type="button" class="btn btn-primary">Save changes</button>
+		                <button type="button" class="btn btn-primary" id="attach-selected-files">Select Documents</button>
 		            </div>
 		        </div>
 		    </div>
@@ -121,16 +124,18 @@
 		                <h4 class="modal-title">Select Packages</h4>
 		            </div>
 		            <div class="modal-body">
-		                
+		                @include('admin.package.file-package-structure-partial', ['packages'=>$packages])
 		            </div>
 		            <div class="modal-footer">
 		                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		                <button type="button" class="btn btn-primary">Save changes</button>
+		                <button type="button" class="btn btn-primary" id = "attach-selected-packages">Select Packages</button>
 		            </div>
 		        </div>
 		    </div>
 		</div>
 
+		<div id="files-selected"></div>
+		<div id="packages-selected"></div>
 		<div>
 			<button type="submit" class="btn btn-default">Submit</button>
 		</div>
@@ -141,6 +146,7 @@
 <script type="text/javascript" src="/js/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/custom/createpackage.js"></script>
+<script type="text/javascript" src="/js/custom/communication.js"></script>
 <script type="text/javascript" src="/js/vendor/moment.js"></script>
 <script type="text/javascript" src="/js/vendor/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="/js/plugins/ckeditor-standard/ckeditor.js"></script>

@@ -8,6 +8,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Banner;
 use App\Models\Document\FileFolder;
+use App\Models\Document\Package;
+use App\Models\Communication\Communication;
 
 class CommunicationAdminController extends Controller
 {
@@ -37,10 +39,12 @@ class CommunicationAdminController extends Controller
         }
     
         $fileFolderStructure = FileFolder::getFileFolderStructure($banner_id);
+        $packages = Package::getPackagesStructure($banner_id);
         $importance = \DB::table('communication_importance_levels')->lists('name', 'id');
         return view('admin.communication.create')->with('banner', $banner)
                                                 ->with('importance', $importance)
-                                                ->with('navigation', $fileFolderStructure);
+                                                ->with('navigation', $fileFolderStructure)
+                                                ->with('packages', $packages);
 
     }
 
@@ -52,7 +56,8 @@ class CommunicationAdminController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        Communication::storeCommunication($request);
+        action('AdminController@index', ['banner_id', $request["banner_id"]]);
     }
 
     /**
