@@ -10,7 +10,8 @@ use App\Models\Banner;
 use App\Models\Document\FileFolder;
 use App\Models\Document\Package;
 use App\Models\Communication\Communication;
-
+use App\Models\Communication\CommunicationDocument;
+use App\Models\Communication\CommunicationPackage;
 class CommunicationAdminController extends Controller
 {
     /**
@@ -68,8 +69,13 @@ class CommunicationAdminController extends Controller
      */
     public function show($id)
     {
-        //
+        $communication = Communication::find($id);
+        $communication_documents  = CommunicationDocument::where('communication_id', $id)->get();
+        $communication_packages  = CommunicationPackage::where('communication_id',$id)->get();
+
+        $return ;
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -77,9 +83,31 @@ class CommunicationAdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, Request $request)
     {
-        //
+        $banner_id = $request["banner_id"];
+        if (isset($banner_id)) {
+            $banner = Banner::find($banner_id);
+        }
+        else{
+            $banner = Banner::find(1);
+        }
+
+
+        $communication = Communication::find($id);
+        $communication_documents  = CommunicationDocument::where('communication_id', $id)->get();
+        $communication_packages  = CommunicationPackage::where('communication_id',$id)->get();
+        $fileFolderStructure = FileFolder::getFileFolderStructure($banner_id);
+        $packages = Package::getPackagesStructure($banner_id);
+        $importance = \DB::table('communication_importance_levels')->lists('name', 'id');
+
+        return view('admin.communication.edit')->with('communication', $communication)
+                                            ->with('communication_packages', $communication_packages)
+                                            ->with('communication_documents', $communication_documents)
+                                            ->with('importance', $importance)
+                                            ->with('banner', $banner)
+                                            ->with('navigation', $fileFolderStructure)
+                                            ->with('packages', $packages);
     }
 
     /**
@@ -91,7 +119,7 @@ class CommunicationAdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        dd($request->all());
     }
 
     /**
