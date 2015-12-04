@@ -105,4 +105,10 @@ class Package extends Model
         
         return;
     }
+
+    public static function getPackagesStructure($banner_id)
+    {
+        
+
+    }
 }

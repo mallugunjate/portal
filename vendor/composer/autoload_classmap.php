@@ -10,6 +10,8 @@ return array(
     'CreateActivityLevelsTable' => $baseDir . '/database/migrations/future/2015_08_05_210403_create_activity_levels_table.php',
     'CreateBannersTable' => $baseDir . '/database/migrations/2015_09_30_213442_create-banners-table.php',
     'CreateCareerPathsTable' => $baseDir . '/database/migrations/future/2015_08_05_210456_create_career_paths_table.php',
+    'CreateCommunicationImportanceTable' => $baseDir . '/database/migrations/2015_12_03_214110_create_communication_importance_table.php',
+    'CreateCommunicationsTable' => $baseDir . '/database/migrations/2015_12_03_214558_create_communications_table.php',
     'CreateDocumentPackagePivotTable' => $baseDir . '/database/migrations/2015_11_27_175201_create_document_package_pivot_table.php',
     'CreateEducationLevelTable' => $baseDir . '/database/migrations/future/2015_08_21_151222_create_education_level_table.php',
     'CreateEventTypesTable' => $baseDir . '/database/migrations/2015_11_30_210139_create_event_types_table.php',
@@ -549,7 +551,6 @@ return array(
     'TestCase' => $baseDir . '/tests/TestCase.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
     'UpdateDocumentsTable' => $baseDir . '/database/migrations/2015_10_27_145632_update_documents_table.php',
-    'UpdateFileFolderTable' => $baseDir . '/database/migrations/2015_11_30_201910_update_file_folder_table.php',
     'UpdateFoldersTable' => $baseDir . '/database/migrations/2015_09_30_215422_update-folders-table.php',
-    'UpdatePackagesTable' => $baseDir . '/database/migrations/2015_12_01_182146_update_packages_table.php',
+    'UpdatePackagesTable' => $baseDir . '/database/migrations/2015_12_02_230415_update_packages_table.php',
 );

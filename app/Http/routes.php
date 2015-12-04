@@ -114,6 +114,9 @@ Route::get('/documents', 'Document\DocumentAdminController@index');
 //PACKAGES
 Route::resource('/admin/package', 'Document\PackageController');
 
+//Communications
+Route::resource('/admin/communication', 'Communication\CommunicationAdminController');
+
 //Api routes
 
 //get navigation
