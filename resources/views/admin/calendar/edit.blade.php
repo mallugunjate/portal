@@ -33,7 +33,7 @@
 
 		<div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
-                    <h2>Calendar Events</h2>
+                    <h2>Edit an Event</h2>
                     <ol class="breadcrumb">
                         <li>
                             <a href="/admin">Home</a>
@@ -65,15 +65,17 @@
 		                        <div class="ibox-content">
 
                                     <form method="get" class="form-horizontal">
+                                        <input type="hidden" name="eventID" id="eventID" value="{{ $event->id }}">
+                                        <input type="hidden" name="banner" id="banner" value="1">
                                         <div class="form-group"><label class="col-sm-2 control-label">Title</label>
-                                            <div class="col-sm-10"><input type="text" class="form-control" value="{{ $event->title }}"></div>
+                                            <div class="col-sm-10"><input type="text" id="title" name="title" class="form-control" value="{{ $event->title }}"></div>
                                         </div>
 
                                         <div class="form-group"><label class="col-sm-2 control-label">Event Type</label>
                                             <div class="col-sm-10">
                                                 {{-- <input type="text" class="form-control" value="{{ $event_type->event_type }}"> --}}
 
-                                                <select class="form-control">
+                                                <select class="form-control" id="event_type" name="event_type">
                                                     @foreach($event_types_list as $e)
                                                         @if( $e->id == $event->event_type )
                                                             <option value="{{ $e->id }}" selected>{{ $e->event_type}}</option>
@@ -89,7 +91,7 @@
 
                                         <div class="form-group"><label class="col-sm-2 control-label">Description</label>
                                             <div class="col-sm-10">
-                                                <textarea class="form-control" rows="5">{{ $event->description }}</textarea>
+                                                <textarea class="form-control" rows="5" id="description" name="description">{{ $event->description }}</textarea>
                                                 
                                             </div>
                                         </div>
@@ -115,9 +117,9 @@
 
                                                 <div class="col-sm-10">
                                                     <div class="input-daterange input-group" id="datepicker">
-                                                        <input type="text" class="input-sm form-control" name="start" value="{{ $event->start }}" />
+                                                        <input type="text" class="input-sm form-control" name="start" id="start" value="{{ $event->start }}" />
                                                         <span class="input-group-addon">to</span>
-                                                        <input type="text" class="input-sm form-control" name="end" value="{{ $event->end }}" />
+                                                        <input type="text" class="input-sm form-control" name="end" id="end" value="{{ $event->end }}" />
                                                     </div>
                                                 </div>
                                         </div>
@@ -127,7 +129,7 @@
                                         <div class="form-group">
                                             <div class="col-sm-4 col-sm-offset-2">
                                                 <a class="btn btn-white" href="/admin/calendar"><i class="fa fa-close"></i> Cancel</a>
-                                                <button class="btn btn-primary" type="submit"><i class="fa fa-check"></i> Save changes</button>
+                                                <button class="event-update btn btn-primary" type="submit"><i class="fa fa-check"></i> Save changes</button>
 
                                             </div>
                                         </div>
@@ -158,35 +160,16 @@
 					});
 
                     $('.input-daterange').datepicker({
+                         format: 'yyyy-mm-dd',
                         keyboardNavigation: false,
                         forceParse: false,
                         autoclose: true
                     });
 
 
-                   //  $(document).ready(function(){
-
-                   //      $('.summernote').summernote({
-                   //        toolbar: [
-                   //          //[groupname, [button list]]
-                             
-                   //          ['style', ['bold', 'italic', 'underline', 'clear']],
-                   //          ['font', ['strikethrough', 'superscript', 'subscript']],
-                   //          ['fontsize', ['fontsize']],
-                   //          ['color', ['color']],
-                   //          ['para', ['ul', 'ol', 'paragraph']],
-                   //          ['height', ['height']],
-                   //        ]
-                   //      });
-
-                   // });
-
-
-
-
 				</script>
 
-				<script src="/js/custom/deleteEvent.js"></script>
+				<script src="/js/custom/editEvent.js"></script>
 
 				@include('site.includes.bugreport')
 

@@ -47,14 +47,17 @@
 		                    <div class="ibox">
 		                        <div class="ibox-title">
 		                            <h5>Event Types</h5>
+
 		                            <div class="ibox-tools">
+
 		                                <a href="/admin/eventtypes/create" class="btn btn-primary btn"><i class="fa fa-plus"></i> Add New Event Type</a>
 		                            </div>
 		                        </div>
 		                        <div class="ibox-content">
 
 		                            <div class="m-b-lg">
-
+		                            <div class="alert alert-warning" role="alert"><p><strong>IMPORTANT</strong> - Don't delete an event type if there are existing events of that type.</p></div>
+		                            
 {{-- 		                                <div class="input-group">
 		                                    <input type="text" placeholder="Search event by title..." class=" form-control">
 		                                    <span class="input-group-btn">
@@ -75,7 +78,6 @@
 											<td>id</td>
 											<td>Event Type</td>
 											<td></td>
-
 										</tr>
 										@foreach($eventtypes as $et)
 										<tr>

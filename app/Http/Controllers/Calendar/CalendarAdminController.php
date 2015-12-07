@@ -108,7 +108,16 @@ class CalendarAdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $event = Event::find($id);
+
+        $event->title = $request['title'];
+        $event->event_type = $request['event_type'];
+        $event->description = $request['description'];
+        $event->start = $request['start'];
+        $event->end = $request['end'];
+
+        $event->save();
     }
 
     /**

@@ -71,7 +71,10 @@ class EventTypesAdminController extends Controller
      */
     public function edit($id)
     {
-        //
+        $eventType = EventType::find($id);
+
+        return view('admin.eventtypes.edit')
+            ->with('eventType', $eventType);
     }
 
     /**
@@ -83,7 +86,12 @@ class EventTypesAdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $eventType = EventType::find($id);
+
+        $eventType->event_type = $request['event_type'];
+    
+        $eventType->save();
     }
 
     /**

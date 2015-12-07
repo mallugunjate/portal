@@ -23,7 +23,7 @@
 
 		<div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
-                    <h2>Calendar Events</h2>
+                    <h2>Create an Event</h2>
                     <ol class="breadcrumb">
                         <li>
                             <a href="/admin">Home</a>
