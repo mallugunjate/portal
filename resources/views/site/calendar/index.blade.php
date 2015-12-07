@@ -16,7 +16,7 @@
         </div>
     </nav>
 
-    <div id="page-wrapper" class="gray-bg sidebar-content">
+    <div id="page-wrapper" class="gray-bg">
         <div class="row border-bottom">
         <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0"  style="">
         <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
@@ -187,13 +187,22 @@ $(function() { // document ready
       right: 'month,agendaWeek,agendaDay'
     },
     defaultDate: '2014-11-12',
-    editable: true,
+    editable: false,
     eventLimit: true, // allow "more" link when too many events
     events: [
       {
         title: 'All Day Event',
         start: '2014-11-01'
       },
+      {
+        title: 'Some Event',
+        start: '2014-11-01'
+      },  
+      {
+        title: 'multiday Event',
+        start: '2014-11-01',
+        end: '2014-11-05'
+      },                
       {
         title: 'Long Event',
         start: '2014-11-07',

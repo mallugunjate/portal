@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Models\Event\Event;
+use App\Models\Event\EventTypes;
+
 class CalendarController extends Controller
 {
     /**
@@ -16,6 +19,7 @@ class CalendarController extends Controller
      */
     public function index()
     {
+        
         return view('site.calendar.index');
     }
 

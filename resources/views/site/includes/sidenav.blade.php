@@ -11,22 +11,52 @@
                              <a href="profile"><span class="text-muted text-xs"> <i class="fa fa-user"></i> My Profile</span></a>   |   
                              <a href="/wireframe/login"><span class="text-muted text-xs"> <i class="fa fa-sign-out"></i> Log out</span></a>
                     </div> --}}
+
                     <div class="logo-element">
-                        E
+                        P
                     </div>
                 </li>
+
+
+                @if (Request::is('/'))
                 <li class="active">
+                @else
+                <li>
+                @endif 
                     <a href="/"><i class="fa fa-home"></i> <span class="nav-label">Dashboard</span></a>
                 </li>
 
-                <li class="">
-                    <a href="/communications"><i class="fa fa-bullhorn"></i> <span class="nav-label">Communications</span> <span class="label label-primary pull-right">2</span></a>
-                </li>                
 
-                <li class="">
+
+                @if (Request::is('communications'))
+                <li class="active">
+                @else
+                <li>
+                @endif 
+                    <a href="/communications"><i class="fa fa-bullhorn"></i> <span class="nav-label">Communications</span> <span class="label label-primary pull-right">2</span></a>
+                </li>            
+
+
+                    
+
+                @if (Request::is('documents'))
+                <li class="active">
+                @else
+                <li>
+                @endif 
                     <a href="/documents"><i class="fa fa-file"></i> <span class="nav-label">Documents</span></a>
                 </li>                
 
+
+
+                <!-- CALENDAR NAV -->
+                @if (Request::is('calendar'))
+                <li class="active">
+                @else
+                <li>
+                @endif                
+                    <a href="/calendar"><i class="fa fa-calendar"></i> <span class="nav-label">Calendar</span></a>
+                </li>
 
 
 {{--                 <li>
@@ -39,9 +69,7 @@
                     </ul>
                 </li>     --}}            
 
-                <li class="">
-                    <a href="/calendar"><i class="fa fa-calendar"></i> <span class="nav-label">Calendar</span></a>
-                </li>
+
 
 
 

@@ -7,3 +7,9 @@
 <a href="/admin/folderstructure/view">View Folder Structure</a><br />
 <a href="/admin/folder/create">Add a folder</a><br />
 <a href="/admin/folderstructure/create">Define a parent/child relationship</a><br />
+
+<h3>Calendar</h3>
+<a href="/admin/calendar/">Event CRUD</a>
+
+
+<h3>Communications</h3>
