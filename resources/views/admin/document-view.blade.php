@@ -49,11 +49,15 @@
   		<div class="navigation-container">
   			<!-- <div class="ui-widget-content"> -->
         <h4>Folders</h4>
-        @include('admin.navigation-view', ['navigation'=>$navigation])
-       <h4>Packages</h4>
-        <a href="/admin/package/create?banner_id={{$banner->id}}"> Create New Package</a>
-        <br>
-        @include('admin.package.list', ['packages'=>$packages])
+          @include('admin.navigation-view', ['navigation'=>$navigation])
+        <h4>Packages</h4>
+          <a href="/admin/package/create?banner_id={{$banner->id}}"> Create New Package</a>
+          <br>
+          @include('admin.package.list', ['packages'=>$packages])
+        <h4>Communications</h4>
+          <a href="/admin/communication/create?banner_id={{$banner->id}}"> Create New Communication</a>
+          <br>
+          <a href="/admin/communication?banner_id={{$banner->id}}">View Communications</a>
   		</div>
   		<div class="content-container">
         

@@ -1,15 +1,15 @@
 $(document).ready(function(){
 
 	formatDate();
-	$('#add-files').on('click', function(){
+	$('#attach-selected-files').on('click', function(){
+		$("#files-selected").append('<p>Files attached :</p>');
 		$('input[name^="package_files"]').each(function(){
 			if($(this).is(":checked")){
 				$("#files-selected").append('<ul class="selected-files" data-fileid='+ $(this).val() +'>'+$(this).attr("data-filename")+'</ul>')
 			}
 		});
-
-		
 	});
+
 });
 
 

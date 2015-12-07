@@ -10,6 +10,7 @@ use App\Models\Banner;
 use App\Models\Document\FolderStructure;
 use App\Models\Document\Folder;
 use App\Models\Document\Package;
+use App\Models\Communication\Communication;
 
 class AdminController extends Controller
 {
@@ -20,6 +21,7 @@ class AdminController extends Controller
      */
     public function index(Request $request)
     {
+
         $banner_id = $request->get('banner_id');
 
         if(isset($banner_id)) {

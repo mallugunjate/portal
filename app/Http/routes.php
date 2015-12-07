@@ -115,11 +115,16 @@ Route::get('/documents', 'Document\DocumentAdminController@index');
 Route::resource('/admin/package', 'Document\PackageController');
 
 
+//Communications
+Route::resource('/admin/communication', 'Communication\CommunicationAdminController');
+
+
 //CALENDAR ADMIN
 Route::resource('/admin/calendar', 'Calendar\CalendarAdminController');
 
 //Event Types
 Route::resource('/admin/eventtypes', 'Calendar\EventTypesAdminController');
+
 
 
 //Api routes

@@ -1,0 +1,16 @@
+.communication-documents, .communication-packages{
+	margin : 10px 0 10px 0;
+}
+
+#documents-staged-to-remove{
+	display:none;
+}
+
+#packages-staged-to-remove{
+	display:none;
+}
+
+.communication-item-title {
+	font: 14px;
+	font-weight: bold;
+}

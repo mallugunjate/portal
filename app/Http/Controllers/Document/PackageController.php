@@ -23,7 +23,7 @@ class PackageController extends Controller
     public function index(Request $request)
     {
         $banner_id = $request["banner_id"];
-        $packages = Package::getAllPackages($banner_id);
+        $packages = Package::getPackagesStructure($banner_id);
         return $packages;
     }
 

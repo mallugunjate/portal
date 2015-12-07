@@ -12,9 +12,8 @@ class FileFolder extends Model
 
     public static function getFileFolderStructure($banner_id)
     {	
-    	$folderStructure = FolderStructure::getNavigationStructure();
+    	$folderStructure = FolderStructure::getNavigationStructure($banner_id);
         $documents = Document::where('banner_id', $banner_id)->get();
-
         foreach ($documents as $document) {
             
             $parent_folder_id = FileFolder::where('document_id', $document->id)->first()->folder_id;
