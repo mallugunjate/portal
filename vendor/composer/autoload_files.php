@@ -6,16 +6,18 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+
     $vendorDir . '/hamcrest/hamcrest-php/hamcrest/Hamcrest.php',
     $vendorDir . '/symfony/var-dumper/Resources/functions/dump.php',
     $vendorDir . '/nikic/php-parser/lib/bootstrap.php',
     $vendorDir . '/swiftmailer/swiftmailer/lib/swift_required.php',
     $vendorDir . '/danielstjules/stringy/src/Create.php',
     $vendorDir . '/psy/psysh/src/Psy/functions.php',
-    $vendorDir . '/paragonie/random_compat/lib/random.php',
     $vendorDir . '/guzzlehttp/streams/src/functions.php',
+    $vendorDir . '/paragonie/random_compat/lib/random.php',
     $vendorDir . '/guzzlehttp/guzzle/src/functions.php',
     $vendorDir . '/laravelcollective/html/src/helpers.php',
     $vendorDir . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
     $vendorDir . '/laravel/framework/src/Illuminate/Support/helpers.php',
+
 );

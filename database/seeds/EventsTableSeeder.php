@@ -21,8 +21,6 @@ class EventsTableSeeder extends Seeder
             $start = $times["start"];
             $end = $times["end"];
 
-      
-
             DB::table('events')->insert(array(
                 'title' => $faker->sentence,
                 'description' => $faker->paragraph(3),
@@ -35,17 +33,31 @@ class EventsTableSeeder extends Seeder
 
     public function fakeStartEndTimes()
     {
-        $most_past = time() - (30 * 24 * 60 * 60); 
-        $most_future = time() + (30 * 24 * 60 * 60); 
+        $year = "2015";
+        $month = "12";
+        $day = "";
 
-        $starttime = rand($most_past, $most_future);
-        $endtime = rand($most_past, $most_future);
+        $startday = rand(1,31);
+        $endday = rand($startday,31);
 
-        if($starttime > $endtime){
-            $endtime = rand($starttime, $most_future);
+        $multiday = rand(1,4);
+
+        //it's a multiday event (~25% of the dates)
+        if($multiday == 4){
+            $start = $year . "-" . $month . "-" . $startday;
+            $end = $year . "-" . $month . "-" . $endday;
+            $dates = array("start" => $start, "end" => $end);
+            return $dates;
+        } else {
+        //single day event
+            $start = $year . "-" . $month . "-" . $startday;
+            $dates = array("start" => $start, "end" => NULL);
+            return $dates;
         }
 
-        $times = array("start" => $starttime, "end" => $endtime);
+        
+
+        
         return $times;
     }
 
