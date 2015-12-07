@@ -128,6 +128,8 @@
 		<div>
 			<div id="add-packages" class="btn btn-default">Add packages</div>		
 		</div>
+		<div id="packages-selected"></div>
+
 		<div id="document-listing" class="modal fade">
 		    <div class="modal-dialog">
 		        <div class="modal-content">
@@ -175,7 +177,7 @@
 		</div>
 
 		
-		<div id="packages-selected"></div>
+		
 		<div>
 			<button type="submit" class="btn btn-default">Submit</button>
 		</div>
@@ -201,7 +203,6 @@
     $("#add-packages").click(function(){
     	$("#package-listing").modal('show');	
     });
-
 
 </script>
 </body>
