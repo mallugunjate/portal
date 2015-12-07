@@ -33,6 +33,7 @@
 	    </div>
 	    
 	  </nav>
+	  
 	<!-- navbar ends-->
 	<div class="col-md-10 col-md-offset-1">
 		<h3>Create Communication</h3>
@@ -59,18 +60,18 @@
 			{!! Form::select('importance', $importance, null,  ['class'=>'form-control']) !!}
 		</div>
 		<div>
-			{!! Form::label('start', 'Send On') !!}
+			{!! Form::label('send_at', 'Send On') !!}
 			<div class="input-group date" id="datetimepicker1">
-	          {!! Form::text('start', null, ['class'=>'form-control',  'required']) !!}
+	          {!! Form::text('send_at', null, ['class'=>'form-control',  'required']) !!}
 	          <span class="input-group-addon">
 	              <span class="glyphicon glyphicon-calendar"></span>
 	          </span>      
 	        </div>
 		</div>
 		<div>
-			{!! Form::label('end', 'Archive On') !!}
+			{!! Form::label('archive_at', 'Archive On') !!}
 			<div class="input-group date" id="datetimepicker1">
-	          {!! Form::text('end', null, ['class'=>'form-control',  'required']) !!}
+	          {!! Form::text('archive_at', null, ['class'=>'form-control',  'required']) !!}
 	          <span class="input-group-addon">
 	              <span class="glyphicon glyphicon-calendar"></span>
 	          </span>      

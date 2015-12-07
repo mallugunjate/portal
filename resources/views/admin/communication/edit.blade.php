@@ -2,6 +2,7 @@
 <head>
 	<title></title>
 	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/css/custom/communication.css">
 </head>
 <body class="container-fluid">
 	<!-- navbar begins -->
@@ -36,7 +37,7 @@
 	  
 	<!-- navbar ends-->
 	<div class="col-md-10 col-md-offset-1">
-		<h3>Create Communication</h3>
+		<h3>Edit Communication</h3>
 		
 		{!! Form::model($communication, ['action' => ['Communication\CommunicationAdminController@update', 'id' => $communication->id], 'method'=>'PATCH']) !!}
 
@@ -78,17 +79,55 @@
 	        </div>
 		</div>
 
-		<div>
+		<div class="documents-attached">
+			<br>
+			<div>Documents Attached:</div>
+			<br>
+			@foreach($communication_documents as $doc)
 			
-			<div id="add-documents" class="btn btn-default">Add Documents</div>
+			<div class="row">
+				<div class="communication-documents col-md-8">
+					<div class="communication-filename"> {{$doc->original_filename}} </div>
+					<div class="communication-filepath"> File Location : {{$doc->folder_path}}</div>
+					<div class="communication-timestamp"> Uploaded At : {{$doc->created_at}}</div>
+				</div>
+				<div class="col-md-1 remove-document btn btn-default" data-document-id="{{$doc->id}}">Remove</div>
+			</div>
+			@endforeach
+
 
 		</div>
 
+		<div id="documents-staged-to-remove"></div>
+
+		<div>	
+			<div id="add-documents" class="btn btn-default">Add Documents</div>
+		</div>
+		<div id="files-selected"></div>
+
+
+		<div class="packages-attached">
+			<br>
+			<div>Packages Attached:</div>
+			<br>
+			@foreach($communication_packages as $package)
+
+			<div class="row">
+				<div class="communication-packages col-md-8">
+					<div class="communication-package-name"> <a href="/admin/package/{{$package->id}}"> {{$package->package_screen_name}} </a></div>
+					<div class="communication-package-timestamp"> Package Last Updated : {{$package->updated_at}}</div>
+				</div>
+				<div class="col-md-1 remove-package btn btn-default" data-package-id="{{$package->id}}">Remove</div>
+			</div>
+			@endforeach
+
+		</div>
+		
+		<div id="packages-staged-to-remove"></div>
+
 		<div>
-			
 			<div id="add-packages" class="btn btn-default">Add packages</div>		
 		</div>
-
 		<div id="document-listing" class="modal fade">
 		    <div class="modal-dialog">
 		        <div class="modal-content">
@@ -135,7 +174,7 @@
 		    </div>
 		</div>
 
-		<div id="files-selected"></div>
+		
 		<div id="packages-selected"></div>
 		<div>
 			<button type="submit" class="btn btn-default">Submit</button>
@@ -146,7 +185,6 @@
 
 <script type="text/javascript" src="/js/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/js/custom/createpackage.js"></script>
 <script type="text/javascript" src="/js/custom/communication.js"></script>
 <script type="text/javascript" src="/js/vendor/moment.js"></script>
 <script type="text/javascript" src="/js/vendor/bootstrap-datetimepicker.min.js"></script>

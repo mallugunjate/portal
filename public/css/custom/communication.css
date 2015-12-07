@@ -1,0 +1,11 @@
+.communication-documents, .communication-packages{
+	margin : 10px 0 10px 0;
+}
+
+#documents-staged-to-remove{
+	display:none;
+}
+
+#packages-staged-to-remove{
+	display:none;
+}

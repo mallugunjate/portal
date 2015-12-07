@@ -40,6 +40,7 @@ class CommunicationAdminController extends Controller
         }
     
         $fileFolderStructure = FileFolder::getFileFolderStructure($banner_id);
+        
         $packages = Package::getPackagesStructure($banner_id);
         $importance = \DB::table('communication_importance_levels')->lists('name', 'id');
         return view('admin.communication.create')->with('banner', $banner)
@@ -95,8 +96,9 @@ class CommunicationAdminController extends Controller
 
 
         $communication = Communication::find($id);
-        $communication_documents  = CommunicationDocument::where('communication_id', $id)->get();
-        $communication_packages  = CommunicationPackage::where('communication_id',$id)->get();
+        $communication_documents  = Communication::getDocumentDetails($id);
+        $communication_packages  = Communication::getPackageDetails($id);
+        
         $fileFolderStructure = FileFolder::getFileFolderStructure($banner_id);
         $packages = Package::getPackagesStructure($banner_id);
         $importance = \DB::table('communication_importance_levels')->lists('name', 'id');
@@ -119,7 +121,7 @@ class CommunicationAdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($request->all());
+        Communication::updateCommunication($id, $request);
     }
 
     /**

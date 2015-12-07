@@ -8,8 +8,6 @@ $(document).ready(function(){
 				$("#files-selected").append('<ul class="selected-files" data-fileid='+ $(this).val() +'>'+$(this).attr("data-filename")+'</ul>')
 			}
 		});
-
-		
 	});
 
 });
