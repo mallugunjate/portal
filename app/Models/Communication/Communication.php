@@ -14,9 +14,14 @@ class Communication extends Model
     protected $table = 'communications';
     protected $fillable = ['subject', 'body', 'sender', 'importance', 'send_at', 'archive_at', 'is_draft', 'banner_id'];
 
-   	public static function storeCommunication($request)
+   	public static function getAllCommunication($banner_id)
+      {
+         return Communication::where('banner_id', $banner_id)->get();
+      }
+
+      public static function storeCommunication($request)
    	{
-   		// dd($request);
+   		
    		$is_draft = 0;
    		if ($request["send_at"]>Carbon::now()) {
    			$is_draft = 1;

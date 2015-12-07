@@ -9,3 +9,8 @@
 #packages-staged-to-remove{
 	display:none;
 }
+
+.communication-item-title {
+	font: 14px;
+	font-weight: bold;
+}

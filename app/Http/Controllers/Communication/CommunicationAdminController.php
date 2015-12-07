@@ -19,9 +19,18 @@ class CommunicationAdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $banner_id = $request['banner_id'];
+        if (isset($banner_id)) {
+            $banner = Banner::where('id', $banner_id)->first();
+        }
+        else {
+            $banner = Banner::find(1);
+        }
+        $communications = Communication::getAllCommunication($request["banner_id"]);
+        return view('admin.communication.index')->with('communications', $communications)
+                                                ->with('banner', $banner);
     }
 
     /**
@@ -59,7 +68,7 @@ class CommunicationAdminController extends Controller
     public function store(Request $request)
     {
         Communication::storeCommunication($request);
-        action('AdminController@index', ['banner_id', $request["banner_id"]]);
+        return redirect()->action('AdminController@index', ['banner_id' => $request["banner_id"]]);
     }
 
     /**
@@ -68,13 +77,27 @@ class CommunicationAdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
-        $communication = Communication::find($id);
-        $communication_documents  = CommunicationDocument::where('communication_id', $id)->get();
-        $communication_packages  = CommunicationPackage::where('communication_id',$id)->get();
+        $banner_id = $request["banner_id"];
+        if (isset($banner_id)) {
+            $banner = Banner::find($banner_id);
+        }
+        else{
+            $banner = Banner::find(1);
+        }
 
-        $return ;
+
+        $communication = Communication::find($id);
+        $communication_documents  = Communication::getDocumentDetails($id);
+        $communication_packages  = Communication::getPackageDetails($id);
+        $importance = \DB::table('communication_importance_levels')->lists('name', 'id');
+
+        return view('admin.communication.view')->with('communication', $communication)
+                                            ->with('communication_packages', $communication_packages)
+                                            ->with('communication_documents', $communication_documents)
+                                            ->with('importance', $importance)
+                                            ->with('banner', $banner);
     }
 
 
@@ -122,6 +145,7 @@ class CommunicationAdminController extends Controller
     public function update(Request $request, $id)
     {
         Communication::updateCommunication($id, $request);
+        return redirect()->action('AdminController@index', ['banner_id' => $request["banner_id"]]);
     }
 
     /**
@@ -130,8 +154,12 @@ class CommunicationAdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        //
+        Communication::find($id)->delete();
+        CommunicationPackage::where('communication_id', $id)->delete();
+        CommunicationDocument::where('communication_id', $id)->delete();
+        return;
+
     }
 }

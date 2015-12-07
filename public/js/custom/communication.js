@@ -47,3 +47,25 @@ var formatDate = function(){
 	}
 	
 }
+
+$(".delete-communication").click(function(){
+	console.log($('[name="_token"]').val());
+	if (confirm('Are you sure you want to delete this package?')) {
+	    
+		$.ajax({
+		    url: '/admin/communication/'+ this.id,
+		    type: 'DELETE',
+		    data : {	
+		    			_token : $('[name="_token"]').val(),
+		    			banner_id : $('[name="banner_id"]').val()
+				   }
+
+		})
+		.done(function(data) {
+			console.log(data);
+			var banner_id = $("input[name='banner_id']").val();
+			window.location = '/admin/home?banner_id=' + banner_id;
+		});
+	} 
+
+});
