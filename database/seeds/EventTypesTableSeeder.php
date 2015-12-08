@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\EventTypes;
+use App\Models\Event\EventType;
 
 class EventTypesTableSeeder extends Seeder
 {
@@ -14,14 +14,14 @@ class EventTypesTableSeeder extends Seeder
     {
         DB::table('event_types')->delete();
 
-        EventTypes::create(array('id' => '1', 'event_type' => 'Event Type 1' ));
-        EventTypes::create(array('id' => '2', 'event_type' => 'Event Type 2' ));
-        EventTypes::create(array('id' => '3', 'event_type' => 'Event Type 3' ));
-        EventTypes::create(array('id' => '4', 'event_type' => 'Event Type 4' ));
-        EventTypes::create(array('id' => '5', 'event_type' => 'Event Type 5' ));
-        EventTypes::create(array('id' => '6', 'event_type' => 'Event Type 6' ));
-        EventTypes::create(array('id' => '7', 'event_type' => 'Event Type 7' ));
-        EventTypes::create(array('id' => '8', 'event_type' => 'Event Type 8' ));
-        EventTypes::create(array('id' => '9', 'event_type' => 'Event Type 9' ));
+        EventType::create(array('id' => '1', 'event_type' => 'Event Type 1' ));
+        EventType::create(array('id' => '2', 'event_type' => 'Event Type 2' ));
+        EventType::create(array('id' => '3', 'event_type' => 'Event Type 3' ));
+        EventType::create(array('id' => '4', 'event_type' => 'Event Type 4' ));
+        EventType::create(array('id' => '5', 'event_type' => 'Event Type 5' ));
+        EventType::create(array('id' => '6', 'event_type' => 'Event Type 6' ));
+        EventType::create(array('id' => '7', 'event_type' => 'Event Type 7' ));
+        EventType::create(array('id' => '8', 'event_type' => 'Event Type 8' ));
+        EventType::create(array('id' => '9', 'event_type' => 'Event Type 9' ));
     }
 }
