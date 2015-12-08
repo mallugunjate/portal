@@ -138,7 +138,7 @@ class DocumentAdminController extends Controller
         Document::updateMetaData($request, $id);
         $parent = FileFolder::where('document_id', $id)->first()->folder_id;
         $banner_id = $request->get('banner_id');
-        return redirect()->action('Document\DocumentAdminController@index', ['banner_id'=> $banner_id, 'parent'=>$parent]);
+        return redirect()->action('AdminController@index', ['banner_id'=> $banner_id, 'parent'=>$parent]);
     }
 
     /**

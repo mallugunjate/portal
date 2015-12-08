@@ -29,7 +29,7 @@ $("body").on("click", ".deleteFolder", function(e){
         })
         .done(function(data){ 
             console.log(data);
-            window.location = '/admin/folderstructure?banner_id='+data;
+            window.location = '/admin/folder?banner_id='+data;
         });
     } 
 })

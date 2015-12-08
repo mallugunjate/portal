@@ -36,7 +36,7 @@
       </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-          <li><a href="/admin/folderstructure?banner_id={{$banner->id}}">Edit Folders</a></li>
+          <li><a href="/admin/folder?banner_id={{$banner->id}}">Edit Folders</a></li>
       </ul>
       
     </div>
@@ -106,7 +106,7 @@
       $("#"+defaultFolderId).parent().click();
       $.ajax(
       {
-        url : '/documents',
+        url : '/admin/document',
         data : {
               folder : defaultFolderId,
               isWeekFolder : folder.attr("data-isweek")

@@ -36,7 +36,7 @@
 	<!-- navbar ends-->
 	<div class="col-md-10 col-md-offset-1">
 		
-		{!! Form::open( ['action' => ['Document\PackageController@store'], 'method'=>'POST']) !!}
+		{!! Form::open( ['action' => ['Document\PackageAdminController@store'], 'method'=>'POST']) !!}
 		<input type="hidden" name="banner_id" value="{{$banner->id}}">
 		<h3>Create Package</h3> 
 		<div>
@@ -77,7 +77,7 @@
 			@endforeach
 		
 
-			<input class="btn btn-default" type="button" id="add-files" value="Add Files" />
+			<input class="btn btn-default" type="button" id="attach-selected-files" value="Add Files" />
 			<div id="files-selected">
 				<p>Files To be added:</p>
 

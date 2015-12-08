@@ -14,7 +14,7 @@
 Route::get('/', 'Dashboard\DashboardController@index');
 
 
-Route::get('/documents', 'Document\DocumentController@index');
+Route::get('/document', 'Document\DocumentController@index');
 
 
 
@@ -46,13 +46,9 @@ Route::get('/admin', function(){
 });
 
 
-
-
 //App routes
-Route::get('/home', function () {
-	
+Route::get('/home', function () {	
 	return view('home');
-
 });
 
 Route::get('/dashboard', 'Dashboard\DashboardController@index');
@@ -60,59 +56,24 @@ Route::get('/dashboard', 'Dashboard\DashboardController@index');
 Route::get('/calendar', 'Calendar\CalendarController@index');
 
 
-//profile routes
-Route::get('/profile/create', 'Profile\ProfileController@create');
-Route::post('/profile/store', 'Profile\ProfileController@store');
-Route::delete('/profile/experience/{$experience}' , [ 'as'=>'experience.destroy' , 'uses'=>"Profile\ExperienceController@destroy"] );
+/* Admin Routes Begin 	*/
 
-
-//wireframes
-//USER LOGIN AND SIGNUP
-Route::get('wireframe', function() { return view('wireframes/index'); });
-Route::get('wireframe/login', function() { return view('auth/login'); });
-Route::get('wireframe/signup', function() { return view('auth/register'); });
-Route::get('wireframe/reset', function() { return view('auth/passwordreset'); });
-Route::get('wireframe/dashboard', function() { return view('wireframes/dashboard'); });
-
-
+//admin home
+Route::get('/admin/home', 'AdminController@index');
 
 
 //FILES
-//upload a file
-Route::get('/admin/document/create', 'Document\DocumentAdminController@create');
-Route::post('/admin/document/create', 'Document\DocumentAdminController@store');
-//metadata
 Route::get('/admin/document/add-meta-data', 'Document\DocumentAdminController@showMetaDataForm');
 Route::post('/admin/document/add-meta-data', 'Document\DocumentAdminController@updateMetaData');
-//delete a file
-Route::delete('/admin/document/{id}', 'Document\DocumentAdminController@destroy');
-//edit a file
-Route::get('/admin/document/{id}/edit', 'Document\DocumentAdminController@edit');
-Route::put('/admin/document/{id}', 'Document\DocumentAdminController@update');
-//get a file
-Route::get('/admin/document/{id}', 'Document\DocumentAdminController@show');
+Route::resource('/admin/document', 'Document\DocumentAdminController');
+//metadata
 
 
 //FOLDERS
 Route::resource('/admin/folder', 'Document\FolderAdminController');
 
-
-//FOLDER STRUCTURE
-//view folder structure
-Route::get('/admin/folderstructure', 'Document\FolderStructureAdminController@index');
-//define a folder relationship
-Route::get('/admin/folderstructure/create', 'Document\FolderStructureAdminController@create');
-Route::post('/admin/folderstructure/create', 'Document\FolderStructureAdminController@store');
-
-//admin home
-Route::get('/admin/home', 'AdminController@index');
-
-//view documents :: need to modify this
-// Route::get('/documents', 'Document\DocumentAdminController@index');
-
-
 //PACKAGES
-Route::resource('/admin/package', 'Document\PackageController');
+Route::resource('/admin/package', 'Document\PackageAdminController');
 
 //Communications
 Route::resource('/admin/communication', 'Communication\CommunicationAdminController');
@@ -126,7 +87,7 @@ Route::resource('/admin/eventtypes', 'Calendar\EventTypesAdminController');
 //Tags
 Route::resource('/admin/tag', 'Tag\TagAdminController');
 
-//Api routes
+/* API Routes */
 
 //get navigation
 Route::get('/api/v1/banner/{id}/navigation', 'Api\V1\ApiController@getNavigation');

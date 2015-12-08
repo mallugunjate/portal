@@ -37,7 +37,7 @@
 	<!-- navbar ends-->
 	<div class="col-md-10 col-md-offset-1">
 
-		{!! Form::model($package, ['action' => ['Document\PackageController@update', 'id'=>$package->id], 'method' => 'PATCH']) !!}
+		{!! Form::model($package, ['action' => ['Document\PackageAdminController@update', 'id'=>$package->id], 'method' => 'PATCH']) !!}
 		<input type="hidden" name="banner_id" value="{{$banner->id}}">
 		<h3>Edit Package : {{$package->package_screen_name}}</h3> 
 
@@ -103,7 +103,7 @@
 
 			@endforeach
 
-			<input class="btn btn-default" type="button" id="add-files" value="Add Selected Files" />
+			<input class="btn btn-default" type="button" id="attach-selected-files" value="Add Selected Files" />
 			<div id="files-selected" >
 				<p>Files To be added:</p>
 			</div>

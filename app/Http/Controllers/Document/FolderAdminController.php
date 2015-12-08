@@ -20,9 +20,19 @@ class FolderAdminController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $banner_id  = $request->get('banner_id');
+        if (isset($banner_id)) {
+            $banner = Banner::where('id', $banner_id)->first();
+        }
+        else {
+            $banner = Banner::where('id', 1)->first();
+        }  
+
+        $navigation = FolderStructure::getNavigationStructure($banner->id);
+        return view('admin.folderstructure-view')->with('navigation', $navigation)
+                                                     ->with('banner', $banner);     
     }
 
     /**
@@ -53,7 +63,7 @@ class FolderAdminController extends Controller
     {
             
         $banner_id = Folder::storeFolder($request);
-        return redirect()->action('Document\FolderStructureAdminController@index', ['banner_id' => $banner_id]);
+        return redirect()->action('Document\FolderAdminController@index', ['banner_id' => $banner_id]);
 
     }
 
@@ -114,7 +124,7 @@ class FolderAdminController extends Controller
 
         $banner_id = Folder::editFolderDetails(compact('id', 'name', 'children', 'weekWindowSize', 'removeWeeks'));
 
-        return redirect()->action('Document\FolderStructureAdminController@index', ['banner_id'=> $banner_id]);
+        return redirect()->action('Document\FolderAdminController@index', ['banner_id'=> $banner_id]);
     }
 
     /**

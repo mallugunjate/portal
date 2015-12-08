@@ -23,7 +23,11 @@ class Package extends Model
     	
     	$start = strtotime($request["start"]);
         $end = strtotime($request["end"]);
+
         $is_hidden = $request["is_hidden"];
+        if (!isset($is_hidden)) {
+            $is_hidden = 0;
+        }
         $banner_id = $request["banner_id"];
 
     	$package = Package::create([

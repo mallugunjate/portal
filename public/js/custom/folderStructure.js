@@ -3,7 +3,7 @@
 
 		$.ajax(
 			{
-				url : '/documents',
+				url : '/admin/document',
 				data : {
 							folder : this.id,
 							isWeekFolder : $(this).attr("data-isweek")
