@@ -6,17 +6,29 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Models\Tag\Tag;
+use App\Models\Banner;
 
-class TagController extends Controller
+class TagAdminController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $tags = Tag::all();
+
+        $banner_id = $request["banner_id"];
+        if (isset($banner_id)) {
+            $banner = Banner::where('id', $banner_id)->first();
+        }
+        else{
+            $banner = Banner::find(1);
+        }
+        return view('admin.tag.index')->with('banner', $banner)
+                                    ->with('tags', $tags);
     }
 
     /**
@@ -24,9 +36,9 @@ class TagController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+
     }
 
     /**
@@ -37,7 +49,8 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Tag::storeTag($request);
+        return ($request->all());
     }
 
     /**
@@ -59,7 +72,8 @@ class TagController extends Controller
      */
     public function edit($id)
     {
-        //
+        $tag = Tag::find($id);
+        return view('admin.tag.edit')->with('tag', $tag);
     }
 
     /**
@@ -71,7 +85,8 @@ class TagController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Tag::updateTag($id, $request);
+        return redirect()->action('Tag\TagAdminController@index')->with('banner_id', $request["banner_id"]);
     }
 
     /**
@@ -82,6 +97,7 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Tag::find($id)->delete();
+        return 'deleted';
     }
 }

@@ -15,8 +15,10 @@ class CreateTagsTable extends Migration
         Schema::create('tags', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->string('name');
+            $table->integer('banner_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();
+            $table->foreign('banner_id')->references('id')->on('banners')->onDelete('cascade');
         });
     }
 
