@@ -25,7 +25,7 @@ class CreateCommunicationsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('importance')->references('id')->on('communication_importance_levels');
-            $table->foreign('banner_id')->references('id')->on('banners');
+            $table->foreign('banner_id')->references('id')->on('banners')->onDelete('cascade');
         });
     }
 
