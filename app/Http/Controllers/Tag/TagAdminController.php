@@ -18,7 +18,6 @@ class TagAdminController extends Controller
      */
     public function index(Request $request)
     {
-        $tags = Tag::all();
 
         $banner_id = $request["banner_id"];
         if (isset($banner_id)) {
@@ -27,6 +26,7 @@ class TagAdminController extends Controller
         else{
             $banner = Banner::find(1);
         }
+        $tags = Tag::where('banner_id', $banner->id)->get();
         return view('admin.tag.index')->with('banner', $banner)
                                     ->with('tags', $tags);
     }
