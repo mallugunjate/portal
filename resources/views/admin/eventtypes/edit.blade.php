@@ -66,7 +66,7 @@
                                         <div class="form-group">
                                             <div class="col-sm-4 col-sm-offset-2">
                                                 <a class="btn btn-white" href="/admin/eventtypes"><i class="fa fa-close"></i> Cancel</a>
-                                                <button class="eventtype-edit btn btn-primary" type="submit"><i class="fa fa-check"></i> Create New Event</button>
+                                                <button class="eventtype-edit btn btn-primary" type="submit"><i class="fa fa-check"></i> Save Event Type</button>
 
                                             </div>
                                         </div>

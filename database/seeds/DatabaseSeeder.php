@@ -22,6 +22,9 @@ class DatabaseSeeder extends Seeder
         $this->call(EventsTableSeeder::class);
         $this->command->info('Events Table seeded!');
 
+        $this->call(BannerTableSeeder::class);
+        $this->command->info('Banner Table seeded!');        
+
         Model::reguard();
     }
  
