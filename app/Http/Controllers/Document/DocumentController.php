@@ -17,12 +17,11 @@ class DocumentController extends Controller
      */
     public function index(Request $request)
     {
-        $folder_id = $request->get('folder');
-
-        $isWeek  = $request->get('isWeekFolder');
-        $documents = Document::getDocuments($folder_id, $isWeek);
-        return view('site.documents.index')
-            ->with('documents', $documents);
+        // $folder_id = $request->get('folder');
+        // $isWeek  = $request->get('isWeekFolder');
+        // $documents = Document::getDocuments($folder_id, $isWeek);
+        return view('site.documents.index');
+            //->with('documents', $documents);
 
     }
 

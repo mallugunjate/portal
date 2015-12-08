@@ -108,7 +108,7 @@ Route::post('/admin/folderstructure/create', 'Document\FolderStructureAdminContr
 Route::get('/admin/home', 'AdminController@index');
 
 //view documents :: need to modify this
-Route::get('/documents', 'Document\DocumentAdminController@index');
+// Route::get('/documents', 'Document\DocumentAdminController@index');
 
 
 //PACKAGES
