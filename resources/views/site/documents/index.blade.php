@@ -21,7 +21,7 @@
 
 	   <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
-                <h2>Documents</h2>
+                <h2>Documents &amp; Packages</h2>
                 <ol class="breadcrumb">
                     <li>
                         <a href="/">Home</a>
@@ -33,7 +33,7 @@
             </div>
         </div>
 
-<div class="wrapper wrapper-content animated fadeInRight">
+        <div class="wrapper wrapper-content animated fadeInRight">
             <div class="row">
                 <div class="col-lg-3">
                     <div class="ibox float-e-margins">
@@ -73,15 +73,18 @@
                     </div>
                 </div>
                 <div class="col-lg-9 animated fadeInRight">
+                    <h1>Documents</h1>
                     <div class="row">
+
                         <div class="col-lg-12">
+
                             <div class="file-box">
                                 <div class="file">
                                     <a href="#">
                                         <span class="corner"></span>
 
                                         <div class="icon">
-                                            <i class="fa fa-file"></i>
+                                            <i class="fa fa-folder"></i>
                                         </div>
                                         <div class="file-name">
                                             Document_2014.doc
@@ -90,8 +93,8 @@
                                         </div>
                                     </a>
                                 </div>
-
                             </div>
+
                             <div class="file-box">
                                 <div class="file">
                                     <a href="#">
@@ -109,6 +112,7 @@
 
                                 </div>
                             </div>
+
                             <div class="file-box">
                                 <div class="file">
                                     <a href="#">
@@ -125,6 +129,7 @@
                                     </a>
                                 </div>
                             </div>
+
                             <div class="file-box">
                                 <div class="file">
                                     <a href="#">
@@ -141,6 +146,7 @@
                                     </a>
                                 </div>
                             </div>
+
                             <div class="file-box">
                                 <div class="file">
                                     <a href="#">
@@ -157,6 +163,7 @@
                                     </a>
                                 </div>
                             </div>
+
                             <div class="file-box">
                                 <div class="file">
                                     <a href="#">
@@ -173,6 +180,7 @@
                                     </a>
                                 </div>
                             </div>
+
                             <div class="file-box">
                                 <a href="#">
                                     <div class="file">
@@ -189,6 +197,7 @@
                                     </div>
                                 </a>
                             </div>
+
                             <div class="file-box">
                                 <div class="file">
                                     <a href="#">
@@ -204,8 +213,8 @@
                                         </div>
                                     </a>
                                 </div>
-
                             </div>
+
                             <div class="file-box">
                                 <div class="file">
                                     <a href="#">
@@ -223,204 +232,112 @@
 
                                 </div>
                             </div>
-                            <div class="file-box">
-                                <div class="file">
-                                    <a href="#">
-                                        <span class="corner"></span>
 
-                                        <div class="image">
-                                            <img alt="image" class="img-responsive" src="img/p2.jpg">
-                                        </div>
-                                        <div class="file-name">
-                                            My feel.png
-                                            <br>
-                                            <small>Added: Jan 7, 2014</small>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="file-box">
-                                <div class="file">
-                                    <a href="#">
-                                        <span class="corner"></span>
+ 
 
-                                        <div class="icon">
-                                            <i class="fa fa-music"></i>
-                                        </div>
-                                        <div class="file-name">
-                                            Michal Jackson.mp3
-                                            <br>
-                                            <small>Added: Jan 22, 2014</small>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="file-box">
-                                <div class="file">
-                                    <a href="#">
-                                        <span class="corner"></span>
+                        </div>
 
-                                        <div class="image">
-                                            <img alt="image" class="img-responsive" src="img/p3.jpg">
-                                        </div>
-                                        <div class="file-name">
-                                            Document_2014.doc
-                                            <br>
-                                            <small>Added: Fab 11, 2014</small>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="file-box">
-                                <div class="file">
-                                    <a href="#">
-                                        <span class="corner"></span>
+                    </div>
 
-                                        <div class="icon">
-                                            <i class="img-responsive fa fa-film"></i>
-                                        </div>
-                                        <div class="file-name">
-                                            Monica's birthday.mpg4
-                                            <br>
-                                            <small>Added: Fab 18, 2014</small>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="file-box">
-                                <a href="#">
+                        
+                        <h1>Packages</h1>
+                        <div class="row">
+                            <div class="col-lg-12">
+
+                                <div class="file-box">
                                     <div class="file">
-                                        <span class="corner"></span>
+                                        <a href="#">
+                                            <span class="corner"></span>
 
-                                        <div class="icon">
-                                            <i class="fa fa-bar-chart-o"></i>
-                                        </div>
-                                        <div class="file-name">
-                                            Annual report 2014.xls
-                                            <br>
-                                            <small>Added: Fab 22, 2014</small>
-                                        </div>
+                                            <div class="icon">
+                                                <i class="fa fa-folder"></i>
+                                            </div>
+                                            <div class="file-name">
+                                                Document_2014.doc
+                                                <br>
+                                                <small>Added: Jan 11, 2014</small>
+                                            </div>
+                                        </a>
                                     </div>
-                                </a>
-                            </div>
-                            <div class="file-box">
-                                <div class="file">
-                                    <a href="#">
-                                        <span class="corner"></span>
-
-                                        <div class="icon">
-                                            <i class="fa fa-file"></i>
-                                        </div>
-                                        <div class="file-name">
-                                            Document_2014.doc
-                                            <br>
-                                            <small>Added: Jan 11, 2014</small>
-                                        </div>
-                                    </a>
                                 </div>
 
-                            </div>
-                            <div class="file-box">
-                                <div class="file">
-                                    <a href="#">
-                                        <span class="corner"></span>
-
-                                        <div class="image">
-                                            <img alt="image" class="img-responsive" src="img/p1.jpg">
-                                        </div>
-                                        <div class="file-name">
-                                            Italy street.jpg
-                                            <br>
-                                            <small>Added: Jan 6, 2014</small>
-                                        </div>
-                                    </a>
-
-                                </div>
-                            </div>
-                            <div class="file-box">
-                                <div class="file">
-                                    <a href="#">
-                                        <span class="corner"></span>
-
-                                        <div class="image">
-                                            <img alt="image" class="img-responsive" src="img/p2.jpg">
-                                        </div>
-                                        <div class="file-name">
-                                            My feel.png
-                                            <br>
-                                            <small>Added: Jan 7, 2014</small>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="file-box">
-                                <div class="file">
-                                    <a href="#">
-                                        <span class="corner"></span>
-
-                                        <div class="icon">
-                                            <i class="fa fa-music"></i>
-                                        </div>
-                                        <div class="file-name">
-                                            Michal Jackson.mp3
-                                            <br>
-                                            <small>Added: Jan 22, 2014</small>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="file-box">
-                                <div class="file">
-                                    <a href="#">
-                                        <span class="corner"></span>
-
-                                        <div class="image">
-                                            <img alt="image" class="img-responsive" src="img/p3.jpg">
-                                        </div>
-                                        <div class="file-name">
-                                            Document_2014.doc
-                                            <br>
-                                            <small>Added: Fab 11, 2014</small>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="file-box">
-                                <div class="file">
-                                    <a href="#">
-                                        <span class="corner"></span>
-
-                                        <div class="icon">
-                                            <i class="img-responsive fa fa-film"></i>
-                                        </div>
-                                        <div class="file-name">
-                                            Monica's birthday.mpg4
-                                            <br>
-                                            <small>Added: Fab 18, 2014</small>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="file-box">
-                                <a href="#">
+                                <div class="file-box">
                                     <div class="file">
-                                        <span class="corner"></span>
+                                        <a href="#">
+                                            <span class="corner"></span>
 
-                                        <div class="icon">
-                                            <i class="fa fa-bar-chart-o"></i>
-                                        </div>
-                                        <div class="file-name">
-                                            Annual report 2014.xls
-                                            <br>
-                                            <small>Added: Fab 22, 2014</small>
-                                        </div>
+                                            <div class="image">
+                                                <img alt="image" class="img-responsive" src="img/p1.jpg">
+                                            </div>
+                                            <div class="file-name">
+                                                Italy street.jpg
+                                                <br>
+                                                <small>Added: Jan 6, 2014</small>
+                                            </div>
+                                        </a>
+
                                     </div>
-                                </a>
+                                </div>
+
+                                <div class="file-box">
+                                    <div class="file">
+                                        <a href="#">
+                                            <span class="corner"></span>
+
+                                            <div class="image">
+                                                <img alt="image" class="img-responsive" src="img/p2.jpg">
+                                            </div>
+                                            <div class="file-name">
+                                                My feel.png
+                                                <br>
+                                                <small>Added: Jan 7, 2014</small>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="file-box">
+                                    <div class="file">
+                                        <a href="#">
+                                            <span class="corner"></span>
+
+                                            <div class="icon">
+                                                <i class="fa fa-music"></i>
+                                            </div>
+                                            <div class="file-name">
+                                                Michal Jackson.mp3
+                                                <br>
+                                                <small>Added: Jan 22, 2014</small>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="file-box">
+                                    <div class="file">
+                                        <a href="#">
+                                            <span class="corner"></span>
+
+                                            <div class="image">
+                                                <img alt="image" class="img-responsive" src="img/p3.jpg">
+                                            </div>
+                                            <div class="file-name">
+                                                Document_2014.doc
+                                                <br>
+                                                <small>Added: Fab 11, 2014</small>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>   
+
                             </div>
 
                         </div>
+
                     </div>
-                    </div>
+
+                    
+
                 </div>
                 </div>
 
@@ -430,7 +347,7 @@
 
 </div>
 
-                @include('site.includes.footer')
+{{--                 @include('site.includes.footer') --}}
 
                 @include('admin.includes.scripts')
 
