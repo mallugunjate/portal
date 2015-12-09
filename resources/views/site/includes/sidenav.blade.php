@@ -28,23 +28,23 @@
 
 
 
-                @if (Request::is('communications'))
+                @if (Request::is('communication'))
                 <li class="active">
                 @else
                 <li>
                 @endif 
-                    <a href="/communications"><i class="fa fa-bullhorn"></i> <span class="nav-label">Communications</span> <span class="label label-primary pull-right">2</span></a>
+                    <a href="/communication"><i class="fa fa-bullhorn"></i> <span class="nav-label">Communications</span> <span class="label label-primary pull-right">2</span></a>
                 </li>            
 
 
                     
 
-                @if (Request::is('documents'))
+                @if (Request::is('document'))
                 <li class="active">
                 @else
                 <li>
                 @endif 
-                    <a href="/documents"><i class="fa fa-file"></i> <span class="nav-label">Documents</span></a>
+                    <a href="/document"><i class="fa fa-file"></i> <span class="nav-label">Documents</span></a>
                 </li>                
 
 

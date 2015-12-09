@@ -12,10 +12,15 @@
 */
 
 Route::get('/', 'Dashboard\DashboardController@index');
-
+Route::get('/dashboard', 'Dashboard\DashboardController@index');
 
 Route::get('/document', 'Document\DocumentController@index');
+Route::get('/calendar', 'Calendar\CalendarController@index');
+Route::get('/communication', 'Communication\CommunicationController@index');
 
+// Route::get('/home', function () {	
+// 	return view('home');
+// });
 
 
 //Authentication Routes
@@ -34,10 +39,9 @@ Route::get('/approve/{activation_code}', 'Auth\AuthController@approveAccount');
 
 //Password reset routes
 Route::controllers([
-
 	'password' => 'Auth\PasswordController',
-
 ]);
+
 
 
 //list of admin functions
@@ -45,29 +49,15 @@ Route::get('/admin', function(){
 	return view('admin.index');
 });
 
-
-//App routes
-Route::get('/home', function () {	
-	return view('home');
-});
-
-Route::get('/dashboard', 'Dashboard\DashboardController@index');
-
-Route::get('/calendar', 'Calendar\CalendarController@index');
-
-
 /* Admin Routes Begin 	*/
 
 //admin home
 Route::get('/admin/home', 'AdminController@index');
 
-
 //FILES
 Route::get('/admin/document/add-meta-data', 'Document\DocumentAdminController@showMetaDataForm');
 Route::post('/admin/document/add-meta-data', 'Document\DocumentAdminController@updateMetaData');
 Route::resource('/admin/document', 'Document\DocumentAdminController');
-//metadata
-
 
 //FOLDERS
 Route::resource('/admin/folder', 'Document\FolderAdminController');
@@ -87,8 +77,8 @@ Route::resource('/admin/eventtypes', 'Calendar\EventTypesAdminController');
 //Tags
 Route::resource('/admin/tag', 'Tag\TagAdminController');
 
-/* API Routes */
 
+/* API Routes */
 //get navigation
 Route::get('/api/v1/banner/{id}/navigation', 'Api\V1\ApiController@getNavigation');
 //get files in folder : query parameter (boolean)isWeek e.g. ?isWeek=false 
