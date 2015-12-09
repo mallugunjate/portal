@@ -41,11 +41,12 @@ $.fn.extend({
             branch.children().children().toggle();
         });
         //fire event from the dynamically added icon
-      tree.find('.branch .indicator').each(function(){
-        $(this).on('click', function () {
-            $(this).closest('li').click();
+        tree.find('.branch .indicator').each(function(){
+            $(this).on('click', function (e) {
+                $(this).closest('li').click();
+                e.preventDefault();
+            });
         });
-      });
         //fire event to open branch if the li contains an anchor instead of text
         tree.find('.branch>a').each(function () {
             $(this).on('click', function (e) {

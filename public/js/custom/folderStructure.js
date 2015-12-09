@@ -1,19 +1,30 @@
-	$(".folder").click(function(){
-		// console.log($(this).closest('li'));
-		console.log(this.id);
+	
+	$(".folder").click(function(e){
+		
+		e.stopPropagation();
+		getFolderDocuments(e.target.id);
+		
+
+	});
+
+	var getFolderDocuments = function(id){
+		
+		var folder_id = id;
 		$.ajax(
 			{
 				url : '/admin/document',
 				data : {
-							folder : this.id,
+							folder : folder_id,
 							isWeekFolder : $(this).attr("data-isweek")
 					   }
 			}
 		)
 		.done(function(data){
 			fillTable(data)
+			
+
 		});
-	});
+	}
 	
 	var fillTable = function(data){
 
