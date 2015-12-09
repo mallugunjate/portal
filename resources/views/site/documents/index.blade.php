@@ -5,6 +5,7 @@
     @section('title', 'Documents')
     @include('site.includes.head')
     <link rel="stylesheet" type="text/css" href="/css/custom/tree.css">
+{{--     <link rel="stylesheet" type="text/css" href="/css/skins/admin/skin.css"> --}}
 </head> 
 
 <body class="fixed-navigation">
