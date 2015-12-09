@@ -111,7 +111,7 @@ class FolderStructure extends Model
             
             $navCounter++;   
         }
-        return  ( $navigation);
+        return  ( $navigation );
     }
 
     
