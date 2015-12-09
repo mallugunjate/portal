@@ -277,7 +277,8 @@ class Document extends Model
         while (!empty($path)) {
             $currentFolder = array_pop($path);
             
-            if ($currentFolder->folder_type ==  'week') {
+            if(isset($currentFolder->folder_type)) {
+                if ($currentFolder->folder_type ==  'week') {
                 $weekFolder = Week::where('id', $currentFolder->folder_id)->first(); 
                 $parent_id = $weekFolder->parent_id;
                 $parent = \DB::table('folder_ids')->where('id', $parent_id)->first();
@@ -302,7 +303,9 @@ class Document extends Model
                     break;
 
                 }
-            }   
+            }     
+            }
+              
         }
         
         return ($finalPath);
