@@ -115,7 +115,7 @@
 	})
 
 	var showPackage = function(docPackage){
-
+		
 		$("#package-viewer").removeClass('hidden').addClass('visible');
 		$("#empty-container").removeClass('visible').addClass('hidden');
 		$("#file-container").removeClass('visible').addClass('hidden');

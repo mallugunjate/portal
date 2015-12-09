@@ -20,7 +20,7 @@
                     </a>
                 </div>
                  <ul class="nav navbar-nav navbar-right">
-                <li><a href="/admin/folderstructure?banner_id={{$banner->id}}">Back to Folder Listing</a></li>
+                <li><a href="/admin/folder?banner_id={{$banner->id}}">Back to Folder Listing</a></li>
             </ul>
             </div>
            
