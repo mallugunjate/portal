@@ -1,6 +1,6 @@
 	$(".folder").click(function(){
 		// console.log($(this).closest('li'));
-
+		console.log(this.id);
 		$.ajax(
 			{
 				url : '/admin/document',
@@ -23,6 +23,8 @@
 		$("#file-uploader").removeClass('hidden').addClass('visible');
 		$("#empty-container").removeClass('visible').addClass('hidden');
 		$("#package-viewer").removeClass('visible').addClass('hidden');
+
+		$(".topLevelNavItems").addClass('hidden');
 
 		var banner_id = $("input[name='banner_id']").val();
 		

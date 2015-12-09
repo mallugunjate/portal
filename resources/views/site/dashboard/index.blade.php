@@ -622,6 +622,7 @@
     </div>
 
     @include('site.includes.scripts')
+    <script type="text/javascript" src="/js/custom/folderStructure.js"></script>
     @include('site.includes.bugreport')
 
 
