@@ -18,6 +18,10 @@ $(document).ready(function(){
 			}
 		});
 	});
+
+	$(".chosen").chosen({
+		width:"50%",
+	});
 });
 
 $(".remove-document").on('click', function(){

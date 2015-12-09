@@ -50,8 +50,9 @@
 		                        </div>
 		                        <div class="ibox-content">
 		                  
-                                    {!! Form::model($tag, ['action' => ['Tag\TagAdminController@update', 'id'=>$tag->id], 'method' => 'PATCH']) !!}
+                                    {!! Form::model($tag, ['action' => ['Tag\TagAdminController@update', 'id'=>$tag->id], 'method' => 'PATCH', 'class'=>'form-horizontal']) !!}
                                     	<input type="hidden" name="banner_id" id="banner_id" value="{{ $tag->banner_id }}">
+                                        
                                         <div class="form-group"><label class="col-sm-2 control-label">Tag Name</label>
                                             <div class="col-sm-10"><input type="text" class="form-control" name="tag_name" id="tag_name" value="{{ $tag->name }}"></div>
                                         </div>

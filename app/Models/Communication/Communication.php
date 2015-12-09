@@ -8,6 +8,7 @@ use App\Models\Communication\CommunicationPackage;
 use App\Models\Communication\CommunicationDocument;
 use App\Models\Document\Document;
 use App\Models\Document\Package;
+use App\Models\Tag\ContentTag;
 
 class Communication extends Model
 {
@@ -21,7 +22,6 @@ class Communication extends Model
 
       public static function storeCommunication($request)
    	{
-   		
    		$is_draft = 0;
    		if ($request["send_at"]>Carbon::now()) {
    			$is_draft = 1;
@@ -38,32 +38,14 @@ class Communication extends Model
 
    		]);
 
-   		$documents = $request["package_files"];
-   		if (isset($documents)) {
-   			foreach ($documents as $document) {
-   				CommunicationDocument::create([
-   					'communication_id' => $communication->id,
-   					'document_id' => $document
-   				]);
-   			}
-   		}
-
-   		$packages = $request["packages"];
-		if (isset($packages)) {
-   			foreach ($packages as $package) {
-   				CommunicationPackage::create([
-   					'communication_id' 	=> $communication->id,
-   					'package_id'		=> $package
-   				]);
-   			}
-   		}   		
+         Communication::updateCommunicationDocuments($communication->id, $request);
+         Communication::updateCommunicationPackages($communication->id, $request);
+         Communication::updateTags($communication->id, $request["tags"]);
    		return;
    	}
 
       public static function updateCommunication($id, $request)
       {
-         // dd($request->all());
-
          $communication = Communication::find($id);
 
          $communication["subject"] = $request["subject"];
@@ -151,5 +133,28 @@ class Communication extends Model
             array_push($packages, $package);
          }
          return $packages;
+      }
+
+      public static function updateTags($id, $tags)
+      {
+         foreach ($tags as $tag) {
+            ContentTag::create([
+               'content_type' => 'communication',
+               'content_id'      => $id,
+               'tag_id'          => $tag
+            ]);
+         }
+         return;
+      }
+
+      public static function deleteCommunication($id)
+      {
+         Communication::find($id)->delete();
+         CommunicationPackage::where('communication_id', $id)->delete();
+         CommunicationDocument::where('communication_id', $id)->delete();
+         $content_type_id = \DB::table('content_types')->where('type_name', 'communication')->first()->id;
+         ContentTag::where('content_id', $id)->where('content_type_id', $content_type_id)->delete();
+         return;
+
       }
 }

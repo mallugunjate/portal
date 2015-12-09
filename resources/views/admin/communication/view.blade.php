@@ -83,6 +83,12 @@
                 <br>
               @endforeach
             </div>
+            <div>
+              <span class="comunication-item-title">Tags:</span>
+                @foreach($tags as $tag)
+                  {{$tag}}
+                @endforeach
+            </div>
         </div>
         
   		</div>

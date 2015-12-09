@@ -12,6 +12,9 @@ use App\Models\Document\Package;
 use App\Models\Communication\Communication;
 use App\Models\Communication\CommunicationDocument;
 use App\Models\Communication\CommunicationPackage;
+use App\Models\Tag\Tag;
+use App\Models\Tag\ContentTag;
+
 class CommunicationAdminController extends Controller
 {
     /**
@@ -48,14 +51,16 @@ class CommunicationAdminController extends Controller
             $banner = Banner::find(1);
         }
     
-        $fileFolderStructure = FileFolder::getFileFolderStructure($banner_id);
+        $fileFolderStructure = FileFolder::getFileFolderStructure($banner->id);
         
-        $packages = Package::getPackagesStructure($banner_id);
+        $packages = Package::getPackagesStructure($banner->id);
         $importance = \DB::table('communication_importance_levels')->lists('name', 'id');
+        $tags = Tag::where('banner_id', $banner->id)->lists('name', 'id');
         return view('admin.communication.create')->with('banner', $banner)
                                                 ->with('importance', $importance)
                                                 ->with('navigation', $fileFolderStructure)
-                                                ->with('packages', $packages);
+                                                ->with('packages', $packages)
+                                                ->with('tags', $tags);
 
     }
 
@@ -92,12 +97,15 @@ class CommunicationAdminController extends Controller
         $communication_documents  = Communication::getDocumentDetails($id);
         $communication_packages  = Communication::getPackageDetails($id);
         $importance = \DB::table('communication_importance_levels')->lists('name', 'id');
+        $tag_ids = ContentTag::where('content_id', $id)->where('content_type', 'communication')->get()->pluck('tag_id');
+        $tags = Tag::findMany($tag_ids);
 
         return view('admin.communication.view')->with('communication', $communication)
                                             ->with('communication_packages', $communication_packages)
                                             ->with('communication_documents', $communication_documents)
                                             ->with('importance', $importance)
-                                            ->with('banner', $banner);
+                                            ->with('banner', $banner)
+                                            ->with('tags', $tags);
     }
 
 
@@ -156,9 +164,10 @@ class CommunicationAdminController extends Controller
      */
     public function destroy($id, Request $request)
     {
-        Communication::find($id)->delete();
-        CommunicationPackage::where('communication_id', $id)->delete();
-        CommunicationDocument::where('communication_id', $id)->delete();
+        Communication::deleteCommunication($id);
+        // Communication::find($id)->delete();
+        // CommunicationPackage::where('communication_id', $id)->delete();
+        // CommunicationDocument::where('communication_id', $id)->delete();
         return;
 
     }
