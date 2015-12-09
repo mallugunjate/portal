@@ -6,7 +6,14 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Models\Document\Folder;
+use App\Models\Document\FolderStructure;
+use App\Models\Document\Week;
+use App\Models\Document\FileFolder;
 use App\Models\Document\Document;
+use App\Models\Banner;
+use App\Models\Document\Package;
+use App\Models\Communication\Communication;
 
 class DocumentController extends Controller
 {
@@ -17,11 +24,49 @@ class DocumentController extends Controller
      */
     public function index(Request $request)
     {
-        // $folder_id = $request->get('folder');
-        // $isWeek  = $request->get('isWeekFolder');
-        // $documents = Document::getDocuments($folder_id, $isWeek);
-        return view('site.documents.index');
-            //->with('documents', $documents);
+
+        $banner_id = $request->get('banner_id');
+
+        if(isset($banner_id)) {
+            
+            $banner = Banner::where('id', $banner_id)->first();
+        }
+        else{
+            $banner = Banner::where('id', 1)->first();
+        }
+
+        $navigation = FolderStructure::getNavigationStructure($banner->id);
+
+        $packages = Package::getAllPackages($banner->id);
+
+        $folders = Folder::all();
+
+        $defaultFolder = $request->get('parent');
+
+        if (!isset($defaultFolder)) {
+            $defaultFolder = null;
+        }
+
+        return view('site.documents.index')
+            ->with('navigation', $navigation)
+            ->with('folders', $folders)
+            ->with('banner', $banner)
+            ->with('packages', $packages)
+            ->with('defaultFolder' , $defaultFolder);
+
+
+        // $banner_id  = $request->get('banner_id');
+        // if (isset($banner_id)) {
+        //     $banner = Banner::where('id', $banner_id)->first();
+        // }
+        // else {
+        //     $banner = Banner::where('id', 1)->first();
+        // }  
+
+        // $navigation = FolderStructure::getNavigationStructure($banner->id);
+        // return view('site.documents.index')
+        //     ->with('navigation', $navigation)
+        //     ->with('banner', $banner);        
 
     }
 

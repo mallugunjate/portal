@@ -4,6 +4,7 @@
 <head>
     @section('title', 'Documents')
     @include('site.includes.head')
+    <link rel="stylesheet" type="text/css" href="/css/custom/tree.css">
 </head> 
 
 <body class="fixed-navigation">
@@ -48,14 +49,27 @@
                                 <button class="btn btn-primary btn-block">Upload Files</button> --}}
 {{--                                 <div class="hr-line-dashed"></div> --}}
                                 <h5>Folders</h5>
-                                <ul class="folder-list" style="padding: 0">
+
+                                <ul class="tree" id="navigation-structure">
+                                    
+                                    @foreach ($navigation as $nav) 
+                                        
+                                        @if ( $nav["is_child"] == 0)
+                                            
+                                            @include('site.documents.foldernavigation-partial', ['navigation' =>$navigation, 'currentnode' => $nav])
+                                            
+                                        @endif
+
+                                    @endforeach
+                                </ul>                             
+{{--                                 <ul class="folder-list" style="padding: 0">
                                     <li><a href=""><i class="fa fa-folder"></i> Files</a></li>
                                     <li><a href=""><i class="fa fa-folder"></i> Pictures</a></li>
                                     <li><a href=""><i class="fa fa-folder"></i> Web pages</a></li>
                                     <li><a href=""><i class="fa fa-folder"></i> Illustrations</a></li>
                                     <li><a href=""><i class="fa fa-folder"></i> Films</a></li>
                                     <li><a href=""><i class="fa fa-folder"></i> Books</a></li>
-                                </ul>
+                                </ul> --}}
                                 <h5 class="tag-title">Tags</h5>
                                 <ul class="tag-list" style="padding: 0">
                                     <li><a href="">Family</a></li>
@@ -78,24 +92,41 @@
 
                         <div class="col-lg-12">
 
-                            <div class="file-box">
-                                <div class="file">
-                                    <a href="#">
-                                        <span class="corner"></span>
 
-                                        <div class="icon">
-                                            <i class="fa fa-folder"></i>
-                                        </div>
-                                        <div class="file-name">
-                                            Document_2014.doc
-                                            <br>
-                                            <small>Added: Jan 11, 2014</small>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
+                        @foreach ($navigation as $nav) 
 
-                            <div class="file-box">
+                            @if ( $nav["is_child"] == 0)
+                        
+                                <div class="file-box">
+                                    <div class="file">
+                                        <a href="#">
+                                            <span class="corner"></span>
+
+{{--                                             <div class="icon">
+                                                <i class="fa fa-folder"></i>
+                                            </div> --}}
+
+                                        <div class="image">
+                                            <img alt="image" class="img-responsive" src="/images/p2.jpg">
+                                        </div>                                            
+
+                                            <div class="file-name">
+                                                {{ $nav["label"] }}
+                                                <br>
+                                                {{-- <small>Added: Jan 11, 2014</small> --}}
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>                                
+
+                            @endif
+
+                        @endforeach
+
+
+
+
+   {{--                          <div class="file-box">
                                 <div class="file">
                                     <a href="#">
                                         <span class="corner"></span>
@@ -231,7 +262,7 @@
                                     </a>
 
                                 </div>
-                            </div>
+                            </div> --}}
 
  
 
@@ -250,7 +281,7 @@
                                             <span class="corner"></span>
 
                                             <div class="icon">
-                                                <i class="fa fa-folder"></i>
+                                                <i class="fa fa-archive"></i>
                                             </div>
                                             <div class="file-name">
                                                 Document_2014.doc
@@ -266,8 +297,8 @@
                                         <a href="#">
                                             <span class="corner"></span>
 
-                                            <div class="image">
-                                                <img alt="image" class="img-responsive" src="img/p1.jpg">
+                                            <div class="icon">
+                                                <i class="fa fa-gift"></i>
                                             </div>
                                             <div class="file-name">
                                                 Italy street.jpg
@@ -284,8 +315,8 @@
                                         <a href="#">
                                             <span class="corner"></span>
 
-                                            <div class="image">
-                                                <img alt="image" class="img-responsive" src="img/p2.jpg">
+                                            <div class="icon">
+                                                <i class="fa fa-cubes"></i>
                                             </div>
                                             <div class="file-name">
                                                 My feel.png
@@ -302,7 +333,7 @@
                                             <span class="corner"></span>
 
                                             <div class="icon">
-                                                <i class="fa fa-music"></i>
+                                                <i class="fa fa-folder"></i>
                                             </div>
                                             <div class="file-name">
                                                 Michal Jackson.mp3
@@ -318,8 +349,8 @@
                                         <a href="#">
                                             <span class="corner"></span>
 
-                                            <div class="image">
-                                                <img alt="image" class="img-responsive" src="img/p3.jpg">
+                                            <div class="icon">
+                                                <i class="fa fa-briefcase"></i>
                                             </div>
                                             <div class="file-name">
                                                 Document_2014.doc
@@ -350,13 +381,38 @@
 {{--                 @include('site.includes.footer') --}}
 
                 @include('admin.includes.scripts')
-
+                
+                <script type="text/javascript" src="/js/vendor/underscore-1.8.3.js"></script>
+                <script type="text/javascript" src="/js/custom/tree.js"></script>
+                <script type="text/javascript" src="/js/custom/folderStructure.js" ></script>
+                <script type="text/javascript" src="/js/vendor/tablesorter.min.js"></script>
+                <script type="text/javascript" src="/js/vendor/lightbox.min.js"></script>
                 <script type="text/javascript">
                     $.ajaxSetup({
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         }
                     });
+
+                    $(".tree").treed({openedClass : 'glyphicon glyphicon-folder-open', closedClass : 'glyphicon glyphicon-folder-close'});
+
+                    var defaultFolderId = $("input[name='default_folder']").val();
+
+                    if (defaultFolderId) {
+                        var folder = $("#"+defaultFolderId);
+                        $("#"+defaultFolderId).parent().click();
+                        $.ajax({
+                            url : '/admin/document',
+                            data : {
+                                folder : defaultFolderId,
+                                isWeekFolder : folder.attr("data-isweek")
+                            }
+                        })
+                        .done(function(data){
+                            console.log(data);
+                            fillTable(data);
+                        });
+                    }
                 </script>
 
 
