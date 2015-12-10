@@ -1,4 +1,4 @@
-	
+
 	$(".folder").click(function(e){
 		
 		e.stopPropagation();
@@ -70,7 +70,64 @@
 			console.log(files)
 			$('#file-table').append('<tbody>');
 			_.each(files, function(i){
-				$('#file-table').append('<tr> <td>'+ i.title +'</td>'+
+
+				var icon ="";
+				console.log("ext: "  + i.original_extension);
+
+				switch(i.original_extension){
+					case "png":
+					case "jpg":
+					case "gif":
+					case "bmp":
+						icon = "fa-file-image-o";
+						break;
+
+					case "pdf":
+						icon = "fa-file-pdf-o";
+						break;
+
+					case "xls":
+					case "xlsx":
+						icon = "fa-file-excel-o";
+						break;
+
+					case "mp4":
+					case "avi":
+					case "mov":
+						icon = "fa-film";
+						break;
+
+					case "doc":
+					case "docx":
+						icon = "fa-file-word-o";
+						break;
+
+					case "mp3":
+					case "wav":
+						icon = "fa-file-audio-o";
+						break;
+
+					case "ppt":
+					case "pptx":
+						icon = "fa-file-powerpoint-o";
+						break;
+
+					case "zip":
+						icon = "fa-file-archive-o";
+						break;
+
+					case "html":
+					case "css":
+					case "js":
+						icon = "fa-file-code-o";
+						break;
+						
+					default: 
+						icon = "fa-file-o";
+						break;
+				}
+
+				$('#file-table').append('<tr> <td><i class="fa '+ icon +'"></i> ' + i.title +'</td>'+
 											' <td>'+ i.description +'</td>'+
 											' <td>'+ i.created_at +'</td>'+
 											' <td>'+ i.start +'</td>' +

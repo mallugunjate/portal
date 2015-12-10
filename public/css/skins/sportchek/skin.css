@@ -3,7 +3,6 @@ body{
 }
 
 .nav > li.active{
-
 	border-left: 4px solid #E20000 !important;
     background: #444444 !important;
 }

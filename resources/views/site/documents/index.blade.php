@@ -206,7 +206,7 @@
                                             <span class="corner"></span>
 
                                             <div class="icon">
-                                                <i class="fa fa-folder"></i>
+                                                <i class="fa fa-files-o"></i>
                                             </div>
                                             <div class="file-name">
                                                 Michal Jackson.mp3
