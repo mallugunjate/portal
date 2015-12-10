@@ -97,15 +97,16 @@ class CommunicationAdminController extends Controller
         $communication_documents  = Communication::getDocumentDetails($id);
         $communication_packages  = Communication::getPackageDetails($id);
         $importance = \DB::table('communication_importance_levels')->lists('name', 'id');
+        
         $tag_ids = ContentTag::where('content_id', $id)->where('content_type', 'communication')->get()->pluck('tag_id');
-        $tags = Tag::findMany($tag_ids);
+        $selected_tags = Tag::findMany($tag_ids)->pluck('id')->toArray();
 
         return view('admin.communication.view')->with('communication', $communication)
                                             ->with('communication_packages', $communication_packages)
                                             ->with('communication_documents', $communication_documents)
                                             ->with('importance', $importance)
                                             ->with('banner', $banner)
-                                            ->with('tags', $tags);
+                                            ->with('tags', $selected_tags);
     }
 
 
@@ -133,6 +134,9 @@ class CommunicationAdminController extends Controller
         $fileFolderStructure = FileFolder::getFileFolderStructure($banner_id);
         $packages = Package::getPackagesStructure($banner_id);
         $importance = \DB::table('communication_importance_levels')->lists('name', 'id');
+        $tags = Tag::where('banner_id', $banner->id)->lists('name', 'id');
+        $tag_ids = ContentTag::where('content_id', $id)->where('content_type', 'communication')->get()->pluck('tag_id');
+        $selected_tags = Tag::findMany($tag_ids)->pluck('id')->toArray();
 
         return view('admin.communication.edit')->with('communication', $communication)
                                             ->with('communication_packages', $communication_packages)
@@ -140,7 +144,9 @@ class CommunicationAdminController extends Controller
                                             ->with('importance', $importance)
                                             ->with('banner', $banner)
                                             ->with('navigation', $fileFolderStructure)
-                                            ->with('packages', $packages);
+                                            ->with('packages', $packages)
+                                            ->with('tags', $tags)
+                                            ->with('selected_tags', $selected_tags);
     }
 
     /**

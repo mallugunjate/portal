@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use App\Models\Document\FolderStructure;
+use App\Models\Tag\Tag;
+use App\Models\Tag\ContentTag;
 
 
 class Folder extends Model
@@ -174,7 +176,6 @@ class Folder extends Model
             ];      
         }
 
-
         $folder->update($update);   
         $banner_id = $folder->banner_id;
 
@@ -220,5 +221,18 @@ class Folder extends Model
                 \DB::table('folder_ids')->where('folder_id', $week->id)->where('folder_type', 'week')->delete();
                 unset($documentsInFolder);
             }
+    }
+
+    public static function updateTags($id, $tags)
+    {
+        ContentTag::where('content_type', 'folder')->where('content_id', $id)->delete();
+        foreach ($tags as $tag) {
+            ContentTag::create([
+               'content_type'   => 'folder',
+               'content_id'     => $id,
+               'tag_id'         => $tag
+            ]);
+        }
+        return;
     }
 }

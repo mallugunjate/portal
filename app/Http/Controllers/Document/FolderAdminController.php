@@ -12,6 +12,8 @@ use App\Models\Document\Week;
 use App\Models\Document\FileFolder;
 use App\Models\Document\Document;
 use App\Models\Banner;
+use App\Models\Tag\Tag;
+use App\Models\Tag\ContentTag;
 
 class FolderAdminController extends Controller
 {
@@ -99,9 +101,16 @@ class FolderAdminController extends Controller
         else {
             $banner = Banner::find(1);
         }
+
+        $tags = Tag::where('banner_id', $banner->id)->lists('name', 'id');
+        $tag_ids = ContentTag::where('content_id', $id)->where('content_type', 'folder')->get()->pluck('tag_id');
+        $selected_tags = Tag::findMany($tag_ids)->pluck('id')->toArray();
+
         return view('admin.folder-edit')->with('folder', $folder)
                                         ->with('params', $params)
-                                        ->with('banner', $banner);
+                                        ->with('banner', $banner)
+                                        ->with('tags', $tags)
+                                        ->with('selected_tags', $selected_tags);
         
         
     }
@@ -121,7 +130,8 @@ class FolderAdminController extends Controller
         $weekWindowSize = $request->get('weekWindowSize');
         $removeWeeks = $request->get('removeWeeks');
         
-
+        $global_folder_id = \DB::table('folder_ids')->where('folder_id', $id)->where('folder_type', 'folder')->first()->id;
+        Folder::updateTags($global_folder_id, $request["tags"]);
         $banner_id = Folder::editFolderDetails(compact('id', 'name', 'children', 'weekWindowSize', 'removeWeeks'));
 
         return redirect()->action('Document\FolderAdminController@index', ['banner_id'=> $banner_id]);

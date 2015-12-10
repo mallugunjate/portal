@@ -6,12 +6,16 @@ $(document).ready(function() {
         var fileIdVal = $(this).attr('data-id');
         var titleVal = $("#title"+fileIdVal).val();
         var descriptionVal = $("#description"+fileIdVal).val();
+
+        var tag_selector = "#select" + fileIdVal ;
+        var tags = $(tag_selector).val();
+
         var start = $("#start"+fileIdVal).val();
         var end =  $("#end"+fileIdVal).val();
         var selector = "#metadataform"+fileIdVal;
         var check = "#checkmark"+fileIdVal;
 
-        console.log(fileIdVal, titleVal, descriptionVal, selector, start, end)
+        console.log(fileIdVal, titleVal, descriptionVal, selector, start, end, tags);
        
         if (start == "") {
             
@@ -21,8 +25,9 @@ $(document).ready(function() {
             return false;
 
         }
-        $.post("/admin/document/add-meta-data",{ file_id: fileIdVal, title: titleVal, description: descriptionVal, start : start, end:end, _token:token })
+        $.post("/admin/document/add-meta-data",{ file_id: fileIdVal, title: titleVal, description: descriptionVal, start : start, end:end, _token:token , tags:tags})
             .done( function(data){
+                console.log(data);
                 $(check).fadeIn(1000);
                 $("#start"+fileIdVal).parent().css("border", 'none');
                 $('.error').remove()
@@ -43,4 +48,7 @@ $(document).ready(function() {
         }
     });
 
+    $('.chosen').chosen({
+        width:'100%'
+    })
 });

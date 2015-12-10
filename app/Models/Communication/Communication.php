@@ -64,6 +64,9 @@ class Communication extends Model
 
          Communication::updateCommunicationDocuments($id, $request);
          Communication::updateCommunicationPackages($id, $request);
+         Communication::updateTags($communication->id, $request["tags"]);
+
+         return;
 
 
       }
@@ -137,6 +140,7 @@ class Communication extends Model
 
       public static function updateTags($id, $tags)
       {
+         ContentTag::where('content_type', 'communication')->where('content_id', $id)->delete();
          foreach ($tags as $tag) {
             ContentTag::create([
                'content_type' => 'communication',
