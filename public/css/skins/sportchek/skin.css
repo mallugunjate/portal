@@ -1,0 +1,12 @@
+body{
+	background-color: #2B2B2B !important;
+}
+
+.nav > li.active{
+	border-left: 4px solid #E20000 !important;
+    background: #444444 !important;
+}
+
+.navbar-minimalize{
+	background-color: #2B2B2B !important;
+}

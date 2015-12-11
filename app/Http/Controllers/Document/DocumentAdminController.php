@@ -23,7 +23,11 @@ class DocumentAdminController extends Controller
     {
         $folder_id = $request->get('folder');
         $documents = Document::getDocuments($folder_id);
-        return $documents;
+        $folder = Folder::getFolderDescription($folder_id);
+        $response = [];
+        $response["files"] = $documents;
+        $response["folder"] = $folder;
+        return $response;
 
     }
 

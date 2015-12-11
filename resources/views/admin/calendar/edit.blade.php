@@ -169,7 +169,7 @@
 
 				</script>
 
-				<script src="/js/custom/editEvent.js"></script>
+				<script src="/js/custom/admin/events/editEvent.js"></script>
 
 				@include('site.includes.bugreport')
 

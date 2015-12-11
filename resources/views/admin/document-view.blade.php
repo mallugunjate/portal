@@ -88,6 +88,11 @@
 <script type="text/javascript" src="/js/vendor/underscore-1.8.3.js"></script>
 <script type="text/javascript" src="/js/custom/tree.js"></script>
 <script type="text/javascript" src="/js/custom/folderStructure.js" ></script>
+<script type="text/javascript" src="/js/custom/admin/documents/fileTable.js"></script>
+<script type="text/javascript" src="/js/custom/admin/documents/deleteFile.js"></script>
+<script type="text/javascript" src="/js/custom/admin/documents/getPackages.js"></script>
+<script type="text/javascript" src="/js/custom/admin/documents/deletePackage.js"></script>
+<script type="text/javascript" src="/js/custom/admin/documents/showPackage.js"></script>
 <script type="text/javascript" src="/js/vendor/dropzone.js"></script>
 <script type="text/javascript" src="/js/custom/uploadDocument.js"></script>
 <script type="text/javascript" src="/js/vendor/tablesorter.min.js"></script>

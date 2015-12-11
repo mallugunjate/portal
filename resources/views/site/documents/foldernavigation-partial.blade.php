@@ -1,5 +1,5 @@
 @if(count($nav["children"]) >0 )
-	<li id={{$nav["id"]}} class="parent-folder"> {{$nav["label"]}} 
+	<li id={{$nav["id"]}} class="parent-folder folder"> {{$nav["label"]}} 
 	<ul>
 	@foreach ($nav["children"] as $child)
 	<?php $nav = $navigation[$child["child_id"]] ?>
@@ -10,10 +10,10 @@
 	</li>
 
 @elseif ( isset($nav["weeks"]) && count($nav["weeks"] > 0) )
-	<li id={{$nav["id"]}} class="parent-folder"> {{$nav["label"]}} 
+	<li id={{$nav["id"]}} class="parent-folder folder"> {{$nav["label"]}} 
 		<ul>
 			@foreach ($nav["weeks"]  as $week )
-			<li class="folder" id = {{$week["global_id"]}}  data-isWeek = true> {{ "week " . $week["week"] }}
+			<li class="folder" id={{$week["global_id"]}}  data-isWeek = true> {{ "week " . $week["week"] }}
 				<ul>
 				</ul>
 			</li>

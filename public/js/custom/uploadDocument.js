@@ -73,9 +73,9 @@ myDropzone.on("queuecomplete", function (progress) {
     var banner_id = $('input[name="banner_id"]').val();
     var folder_id = $("#folder-title").attr('data-folderid');
     $(".file-row .delete").hide();
-    window.location = '/admin/document/add-meta-data?package=' + upload_package_id + "&banner_id=" + banner_id + "&parent=" + folder_id;
-    // var metadatalink = $("<a class='btn btn-default next-action' href='/admin/document/add-meta-data?package="+upload_package_id+"&banner_id="+ banner_id +"&parent="+ folder_id +"'> Next >> Review Documents</a>");
-    // $(metadatalink).appendTo("#file-uploader #container");
+//    window.location = '/admin/document/add-meta-data?package=' + upload_package_id + "&banner_id=" + banner_id + "&parent=" + folder_id;
+    var metadatalink = $("<a class='btn btn-default next-action' href='/admin/document/add-meta-data?package="+upload_package_id+"&banner_id="+ banner_id +"&parent="+ folder_id +"'> Next >> Review Documents</a>");
+    $(metadatalink).appendTo("#file-uploader #container");
 });
 
 // Setup the buttons for all transfers

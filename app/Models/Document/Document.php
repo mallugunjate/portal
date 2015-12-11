@@ -23,22 +23,7 @@ class Document extends Model
             $global_folder_details = \DB::table('folder_ids')->where('id', $global_folder_id )->first();                                                            
             $folder_type = $global_folder_details->folder_type;
             $folder_id = $global_folder_details->folder_id;
-            $response = [];
-            $response["folder"] = [];
-
-            if ($folder_type == "week") {
-                $response["type"] = "week";
-                $week = Week::where('id', $folder_id)->first();
-                $week->global_folder_id = $global_folder_id;
-                $response["folder"] = $week;
-
-            }
-            if ($folder_type == "folder") {
-                $response["type"] = "folder";
-                $folder = Folder::where('id', $folder_id)->first();
-                $folder->global_folder_id = $global_folder_id;
-                $response["folder"] = $folder;
-            }
+            
             if ($forApi) {
                 $files = \DB::table('file_folder')
                             ->join('documents', 'file_folder.document_id', '=', 'documents.id')
@@ -55,14 +40,14 @@ class Document extends Model
                             ->get();            
             }
             
-            $response["files"] = [];
+            
             if (count($files) > 0) {
-                 $response["files"] =  $files;
+                return $files;
             }
             else{
-                $response["files"] = null;
+                
+                return null;
             }
-            return $response;
 
         }
 
@@ -110,9 +95,16 @@ class Document extends Model
                 'folder_id' => $global_folder_id
             );
             
-            Document::createDocumentThumbnail($filename);
+            // Document::createDocumentThumbnail($filename);
             $documentfolder = FileFolder::create($documentfolderdetails);
+            
+            if($metadata["originalExtension"] == "jpg" || $metadata["originalExtension"] == "png" || $metadata["originalExtension"] == "gif" || $metadata["originalExtension"] == "pdf"){
+                Document::createDocumentThumbnail($filename);    
+            }            
+
             $documentfolder->save();
+
+
         }
     }
 

@@ -15,7 +15,6 @@
 	          @include('admin.includes.sidenav')
 	        </div>
 	    </nav>
-
 	<div id="page-wrapper" class="gray-bg" >
 		<div class="row border-bottom">
 			@include('admin.includes.topbar')
@@ -62,7 +61,7 @@
 		                                    </span>
 		                                </div>
 
-	
+
 
 
 		                            </div>
@@ -125,7 +124,7 @@
 
 				</script>
 
-				<script src="/js/custom/deleteEvent.js"></script>
+				<script src="/js/custom/admin/events/deleteEvent.js"></script>
 
 				@include('site.includes.bugreport')
 
