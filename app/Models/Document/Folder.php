@@ -162,6 +162,7 @@ class Folder extends Model
             $folder = Folder::where('id', $folder_id)->first();
             $folder->global_folder_id = $global_folder_id;
             $folder->folder_path = Folder::getFolderPath($global_folder_id);
+            $folder->folder_children = Folder::getFolderChildren($global_folder_id);
             return $folder;
         }
     }
@@ -303,6 +304,57 @@ class Folder extends Model
         }
         $finalPath =  array_reverse($finalPath);
         return( $finalPath);
+    }
+
+
+    public static function getFolderChildren($global_folder_id)
+    {
+        $currentGlobalFolder = \DB::table('folder_ids')->where('id', $global_folder_id)->first();
+
+        if(isset($currentGlobalFolder->folder_type)) {
+                
+                if ($currentGlobalFolder->folder_type ==  'week') {
+                    $folder_children = [];
+                }
+
+                else if ($currentGlobalFolder->folder_type == 'folder') {
+                    
+                    $currentFolder = Folder::where('id', $currentGlobalFolder->folder_id)->first();
+
+                    if ( $currentFolder->has_weeks ) {
+
+                        $week_window_size = $currentFolder->week_window_size;
+                        $current_week = Week::getCurrentWeek($global_folder_id);
+                        $week_window = Week::getWeekWindow($current_week, $week_window_size);
+                        foreach ($week_window as $week) {
+                            $week->global_folder_id = \DB::table('folder_ids')->where('folder_id', $week->id )
+                                                        ->where('folder_type', 'week')
+                                                        ->first()->id;
+                        }
+                        return $week_window;
+
+                        
+                    }
+                    else {
+                        $children = FolderStructure::where('parent', $currentFolder->id)->get()->pluck('child');
+
+                        $folder_children = [];
+                        foreach ($children as $child) {
+                            
+                            $child_folder = Folder::where('id', intval($child))->first();
+
+                            $child_global_id = \DB::table('folder_ids')->where('folder_id' , $child_folder->id)->where('folder_type', 'folder')->first();
+                            $child_folder["global_folder_id"] =  $child_global_id->id;
+                            array_push($folder_children, $child_folder);
+                        }
+                        return $folder_children;
+                    }
+                }
+        }
+        else {
+            $folder_children = [];
+        }
+
     }
     
 }
