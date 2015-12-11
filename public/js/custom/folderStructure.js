@@ -20,15 +20,29 @@
 			}
 		)
 		.done(function(data){
-			fillTable(data)
-			
-
+			console.log(data);
+			fillTable(data);
+			setDeepLink(data);
 		});
+	}
+
+	var checkDeepLink = function(){
+		if(window.location.hash){
+			folderId = window.location.hash.substr(3);
+			$("li#" + folderId).click();
+			//getFolderDocuments(folderId);
+		}
+	}
+	var setDeepLink = function(data){
+		var id = window.location.hash;
+		console.log(id);
+		console.log(window.location.pathname);
+		location.href = window.location.pathname + "#!/" + data.folder.global_folder_id;
 	}
 	
 	var fillTable = function(data){
 
-		console.log( data );
+		//console.log( data );
 
 		$("#file-container").removeClass('hidden').addClass('visible');
 		$("#file-uploader").removeClass('hidden').addClass('visible');

@@ -110,11 +110,11 @@ class Document extends Model
                 'folder_id' => $global_folder_id
             );
             
-            // if($metadata["originalExtension"] == "jpg" || $metadata["originalExtension"] == "png" || $metadata["originalExtension"] == "gif"){
-            //     Document::createDocumentThumbnail($filename);    
-            // }
+            if($metadata["originalExtension"] == "jpg" || $metadata["originalExtension"] == "png" || $metadata["originalExtension"] == "gif" || $metadata["originalExtension"] == "pdf"){
+                Document::createDocumentThumbnail($filename);    
+            }
 
-            Document::createDocumentThumbnail($filename);
+            // Document::createDocumentThumbnail($filename);
             $documentfolder = FileFolder::create($documentfolderdetails);
             $documentfolder->save();
         }

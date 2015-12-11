@@ -8,7 +8,7 @@
 {{--     <link rel="stylesheet" type="text/css" href="/css/skins/admin/skin.css"> --}}
 </head> 
 
-<body class="fixed-navigation">
+<body class="fixed-navigation" onload="checkDeepLink()">
     <div id="wrapper">
     <nav class="navbar-default navbar-static-side" role="navigation">
         <div class="sidebar-collapse">
@@ -256,7 +256,6 @@
 {{--                 @include('site.includes.footer') --}}
 
                 @include('admin.includes.scripts')
-                
                 <script type="text/javascript" src="/js/vendor/underscore-1.8.3.js"></script>
                 <script type="text/javascript" src="/js/custom/tree.js"></script>
                 <script type="text/javascript" src="/js/custom/folderStructure.js" ></script>

@@ -13,7 +13,7 @@
 	<li id={{$nav["id"]}} class="parent-folder folder"> {{$nav["label"]}} 
 		<ul>
 			@foreach ($nav["weeks"]  as $week )
-			<li class="folder" id = {{$week["global_id"]}}  data-isWeek = true> {{ "week " . $week["week"] }}
+			<li class="folder" rel="address:/{{$week["global_id"]}}" id={{$week["global_id"]}}  data-isWeek = true> {{ "week " . $week["week"] }}
 				<ul>
 				</ul>
 			</li>
@@ -23,7 +23,7 @@
 	
 
 @else
-	<li class="folder" id={{$nav["id"]}} data-isWeek = false>{{ $nav["label"] }}	 	
+	<li class="folder" rel="address:/{{$nav["id"]}}" id={{$nav["id"]}} data-isWeek = false>{{ $nav["label"] }}	 	
 		<ul>
 		</ul>
 	</li>
