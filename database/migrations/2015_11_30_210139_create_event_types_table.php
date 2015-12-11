@@ -14,9 +14,11 @@ class CreateEventTypesTable extends Migration
     {
         Schema::create('event_types', function (Blueprint $table) {
             $table->increments('id')->unsigned();
-            $table->mediumText('event_type');    
+            $table->mediumText('event_type');
+            $table->integer('banner_id')->unsigned();
             $table->softDeletes();
             $table->timestamps();
+            $table->foreign('banner_id')->references('id')->on('banners');
         });
     }
 

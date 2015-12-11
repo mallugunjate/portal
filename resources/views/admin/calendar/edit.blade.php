@@ -6,7 +6,7 @@
     @include('admin.includes.head')
     <link rel="stylesheet" type="text/css" href="/css/plugins/fullcalendar/fullcalendar.css">
     <link rel="stylesheet" type="text/css" href="/css/plugins/fullcalendar/fullcalendar.print.css">
-
+    <link rel="stylesheet" type="text/css" href="/css/plugins/chosen/chosen.css">
 	<script type="text/javascript">
 		function convertDate(t)
 		{
@@ -126,6 +126,15 @@
 
                                         <div class="hr-line-dashed"></div>
 
+                                        <div class="form-group"><label class="col-sm-2 control-label">Tags</label>
+                                            <div class="col-md  -10">
+                                                {!! Form::select('tags[]', $tags, $selected_tags, ['class'=>'chosen', 'multiple'=>'true', 'id'=>'tags']) !!}
+                                                
+                                            </div>
+                                        </div>
+
+                                        <div class="hr-line-dashed"></div>
+
                                         <div class="form-group">
                                             <div class="col-sm-4 col-sm-offset-2">
                                                 <a class="btn btn-white" href="/admin/calendar"><i class="fa fa-close"></i> Cancel</a>
@@ -152,7 +161,11 @@
 
 			    @include('admin.includes.scripts')
 
-				<script type="text/javascript">
+				@include('site.includes.bugreport')
+
+                <script src="/js/custom/editEvent.js"></script>
+                <script type="text/javascript" src="/js/plugins/chosen/chosen.jquery.js"></script>
+                <script type="text/javascript">
 					$.ajaxSetup({
 				        headers: {
 				            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -165,13 +178,11 @@
                         forceParse: false,
                         autoclose: true
                     });
-
+                    $(".chosen").chosen();
 
 				</script>
 
-				<script src="/js/custom/editEvent.js"></script>
-
-				@include('site.includes.bugreport')
+				
 
 
 

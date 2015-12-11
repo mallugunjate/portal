@@ -8,6 +8,9 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Event\Event;
 use App\Models\Event\EventType;
+use App\Models\Tag\ContentTag;
+use App\Models\Tag\Tag;
+
 
 class CalendarAdminController extends Controller
 {
@@ -31,9 +34,12 @@ class CalendarAdminController extends Controller
      */
     public function create()
     {
+        
         $event_types_list = EventType::all();
+        $tags = Tag::where('banner_id', 1)->lists('name', 'id');
         return view('admin.calendar.create')
-            ->with('event_types_list', $event_types_list);
+            ->with('event_types_list', $event_types_list)
+            ->with('tags', $tags);
     }
 
     /**
@@ -44,30 +50,7 @@ class CalendarAdminController extends Controller
      */
     public function store(Request $request)
     {
-
-        // $validator = Validator::make($request->all(), [
-        //     'banner' => 'required',
-        //     'title' => 'required',
-        //     'start' => 'required'
-        // ]);
-
-        // if ($validator->fails()) {
-        //     return redirect('/admin/calendar/create')
-        //         ->withErrors($validator)
-        //         ->withInput();
-        // }
-
-        $eventDetails = array(
-            'banner' => $request['banner'],
-            'title' => $request['title'],
-            'event_type' => $request['event_type'],
-            'description' => $request['description'],
-            'start' => $request['start'],
-            'end' => $request['end'],
-        );
-
-        $event = Event::create($eventDetails);
-        $event->save();
+        Event::storeEvent($request);   
     }
 
     /**
@@ -92,11 +75,16 @@ class CalendarAdminController extends Controller
         $event = Event::find($id);
         $event_type = EventType::find($id);
         $event_types_list = EventType::all();
+        $tags = Tag::where('banner_id', 1)->lists('name', 'id');
+        $tag_ids = ContentTag::where('content_id', $id)->where('content_type', 'event')->get()->pluck('tag_id');
+        $selected_tags = Tag::findMany($tag_ids)->pluck('id')->toArray();
 
         return view('admin.calendar.edit')
             ->with('event', $event)
             ->with('event_type', $event_type)
-            ->with('event_types_list', $event_types_list);
+            ->with('event_types_list', $event_types_list)
+            ->with('tags', $tags)
+            ->with('selected_tags', $selected_tags);
     }
 
     /**
@@ -109,15 +97,7 @@ class CalendarAdminController extends Controller
     public function update(Request $request, $id)
     {
 
-        $event = Event::find($id);
-
-        $event->title = $request['title'];
-        $event->event_type = $request['event_type'];
-        $event->description = $request['description'];
-        $event->start = $request['start'];
-        $event->end = $request['end'];
-
-        $event->save();
+        Event::updateEvent($id, $request);
     }
 
     /**
