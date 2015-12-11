@@ -283,7 +283,7 @@ class Folder extends Model
    
                         //folder_id would be replace with id when folder_struct gets updated to store global_folder_id
                         $finalPath[$counter]["name"]  = Folder::where('id', $currentFolder->folder_id)->first()->name;
-                        $finalPath[$counter]["global_folder_id"] = $currentFolder->folder_id;
+                        $finalPath[$counter]["global_folder_id"] = $currentFolder->id;
                         
                         $parent_id = $folder_struct->parent;
                         $parent = $parent = \DB::table('folder_ids')->where('folder_id', $parent_id)->where('folder_type', 'folder')->first(); 

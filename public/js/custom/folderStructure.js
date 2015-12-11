@@ -11,6 +11,8 @@ $("body").on("click", ".folder", function(e){
 	} else {
 		getFolderDocuments(this.id);
 	}
+
+	
 	
 });
 
@@ -30,6 +32,7 @@ var getFolderDocuments = function(id){
 		console.log(data);
 		fillTable(data);
 		setDeepLink(data);
+		fillBreadCrumbs(data);
 	});
 }
 

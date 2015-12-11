@@ -31,9 +31,8 @@
             <div class="col-lg-10">
                 <h2>Documents &amp; Packages</h2>
                 <ol class="breadcrumb">
-                    <li>
-                        <a href="/">Home</a>
-                    </li>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/">Documents</a></li>
                 </ol>
             </div>
             <div class="col-lg-2">
@@ -267,6 +266,7 @@
                 <script type="text/javascript" src="/js/vendor/underscore-1.8.3.js"></script>
                 <script type="text/javascript" src="/js/custom/tree.js"></script>
                 <script type="text/javascript" src="/js/custom/folderStructure.js" ></script>
+                <script type="text/javascript" src="/js/custom/site/documents/breadcrumb.js" ></script>
                 <script type="text/javascript" src="/js/custom/site/documents/fileTable.js" ></script>
                 <script type="text/javascript" src="/js/vendor/tablesorter.min.js"></script>
                 <script type="text/javascript" src="/js/vendor/lightbox.min.js"></script>

@@ -31,7 +31,8 @@ var fillTable = function(data){
 	$('#folder-table').empty();
 	$('#file-table').empty();
 
-	if( (data.folder.folder_children).length > 0){
+	// if( (data.folder.folder_children).length > 0){
+	if( !(data.folder.folder_children === null) ) {		
 		folderFill(data);
 	}	
 	
