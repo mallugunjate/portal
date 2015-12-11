@@ -32,7 +32,7 @@
                 <h2>Documents &amp; Packages</h2>
                 <ol class="breadcrumb">
                     <li><a href="/">Home</a></li>
-                    <li><a href="/">Documents</a></li>
+                    <li><a href="/document">Documents</a></li>
                 </ol>
             </div>
             <div class="col-lg-2">
