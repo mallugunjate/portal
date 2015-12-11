@@ -1,6 +1,8 @@
 
-$(".folder").click(function(e){
+$("body").on("click", ".folder", function(e){
 	
+	console.log(e);
+	console.log(this.id);
 	e.stopPropagation();
 	var id = e.target.id;
 

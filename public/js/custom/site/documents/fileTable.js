@@ -48,9 +48,10 @@ var folderFill = function(data)
 		$('#folder-table').append('<tbody>');
 		_.each(folders, function(i){
 
-			
+		
+
 			$('#folder-table').append('<tr>'+
-										' <td><i class="fa fa-folder"></i> ' + i.name+'</td>'+
+										' <td><i class="fa fa-folder"></i> <a class="folder" id="' + i.global_folder_id  +'" href="/document#!/' + i.global_folder_id + '">' + i.name+'</a></td>'+
 										' <td>' + i.updated_at +'</td>'+
 									'</tr>')
 		});
@@ -142,12 +143,8 @@ var fileFill = function(data)
 										' <td>'+ i.created_at +'</td>'+
 										' <td>'+ i.start +'</td>' +
 										' <td>'+ i.end +'</td>' +
-										' <td> '+
-											'<a class="btn btn-xs btn-primary" data-lightbox= "'+i.title+'"  href="/images/documents/thumb/'+ i.filename +'.jpg"> Preview </a> '+
-											'<a class="btn btn-xs btn-warning" href="/admin/document/'+ i.id +'/edit?banner_id='+ banner_id +'"> Edit </a> '+
-											'<a class="deleteFile btn btn-xs btn-danger" id="'+ i.id +'" > Delete </a>'+
-										'</td> </tr>')
-		});
+										' <td></td> </tr>')
+			});
 		$('#file-table').append('</tbody>');
 		$("#file-table").tablesorter({
 			sortReset : true,
