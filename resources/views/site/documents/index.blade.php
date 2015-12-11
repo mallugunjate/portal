@@ -95,8 +95,8 @@
 
                             <div class="ibox-content">
                             
-                                <input type="hidden" name="default_folder" value={{$defaultFolder}}>
-                                @include('admin.document-table')
+                                <input type="hidden" name="default_folder" value={{ $defaultFolder }}>
+                                @include('site.documents.document-table')
                             
                             </div>
                         </div>
@@ -106,10 +106,10 @@
                         @foreach ($navigation as $nav) 
 
                             @if ( $nav["is_child"] == 0)
-                        
-                                <div class="file-box folder">
+                                
+                                <div class="file-box">
                                     <div class="file">
-                                        <a href="#">
+                                        <a id="{{ $nav['id'] }}" class="parent-folder folder branch" href="/document#!/{{ $nav['id'] }}">
                                             <span class="corner"></span>
 
 {{--                                             <div class="icon">

@@ -152,7 +152,7 @@
 
 				</script>
 
-				<script src="/js/custom/addEvent.js"></script>
+				<script src="/js/custom/admin/events/addEvent.js"></script>
 
 				@include('site.includes.bugreport')
 

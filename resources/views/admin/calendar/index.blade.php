@@ -124,7 +124,7 @@
 
 				</script>
 
-				<script src="/js/custom/deleteEvent.js"></script>
+				<script src="/js/custom/admin/events/deleteEvent.js"></script>
 
 				@include('site.includes.bugreport')
 

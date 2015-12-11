@@ -2,9 +2,14 @@
 	$(".folder").click(function(e){
 		
 		e.stopPropagation();
-		getFolderDocuments(e.target.id);
-		
+		var id = e.target.id;
 
+		if(id){
+			getFolderDocuments(e.target.id);
+		} else {
+			getFolderDocuments(this.id);
+		}
+		
 	});
 
 	var getFolderDocuments = function(id){
