@@ -259,6 +259,7 @@
                 <script type="text/javascript" src="/js/vendor/underscore-1.8.3.js"></script>
                 <script type="text/javascript" src="/js/custom/tree.js"></script>
                 <script type="text/javascript" src="/js/custom/folderStructure.js" ></script>
+                <script type="text/javascript" src="/js/custom/site/documents/fileTable.js" ></script>
                 <script type="text/javascript" src="/js/vendor/tablesorter.min.js"></script>
                 <script type="text/javascript" src="/js/vendor/lightbox.min.js"></script>
                 <script type="text/javascript">
