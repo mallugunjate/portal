@@ -6,6 +6,12 @@
     @include('site.includes.head')
     <link rel="stylesheet" type="text/css" href="/css/custom/tree.css">
 {{--     <link rel="stylesheet" type="text/css" href="/css/skins/admin/skin.css"> --}}
+
+    <style>
+    .modal-lg{ height: 95%; width: 80% !important; padding: 0; }
+    .modal-content{ height: 100% !important;}
+    .modal-body{ padding: 0; margin: 0; height: 100% !important; }
+    </style>
 </head> 
 
 <body class="fixed-navigation" onload="checkDeepLink()">
@@ -252,6 +258,8 @@
     </div>
 
 </div>
+
+@include('site.includes.modal')
 
 {{--                 @include('site.includes.footer') --}}
 

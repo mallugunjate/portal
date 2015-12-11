@@ -1,3 +1,5 @@
+
+
 var fillTable = function(data){
 
 	//console.log( data );
@@ -138,8 +140,9 @@ var fileFill = function(data)
 					break;
 			}
 
-			$('#file-table').append('<tr> <td><i class="fa '+ icon +'"></i> ' + i.title +'</td>'+
-										' <td>'+ i.description +'</td>'+
+			$('#file-table').append('<tr> <td><div class="launchPDFViewer" data-toggle="modal" data-file="/viewer/?file=/files/'+i.filename+'" data-target="#fileviewmodal"><i class="fa '+ icon +'"></i> ' + i.title +'</div></td>'+
+			//$('#file-table').append('<tr> <td><a data-toggle="modal" data-target="#fileviewmodal" href="/viewer/?file=/files/'+i.filename+'"><i class="fa '+ icon +'"></i> ' + i.title +'</a></td>'+				
+										' <td>'+ i.description + '</td>'+
 										' <td>'+ i.created_at +'</td>'+
 										' <td>'+ i.start +'</td>' +
 										' <td>'+ i.end +'</td>' +
@@ -154,4 +157,12 @@ var fileFill = function(data)
 
 	}
 
+	
+		
+		$("body").on("click", ".launchPDFViewer", function(e){
+			var filepath = $(this).attr("data-file");
+			$("#fileviewmodal").find('iframe').attr("src", filepath);
+		});
+
 }	
+
