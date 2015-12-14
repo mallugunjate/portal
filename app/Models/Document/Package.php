@@ -5,6 +5,9 @@ namespace App\Models\Document;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use App\Models\Document\Document;
+use App\Models\Tag\Tag;
+use App\Models\Tag\ContentTag;
+
 
 class Package extends Model
 {
@@ -47,7 +50,7 @@ class Package extends Model
     			'package_id'	=> $package_id	
     		]);
     	}
-
+        Package::updateTags($package_id, $request['tags']);
     	return;
     }
 
@@ -106,7 +109,7 @@ class Package extends Model
                 ]);
             }
         }
-        
+        Package::updateTags($id, $request['tags']);
         return;
     }
 
@@ -129,5 +132,17 @@ class Package extends Model
         }
         return($packages);
 
+    }
+
+    public static function updateTags($id, $tags){
+        ContentTag::where('content_type', 'package')->where('content_id', $id)->delete();
+         foreach ($tags as $tag) {
+            ContentTag::create([
+               'content_type' => 'package',
+               'content_id'      => $id,
+               'tag_id'          => $tag
+            ]);
+         }
+         return;
     }
 }

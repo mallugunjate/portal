@@ -3,6 +3,7 @@
 	<title></title>
 	<link rel="stylesheet" href="/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="/css/custom/communication.css">
+	<link rel="stylesheet" type="text/css" href="/css/plugins/chosen/chosen.css">
 </head>
 <body class="container-fluid">
 	<!-- navbar begins -->
@@ -77,6 +78,11 @@
 	              <span class="glyphicon glyphicon-calendar"></span>
 	          </span>      
 	        </div>
+		</div>
+
+		<div>
+			{!! Form::label('tags[]', 'Tags:') !!}
+			{!! Form::select('tags[]', $tags , $selected_tags,  ['class'=>'chosen', 'multiple'=>'true']) !!}
 		</div>
 
 		<div class="documents-attached">
@@ -191,6 +197,7 @@
 <script type="text/javascript" src="/js/vendor/moment.js"></script>
 <script type="text/javascript" src="/js/vendor/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="/js/plugins/ckeditor-standard/ckeditor.js"></script>
+<script type="text/javascript" src="/js/plugins/chosen/chosen.jquery.js"></script>
 <script type="text/javascript">
 	$(".date").datetimepicker({
           format: 'YYYY-MM-DD HH:mm:ss'

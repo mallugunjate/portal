@@ -11,7 +11,8 @@ use App\Models\Document\Folder;
 use App\Models\Document\FileFolder;
 use App\Models\Document\FolderStructure;
 use App\Models\Banner;
-
+use App\Models\Tag\Tag;
+use App\Models\Tag\ContentTag;
 class DocumentAdminController extends Controller
 {
     /**
@@ -75,13 +76,14 @@ class DocumentAdminController extends Controller
         }
 
         $parent = $request->get('parent');
-
+        $tags = Tag::where('banner_id', $banner->id)->lists('name', 'id');
         $documents = Document::where('upload_package_id', $package)->get();
 
         return view('admin.document-add-meta-data')
-             ->with('documents', $documents)
-             ->with('banner', $banner)
-             ->with('folder_id', $parent);
+                ->with('documents', $documents)
+                ->with('banner', $banner)
+                ->with('folder_id', $parent)
+                ->with('tags', $tags);
             
     }    
 
@@ -93,9 +95,7 @@ class DocumentAdminController extends Controller
      */
     public function updateMetaData(Request $request)
     {
-        
         Document::updateMetaData($request);
-
     }       
 
     /**
@@ -125,8 +125,13 @@ class DocumentAdminController extends Controller
         else {
             $banner = Banner::find(1);
         }
+        $tags = Tag::where('banner_id', $banner->id)->lists('name', 'id');
+        $tag_ids = ContentTag::where('content_id', $id)->where('content_type', 'document')->get()->pluck('tag_id');
+        $selected_tags = Tag::findMany($tag_ids)->pluck('id')->toArray();
         return view('admin.document-edit-meta-data')->with('document', $document)
-                                                    ->with('banner', $banner);
+                                                    ->with('banner', $banner)
+                                                    ->with('tags', $tags)
+                                                    ->with('selected_tags', $selected_tags);
     }
 
     /**

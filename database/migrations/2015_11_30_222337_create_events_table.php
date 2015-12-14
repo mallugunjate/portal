@@ -14,14 +14,16 @@ class CreateEventsTable extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->increments('id')->unsigned();
-            $table->integer('banner')->references('id')->on('banners');
+            $table->integer('banner_id')->unsigned();
             $table->mediumText('title');    
             $table->longText('description');
-            $table->integer('event_type')->references('id')->on('event_types');
+            $table->integer('event_type')->unsigned();
             $table->date('start');
             $table->date('end')->nullable(); 
             $table->softDeletes();
             $table->timestamps();
+            $table->foreign('banner_id')->references('id')->on('banners');
+            $table->foreign('event_type')->references('id')->on('event_types');
         });
     }
 

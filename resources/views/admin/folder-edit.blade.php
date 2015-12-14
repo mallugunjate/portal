@@ -2,6 +2,8 @@
 <head>
 	<title></title>
 	<link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/plugins/chosen/chosen.css">
+
     <style type="text/css">
         form {
             border: thin solid #e9e9e9;
@@ -97,7 +99,10 @@
                 
             </div>
         @endif
-
+        <div>
+            {!! Form::label('tags[]', 'Tags') !!}
+            {!! Form::select('tags[]', $tags, $selected_tags, ['class'=>'chosen', 'multiple'=>'true']) !!}
+        </div>
         <div class="row">
             <div class="col-md-4 col-md-offset-4 ">
                 {!! Form::submit('Update Folder!', ['class'=> 'form-control btn-success']) !!}
@@ -110,10 +115,15 @@
     <script type="text/javascript" src="/js/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/js/custom/editFolder.js"></script>
+    <script type="text/javascript" src="/js/plugins/chosen/chosen.jquery.js"></script>
     <script type="text/javascript">
         $(function () {
             $('.disabled-button-container').tooltip()
+            $('.chosen').chosen({
+                width:'100%'
+            })
         })
+
     </script>
 </body>
 </html>

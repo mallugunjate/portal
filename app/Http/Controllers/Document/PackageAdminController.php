@@ -12,7 +12,8 @@ use App\Models\Document\FileFolder;
 use App\Models\Document\Package;
 use App\Models\Banner;
 use App\Models\Document\DocumentPackage;
-
+use App\Models\Tag\Tag;
+use App\Models\Tag\ContentTag;
 class PackageAdminController extends Controller
 {
     /**
@@ -42,11 +43,13 @@ class PackageAdminController extends Controller
             $banner = Banner::where('id', 1)->first();
         }  
 
-        $fileFolderStructure = FileFolder::getFileFolderStructure($banner_id);
+        $fileFolderStructure = FileFolder::getFileFolderStructure($banner->id);
+        $tags = Tag::where('banner_id', $banner->id)->lists('name', 'id');
         
         return view('admin.package.create')
                     ->with('banner', $banner)
-                    ->with('navigation', $fileFolderStructure);
+                    ->with('navigation', $fileFolderStructure)
+                    ->with('tags', $tags);
                     
     }
 
@@ -96,11 +99,18 @@ class PackageAdminController extends Controller
             $banner = Banner::where('id', 1)->first();
         }  
 
-        $fileFolderStructure = FileFolder::getFileFolderStructure($banner_id);
+        $fileFolderStructure = FileFolder::getFileFolderStructure($banner->id);
+        $tags = Tag::where('banner_id', $banner->id)->lists('name', 'id');
+
+        $tag_ids = ContentTag::where('content_id', $id)->where('content_type', 'package')->get()->pluck('tag_id');
+        $selected_tags = Tag::findMany($tag_ids)->pluck('id')->toArray();
+
         return view('admin.package.edit')->with('package', $package)
                                         ->with('documentDetails', $documentDetails)
                                         ->with('banner', $banner)
-                                        ->with('navigation', $fileFolderStructure);
+                                        ->with('navigation', $fileFolderStructure)
+                                        ->with('tags', $tags)
+                                        ->with('selected_tags', $selected_tags);
     }
 
     /**

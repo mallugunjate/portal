@@ -9,6 +9,8 @@ use App\Models\Document\Week;
 use App\Models\Document\Folder;
 use App\Models\Document\FileFolder;
 use Carbon\Carbon;
+use App\Models\Tag\Tag;
+use App\Models\Tag\ContentTag;
 
 
 class Document extends Model
@@ -149,12 +151,14 @@ class Document extends Model
         if (!isset($id)) {
             $id = $request->get('file_id');
         }
+        $tags           = $request->get('tags'); 
+        Document::updateTags($id, $tags);
         
-        $title = $request->get('title');
-        $description = $request->get('description');
-        $start = $request->get('start');
-        $end = $request->get('end');
-
+        $title          = $request->get('title');
+        $description    = $request->get('description');
+        $start          = $request->get('start');
+        $end            = $request->get('end');
+        
         $metadata = array(
             'title'       => $title,
             'description' => $description,
@@ -164,7 +168,7 @@ class Document extends Model
 
         $document = Document::find($id);
         $document->update($metadata);
-
+        
     }
 
     public static function getRecentDocuments($banner_id, $days)
@@ -301,5 +305,19 @@ class Document extends Model
         }
         
         return ($finalPath);
+    }
+
+    public static function updateTags($id, $tags)
+    {
+         
+        ContentTag::where('content_type', 'document')->where('content_id', $id)->delete();
+        foreach ($tags as $tag) {
+            ContentTag::create([
+               'content_type'   => 'document',
+               'content_id'     => $id,
+               'tag_id'         => $tag
+            ]);
+        }
+        return;
     }
 }

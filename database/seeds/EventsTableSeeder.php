@@ -23,7 +23,7 @@ class EventsTableSeeder extends Seeder
 
             DB::table('events')->insert(array(
                 'title' => $faker->sentence,
-                'banner' => $faker->numberBetween(1,3),
+                'banner_id' => $faker->numberBetween(1,2),
                 'description' => $faker->paragraph(3),
                 'event_type' => $faker->numberBetween(1,9),
                 'start' => $start,

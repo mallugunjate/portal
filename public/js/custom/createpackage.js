@@ -10,6 +10,10 @@ $(document).ready(function(){
 		});
 	});
 
+	$(".chosen").chosen({
+		width:'50%'
+	});
+
 });
 
 

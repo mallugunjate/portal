@@ -2,6 +2,7 @@
 <head>
 	<title></title>
 	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/css/plugins/chosen/chosen.css">
 </head>
 <body class="container-fluid">
 	<!-- navbar begins -->
@@ -79,14 +80,17 @@
 		</div>
 
 		<div>
-			
 			<div id="add-documents" class="btn btn-default">Add Documents</div>
-
 		</div>
 
 		<div>
-			
 			<div id="add-packages" class="btn btn-default">Add packages</div>		
+		</div>
+
+		<div>
+			{!! Form::label('tags[]', 'Tags:') !!}
+			{!! Form::select('tags[]', $tags , null,  ['class'=>'chosen', 'multiple'=>'true']) !!}
+			
 		</div>
 
 		<div id="document-listing" class="modal fade">
@@ -151,6 +155,7 @@
 <script type="text/javascript" src="/js/vendor/moment.js"></script>
 <script type="text/javascript" src="/js/vendor/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="/js/plugins/ckeditor-standard/ckeditor.js"></script>
+<script type="text/javascript" src="/js/plugins/chosen/chosen.jquery.js"></script>
 <script type="text/javascript">
 	$(".date").datetimepicker({
           format: 'YYYY-MM-DD HH:mm:ss'
@@ -163,6 +168,7 @@
     $("#add-packages").click(function(){
     	$("#package-listing").modal('show');	
     });
+
 
 
 </script>
