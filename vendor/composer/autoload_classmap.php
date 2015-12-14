@@ -16,8 +16,6 @@ return array(
     'CreateCommunicationPackagePivotTable' => $baseDir . '/database/migrations/2015_12_04_222108_create_communication_package_pivot_table.php',
     'CreateCommunicationsTable' => $baseDir . '/database/migrations/2015_12_03_214558_create_communications_table.php',
     'CreateContentTagPivotTable' => $baseDir . '/database/migrations/2015_12_09_200212_create_content_tag_pivot_table.php',
-    'CreateContentTypeTable' => $baseDir . '/database/migrations/2015_12_09_180109_create_content_type_table.php',
-    'CreateContentTypeTagPivotTable' => $baseDir . '/database/migrations/2015_12_09_180514_create_content_type_tag_pivot_table.php',
     'CreateDocumentPackagePivotTable' => $baseDir . '/database/migrations/2015_11_27_175201_create_document_package_pivot_table.php',
     'CreateEducationLevelTable' => $baseDir . '/database/migrations/future/2015_08_21_151222_create_education_level_table.php',
     'CreateEventTypesTable' => $baseDir . '/database/migrations/2015_11_30_210139_create_event_types_table.php',
@@ -560,4 +558,5 @@ return array(
     'UpdateDocumentsTable' => $baseDir . '/database/migrations/2015_10_27_145632_update_documents_table.php',
     'UpdateFoldersTable' => $baseDir . '/database/migrations/2015_09_30_215422_update-folders-table.php',
     'UpdatePackagesTable' => $baseDir . '/database/migrations/2015_12_02_230415_update_packages_table.php',
+    'UpdateWeeksTable' => $baseDir . '/database/migrations/2015_12_14_180605_update_weeks_table.php',
 );

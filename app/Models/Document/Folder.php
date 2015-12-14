@@ -271,7 +271,7 @@ class Folder extends Model
                     $weekFolder = Week::where('id', $currentFolder->folder_id)->first(); 
                     
                     $finalPath[$counter]["name"] = "Week " . $weekFolder->week_number;
-                    $finalPath[$counter]["global_folder_id"] = $currentFolder->folder_id;
+                    $finalPath[$counter]["global_folder_id"] = $currentFolder->id;
                     
                     $parent_id = $weekFolder->parent_id;
                     $parent = \DB::table('folder_ids')->where('id', $parent_id)->first();
@@ -316,6 +316,7 @@ class Folder extends Model
                 
                 if ($currentGlobalFolder->folder_type ==  'week') {
                     $folder_children = [];
+                    return $folder_children;
                 }
 
                 else if ($currentGlobalFolder->folder_type == 'folder') {
@@ -354,6 +355,7 @@ class Folder extends Model
         }
         else {
             $folder_children = [];
+            return $folder_children;
         }
 
     }
@@ -369,6 +371,23 @@ class Folder extends Model
             ]);
         }
         return;
+    }
+
+    public static function updateTimestamp($global_folder_id, $timestamp)
+    {
+        $folderPath = Folder::getFolderPath($global_folder_id);
+        \Log::info($folderPath);
+        foreach ($folderPath as $path) {
+            
+            $global_folder = \DB::table('folder_ids')->where('id', $path["global_folder_id"])->first();
+            
+            if ($global_folder->folder_type == 'folder') {   
+                $folder = Folder::where('id', $global_folder->folder_id)->first();
+                $folder->timestamps = false;
+                $folder->last_activity_at = $timestamp;
+                $folder->save();
+            }
+        }
     }
 
 }
