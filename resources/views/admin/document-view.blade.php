@@ -65,6 +65,7 @@
           <h4>Select a folder to view</h4>
         </div>
   			<div id="file-container" class="hidden">
+          <ol class="breadcrumbs"></ol>
           <input type="hidden" name="default_folder" value={{$defaultFolder}}>
   				@include('admin.document-table')
   			</div>
@@ -93,6 +94,7 @@
 <script type="text/javascript" src="/js/custom/admin/documents/getPackages.js"></script>
 <script type="text/javascript" src="/js/custom/admin/documents/deletePackage.js"></script>
 <script type="text/javascript" src="/js/custom/admin/documents/showPackage.js"></script>
+<script type="text/javascript" src="/js/custom/admin/documents/breadcrumb.js"></script>
 <script type="text/javascript" src="/js/vendor/dropzone.js"></script>
 <script type="text/javascript" src="/js/custom/uploadDocument.js"></script>
 <script type="text/javascript" src="/js/vendor/tablesorter.min.js"></script>

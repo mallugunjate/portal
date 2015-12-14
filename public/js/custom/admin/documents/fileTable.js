@@ -11,7 +11,7 @@
 
 		var banner_id = $("input[name='banner_id']").val();
 		
-		if ( data.type == "week") {
+		if ( data.folder.type == "week") {
 			if( !(data.folder === null) ) {
 				$("#folder-title h2").html("Week " + data.folder.week_number)
 				$("#folder-title").attr('data-folderId', data.folder.global_folder_id)

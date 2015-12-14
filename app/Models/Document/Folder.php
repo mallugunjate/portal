@@ -153,19 +153,21 @@ class Folder extends Model
         
 
         if ($folder_type == "week") {
-            $response["type"] = "week";
+            
             $week = Week::where('id', $folder_id)->first();
             $week->global_folder_id = $global_folder_id;
             $week->folder_path = Folder::getFolderPath($global_folder_id);
+            $week->type = "week";
             return $week;
 
         }
         if ($folder_type == "folder") {
-            $response["type"] = "folder";
+            
             $folder = Folder::where('id', $folder_id)->first();
             $folder->global_folder_id = $global_folder_id;
             $folder->folder_path = Folder::getFolderPath($global_folder_id);
             $folder->folder_children = Folder::getFolderChildren($global_folder_id);
+            $folder->type = "folder";
             return $folder;
         }
     }

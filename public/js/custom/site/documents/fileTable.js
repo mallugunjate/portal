@@ -1,5 +1,4 @@
 
-
 var fillTable = function(data){
 
 	//console.log( data );
@@ -13,7 +12,7 @@ var fillTable = function(data){
 
 	var banner_id = $("input[name='banner_id']").val();
 	
-	if ( data.type == "week") {
+	if ( data.folder.type == "week") {
 		if( !(data.folder === null) ) {
 			$("#folder-title h2").html("Week " + data.folder.week_number)
 			$("#folder-title").attr('data-folderId', data.folder.global_folder_id)
@@ -51,12 +50,22 @@ var folderFill = function(data)
 		$('#folder-table').append('<tbody>');
 		_.each(folders, function(i){
 
-		
+			if (data.folder.has_weeks == 1) {
 
-			$('#folder-table').append('<tr>'+
+				$('#folder-table').append('<tr>'+
+										' <td><i class="fa fa-folder"></i> <a class="folder" id="' + i.global_folder_id  +'" href="/document#!/' + i.global_folder_id + '"> Week ' +  i.week_number +'</a></td>'+
+										' <td>' + i.updated_at +'</td>'+
+									'</tr>')
+			}
+			else{
+
+				$('#folder-table').append('<tr>'+
 										' <td><i class="fa fa-folder"></i> <a class="folder" id="' + i.global_folder_id  +'" href="/document#!/' + i.global_folder_id + '">' + i.name+'</a></td>'+
 										' <td>' + i.updated_at +'</td>'+
 									'</tr>')
+
+			}
+			
 		});
 		$('#folder-table').append('</tbody>');
 		$("#folder-table").tablesorter({
