@@ -9,6 +9,7 @@ use Illuminate\Support\Collection;
 use App\Models\Document\FolderStructure;
 use App\Models\Tag\Tag;
 use App\Models\Tag\ContentTag;
+use Carbon\Carbon;
 
 
 class Folder extends Model
@@ -152,19 +153,21 @@ class Folder extends Model
         
 
         if ($folder_type == "week") {
-            $response["type"] = "week";
+            
             $week = Week::where('id', $folder_id)->first();
             $week->global_folder_id = $global_folder_id;
             $week->folder_path = Folder::getFolderPath($global_folder_id);
+            $week->type = "week";
             return $week;
 
         }
         if ($folder_type == "folder") {
-            $response["type"] = "folder";
+            
             $folder = Folder::where('id', $folder_id)->first();
             $folder->global_folder_id = $global_folder_id;
             $folder->folder_path = Folder::getFolderPath($global_folder_id);
             $folder->folder_children = Folder::getFolderChildren($global_folder_id);
+            $folder->type = "folder";
             return $folder;
         }
     }
@@ -203,9 +206,12 @@ class Folder extends Model
             ];      
         }
 
-        $folder->update($update);   
-        $banner_id = $folder->banner_id;
+        $folder->update($update);
 
+        $global_folder_id = \DB::table('folder_ids')->where('folder_id', $folder->id)->where('folder_type', 'folder')->first()->id;
+        Folder::updateTimestamp($global_folder_id, Carbon::now());
+        
+        $banner_id = $folder->banner_id;
         return $banner_id;
     }
 
@@ -271,7 +277,7 @@ class Folder extends Model
                     $weekFolder = Week::where('id', $currentFolder->folder_id)->first(); 
                     
                     $finalPath[$counter]["name"] = "Week " . $weekFolder->week_number;
-                    $finalPath[$counter]["global_folder_id"] = $currentFolder->folder_id;
+                    $finalPath[$counter]["global_folder_id"] = $currentFolder->id;
                     
                     $parent_id = $weekFolder->parent_id;
                     $parent = \DB::table('folder_ids')->where('id', $parent_id)->first();
@@ -316,6 +322,7 @@ class Folder extends Model
                 
                 if ($currentGlobalFolder->folder_type ==  'week') {
                     $folder_children = [];
+                    return $folder_children;
                 }
 
                 else if ($currentGlobalFolder->folder_type == 'folder') {
@@ -354,21 +361,42 @@ class Folder extends Model
         }
         else {
             $folder_children = [];
+            return $folder_children;
         }
 
     }
     
     public static function updateTags($id, $tags)
     {
-        ContentTag::where('content_type', 'folder')->where('content_id', $id)->delete();
-        foreach ($tags as $tag) {
-            ContentTag::create([
-               'content_type'   => 'folder',
-               'content_id'     => $id,
-               'tag_id'         => $tag
-            ]);
+        if (isset($tags)) {
+            ContentTag::where('content_type', 'folder')->where('content_id', $id)->delete();
+            foreach ($tags as $tag) {
+                ContentTag::create([
+                   'content_type'   => 'folder',
+                   'content_id'     => $id,
+                   'tag_id'         => $tag
+                ]);
+            }
         }
+        
         return;
+    }
+
+    public static function updateTimestamp($global_folder_id, $timestamp)
+    {
+        $folderPath = Folder::getFolderPath($global_folder_id);
+        \Log::info($folderPath);
+        foreach ($folderPath as $path) {
+            
+            $global_folder = \DB::table('folder_ids')->where('id', $path["global_folder_id"])->first();
+            
+            if ($global_folder->folder_type == 'folder') {   
+                $folder = Folder::where('id', $global_folder->folder_id)->first();
+                $folder->timestamps = false;
+                $folder->last_activity_at = $timestamp;
+                $folder->save();
+            }
+        }
     }
 
 }

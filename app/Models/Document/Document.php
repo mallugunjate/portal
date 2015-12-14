@@ -83,13 +83,13 @@ class Document extends Model
             $document->save();
             $lastInsertedId= $document->id;
 
+            //update file-folder table
             $isWeekFolder = $request->get('isWeekFolder');
             $folder_type = "folder"; 
             if ($isWeekFolder == "true") {
                 $folder_type = "week";
             }
             
-
             $global_folder_id = $request->get('folder_id');
 
             $documentfolderdetails = array(
@@ -97,14 +97,20 @@ class Document extends Model
                 'folder_id' => $global_folder_id
             );
             
-            // Document::createDocumentThumbnail($filename);
             $documentfolder = FileFolder::create($documentfolderdetails);
-            
+
+
+            //update folder timestamp
+            Folder::updateTimestamp($global_folder_id, $document->created_at);
+
+            //create thumbnail
             if($metadata["originalExtension"] == "jpg" || $metadata["originalExtension"] == "png" || $metadata["originalExtension"] == "gif" || $metadata["originalExtension"] == "pdf"){
                 Document::createDocumentThumbnail($filename);    
             }            
 
+
             $documentfolder->save();
+
 
 
         }
@@ -151,9 +157,12 @@ class Document extends Model
         if (!isset($id)) {
             $id = $request->get('file_id');
         }
-        $tags           = $request->get('tags'); 
-        Document::updateTags($id, $tags);
         
+        $tags = $request->get('tags'); 
+        if ($tags != null) {
+            Document::updateTags($id, $tags);
+        }
+
         $title          = $request->get('title');
         $description    = $request->get('description');
         $start          = $request->get('start');
@@ -168,6 +177,9 @@ class Document extends Model
 
         $document = Document::find($id);
         $document->update($metadata);
+
+        $global_parent_folder_id = FileFolder::where('document_id', $id)->first()->folder_id;
+        Folder::updateTimestamp($global_parent_folder_id, $document->updated_at );
         
     }
 
