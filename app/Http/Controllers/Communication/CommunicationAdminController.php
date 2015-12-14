@@ -97,7 +97,7 @@ class CommunicationAdminController extends Controller
         $communication_documents  = Communication::getDocumentDetails($id);
         $communication_packages  = Communication::getPackageDetails($id);
         $importance = \DB::table('communication_importance_levels')->lists('name', 'id');
-        
+        $tags = Tag::where('banner_id', $banner->id)->lists('name', 'id');
         $tag_ids = ContentTag::where('content_id', $id)->where('content_type', 'communication')->get()->pluck('tag_id');
         $selected_tags = Tag::findMany($tag_ids)->pluck('id')->toArray();
 
@@ -106,7 +106,8 @@ class CommunicationAdminController extends Controller
                                             ->with('communication_documents', $communication_documents)
                                             ->with('importance', $importance)
                                             ->with('banner', $banner)
-                                            ->with('tags', $selected_tags);
+                                            ->with('tags', $tags)
+                                            ->with('selected_tags', $selected_tags);
     }
 
 

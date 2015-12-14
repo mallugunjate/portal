@@ -85,8 +85,8 @@
             </div>
             <div>
               <span class="comunication-item-title">Tags:</span>
-                @foreach($tags as $tag)
-                  {{$tag}}
+                @foreach($selected_tags as $selected_tag)
+                  {{$tags[$selected_tag]}}
                 @endforeach
             </div>
         </div>
