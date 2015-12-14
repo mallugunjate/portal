@@ -3,13 +3,19 @@
 
     <title> @yield('title') </title>
 
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/fonts/font-awesome/css/font-awesome.css">
 
     <!-- Morris -->
-    <link href="/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/plugins/morris/morris-0.4.3.min.css">
 
-    <link href="/css/animate.css" rel="stylesheet">
-    <link href="/css/app.css" rel="stylesheet">
 
-    <link href="/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/plugins/sweetalert/sweetalert.css">
+    <link rel="stylesheet" type="text/css" href="/css/plugins/fullcalendar/fullcalendar.css">
+    <link rel="stylesheet" type="text/css" href="/css/plugins/fullcalendar/fullcalendar.print.css" media='print'>
+
+
+    <link rel="stylesheet" type="text/css" href="/css/animate.css">
+    <link rel="stylesheet" type="text/css" href="/css/app.css">
+
+    

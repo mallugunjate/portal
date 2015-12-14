@@ -56,5 +56,9 @@ class Event extends Model
         }
         return;
     }
+
+    // public static function getEvents($banner){
+        
+    // }
 }
 
