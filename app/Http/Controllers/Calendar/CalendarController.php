@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Event\Event;
 use App\Models\Event\EventTypes;
+use App\Models\Banner;
 
 class CalendarController extends Controller
 {
@@ -17,10 +18,22 @@ class CalendarController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        
-        return view('site.calendar.index');
+
+        $banner_id = $request->get('banner_id');
+
+        if(isset($banner_id)) {
+            
+            $banner = Banner::where('id', $banner_id)->first();
+        }
+        else{
+            $banner = Banner::where('id', 1)->first();
+        }        
+
+        $events = Event::where('banner', $banner->id)->get();
+        return view('site.calendar.index')
+                ->with('events', $events);
     }
 
     /**
