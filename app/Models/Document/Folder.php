@@ -9,6 +9,7 @@ use Illuminate\Support\Collection;
 use App\Models\Document\FolderStructure;
 use App\Models\Tag\Tag;
 use App\Models\Tag\ContentTag;
+use Carbon\Carbon;
 
 
 class Folder extends Model
@@ -203,9 +204,12 @@ class Folder extends Model
             ];      
         }
 
-        $folder->update($update);   
-        $banner_id = $folder->banner_id;
+        $folder->update($update);
 
+        $global_folder_id = \DB::table('folder_ids')->where('folder_id', $folder->id)->where('folder_type', 'folder')->first()->id;
+        Folder::updateTimestamp($global_folder_id, Carbon::now());
+        
+        $banner_id = $folder->banner_id;
         return $banner_id;
     }
 
@@ -362,14 +366,17 @@ class Folder extends Model
     
     public static function updateTags($id, $tags)
     {
-        ContentTag::where('content_type', 'folder')->where('content_id', $id)->delete();
-        foreach ($tags as $tag) {
-            ContentTag::create([
-               'content_type'   => 'folder',
-               'content_id'     => $id,
-               'tag_id'         => $tag
-            ]);
+        if (isset($tags)) {
+            ContentTag::where('content_type', 'folder')->where('content_id', $id)->delete();
+            foreach ($tags as $tag) {
+                ContentTag::create([
+                   'content_type'   => 'folder',
+                   'content_id'     => $id,
+                   'tag_id'         => $tag
+                ]);
+            }
         }
+        
         return;
     }
 
