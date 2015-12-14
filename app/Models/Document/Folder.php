@@ -250,7 +250,6 @@ class Folder extends Model
             }
     }
 
-<<<<<<< HEAD
 
     public static function getFolderPath($global_folder_id)
     {
@@ -359,7 +358,6 @@ class Folder extends Model
 
     }
     
-=======
     public static function updateTags($id, $tags)
     {
         ContentTag::where('content_type', 'folder')->where('content_id', $id)->delete();
@@ -372,5 +370,5 @@ class Folder extends Model
         }
         return;
     }
->>>>>>> tagging
+
 }
