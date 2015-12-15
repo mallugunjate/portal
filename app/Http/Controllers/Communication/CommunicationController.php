@@ -22,7 +22,7 @@ class CommunicationController extends Controller
      */
     public function index()
     {
-        return("this is the comm view");
+        return view('site.communications.index')
     }
 
     /**
