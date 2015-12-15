@@ -89,8 +89,7 @@ class AuthController extends Controller
         Mail::send( 'emails.approveRegistration',
                     [ 'approval_code'  => $approval_code,
                       'firstname'      => $user->firstname,
-                      'lastname'       => $user->lastname,
-                      // 'position'       => Position::find($request->position)->name
+                      'lastname'       => $user->lastname
                     ], 
                     function ($m) use ($user, $managerEmail, $managerProfile) {
                         $m->to($managerEmail, $managerProfile->firstname)
