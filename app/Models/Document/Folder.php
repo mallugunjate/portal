@@ -91,14 +91,24 @@ class Folder extends Model
         }
 
         $parentChildStructure = FolderStructure::where('child', $id)->first();
-        
-        if(isset($parentChildStructure)) {
-            $parent = Folder::where('id', $parentChildStructure->parent)->first();
-            $parent["has_child"] = 0;
-            $parent->save();
-            $parentChildStructure->delete();
-    
+        if (isset($parentChildStructure)) {
+            
+            $parent = $parentChildStructure->parent;
+            
+            $children = FolderStructure::where('parent', $parent)->get();
+
+            if (count($children) == 1) {
+                $parent = Folder::where('id', $parent)->first();
+                $parent["has_child"] = 0;
+                $parent->save();
+                $parentChildStructure->delete();
+            }
+            else if (count($children) > 1) {
+                $parentChildStructure->delete();
+            }
+
         }
+        
         
         $folder = Folder::find($id)->delete();  
 

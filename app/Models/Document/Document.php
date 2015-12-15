@@ -309,7 +309,6 @@ class Document extends Model
 
     public static function updateTags($id, $tags)
     {
-         
         ContentTag::where('content_type', 'document')->where('content_id', $id)->delete();
         foreach ($tags as $tag) {
             ContentTag::create([
@@ -318,6 +317,7 @@ class Document extends Model
                'tag_id'         => $tag
             ]);
         }
+            
         return;
     }
 }
