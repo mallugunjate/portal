@@ -39,7 +39,7 @@
                         </div>
                     @endif
 
-					<form class="m-t" role="form" method="POST" action="{{ url('/register') }}">
+					<form class="m-t" role="form" method="POST" action="{{ url('/admin/register') }}">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                         <div class="form-group">
@@ -54,9 +54,9 @@
                             <input type="email" class="form-control" name="email" placeholder="E-mail" value="{{ old('email') }}" required="">
                         </div>
 
-                        <div class="form-group">
+<!--                         <div class="form-group">
                             <input type="text" class="form-control" id="store" name="store" placeholder="Store" value="{{ old('store') }}" required=""> 
-                        </div>  
+                        </div>   -->
 
 
 						<!-- <div class="form-group">
@@ -103,7 +103,7 @@
     <script>
         $(document).ready(function(){
 
-            var stores = <?php echo $storeobj_list ?>;
+            
             $(function () {
               $('[data-toggle="popover"]').popover()
             })
@@ -113,9 +113,9 @@
                 radioClass: 'iradio_square-green',
             });
 
-            $("#store").autocomplete({
-                source : stores
-            })
+            // $("#store").autocomplete({
+            //     source : stores
+            // })
         });
     </script>
 </body>

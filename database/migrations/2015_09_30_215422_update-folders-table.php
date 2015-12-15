@@ -18,7 +18,7 @@ class UpdateFoldersTable extends Migration
             $table->boolean('has_weeks')->after('is_child');
             $table->integer('week_window_size')->after('has_weeks');
             $table->integer('banner_id')->unsigned()->after('week_window_size');
-
+            $table->timestamp('last_activity_at');
             $table->foreign('banner_id')->references('id')->on('banners')->onDelete('cascade');
         }); 
     }
@@ -36,6 +36,7 @@ class UpdateFoldersTable extends Migration
             $table->dropColumn('has_weeks');
             $table->dropColumn('week_window_size');
             $table->dropColumn('banner_id');
+            $table->dropColumn('last_activity_at');
         });
 
     }
