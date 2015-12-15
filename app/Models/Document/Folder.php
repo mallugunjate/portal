@@ -92,14 +92,24 @@ class Folder extends Model
         }
 
         $parentChildStructure = FolderStructure::where('child', $id)->first();
-        
-        if(isset($parentChildStructure)) {
-            $parent = Folder::where('id', $parentChildStructure->parent)->first();
-            $parent["has_child"] = 0;
-            $parent->save();
-            $parentChildStructure->delete();
-    
+        if (isset($parentChildStructure)) {
+            
+            $parent = $parentChildStructure->parent;
+            
+            $children = FolderStructure::where('parent', $parent)->get();
+
+            if (count($children) == 1) {
+                $parent = Folder::where('id', $parent)->first();
+                $parent["has_child"] = 0;
+                $parent->save();
+                $parentChildStructure->delete();
+            }
+            else if (count($children) > 1) {
+                $parentChildStructure->delete();
+            }
+
         }
+        
         
         $folder = Folder::find($id)->delete();  
 
@@ -128,7 +138,9 @@ class Folder extends Model
                 $child_folders = [];
                 $children = FolderStructure::where('parent', $folder->id)->get();
                 foreach ($children as $child) {
-                    $child_folders[$child->child] = Folder::find($child->child);   
+                    $child_folder = Folder::find($child->child);
+                    $child_folder["global_folder_id"] = \DB::table('folder_ids')->where('folder_id', $child_folder->id)->where('folder_type', 'folder')->first()->id;
+                    array_push($child_folders, $child_folder);
                 }
                 $params = [ "param_name"=>"has_children", "param_value"=>$child_folders];
             }

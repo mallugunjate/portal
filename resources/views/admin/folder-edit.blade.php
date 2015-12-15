@@ -73,7 +73,7 @@
                     
                     <div class="form-group">
                         {{ $child["name"] }}
-                        <a class="btn btn-default editFolder" href="/admin/folder/{{$child['id']}}/edit"> Edit </a>
+                        <a class="btn btn-default editFolder" href="/admin/folder/{{$child['global_folder_id']}}/edit"> Edit </a>
                     </div>
 
                 @endforeach
