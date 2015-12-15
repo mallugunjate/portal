@@ -3,8 +3,9 @@
 
 <head>
     @section('title', 'Communications')
-    @include('site.includes.head')
     <link href="/css/plugins/iCheck/custom.css" rel="stylesheet">
+    @include('site.includes.head')
+    
 </head>	
 
 <body class="fixed-navigation">
@@ -83,9 +84,24 @@
             </div>
                 <div class="mail-box">
 
+
                 <table class="table table-hover table-mail">
                 <tbody>
+
+                @foreach($communications as $communication)
+                
                 <tr class="unread">
+                    <td class="check-mail">
+                        <div class="icheckbox_square-green" style="position: relative;"><input type="checkbox" class="i-checks" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
+                    </td>
+                    <td class="mail-ontact"><a href="/communication/show/{{ $communication->id }}">{{ $communication->sender }}</a></td>
+                    <td class="mail-subject"><a href="/communication/show/{{ $communication->id }}">{{ $communication->subject }}</a></td>
+                    <td class=""><i class="fa fa-paperclip"></i></td>
+                    <td class="text-right mail-date">{{ $communication->send_at }}</td>
+                </tr>                
+
+                @endforeach
+                {{-- <tr class="unread">
                     <td class="check-mail">
                         <div class="icheckbox_square-green" style="position: relative;"><input type="checkbox" class="i-checks" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
                     </td>
@@ -255,7 +271,7 @@
                     <td class="mail-subject"><a href="mail_detail.html">Oor Lorem Ipsum is that it has a more-or-less normal.</a></td>
                     <td class=""></td>
                     <td class="text-right mail-date">Jun 11</td>
-                </tr>
+                </tr> --}}
                 </tbody>
                 </table>
 
@@ -270,7 +286,7 @@
     @include('site.includes.footer')       
 
     <script type="text/javascript" src="/js/plugins/fullcalendar/moment.min.js"></script>
-    
+  
     @include('site.includes.scripts')
     <script src="/js/plugins/iCheck/icheck.min.js"></script>
  

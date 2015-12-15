@@ -20,9 +20,21 @@ class CommunicationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('site.communications.index');
+        $banner_id = $request->get('banner_id');
+
+        if(isset($banner_id)) {
+            
+            $banner = Banner::where('id', $banner_id)->first();
+        }
+        else{
+            $banner = Banner::where('id', 1)->first();
+        }
+
+        $communications = Communication::where('banner_id', $banner->id)->get();
+        return view('site.communications.index')
+            ->with('communications', $communications);
     }
 
     /**
@@ -54,7 +66,9 @@ class CommunicationController extends Controller
      */
     public function show($id)
     {
-        return view('site.communications.message');
+        $communication = Communication::find($id);
+        return view('site.communications.message')
+            ->with('communication', $communication);
     }
 
     /**
