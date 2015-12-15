@@ -4,6 +4,7 @@
 <head>
     @section('title', 'Communications')
     @include('site.includes.head')
+    <link href="/css/plugins/iCheck/custom.css" rel="stylesheet">
 </head>	
 
 <body class="fixed-navigation">
@@ -31,11 +32,11 @@
                             <div class="space-25"></div>
                             <h5>Folders</h5>
                             <ul class="folder-list m-b-md" style="padding: 0">
-                                <li><a href="mailbox.html"> <i class="fa fa-inbox "></i> Inbox <span class="label label-warning pull-right">16</span> </a></li>
-                                <li><a href="mailbox.html"> <i class="fa fa-envelope-o"></i> Send Mail</a></li>
-                                <li><a href="mailbox.html"> <i class="fa fa-certificate"></i> Important</a></li>
-                                <li><a href="mailbox.html"> <i class="fa fa-file-text-o"></i> Drafts <span class="label label-danger pull-right">2</span></a></li>
-                                <li><a href="mailbox.html"> <i class="fa fa-trash-o"></i> Trash</a></li>
+                                <li><a href="/communication"> <i class="fa fa-inbox "></i> Inbox <span class="label label-warning pull-right">16</span> </a></li>
+{{--                                 <li><a href="mailbox.html"> <i class="fa fa-envelope-o"></i> Send Mail</a></li>
+                                <li><a href="mailbox.html"> <i class="fa fa-certificate"></i> Important</a></li> --}}
+{{--                                 <li><a href="mailbox.html"> <i class="fa fa-file-text-o"></i> Drafts <span class="label label-danger pull-right">2</span></a></li>
+                                <li><a href="mailbox.html"> <i class="fa fa-trash-o"></i> Trash</a></li> --}}
                             </ul>
                             <h5>Categories</h5>
                             <ul class="category-list" style="padding: 0">
@@ -271,9 +272,16 @@
     <script type="text/javascript" src="/js/plugins/fullcalendar/moment.min.js"></script>
     
     @include('site.includes.scripts')
-
-
+    <script src="/js/plugins/iCheck/icheck.min.js"></script>
  
+	<script>
+        $(document).ready(function(){
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+    </script>
 
     @include('site.includes.bugreport')
 

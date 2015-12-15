@@ -28,7 +28,7 @@
 
 
 
-                @if (Request::is('communication'))
+                @if (Request::is('communication') || Request::is('communication/*'))
                 <li class="active">
                 @else
                 <li>

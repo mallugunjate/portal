@@ -54,7 +54,7 @@ class CommunicationController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('site.communications.message');
     }
 
     /**
