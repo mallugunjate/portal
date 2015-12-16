@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'Dashboard\DashboardController@index');
+Route::get('/', 'StoreSelectorController@index');
 Route::get('/dashboard', 'Dashboard\DashboardController@index');
 
 Route::get('/document', 'Document\DocumentController@index');
