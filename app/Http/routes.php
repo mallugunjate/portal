@@ -17,6 +17,7 @@ Route::get('/dashboard', 'Dashboard\DashboardController@index');
 Route::get('/document', 'Document\DocumentController@index');
 Route::get('/calendar', 'Calendar\CalendarController@index');
 Route::get('/communication', 'Communication\CommunicationController@index');
+Route::get('/communication/show/{id}', 'Communication\CommunicationController@show');
 
 // Route::get('/home', function () {	
 // 	return view('home');

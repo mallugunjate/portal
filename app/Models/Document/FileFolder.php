@@ -17,6 +17,7 @@ class FileFolder extends Model
         foreach ($documents as $document) {
             
             $parent_folder_id = FileFolder::where('document_id', $document->id)->first()->folder_id;
+            // dd($parent_folder_id);
             if (isset($folderStructure[$parent_folder_id]["documents"])) {
                 array_push($folderStructure[$parent_folder_id]["documents"], $document);
             }    
