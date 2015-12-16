@@ -6,7 +6,11 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\MOdels\User;
+use App\Models\User;
+use App\Models\Banner;
+use App\Models\UserGroup;
+use App\Models\UserBanner;
+
 
 class UserAdminController extends Controller
 {
@@ -62,7 +66,17 @@ class UserAdminController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        $banners = Banner::lists('name', 'id');
+        $selected_banner_ids = UserBanner::where('user_id', $id)->get()->pluck('banner_id');
+        $selected_banners = Banner::findMany($selected_banner_ids)->pluck('id')->toArray();
+
+        $groups = UserGroup::lists('name', 'id');
+        
+        return view('superadmin.user.edit')->with('user', $user)
+                                            ->with('banners', $banners)
+                                            ->with('selected_banners', $selected_banners)
+                                            ->with('groups', $groups);
     }
 
     /**
@@ -74,7 +88,7 @@ class UserAdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        dd($request);
     }
 
     /**
