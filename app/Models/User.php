@@ -8,6 +8,7 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use App\Models\Profile\Profile;
+use App\Models\UserBanner;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
@@ -58,5 +59,26 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
         }
         return $user;
+    }
+    public static function updateAdminUser($id, $request)
+    {
+        $user = User::find($id);
+
+        $user['firstname'] = $request['firstname'];
+        $user['lastname']  = $request['lastname'];
+        $user['email']     = $request['email'];
+        $user['group_id']     = intval($request['group']);
+        $user->save();
+
+        UserBanner::where('user_id', $id)->delete();
+        $banners = $request['banners'];
+        foreach ($banners as $banner) {
+            UserBanner::create([
+                'user_id' => $id,
+                'banner_id' => $banner
+            ]);
+        }
+        return;
+
     }
 }

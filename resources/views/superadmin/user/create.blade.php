@@ -23,7 +23,7 @@
 
 		<div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
-                    <h2>Edit an Admin Info</h2>
+                    <h2>Add an Admin User</h2>
                     <ol class="breadcrumb">
                         <li>
                             <a href="/admin/home">Home</a>
@@ -32,7 +32,7 @@
                             <a href="/admin/home">User</a>
                         </li>
                         <li class="active">
-                            <strong>Edit an Admin</strong>
+                            <strong>Add an Admin</strong>
                         </li>
                     </ol>
                 </div>
@@ -46,7 +46,7 @@
 		                <div class="col-lg-12">
 		                    <div class="ibox">
 		                        <div class="ibox-title">
-		                            <h5>Edit Admin: {{ $user->firstname }} {{ $user->lastname}} </h5>
+		                            <h5>Add Admin </h5>
                                     <div class="ibox-tools">
                                         <a href="/admin/user/create" class="btn btn-primary" role="button"><i class="fa fa-plus"></i> Add New Admin</a>
                                         
@@ -55,18 +55,17 @@
 		                        <div class="ibox-content">
 
                                     <form method="get" class="form-horizontal">
-                                        <input type="hidden" name="userId" id="userId" value="{{ $user->id }}">
                                          
                                         <div class="form-group"><label class="col-sm-2 control-label">Name</label>
                                             <div class="col-sm-10">
-                                                <input name="firstname" value="{{$user->firstname}}" class="form-control">
-                                                <input name="lastname" value="{{$user->lastname}}" class="form-control">
+                                                <input name="firstname" value class="form-control">
+                                                <input name="lastname" value class="form-control">
                                             </div>
                                         </div>
 
                                         <div class="form-group"><label class="col-sm-2 control-label">Email</label>
                                             <div class="col-sm-10">
-                                                <input name="email" value="{{$user->email}}" class="form-control">
+                                                <input name="email" value class="form-control">
                                             </div>
                                         </div>                                        
 
@@ -74,7 +73,7 @@
 
                                         <div class="form-group"><label class="col-sm-2 control-label">Group</label>
                                             <div class="col-sm-10">
-                                                {!! Form::select('group', $groups , $user->group_id, ['class'=>'form-control', 'id'=>'select-group']) !!}
+                                                {!! Form::select('group', $groups , null, ['class'=>'form-control', 'id'=>'select-group']) !!}
                                             </div>
                                         </div>
 
@@ -87,7 +86,7 @@
 
                                                 <div class="col-sm-10">
 
-                                                    {!! Form::select('banners[]', $banners, $selected_banners, ['class'=>'chosen', 'multiple'=>'true', 'id'=>'select-banner']) !!}  
+                                                    {!! Form::select('banners[]', $banners, null, ['class'=>'chosen', 'multiple'=>'true', 'id'=>'select-banner']) !!}  
                                                 </div>
                                         </div>
 
@@ -97,7 +96,7 @@
                                         <div class="form-group">
                                             <div class="col-sm-4 col-sm-offset-2">
                                                 <a class="btn btn-white" href="/admin/home"><i class="fa fa-close"></i> Cancel</a>
-                                                <button class="user-update btn btn-primary" type="submit"><i class="fa fa-check"></i> Save changes</button>
+                                                <button class="user-create btn btn-primary" type="submit"><i class="fa fa-check"></i> Save changes</button>
 
                                             </div>
                                         </div>
@@ -134,7 +133,7 @@
 				</script>
 
 
-				<script src="/js/custom/superadmin/user/editUser.js"></script>
+				<script src="/js/custom/superadmin/user/addUser.js"></script>
 
 				@include('site.includes.bugreport')
 

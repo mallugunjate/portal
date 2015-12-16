@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use App\Models\UserBanner;
 
 class User extends Model implements AuthenticatableContract,
                                     AuthorizableContract,
@@ -28,7 +29,7 @@ class User extends Model implements AuthenticatableContract,
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password'];
+    protected $fillable = ['firstname', 'lastname' , 'email', 'password', 'group_id'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -36,4 +37,20 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+    public static function updateAdminUser($id, $request)
+    {
+        $user = User::find($id);
+
+        $user['firstname'] = $request['firstname'];
+        $user['lastname']  = $request['lastname'];
+        $user['email']     = $request['email'];
+        $user['group_id']  = intval($request['group']);
+        $user->save();
+
+        UserBanner::updateAdminBanners($id, $request['banners']);
+
+    }
+
+
 }

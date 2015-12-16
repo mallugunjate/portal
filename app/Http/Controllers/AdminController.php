@@ -11,7 +11,7 @@ use App\Models\Document\FolderStructure;
 use App\Models\Document\Folder;
 use App\Models\Document\Package;
 use App\Models\Communication\Communication;
-use App\Models\User;
+use App\User;
 
 class AdminController extends Controller
 {
@@ -57,7 +57,6 @@ class AdminController extends Controller
         if (!isset($defaultFolder)) {
             $defaultFolder = null;
         }
-
 
 
         if ($this->group_id == 1) {

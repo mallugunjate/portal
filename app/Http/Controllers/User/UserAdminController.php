@@ -33,7 +33,12 @@ class UserAdminController extends Controller
      */
     public function create()
     {
-        //
+        $banners = Banner::lists('name', 'id');
+
+        $groups = UserGroup::lists('name', 'id');
+        
+        return view('superadmin.user.create')->with('banners', $banners)
+                                        ->with('groups', $groups);
     }
 
     /**
@@ -44,7 +49,7 @@ class UserAdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -87,8 +92,9 @@ class UserAdminController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        dd($request);
+    {  
+        User::updateAdminUser($id, $request);    
+        return ($request->all());
     }
 
     /**
@@ -99,6 +105,7 @@ class UserAdminController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::where('id', $id)->delete();
+        return;
     }
 }
