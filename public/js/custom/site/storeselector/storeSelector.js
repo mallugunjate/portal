@@ -24,6 +24,8 @@ $( document ).ready(function() {
 			console.log("set the userStoreNumber = " + localStorage.getItem('userStoreNumber') );
 //			window.location="/dashboard";
 		}	
+
+
 	// }	
 });
 
@@ -42,7 +44,7 @@ var getBanners = function()
 var getStores = function(banner)
 {
 	$("#storeSelect").empty();	
-	$("#storeSelect").append("<option>--- Select Your Store ---</option>");
+	$("#storeSelect").append("<option></option>");
 	var jqxhr = $.getJSON( API_DOMAIN + "/banner/" + banner, function(json) {
  
     var i=0;
