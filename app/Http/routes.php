@@ -76,6 +76,8 @@ Route::resource('/admin/eventtypes', 'Calendar\EventTypesAdminController');
 //Tags
 Route::resource('/admin/tag', 'Tag\TagAdminController');
 
+//Users
+Route::resource('/admin/user', 'User\UserAdminController');
 
 /* API Routes */
 //get navigation
