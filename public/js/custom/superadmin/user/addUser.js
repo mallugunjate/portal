@@ -12,5 +12,56 @@ $(document).ready(function(){
 		console.log('email: '+ email );
 		console.log('group: '+ group );
 		console.log('banner: '+ banners);
+
+		var hasError = false;
+		if(firstname == '') {
+		swal("Oops!", "Need a first name.", "error"); 
+		hasError = true;
+		$(window).scrollTop(0);
+		}	
+
+	    if(lastname == '') {
+			swal("Oops!", "We need a lastname.", "error"); 
+			hasError = true;
+			$(window).scrollTop(0);
+		}
+
+	    if(email == '') {
+			swal("Oops!", "We need an email.", "error"); 
+			hasError = true;
+			$(window).scrollTop(0);
+		}
+
+		if(group == '') {
+			swal("Oops!", "We need an group.", "error"); 
+			hasError = true;
+			$(window).scrollTop(0);	
+		}
+
+		if(banners == '') {
+			swal("Oops!", "Select a banner.", "error"); 
+			hasError = true;
+			$(window).scrollTop(0);	
+		}
+
+	    if(hasError == false) {
+	    	
+			$.ajax({
+			    url: '/admin/user/',
+			    type: 'POST',
+			    data: {
+			    	firstname : firstname,
+			    	lastname : lastname,
+			    	email : email,
+			    	group : group,
+			    	banners : banners
+			    }
+			}).done(function(data){
+				console.log(data);
+			});    	
+	    }
+
+
+	    return false;
 	});
 });

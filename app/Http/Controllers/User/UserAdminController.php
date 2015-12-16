@@ -22,7 +22,7 @@ class UserAdminController extends Controller
     public function index()
     {
         
-        $user = User::whereIn('group_id', [1,2])->get();
+        $user = User::getAdminUsers();
         return $user;
     }
 
@@ -49,7 +49,8 @@ class UserAdminController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $user = User::createAdminUser($request);
+        return ($user);
     }
 
     /**

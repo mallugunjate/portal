@@ -15,7 +15,6 @@ var fillUserTable = function(data){
 									' <th> Action </th> </tr></thead>');
 	$('#user-table').append('<tbody>');
 	_.each(data, function(i){
-	console.log("heollllleee");
 	$('#user-table').append('<tr> <td>'+ i.firstname +'</td>'+
 								' <td>'+ i.lastname +'</td>'+
 								' <td>'+ i.email +'</td>'+

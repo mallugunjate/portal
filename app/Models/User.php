@@ -60,6 +60,39 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         }
         return $user;
     }
+
+    public static function getAdminUsers()
+    {
+        $users = User::whereIn('group_id', [1,2])->get();
+        foreach ($users as $user) {
+            $banners = UserBanner::where('user_id', $user->id)->get();
+            $user["banners"] = $banners;
+        }
+        return $users;
+    }
+    
+    public static function createAdminUser($request)
+    {
+        \Log::info("here");
+        $user = User::create([
+            'firstname' => $request['firstname'],
+            'lastname'  => $request['lastname'],
+            'email'     => $request['email'],
+            'group_id'  => intval($request['group'])
+        ]);
+
+        $banners = $request['banners'];
+        foreach ($banners as $banner) {
+            UserBanner::create([
+                'user_id' => $user->id,
+                'banner_id' => $banner
+            ]);
+        }
+        \Log::info($user);
+        return;
+
+    }
+
     public static function updateAdminUser($id, $request)
     {
         $user = User::find($id);
