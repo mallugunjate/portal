@@ -1,4 +1,4 @@
-const API_DOMAIN = "http://localhost:8888";
+
 
 $( document ).ready(function() {
 
@@ -30,7 +30,7 @@ $( document ).ready(function() {
 
 var getBanners = function()
 {
-    var jqxhr = $.getJSON( API_DOMAIN + "/banners", function(json) {
+    var jqxhr = $.getJSON( STORE_API_DOMAIN + "/banners", function(json) {
  
     var i=0;
         $.each(json, function(index, element) {
@@ -44,7 +44,7 @@ var getStores = function(banner)
 {
 	$("#storeSelect").empty();	
 	$("#storeSelect").append("<option></option>");
-	var jqxhr = $.getJSON( API_DOMAIN + "/banner/" + banner, function(json) {
+	var jqxhr = $.getJSON( STORE_API_DOMAIN + "/banner/" + banner, function(json) {
  
     var i=0;
         $.each(json, function(index, element) {
