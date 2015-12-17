@@ -2,32 +2,30 @@ const API_DOMAIN = "http://localhost:8888";
 
 $( document ).ready(function() {
 
-	// if( localStorage.getItem('userBanner') && localStorage.getItem('userStoreNumber') ) {
-	// //	window.location="/dashboard";
-	// } else {
-		console.log("check state of banner/store....");
-		console.log("Banner: " + localStorage.getItem('userBanner') );
-		console.log("Store: " + localStorage.getItem('userStoreNumber') );
+	if( localStorage.getItem('userBanner') && localStorage.getItem('userStoreNumber') ) {
+		window.location="/dashboard";
+	}
 
-		getBanners();
+	console.log("check state of banner/store....");
+	console.log("Banner: " + localStorage.getItem('userBanner') );
+	console.log("Store: " + localStorage.getItem('userStoreNumber') );
 
-		var bannerDropdown = document.getElementById('bannerSelect');
-		var storeDropdown = document.getElementById('storeSelect');
+	getBanners();
 
-		bannerDropdown.onchange = function() {
-			localStorage.setItem('userBanner', bannerDropdown.options[bannerDropdown.selectedIndex].value);
-			console.log("set the userBanner = " + localStorage.getItem('userBanner') );		
-			getStores( localStorage.getItem('userBanner') );
-		}
-		storeDropdown.onchange = function() {
-			localStorage.setItem('userStoreNumber', storeDropdown.options[storeDropdown.selectedIndex].value);
-			console.log("set the userStoreNumber = " + localStorage.getItem('userStoreNumber') );
-//			window.location="/dashboard";
-			alert("we're off!");
-		}	
+	var bannerDropdown = document.getElementById('bannerSelect');
+	var storeDropdown = document.getElementById('storeSelect');
 
-
-	// }	
+	bannerDropdown.onchange = function() {
+		localStorage.setItem('userBanner', bannerDropdown.options[bannerDropdown.selectedIndex].value);
+		console.log("set the userBanner = " + localStorage.getItem('userBanner') );		
+		getStores( localStorage.getItem('userBanner') );
+	}
+	storeDropdown.onchange = function() {
+		localStorage.setItem('userStoreNumber', storeDropdown.options[storeDropdown.selectedIndex].value);
+		console.log("set the userStoreNumber = " + localStorage.getItem('userStoreNumber') );
+		window.location="/dashboard";
+	}	
+	
 });
 
 var getBanners = function()
