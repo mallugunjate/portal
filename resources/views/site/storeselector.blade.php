@@ -11,7 +11,6 @@
 
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
-
     <link href="/css/animate.css" rel="stylesheet">
     <link href="/css/style.min.css" rel="stylesheet">
 
@@ -58,7 +57,7 @@
 
 
 
-
+    <script type="text/javascript" src="/js/env.js"></script>
 	<script type="text/javascript" src="/js/jquery-2.1.1.min.js"></script>
 	<script type="text/javascript" src="/js/custom/site/storeselector/storeSelector.js"></script>
     <script src="/js/bootstrap.min.js"></script>
