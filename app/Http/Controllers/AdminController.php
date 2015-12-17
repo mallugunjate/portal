@@ -13,6 +13,7 @@ use App\Models\Document\Package;
 use App\Models\Communication\Communication;
 use App\User;
 use App\Models\UserBanner;
+use App\Models\UserSelectedBanner;
 
 class AdminController extends Controller
 {
@@ -47,9 +48,9 @@ class AdminController extends Controller
         //     $banner = Banner::where('id', 1)->first();
         // }
 
-        $banner_id = $request->session()->get('banner_id');
+        $banner_id = UserSelectedBanner::where('user_id', \Auth::user()->id)->first()->banner_id;
 
-        \Log::info('banner id Admin Controller : ' . $banner_id);
+        \Log::info('banner id ********* Admin Controller : ' . \Auth::user()->firstname . " " . $banner_id);
 
         $banner  = Banner::find($banner_id);
 

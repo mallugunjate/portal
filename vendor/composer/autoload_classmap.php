@@ -42,6 +42,7 @@ return array(
     'CreateSubscriptionGroupsTable' => $baseDir . '/database/migrations/future/2015_08_18_222608_create_subscription_groups_table.php',
     'CreateTagsTable' => $baseDir . '/database/migrations/2015_12_07_234421_create_tags_table.php',
     'CreateUserGroupTable' => $baseDir . '/database/migrations/2015_12_15_181406_create_user_group_table.php',
+    'CreateUserSelectedBannerTable' => $baseDir . '/database/migrations/2015_12_17_231103_create_user_selected_banner_table.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
     'CreateWeeksTable' => $baseDir . '/database/migrations/2015_09_28_215144_create-weeks-table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
