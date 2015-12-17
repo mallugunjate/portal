@@ -1,0 +1,1 @@
+const STORE_API_DOMAIN = "http://localhost:8888";

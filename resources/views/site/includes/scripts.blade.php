@@ -1,4 +1,5 @@
     <!-- Mainly scripts -->
+    <script src="/js/env.js"></script>
     <script src="/js/jquery-2.1.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/plugins/metisMenu/jquery.metisMenu.js"></script>
@@ -14,6 +15,8 @@
 
     <!-- Alerts -->
     <script src="/js/plugins/sweetalert/sweetalert.min.js"></script>
+
+    <script src="/js/custom/site/storeselector/storeSelector.js"></script>
 
     <script type="text/javascript">
     // Config box
