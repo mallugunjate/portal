@@ -23,6 +23,7 @@ $( document ).ready(function() {
 			localStorage.setItem('userStoreNumber', storeDropdown.options[storeDropdown.selectedIndex].value);
 			console.log("set the userStoreNumber = " + localStorage.getItem('userStoreNumber') );
 //			window.location="/dashboard";
+			alert("we're off!");
 		}	
 
 
