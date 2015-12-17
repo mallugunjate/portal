@@ -116,6 +116,7 @@
     <script type="text/javascript" src="/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/js/custom/editFolder.js"></script>
     <script type="text/javascript" src="/js/plugins/chosen/chosen.jquery.js"></script>
+    <script type="text/javascript" src="/js/custom/admin/global/bannerSelector.js"></script>
     <script type="text/javascript">
         $(function () {
             $('.disabled-button-container').tooltip()

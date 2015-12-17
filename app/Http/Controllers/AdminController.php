@@ -12,16 +12,19 @@ use App\Models\Document\Folder;
 use App\Models\Document\Package;
 use App\Models\Communication\Communication;
 use App\User;
+use App\Models\UserBanner;
 
 class AdminController extends Controller
 {
     
     private $group_id;
+    private $user_id;
      /**
      * Instantiate a new AdminController instance.
      */
     public function __construct()
     {
+        $this->user_id = \Auth::user()->id;
         $this->group_id = \Auth::user()->group_id;
     }
 
@@ -76,12 +79,15 @@ class AdminController extends Controller
         }
         else if ($this->group_id == 2) {
 
-
+            $banner_ids = UserBanner::where('user_id', $this->user_id)->get()->pluck('banner_id');
+            $banners = Banner::whereIn('id', $banner_ids)->get();
+            
             return view('admin.document-view')
                 ->with('navigation', $navigation)
                 ->with('folders', $folders)
                 ->with('packageHash', $packageHash)
                 ->with('banner', $banner)
+                ->with('banners', $banners)
                 ->with('packages', $packages)
                 ->with('defaultFolder' , $defaultFolder);
         }

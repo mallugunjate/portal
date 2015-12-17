@@ -92,10 +92,10 @@
 
 <script type="text/javascript" src="/js/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/js/custom/createpackage.js"></script>
 <script type="text/javascript" src="/js/vendor/moment.js"></script>
 <script type="text/javascript" src="/js/custom/tags.js"></script>
 <script type="text/javascript" src="/js/vendor/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="/js/custom/admin/global/bannerSelector.js"></script>
 @include('admin.includes.scripts')
 	
 

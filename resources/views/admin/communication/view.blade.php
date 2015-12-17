@@ -107,6 +107,7 @@
 <script type="text/javascript" src="/js/vendor/jquery-ui.min.js"></script>
 <script type="text/javascript" src="/js/vendor/underscore-1.8.3.js"></script>
 <script type="text/javascript" src="/js/custom/communication.js"></script>
+<script type="text/javascript" src="/js/custom/admin/global/bannerSelector.js"></script>
 
 </html>
 

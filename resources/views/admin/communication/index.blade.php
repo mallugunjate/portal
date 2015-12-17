@@ -65,6 +65,7 @@
 </body>
 <script type="text/javascript" src="/js/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/custom/admin/global/bannerSelector.js"></script>
 <script type="text/javascript" src="/js/vendor/jquery-ui.min.js"></script>
 <script type="text/javascript" src="/js/vendor/underscore-1.8.3.js"></script>
 
