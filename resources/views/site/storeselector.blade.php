@@ -11,7 +11,6 @@
 
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
-
     <link href="/css/animate.css" rel="stylesheet">
     <link href="/css/style.min.css" rel="stylesheet">
 
