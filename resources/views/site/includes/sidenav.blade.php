@@ -18,12 +18,12 @@
                 </li>
 
 
-                @if (Request::is('/'))
+                @if (Request::is('dashboard'))
                 <li class="active">
                 @else
                 <li>
                 @endif 
-                    <a href="/"><i class="fa fa-home"></i> <span class="nav-label">Dashboard</span></a>
+                    <a href="/dashboard"><i class="fa fa-home"></i> <span class="nav-label">Dashboard</span></a>
                 </li>
 
 
