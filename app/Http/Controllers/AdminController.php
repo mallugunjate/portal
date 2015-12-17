@@ -37,15 +37,21 @@ class AdminController extends Controller
     public function index(Request $request)
     {
 
-        $banner_id = $request->get('banner_id');
+        // $banner_id = $request->get('banner_id');
 
-        if(isset($banner_id)) {
+        // if(isset($banner_id)) {
             
-            $banner = Banner::where('id', $banner_id)->first();
-        }
-        else{
-            $banner = Banner::where('id', 1)->first();
-        }
+        //     $banner = Banner::where('id', $banner_id)->first();
+        // }
+        // else{
+        //     $banner = Banner::where('id', 1)->first();
+        // }
+
+        $banner_id = $request->session()->get('banner_id');
+
+        \Log::info('banner id Admin Controller : ' . $banner_id);
+
+        $banner  = Banner::find($banner_id);
 
         $navigation = FolderStructure::getNavigationStructure($banner->id);
 

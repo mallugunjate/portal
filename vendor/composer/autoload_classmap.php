@@ -9,6 +9,7 @@ return array(
     'BannerTableSeeder' => $baseDir . '/database/seeds/BannerTableSeeder.php',
     'CreateActivitiesTable' => $baseDir . '/database/migrations/future/2015_08_05_203634_create_activities_table.php',
     'CreateActivityLevelsTable' => $baseDir . '/database/migrations/future/2015_08_05_210403_create_activity_levels_table.php',
+    'CreateBannerUserPivotTable' => $baseDir . '/database/migrations/2015_12_16_200336_create_banner_user_pivot_table.php',
     'CreateBannersTable' => $baseDir . '/database/migrations/2015_09_30_213442_create-banners-table.php',
     'CreateCareerPathsTable' => $baseDir . '/database/migrations/future/2015_08_05_210456_create_career_paths_table.php',
     'CreateCommunicationDocumentPivotTable' => $baseDir . '/database/migrations/2015_12_04_222116_create_communication_document_pivot_table.php',
