@@ -31,9 +31,9 @@
           <br>
           @include('admin.package.list', ['packages'=>$packages])
         <h4>Communications</h4>
-          <a href="/admin/communication/create?banner_id={{$banner->id}}"> Create New Communication</a>
+          <a href="/admin/communication/create"> Create New Communication</a>
           <br>
-          <a href="/admin/communication?banner_id={{$banner->id}}">View Communications</a>
+          <a href="/admin/communication}">View Communications</a>
   		</div>
   		<div class="content-container">
         

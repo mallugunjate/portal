@@ -14,6 +14,7 @@ use App\Models\Communication\CommunicationDocument;
 use App\Models\Communication\CommunicationPackage;
 use App\Models\Tag\Tag;
 use App\Models\Tag\ContentTag;
+use App\Models\UserSelectedBanner;
 
 class CommunicationAdminController extends Controller
 {
@@ -24,16 +25,13 @@ class CommunicationAdminController extends Controller
      */
     public function index(Request $request)
     {
-        $banner_id = $request['banner_id'];
-        if (isset($banner_id)) {
-            $banner = Banner::where('id', $banner_id)->first();
-        }
-        else {
-            $banner = Banner::find(1);
-        }
-        $communications = Communication::getAllCommunication($request["banner_id"]);
+        
+        $banner = UserSelectedBanner::getBanner();
+        $banners = Banner::all();
+        $communications = Communication::getAllCommunication($banner->id);
         return view('admin.communication.index')->with('communications', $communications)
-                                                ->with('banner', $banner);
+                                                ->with('banner', $banner)
+                                                ->with('banners', $banners);
     }
 
     /**
@@ -43,20 +41,15 @@ class CommunicationAdminController extends Controller
      */
     public function create(Request $request)
     {
-        $banner_id = $request['banner_id'];
-        if (isset($banner_id)) {
-            $banner = Banner::find($banner_id);
-        }
-        else {
-            $banner = Banner::find(1);
-        }
-    
+        $banner = UserSelectedBanner::getBanner();
+        $banners = Banner::all();
         $fileFolderStructure = FileFolder::getFileFolderStructure($banner->id);
         
         $packages = Package::getPackagesStructure($banner->id);
         $importance = \DB::table('communication_importance_levels')->lists('name', 'id');
         $tags = Tag::where('banner_id', $banner->id)->lists('name', 'id');
         return view('admin.communication.create')->with('banner', $banner)
+                                                ->with('banners', $banners)
                                                 ->with('importance', $importance)
                                                 ->with('navigation', $fileFolderStructure)
                                                 ->with('packages', $packages)
@@ -84,14 +77,9 @@ class CommunicationAdminController extends Controller
      */
     public function show($id, Request $request)
     {
-        $banner_id = $request["banner_id"];
-        if (isset($banner_id)) {
-            $banner = Banner::find($banner_id);
-        }
-        else{
-            $banner = Banner::find(1);
-        }
-
+        
+        $banner = UserSelectedBanner::getBanner();
+        $banners = Banner::all();
 
         $communication = Communication::find($id);
         $communication_documents  = Communication::getDocumentDetails($id);
@@ -106,6 +94,7 @@ class CommunicationAdminController extends Controller
                                             ->with('communication_documents', $communication_documents)
                                             ->with('importance', $importance)
                                             ->with('banner', $banner)
+                                            ->with('banners', $banners)
                                             ->with('tags', $tags)
                                             ->with('selected_tags', $selected_tags);
     }
@@ -119,21 +108,15 @@ class CommunicationAdminController extends Controller
      */
     public function edit($id, Request $request)
     {
-        $banner_id = $request["banner_id"];
-        if (isset($banner_id)) {
-            $banner = Banner::find($banner_id);
-        }
-        else{
-            $banner = Banner::find(1);
-        }
-
+        $banner = UserSelectedBanner::getBanner();
+        $banners = Banner::all();
 
         $communication = Communication::find($id);
         $communication_documents  = Communication::getDocumentDetails($id);
         $communication_packages  = Communication::getPackageDetails($id);
         
-        $fileFolderStructure = FileFolder::getFileFolderStructure($banner_id);
-        $packages = Package::getPackagesStructure($banner_id);
+        $fileFolderStructure = FileFolder::getFileFolderStructure($banner->id);
+        $packages = Package::getPackagesStructure($banner->id);
         $importance = \DB::table('communication_importance_levels')->lists('name', 'id');
         $tags = Tag::where('banner_id', $banner->id)->lists('name', 'id');
         $tag_ids = ContentTag::where('content_id', $id)->where('content_type', 'communication')->get()->pluck('tag_id');
@@ -144,6 +127,7 @@ class CommunicationAdminController extends Controller
                                             ->with('communication_documents', $communication_documents)
                                             ->with('importance', $importance)
                                             ->with('banner', $banner)
+                                            ->with('banners', $banners)
                                             ->with('navigation', $fileFolderStructure)
                                             ->with('packages', $packages)
                                             ->with('tags', $tags)

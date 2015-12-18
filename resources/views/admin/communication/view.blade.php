@@ -9,32 +9,7 @@
 <body class="container-fluid">
   <!-- navbar begins -->
   <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand">
-          @if(isset($banner))
-          <span>{{$banner->name}}</span>
-          <input type="hidden" name="banner_id" value="{{$banner->id}}">
-          @endif
-        </a>
-        
-      </div>
-      
-    <ul class="nav navbar-nav">
-      <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Banner <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="/admin/home?banner_id=1">Sportchek</a></li>
-            <li><a href="/admin/home?banner_id=2">Atmosphere</a></li>
-          </ul>
-      </li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-          <li><a href="/admin/folder?banner_id={{$banner->id}}">Edit Folders</a></li>
-      </ul>
-      
-    </div>
-    
+    @include('admin.banner', ['banners'=>$banners])
   </nav>
   <!-- navbar ends-->
   <div id="admin-container" >
@@ -93,7 +68,7 @@
         
   		</div>
       <div class="col-md-2">
-        <a href="/admin/communication/{{$communication->id}}/edit?banner_id={{$banner->id}}" class="btn btn-warning">Edit</a>
+        <a href="/admin/communication/{{$communication->id}}/edit" class="btn btn-warning">Edit</a>
         <div class="delete-communication btn btn-danger"  id="{{$communication->id}}">Delete</div>
       </div>
 
@@ -106,6 +81,7 @@
 <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/vendor/jquery-ui.min.js"></script>
 <script type="text/javascript" src="/js/vendor/underscore-1.8.3.js"></script>
+<script type="text/javascript" src="/js/plugins/chosen/chosen.jquery.js"></script>
 <script type="text/javascript" src="/js/custom/communication.js"></script>
 <script type="text/javascript" src="/js/custom/admin/global/bannerSelector.js"></script>
 
