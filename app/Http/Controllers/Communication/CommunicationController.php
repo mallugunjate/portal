@@ -12,6 +12,8 @@ use App\Models\Document\Package;
 use App\Models\Communication\Communication;
 use App\Models\Communication\CommunicationDocument;
 use App\Models\Communication\CommunicationPackage;
+use App\Models\Tag\Tag;
+use App\Models\Tag\ContentTag;
 
 class CommunicationController extends Controller
 {
@@ -67,8 +69,12 @@ class CommunicationController extends Controller
     public function show($id)
     {
         $communication = Communication::find($id);
+        $tag_ids = ContentTag::where('content_id', $id)->where("content_type", "communication")->get()->pluck("tag_id");
+        $tags = Tag::findmany($tag_ids);
         return view('site.communications.message')
-            ->with('communication', $communication);
+            ->with('communication', $communication)
+            ->with('tag_ids', $tag_ids)
+            ->with('tags', $tags);
     }
 
     /**
