@@ -13,8 +13,6 @@
 				@foreach($banners as $banner)
 					<li> <div class="banner-switch" data-banner-id ={{$banner->id}}> {{$banner->name}} </div> </li>
 				@endforeach
-			<!-- 		<li><a href="/admin/home?banner_id=1">Sportchek</a></li>
-				<li><a href="/admin/home?banner_id=2">Atmosphere</a></li> -->
 			</ul>
 		</li>
 	</ul>

@@ -26,8 +26,13 @@ class SetInitialBanner
             return redirect('/admin/login')->withErrors();
         }
 
-        UserSelectedBanner::where('user_id', $user_id)->delete();
-        $session = UserSelectedBanner::create(['user_id' => $user_id, 'selected_banner_id' => $banner_id]);
+        $exists = UserSelectedBanner::where('user_id', $user_id)->get();
+        if (!($exists)) {
+            UserSelectedBanner::create(['user_id' => $user_id, 'selected_banner_id' => $banner_id]);
+        }
+
+        // UserSelectedBanner::where('user_id', $user_id)->delete();
+        // $session = UserSelectedBanner::create(['user_id' => $user_id, 'selected_banner_id' => $banner_id]);
 
         return $next($request);
     }

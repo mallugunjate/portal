@@ -79,6 +79,9 @@ Route::resource('/admin/tag', 'Tag\TagAdminController');
 //Users
 Route::resource('/admin/user', 'User\UserAdminController');
 
+//Banner selector
+Route::resource('/admin/banner' , 'AdminSelectedBannerController');
+
 /* API Routes */
 //get navigation
 Route::get('/api/v1/banner/{id}/navigation', 'Api\V1\ApiController@getNavigation');

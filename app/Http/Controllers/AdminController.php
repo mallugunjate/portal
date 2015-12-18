@@ -41,8 +41,6 @@ class AdminController extends Controller
 
         $banner_id = UserSelectedBanner::where('user_id', \Auth::user()->id)->first()->selected_banner_id;
 
-        \Log::info('banner id ********* Admin Controller : ' . \Auth::user()->firstname . " " );
-
         $banner  = Banner::find($banner_id);
 
         $navigation = FolderStructure::getNavigationStructure($banner->id);
