@@ -101,26 +101,7 @@
                 </tr>                
 
                 @endforeach
-
-                <tr class="read">
-                    <td class="check-mail">
-                        <div class="icheckbox_square-green" style="position: relative;"><input type="checkbox" class="i-checks" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
-                    </td>
-                    <td class="mail-ontact"><a href="/communication/show/">Sender Name</a></td>
-                    <td class="mail-subject"><a href="/communication/show/">Subject - this is an opened messsage</a></td>
-                    <td class=""><i class="fa fa-paperclip"></i></td>
-                    <td class="text-right mail-date"></td>
-                </tr>   
-
-                <tr class="unread">
-                    <td class="check-mail">
-                        <div class="icheckbox_square-green" style="position: relative;"><input type="checkbox" class="i-checks" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
-                    </td>
-                    <td class="mail-ontact"><a href="/communication/show/">Sender Name</a></td>
-                    <td class="mail-subject"><a href="/communication/show/">Subject - this is an opened messsage</a></td>
-                    <td class=""><i class="fa fa-paperclip"></i></td>
-                    <td class="text-right mail-date"></td>
-                </tr>                   
+                 
                 {{-- <tr class="unread">
                     <td class="check-mail">
                         <div class="icheckbox_square-green" style="position: relative;"><input type="checkbox" class="i-checks" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
