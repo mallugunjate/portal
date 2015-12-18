@@ -12,7 +12,14 @@ class CreateCommunicationsReadTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('communications_read', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('communication_id');
+            $table->integer('store_id');
+            $table->boolean('is_read');
+            $table->timestamps();
+            $table->softDeletes();
+        });
     }
 
     /**
@@ -22,6 +29,6 @@ class CreateCommunicationsReadTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('communications_read');
     }
 }
