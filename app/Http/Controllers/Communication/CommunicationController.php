@@ -34,6 +34,11 @@ class CommunicationController extends Controller
             $banner = Banner::where('id', 1)->first();
         }
 
+        // $id = $request->get('id');
+        // $storeno = $request->get('storeNumber');
+        // $banner = $request->get('storeBanner');
+
+
         $communications = Communication::where('banner_id', $banner->id)->get();
         return view('site.communications.index')
             ->with('communications', $communications);
@@ -68,6 +73,8 @@ class CommunicationController extends Controller
      */
     public function show($id)
     {
+
+
         $communication = Communication::find($id);
         $tag_ids = ContentTag::where('content_id', $id)->where("content_type", "communication")->get()->pluck("tag_id");
         $tags = Tag::findmany($tag_ids);

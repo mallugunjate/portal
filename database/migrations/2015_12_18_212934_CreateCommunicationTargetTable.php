@@ -15,7 +15,7 @@ class CreateCommunicationTargetTable extends Migration
         Schema::create('communications_target', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('communication_id');
-            $table->integer('store_id');
+            $table->string('store_id');
             $table->timestamps();
             $table->softDeletes();
         });
