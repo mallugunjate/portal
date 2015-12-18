@@ -11,7 +11,7 @@ use App\Models\Document\FileFolder;
 use Carbon\Carbon;
 use App\Models\Tag\Tag;
 use App\Models\Tag\ContentTag;
-
+use App\Models\UserSelectedBanner;
 
 class Document extends Model
 {
@@ -67,6 +67,8 @@ class Document extends Model
         $filename  = $metadata["modifiedName"] . "_" . $uniqueHash . "." . $metadata["originalExtension"];
 
         $upload_success = $request->file('document')->move($directory, $filename); //move and rename file        
+        
+        $banner = UserSelectedBanner::getBanner();
 
         if ($upload_success) {
             $documentdetails = array(
@@ -76,7 +78,7 @@ class Document extends Model
                 'upload_package_id' => $request->get('upload_package_id'),
                 'title'             => "no title",
                 'description'       => "no description",
-                'banner_id'         => intval($request->get('banner_id'))
+                'banner_id'         => $banner->id
             );
 
             $document = Document::create($documentdetails);

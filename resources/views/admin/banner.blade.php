@@ -16,6 +16,7 @@
 			</ul>
 		</li>
 	</ul>
+	
     <ul class="nav navbar-nav navbar-right">
           <li><a href="/admin/folder">Edit Folders</a></li>
     </ul>
