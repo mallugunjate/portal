@@ -144,7 +144,7 @@ class CommunicationAdminController extends Controller
     public function update(Request $request, $id)
     {
         Communication::updateCommunication($id, $request);
-        return redirect()->action('AdminController@index', ['banner_id' => $request["banner_id"]]);
+        return redirect()->action('AdminController@index');
     }
 
     /**
@@ -156,9 +156,6 @@ class CommunicationAdminController extends Controller
     public function destroy($id, Request $request)
     {
         Communication::deleteCommunication($id);
-        // Communication::find($id)->delete();
-        // CommunicationPackage::where('communication_id', $id)->delete();
-        // CommunicationDocument::where('communication_id', $id)->delete();
         return;
 
     }

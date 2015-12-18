@@ -4,6 +4,7 @@
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
 	<link href="/css/bootstrap-glyphicons.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="/css/vendor/jquery-ui.theme.min.css">
+  
   <link rel="stylesheet" type="text/css" href="/css/custom/communication.css">	
 </head>
 <body class="container-fluid">
