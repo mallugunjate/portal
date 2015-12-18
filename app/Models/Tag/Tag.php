@@ -3,7 +3,7 @@
 namespace App\Models\Tag;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\UserSelectedBanner;
 class Tag extends Model
 {
     protected $table = 'tags';
@@ -11,9 +11,10 @@ class Tag extends Model
 
     public static function storeTag($request)
     {
+        $banner = UserSelectedBanner::getBanner();
     	Tag::create([
     		'name' => $request['tag_name'],
-    		'banner_id' => $request['banner_id']
+    		'banner_id' => $banner->id
     	]);
     	return;
     }

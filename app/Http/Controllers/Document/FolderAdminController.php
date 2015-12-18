@@ -44,13 +44,6 @@ class FolderAdminController extends Controller
         
         $banner = UserSelectedBanner::getBanner();
         $banners = Banner::all();          
-        
-        if (isset($banner_id)) {
-            $banner = Banner::where('id', $banner_id)->first();
-        }
-        else{
-            $banner = Banner::where('id' , 1);
-        }
         return view('admin.create-folder')->with('banner', $banner)
                                          ->with('banners', $banners);
     }
