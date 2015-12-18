@@ -8,33 +8,9 @@
 <body class="container-fluid">
 	<!-- navbar begins -->
 	<nav class="navbar navbar-default">
-	    <div class="container-fluid">
-	      <div class="navbar-header">
-	        <a class="navbar-brand">
-	          @if(isset($banner))
-	          <span>{{$banner->name}}</span>
-	          <input type="hidden" name="banner_id" value="{{$banner->id}}">
-	          @endif
-	        </a>
-	        
-	      </div>
-	      
-	    <ul class="nav navbar-nav">
-	      <li class="dropdown">
-	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Banner <span class="caret"></span></a>
-	          <ul class="dropdown-menu">
-	            <li><a href="/admin/package/create?banner_id=1">Sportchek</a></li>
-	            <li><a href="/admin/package/create?banner_id=2">Atmosphere</a></li>
-	          </ul>
-	      </li>
-	    </ul>
-	    <ul class="nav navbar-nav navbar-right">
-	          <li><a href="/admin/home?banner_id={{$banner->id}}">View File Listing</a></li>
-	    </ul>
-	      
-	    </div>
+		@include('admin.banner', ['banners' =>$banners])    
 	    
-	  </nav>
+	</nav>
 	<!-- navbar ends-->
 	<div class="col-md-10 col-md-offset-1">
 
@@ -99,30 +75,37 @@
 		<div class="row">
 			<div id="add-more-files" class="btn btn-default">Add More Files</div>
 		</div>
-		<div class="file-listing row hidden">
-			@foreach ($navigation as $nav) 
+
+		<div id="document-listing" class="modal fade">
+		    <div class="modal-dialog">
+		        <div class="modal-content">
+		            <div class="modal-header">
+		                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		                <h4 class="modal-title">Select Documents</h4>
+		            </div>
+		            <div class="modal-body">
+		            	@foreach ($navigation as $nav) 
 						
-				@if (isset($nav["is_child"]) && ($nav["is_child"] == 0) )
-					
-					@include('admin.package.file-folder-structure-partial', ['navigation' =>$navigation, 'currentnode' => $nav])
-					
-				@endif
+							@if (isset($nav["is_child"]) && ($nav["is_child"] == 0) )
+								
+								@include('admin.package.file-folder-structure-partial', ['navigation' =>$navigation, 'currentnode' => $nav])
+								
+							@endif
 
-			@endforeach
-
-			<input class="btn btn-default" type="button" id="attach-selected-files" value="Add Selected Files" />
-			<div id="files-selected" >
-				<p>Files To be added:</p>
-			</div>
-			<div id="files-selected-to-add">
-
-			</div>
+						@endforeach
+		            </div>
+		            <div class="modal-footer">
+		                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		                <button type="button" class="btn btn-primary" id="attach-selected-files">Select Documents</button>
+		            </div>
+		        </div>
+		    </div>
 		</div>
-		
 
-		
-		
+		<div id="files-selected">
 
+		</div>
+				
 		{!! csrf_field() !!}
 		<div class="row">
 			<button type="submit" class="btn btn-default">Update Package</button>

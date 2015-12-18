@@ -9,6 +9,6 @@
 		}).done(function( data ){
 			console.log(data);
 			var banner_id = $("input[name='banner_id']").val();
-			window.location = '/admin/home?banner_id=' + banner_id;
+			window.location = '/admin/home';
 		});
 	});

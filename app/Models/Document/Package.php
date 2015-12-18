@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Document\Document;
 use App\Models\Tag\Tag;
 use App\Models\Tag\ContentTag;
-
+use App\Models\UserSelectedBanner;
 
 class Package extends Model
 {
@@ -31,12 +31,12 @@ class Package extends Model
         if (!isset($is_hidden)) {
             $is_hidden = 0;
         }
-        $banner_id = $request["banner_id"];
+        $banner = UserSelectedBanner::getBanner();
 
     	$package = Package::create([
     			'package_screen_name' 	=> $package_screen_name,
     			'package_name'			=> $package_name,
-    			'banner_id'				=> $banner_id,
+    			'banner_id'				=> $banner->id,
                 'start'                 => $start,
                 'end'                   => $end,
                 'is_hidden'             => $is_hidden

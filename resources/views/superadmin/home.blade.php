@@ -35,7 +35,7 @@
         <h4>Folders</h4>
           @include('admin.navigation-view', ['navigation'=>$navigation])
         <h4>Packages</h4>
-          <a href="/admin/package/create?banner_id={{$banner->id}}"> Create New Package</a>
+          <a href="/admin/package/create"> Create New Package</a>
           <br>
           @include('admin.package.list', ['packages'=>$packages])
         <h4>Communications</h4>
