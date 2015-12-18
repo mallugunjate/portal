@@ -2,7 +2,7 @@
 @if(count($nav["children"]) >0 )
 	<div class="folder" id={{$nav["id"]}} data-isWeek = false>
 	
-		<a class="editFolder fa fa-pencil" href="/admin/folder/{{$nav['id']}}/edit?banner_id={{$banner->id}}" >
+		<a class="editFolder fa fa-pencil" href="/admin/folder/{{$nav['id']}}/edit" >
 	
 			<div class="folder-name">
 				{{$nav["label"]}} 
@@ -20,7 +20,7 @@
 
 @elseif ( isset($nav["weeks"]) && count($nav["weeks"] > 0) )
 	<div class="folder" id={{$nav["id"]}} data-isWeek = false> 
-		<a class="editFolder fa fa-pencil" href="/admin/folder/{{$nav['id']}}/edit?banner_id={{$banner->id}}" >
+		<a class="editFolder fa fa-pencil" href="/admin/folder/{{$nav['id']}}/edit" >
 			<div class="folder-name">
 				{{$nav["label"]}} 
 			</div>
@@ -41,7 +41,7 @@
 
 @else
 	<div class="folder" id={{$nav["id"]}} data-isWeek = false>
-		<a class="editFolder fa fa-pencil" href="/admin/folder/{{$nav['id']}}/edit?banner_id={{$banner->id}}" >
+		<a class="editFolder fa fa-pencil" href="/admin/folder/{{$nav['id']}}/edit" >
 		<div class="folder-name"> 
 			{{$nav["label"]}}
 		</div>

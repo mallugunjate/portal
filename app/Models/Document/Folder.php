@@ -10,6 +10,7 @@ use App\Models\Document\FolderStructure;
 use App\Models\Tag\Tag;
 use App\Models\Tag\ContentTag;
 use Carbon\Carbon;
+use App\Models\UserSelectedBanner;
 
 
 class Folder extends Model
@@ -32,7 +33,7 @@ class Folder extends Model
     public static function storeFolder(Request $request)
     {
         $is_child = 0; 
-        $banner_id = 0; 
+        
         if ( null !==  $request->get('subfolder')) {
             $is_child = $request->get('subfolder');
             $banner_id = $request->get("banner_id");
@@ -48,15 +49,12 @@ class Folder extends Model
 
         }
 
-        $banner_id = 1;
-        if ( null !==  $request->get('banner_id')) {
-            $banner_id = $request->get('banner_id');
-        }            
+        $banner =  UserSelectedBanner::getBanner();      
 
         $folderdetails = array(
             'name'      => $request->get('foldername'),
             'is_child'  => $is_child,
-            'banner_id' => $banner_id,
+            'banner_id' => $banner->id,
             'has_weeks' => $has_weeks,
             'week_window_size' =>$week_window_size,
             'has_child'  => $has_child
@@ -73,7 +71,7 @@ class Folder extends Model
                 'folder_type'  => 'folder' 
             ]);
 
-        return $banner_id; 
+        return;
     }
 
     public static function deleteFolder($id)

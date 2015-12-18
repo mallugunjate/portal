@@ -17,7 +17,7 @@
 		</li>
 	</ul>
     <ul class="nav navbar-nav navbar-right">
-          <li><a href="/admin/folder?banner_id={{$banner->id}}">Edit Folders</a></li>
+          <li><a href="/admin/folder">Edit Folders</a></li>
     </ul>
       
 </div>

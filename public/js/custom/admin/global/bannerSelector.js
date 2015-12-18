@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
 	console.log('selected banner : ' + localStorage.getItem('admin-banner'));
-	$(".navbar-brand").find('span').text(localStorage.getItem("admin-banner"));
+	$(".navbar-brand").find('span').append('<a href="/admin/home">'+ localStorage.getItem('admin-banner') +'</a>');
 	
 	$(".banner-switch").click(function(){
 		
@@ -20,7 +20,7 @@ $(document).ready(function(){
 			data : { "_token" : $('[name="_token"]').val()}
 		}).done(function( data ){
 			console.log(data);
-			$(".navbar-brand").find('span').text(banner);
+			$(".navbar-brand").find('span').append('<a href="/admin/home">'+ banner +'</a>');
 			window.location = '/admin/home';
 		});
 

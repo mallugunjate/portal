@@ -24,21 +24,7 @@
 <body>
     <!-- navbar begins -->
       <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <a class="navbar-brand">
-              @if(isset($banner))
-              <span>{{$banner->name}}</span>
-              @endif
-            </a>
-            
-          </div>
-          
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="/admin/folder?banner_id={{$banner->id}}">Back to Folder Listing</a></li>
-        </ul
-          
-        </div>
+        @include('admin.banner', ['banners'=>$banners])
         
       </nav>
       <!-- navbar ends-->
