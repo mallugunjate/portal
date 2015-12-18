@@ -27,6 +27,7 @@ class AdminController extends Controller
     {
         $this->user_id = \Auth::user()->id;
         $this->group_id = \Auth::user()->group_id;
+        $this->middleware('banner');
     }
 
 
@@ -38,19 +39,9 @@ class AdminController extends Controller
     public function index(Request $request)
     {
 
-        // $banner_id = $request->get('banner_id');
+        $banner_id = UserSelectedBanner::where('user_id', \Auth::user()->id)->first()->selected_banner_id;
 
-        // if(isset($banner_id)) {
-            
-        //     $banner = Banner::where('id', $banner_id)->first();
-        // }
-        // else{
-        //     $banner = Banner::where('id', 1)->first();
-        // }
-
-        $banner_id = UserSelectedBanner::where('user_id', \Auth::user()->id)->first()->banner_id;
-
-        \Log::info('banner id ********* Admin Controller : ' . \Auth::user()->firstname . " " . $banner_id);
+        \Log::info('banner id ********* Admin Controller : ' . \Auth::user()->firstname . " " );
 
         $banner  = Banner::find($banner_id);
 

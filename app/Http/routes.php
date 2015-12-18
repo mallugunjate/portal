@@ -51,7 +51,7 @@ Route::get('/admin', function(){
 /* Admin Routes Begin 	*/
 
 //admin home
-Route::get('/admin/home', 'AdminController@index', ['middleware'=>'banner'] );
+Route::get('/admin/home', 'AdminController@index' );
 
 //FILES
 Route::get('/admin/document/add-meta-data', 'Document\DocumentAdminController@showMetaDataForm');
