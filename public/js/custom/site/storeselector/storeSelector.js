@@ -28,12 +28,8 @@ $( document ).ready(function() {
 			localStorage.setItem('userStoreNumber', storeDropdown.options[storeDropdown.selectedIndex].value);
 			localStorage.setItem('userStoreName', storeDropdown.options[storeDropdown.selectedIndex].text);
 			window.location="/" + localStorage.getItem('userStoreNumber');
-		}
-
-	
+		}	
 	}
-
-
 
 });
 
