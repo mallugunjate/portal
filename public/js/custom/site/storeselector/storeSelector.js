@@ -6,7 +6,7 @@ $( document ).ready(function() {
 	});
 	
 	if( !!localStorage.getItem('userStoreNumber') && window.location.pathname == "/" ) {
-		window.location="/dashboard";
+		window.location="/" + localStorage.getItem('userStoreNumber');
 	}
 
 	if( localStorage.getItem('userStoreNumber') == null && window.location.pathname != "/" ) {
@@ -27,16 +27,13 @@ $( document ).ready(function() {
 		storeDropdown.onchange = function() {
 			localStorage.setItem('userStoreNumber', storeDropdown.options[storeDropdown.selectedIndex].value);
 			localStorage.setItem('userStoreName', storeDropdown.options[storeDropdown.selectedIndex].text);
-
-			setStore(localStorage.getItem('userBanner'), localStorage.getItem('userStoreNumber'));	
-
-			window.location="/dashboard";
+			window.location="/" + localStorage.getItem('userStoreNumber');
 		}
 
 	
 	}
 
-	setStore(localStorage.getItem('userBanner'), localStorage.getItem('userStoreNumber'));
+
 
 });
 
@@ -64,28 +61,6 @@ var getStores = function(banner)
             i++;
         });
     })
-}
-
-var setStore = function(banner, storeno)
-{
-	console.log("creating hidden fields with: " + banner +", " +storeno);
-
-	// if( $('input[name="storeBanner"]').length && $('input[name="storeNumber"]').length ){
-	// 	input.setAttribute("value", banner);
-	// 	input.setAttribute("value", storeno);
-	// } else {
-	// 	var storeBannerInput = document.createElement("input");
-	// 	storeBannerInput.setAttribute("type", "hidden");
-	// 	storeBannerInput.setAttribute("name", "storeBanner");
-	// 	storeBannerInput.setAttribute("value", banner);
-	// 	document.getElementById("wrapper").appendChild(storeBannerInput);
-
-	// 	var storeNumberInput = document.createElement("input");
-	// 	storeNumberInput.setAttribute("type", "hidden");
-	// 	storeNumberInput.setAttribute("name", "storeNumber");
-	// 	storeNumberInput.setAttribute("value", storeno);
-	// 	document.getElementById("wrapper").appendChild(storeNumberInput);
-	// }
 }
 
 var resetStore = function()
