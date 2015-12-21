@@ -18,21 +18,20 @@ class SetInitialBanner
     public function handle($request, Closure $next)
     {
         $user_id = \Auth::user()->id;
-        $banner_id = UserBanner::where('user_id', $user_id)->first()->banner_id;
+        $default_banner_id = UserBanner::where('user_id', $user_id)->first()->banner_id;
         \Log::info('user_id ' . $user_id); 
-        \Log::info('$banner_id ' . $banner_id );       
+        \Log::info('$banner_id ' . $default_banner_id );       
         
-        if ( $banner_id == null ) {
+        if ( $default_banner_id == null ) {
             return redirect('/admin/login')->withErrors();
         }
 
         $exists = UserSelectedBanner::where('user_id', $user_id)->get();
-        if (!($exists)) {
-            UserSelectedBanner::create(['user_id' => $user_id, 'selected_banner_id' => $banner_id]);
-        }
-
-        // UserSelectedBanner::where('user_id', $user_id)->delete();
-        // $session = UserSelectedBanner::create(['user_id' => $user_id, 'selected_banner_id' => $banner_id]);
+        \Log::info($exists);
+        if (count($exists) == 0) {
+            
+            UserSelectedBanner::create(['user_id' => $user_id, 'selected_banner_id' => $default_banner_id]);
+        }        
 
         return $next($request);
     }
