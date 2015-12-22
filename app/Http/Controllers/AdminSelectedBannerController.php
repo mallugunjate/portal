@@ -10,6 +10,7 @@ use App\Models\UserSelectedBanner;
 
 class AdminSelectedBannerController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *

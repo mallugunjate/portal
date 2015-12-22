@@ -19,6 +19,15 @@ use App\Models\UserSelectedBanner;
 class PackageAdminController extends Controller
 {
     /**
+     * Instantiate a new packageAdminController instance.
+     */
+    public function __construct()
+    {
+        $this->middleware('admin.auth');
+        $this->middleware('banner');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

@@ -15,6 +15,16 @@ use App\Models\Tag\Tag;
 class CalendarAdminController extends Controller
 {
     /**
+     * Instantiate a new CalendarAdminController instance.
+     */
+    public function __construct()
+    {
+        $this->middleware('admin.auth');
+        $this->middleware('banner');
+    }
+
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
