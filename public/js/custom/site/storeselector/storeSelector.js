@@ -1,18 +1,30 @@
 $( document ).ready(function() {
 
+	var pathArray = window.location.pathname.split( '/' );
+
+	//binding for the "logout" button
 	$("#storeswitch").click(function() {
 		resetStore();
 		return;
 	});
 	
+	//direct to the dashboard if the localStorage value is set
 	if( !!localStorage.getItem('userStoreNumber') && window.location.pathname == "/" ) {
 		window.location="/" + localStorage.getItem('userStoreNumber');
 	}
 
+	//redirect to the store chooser if the localStorage value is not set
 	if( localStorage.getItem('userStoreNumber') == null && window.location.pathname != "/" ) {
 		window.location="/";
-	}		
+	}	
 
+	//redirect to store as set in localStorage in the event of a change to the URL
+	if( window.location.pathname != "/"  && localStorage.getItem('userStoreNumber') != pathArray[1] )
+	{
+		window.location="/" + localStorage.getItem('userStoreNumber');
+	}	
+
+	//store selection logic
 	var bannerDropdown = document.getElementById('bannerSelect');
 	var storeDropdown = document.getElementById('storeSelect');
 
