@@ -18,7 +18,7 @@
 	</ul>
 	
     <ul class="nav navbar-nav navbar-right">
-          <li><a href="/admin/folder">Edit Folders</a></li>
+          <li><a href="/admin/logout">Logout</a></li>
     </ul>
       
 </div>

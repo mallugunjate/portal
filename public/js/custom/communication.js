@@ -1,6 +1,9 @@
 $(document).ready(function(){
 	
 	formatDate();
+
+	getStoreNumbers();
+
 	$('#attach-selected-packages').on('click', function(){
 		$("#packages-selected").append('<p>Packages Attached:</p>');
 		$('input[name^="packages"]').each(function(){			
@@ -66,9 +69,50 @@ $(".delete-communication").click(function(){
 
 		})
 		.done(function(data) {
-			console.log(data);
-			window.location = '/admin/home';
+			//console.log(data);
+			window.location = '/admin/communication';
 		});
 	} 
 
 });
+
+var getStoreNumbers = function(){
+	$("#storeSelect").empty();	
+	$("#storeSelect").append("<option></option>");
+	var banner = localStorage.getItem('admin-banner-id');
+	var jqxhr = $.getJSON( STORE_API_DOMAIN + "/banner/" + banner, function(json) {
+ 	
+ 		var target_stores = $(".target_stores");
+        var target = [];
+		if (! (typeof target_stores  == "undefined") ) {
+			$.each(target_stores ,function (index, element){
+				target.push(element.value);
+			});
+		}
+
+    	var i=0;
+        
+        $.each(json, function(index, element) {
+        	console.log(element.store_number);
+            if(  target.indexOf(element.store_number) >= 0) {
+            	$("#storeSelect").append("<option value='"+ element.store_number +"' selected>"+ element.id + " " + element.name +"</option>");
+            }
+            else{
+            	$("#storeSelect").append("<option value='"+ element.store_number +"'>"+ element.id + " " + element.name +"</option>");	
+            }
+            
+            i++;
+        });
+        $("#storeSelect").chosen({
+        	width:"50%"
+        });
+        
+        
+		
+
+		
+        
+    });
+
+    
+}
