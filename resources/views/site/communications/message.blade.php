@@ -4,9 +4,14 @@
 <head>
     @section('title', 'Communications')
     @include('site.includes.head')
+    <meta name="csrf-token" content="{!! csrf_token() !!}"/>
 </head>	
 
 <body class="fixed-navigation">
+
+    <input type="hidden" id="communication_id" name="communication_id" value="{{ $communication->id }}">
+    <input type="hidden" id="store_id" name="store_id" value="{{ Request::segment(1) }}">
+
     <div id="wrapper">
     <nav class="navbar-default navbar-static-side" role="navigation">
         <div class="sidebar-collapse">
@@ -96,7 +101,7 @@
                 <div class="mail-body">
                     {!! $communication->body !!}
                 </div>
-                    <div class="mail-attachment">
+{{--                     <div class="mail-attachment">
                         <p>
                             <span><i class="fa fa-paperclip"></i> 2 attachments - </span>
                             <a href="#">Download all</a>
@@ -167,7 +172,7 @@
                         <div class="clearfix"></div>
 
 
-                </div>
+                </div> --}}
             </div>            
 
                 
@@ -181,7 +186,14 @@
     <script type="text/javascript" src="/js/plugins/fullcalendar/moment.min.js"></script>
     
     @include('site.includes.scripts')
-
+    <script type="text/javascript">
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
+    <script type="text/javascript" src="/js/custom/site/communications/markAsRead.js"></script>
 
  
 

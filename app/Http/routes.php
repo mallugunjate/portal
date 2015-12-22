@@ -11,17 +11,25 @@
 |
 */
 
-Route::get('/', 'StoreSelectorController@index');
-// Route::get('/dashboard', 'Dashboard\DashboardController@index');
-// 
 Route::pattern('storeno', '[0-9]+');
 Route::pattern('id', '[0-9]+');
 
+//STORE SELECTOR
+Route::get('/', 'StoreSelectorController@index');
+
+//DASHBOARD
 Route::get('/{storeno}', array('uses' => 'Dashboard\DashboardController@index'));
+
+//DOCUMENTS
 Route::get('/{storeno}/document', array('uses' => 'Document\DocumentController@index'));
+
+//CALENDAR
 Route::get('/{storeno}/calendar', array('uses' => 'Calendar\CalendarController@index'));
+
+//COMMUNICATIONS
 Route::get('/{storeno}/communication', array('uses' => 'Communication\CommunicationController@index'));
 Route::get('/{storeno}/communication/show/{id}', 'Communication\CommunicationController@show');
+Route::resource('/communication', 'Communication\CommunicationTargetController');
 
 // Route::get('/home', function () {	
 // 	return view('home');

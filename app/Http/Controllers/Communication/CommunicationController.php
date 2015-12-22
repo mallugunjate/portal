@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Communication;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request as RequestFacade; 
+use DB;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -12,8 +14,11 @@ use App\Models\Document\Package;
 use App\Models\Communication\Communication;
 use App\Models\Communication\CommunicationDocument;
 use App\Models\Communication\CommunicationPackage;
+use App\Models\Communication\CommunicationTarget;
 use App\Models\Tag\Tag;
 use App\Models\Tag\ContentTag;
+
+
 
 class CommunicationController extends Controller
 {
@@ -24,24 +29,15 @@ class CommunicationController extends Controller
      */
     public function index(Request $request)
     {
-        $banner_id = $request->get('banner_id');
+        $storeNumber = RequestFacade::segment(1);
 
-        if(isset($banner_id)) {
-            
-            $banner = Banner::where('id', $banner_id)->first();
-        }
-        else{
-            $banner = Banner::where('id', 1)->first();
-        }
+        $targetedCommunications = DB::table('communications_target')
+                ->join('communications', 'communications_target.communication_id', '=', 'communications.id')
+                ->where('communications_target.store_id', '=', $storeNumber)
+                ->get();
 
-        // $id = $request->get('id');
-        // $storeno = $request->get('storeNumber');
-        // $banner = $request->get('storeBanner');
-
-
-        $communications = Communication::where('banner_id', $banner->id)->get();
         return view('site.communications.index')
-            ->with('communications', $communications);
+            ->with('communications', $targetedCommunications);
     }
 
     /**
