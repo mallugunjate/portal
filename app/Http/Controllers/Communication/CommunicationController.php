@@ -36,8 +36,14 @@ class CommunicationController extends Controller
                 ->where('communications_target.store_id', '=', $storeNumber)
                 ->get();
 
+        $communicationCount = DB::table('communications_target')
+                ->where('store_id', $storeNumber)
+                ->whereNull('is_read')
+                ->count();
+
         return view('site.communications.index')
-            ->with('communications', $targetedCommunications);
+            ->with('communications', $targetedCommunications)
+            ->with('communicationCount', $communicationCount);
     }
 
     /**

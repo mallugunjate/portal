@@ -12,7 +12,7 @@
     <div id="wrapper">
     <nav class="navbar-default navbar-static-side" role="navigation">
         <div class="sidebar-collapse">
-          @include('site.includes.sidenav')
+          @include('site.includes.sidenav');
         </div>
     </nav>
 
@@ -33,7 +33,13 @@
                             <div class="space-25"></div>
                             <h5>Folders</h5>
                             <ul class="folder-list m-b-md" style="padding: 0">
-                                <li><a href="/{{ Request::segment(1) }}/communication"> <i class="fa fa-inbox "></i> Inbox <span class="label label-warning pull-right">16</span> </a></li>
+                                <li>
+                                    <a href="/{{ Request::segment(1) }}/communication"> <i class="fa fa-inbox "></i> Inbox 
+                                    @if($communicationCount > 0)
+                                    <span class="label label-warning pull-right">{{ $communicationCount }}</span> 
+                                    @endif
+                                    </a>
+                                </li>
 {{--                                 <li><a href="mailbox.html"> <i class="fa fa-envelope-o"></i> Send Mail</a></li>
                                 <li><a href="mailbox.html"> <i class="fa fa-certificate"></i> Important</a></li> --}}
 {{--                                 <li><a href="mailbox.html"> <i class="fa fa-file-text-o"></i> Drafts <span class="label label-danger pull-right">2</span></a></li>
@@ -78,7 +84,7 @@
                     </div>
                 </form> --}}
                 <h2>
-                    Inbox (16)
+                    Inbox <small>({{ count($communications) }})</small>
                 </h2>
 
             </div>
