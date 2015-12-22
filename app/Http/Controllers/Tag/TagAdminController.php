@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Tag\Tag;
 use App\Models\Banner;
+use App\Models\UserSelectedBanner;
 
 class TagAdminController extends Controller
 {
@@ -19,15 +20,11 @@ class TagAdminController extends Controller
     public function index(Request $request)
     {
 
-        $banner_id = $request["banner_id"];
-        if (isset($banner_id)) {
-            $banner = Banner::where('id', $banner_id)->first();
-        }
-        else{
-            $banner = Banner::find(1);
-        }
+        $banner = UserSelectedBanner::getBanner();
+        $banners = Banner::all();
         $tags = Tag::where('banner_id', $banner->id)->get();
         return view('admin.tag.index')->with('banner', $banner)
+                                    ->with('banners', $banners)
                                     ->with('tags', $tags);
     }
 
@@ -86,7 +83,7 @@ class TagAdminController extends Controller
     public function update(Request $request, $id)
     {
         Tag::updateTag($id, $request);
-        return redirect()->action('Tag\TagAdminController@index')->with('banner_id', $request["banner_id"]);
+        return redirect()->action('Tag\TagAdminController@index');
     }
 
     /**

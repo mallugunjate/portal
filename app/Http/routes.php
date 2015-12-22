@@ -28,16 +28,15 @@ Route::get('/{storeno}/communication/show/{id}', 'Communication\CommunicationCon
 // });
 
 //Authentication Routes
-Route::get('/login', 'Auth\AuthController@getLogin');
-Route::post('/login', 'Auth\AuthController@postLogin');
-Route::get('/logout', 'Auth\AuthController@getLogout');
+Route::get('/admin/login', 'Auth\AuthController@getLogin');
+Route::post('/admin/login', 'Auth\AuthController@postLogin');
+Route::get('/admin/logout', 'Auth\AuthController@getLogout');
 
 //Registration Routes
-// Route::get('/auth/register', 'Auth\AuthController@getRegister');
-Route::get('/register', 'Auth\AuthController@getRegister');
-Route::post('/register', 'Auth\AuthController@postRegister');
-Route::get('/activate/{activation_code}', 'Auth\AuthController@activateAccount');
-Route::get('/approve/{activation_code}', 'Auth\AuthController@approveAccount');
+Route::get('/admin/register', 'Auth\AuthController@getRegister');
+Route::post('/admin/register', 'Auth\AuthController@postRegister');
+// Route::get('/activate/{activation_code}', 'Auth\AuthController@activateAccount');
+// Route::get('/approve/{activation_code}', 'Auth\AuthController@approveAccount');
 
 
 //Password reset routes
@@ -55,7 +54,7 @@ Route::get('/admin', function(){
 /* Admin Routes Begin 	*/
 
 //admin home
-Route::get('/admin/home', 'AdminController@index');
+Route::get('/admin/home', 'AdminController@index' );
 
 //FILES
 Route::get('/admin/document/add-meta-data', 'Document\DocumentAdminController@showMetaDataForm');
@@ -80,6 +79,11 @@ Route::resource('/admin/eventtypes', 'Calendar\EventTypesAdminController');
 //Tags
 Route::resource('/admin/tag', 'Tag\TagAdminController');
 
+//Users
+Route::resource('/admin/user', 'User\UserAdminController');
+
+//Banner selector
+Route::resource('/admin/banner' , 'AdminSelectedBannerController');
 
 /* API Routes */
 //get navigation

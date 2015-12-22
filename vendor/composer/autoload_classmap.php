@@ -9,6 +9,7 @@ return array(
     'BannerTableSeeder' => $baseDir . '/database/seeds/BannerTableSeeder.php',
     'CreateActivitiesTable' => $baseDir . '/database/migrations/future/2015_08_05_203634_create_activities_table.php',
     'CreateActivityLevelsTable' => $baseDir . '/database/migrations/future/2015_08_05_210403_create_activity_levels_table.php',
+    'CreateBannerUserPivotTable' => $baseDir . '/database/migrations/2015_12_16_200336_create_banner_user_pivot_table.php',
     'CreateBannersTable' => $baseDir . '/database/migrations/2015_09_30_213442_create-banners-table.php',
     'CreateCareerPathsTable' => $baseDir . '/database/migrations/future/2015_08_05_210456_create_career_paths_table.php',
     'CreateCommunicationDocumentPivotTable' => $baseDir . '/database/migrations/2015_12_04_222116_create_communication_document_pivot_table.php',
@@ -42,6 +43,8 @@ return array(
     'CreateRolesTable' => $baseDir . '/database/migrations/future/2015_09_09_205316_create_roles_table.php',
     'CreateSubscriptionGroupsTable' => $baseDir . '/database/migrations/future/2015_08_18_222608_create_subscription_groups_table.php',
     'CreateTagsTable' => $baseDir . '/database/migrations/2015_12_07_234421_create_tags_table.php',
+    'CreateUserGroupTable' => $baseDir . '/database/migrations/2015_12_15_181406_create_user_group_table.php',
+    'CreateUserSelectedBannerTable' => $baseDir . '/database/migrations/2015_12_17_231103_create_user_selected_banner_table.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
     'CreateWeeksTable' => $baseDir . '/database/migrations/2015_09_28_215144_create-weeks-table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
@@ -560,5 +563,6 @@ return array(
     'UpdateDocumentsTable' => $baseDir . '/database/migrations/2015_10_27_145632_update_documents_table.php',
     'UpdateFoldersTable' => $baseDir . '/database/migrations/2015_09_30_215422_update-folders-table.php',
     'UpdatePackagesTable' => $baseDir . '/database/migrations/2015_12_02_230415_update_packages_table.php',
+    'UpdateUsersTable' => $baseDir . '/database/migrations/2015_12_15_182533_update_users_table.php',
     'UpdateWeeksTable' => $baseDir . '/database/migrations/2015_12_14_180605_update_weeks_table.php',
 );

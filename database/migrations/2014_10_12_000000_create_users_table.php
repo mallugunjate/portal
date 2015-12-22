@@ -18,11 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('lastname', 255);
             $table->string('email')->unique();            
             $table->string('password', 60);
-            $table->string('activation_code');
-            $table->boolean('active')->default(0);
-            $table->string('approval_code', 255);
-            $table->boolean('approved');
-            $table->dateTime('last_login')->default(null);
+            $table->timestamp('last_login')->default(null);
             $table->rememberToken();
             $table->timestamps();
         });

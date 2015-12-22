@@ -8,6 +8,7 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use App\Models\Profile\Profile;
+use App\Models\UserBanner;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
@@ -25,7 +26,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @var array
      */
-    protected $fillable = ['firstname', 'lastname', 'email', 'password', 'activation_code'];
+    protected $fillable = ['firstname', 'lastname', 'email', 'password', 'group_id'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -58,5 +59,59 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
         }
         return $user;
+    }
+
+    public static function getAdminUsers()
+    {
+        $users = User::whereIn('group_id', [1,2])->get();
+        foreach ($users as $user) {
+            $banners = UserBanner::where('user_id', $user->id)->get();
+            $user["banners"] = $banners;
+        }
+        return $users;
+    }
+    
+    public static function createAdminUser($request)
+    {
+        \Log::info("here");
+        $user = User::create([
+            'firstname' => $request['firstname'],
+            'lastname'  => $request['lastname'],
+            'email'     => $request['email'],
+            'group_id'  => intval($request['group'])
+        ]);
+
+        $banners = $request['banners'];
+        foreach ($banners as $banner) {
+            UserBanner::create([
+                'user_id' => $user->id,
+                'banner_id' => $banner
+            ]);
+        }
+        \Log::info($user);
+        return;
+
+    }
+
+    public static function updateAdminUser($id, $request)
+    {
+        $user = User::find($id);
+
+        $user['firstname'] = $request['firstname'];
+        $user['lastname']  = $request['lastname'];
+        $user['email']     = $request['email'];
+        $user['group_id']     = intval($request['group']);
+        $user->save();
+
+        UserBanner::where('user_id', $id)->delete();
+        $banners = $request['banners'];
+        foreach ($banners as $banner) {
+            UserBanner::create([
+                'user_id' => $id,
+                'banner_id' => $banner
+            ]);
+        }
+        return;
+
     }
 }

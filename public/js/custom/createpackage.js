@@ -19,7 +19,7 @@ $(document).ready(function(){
 
 
 $("#add-more-files").on('click', function(){
-	$(".file-listing").toggleClass('hidden');
+	$("#document-listing").modal('show');
 })
 
 $(".remove-file").on('click', function(){
@@ -30,7 +30,9 @@ $(".remove-file").on('click', function(){
 
 
 
-
+$("#add-documents").click(function(){
+	$("#document-listing").modal('show');
+});
 
 var formatDate = function(){
 	

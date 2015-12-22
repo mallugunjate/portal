@@ -14,6 +14,7 @@ use App\Models\Document\Document;
 use App\Models\Banner;
 use App\Models\Tag\Tag;
 use App\Models\Tag\ContentTag;
+use App\Models\UserSelectedBanner;
 
 class FolderAdminController extends Controller
 {
@@ -24,17 +25,13 @@ class FolderAdminController extends Controller
      */
     public function index(Request $request)
     {
-        $banner_id  = $request->get('banner_id');
-        if (isset($banner_id)) {
-            $banner = Banner::where('id', $banner_id)->first();
-        }
-        else {
-            $banner = Banner::where('id', 1)->first();
-        }  
+        $banner = UserSelectedBanner::getBanner();
+        $banners = Banner::all();  
 
         $navigation = FolderStructure::getNavigationStructure($banner->id);
         return view('admin.folderstructure-view')->with('navigation', $navigation)
-                                                     ->with('banner', $banner);     
+                                                     ->with('banner', $banner)
+                                                     ->with('banners', $banners);     
     }
 
     /**
@@ -44,15 +41,11 @@ class FolderAdminController extends Controller
      */
     public function create(Request $request)
     {
-        $banner_id = $request->get('banner_id');
-
-        if (isset($banner_id)) {
-            $banner = Banner::where('id', $banner_id)->first();
-        }
-        else{
-            $banner = Banner::where('id' , 1);
-        }
-        return view('admin.create-folder')->with('banner', $banner);
+        
+        $banner = UserSelectedBanner::getBanner();
+        $banners = Banner::all();          
+        return view('admin.create-folder')->with('banner', $banner)
+                                         ->with('banners', $banners);
     }
 
     /**
@@ -64,8 +57,9 @@ class FolderAdminController extends Controller
     public function store(Request $request)
     {
             
-        $banner_id = Folder::storeFolder($request);
-        return redirect()->action('Document\FolderAdminController@index', ['banner_id' => $banner_id]);
+        Folder::storeFolder($request);
+
+        return redirect()->action('Document\FolderAdminController@index');
 
     }
 
@@ -94,13 +88,8 @@ class FolderAdminController extends Controller
 
         $params =  Folder::getFolderDetails($id);
         
-        $banner_id = $request->get('banner_id');
-        if (isset($banner_id)) {
-            $banner = Banner::find($banner_id);
-        }
-        else {
-            $banner = Banner::find(1);
-        }
+        $banner = UserSelectedBanner::getBanner();
+        $banners = Banner::all();
 
         $tags = Tag::where('banner_id', $banner->id)->lists('name', 'id');
         $tag_ids = ContentTag::where('content_id', $id)->where('content_type', 'folder')->get()->pluck('tag_id');
@@ -109,6 +98,7 @@ class FolderAdminController extends Controller
         return view('admin.folder-edit')->with('folder', $folder)
                                         ->with('params', $params)
                                         ->with('banner', $banner)
+                                        ->with('banners', $banners)
                                         ->with('tags', $tags)
                                         ->with('selected_tags', $selected_tags);
         
@@ -134,7 +124,7 @@ class FolderAdminController extends Controller
         Folder::updateTags($global_folder_id, $request["tags"]);
         $banner_id = Folder::editFolderDetails(compact('id', 'name', 'children', 'weekWindowSize', 'removeWeeks'));
 
-        return redirect()->action('Document\FolderAdminController@index', ['banner_id'=> $banner_id]);
+        return redirect()->action('Document\FolderAdminController@index');
     }
 
     /**
@@ -147,10 +137,10 @@ class FolderAdminController extends Controller
     {
         
         $children = FolderStructure::where('parent', $id)->get();
-        if (count($children)) {
+        if (count($children)>0) {
             return "Delete inner Folders first";
         }
-        $banner_id = Folder::deleteFolder($id);
-        return $banner_id;
+        Folder::deleteFolder($id);
+        return;
     }
 }
