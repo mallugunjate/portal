@@ -15,6 +15,7 @@ use App\Models\Communication\CommunicationPackage;
 use App\Models\Tag\Tag;
 use App\Models\Tag\ContentTag;
 use App\Models\UserSelectedBanner;
+use App\Models\Communication\CommunicationTarget;
 
 class CommunicationAdminController extends Controller
 {
@@ -124,7 +125,8 @@ class CommunicationAdminController extends Controller
         $communication = Communication::find($id);
         $communication_documents  = Communication::getDocumentDetails($id);
         $communication_packages  = Communication::getPackageDetails($id);
-        
+        $communication_target_stores = CommunicationTarget::where('communication_id', $id)->get()->pluck('store_id');
+
         $fileFolderStructure = FileFolder::getFileFolderStructure($banner->id);
         $packages = Package::getPackagesStructure($banner->id);
         $importance = \DB::table('communication_importance_levels')->lists('name', 'id');
@@ -141,7 +143,8 @@ class CommunicationAdminController extends Controller
                                             ->with('navigation', $fileFolderStructure)
                                             ->with('packages', $packages)
                                             ->with('tags', $tags)
-                                            ->with('selected_tags', $selected_tags);
+                                            ->with('selected_tags', $selected_tags)
+                                            ->with('target_stores', $communication_target_stores);
     }
 
     /**

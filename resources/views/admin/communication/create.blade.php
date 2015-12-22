@@ -36,6 +36,12 @@
 			{!! Form::label('importance', 'Importance') !!}
 			{!! Form::select('importance', $importance, null,  ['class'=>'form-control']) !!}
 		</div>
+
+		<div>
+			{!! Form::label('stores[]', 'Select Stores:') !!}
+			<select name="stores[]" id="storeSelect"  multiple ="true" ></select>
+		</div>
+		
 		<div>
 			{!! Form::label('send_at', 'Send On') !!}
 			<div class="input-group date" id="datetimepicker1">
@@ -133,6 +139,7 @@
 <script type="text/javascript" src="/js/vendor/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="/js/plugins/ckeditor-standard/ckeditor.js"></script>
 <script type="text/javascript" src="/js/plugins/chosen/chosen.jquery.js"></script>
+<script type="text/javascript" src="/js/env.js"></script>
 <script type="text/javascript">
 	$(".date").datetimepicker({
           format: 'YYYY-MM-DD HH:mm:ss'
