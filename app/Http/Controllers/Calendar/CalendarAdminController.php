@@ -75,7 +75,8 @@ class CalendarAdminController extends Controller
         $event = Event::find($id);
         $event_type = EventType::find($id);
         $event_types_list = EventType::all();
-        $tags = Tag::where('banner_id', 1)->lists('name', 'id');
+        $banner = UserSelectedBanner::getBanner();
+        $tags = Tag::where('banner_id', $banner->id)->lists('name', 'id');
         $tag_ids = ContentTag::where('content_id', $id)->where('content_type', 'event')->get()->pluck('tag_id');
         $selected_tags = Tag::findMany($tag_ids)->pluck('id')->toArray();
 

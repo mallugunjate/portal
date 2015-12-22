@@ -52,7 +52,7 @@ Route::get('/admin', function(){
 /* Admin Routes Begin 	*/
 
 //admin home
-Route::get('/admin/home', 'AdminController@index');
+Route::get('/admin/home', 'AdminController@index' );
 
 //FILES
 Route::get('/admin/document/add-meta-data', 'Document\DocumentAdminController@showMetaDataForm');
@@ -79,6 +79,9 @@ Route::resource('/admin/tag', 'Tag\TagAdminController');
 
 //Users
 Route::resource('/admin/user', 'User\UserAdminController');
+
+//Banner selector
+Route::resource('/admin/banner' , 'AdminSelectedBannerController');
 
 /* API Routes */
 //get navigation

@@ -14,6 +14,8 @@ use App\Models\Banner;
 use App\Models\Document\DocumentPackage;
 use App\Models\Tag\Tag;
 use App\Models\Tag\ContentTag;
+use App\Models\UserSelectedBanner;
+
 class PackageAdminController extends Controller
 {
     /**
@@ -23,8 +25,8 @@ class PackageAdminController extends Controller
      */
     public function index(Request $request)
     {
-        $banner_id = $request["banner_id"];
-        $packages = Package::getPackagesStructure($banner_id);
+        $banner = UserSelectedBanner::getBanner();
+        $packages = Package::getPackagesStructure($banner->id);
         return $packages;
     }
 
@@ -35,19 +37,15 @@ class PackageAdminController extends Controller
      */
     public function create(Request $request)
     {
-        $banner_id = $request['banner_id'];
-        if (isset($banner_id)) {
-            $banner = Banner::where('id', $banner_id)->first();
-        }
-        else {
-            $banner = Banner::where('id', 1)->first();
-        }  
+        $banner = UserSelectedBanner::getBanner();
+        $banners = Banner::all();
 
         $fileFolderStructure = FileFolder::getFileFolderStructure($banner->id);
         $tags = Tag::where('banner_id', $banner->id)->lists('name', 'id');
         
         return view('admin.package.create')
                     ->with('banner', $banner)
+                    ->with('banners',$banners)
                     ->with('navigation', $fileFolderStructure)
                     ->with('tags', $tags);
                     
@@ -62,7 +60,7 @@ class PackageAdminController extends Controller
     public function store(Request $request)
     {
         Package::storePackage($request);
-        return redirect()->action('AdminController@index', ['banner_id' => $request["banner_id"]]);
+        return redirect()->action('AdminController@index');
     }
 
     /**
@@ -91,13 +89,8 @@ class PackageAdminController extends Controller
     {
         $package = Package::find($id);
         $documentDetails = Package::getPackageDocumentDetails($id);
-        $banner_id = $request['banner_id'];
-        if (isset($banner_id)) {
-            $banner = Banner::where('id', $banner_id)->first();
-        }
-        else {
-            $banner = Banner::where('id', 1)->first();
-        }  
+        $banner = UserSelectedBanner::getBanner();
+        $banners = Banner::all(); 
 
         $fileFolderStructure = FileFolder::getFileFolderStructure($banner->id);
         $tags = Tag::where('banner_id', $banner->id)->lists('name', 'id');
@@ -108,6 +101,7 @@ class PackageAdminController extends Controller
         return view('admin.package.edit')->with('package', $package)
                                         ->with('documentDetails', $documentDetails)
                                         ->with('banner', $banner)
+                                        ->with('banners', $banners)
                                         ->with('navigation', $fileFolderStructure)
                                         ->with('tags', $tags)
                                         ->with('selected_tags', $selected_tags);
@@ -123,7 +117,7 @@ class PackageAdminController extends Controller
     public function update(Request $request, $id)
     {
         Package::updatePackage($request, $id);
-        return redirect()->action('AdminController@index', ['banner_id' => $request["banner_id"]]);
+        return redirect()->action('AdminController@index');
     }
 
     /**

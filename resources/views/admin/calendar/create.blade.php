@@ -165,15 +165,21 @@
                         autoclose: true
                     });
 
-<<<<<<< HEAD
+                    $(".chosen").chosen({
+                        width:'50%'
+                    });
+
+
 				</script>
 
 				<script src="/js/custom/admin/events/addEvent.js"></script>
+                <script type="text/javascript" src="/js/plugins/chosen/chosen.jquery.js"></script>
+
 
 				@include('site.includes.bugreport')
-=======
-                    $(".chosen").chosen();
->>>>>>> tagging
+
+                $(".chosen").chosen();
+
 
                 </script>
 

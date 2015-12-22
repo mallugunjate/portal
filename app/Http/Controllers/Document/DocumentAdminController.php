@@ -13,6 +13,8 @@ use App\Models\Document\FolderStructure;
 use App\Models\Banner;
 use App\Models\Tag\Tag;
 use App\Models\Tag\ContentTag;
+use App\Models\UserSelectedBanner;
+
 class DocumentAdminController extends Controller
 {
     /**
@@ -67,13 +69,8 @@ class DocumentAdminController extends Controller
     {
         $package = $request->get('package');
 
-        $banner_id = $request->get('banner_id');
-        if (isset($banner_id)) {
-            $banner = Banner::where('id', $banner_id)->first(); 
-        }
-        else{
-            $banner = Banner::where('id', 1)->first();
-        }
+        $banner = UserSelectedBanner::getBanner();
+        $banners = Banner::all();
 
         $parent = $request->get('parent');
         $tags = Tag::where('banner_id', $banner->id)->lists('name', 'id');
@@ -82,6 +79,7 @@ class DocumentAdminController extends Controller
         return view('admin.document-add-meta-data')
                 ->with('documents', $documents)
                 ->with('banner', $banner)
+                ->with('banners', $banners)
                 ->with('folder_id', $parent)
                 ->with('tags', $tags);
             
@@ -118,18 +116,14 @@ class DocumentAdminController extends Controller
     public function edit($id, Request $request)
     {
         $document = Document::find($id);
-        $banner_id = $request->get('banner_id');
-        if (isset($banner_id)) {
-            $banner = Banner::find($banner_id);
-        }
-        else {
-            $banner = Banner::find(1);
-        }
+        $banner = UserSelectedBanner::getBanner();
+        $banners = Banner::all();
         $tags = Tag::where('banner_id', $banner->id)->lists('name', 'id');
         $tag_ids = ContentTag::where('content_id', $id)->where('content_type', 'document')->get()->pluck('tag_id');
         $selected_tags = Tag::findMany($tag_ids)->pluck('id')->toArray();
         return view('admin.document-edit-meta-data')->with('document', $document)
                                                     ->with('banner', $banner)
+                                                    ->with('banners', $banners)
                                                     ->with('tags', $tags)
                                                     ->with('selected_tags', $selected_tags);
     }
@@ -147,7 +141,7 @@ class DocumentAdminController extends Controller
         Document::updateMetaData($request, $id);
         $parent = FileFolder::where('document_id', $id)->first()->folder_id;
         $banner_id = $request->get('banner_id');
-        return redirect()->action('AdminController@index', ['banner_id'=> $banner_id, 'parent'=>$parent]);
+        return redirect()->action('AdminController@index', ['parent'=>$parent]);
     }
 
     /**

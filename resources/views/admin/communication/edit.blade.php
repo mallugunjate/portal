@@ -8,33 +8,9 @@
 <body class="container-fluid">
 	<!-- navbar begins -->
 	<nav class="navbar navbar-default">
-	    <div class="container-fluid">
-	      <div class="navbar-header">
-	        <a class="navbar-brand">
-	          @if(isset($banner))
-	          <span>{{$banner->name}}</span>
-	          <input type="hidden" name="banner_id" value="{{$banner->id}}">
-	          @endif
-	        </a>
-	        
-	      </div>
-	      
-	    <ul class="nav navbar-nav">
-	      <li class="dropdown">
-	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Banner <span class="caret"></span></a>
-	          <ul class="dropdown-menu">
-	            <li><a href="/admin/package/create?banner_id=1">Sportchek</a></li>
-	            <li><a href="/admin/package/create?banner_id=2">Atmosphere</a></li>
-	          </ul>
-	      </li>
-	    </ul>
-	    <ul class="nav navbar-nav navbar-right">
-	          <li><a href="/admin/home?banner_id={{$banner->id}}">View File Listing</a></li>
-	    </ul>
-	      
-	    </div>
+		@include('admin.banner', ['banners'=>$banners])    
 	    
-	  </nav>
+	</nav>
 	  
 	<!-- navbar ends-->
 	<div class="col-md-10 col-md-offset-1">
@@ -194,6 +170,7 @@
 <script type="text/javascript" src="/js/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/custom/communication.js"></script>
+<script type="text/javascript" src="/js/custom/admin/global/bannerSelector.js"></script>
 <script type="text/javascript" src="/js/vendor/moment.js"></script>
 <script type="text/javascript" src="/js/vendor/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="/js/plugins/ckeditor-standard/ckeditor.js"></script>

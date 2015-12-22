@@ -15,31 +15,7 @@
 <body class="container-fluid">
   <!-- navbar begins -->
   <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand">
-          @if(isset($banner))
-          <span>{{$banner->name}}</span>
-          <input type="hidden" name="banner_id" value="{{$banner->id}}">
-          @endif
-        </a>
-        
-      </div>
-      
-    <ul class="nav navbar-nav">
-      <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Banner <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="/admin/home?banner_id=1">Sportchek</a></li>
-            <li><a href="/admin/home?banner_id=2">Atmosphere</a></li>
-          </ul>
-      </li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-          <li><a href="/admin/folder?banner_id={{$banner->id}}">Edit Folders</a></li>
-      </ul>
-      
-    </div>
+    @include('admin.banner', ['banners'=>$banners])
     
   </nav>
   <!-- navbar ends-->
@@ -51,13 +27,13 @@
         <h4>Folders</h4>
           @include('admin.navigation-view', ['navigation'=>$navigation])
         <h4>Packages</h4>
-          <a href="/admin/package/create?banner_id={{$banner->id}}"> Create New Package</a>
+          <a href="/admin/package/create"> Create New Package</a>
           <br>
           @include('admin.package.list', ['packages'=>$packages])
         <h4>Communications</h4>
-          <a href="/admin/communication/create?banner_id={{$banner->id}}"> Create New Communication</a>
+          <a href="/admin/communication/create"> Create New Communication</a>
           <br>
-          <a href="/admin/communication?banner_id={{$banner->id}}">View Communications</a>
+          <a href="/admin/communication}">View Communications</a>
   		</div>
   		<div class="content-container">
         
@@ -95,6 +71,7 @@
 <script type="text/javascript" src="/js/custom/admin/documents/deletePackage.js"></script>
 <script type="text/javascript" src="/js/custom/admin/documents/showPackage.js"></script>
 <script type="text/javascript" src="/js/custom/admin/documents/breadcrumb.js"></script>
+<script type="text/javascript" src="/js/custom/admin/global/bannerSelector.js"></script>
 <script type="text/javascript" src="/js/vendor/dropzone.js"></script>
 <script type="text/javascript" src="/js/custom/uploadDocument.js"></script>
 <script type="text/javascript" src="/js/vendor/tablesorter.min.js"></script>

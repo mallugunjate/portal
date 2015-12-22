@@ -1,31 +1,23 @@
 <?php
 
-namespace App\Http\Controllers\Tag;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Models\Tag\Tag;
-use App\Models\Banner;
 use App\Models\UserSelectedBanner;
 
-class TagAdminController extends Controller
+class AdminSelectedBannerController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-
-        $banner = UserSelectedBanner::getBanner();
-        $banners = Banner::all();
-        $tags = Tag::where('banner_id', $banner->id)->get();
-        return view('admin.tag.index')->with('banner', $banner)
-                                    ->with('banners', $banners)
-                                    ->with('tags', $tags);
+        //
     }
 
     /**
@@ -33,9 +25,9 @@ class TagAdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-
+        //
     }
 
     /**
@@ -46,8 +38,7 @@ class TagAdminController extends Controller
      */
     public function store(Request $request)
     {
-        Tag::storeTag($request);
-        return ($request->all());
+        //
     }
 
     /**
@@ -69,8 +60,7 @@ class TagAdminController extends Controller
      */
     public function edit($id)
     {
-        $tag = Tag::find($id);
-        return view('admin.tag.edit')->with('tag', $tag);
+        //
     }
 
     /**
@@ -82,8 +72,15 @@ class TagAdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Tag::updateTag($id, $request);
-        return redirect()->action('Tag\TagAdminController@index');
+        $user_id = \Auth::user()->id;
+        UserSelectedBanner::where('user_id', $user_id)->delete();
+        UserSelectedBanner::create([
+            'user_id' => $user_id,
+            'selected_banner_id' => $id
+
+        ]);
+        return action('AdminController@index');
+        //return to /admin/home but not run the middleware again
     }
 
     /**
@@ -94,7 +91,6 @@ class TagAdminController extends Controller
      */
     public function destroy($id)
     {
-        Tag::find($id)->delete();
-        return 'deleted';
+        //
     }
 }

@@ -15,9 +15,10 @@ class Event extends Model
 
     public static function storeEvent($request)
     {
-    	$event = Event::create([
+    	$banner = UserSelectedBanner::getBanner();
+        $event = Event::create([
 
-    		'banner_id' => intval($request['banner']),
+    		'banner_id' => $banner->id,
             'title' => $request['title'],
             'event_type' => $request['event_type'],
             'description' => $request['description'],

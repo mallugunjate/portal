@@ -15,6 +15,7 @@
     <script type="text/javascript" src="/js/vendor/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" src="/js/custom/submitmetadata.js"></script>
     <script type="text/javascript" src="/js/plugins/chosen/chosen.jquery.js"></script>
+    <script type="text/javascript" src="/js/custom/admin/global/bannerSelector.js"></script>
 
     <style>
     .glyphicon-ok{
@@ -28,16 +29,7 @@
 <body>
      <!-- navbar begins -->
       <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <a class="navbar-brand">
-              @if(isset($banner))
-              <span>{{$banner->name}}</span>
-              @endif
-            </a>
-            <input type="hidden" name="folder_id" value="{{$folder_id}}">
-          </div>
-        </div>
+        @include('admin.banner', ['banners'=>$banners])
         
       </nav>
       <!-- navbar ends-->
