@@ -16,6 +16,7 @@ class CreateCommunicationTargetTable extends Migration
             $table->increments('id');
             $table->integer('communication_id');
             $table->string('store_id');
+            $table->boolean('is_read');
             $table->timestamps();
             $table->softDeletes();
         });
