@@ -71,10 +71,8 @@ class CommunicationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($sn, $id)
     {
-
-
         $communication = Communication::find($id);
         $tag_ids = ContentTag::where('content_id', $id)->where("content_type", "communication")->get()->pluck("tag_id");
         $tags = Tag::findmany($tag_ids);

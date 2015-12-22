@@ -33,7 +33,7 @@
                             <div class="space-25"></div>
                             <h5>Folders</h5>
                             <ul class="folder-list m-b-md" style="padding: 0">
-                                <li><a href="/communication"> <i class="fa fa-inbox "></i> Inbox <span class="label label-warning pull-right">16</span> </a></li>
+                                <li><a href="/{{ Request::segment(1) }}/communication"> <i class="fa fa-inbox "></i> Inbox <span class="label label-warning pull-right">16</span> </a></li>
 {{--                                 <li><a href="mailbox.html"> <i class="fa fa-envelope-o"></i> Send Mail</a></li>
                                 <li><a href="mailbox.html"> <i class="fa fa-certificate"></i> Important</a></li> --}}
 {{--                                 <li><a href="mailbox.html"> <i class="fa fa-file-text-o"></i> Drafts <span class="label label-danger pull-right">2</span></a></li>
@@ -94,8 +94,8 @@
                     <td class="check-mail">
                         <div class="icheckbox_square-green" style="position: relative;"><input type="checkbox" class="i-checks" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
                     </td>
-                    <td class="mail-ontact"><a href="/communication/show/{{ $communication->id }}">{{ $communication->sender }}</a></td>
-                    <td class="mail-subject"><a href="/communication/show/{{ $communication->id }}">{{ $communication->subject }}</a></td>
+                    <td class="mail-ontact"><a href="communication/show/{{ $communication->id }}">{{ $communication->sender }}</a></td>
+                    <td class="mail-subject"><a href="communication/show/{{ $communication->id }}">{{ $communication->subject }}</a></td>
                     <td class=""><i class="fa fa-paperclip"></i></td>
                     <td class="text-right mail-date">{{ $communication->send_at }}</td>
                 </tr>                

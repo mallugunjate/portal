@@ -1,3 +1,4 @@
+
             <ul class="nav metismenu" id="side-menu">
                 <li class="nav-header">
 {{--                     <div class="dropdown profile-element"> <span>
@@ -18,33 +19,34 @@
                 </li>
 
 
-                @if (Request::is('dashboard'))
+
+                @if (Request::is( Request::segment(1) ))
                 <li class="active">
                 @else
                 <li>
                 @endif 
-                    <a href="/dashboard"><i class="fa fa-home"></i> <span class="nav-label">Dashboard</span></a>
+                    <a href="/{{ Request::segment(1) }}"><i class="fa fa-home"></i> <span class="nav-label">Dashboard</span></a>
                 </li>
 
 
 
-                @if (Request::is('communication') || Request::is('communication/*'))
+                @if (Request::segment(2) == 'communication')
                 <li class="active">
                 @else
                 <li>
                 @endif 
-                    <a href="/communication"><i class="fa fa-bullhorn"></i> <span class="nav-label">Communications</span> <span class="label label-primary pull-right">2</span></a>
+                    <a href="/{{ Request::segment(1) }}/communication"><i class="fa fa-bullhorn"></i> <span class="nav-label">Communications</span> <span class="label label-primary pull-right">2</span></a>
                 </li>            
 
 
                     
 
-                @if (Request::is('document'))
+                @if (Request::segment(2) == 'document')
                 <li class="active">
                 @else
                 <li>
                 @endif 
-                    <a href="/document"><i class="fa fa-file"></i> <span class="nav-label">Documents</span></a>
+                    <a href="/{{ Request::segment(1) }}/document"><i class="fa fa-file"></i> <span class="nav-label">Documents</span></a>
                 </li>                
 
 
@@ -55,7 +57,7 @@
                 @else
                 <li>
                 @endif                
-                    <a href="/calendar"><i class="fa fa-calendar"></i> <span class="nav-label">Calendar</span></a>
+                    <a href="/{{ Request::segment(1) }}/calendar"><i class="fa fa-calendar"></i> <span class="nav-label">Calendar</span></a>
                 </li>
 
 
