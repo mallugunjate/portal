@@ -13,6 +13,15 @@ use App\Models\Event\EventType;
 class EventTypesAdminController extends Controller
 {
     /**
+     * Instantiate a new EventTypesAdminController instance.
+     */
+    public function __construct()
+    {
+        $this->middleware('admin.auth');
+        $this->middleware('banner');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

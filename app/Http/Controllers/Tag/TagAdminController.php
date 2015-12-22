@@ -13,6 +13,15 @@ use App\Models\UserSelectedBanner;
 class TagAdminController extends Controller
 {
     /**
+     * Instantiate a new TagAdminController instance.
+     */
+    public function __construct()
+    {
+        $this->middleware('admin.auth');
+        $this->middleware('banner');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

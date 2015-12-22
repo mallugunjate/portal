@@ -15,6 +15,16 @@ use App\Models\UserBanner;
 class UserAdminController extends Controller
 {
     /**
+     * Instantiate a new UserAdminController instance.
+     */
+    public function __construct()
+    {        
+        $this->middleware('admin.auth');
+        $this->middleware('superadmin.auth');
+        $this->middleware('banner');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

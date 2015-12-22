@@ -18,6 +18,15 @@ use App\Models\UserSelectedBanner;
 class DocumentAdminController extends Controller
 {
     /**
+     * Instantiate a new DocumentAdminController instance.
+     */
+    public function __construct()
+    {
+        $this->middleware('admin.auth');
+        $this->middleware('banner');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return Response

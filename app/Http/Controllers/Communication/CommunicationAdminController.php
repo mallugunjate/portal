@@ -18,6 +18,16 @@ use App\Models\UserSelectedBanner;
 
 class CommunicationAdminController extends Controller
 {
+    
+    /**
+     * Instantiate a new CommunicationAdminController instance.
+     */
+    public function __construct()
+    {
+        $this->middleware('admin.auth');
+        $this->middleware('banner');
+    }
+
     /**
      * Display a listing of the resource.
      *

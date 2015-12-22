@@ -18,6 +18,16 @@ use App\Models\UserSelectedBanner;
 
 class FolderAdminController extends Controller
 {
+    
+    /**
+     * Instantiate a new FolderAdminController instance.
+     */
+    public function __construct()
+    {
+        $this->middleware('admin.auth');
+        $this->middleware('banner');
+    }
+
     /**
      * Display a listing of the resource.
      *
