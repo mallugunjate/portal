@@ -1,0 +1,23 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class UserBanner extends Model
+{
+    protected $table = 'banner_user';
+
+    protected $fillable = ['banner_id', 'user_id'];
+
+    public static function updateAdminBanner($user_id, $banners)
+    {
+    	UserBanner::where('user_id', $id)->delete();
+    	foreach ($banners as $banner) {
+    		UserBannser::create([
+    			'user_id' => $user_id,
+    			'banner_id'	=> $banner
+    		]);
+    	}
+    }
+}

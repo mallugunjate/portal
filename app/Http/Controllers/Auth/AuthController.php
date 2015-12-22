@@ -31,8 +31,10 @@ class AuthController extends Controller
     * Properties | define all the properties here 
     * to overwrite the laravel default properties such as routes.
     */
-    private $redirectTo = '/home';
-    private $loginPath = '/login';
+    private $redirectTo = '/admin/home';
+    private $loginPath = '/admin/login';
+    private $redirectPath = '/admin/home';
+    private $redirectAfterLogout = '/admin/login';
 
     /**
      * Create a new authentication controller instance.
@@ -69,68 +71,73 @@ class AuthController extends Controller
     protected function create(array $data)
     {
         return User::create([
+            'group_id'  => '2',
             'firstname' => $data['firstname'],
             'lastname'  => $data['lastname'],
             'email'     => $data['email'],
             'password'  => bcrypt($data['password']),
+            
         ]);
+
+
     }
 
-    protected function sendRegistrationApproval($request, $user)
-    {
-        $approval_code = str_random(60).$request->get('store');
-        $user->approved = 0;
-        $user->approval_code = $approval_code; 
-        $user->save();
+    // protected function sendRegistrationApproval($request, $user)
+    // {
+    //     $approval_code = str_random(60).$request->get('store');
+    //     $user->approved = 0;
+    //     $user->approval_code = $approval_code; 
+    //     $user->save();
 
-        $managerProfile = Profile::getManagerProfile($request->get('store'));
-        $managerEmail = Profile::getManagerEmail($request->get('store'));
+    //     $managerProfile = Profile::getManagerProfile($request->get('store'));
+    //     $managerEmail = Profile::getManagerEmail($request->get('store'));
         
-        Mail::send( 'emails.approveRegistration',
-                    [ 'approval_code'  => $approval_code,
-                      'firstname'      => $user->firstname,
-                      'lastname'       => $user->lastname,
-                      // 'position'       => Position::find($request->position)->name
-                    ], 
-                    function ($m) use ($user, $managerEmail, $managerProfile) {
-                        $m->to($managerEmail, $managerProfile->firstname)
-                          ->sender(env('MAIL_USERNAME'), $name = null)
-                          ->subject('Approve a new registration!');
-                    }
-                );
+    //     Mail::send( 'emails.approveRegistration',
+    //                 [ 'approval_code'  => $approval_code,
+    //                   'firstname'      => $user->firstname,
+    //                   'lastname'       => $user->lastname
+    //                 ], 
+    //                 function ($m) use ($user, $managerEmail, $managerProfile) {
+    //                     $m->to($managerEmail, $managerProfile->firstname)
+    //                       ->sender(env('MAIL_USERNAME'), $name = null)
+    //                       ->subject('Approve a new registration!');
+    //                 }
+    //             );
 
         
-    }
+    // }
 
 
-    protected function sendRegistrationActivation($user)
-    {
+    // protected function sendRegistrationActivation($user)
+    // {
         
-        $activation_code = str_random(60).$user->email;
+    //     $activation_code = str_random(60).$user->email;
 
-        $user->activation_code =  $activation_code;
+    //     $user->activation_code =  $activation_code;
     
-        $user->save();
+    //     $user->save();
         
-        Mail::send( 'emails.confirmRegistration', 
-                    ['activation_code'=>$activation_code], 
-                    function ($m) use ($user) {
-                        $m->to($user->email, $user->firstname)
-                          ->sender(env('MAIL_USERNAME'), $name = null)
-                          ->subject('Please activate your account!');
-                    }
-                );
+    //     Mail::send( 'emails.confirmRegistration', 
+    //                 ['activation_code'=>$activation_code], 
+    //                 function ($m) use ($user) {
+    //                     $m->to($user->email, $user->firstname)
+    //                       ->sender(env('MAIL_USERNAME'), $name = null)
+    //                       ->subject('Please activate your account!');
+    //                 }
+    //             );
 
-    }
+    // }
 
 
-    public function getRegister()
-    {
-        $client = new \GuzzleHttp\Client(['base_uri' => 'http://localhost:8080/stores']);
-        $storeobj_list = ($client->request('GET')->getBody()->getContents());
+    // public function getRegister()
+    // {
         
-        return view('auth.register')->with('storeobj_list', $storeobj_list);
-    }
+    //     // $client = new \GuzzleHttp\Client(['base_uri' => 'http://localhost:8080/stores']);
+        
+    //     // $storeobj_list = $client->request('GET')->getBody()->getContents();
+        
+    //     // return view('auth.register')->with('storeobj_list', $storeobj_list);
+    // }
 
 
     /* postRegister method overwriting the vendor method*/
@@ -145,46 +152,50 @@ class AuthController extends Controller
             );
         }
 
+        
         $user = $this->create($request->all());
+        Auth::login($user);
 
-        $this->sendRegistrationApproval($request, $user);
+        return redirect($this->redirectPath());
+
+        // $this->sendRegistrationApproval($request, $user);
         
-        return view('auth.activateAccount');
+        // return view('auth.activateAccount');
 
     }
 
 
-    public function activateAccount($code, User $user)
-    {
-        $activatedUser = $user->activateAccount($code);
-        if ($activatedUser) {
-            \Session::flash('message', "Your acccount has been activated!");
-            return redirect("/profile/create");
-        }
+    // public function activateAccount($code, User $user)
+    // {
+    //     $activatedUser = $user->activateAccount($code);
+    //     if ($activatedUser) {
+    //         \Session::flash('message', "Your acccount has been activated!");
+    //         return redirect("/profile/create");
+    //     }
         
-        \Session::flash('message', 'Your account couldn\'t be activated, please try again');
+    //     \Session::flash('message', 'Your account couldn\'t be activated, please try again');
         
-        return redirect('/');
-    }
+    //     return redirect('/');
+    // }
 
-    public function approveAccount($code, User $user)
-    {
-        $approvedUser = $user->approveAccount($code);
-        if ($approvedUser) {
-            \Session::flash('message', "User profile approved!");
-            $this->sendRegistrationActivation($approvedUser);
-        }
+    // public function approveAccount($code, User $user)
+    // {
+    //     $approvedUser = $user->approveAccount($code);
+    //     if ($approvedUser) {
+    //         \Session::flash('message', "User profile approved!");
+    //         $this->sendRegistrationActivation($approvedUser);
+    //     }
         
-        \Session::flash('message', 'Your account couldn\'t be activated, please try again');
+    //     \Session::flash('message', 'Your account couldn\'t be activated, please try again');
         
-        return view('auth.approved');
-    }
+    //     return view('auth.approved');
+    // }
 
-    protected function getCredentials(Request $request)
-    {
-        $creds = ( $request->only($this->loginUsername(), 'password' ) );
-        $creds["active"] = 1;
-        $creds["approved"] = 1;
-        return ($creds);
-    }
+    // protected function getCredentials(Request $request)
+    // {
+    //     $creds = ( $request->only($this->loginUsername(), 'password' ) );
+    //     $creds["active"] = 1;
+    //     $creds["approved"] = 1;
+    //     return ($creds);
+    // }
 }

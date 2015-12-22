@@ -11,9 +11,21 @@ use App\Models\Document\FolderStructure;
 use App\Models\Document\Folder;
 use App\Models\Document\Package;
 use App\Models\Communication\Communication;
+use App\User;
 
 class AdminController extends Controller
 {
+    
+    private $group_id;
+     /**
+     * Instantiate a new AdminController instance.
+     */
+    public function __construct()
+    {
+        $this->group_id = \Auth::user()->group_id;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -46,13 +58,34 @@ class AdminController extends Controller
             $defaultFolder = null;
         }
 
-        return view('admin.document-view')
-            ->with('navigation', $navigation)
-            ->with('folders', $folders)
-            ->with('packageHash', $packageHash)
-            ->with('banner', $banner)
-            ->with('packages', $packages)
-            ->with('defaultFolder' , $defaultFolder);
+
+        if ($this->group_id == 1) {
+
+
+            $banners = Banner::all();
+            $admin_users = User::whereIn('group_id',[1,2])->get();
+            $navigation = FolderStructure::getNavigationStructure($banner->id);
+            return view('superadmin.home')->with('banners', $banners)
+                                                ->with('admin_users', $admin_users)
+                                                ->with('navigation', $navigation) 
+                                                ->with('folders', $folders)
+                                                ->with('packageHash', $packageHash)
+                                                ->with('banner', $banner)
+                                                ->with('packages', $packages)
+                                                ->with('defaultFolder' , $defaultFolder);
+        }
+        else if ($this->group_id == 2) {
+
+
+            return view('admin.document-view')
+                ->with('navigation', $navigation)
+                ->with('folders', $folders)
+                ->with('packageHash', $packageHash)
+                ->with('banner', $banner)
+                ->with('packages', $packages)
+                ->with('defaultFolder' , $defaultFolder);
+        }
+        
     }
 
     /**

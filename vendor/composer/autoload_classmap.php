@@ -40,6 +40,7 @@ return array(
     'CreateRolesTable' => $baseDir . '/database/migrations/future/2015_09_09_205316_create_roles_table.php',
     'CreateSubscriptionGroupsTable' => $baseDir . '/database/migrations/future/2015_08_18_222608_create_subscription_groups_table.php',
     'CreateTagsTable' => $baseDir . '/database/migrations/2015_12_07_234421_create_tags_table.php',
+    'CreateUserGroupTable' => $baseDir . '/database/migrations/2015_12_15_181406_create_user_group_table.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
     'CreateWeeksTable' => $baseDir . '/database/migrations/2015_09_28_215144_create-weeks-table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
@@ -558,5 +559,6 @@ return array(
     'UpdateDocumentsTable' => $baseDir . '/database/migrations/2015_10_27_145632_update_documents_table.php',
     'UpdateFoldersTable' => $baseDir . '/database/migrations/2015_09_30_215422_update-folders-table.php',
     'UpdatePackagesTable' => $baseDir . '/database/migrations/2015_12_02_230415_update_packages_table.php',
+    'UpdateUsersTable' => $baseDir . '/database/migrations/2015_12_15_182533_update_users_table.php',
     'UpdateWeeksTable' => $baseDir . '/database/migrations/2015_12_14_180605_update_weeks_table.php',
 );

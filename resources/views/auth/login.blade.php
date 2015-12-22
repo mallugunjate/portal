@@ -31,7 +31,7 @@
             </p>
             <p>Login in.</p>
 
-					<form class="m-t" role="form" method="POST" action="{{ url('/login') }}">
+					<form class="m-t" role="form" method="POST" action="{{ url('/admin/login') }}">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						
 
