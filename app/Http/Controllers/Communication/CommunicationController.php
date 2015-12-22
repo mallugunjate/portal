@@ -36,7 +36,6 @@ class CommunicationController extends Controller
                 ->where('communications_target.store_id', '=', $storeNumber)
                 ->get();
 
-
         return view('site.communications.index')
             ->with('communications', $targetedCommunications);
     }
