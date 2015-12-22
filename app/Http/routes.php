@@ -12,23 +12,25 @@
 */
 
 Route::get('/', 'StoreSelectorController@index');
-Route::get('/dashboard', 'Dashboard\DashboardController@index');
+// Route::get('/dashboard', 'Dashboard\DashboardController@index');
+// 
+Route::pattern('storeno', '[0-9]+');
+Route::pattern('id', '[0-9]+');
 
-Route::get('/document', 'Document\DocumentController@index');
-Route::get('/calendar', 'Calendar\CalendarController@index');
-Route::get('/communication', 'Communication\CommunicationController@index');
-Route::get('/communication/show/{id}', 'Communication\CommunicationController@show');
+Route::get('/{storeno}', array('uses' => 'Dashboard\DashboardController@index'));
+Route::get('/{storeno}/document', array('uses' => 'Document\DocumentController@index'));
+Route::get('/{storeno}/calendar', array('uses' => 'Calendar\CalendarController@index'));
+Route::get('/{storeno}/communication', array('uses' => 'Communication\CommunicationController@index'));
+Route::get('/{storeno}/communication/show/{id}', 'Communication\CommunicationController@show');
 
 // Route::get('/home', function () {	
 // 	return view('home');
 // });
 
-
 //Authentication Routes
 Route::get('/login', 'Auth\AuthController@getLogin');
 Route::post('/login', 'Auth\AuthController@postLogin');
 Route::get('/logout', 'Auth\AuthController@getLogout');
-
 
 //Registration Routes
 // Route::get('/auth/register', 'Auth\AuthController@getRegister');

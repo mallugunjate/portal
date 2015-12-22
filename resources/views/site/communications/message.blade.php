@@ -23,7 +23,7 @@
 
 <div class="wrapper wrapper-content">
         <div class="row">
-            <div class="col-lg-3">
+            <div class="col-lg-2">
                 <div class="ibox float-e-margins">
                     <div class="ibox-content mailbox-content">
                         <div class="file-manager">
@@ -31,7 +31,7 @@
                             <div class="space-25"></div>
                             <h5>Folders</h5>
                             <ul class="folder-list m-b-md" style="padding: 0">
-                                <li><a href="/communication"> <i class="fa fa-inbox "></i> Inbox <span class="label label-warning pull-right">16</span> </a></li>
+                                <li><a href="/{{ Request::segment(1) }}/communication"> <i class="fa fa-inbox "></i> Inbox <span class="label label-warning pull-right">16</span> </a></li>
 <!--                                 <li><a href="mailbox.html"> <i class="fa fa-envelope-o"></i> Send Mail</a></li>
                                 <li><a href="mailbox.html"> <i class="fa fa-certificate"></i> Important</a></li>
                                 <li><a href="mailbox.html"> <i class="fa fa-file-text-o"></i> Drafts <span class="label label-danger pull-right">2</span></a></li>
@@ -63,7 +63,7 @@
                 </div>
             </div>
 
-<div class="col-lg-9 animated fadeInRight">
+<div class="col-lg-10 animated fadeInRight">
             <div class="mail-box-header">
 <!--                 <div class="pull-right tooltip-demo">
                     <a href="mail_compose.html" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Reply"><i class="fa fa-reply"></i> Reply</a>
@@ -78,6 +78,15 @@
                     <h5>
                         <span class="pull-right font-noraml">{{ $communication->send_at }}</span>
                         <span class="font-noraml">From: </span>{{ $communication->sender }}
+
+                        <ul class="tag-list" style="padding: 0">
+                        @foreach($tags as $tag)
+                            <li><a href=""><i class="fa fa-tag"></i> {{ $tag->name }}</a></li>
+                        @endforeach
+                        </ul>
+                        
+                            
+                        
                     </h5>
                 </div>
             </div>

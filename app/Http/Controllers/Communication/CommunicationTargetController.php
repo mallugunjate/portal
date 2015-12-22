@@ -6,42 +6,17 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Models\Banner;
-use App\Models\Document\FileFolder;
-use App\Models\Document\Package;
-use App\Models\Communication\Communication;
-use App\Models\Communication\CommunicationDocument;
-use App\Models\Communication\CommunicationPackage;
-use App\Models\Tag\Tag;
-use App\Models\Tag\ContentTag;
 
-class CommunicationController extends Controller
+class CommunicationTargetController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $banner_id = $request->get('banner_id');
-
-        if(isset($banner_id)) {
-            
-            $banner = Banner::where('id', $banner_id)->first();
-        }
-        else{
-            $banner = Banner::where('id', 1)->first();
-        }
-
-        // $id = $request->get('id');
-        // $storeno = $request->get('storeNumber');
-        // $banner = $request->get('storeBanner');
-
-
-        $communications = Communication::where('banner_id', $banner->id)->get();
-        return view('site.communications.index')
-            ->with('communications', $communications);
+        //
     }
 
     /**
@@ -71,15 +46,9 @@ class CommunicationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($sn, $id)
+    public function show($id)
     {
-        $communication = Communication::find($id);
-        $tag_ids = ContentTag::where('content_id', $id)->where("content_type", "communication")->get()->pluck("tag_id");
-        $tags = Tag::findmany($tag_ids);
-        return view('site.communications.message')
-            ->with('communication', $communication)
-            ->with('tag_ids', $tag_ids)
-            ->with('tags', $tags);
+        //
     }
 
     /**

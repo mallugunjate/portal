@@ -3669,17 +3669,17 @@ table.table-mail tr td {
 .check-mail {
   width: 40px;
 }
-.unread td a,
-.unread td {
-  font-weight: 600;
-  color: inherit;
-}
 .read td a,
 .read td {
   font-weight: normal;
   color: inherit;
 }
+.unread td a,
 .unread td {
+  font-weight: 600;
+  color: inherit;
+}
+.read td {
   background-color: #f9f8f8;
 }
 .ibox-content {

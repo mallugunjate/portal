@@ -6,34 +6,28 @@ $( document ).ready(function() {
 	});
 	
 	if( !!localStorage.getItem('userStoreNumber') && window.location.pathname == "/" ) {
-		// console.log( "null check: " + localStorage.getItem('userStoreNumber') );
-		window.location="/dashboard";
+		window.location="/" + localStorage.getItem('userStoreNumber');
 	}
 
-	// console.log("check state of banner/store....");
-	// console.log("Banner: " + localStorage.getItem('userBanner') );
-	// console.log("Store: " + localStorage.getItem('userStoreNumber') );
-	// console.log("Name: " + localStorage.getItem('userStoreName') );
+	if( localStorage.getItem('userStoreNumber') == null && window.location.pathname != "/" ) {
+		window.location="/";
+	}		
 
 	var bannerDropdown = document.getElementById('bannerSelect');
 	var storeDropdown = document.getElementById('storeSelect');
-
 
 	if( document.contains(bannerDropdown) ){
 
 		getBanners();
 
 		bannerDropdown.onchange = function() {
-			localStorage.setItem('userBanner', bannerDropdown.options[bannerDropdown.selectedIndex].value);
-			// console.log("set the userBanner = " + localStorage.getItem('userBanner') );		
+			localStorage.setItem('userBanner', bannerDropdown.options[bannerDropdown.selectedIndex].value);	
 			getStores( localStorage.getItem('userBanner') );
 		}
 		storeDropdown.onchange = function() {
 			localStorage.setItem('userStoreNumber', storeDropdown.options[storeDropdown.selectedIndex].value);
 			localStorage.setItem('userStoreName', storeDropdown.options[storeDropdown.selectedIndex].text);
-			// console.log("set the userStoreNumber = " + localStorage.getItem('userStoreNumber') );
-			// console.log("set the userStoreName = " + localStorage.getItem('userStoreName') );
-			window.location="/dashboard";
+			window.location="/" + localStorage.getItem('userStoreNumber');
 		}	
 	}
 
@@ -67,19 +61,9 @@ var getStores = function(banner)
 
 var resetStore = function()
 {
-	// console.log("-------- Before --------");
-	// console.log("Banner: " + localStorage.getItem('userBanner') );
-	// console.log("Store: " + localStorage.getItem('userStoreNumber') );
-	// console.log("Name: " + localStorage.getItem('userStoreName') );
-
 	localStorage.removeItem('userBanner');
 	localStorage.removeItem('userStoreNumber');
 	localStorage.removeItem('userStoreName');
-
-	// console.log("-------- After --------");	
-	// console.log("Banner: " + localStorage.getItem('userBanner') );
-	// console.log("Store: " + localStorage.getItem('userStoreNumber') );
-	// console.log("Name: " + localStorage.getItem('userStoreName') );
 
 	window.location="/";
 }

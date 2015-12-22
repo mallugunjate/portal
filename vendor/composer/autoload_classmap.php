@@ -14,6 +14,8 @@ return array(
     'CreateCommunicationDocumentPivotTable' => $baseDir . '/database/migrations/2015_12_04_222116_create_communication_document_pivot_table.php',
     'CreateCommunicationImportanceTable' => $baseDir . '/database/migrations/2015_12_03_214110_create_communication_importance_table.php',
     'CreateCommunicationPackagePivotTable' => $baseDir . '/database/migrations/2015_12_04_222108_create_communication_package_pivot_table.php',
+    'CreateCommunicationTargetTable' => $baseDir . '/database/migrations/2015_12_18_212934_CreateCommunicationTargetTable.php',
+    'CreateCommunicationsReadTable' => $baseDir . '/database/migrations/2015_12_18_211214_CreateCommunicationsReadTable.php',
     'CreateCommunicationsTable' => $baseDir . '/database/migrations/2015_12_03_214558_create_communications_table.php',
     'CreateContentTagPivotTable' => $baseDir . '/database/migrations/2015_12_09_200212_create_content_tag_pivot_table.php',
     'CreateDocumentPackagePivotTable' => $baseDir . '/database/migrations/2015_11_27_175201_create_document_package_pivot_table.php',
