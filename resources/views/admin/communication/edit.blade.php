@@ -43,6 +43,9 @@
 			@foreach ($target_stores as $store)
 			<input class="target_stores" value="{{$store}}" hidden>
 			@endforeach
+
+			{!! Form::label('allStores', 'Or select all stores:') !!}
+			{!! Form::checkbox('allStores', null, false ,['id'=> 'allStores'] ) !!}
 		</div>
 		<div>
 			{!! Form::label('send_at', 'Send On') !!}
