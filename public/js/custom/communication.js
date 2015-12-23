@@ -124,18 +124,18 @@ var getStoreNumbers = function(){
 
 
 $("#allStores").change(function(){
+
 	if ($("#allStores").is(":checked")) {
-		$("#storeSelect option").each(function(){
-			console.log($(this).val());
-			$(this).attr('selected', true);
+
+		$("#storeSelect option").each(function(index){			
+			$(this).attr('selected', 'selected');
 		});
 		$("#storeSelect").chosen();
 		
 	}
-	if ($("#allStores").not(":checked")) {
+	else if ($("#allStores").not(":checked")) {
 		$("#storeSelect option").each(function(){
-			console.log($(this).val());
-			$(this).attr('selected', false);
+			$(this).removeAttr('selected');
 		});
 		$("#storeSelect").chosen();
 		
