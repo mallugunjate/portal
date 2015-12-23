@@ -40,6 +40,8 @@
 		<div>
 			{!! Form::label('stores[]', 'Select Stores:') !!}
 			<select name="stores[]" id="storeSelect"  multiple ="true" ></select>
+			{!! Form::label('allStores', 'Or select all stores:') !!}
+			{!! Form::checkbox('allStores', null, false ,['id'=> 'allStores'] ) !!}
 		</div>
 		
 		<div>

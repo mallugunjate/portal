@@ -91,9 +91,17 @@ var getStoreNumbers = function(){
 		}
 
     	var i=0;
-        
-        $.each(json, function(index, element) {
-        	console.log(element.store_number);
+    	console.log(target.length);
+    	console.log(json.length);
+        if ( (target.length - 1) == json.length){
+        	$("#allStores").prop('checked', true);
+        	$.each(json, function(index, element) {
+        		$("#storeSelect").append("<option value='"+ element.store_number +"'>"+ element.id + " " + element.name +"</option>");	
+        	});
+        }
+        else{
+        	$.each(json, function(index, element) {
+        	
             if(  target.indexOf(element.store_number) >= 0) {
             	$("#storeSelect").append("<option value='"+ element.store_number +"' selected>"+ element.id + " " + element.name +"</option>");
             }
@@ -103,16 +111,33 @@ var getStoreNumbers = function(){
             
             i++;
         });
+        }
+        
         $("#storeSelect").chosen({
         	width:"50%"
-        });
-        
-        
-		
-
-		
+        });		
         
     });
 
     
 }
+
+
+$("#allStores").change(function(){
+	if ($("#allStores").is(":checked")) {
+		$("#storeSelect option").each(function(){
+			console.log($(this).val());
+			$(this).attr('selected', true);
+		});
+		$("#storeSelect").chosen();
+		
+	}
+	if ($("#allStores").not(":checked")) {
+		$("#storeSelect option").each(function(){
+			console.log($(this).val());
+			$(this).attr('selected', false);
+		});
+		$("#storeSelect").chosen();
+		
+	}
+});
