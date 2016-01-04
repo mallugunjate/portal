@@ -36,9 +36,10 @@
                 <li>
                 @endif 
                     <a href="/{{ Request::segment(1) }}/communication"><i class="fa fa-bullhorn"></i> <span class="nav-label">Communications</span> 
-                    @if($communicationCount > 0)
-                    <span class="label label-primary pull-right">{{ $communicationCount }}</span></a>
+                    @if( isset($communicationCount) ) 
+                    <span class="label label-primary pull-right">{{ $communicationCount }}</span>
                     @endif
+                    </a>
                 </li>            
 
 
