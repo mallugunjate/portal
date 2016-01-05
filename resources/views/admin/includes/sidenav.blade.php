@@ -24,7 +24,7 @@
     @else
     <li>
     @endif
-        <a href="/"><i class="fa fa-home"></i> <span class="nav-label">Dashboard</span></a>
+        <a href="/admin"><i class="fa fa-home"></i> <span class="nav-label">Dashboard</span></a>
     </li>
 
 
@@ -34,7 +34,7 @@
     @else
     <li>
     @endif
-        <a href="/communication"><i class="fa fa-bullhorn"></i> <span class="nav-label">Communications</span> <span class="label label-primary pull-right">2</span></a>
+        <a href="/communication"><i class="fa fa-bullhorn"></i> <span class="nav-label">Communications</span></a>
     </li>
 
 

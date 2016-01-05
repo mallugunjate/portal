@@ -113,7 +113,7 @@
 
 				@include('site.includes.footer')
 
-			    @include('site.includes.scripts')
+			    @include('admin.includes.scripts')
 
 				<script type="text/javascript">
 					$.ajaxSetup({
