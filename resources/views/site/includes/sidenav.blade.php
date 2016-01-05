@@ -35,7 +35,11 @@
                 @else
                 <li>
                 @endif 
-                    <a href="/{{ Request::segment(1) }}/communication"><i class="fa fa-bullhorn"></i> <span class="nav-label">Communications</span> <span class="label label-primary pull-right">2</span></a>
+                    <a href="/{{ Request::segment(1) }}/communication"><i class="fa fa-bullhorn"></i> <span class="nav-label">Communications</span> 
+                    @if( isset($communicationCount) ) 
+                    <span class="label label-primary pull-right">{{ $communicationCount }}</span>
+                    @endif
+                    </a>
                 </li>            
 
 
