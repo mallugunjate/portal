@@ -38,6 +38,16 @@
 			{!! Form::select('importance', $importance, null,  ['class'=>'form-control']) !!}
 		</div>
 		<div>
+			{!! Form::label('stores[]', 'Select Stores:') !!}
+			<select name="stores[]" id="storeSelect"  multiple ="true" ></select>
+			@foreach ($target_stores as $store)
+			<input class="target_stores" value="{{$store}}" hidden>
+			@endforeach
+
+			{!! Form::label('allStores', 'Or select all stores:') !!}
+			{!! Form::checkbox('allStores', null, false ,['id'=> 'allStores'] ) !!}
+		</div>
+		<div>
 			{!! Form::label('send_at', 'Send On') !!}
 			<div class="input-group date" id="datetimepicker1">
 	          {!! Form::text('send_at', null, ['class'=>'form-control',  'required']) !!}
@@ -175,6 +185,7 @@
 <script type="text/javascript" src="/js/vendor/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="/js/plugins/ckeditor-standard/ckeditor.js"></script>
 <script type="text/javascript" src="/js/plugins/chosen/chosen.jquery.js"></script>
+<script type="text/javascript" src="/js/env.js"></script>
 <script type="text/javascript">
 	$(".date").datetimepicker({
           format: 'YYYY-MM-DD HH:mm:ss'

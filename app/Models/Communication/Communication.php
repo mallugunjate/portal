@@ -9,6 +9,7 @@ use App\Models\Communication\CommunicationDocument;
 use App\Models\Document\Document;
 use App\Models\Document\Package;
 use App\Models\Tag\ContentTag;
+use App\Models\Communication\CommunicationTarget;
 
 class Communication extends Model
 {
@@ -38,6 +39,7 @@ class Communication extends Model
 
    		]);
 
+         Communication::updateTargetStores($communication->id, $request);
          Communication::updateCommunicationDocuments($communication->id, $request);
          Communication::updateCommunicationPackages($communication->id, $request);
          Communication::updateTags($communication->id, $request["tags"]);
@@ -62,6 +64,7 @@ class Communication extends Model
          }
          $communication->save();
 
+         Communication::updateTargetStores($id, $request);
          Communication::updateCommunicationDocuments($id, $request);
          Communication::updateCommunicationPackages($id, $request);
          Communication::updateTags($communication->id, $request["tags"]);
@@ -69,6 +72,24 @@ class Communication extends Model
          return;
 
 
+      }
+
+      public static function updateTargetStores($id, $request)
+      {
+         CommunicationTarget::where('communication_id', $id)->delete();
+         
+         $stores = $request["stores"];
+         if (count($stores>0)) {
+            foreach ($stores as $store) {
+               CommunicationTarget::create([
+                  'communication_id'   => $id,
+                  'store_id'           => $store
+               ]);
+            
+            }
+         }
+         
+         return;
       }
 
       public static function updateCommunicationDocuments($id, $request)
@@ -140,14 +161,17 @@ class Communication extends Model
 
       public static function updateTags($id, $tags)
       {
-         ContentTag::where('content_type', 'communication')->where('content_id', $id)->delete();
-         foreach ($tags as $tag) {
-            ContentTag::create([
-               'content_type' => 'communication',
-               'content_id'      => $id,
-               'tag_id'          => $tag
-            ]);
+         if (isset($tags)) {
+            ContentTag::where('content_type', 'communication')->where('content_id', $id)->delete();
+            foreach ($tags as $tag) {
+               ContentTag::create([
+                  'content_type' => 'communication',
+                  'content_id'      => $id,
+                  'tag_id'          => $tag
+               ]);
+            }
          }
+         
          return;
       }
 
@@ -156,8 +180,8 @@ class Communication extends Model
          Communication::find($id)->delete();
          CommunicationPackage::where('communication_id', $id)->delete();
          CommunicationDocument::where('communication_id', $id)->delete();
-         $content_type_id = \DB::table('content_types')->where('type_name', 'communication')->first()->id;
-         ContentTag::where('content_id', $id)->where('content_type_id', $content_type_id)->delete();
+         CommunicationTarget::where('communication_id', $id)->delete();
+         ContentTag::where('content_id', $id)->where('content_type', 'communication')->delete();
          return;
 
       }
