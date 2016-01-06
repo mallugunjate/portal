@@ -34,7 +34,7 @@
     @else
     <li>
     @endif
-        <a href="/communication"><i class="fa fa-bullhorn"></i> <span class="nav-label">Communications</span></a>
+        <a href="/admin/communication"><i class="fa fa-bullhorn"></i> <span class="nav-label">Communications</span></a>
     </li>
 
 
@@ -45,7 +45,12 @@
     @else
     <li>
     @endif
-        <a href="/document"><i class="fa fa-file"></i> <span class="nav-label">Documents</span></a>
+        <a href="/document"><i class="fa fa-file"></i> <span class="nav-label">Documents</span><span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level collapse">
+            <li><a href="/admin/folder">Manage Folders</a></li>
+            {{-- <li><a href="/admin/folder/create">Create New Folder</a></li> --}}
+            <li><a href="/admin/document/create">Upload New Document</a></li>
+        </ul>        
     </li>
 
 

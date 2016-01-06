@@ -62,7 +62,6 @@ class AdminController extends Controller
 
         if ($this->group_id == 1) {
 
-
             $banners = Banner::all();
             $admin_users = User::whereIn('group_id',[1,2])->get();
             $navigation = FolderStructure::getNavigationStructure($banner->id);
