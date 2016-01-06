@@ -38,7 +38,9 @@ class EventTypesAdminController extends Controller
         $banner_id = UserSelectedBanner::where('user_id', \Auth::user()->id)->first()->selected_banner_id;
         $banner  = Banner::find($banner_id);
 
-        $eventtypes = EventType::all();
+        // $eventtypes = EventType::all();
+        $eventtypes = EventType::where('banner_id', $banner_id)->get();
+
         return view('admin.eventtypes.index')
             ->with('eventtypes', $eventtypes)
             ->with('banner', $banner)

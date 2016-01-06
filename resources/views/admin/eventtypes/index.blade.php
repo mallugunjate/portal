@@ -65,9 +65,6 @@
 		                                    </span>
 		                                </div> --}}
 
-	
-
-
 		                            </div>
 
 		                            <div class="table-responsive">
