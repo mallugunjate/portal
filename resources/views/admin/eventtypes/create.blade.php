@@ -96,8 +96,8 @@
 					});
 				</script>
 
-				<script src="/js/custom/addEventType.js"></script>
-				<script type="text/javascript" src="/js/custom/admin/global/bannerSelector.js"></script>
+				<script src="/js/custom/admin/events/addEventType.js"></script>
+				
 
 				@include('site.includes.bugreport')
 

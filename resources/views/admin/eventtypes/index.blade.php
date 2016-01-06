@@ -122,8 +122,8 @@
 
 				</script>
 
-				<script src="/js/custom/deleteEventType.js"></script>
-				<script type="text/javascript" src="/js/custom/admin/global/bannerSelector.js"></script>
+				<script src="/js/custom/admin/events/deleteEventType.js"></script>
+
 
 				@include('site.includes.bugreport')
 

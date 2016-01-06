@@ -10,6 +10,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Event\Event;
 use App\Models\Event\EventType;
 
+use App\Models\Banner;
+use App\Models\UserBanner;
+use App\Models\UserSelectedBanner;
+
 class EventTypesAdminController extends Controller
 {
     /**
@@ -28,9 +32,17 @@ class EventTypesAdminController extends Controller
      */
     public function index()
     {
+        $user_id = \Auth::user()->id;
+        $banner_ids = UserBanner::where('user_id', $user_id)->get()->pluck('banner_id');
+        $banners = Banner::whereIn('id', $banner_ids)->get();        
+        $banner_id = UserSelectedBanner::where('user_id', \Auth::user()->id)->first()->selected_banner_id;
+        $banner  = Banner::find($banner_id);
+
         $eventtypes = EventType::all();
         return view('admin.eventtypes.index')
-           ->with('eventtypes', $eventtypes);
+            ->with('eventtypes', $eventtypes)
+            ->with('banner', $banner)
+            ->with('banners', $banners);   
     }
 
     /**
@@ -40,9 +52,17 @@ class EventTypesAdminController extends Controller
      */
     public function create()
     {
+        $user_id = \Auth::user()->id;
+        $banner_ids = UserBanner::where('user_id', $user_id)->get()->pluck('banner_id');
+        $banners = Banner::whereIn('id', $banner_ids)->get();        
+        $banner_id = UserSelectedBanner::where('user_id', \Auth::user()->id)->first()->selected_banner_id;
+        $banner  = Banner::find($banner_id);
+
         $event_types_list = EventType::all();
         return view('admin.eventtypes.create')
-            ->with('event_types_list', $event_types_list);
+            ->with('event_types_list', $event_types_list)
+            ->with('banner', $banner)
+            ->with('banners', $banners);
     }
 
     /**
@@ -55,6 +75,7 @@ class EventTypesAdminController extends Controller
     {
         $eventTypeDetails = array(
             'event_type' => $request['event_type'],
+            'banner_id' => $request['banner_id']
         );
 
         $eventType = EventType::create($eventTypeDetails);

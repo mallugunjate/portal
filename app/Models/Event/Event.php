@@ -5,6 +5,9 @@ namespace App\Models\Event;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Tag\ContentTag;
+use App\Models\Banner;
+use App\Models\UserBanner;
+use App\Models\UserSelectedBanner;
 
 class Event extends Model
 {

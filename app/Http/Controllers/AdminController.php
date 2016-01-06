@@ -79,7 +79,8 @@ class AdminController extends Controller
             $banner_ids = UserBanner::where('user_id', $this->user_id)->get()->pluck('banner_id');
             $banners = Banner::whereIn('id', $banner_ids)->get();
             
-            return view('admin.document-view')
+            //return view('admin.document-view')
+            return view('admin.index')
                 ->with('navigation', $navigation)
                 ->with('folders', $folders)
                 ->with('packageHash', $packageHash)

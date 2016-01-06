@@ -55,9 +55,11 @@ Route::controllers([
 
 
 //list of admin functions
-Route::get('/admin', function(){
-	return view('admin.index');
-});
+// Route::get('/admin', function(){
+// //	return view('admin.index');
+// });
+
+Route::get('/admin',  ['middleware' => 'admin.auth', 'uses' =>'AdminController@index' ] );
 
 /* Admin Routes Begin 	*/
 

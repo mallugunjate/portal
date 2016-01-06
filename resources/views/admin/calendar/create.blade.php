@@ -148,7 +148,6 @@
 
 				@include('site.includes.bugreport')
 
-				<script src="/js/custom/addEvent.js"></script>
                 <script type="text/javascript" src="/js/plugins/chosen/chosen.jquery.js"></script>
 
                 <script type="text/javascript">
