@@ -1,13 +1,13 @@
 <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0"  style="">
 <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
 <div class="navbar-header">
-    <form class="form-inline" style="position: relative; top: 10px; left: 30px;">
+{{--     <form class="form-inline" style="position: relative; top: 10px; left: 30px;">
       <div class="form-group">
         <label for="top-search" style="font-size: 24px;"><i class="fa fa-search"></i></label>
         <input type="text" class="form-control" class="form-control" name="top-search" id="top-search" placeholder="" style="">
       </div>
       <button type="submit" class="btn btn-default">Search</button>
-    </form>
+    </form> --}}
 </div>
     <ul class="nav navbar-top-links navbar-right">
         {{-- <li>
