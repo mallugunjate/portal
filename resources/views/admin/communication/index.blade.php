@@ -43,7 +43,7 @@
 		                <div class="col-lg-12">
 		                    <div class="ibox">
 		                        <div class="ibox-title">
-		                            <h5>Event Types</h5>
+		                            <h5>Communications List</h5>
 
 		                            <div class="ibox-tools">
 
@@ -52,12 +52,7 @@
 		                        </div>
 		                        <div class="ibox-content">
 
-		                            <div class="m-b-lg">
-		                            
-		                            	
 
-
-		                            </div>
 
 		                            <div class="table-responsive">
 

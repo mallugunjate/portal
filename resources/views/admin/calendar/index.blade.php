@@ -52,19 +52,6 @@
 		                        </div>
 		                        <div class="ibox-content">
 
-		                            <div class="m-b-lg">
-
-		                                <div class="input-group">
-		                                    <input type="text" placeholder="Search event by title..." class=" form-control">
-		                                    <span class="input-group-btn">
-		                                        <button type="button" class="btn btn-white"> Search</button>
-		                                    </span>
-		                                </div>
-
-
-
-
-		                            </div>
 
 		                            <div class="table-responsive">
 
