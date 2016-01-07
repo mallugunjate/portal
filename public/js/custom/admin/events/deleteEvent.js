@@ -1,8 +1,7 @@
-$(document).on('click','.eventtype-delete',function(){
+$(document).on('click','.event-delete',function(){
 
-    var eventtypeidVal = $(this).attr('data-eventtype');
-    var selector = "#eventtype"+eventtypeidVal;
-
+    var eventId = $(this).attr('data-event');
+    var selector = "#event"+eventId;
 
     swal({
         title: "Are you sure?",
@@ -14,11 +13,11 @@ $(document).on('click','.eventtype-delete',function(){
         closeOnConfirm: false
     }, function () {
     	$.ajax({
-		    url: '/admin/eventtypes/'+eventtypeidVal,
+		    url: '/admin/calendar/'+eventId,
 		    type: 'DELETE',
 		    success: function(result) {
 		        $(selector).closest('tr').fadeOut(1000);
-		        swal("Deleted!", "This Event Type has been deleted.", "success");
+		        swal("Deleted!", "This event has been deleted.", "success");
 		    }
 		});
         
