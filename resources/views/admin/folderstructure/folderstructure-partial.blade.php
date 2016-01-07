@@ -3,9 +3,9 @@
 	<div class="folder" id={{$nav["id"]}} data-isWeek = false>
 	
 		{{-- <a class="editFolder fa fa-pencil" href="/admin/folder/{{$nav['id']}}/edit" > --}}
-		<a data-toggle="modal" data-remote="true" href="/admin/folder/{{$nav['id']}}/edit" data-target="#modal">
+		<a class="modal-link" data-toggle="modal" data-remote="true" href="/admin/folder/{{$nav['id']}}/edit" data-target="#mmmm-modal">
 			<div class="folder-name">
-				{{$nav["label"]}} 
+				{{$nav["label"]}}
 			</div>
 	 	</a>
 		<ul>
@@ -21,9 +21,9 @@
 @elseif ( isset($nav["weeks"]) && count($nav["weeks"] > 0) )
 	<div class="folder" id={{$nav["id"]}} data-isWeek = false> 
 		{{-- <a class="editFolder fa fa-pencil" href="/admin/folder/{{$nav['id']}}/edit" > --}}
-		<a data-toggle="modal" data-remote="true" href="/admin/folder/{{$nav['id']}}/edit" data-target="#modal">
+		<a class="modal-link" data-toggle="modal" data-remote="true" href="/admin/folder/{{$nav['id']}}/edit" data-target="#mmmm-modal">
 			<div class="folder-name">
-				{{$nav["label"]}} 
+				{{$nav["label"]}}
 			</div>
 		</a>
 		<!-- <a class="deleteFolder" href="" data-folder-id={{$nav["id"]}} >Delete</a> -->
@@ -43,7 +43,7 @@
 @else
 	<div class="folder" id={{$nav["id"]}} data-isWeek = false>
 		{{-- <a class="editFolder fa fa-pencil" href="/admin/folder/{{$nav['id']}}/edit" > --}}
-		<a data-toggle="modal" data-remote="true" href="/admin/folder/{{$nav['id']}}/edit" data-target="#modal">
+		<a class="modal-link" data-toggle="modal" data-remote="true" href="/admin/folder/{{$nav['id']}}/edit" data-target="#mmmm-modal">
 		<div class="folder-name"> 
 			{{$nav["label"]}}
 		</div>

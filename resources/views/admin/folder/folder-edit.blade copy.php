@@ -1,4 +1,35 @@
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/plugins/chosen/chosen.css">
 
+    <style type="text/css">
+        form {
+            border: thin solid #e9e9e9;
+            margin-top: 25px;
+            padding: 20px;
+        }
+        .form-title{
+            padding-top:20px;
+            font-size:22px;
+            font-weight: bold;
+        }
+        .deleteFolder{
+
+        }
+
+    </style>
+</head>
+<body>
+    <!-- navbar begins -->
+      <nav class="navbar navbar-default">
+        @include('admin.banner', ['banners'=>$banners])
+        
+      </nav>
+      <!-- navbar ends-->
+
+	<div class="col-md-10 col-md-offset-1">
 	{!! Form::model($folder, ['action' => ['Document\FolderAdminController@update', 'id'=>$folder->id], 'method' => 'PUT']) !!}    
 		<input type="hidden" name="banner_id" value={{$banner->id}}>
         <div class="row">
@@ -66,5 +97,21 @@
        
 
     {!! Form::close() !!}
+    </div>
+    <script type="text/javascript" src="/js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/custom/editFolder.js"></script>
+    <script type="text/javascript" src="/js/plugins/chosen/chosen.jquery.js"></script>
+    <script type="text/javascript" src="/js/custom/admin/global/bannerSelector.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('.disabled-button-container').tooltip()
+            $('.chosen').chosen({
+                width:'100%'
+            })
+        })
 
+    </script>
+</body>
+</html>
 
