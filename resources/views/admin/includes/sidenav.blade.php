@@ -19,7 +19,7 @@
     </li>
 
 
-    @if (Request::is('/'))
+    @if (Request::is('/') || Request::is('/admin') || Request::is('/admin/home'))
     <li class="active">
     @else
     <li>
@@ -29,7 +29,7 @@
 
 
 
-    @if (Request::is('communication'))
+    @if (Request::is('admin/communication/*') || Request::is('admin/communication'))
     <li class="active">
     @else
     <li>
@@ -40,7 +40,7 @@
 
 
 
-    @if (Request::is('document'))
+    @if (Request::is('admin/document/*') || Request::is('admin/document'))
     <li class="active">
     @else
     <li>
@@ -56,7 +56,7 @@
 
 
     <!-- CALENDAR NAV -->
-    @if (Request::is('admin/calendar/*') || Request::is('admin/calendar') || Request::is('admin/eventtypes') || Request::is('admin/eventtypes/*') ) 
+    @if (Request::is('admin/calendar/*') || Request::is('admin/calendar') || Request::is('admin/eventtypes') || Request::is('admin/eventtypes/*')) 
     <li class="active">
     @else
     <li>

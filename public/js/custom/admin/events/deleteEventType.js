@@ -3,7 +3,6 @@ $(document).on('click','.eventtype-delete',function(){
     var eventtypeidVal = $(this).attr('data-eventtype');
     var selector = "#eventtype"+eventtypeidVal;
 
-
     swal({
         title: "Are you sure?",
         //text: "You will not be able to recover this imaginary file!",
@@ -23,8 +22,6 @@ $(document).on('click','.eventtype-delete',function(){
 		});
         
     });
-
-
 
     return false;
 });

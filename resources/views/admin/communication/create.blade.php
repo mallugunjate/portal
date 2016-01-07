@@ -56,6 +56,30 @@
 		                        <div class="ibox-content">
 
 
+
+		{!! Form::open( ['action' => ['Communication\CommunicationAdminController@store'], 'method'=>'POST']) !!}
+
+		<div>
+			<input type="hidden" name="banner_id" value={{$banner->id}} >
+		</div>
+		<div>
+			{!! Form::label('subject', 'Subject') !!}
+			{!! Form::input('text', 'subject', null,  ['class'=>'form-control']) !!}
+		</div>
+		<div>
+			{!! Form::label('body', 'Body') !!}
+			{!! Form::textarea('body', null, ['class'=> 'communication_body']) !!}
+		</div>
+		<div>
+			{!! Form::label('sender', 'Sender') !!}
+			{!! Form::input('text', 'sender', null, ['class'=>'form-control']) !!}
+		</div>
+		<div>
+			{!! Form::label('importance', 'Importance') !!}
+			{!! Form::select('importance', $importance, null,  ['class'=>'form-control']) !!}
+		</div>
+
+		<div>
 			{!! Form::label('stores[]', 'Select Stores:') !!}
 			<select name="stores[]" id="storeSelect"  multiple ="true" ></select>
 			{!! Form::label('allStores', 'Or select all stores:') !!}
@@ -147,6 +171,10 @@
 			<button type="submit" class="btn btn-default">Submit</button>
 		</div>
 		{!! Form::close() !!}
+
+
+
+
 		                        </div>
 
 		                    </div>

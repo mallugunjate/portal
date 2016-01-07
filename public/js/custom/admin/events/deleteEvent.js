@@ -23,7 +23,5 @@ $(document).on('click','.event-delete',function(){
         
     });
 
-
-
     return false;
 });
