@@ -4,7 +4,24 @@
 <head>
     @section('title', 'Folder Structure')
     @include('admin.includes.head')
+       <style type="text/css">
+       	.folder-name{
+			display:inline-block;
+			color:#222222;
+			font-size: 14px;
+			font-family: Helvetica, ariel, sans-serif ;
+			text-transform: capitalize;	
+			line-height: 25px;
+		}
+		.add-folder{
+			color: #222222;
+			cursor: pointer;
+		}
+		.glyphicon-plus-sign{
+			color:#228B22;
+		}
 
+       </style>
 	<meta name="csrf-token" content="{!! csrf_token() !!}"/>
 </head>
 
@@ -124,5 +141,27 @@
 
 </script>
 
+
+    <div class="modal inmodal" id="modal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+        <div class="modal-content animated fadeIn">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    
+<!--                     <h4 class="modal-title">Report a Bug</h4>
+                    <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small> -->
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary sendBugReport" data-dismiss="modal">Send</button>
+                </div>
+            </div>
+        </div>
+    </div> 
+
+    
 			</body>
 			</html>
