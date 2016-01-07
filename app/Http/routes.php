@@ -77,6 +77,9 @@ Route::resource('/admin/folder', 'Document\FolderAdminController');
 //PACKAGES
 Route::resource('/admin/package', 'Document\PackageAdminController');
 
+//Dasboard ADMIN
+Route::resource('/admin/dashboard', 'Dashboard\DashboardAdminController');
+
 //Communications
 Route::resource('/admin/communication', 'Communication\CommunicationAdminController');
 

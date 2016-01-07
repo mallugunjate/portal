@@ -57,7 +57,6 @@ var formatDate = function(){
 
 $(".delete-communication").click(function(){
 
-	console.log($('[name="_token"]').val());
 	var commId = $(this).attr('data-communication');
 	var selector = "#communication"+commId;
 

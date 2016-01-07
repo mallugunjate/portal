@@ -19,12 +19,22 @@
     </li>
 
 
-    @if (Request::is('/') || Request::is('/admin') || Request::is('/admin/home'))
+
+    @if ( Request::is('admin') || Request::is('admin/home'))
     <li class="active">
     @else
     <li>
     @endif
-        <a href="/admin"><i class="fa fa-home"></i> <span class="nav-label">Dashboard</span></a>
+        <a href="/admin"><i class="fa fa-home"></i> <span class="nav-label">Home</span></a>
+    </li>
+
+
+    @if (Request::is('admin/dashboard') || Request::is('admin/dashboard/*'))
+    <li class="active">
+    @else
+    <li>
+    @endif
+        <a href="/admin/dashboard"><i class="fa fa-tachometer"></i> <span class="nav-label">Dashboard</span></a>
     </li>
 
 
@@ -66,6 +76,10 @@
             <li><a href="/admin/calendar">Manage Events</a></li>
             <li><a href="/admin/eventtypes">Manage Event Types</a></li>
         </ul>
+    </li>
+
+    <li>
+        <a href="#"><i class="fa fa-line-chart"></i> <span class="nav-label">Analytics</span></a>
     </li>
 
 {{--                 <li>
