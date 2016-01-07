@@ -12,7 +12,7 @@
 
 		@foreach ($nav["children"] as $child)
 		<?php $nav = $navigation[$child["child_id"]] ?>
-		@include('admin.folderstructure-partial')
+		@include('admin.folderstructure.folderstructure-partial')
 		@endforeach 
 
 		</ul>
