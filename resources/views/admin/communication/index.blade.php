@@ -74,7 +74,7 @@
 											
 											<td>
 												
-												<a data-eventtype="{{ $communication->id }}" id="eventtype{{ $communication->id }}" class="delete-communication btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+												<a data-communication="{{ $communication->id }}" id="communication{{ $communication->id }}" class="delete-communication btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
 
 											</td>
 										</tr>

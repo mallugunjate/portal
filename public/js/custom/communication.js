@@ -56,24 +56,35 @@ var formatDate = function(){
 }
 
 $(".delete-communication").click(function(){
+
 	console.log($('[name="_token"]').val());
-	if (confirm('Are you sure you want to delete this communication?')) {
+	var commId = $(this).attr('data-communication');
+	var selector = "#communication"+commId;
+
+	swal({
+		title: "Are you sure?",
+		//text: "You will not be able to recover this imaginary file!",
+		type: "warning",
+		showCancelButton: true,
+		confirmButtonColor: "#DD6B55",
+		confirmButtonText: "Yes, delete it!",
+		closeOnConfirm: false
+    	}, function () {
 	    
 		$.ajax({
-		    url: '/admin/communication/'+ this.id,
+		    url: '/admin/communication/'+ commId,
 		    type: 'DELETE',
-		    data : {	
-		    			_token : $('[name="_token"]').val(),
-		    			banner_id : localStorage.getItem("admin-banner-id")
-				   }
 
-		})
-		.done(function(data) {
-			//console.log(data);
-			window.location = '/admin/communication';
+		    success: function(result) {
+		        $(selector).closest('tr').fadeOut(1000);
+		        swal("Deleted!", "This communication has been deleted.", "success");
+		    }
+
 		});
-	} 
+        
+    });
 
+    return false;
 });
 
 var getStoreNumbers = function(){
