@@ -139,7 +139,10 @@
 	$('.modal-link').click(function(e) {
 	    var modal = $('#mmmm-modal');
 	    var modalBody = $('#mmmm-modal .modal-content');
-	    
+	    console.log( $(this).parent().attr('id') );
+
+	    localStorage.setItem('lastClickedtoTriggerModal', $(this).parent().attr('id') );
+
 	    modalBody.empty();
 
 	    modal

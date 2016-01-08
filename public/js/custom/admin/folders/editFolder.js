@@ -16,8 +16,9 @@ $("#removeWeeks").on("change", function(){
 
 $("body").on("click", ".deleteFolder", function(e){
     var folderId = $(this).attr('data-id');//$(this).id;
-    var selector = "#folder"+folderId;
-    
+    //var selector = "#folder"+folderId;
+    var selector = "#" + localStorage.getItem("lastClickedtoTriggerModal");
+
     console.log("folderId: "+folderId);
     console.log("selector: "+selector);
     swal({
