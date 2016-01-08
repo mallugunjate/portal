@@ -3,7 +3,7 @@
 
 <title> @yield('title') </title>
 
-<link href="/css/bootstrap.min.css" rel="stylesheet">
+<link href="/css/bootstrap.css" rel="stylesheet">
 <link href="/fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
 
 <!-- Morris -->
@@ -15,4 +15,6 @@
 <link href="/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 
 <link href="/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
-<link href="/css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
+<link href="/css/plugins/chosen/chosen.css" rel="stylesheet">
+
+{{-- <link href="/css/plugins/summernote/summernote-bs3.css" rel="stylesheet"> --}}

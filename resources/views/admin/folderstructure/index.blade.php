@@ -111,7 +111,6 @@
 		        </div>
 
 				@include('site.includes.footer')
-
 			    @include('admin.includes.scripts')
 
 				<script type="text/javascript">
@@ -126,10 +125,10 @@
 				<script src="/js/custom/admin/events/deleteEvent.js"></script>
 
 				@include('site.includes.bugreport')
+				@include('admin.folder.foldermodal')
 
 <script type="text/javascript">
  
-
 	$(".add-folder").on("click", function() {
 		$("#form-container").empty();
 		$("#form-container").append('<input class="form-control" type="text" name="foldername" placeholder="Folder Name">'+
@@ -139,7 +138,9 @@
 
 	$('.modal-link').click(function(e) {
 	    var modal = $('#mmmm-modal');
-	    var modalBody = $('#mmmm-modal .modal-body');
+	    var modalBody = $('#mmmm-modal .modal-content');
+	    
+	    modalBody.empty();
 
 	    modal
 	        .on('show.bs.modal', function () {
@@ -149,35 +150,20 @@
 	    	e.preventDefault();
 	});
 
-	$('#mmmm-modal .close').click(function(e) {
+	$('.cancel-modal').click(function(e) {
 
-		var modalBody = $('#mmmm-modal .modal-body');
+		var modalBody = $('#mmmm-modal .modal-content');
 		modalBody.empty();
 		console.log("empty the modal");
 	});
 
-	
-
 </script>
 
 
+   
 			<!-- Modal -->
-			<div class="modal fade" id="mmmm-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			    <div class="modal-dialog">
-			        <div class="modal-content">
-			            <div class="modal-header">
-			                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			                 <h4 class="modal-title">Modal title</h4>
-			            </div>
-			            <div class="modal-body"><div class="te"></div></div>
-			            <div class="modal-footer">
-			                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			                <button type="button" class="btn btn-primary">Save changes</button>
-						</div>
-			        </div>
-			        
-				</div>
-			</div>
+			
+
 
 
 
