@@ -137,16 +137,23 @@
 	});
 	
 
-
 	$('.modal-link').click(function(e) {
-    var modal = $('#mmmm-modal'), modalBody = $('#mmmm-modal .modal-body');
+	    var modal = $('#mmmm-modal');
+	    var modalBody = $('#mmmm-modal .modal-body');
 
-    modal
-        .on('show.bs.modal', function () {
-            modalBody.load(e.currentTarget.href)
-        })
-        .modal();
-    	e.preventDefault();
+	    modal
+	        .on('show.bs.modal', function () {
+	            modalBody.load(e.currentTarget.href)
+	        })
+	        // .modal();
+	    	e.preventDefault();
+	});
+
+	$('#mmmm-modal .close').click(function(e) {
+
+		var modalBody = $('#mmmm-modal .modal-body');
+		modalBody.empty();
+		console.log("empty the modal");
 	});
 
 	
@@ -154,46 +161,25 @@
 </script>
 
 
-
-
-<!-- Modal -->
-<div class="modal fade" id="mmmm-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                 <h4 class="modal-title">Modal title</h4>
-            </div>
-            <div class="modal-body"><div class="te"></div></div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+			<!-- Modal -->
+			<div class="modal fade" id="mmmm-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			    <div class="modal-dialog">
+			        <div class="modal-content">
+			            <div class="modal-header">
+			                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			                 <h4 class="modal-title">Modal title</h4>
+			            </div>
+			            <div class="modal-body"><div class="te"></div></div>
+			            <div class="modal-footer">
+			                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			                <button type="button" class="btn btn-primary">Save changes</button>
+						</div>
+			        </div>
+			        
+				</div>
 			</div>
-        </div>
-        
-	</div>
-</div>
 
 
-<!--     <div class="modal inmodal" id="modal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
-        <div class="modal-dialog">
-        <div class="modal-content animated fadeIn">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                    
-                    <h4 class="modal-title">Report a Bug</h4>
-                    <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
-                </div>
-                <div class="modal-body">
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary sendBugReport" data-dismiss="modal">Send</button>
-                </div>
-            </div>
-        </div>
-    </div>  -->
 
 
 			</body>
