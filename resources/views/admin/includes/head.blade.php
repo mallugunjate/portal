@@ -1,20 +1,36 @@
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title> @yield('title') </title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="/css/bootstrap.css" rel="stylesheet">
-<link href="/fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
+	<title> @yield('title') </title>
 
-<!-- Morris -->
-<link href="/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
+	<link href="/css/bootstrap.css" rel="stylesheet">
+	<link href="/fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
 
-<link href="/css/animate.css" rel="stylesheet">
-<link href="/css/app.css" rel="stylesheet">
+	{{-- <!-- Morris -->
+	<link href="/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet"> --}}
 
-<link href="/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+	<link href="/css/animate.css" rel="stylesheet">
+	<link href="/css/app.css" rel="stylesheet">
 
-<link href="/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
-<link href="/css/plugins/chosen/chosen.css" rel="stylesheet">
+	<link href="/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+	<link href="/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+	<link href="/css/plugins/chosen/chosen.css" rel="stylesheet">
+	<link href="/css/plugins/steps/jquery.steps.css" rel="stylesheet">
 
-{{-- <link href="/css/plugins/summernote/summernote-bs3.css" rel="stylesheet"> --}}
+	<link href="/css/vendor/jquery-ui.theme.min.css" rel="stylesheet">
+	<link href="/css/vendor/dz.css" rel="stylesheet">
+	<link href="/css/vendor/dropzone.css" rel="stylesheet">
+	<link href="/css/vendor/lightbox.css" rel="stylesheet">
+
+	<link href="/css/custom/tree.css" rel="stylesheet">
+	<link href="/css/custom/document-upload.css" rel="stylesheet">
+	<link href="/css/custom/package.css" rel="stylesheet">
+
+	<style>
+		.modal-lg{ height: 95%; width: 80% !important; padding: 0; }
+		.modal-content{ height: 100% !important;}
+		.modal-body{ padding: 0; margin: 0; height: 100% !important; }
+	</style>  
+
+	{{-- <link href="/css/plugins/summernote/summernote-bs3.css" rel="stylesheet"> --}}

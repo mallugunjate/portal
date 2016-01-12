@@ -69,7 +69,6 @@ Route::get('/admin/home',  ['middleware' => 'admin.auth', 'uses' =>'AdminControl
 //FILES
 Route::get('/admin/document/add-meta-data', 'Document\DocumentAdminController@showMetaDataForm');
 Route::post('/admin/document/add-meta-data', 'Document\DocumentAdminController@updateMetaData');
-
 Route::get('/admin/documentmanager',  ['middleware' => 'admin.auth', 'uses' =>'Document\DocumentManagerController@index' ] );
 
 Route::resource('/admin/document', 'Document\DocumentAdminController');

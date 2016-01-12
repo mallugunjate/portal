@@ -80,7 +80,7 @@ class AdminController extends Controller
             $banners = Banner::whereIn('id', $banner_ids)->get();
             
             //return view('admin.document-view')
-            return view('admin.docdev.document-view')
+            return view('admin.document.document-view')
                 ->with('navigation', $navigation)
                 ->with('folders', $folders)
                 ->with('packageHash', $packageHash)

@@ -141,7 +141,7 @@
             <li><a href="graph_morris.html">Living Healthy <span class="label label-primary pull-right">27</span></a></li>
         </ul>
     </li>    --}}
-<!--
+{{--
     <li>
         <a href="metrics.html"><i class="fa fa-pie-chart"></i> <span class="nav-label">Metrics</span> <span class="label label-primary pull-right">NEW</span> </a>
     </li>
@@ -293,5 +293,5 @@
     <li class="special_link">
         <a href="package.html"><i class="fa fa-database"></i> <span class="nav-label">Package</span></a>
     </li>
--->
+--}}
 </ul>
