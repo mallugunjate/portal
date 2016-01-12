@@ -1,17 +1,22 @@
+<!DOCTYPE html>
 <html>
-<head>
-	<title></title>
-	<link href="/css/bootstrap.min.css" rel="stylesheet">
-	<link href="/css/bootstrap-glyphicons.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="/css/vendor/jquery-ui.theme.min.css">
-  <link rel="stylesheet" type="text/css" href="/css/custom/tree.css">
-	<link rel="stylesheet" type="text/css" href="/css/vendor/dz.css">
-  <link rel="stylesheet" type="text/css" href="/css/vendor/dropzone.css">
-	<link rel="stylesheet" type="text/css" href="/css/custom/document-upload.css">
-  <link rel="stylesheet" type="text/css" href="/css/vendor/lightbox.css">
-  <link rel="stylesheet" type="text/css" href="/css/custom/package.css">
 
+<head>
+    @section('title', 'Communications')
+    @include('admin.includes.head')
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap-glyphicons.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/vendor/jquery-ui.theme.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/custom/tree.css">
+    <link rel="stylesheet" type="text/css" href="/css/vendor/dz.css">
+    <link rel="stylesheet" type="text/css" href="/css/vendor/dropzone.css">
+    <link rel="stylesheet" type="text/css" href="/css/custom/document-upload.css">
+    <link rel="stylesheet" type="text/css" href="/css/vendor/lightbox.css">
+    <link rel="stylesheet" type="text/css" href="/css/custom/package.css">
+  <meta name="csrf-token" content="{!! csrf_token() !!}"/>
 </head>
+
+
 <body class="container-fluid">
   <!-- navbar begins -->
   <nav class="navbar navbar-default">
@@ -43,14 +48,14 @@
   			<div id="file-container" class="hidden">
           <ol class="breadcrumbs"></ol>
           <input type="hidden" name="default_folder" value={{$defaultFolder}}>
-  				@include('admin.document-table')
+  				@include('admin.documentmanager.document-table')
   			</div>
         <div id="package-viewer" class="hidden">
           @include('admin.package.view')
         </div>
   			<div id="file-uploader" class="hidden">
           <div id="watermark">Drag and drop documents here</div>
-  				@include('admin.document-upload')
+  				@include('admin.documentmanager.document-upload')
   			</div>
         
 
@@ -64,7 +69,7 @@
 <script type="text/javascript" src="/js/vendor/jquery-ui.min.js"></script>
 <script type="text/javascript" src="/js/vendor/underscore-1.8.3.js"></script>
 <script type="text/javascript" src="/js/custom/tree.js"></script>
-<script type="text/javascript" src="/js/custom/folderStructure.js" ></script>
+<script type="text/javascript" src="/js/custom/admin/folders/folderStructure.js" ></script>
 <script type="text/javascript" src="/js/custom/admin/documents/fileTable.js"></script>
 <script type="text/javascript" src="/js/custom/admin/documents/deleteFile.js"></script>
 <script type="text/javascript" src="/js/custom/admin/documents/getPackages.js"></script>
@@ -73,7 +78,7 @@
 <script type="text/javascript" src="/js/custom/admin/documents/breadcrumb.js"></script>
 <script type="text/javascript" src="/js/custom/admin/global/bannerSelector.js"></script>
 <script type="text/javascript" src="/js/vendor/dropzone.js"></script>
-<script type="text/javascript" src="/js/custom/uploadDocument.js"></script>
+<script type="text/javascript" src="/js/custom/admin/documents/uploadDocument.js"></script>
 <script type="text/javascript" src="/js/vendor/tablesorter.min.js"></script>
 <script type="text/javascript" src="/js/vendor/lightbox.min.js"></script>
 

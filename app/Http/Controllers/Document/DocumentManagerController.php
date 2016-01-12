@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Document;
 
 use Illuminate\Http\Request;
 
@@ -15,13 +15,13 @@ use App\User;
 use App\Models\UserBanner;
 use App\Models\UserSelectedBanner;
 
-class AdminController extends Controller
+class DocumentManagerController extends Controller
 {
-    
+
     private $group_id;
     private $user_id;
      /**
-     * Instantiate a new AdminController instance.
+     * Instantiate a new DocumentManagerController instance.
      */
     public function __construct()
     {
@@ -32,7 +32,6 @@ class AdminController extends Controller
         
     }
 
-
     /**
      * Display a listing of the resource.
      *
@@ -40,7 +39,6 @@ class AdminController extends Controller
      */
     public function index(Request $request)
     {
-
         $banner_id = UserSelectedBanner::where('user_id', \Auth::user()->id)->first()->selected_banner_id;
 
         $banner  = Banner::find($banner_id);
@@ -60,27 +58,11 @@ class AdminController extends Controller
         }
 
 
-        if ($this->group_id == 1) {
-
-            $banners = Banner::all();
-            $admin_users = User::whereIn('group_id',[1,2])->get();
-            $navigation = FolderStructure::getNavigationStructure($banner->id);
-            return view('superadmin.home')->with('banners', $banners)
-                                                ->with('admin_users', $admin_users)
-                                                ->with('navigation', $navigation) 
-                                                ->with('folders', $folders)
-                                                ->with('packageHash', $packageHash)
-                                                ->with('banner', $banner)
-                                                ->with('packages', $packages)
-                                                ->with('defaultFolder' , $defaultFolder);
-        }
-        else if ($this->group_id == 2) {
-
             $banner_ids = UserBanner::where('user_id', $this->user_id)->get()->pluck('banner_id');
             $banners = Banner::whereIn('id', $banner_ids)->get();
             
             //return view('admin.document-view')
-            return view('admin.docdev.document-view')
+            return view('admin.documentmanager.index')
                 ->with('navigation', $navigation)
                 ->with('folders', $folders)
                 ->with('packageHash', $packageHash)
@@ -88,8 +70,7 @@ class AdminController extends Controller
                 ->with('banners', $banners)
                 ->with('packages', $packages)
                 ->with('defaultFolder' , $defaultFolder);
-        }
-        
+
     }
 
     /**
