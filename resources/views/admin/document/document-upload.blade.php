@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    @section('title', 'Calendar')
+    @section('title', 'Upload New Documents')
     @include('admin.includes.head')
 
   {{-- <link href="/css/bootstrap.min.css" rel="stylesheet"> --}}
@@ -47,23 +47,21 @@
                         </li>
                     </ol>
                 </div>
-                <div class="col-lg-2">
 
-                </div>
     </div>
 
 
 <div class="wrapper wrapper-content  animated fadeInRight">
 
 
-<div class="row">
-  <div id="folder-title" data-folderId= "" data-isWeekFolder = "">
-    <h2></h2>
-  </div>
-  <table class="table tablesorter" id="file-table"> 
-  </table>
+                            <div class="row">
+                              <div id="folder-title" data-folderId= "" data-isWeekFolder = "">
+                                <h2></h2>
+                              </div>
+                              <table class="table tablesorter" id="file-table"> 
+                              </table>
 
-</div>
+                            </div>
 
                                     <div class="container" id="container">
                                        <div id="actions" class="row">
@@ -144,7 +142,6 @@
         @include('site.includes.footer')
         @include('admin.includes.scripts')
 
-
       <script type="text/javascript" src="/js/vendor/underscore-1.8.3.js"></script>
       <script type="text/javascript" src="/js/custom/tree.js"></script>
       <script type="text/javascript" src="/js/custom/admin/folders/folderStructure.js" ></script>
@@ -154,7 +151,6 @@
       <script type="text/javascript" src="/js/custom/admin/documents/deletePackage.js"></script>
       <script type="text/javascript" src="/js/custom/admin/documents/showPackage.js"></script>
       <script type="text/javascript" src="/js/custom/admin/documents/breadcrumb.js"></script>
-      <script type="text/javascript" src="/js/custom/admin/global/bannerSelector.js"></script>
       <script type="text/javascript" src="/js/vendor/dropzone.js"></script>
       <script type="text/javascript" src="/js/custom/admin/documents/uploadDocument.js"></script>
       <script type="text/javascript" src="/js/vendor/tablesorter.min.js"></script>
