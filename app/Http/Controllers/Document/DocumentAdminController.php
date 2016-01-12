@@ -50,11 +50,17 @@ class DocumentAdminController extends Controller
      */
     public function create()
     {
+
+        $banner = UserSelectedBanner::getBanner();
+        $banners = Banner::all();     
+
         $packageHash = sha1(time() . time());
         $folders = Folder::all();
         return view('admin.document.document-upload')
             ->with('folders', $folders)
-            ->with('packageHash', $packageHash);
+            ->with('packageHash', $packageHash)
+            ->with('banner', $banner)
+            ->with('banners', $banners);  
     }
 
     /**
