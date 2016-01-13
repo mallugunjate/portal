@@ -80,6 +80,10 @@
                                 
 
 
+                                    <hr />
+
+                                <h2>Add Files</h2>
+
                                 <form id="example-advanced-form" action="#">
                                     <h3>Upload Files</h3>
                                     <fieldset>
@@ -193,13 +197,18 @@
             @include('site.includes.modal') --}}
 
                 @include('site.includes.footer')
+                
 
                 @include('admin.includes.scripts')
 
-            <script type="text/javascript" src="/js/jquery-2.1.1.min.js"></script>
-            <script type="text/javascript" src="/js/bootstrap.min.js"></script>
-            <script type="text/javascript" src="/js/vendor/jquery-ui.min.js"></script>
+
             <script type="text/javascript" src="/js/vendor/underscore-1.8.3.js"></script>
+            <script type="text/javascript" src="/js/vendor/dropzone.js"></script>
+            <script type="text/javascript" src="/js/vendor/tablesorter.min.js"></script>
+            <script type="text/javascript" src="/js/vendor/lightbox.min.js"></script>
+
+            <script type="text/javascript" src="/js/plugins/steps/jquery.steps.min.js"></script>
+
             <script type="text/javascript" src="/js/custom/admin/folders/folderStructure.js" ></script>
             <script type="text/javascript" src="/js/custom/admin/documents/fileTable.js"></script>
             <script type="text/javascript" src="/js/custom/admin/documents/deleteFile.js"></script>
@@ -207,17 +216,10 @@
             <script type="text/javascript" src="/js/custom/admin/documents/deletePackage.js"></script>
             <script type="text/javascript" src="/js/custom/admin/documents/showPackage.js"></script>
             <script type="text/javascript" src="/js/custom/admin/documents/breadcrumb.js"></script>
-            <script type="text/javascript" src="/js/custom/admin/global/bannerSelector.js"></script>
-            <script type="text/javascript" src="/js/vendor/dropzone.js"></script>
             <script type="text/javascript" src="/js/custom/admin/documents/uploadDocument.js"></script>
-            <script type="text/javascript" src="/js/vendor/tablesorter.min.js"></script>
-            <script type="text/javascript" src="/js/vendor/lightbox.min.js"></script>
             <script type="text/javascript" src="/js/custom/tree.js"></script>
-            <script type="text/javascript" src="/js/plugins/steps/jquery.steps.min.js"></script>
-             {{--    <script type="text/javascript" src="/js/custom/folderStructure.js" ></script> --}}
-                {{-- <script type="text/javascript" src="/js/custom/site/documents/breadcrumb.js" ></script --}}>
- {{--                <script type="text/javascript" src="/js/custom/site/documents/fileTable.js" ></script> --}}
 
+        
                 <script type="text/javascript">
 
 
@@ -231,64 +233,64 @@
 
 
 
-// var form = $("#example-advanced-form").show();
- 
-// form.steps({
-//     headerTag: "h3",
-//     bodyTag: "fieldset",
-//     transitionEffect: "slideLeft",
-//     onStepChanging: function (event, currentIndex, newIndex)
-//     {
-//         // Allways allow previous action even if the current form is not valid!
-//         if (currentIndex > newIndex)
-//         {
-//             return true;
-//         }
-//         // Forbid next action on "Warning" step if the user is to young
-//         if (newIndex === 3 && Number($("#age-2").val()) < 18)
-//         {
-//             return false;
-//         }
-//         // Needed in some cases if the user went back (clean up)
-//         if (currentIndex < newIndex)
-//         {
-//             // To remove error styles
-//             form.find(".body:eq(" + newIndex + ") label.error").remove();
-//             form.find(".body:eq(" + newIndex + ") .error").removeClass("error");
-//         }
-//         form.validate().settings.ignore = ":disabled,:hidden";
-//         return form.valid();
-//     },
-//     onStepChanged: function (event, currentIndex, priorIndex)
-//     {
-//         // Used to skip the "Warning" step if the user is old enough.
-//         if (currentIndex === 2 && Number($("#age-2").val()) >= 18)
-//         {
-//             form.steps("next");
-//         }
-//         // Used to skip the "Warning" step if the user is old enough and wants to the previous step.
-//         if (currentIndex === 2 && priorIndex === 3)
-//         {
-//             form.steps("previous");
-//         }
-//     },
-//     onFinishing: function (event, currentIndex)
-//     {
-//         form.validate().settings.ignore = ":disabled";
-//         return form.valid();
-//     },
-//     onFinished: function (event, currentIndex)
-//     {
-//         alert("Submitted!");
-//     }
-// }).validate({
-//     errorPlacement: function errorPlacement(error, element) { element.before(error); },
-//     rules: {
-//         confirm: {
-//             equalTo: "#password-2"
-//         }
-//     }
-// });
+                        var form = $("#example-advanced-form").show();
+                         
+                        form.steps({
+                            headerTag: "h3",
+                            bodyTag: "fieldset",
+                            transitionEffect: "slideLeft",
+                            onStepChanging: function (event, currentIndex, newIndex)
+                            {
+                                // Allways allow previous action even if the current form is not valid!
+                                if (currentIndex > newIndex)
+                                {
+                                    return true;
+                                }
+                                // Forbid next action on "Warning" step if the user is to young
+                                if (newIndex === 3 && Number($("#age-2").val()) < 18)
+                                {
+                                    return false;
+                                }
+                                // Needed in some cases if the user went back (clean up)
+                                if (currentIndex < newIndex)
+                                {
+                                    // To remove error styles
+                                    form.find(".body:eq(" + newIndex + ") label.error").remove();
+                                    form.find(".body:eq(" + newIndex + ") .error").removeClass("error");
+                                }
+                                form.validate().settings.ignore = ":disabled,:hidden";
+                                return form.valid();
+                            },
+                            onStepChanged: function (event, currentIndex, priorIndex)
+                            {
+                                // Used to skip the "Warning" step if the user is old enough.
+                                if (currentIndex === 2 && Number($("#age-2").val()) >= 18)
+                                {
+                                    form.steps("next");
+                                }
+                                // Used to skip the "Warning" step if the user is old enough and wants to the previous step.
+                                if (currentIndex === 2 && priorIndex === 3)
+                                {
+                                    form.steps("previous");
+                                }
+                            },
+                            onFinishing: function (event, currentIndex)
+                            {
+                                form.validate().settings.ignore = ":disabled";
+                                return form.valid();
+                            },
+                            onFinished: function (event, currentIndex)
+                            {
+                                alert("Submitted!");
+                            }
+                        // }).validate({
+                        //     errorPlacement: function errorPlacement(error, element) { element.before(error); },
+                        //     rules: {
+                        //         confirm: {
+                        //             equalTo: "#password-2"
+                        //         }
+                        //     }
+                        });
 
 
 
@@ -317,7 +319,6 @@
                     }); 
                 </script>
 
-
                 @include('site.includes.bugreport')
-
             </body>
+</html>
