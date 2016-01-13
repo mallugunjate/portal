@@ -25,206 +25,362 @@
 
             <div class="wrapper wrapper-content" style="position: relative; top: 270px;">
 
-            <div class="row">
-                <div class="col-lg-8">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Featured Content</h5>
-                    </div>
-                    <div class="ibox-content">
 
-                            <p>See how aspects of the Bootstrap grid system work across multiple devices with a handy table.</p>
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-striped">
-                                    <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th>
-                                            Extra small devices
-                                            <small>Phones (&lt;768px)</small>
-                                        </th>
-                                        <th>
-                                            Small devices
-                                            <small>Tablets (≥768px)</small>
-                                        </th>
-                                        <th>
-                                            Medium devices
-                                            <small>Desktops (≥992px)</small>
-                                        </th>
-                                        <th>
-                                            Large devices
-                                            <small>Desktops (≥1200px)</small>
-                                        </th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <th>Grid behavior</th>
-                                        <td>Horizontal at all times</td>
-                                        <td colspan="3">Collapsed to start, horizontal above breakpoints</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Max container width</th>
-                                        <td>None (auto)</td>
-                                        <td>750px</td>
-                                        <td>970px</td>
-                                        <td>1170px</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Class prefix</th>
-                                        <td>
-                                            <code>.col-xs-</code>
-                                        </td>
-                                        <td>
-                                            <code>.col-sm-</code>
-                                        </td>
-                                        <td>
-                                            <code>.col-md-</code>
-                                        </td>
-                                        <td>
-                                            <code>.col-lg-</code>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th># of columns</th>
-                                        <td colspan="4">12</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Max column width</th>
-                                        <td class="text-muted">Auto</td>
-                                        <td>60px</td>
-                                        <td>78px</td>
-                                        <td>95px</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Gutter width</th>
-                                        <td colspan="4">30px (15px on each side of a column)</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Nestable</th>
-                                        <td colspan="4">Yes</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Offsets</th>
-                                        <td colspan="4">Yes</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Column ordering</th>
-                                        <td colspan="4">Yes</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h2>Featured Content</h2>
                             </div>
-                            <p>Grid classes apply to devices with screen widths greater than or equal to the breakpoint sizes, and override grid classes targeted at smaller devices. Therefore, applying any
-                                <code>.col-md-</code> class to an element will not only affect its styling on medium devices but also on large devices if a
-                                <code>.col-lg-</code> class is not present.</p>
-
-                    </div>
-                </div>
-            </div>
+                      
+                            <div class="ibox-content clearfix">
 
 
-                <div class="col-lg-4">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Latest Updates</h5>
-                    </div>
-                    <div class="ibox-content">
+                            <div class="col-md-3">     
+                                <div class="ibox-content product-box">
 
-                            <p>See how aspects of the Bootstrap grid system work across multiple devices with a handy table.</p>
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-striped">
-                                    <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th>
-                                            Extra small devices
-                                            <small>Phones (&lt;768px)</small>
-                                        </th>
-                                        <th>
-                                            Small devices
-                                            <small>Tablets (≥768px)</small>
-                                        </th>
-                                        <th>
-                                            Medium devices
-                                            <small>Desktops (≥992px)</small>
-                                        </th>
-                                        <th>
-                                            Large devices
-                                            <small>Desktops (≥1200px)</small>
-                                        </th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <th>Grid behavior</th>
-                                        <td>Horizontal at all times</td>
-                                        <td colspan="3">Collapsed to start, horizontal above breakpoints</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Max container width</th>
-                                        <td>None (auto)</td>
-                                        <td>750px</td>
-                                        <td>970px</td>
-                                        <td>1170px</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Class prefix</th>
-                                        <td>
-                                            <code>.col-xs-</code>
-                                        </td>
-                                        <td>
-                                            <code>.col-sm-</code>
-                                        </td>
-                                        <td>
-                                            <code>.col-md-</code>
-                                        </td>
-                                        <td>
-                                            <code>.col-lg-</code>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th># of columns</th>
-                                        <td colspan="4">12</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Max column width</th>
-                                        <td class="text-muted">Auto</td>
-                                        <td>60px</td>
-                                        <td>78px</td>
-                                        <td>95px</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Gutter width</th>
-                                        <td colspan="4">30px (15px on each side of a column)</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Nestable</th>
-                                        <td colspan="4">Yes</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Offsets</th>
-                                        <td colspan="4">Yes</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Column ordering</th>
-                                        <td colspan="4">Yes</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                                <div class="product-imitation">
+                                    
+                                </div>
+                                <div class="product-desc">
+                                    
+                                    
+                                    <a href="#" class="product-name"> Hockey Plus</a>
+
+                                    <div class="m-t text-righ">
+
+                                        <a href="#" class="btn btn-xs btn-outline btn-primary">Info <i class="fa fa-long-arrow-right"></i> </a>
+                                    </div>
+                                </div>
+                                </div>
                             </div>
-                            <p>Grid classes apply to devices with screen widths greater than or equal to the breakpoint sizes, and override grid classes targeted at smaller devices. Therefore, applying any
-                                <code>.col-md-</code> class to an element will not only affect its styling on medium devices but also on large devices if a
-                                <code>.col-lg-</code> class is not present.</p>
+
+                            <div class="col-md-3">     
+                                <div class="ibox-content product-box">
+
+                                <div class="product-imitation">
+
+                                </div>
+                                <div class="product-desc">
+                                    
+                                    
+                                    <a href="#" class="product-name"> Back to School</a>
+
+                                    <div class="m-t text-righ">
+
+                                        <a href="#" class="btn btn-xs btn-outline btn-primary">Info <i class="fa fa-long-arrow-right"></i> </a>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">     
+                                <div class="ibox-content product-box">
+
+                                <div class="product-imitation">
+                         
+                                </div>
+                                <div class="product-desc">
+                                    
+                                    
+                                    <a href="#" class="product-name"> Footwear</a>
+
+                                    <div class="m-t text-righ">
+
+                                        <a href="#" class="btn btn-xs btn-outline btn-primary">Info <i class="fa fa-long-arrow-right"></i> </a>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">     
+                                <div class="ibox-content product-box">
+
+                                <div class="product-imitation">
+                                   
+                                </div>
+                                <div class="product-desc">
+                                    
+                                    
+                                    <a href="#" class="product-name"> Athletic Apparel</a>
+
+                                    <div class="m-t text-righ">
+
+                                        <a href="#" class="btn btn-xs btn-outline btn-primary">Info <i class="fa fa-long-arrow-right"></i> </a>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+
+{{--                                 <div class="file-box">
+                                    <div class="file">
+                                        <a id="222" class="parent-folder folder branch" href="#">
+                                            <span class="corner"></span>
+
+
+                                        <div class="image">
+                                            <img alt="image" class="img-responsive" src="/images/p2.jpg">
+                                        </div>                                            
+
+                                            <div class="file-name">
+                                                Hockey Plus
+                                                <br>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div> --}}
+
+
+
+
+
+
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="ibox float-e-margins">
+                                    <div class="ibox-title">
+                                        <h2>Quick Links</h2>
+                                    </div>
+                              
+                                    <div class="ibox-content">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-hover">
+                                                <tbody>
+                                                <tr>
+                                                    
+                                                    <td><a data-toggle="tab" href="#contact-1" class="client-link"><i class="fa fa-external-link"></i>  Visit The North Face Website</a></td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                    
+                                                    <td><a data-toggle="tab" href="#contact-1" class="client-link"><i class="fa fa-external-link"></i>  Visit the Nike University</a></td>
+                                                </tr>
+                                                <tr>
+                                                    
+                                                    <td><a data-toggle="tab" href="#contact-1" class="client-link"><i class="fa fa-file-pdf-o"></i>  OH&amp;S</a></td>
+                                                </tr>
+                                                <tr>
+                                                    
+                                                   <td><a data-toggle="tab" href="#contact-1" class="client-link"><i class="fa fa-file-pdf-o"></i>  Store Repairs</a></td>
+                                                </tr>
+                                                <tr>
+                                                    
+                                                    <td><a data-toggle="tab" href="#contact-1" class="client-link"><i class="fa fa-external-link"></i>  Corporate Web Portal</a></td>
+                                                </tr>
+                                                <tr>
+                                                    
+                                                    <td><a data-toggle="tab" href="#contact-1" class="client-link"><i class="fa fa-calendar"></i>  Week 46 Workload Calendar</a></td>
+                                                </tr>
+
+
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>                              
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="ibox float-e-margins">
+                                    <div class="ibox-title">
+                                        <h2>Latest Communications</h2>
+                                    </div>
+                              
+<div class="ibox-content">
+                                <div class="feed-activity-list">
+
+                                    <div class="feed-element">
+                                        <div>
+                                            <small class="pull-right text-navy">1m ago</small>
+                                            <strong>Get Ready for Hockey Plus</strong>
+                                            <div>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum</div>
+                                            <small class="text-muted">Today 5:60 pm - 12.06.2014</small>
+                                        </div>
+                                    </div>
+
+                                    <div class="feed-element">
+                                        <div>
+                                            <small class="pull-right">2m ago</small>
+                                            <strong>Back to School Primer</strong>
+                                            <div>There are many variations of passages of Lorem Ipsum available</div>
+                                            <small class="text-muted">Today 2:23 pm - 11.06.2014</small>
+                                        </div>
+                                    </div>
+
+                                    <div class="feed-element">
+                                        <div>
+                                            <small class="pull-right">5m ago</small>
+                                            <strong>Information on New Accessories Fixtures</strong>
+                                            <div>Contrary to popular belief, Lorem Ipsum</div>
+                                            <small class="text-muted">Today 1:00 pm - 08.06.2014</small>
+                                        </div>
+                                    </div>
+
+                                    <div class="feed-element">
+                                        <div>
+                                            <small class="pull-right">5m ago</small>
+                                            <strong>Jumpstart Update for March 2016</strong>
+                                            <div>The generated Lorem Ipsum is therefore </div>
+                                            <small class="text-muted">Yesterday 8:48 pm - 10.06.2014</small>
+                                        </div>
+                                    </div>
+
+
+
+
+                                </div>
+                            </div>
+                                </div>                              
+                            </div>                            
+                        </div>
+
+
+                      
+                    </div>
+
+                    <div class="col-lg-4">
+
+                        <div class="row">
+
+                            <div class="col-lg-12">
+                                <div class="ibox float-e-margins">
+                                    <div class="ibox-title">
+                                        <h2>Latest Updates</h2>
+                                    </div>
+<div class="ibox-content">
+
+                                        <div>
+                                            <div class="feed-activity-list">
+
+                                                <div class="feed-element">
+                                                    <a href="profile.html" class="pull-left">
+                                                        <h1><i class="fa fa-file-pdf-o"></i></h1>
+                                                    </a>
+                                                    <div class="media-body ">
+                                                        <small class="pull-right">5m ago</small>
+                                                        <strong>Monica Smith</strong> posted a new blog. <br>
+                                                        <small class="text-muted">Today 5:60 pm - 12.06.2014</small>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="feed-element">
+                                                    <a href="profile.html" class="pull-left">
+                                                        <h1><i class="fa fa-file-pdf-o"></i></h1>
+                                                    </a>
+                                                    <div class="media-body ">
+                                                        <small class="pull-right">2h ago</small>
+                                                        <strong>Mark Johnson</strong> posted message on <strong>Monica Smith</strong> site. <br>
+                                                        <small class="text-muted">Today 2:10 pm - 12.06.2014</small>
+                                                    </div>
+                                                </div>
+                                                <div class="feed-element">
+                                                    <a href="profile.html" class="pull-left">
+                                                        <h1><i class="fa fa-file-pdf-o"></i></h1>
+                                                    </a>
+                                                    <div class="media-body ">
+                                                        <small class="pull-right">2h ago</small>
+                                                        <strong>Janet Rosowski</strong> add 1 photo on <strong>Monica Smith</strong>. <br>
+                                                        <small class="text-muted">2 days ago at 8:30am</small>
+                                                    </div>
+                                                </div>
+                                                <div class="feed-element">
+                                                    <a href="profile.html" class="pull-left">
+                                                        <h1><i class="fa fa-file-pdf-o"></i></h1>
+                                                    </a>
+                                                    <div class="media-body ">
+                                                        <small class="pull-right text-navy">5h ago</small>
+                                                        <strong>Chris Johnatan Overtunk</strong> started following <strong>Monica Smith</strong>. <br>
+                                                        <small class="text-muted">Yesterday 1:21 pm - 11.06.2014</small>
+                                                        <div class="actions">
+                                                            <a class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> Like </a>
+                                                            <a class="btn btn-xs btn-white"><i class="fa fa-heart"></i> Love</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="feed-element">
+                                                    <a href="profile.html" class="pull-left">
+                                                        <h1><i class="fa fa-file-pdf-o"></i></h1>
+                                                    </a>
+                                                    <div class="media-body ">
+                                                        <small class="pull-right">2h ago</small>
+                                                        <strong>Kim Smith</strong> posted message on <strong>Monica Smith</strong> site. <br>
+                                                        <small class="text-muted">Yesterday 5:20 pm - 12.06.2014</small>
+                                                        
+                                                        <div class="pull-right">
+                                                            <a class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> Like </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="feed-element">
+                                                    <a href="profile.html" class="pull-left">
+                                                        <h1><i class="fa fa-file-pdf-o"></i></h1>
+                                                    </a>
+                                                    <div class="media-body ">
+                                                        <small class="pull-right">23h ago</small>
+                                                        <strong>Monica Smith</strong> love <strong>Kim Smith</strong>. <br>
+                                                        <small class="text-muted">2 days ago at 2:30 am - 11.06.2014</small>
+                                                    </div>
+                                                </div>
+                                                <div class="feed-element">
+                                                    <a href="profile.html" class="pull-left">
+                                                       <h1><i class="fa fa-file-pdf-o"></i></h1>
+                                                    </a>
+                                                    <div class="media-body ">
+                                                        <small class="pull-right">46h ago</small>
+                                                        <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>
+                                                        <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
+                                                    </div>
+                                                </div>
+
+                                                <div class="feed-element">
+                                                    <a href="profile.html" class="pull-left">
+                                                        <h1><i class="fa fa-file-pdf-o"></i></h1>
+                                                    </a>
+                                                    <div class="media-body ">
+                                                        <small class="pull-right">46h ago</small>
+                                                        <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>
+                                                        <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
+                                                    </div>
+                                                </div>
+
+                                                <div class="feed-element">
+                                                    <a href="profile.html" class="pull-left">
+                                                        <h1><i class="fa fa-file-pdf-o"></i></h1>
+                                                    </a>
+                                                    <div class="media-body ">
+                                                        <small class="pull-right">46h ago</small>
+                                                        <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>
+                                                        <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                           {{--  <button class="btn btn-primary btn-block m-t"><i class="fa fa-arrow-down"></i> Show More</button> --}}
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
 
                     </div>
+
+
                 </div>
+           
             </div>
 
 
-            </div>
 
-            </div>
+
 
         </div>
     </div>
