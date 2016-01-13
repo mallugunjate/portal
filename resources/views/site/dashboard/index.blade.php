@@ -39,9 +39,13 @@
                             <div class="col-md-3">     
                                 <div class="ibox-content product-box">
 
-                                <div class="product-imitation">
-                                    
-                                </div>
+                  {{--               <div class="product-imitation"> --}}
+
+                                        <div class="image">
+                                            <img alt="image" class="img-responsive" src="/images/featured-covers/canada-gold1.jpg">
+                                        </div>
+                                    {{-- <img src="/images/featured-covers/canada-gold1.jpg" /> --}}
+                                {{-- </div> --}}
                                 <div class="product-desc">
                                     
                                     
@@ -58,9 +62,9 @@
                             <div class="col-md-3">     
                                 <div class="ibox-content product-box">
 
-                                <div class="product-imitation">
-
-                                </div>
+                                <div class="image">
+                                            <img alt="image" class="img-responsive" src="/images/featured-covers/back-to-school.jpg">
+                                        </div>
                                 <div class="product-desc">
                                     
                                     
@@ -77,9 +81,9 @@
                             <div class="col-md-3">     
                                 <div class="ibox-content product-box">
 
-                                <div class="product-imitation">
-                         
-                                </div>
+                                <div class="image">
+                                            <img alt="image" class="img-responsive" src="/images/featured-covers/footwear.jpg">
+                                        </div>
                                 <div class="product-desc">
                                     
                                     
@@ -96,9 +100,9 @@
                             <div class="col-md-3">     
                                 <div class="ibox-content product-box">
 
-                                <div class="product-imitation">
-                                   
-                                </div>
+                                <div class="image">
+                                            <img alt="image" class="img-responsive" src="/images/featured-covers/athletic.jpg">
+                                        </div>
                                 <div class="product-desc">
                                     
                                     
@@ -258,104 +262,99 @@
                                             <div class="feed-activity-list">
 
                                                 <div class="feed-element">
-                                                    <a href="profile.html" class="pull-left">
+                                                    <a href="#" class="pull-left">
                                                         <h1><i class="fa fa-file-pdf-o"></i></h1>
                                                     </a>
                                                     <div class="media-body ">
                                                         <small class="pull-right">5m ago</small>
-                                                        <strong>Monica Smith</strong> posted a new blog. <br>
+                                                        <strong>Place Holder File name</strong> was added to <strong>Folder Name</strong>. <br>
                                                         <small class="text-muted">Today 5:60 pm - 12.06.2014</small>
 
                                                     </div>
                                                 </div>
 
                                                 <div class="feed-element">
-                                                    <a href="profile.html" class="pull-left">
+                                                    <a href="#" class="pull-left">
                                                         <h1><i class="fa fa-file-pdf-o"></i></h1>
                                                     </a>
                                                     <div class="media-body ">
                                                         <small class="pull-right">2h ago</small>
-                                                        <strong>Mark Johnson</strong> posted message on <strong>Monica Smith</strong> site. <br>
+                                                        <strong>Place Holder File name</strong> was added to <strong>Folder Name</strong>. <br>
                                                         <small class="text-muted">Today 2:10 pm - 12.06.2014</small>
                                                     </div>
                                                 </div>
                                                 <div class="feed-element">
-                                                    <a href="profile.html" class="pull-left">
+                                                    <a href="#" class="pull-left">
                                                         <h1><i class="fa fa-file-pdf-o"></i></h1>
                                                     </a>
                                                     <div class="media-body ">
                                                         <small class="pull-right">2h ago</small>
-                                                        <strong>Janet Rosowski</strong> add 1 photo on <strong>Monica Smith</strong>. <br>
+                                                        <strong>Place Holder File name</strong> was added to <strong>Folder Name</strong>. <br>
                                                         <small class="text-muted">2 days ago at 8:30am</small>
                                                     </div>
                                                 </div>
                                                 <div class="feed-element">
-                                                    <a href="profile.html" class="pull-left">
+                                                    <a href="#" class="pull-left">
                                                         <h1><i class="fa fa-file-pdf-o"></i></h1>
                                                     </a>
                                                     <div class="media-body ">
-                                                        <small class="pull-right text-navy">5h ago</small>
-                                                        <strong>Chris Johnatan Overtunk</strong> started following <strong>Monica Smith</strong>. <br>
+                                                        <small class="pull-right">5h ago</small>
+                                                        <strong>Place Holder File name</strong> was added to <strong>Folder Name</strong>. <br>
                                                         <small class="text-muted">Yesterday 1:21 pm - 11.06.2014</small>
-                                                        <div class="actions">
-                                                            <a class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> Like </a>
-                                                            <a class="btn btn-xs btn-white"><i class="fa fa-heart"></i> Love</a>
-                                                        </div>
+
                                                     </div>
                                                 </div>
                                                 <div class="feed-element">
-                                                    <a href="profile.html" class="pull-left">
+                                                    <a href="#" class="pull-left">
                                                         <h1><i class="fa fa-file-pdf-o"></i></h1>
                                                     </a>
                                                     <div class="media-body ">
                                                         <small class="pull-right">2h ago</small>
-                                                        <strong>Kim Smith</strong> posted message on <strong>Monica Smith</strong> site. <br>
+                                                        <strong>Place Holder File name</strong> was added to <strong>Folder Name</strong>. <br>
                                                         <small class="text-muted">Yesterday 5:20 pm - 12.06.2014</small>
                                                         
-                                                        <div class="pull-right">
-                                                            <a class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> Like </a>
-                                                        </div>
+                                                        
                                                     </div>
                                                 </div>
                                                 <div class="feed-element">
-                                                    <a href="profile.html" class="pull-left">
+                                                    <a href="#" class="pull-left">
                                                         <h1><i class="fa fa-file-pdf-o"></i></h1>
                                                     </a>
                                                     <div class="media-body ">
                                                         <small class="pull-right">23h ago</small>
-                                                        <strong>Monica Smith</strong> love <strong>Kim Smith</strong>. <br>
+                                                        <strong>Place Holder File name</strong> was added to <strong>Folder Name</strong>. <br>
                                                         <small class="text-muted">2 days ago at 2:30 am - 11.06.2014</small>
                                                     </div>
                                                 </div>
                                                 <div class="feed-element">
-                                                    <a href="profile.html" class="pull-left">
+                                                    <a href="#" class="pull-left">
                                                        <h1><i class="fa fa-file-pdf-o"></i></h1>
                                                     </a>
                                                     <div class="media-body ">
                                                         <small class="pull-right">46h ago</small>
-                                                        <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>
+                                                        <strong>Place Holder File name</strong> was added to <strong>Folder Name</strong>. <br>
                                                         <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
                                                     </div>
                                                 </div>
 
                                                 <div class="feed-element">
-                                                    <a href="profile.html" class="pull-left">
+                                                    <a href="#" class="pull-left">
                                                         <h1><i class="fa fa-file-pdf-o"></i></h1>
                                                     </a>
                                                     <div class="media-body ">
                                                         <small class="pull-right">46h ago</small>
-                                                        <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>
+                                                        <strong>Place Holder File name</strong> was added to <strong>Folder Name</strong>. <br>
                                                         <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
                                                     </div>
                                                 </div>
 
                                                 <div class="feed-element">
-                                                    <a href="profile.html" class="pull-left">
+                                                    <a href="#" class="pull-left">
                                                         <h1><i class="fa fa-file-pdf-o"></i></h1>
                                                     </a>
                                                     <div class="media-body ">
                                                         <small class="pull-right">46h ago</small>
-                                                        <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>
+                                                        <strong>Place Holder File name</strong> was added to <strong>Folder Name</strong>. <br>
                                                         <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
                                                     </div>
                                                 </div>
