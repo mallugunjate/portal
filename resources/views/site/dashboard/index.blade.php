@@ -16,7 +16,7 @@
             </div>
         </nav>
 
-        <div id="page-wrapper" class="gray-bg" style="background: #f3f3f4 url('/images/dashboard-banners/hockey.jpg') top left no-repeat;">
+        <div id="page-wrapper" class="gray-bg clearfix" style="background-color: #f3f3f4; background: url('/images/dashboard-banners/hockey.jpg') top left no-repeat; height: 100%">
             <div class="row border-bottom">
                 @include('site.includes.topbar')
             </div>
@@ -116,29 +116,6 @@
                                 </div>
                             </div>
 
-{{--                                 <div class="file-box">
-                                    <div class="file">
-                                        <a id="222" class="parent-folder folder branch" href="#">
-                                            <span class="corner"></span>
-
-
-                                        <div class="image">
-                                            <img alt="image" class="img-responsive" src="/images/p2.jpg">
-                                        </div>                                            
-
-                                            <div class="file-name">
-                                                Hockey Plus
-                                                <br>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div> --}}
-
-
-
-
-
-
 
                             </div>
                         </div>
@@ -200,7 +177,7 @@
 
                                     <div class="feed-element">
                                         <div>
-                                            <small class="pull-right text-navy">1m ago</small>
+                                            <small class="pull-right">1m ago</small>
                                             <strong>Get Ready for Hockey Plus</strong>
                                             <div>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum</div>
                                             <small class="text-muted">Today 5:60 pm - 12.06.2014</small>
@@ -375,6 +352,8 @@
 
                 </div>
            
+
+                <br class="clearfix" />
             </div>
 
 

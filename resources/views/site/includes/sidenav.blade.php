@@ -56,7 +56,7 @@
 
 
                 <!-- CALENDAR NAV -->
-                @if (Request::is('calendar'))
+                @if (Request::segment(2) == 'calendar')
                 <li class="active">
                 @else
                 <li>
