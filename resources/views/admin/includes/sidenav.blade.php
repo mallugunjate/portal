@@ -59,7 +59,7 @@
         <ul class="nav nav-second-level collapse">
             <li><a href="/admin/folder">Manage Folders</a></li>
             {{-- <li><a href="/admin/folder/create">Create New Folder</a></li> --}}
-            <li><a href="/admin/document/create">Upload New Document</a></li>
+            <li><a href="/admin/document/manager">Document Manager</a></li>
         </ul>        
     </li>
 

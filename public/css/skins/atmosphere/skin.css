@@ -2,6 +2,11 @@ body{
 	background-color: #14380C !important;
 }
 
+.nav-header{
+	background: #14380C url('/images/skin/atmo.png') top center no-repeat !important;
+	margin: 20px 0px;
+}
+
 .nav > li.active{
 	border-left: 4px solid #F1CA00 !important;
     background: #7F9A82 !important;
@@ -9,4 +14,5 @@ body{
 
 .navbar-minimalize{
 	background-color: #14380C !important;
+	border: #14380C;
 }

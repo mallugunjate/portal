@@ -2,6 +2,13 @@ body{
 	background-color: #2B2B2B !important;
 }
 
+
+.nav-header{
+	background: #2B2B2B url('/images/skin/sc.png') top center no-repeat !important;
+	margin: 20px 0px;
+}
+
+
 .nav > li.active{
 	border-left: 4px solid #E20000 !important;
     background: #444444 !important;
@@ -9,4 +16,5 @@ body{
 
 .navbar-minimalize{
 	background-color: #2B2B2B !important;
+	border: #2B2B2B;
 }
