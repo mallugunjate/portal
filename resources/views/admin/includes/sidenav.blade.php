@@ -37,7 +37,18 @@
         <a href="/admin/dashboard"><i class="fa fa-tachometer"></i> <span class="nav-label">Dashboard</span></a>
     </li>
 
-
+        <!-- CALENDAR NAV -->
+    @if (Request::is('admin/calendar/*') || Request::is('admin/calendar') || Request::is('admin/eventtypes') || Request::is('admin/eventtypes/*')) 
+    <li class="active">
+    @else
+    <li>
+    @endif
+        <a href="/admin/calendar"><i class="fa fa-calendar"></i> <span class="nav-label">Calendar</span><span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level collapse">
+            <li><a href="/admin/calendar">Manage Events</a></li>
+            <li><a href="/admin/eventtypes">Manage Event Types</a></li>
+        </ul>
+    </li>
 
     @if (Request::is('admin/communication/*') || Request::is('admin/communication'))
     <li class="active">
@@ -46,8 +57,6 @@
     @endif
         <a href="/admin/communication"><i class="fa fa-bullhorn"></i> <span class="nav-label">Communications</span></a>
     </li>
-
-
 
 
     @if (Request::is('admin/document/*') || Request::is('admin/document'))
@@ -64,23 +73,11 @@
     </li>
 
 
-
-    <!-- CALENDAR NAV -->
-    @if (Request::is('admin/calendar/*') || Request::is('admin/calendar') || Request::is('admin/eventtypes') || Request::is('admin/eventtypes/*')) 
-    <li class="active">
-    @else
-    <li>
-    @endif
-        <a href="/admin/calendar"><i class="fa fa-calendar"></i> <span class="nav-label">Calendar</span><span class="fa arrow"></span></a>
-        <ul class="nav nav-second-level collapse">
-            <li><a href="/admin/calendar">Manage Events</a></li>
-            <li><a href="/admin/eventtypes">Manage Event Types</a></li>
-        </ul>
-    </li>
-
-    <li>
+    {{-- <li>
         <a href="#"><i class="fa fa-line-chart"></i> <span class="nav-label">Analytics</span></a>
-    </li>
+    </li> --}}
+
+
 
 {{--                 <li>
         <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">Messages </span><span class="label label-warning pull-right">5</span></a>
