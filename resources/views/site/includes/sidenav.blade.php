@@ -53,6 +53,9 @@
                 </li>            
 
 
+                <li>
+                    <a href="/{{ Request::segment(1) }}/alerts"><i class="fa fa-bell"></i> <span class="nav-label">Alerts</span></a>
+                </li>   
                     
 
                 @if (Request::segment(2) == 'document')
@@ -62,6 +65,8 @@
                 @endif 
                     <a href="/{{ Request::segment(1) }}/document"><i class="fa fa-file"></i> <span class="nav-label">Documents</span></a>
                 </li>                
+
+
 
 
 
