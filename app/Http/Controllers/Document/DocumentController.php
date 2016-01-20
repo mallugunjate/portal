@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Document;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request as RequestFacade; 
+use DB;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -13,7 +15,11 @@ use App\Models\Document\FileFolder;
 use App\Models\Document\Document;
 use App\Models\Banner;
 use App\Models\Document\Package;
+
 use App\Models\Communication\Communication;
+use App\Models\Communication\CommunicationDocument;
+use App\Models\Communication\CommunicationPackage;
+use App\Models\Communication\CommunicationTarget;
 
 class DocumentController extends Controller
 {
@@ -24,6 +30,12 @@ class DocumentController extends Controller
      */
     public function index(Request $request)
     {
+        $storeNumber = RequestFacade::segment(1);
+
+        $communicationCount = DB::table('communications_target')
+            ->where('store_id', $storeNumber)
+            ->whereNull('is_read')
+            ->count();        
 
         $banner_id = $request->get('banner_id');
 
@@ -52,6 +64,7 @@ class DocumentController extends Controller
             ->with('folders', $folders)
             ->with('banner', $banner)
             ->with('packages', $packages)
+            ->with('communicationCount', $communicationCount)
             ->with('defaultFolder' , $defaultFolder);
 
 

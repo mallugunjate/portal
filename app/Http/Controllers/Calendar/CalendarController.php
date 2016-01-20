@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Calendar;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request as RequestFacade; 
+use DB;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -10,6 +12,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Event\Event;
 use App\Models\Event\EventTypes;
 use App\Models\Banner;
+
+use App\Models\Communication\Communication;
+use App\Models\Communication\CommunicationDocument;
+use App\Models\Communication\CommunicationPackage;
+use App\Models\Communication\CommunicationTarget;
 
 class CalendarController extends Controller
 {
@@ -31,8 +38,17 @@ class CalendarController extends Controller
         // }        
 
         // $events = Event::where('banner', $banner->id)->get();
+        // 
+        $storeNumber = RequestFacade::segment(1);
+
+        $communicationCount = DB::table('communications_target')
+            ->where('store_id', $storeNumber)
+            ->whereNull('is_read')
+            ->count();
+
         $events = Event::where('banner_id', 1)->get(); 
         return view('site.calendar.index')
+                ->with('communicationCount', $communicationCount)
                 ->with('events', $events);
 
     }
