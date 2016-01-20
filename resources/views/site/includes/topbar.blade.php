@@ -1,5 +1,5 @@
 <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0"  style="">
-<a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+{{-- <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a> --}}
 <div class="navbar-header">
 {{--     <form class="form-inline" style="position: relative; top: 10px; left: 30px;">
       <div class="form-group">
@@ -9,7 +9,7 @@
       <button type="submit" class="btn btn-default">Search</button>
     </form> --}}
 </div>
-    <ul class="nav navbar-top-links navbar-right">
+    <ul class="nav navbar-top-links navbar-right" style="position: relative; top: 12px">
         {{-- <li>
             <span class="m-r-sm text-muted welcome-message"></span>
         </li>
@@ -38,9 +38,7 @@
                     <script>
                         document.write( localStorage.getItem('userStoreName') );
                     </script>
-                    <a id="storeswitch">
-                        <i class="fa fa-sign-out "></i> Log out
-                    </a>
+                    <a id="storeswitch" style="display: inline;"><i class="fa fa-sign-out "></i> Log out</a>
                 </li>
     </ul>
 
