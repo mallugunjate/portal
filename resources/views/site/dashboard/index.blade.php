@@ -16,7 +16,7 @@
             </div>
         </nav>
 
-        <div id="page-wrapper" class="gray-bg clearfix" style="background-color: #f3f3f4; background: url('/images/dashboard-banners/hockey.jpg') top left no-repeat; height: 100%">
+        <div id="page-wrapper" class="gray-bg clearfix" style="background-color: #f3f3f4; background-position: top left; background-repeat: no-repeat; float: left; clear: both;">
             <div class="row border-bottom">
                 @include('site.includes.topbar')
             </div>

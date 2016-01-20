@@ -9,7 +9,7 @@
       <button type="submit" class="btn btn-default">Search</button>
     </form> --}}
 </div>
-    <ul class="nav navbar-top-links navbar-right" style="position: relative; top: 12px">
+    <ul class="nav navbar-top-links navbar-right">
         {{-- <li>
             <span class="m-r-sm text-muted welcome-message"></span>
         </li>
@@ -33,6 +33,19 @@
                 <i class="fa fa-tasks"></i>
             </a>
         </li> --}}
+
+
+        <li class="dropdown">
+            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
+            </a>
+            <ul class="dropdown-menu dropdown-alerts">
+
+
+
+                
+            </ul>
+        </li>
 
                 <li>
                     <script>
