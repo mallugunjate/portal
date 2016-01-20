@@ -62,7 +62,6 @@ class AdminController extends Controller
 
         if ($this->group_id == 1) {
 
-
             $banners = Banner::all();
             $admin_users = User::whereIn('group_id',[1,2])->get();
             $navigation = FolderStructure::getNavigationStructure($banner->id);
@@ -80,14 +79,19 @@ class AdminController extends Controller
             $banner_ids = UserBanner::where('user_id', $this->user_id)->get()->pluck('banner_id');
             $banners = Banner::whereIn('id', $banner_ids)->get();
             
-            return view('admin.document-view')
-                ->with('navigation', $navigation)
-                ->with('folders', $folders)
-                ->with('packageHash', $packageHash)
+            //return view('admin.document-view')
+            // return view('admin.document.document-view')
+            //     ->with('navigation', $navigation)
+            //     ->with('folders', $folders)
+            //     ->with('packageHash', $packageHash)
+            //     ->with('banner', $banner)
+            //     ->with('banners', $banners)
+            //     ->with('packages', $packages)
+            //     ->with('defaultFolder' , $defaultFolder);
+            //     
+            return view('admin.home.index')
                 ->with('banner', $banner)
-                ->with('banners', $banners)
-                ->with('packages', $packages)
-                ->with('defaultFolder' , $defaultFolder);
+                ->with('banners', $banners);           
         }
         
     }

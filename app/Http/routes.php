@@ -55,9 +55,11 @@ Route::controllers([
 
 
 //list of admin functions
-Route::get('/admin', function(){
-	return view('admin.index');
-});
+// Route::get('/admin', function(){
+// //	return view('admin.index');
+// });
+
+Route::get('/admin',  ['middleware' => 'admin.auth', 'uses' =>'AdminController@index' ] );
 
 /* Admin Routes Begin 	*/
 
@@ -67,6 +69,8 @@ Route::get('/admin/home',  ['middleware' => 'admin.auth', 'uses' =>'AdminControl
 //FILES
 Route::get('/admin/document/add-meta-data', 'Document\DocumentAdminController@showMetaDataForm');
 Route::post('/admin/document/add-meta-data', 'Document\DocumentAdminController@updateMetaData');
+Route::get('/admin/document/manager',  ['middleware' => 'admin.auth', 'uses' =>'Document\DocumentManagerController@index' ] );
+
 Route::resource('/admin/document', 'Document\DocumentAdminController');
 
 //FOLDERS
@@ -74,6 +78,9 @@ Route::resource('/admin/folder', 'Document\FolderAdminController');
 
 //PACKAGES
 Route::resource('/admin/package', 'Document\PackageAdminController');
+
+//Dasboard ADMIN
+Route::resource('/admin/dashboard', 'Dashboard\DashboardAdminController');
 
 //Communications
 Route::resource('/admin/communication', 'Communication\CommunicationAdminController');

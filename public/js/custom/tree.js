@@ -1,8 +1,8 @@
 $.fn.extend({
     treed: function (o) {
       
-      var openedClass = 'glyphicon-minus-sign';
-      var closedClass = 'glyphicon-plus-sign';
+      var openedClass = '';
+      var closedClass = '';
       
       if (typeof o != 'undefined'){
         if (typeof o.openedClass != 'undefined'){
@@ -18,16 +18,16 @@ $.fn.extend({
         tree.addClass("tree");
         tree.find('li').has("ul").each(function () {
             var branch = $(this); //li with children ul
-            branch.prepend("<i class='indicator glyphicon " + closedClass + "'></i>");
+            branch.prepend("<i class='indicator fa " + closedClass + "'></i>");
             branch.addClass('branch');
             branch.on('click', function (e) {
                 if (this == e.target) {                    
                     //close all other folders
-                    $(".indicator").removeClass('glyphicon-folder-open').addClass('glyphicon-folder-close')
+                    $(".indicator").removeClass('fa-folder-open').addClass('fa-folder')
                     
                     if (!$(this).hasClass('parent-folder')) {
 
-                        $(this).closest('.parent-folder').children('i').removeClass('glyphicon-folder-close').addClass('glyphicon-folder-open');
+                        $(this).closest('.parent-folder').children('i').removeClass('fa-folder').addClass('fa-folder-open');
 
                     }
                     else{

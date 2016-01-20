@@ -3302,6 +3302,7 @@ video {
 .modal-body {
   padding: 20px 30px 30px 30px;
 }
+
 .inmodal .modal-body {
   background: #f8fafb;
 }
@@ -8010,3 +8011,17 @@ body.md-skin {
 }
 
 /*# sourceMappingURL=app.css.map */
+
+.navbar-brand a{
+  position: relative;
+  bottom: 15px;
+  font-weight: normal !important;
+
+}
+.dropdown-menu{
+
+
+}
+.banner-switch{
+
+}

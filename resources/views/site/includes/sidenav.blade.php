@@ -29,6 +29,16 @@
                 </li>
 
 
+                <!-- CALENDAR NAV -->
+                @if (Request::segment(2) == 'calendar')
+                <li class="active">
+                @else
+                <li>
+                @endif                
+                    <a href="/{{ Request::segment(1) }}/calendar"><i class="fa fa-calendar"></i> <span class="nav-label">Calendar</span></a>
+                </li>                
+
+
 
                 @if (Request::segment(2) == 'communication')
                 <li class="active">
@@ -43,6 +53,9 @@
                 </li>            
 
 
+                <li>
+                    <a href="/{{ Request::segment(1) }}/alerts"><i class="fa fa-bell"></i> <span class="nav-label">Alerts</span></a>
+                </li>   
                     
 
                 @if (Request::segment(2) == 'document')
@@ -55,14 +68,8 @@
 
 
 
-                <!-- CALENDAR NAV -->
-                @if (Request::is('calendar'))
-                <li class="active">
-                @else
-                <li>
-                @endif                
-                    <a href="/{{ Request::segment(1) }}/calendar"><i class="fa fa-calendar"></i> <span class="nav-label">Calendar</span></a>
-                </li>
+
+
 
 
 {{--                 <li>

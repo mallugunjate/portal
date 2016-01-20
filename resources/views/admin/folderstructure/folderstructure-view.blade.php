@@ -52,7 +52,7 @@
 					
 					@if ( $nav["is_child"] == 0)
 						
-						@include('admin.folderstructure-partial', ['navigation' =>$navigation, 'currentnode' => $nav, 'banner' => $banner])
+						@include('admin.folderstructure.folderstructure-partial', ['navigation' =>$navigation, 'currentnode' => $nav, 'banner' => $banner])
 						
 					@endif
 

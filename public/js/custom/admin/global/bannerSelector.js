@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
 	console.log('selected banner : ' + localStorage.getItem('admin-banner'));
-	$(".navbar-brand").find('span').append('<a href="/admin/home">'+ localStorage.getItem('admin-banner') +'</a>');
+	$(".navbar-brand").append('<a href="/admin">'+ localStorage.getItem('admin-banner') +'</a>');
 	
 	$(".banner-switch").click(function(){
 		
@@ -13,14 +13,13 @@ $(document).ready(function(){
 
 		console.log('banner_id' + banner_id);
 
-
 		$.ajax({
 			method : "PATCH",
 			url : "/admin/banner/" + banner_id ,
 			data : { "_token" : $('[name="_token"]').val()}
 		}).done(function( data ){
 			console.log(data);
-			$(".navbar-brand").find('span').append('<a href="/admin/home">'+ banner +'</a>');
+			$(".navbar-brand").find('span').append( banner );
 			window.location = '/admin/home';
 		});
 

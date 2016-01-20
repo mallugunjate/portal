@@ -26,7 +26,7 @@
                     <h2>Calendar Event Types</h2>
                     <ol class="breadcrumb">
                         <li>
-                            <a href="index.html">Home</a>
+                            <a href="/admin">Home</a>
                         </li>
                         <li>
                             <a>Calendar</a>
@@ -64,9 +64,6 @@
 		                                        <button type="button" class="btn btn-white"> Search</button>
 		                                    </span>
 		                                </div> --}}
-
-	
-
 
 		                            </div>
 
@@ -111,7 +108,7 @@
 
 				@include('site.includes.footer')
 
-			    @include('site.includes.scripts')
+			    @include('admin.includes.scripts')
 
 				<script type="text/javascript">
 					$.ajaxSetup({
@@ -122,8 +119,8 @@
 
 				</script>
 
-				<script src="/js/custom/deleteEventType.js"></script>
-				<script type="text/javascript" src="/js/custom/admin/global/bannerSelector.js"></script>
+				<script src="/js/custom/admin/events/deleteEventType.js"></script>
+
 
 				@include('site.includes.bugreport')
 

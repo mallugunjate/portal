@@ -2,11 +2,56 @@ body{
 	background-color: #14380C !important;
 }
 
-.nav > li.active{
+.nav-header{
+	background: #14380C url('/images/skin/atmo.png') top center no-repeat !important;
+	margin: 20px 0px;
+}
+
+/*.nav > li.active{
 	border-left: 4px solid #F1CA00 !important;
     background: #7F9A82 !important;
 }
 
+.metismenu > li a:hover{
+	border-left: 4px solid #F1CA00 !important;
+    background: #7F9A82 !important;
+}
+*/
 .navbar-minimalize{
 	background-color: #14380C !important;
+	border: #14380C;
+}
+
+
+
+.metismenu > li.active{
+	border: none !important;
+}
+
+.metismenu > li a{
+	border-left: 4px solid #14380C !important;
+	border-left: none;
+}
+
+.metismenu > li.active a{
+	border-left: 4px solid #F1CA00 !important;	
+    background: #7F9A82 !important;
+}
+
+.metismenu > li.active a:hover{
+	border-left: 4px solid #F1CA00 !important;
+}
+
+
+.metismenu > li a:hover{
+	border-left: 4px solid #F1CA00 !important;	
+	background: #7F9A82 !important;
+}
+
+.metismenu > li.active a:hover{
+	border-left: none;
+}
+
+.metismenu .label-primary{
+	background-color: #F1CA00 !important;
 }

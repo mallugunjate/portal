@@ -10,6 +10,9 @@ use App\Models\Event\Event;
 use App\Models\Event\EventType;
 use App\Models\Tag\ContentTag;
 use App\Models\Tag\Tag;
+use App\Models\Banner;
+use App\Models\UserBanner;
+use App\Models\UserSelectedBanner;
 
 
 class CalendarAdminController extends Controller
@@ -31,10 +34,18 @@ class CalendarAdminController extends Controller
      */
     public function index()
     {
+        $user_id = \Auth::user()->id;
+        $banner_ids = UserBanner::where('user_id', $user_id)->get()->pluck('banner_id');
+        $banners = Banner::whereIn('id', $banner_ids)->get();        
+        $banner_id = UserSelectedBanner::where('user_id', \Auth::user()->id)->first()->selected_banner_id;
+        $banner  = Banner::find($banner_id);
+
         // return view('site.calendar.index');
-        $events = Event::paginate(15);
+        $events = Event::where('banner_id', $banner_id)->paginate(15);
         return view('admin.calendar.index')
-            ->with('events', $events);
+            ->with('events', $events)
+            ->with('banner', $banner)
+            ->with('banners', $banners);            
     }
 
     /**
@@ -44,12 +55,20 @@ class CalendarAdminController extends Controller
      */
     public function create()
     {
-        
-        $event_types_list = EventType::all();
-        $tags = Tag::where('banner_id', 1)->lists('name', 'id');
+        $user_id = \Auth::user()->id;
+        $banner_ids = UserBanner::where('user_id', $user_id)->get()->pluck('banner_id');
+        $banners = Banner::whereIn('id', $banner_ids)->get();        
+        $banner_id = UserSelectedBanner::where('user_id', \Auth::user()->id)->first()->selected_banner_id;
+        $banner  = Banner::find($banner_id);
+
+        // $event_types_list = EventType::all();
+        $event_types_list = EventType::where('banner_id', $banner_id)->get();
+        $tags = Tag::where('banner_id', $banner_id)->lists('name', 'id');
         return view('admin.calendar.create')
             ->with('event_types_list', $event_types_list)
-            ->with('tags', $tags);
+            ->with('tags', $tags)
+            ->with('banner', $banner)
+            ->with('banners', $banners);     
     }
 
     /**
@@ -82,10 +101,17 @@ class CalendarAdminController extends Controller
      */
     public function edit($id)
     {
+
+        $user_id = \Auth::user()->id;
+        $banner_ids = UserBanner::where('user_id', $user_id)->get()->pluck('banner_id');
+        $banners = Banner::whereIn('id', $banner_ids)->get();        
+        $banner_id = UserSelectedBanner::where('user_id', \Auth::user()->id)->first()->selected_banner_id;
+        $banner  = Banner::find($banner_id);
+
         $event = Event::find($id);
         $event_type = EventType::find($id);
         $event_types_list = EventType::all();
-        $banner = UserSelectedBanner::getBanner();
+        // $banner = UserSelectedBanner::getBanner();
         $tags = Tag::where('banner_id', $banner->id)->lists('name', 'id');
         $tag_ids = ContentTag::where('content_id', $id)->where('content_type', 'event')->get()->pluck('tag_id');
         $selected_tags = Tag::findMany($tag_ids)->pluck('id')->toArray();
@@ -95,7 +121,9 @@ class CalendarAdminController extends Controller
             ->with('event_type', $event_type)
             ->with('event_types_list', $event_types_list)
             ->with('tags', $tags)
-            ->with('selected_tags', $selected_tags);
+            ->with('selected_tags', $selected_tags)
+            ->with('banner', $banner)
+            ->with('banners', $banners);
     }
 
     /**

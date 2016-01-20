@@ -39,7 +39,7 @@ class FolderAdminController extends Controller
         $banners = Banner::all();  
 
         $navigation = FolderStructure::getNavigationStructure($banner->id);
-        return view('admin.folderstructure-view')->with('navigation', $navigation)
+        return view('admin.folderstructure.index')->with('navigation', $navigation)
                                                      ->with('banner', $banner)
                                                      ->with('banners', $banners);     
     }
@@ -54,7 +54,7 @@ class FolderAdminController extends Controller
         
         $banner = UserSelectedBanner::getBanner();
         $banners = Banner::all();          
-        return view('admin.create-folder')->with('banner', $banner)
+        return view('admin.folder.create-folder')->with('banner', $banner)
                                          ->with('banners', $banners);
     }
 
@@ -105,7 +105,7 @@ class FolderAdminController extends Controller
         $tag_ids = ContentTag::where('content_id', $id)->where('content_type', 'folder')->get()->pluck('tag_id');
         $selected_tags = Tag::findMany($tag_ids)->pluck('id')->toArray();
 
-        return view('admin.folder-edit')->with('folder', $folder)
+        return view('admin.folder.folder-edit')->with('folder', $folder)
                                         ->with('params', $params)
                                         ->with('banner', $banner)
                                         ->with('banners', $banners)

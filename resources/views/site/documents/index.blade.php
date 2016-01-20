@@ -265,7 +265,7 @@
                 @include('admin.includes.scripts')
                 <script type="text/javascript" src="/js/vendor/underscore-1.8.3.js"></script>
                 <script type="text/javascript" src="/js/custom/tree.js"></script>
-                <script type="text/javascript" src="/js/custom/folderStructure.js" ></script>
+                <script type="text/javascript" src="/js/custom/site/documents/folderStructure.js" ></script>
                 <script type="text/javascript" src="/js/custom/site/documents/breadcrumb.js" ></script>
                 <script type="text/javascript" src="/js/custom/site/documents/fileTable.js" ></script>
                 <script type="text/javascript" src="/js/vendor/tablesorter.min.js"></script>
@@ -277,7 +277,7 @@
                         }
                     });
 
-                    $(".tree").treed({openedClass : 'glyphicon glyphicon-folder-open', closedClass : 'glyphicon glyphicon-folder-close'});
+                    $(".tree").treed({openedClass : 'fa fa-folder-open', closedClass : 'fa fa-folder'});
 
                     var defaultFolderId = $("input[name='default_folder']").val();
 

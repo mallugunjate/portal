@@ -21,19 +21,20 @@ class CalendarController extends Controller
     public function index(Request $request)
     {
 
-        $banner_id = $request->get('banner_id');
+        // $banner_id = $request->get('banner_id');
 
-        if(isset($banner_id)) {
-            
-            $banner = Banner::where('id', $banner_id)->first();
-        }
-        else{
-            $banner = Banner::where('id', 1)->first();
-        }        
+        // if(isset($banner_id)) {
+        //     $banner = Banner::where('id', $banner_id)->first();
+        // }
+        // else{
+        //     $banner = Banner::where('id', 1)->first();
+        // }        
 
-        $events = Event::where('banner', $banner->id)->get();
+        // $events = Event::where('banner', $banner->id)->get();
+        $events = Event::where('banner_id', 1)->get(); 
         return view('site.calendar.index')
                 ->with('events', $events);
+
     }
 
     /**

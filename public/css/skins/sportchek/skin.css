@@ -2,11 +2,47 @@ body{
 	background-color: #2B2B2B !important;
 }
 
-.nav > li.active{
-	border-left: 4px solid #E20000 !important;
+
+.nav-header{
+	background: #2B2B2B url('/images/skin/sc.png') top center no-repeat !important;
+	margin: 20px 0px;
+}
+
+
+.metismenu > li.active{
+	border: none !important;
+}
+
+.metismenu > li a{
+	border-left: 4px solid #2B2B2B !important;
+	border-left: none;
+}
+
+.metismenu > li.active a{
+	border-left: 4px solid #E20000 !important;	
     background: #444444 !important;
 }
 
+.metismenu > li.active a:hover{
+	border-left: 4px solid #E20000 !important;
+}
+
+
+.metismenu > li a:hover{
+	border-left: 4px solid #E20000 !important;	
+	background: #444444 !important;
+}
+
+.metismenu > li.active a:hover{
+	border-left: none;
+}
+
+
 .navbar-minimalize{
 	background-color: #2B2B2B !important;
+	border: #2B2B2B;
+}
+
+.metismenu .label-primary{
+	background-color: #E20000 !important;
 }

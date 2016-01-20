@@ -19,39 +19,26 @@
     </li>
 
 
-    @if (Request::is('/'))
+
+    @if ( Request::is('admin') || Request::is('admin/home'))
     <li class="active">
     @else
     <li>
     @endif
-        <a href="/"><i class="fa fa-home"></i> <span class="nav-label">Dashboard</span></a>
+        <a href="/admin"><i class="fa fa-home"></i> <span class="nav-label">Home</span></a>
     </li>
 
 
-
-    @if (Request::is('communication'))
+    @if (Request::is('admin/dashboard') || Request::is('admin/dashboard/*'))
     <li class="active">
     @else
     <li>
     @endif
-        <a href="/communication"><i class="fa fa-bullhorn"></i> <span class="nav-label">Communications</span> <span class="label label-primary pull-right">2</span></a>
+        <a href="/admin/dashboard"><i class="fa fa-tachometer"></i> <span class="nav-label">Dashboard</span></a>
     </li>
 
-
-
-
-    @if (Request::is('document'))
-    <li class="active">
-    @else
-    <li>
-    @endif
-        <a href="/document"><i class="fa fa-file"></i> <span class="nav-label">Documents</span></a>
-    </li>
-
-
-
-    <!-- CALENDAR NAV -->
-    @if (Request::is('admin/calendar/*') || Request::is('admin/calendar') || Request::is('admin/eventtypes') || Request::is('admin/eventtypes/*') ) 
+        <!-- CALENDAR NAV -->
+    @if (Request::is('admin/calendar/*') || Request::is('admin/calendar') || Request::is('admin/eventtypes') || Request::is('admin/eventtypes/*')) 
     <li class="active">
     @else
     <li>
@@ -62,6 +49,35 @@
             <li><a href="/admin/eventtypes">Manage Event Types</a></li>
         </ul>
     </li>
+
+    @if (Request::is('admin/communication/*') || Request::is('admin/communication'))
+    <li class="active">
+    @else
+    <li>
+    @endif
+        <a href="/admin/communication"><i class="fa fa-bullhorn"></i> <span class="nav-label">Communications</span></a>
+    </li>
+
+
+    @if (Request::is('admin/document/*') || Request::is('admin/document'))
+    <li class="active">
+    @else
+    <li>
+    @endif
+        <a href="/document"><i class="fa fa-file"></i> <span class="nav-label">Documents</span><span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level collapse">
+            <li><a href="/admin/folder">Manage Folders</a></li>
+            {{-- <li><a href="/admin/folder/create">Create New Folder</a></li> --}}
+            <li><a href="/admin/document/manager">Document Manager</a></li>
+        </ul>        
+    </li>
+
+
+    {{-- <li>
+        <a href="#"><i class="fa fa-line-chart"></i> <span class="nav-label">Analytics</span></a>
+    </li> --}}
+
+
 
 {{--                 <li>
         <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">Messages </span><span class="label label-warning pull-right">5</span></a>
@@ -122,7 +138,7 @@
             <li><a href="graph_morris.html">Living Healthy <span class="label label-primary pull-right">27</span></a></li>
         </ul>
     </li>    --}}
-<!--
+{{--
     <li>
         <a href="metrics.html"><i class="fa fa-pie-chart"></i> <span class="nav-label">Metrics</span> <span class="label label-primary pull-right">NEW</span> </a>
     </li>
@@ -274,5 +290,5 @@
     <li class="special_link">
         <a href="package.html"><i class="fa fa-database"></i> <span class="nav-label">Package</span></a>
     </li>
--->
+--}}
 </ul>
