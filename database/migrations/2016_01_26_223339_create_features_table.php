@@ -12,7 +12,7 @@ class CreateFeaturesTable extends Migration
      */
     public function up()
     {
-        Schema::table('features', function ($table) {
+        Schema::create('features', function ($table) {
             $table->increments('id')->unsigned();
             $table->integer('banner_id')->unsigned();
             $table->mediumText('title'); 
@@ -32,6 +32,8 @@ class CreateFeaturesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('features');
+        Schema::table('features', function (Blueprint $table) {
+            Schema::dropIfExists('features');
+        });
     }
 }

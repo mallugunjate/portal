@@ -561,6 +561,7 @@ return array(
     'TestCase' => $baseDir . '/tests/TestCase.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
     'UpdateDocumentsTable' => $baseDir . '/database/migrations/2015_10_27_145632_update_documents_table.php',
+    'UpdateFeaturesTable' => $baseDir . '/database/migrations/2016_01_26_231215_update_features_table.php',
     'UpdateFoldersTable' => $baseDir . '/database/migrations/2015_09_30_215422_update-folders-table.php',
     'UpdatePackagesTable' => $baseDir . '/database/migrations/2015_12_02_230415_update_packages_table.php',
     'UpdateUsersTable' => $baseDir . '/database/migrations/2015_12_15_182533_update_users_table.php',
