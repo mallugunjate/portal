@@ -37,6 +37,18 @@
         <a href="/admin/dashboard"><i class="fa fa-tachometer"></i> <span class="nav-label">Dashboard</span></a>
     </li>
 
+
+    <!-- FEATURES -->
+
+    @if (Request::is('admin/feature') || Request::is('admin/feature/*'))
+    <li class="active">
+    @else
+    <li>
+    @endif
+        <a href="/admin/feature"><i class="fa fa-gift"></i> <span class="nav-label">Featured Content</span></a>
+    </li>
+
+
         <!-- CALENDAR NAV -->
     @if (Request::is('admin/calendar/*') || Request::is('admin/calendar') || Request::is('admin/eventtypes') || Request::is('admin/eventtypes/*')) 
     <li class="active">
