@@ -34,6 +34,11 @@ $("#add-documents").click(function(){
 	$("#document-listing").modal('show');
 });
 
+
+$("#add-folders").click(function(){
+	$("#folder-listing").modal('show');
+});
+
 var formatDate = function(){
 	
 	if ( typeof(start) === "number") {

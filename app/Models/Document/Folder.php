@@ -409,4 +409,96 @@ class Folder extends Model
         }
     }
 
+    public static function getFolderChildrenTree($global_folder_id)
+    {
+        $folder_id = \DB::table('folder_ids')->where('id',$global_folder_id)->first()->folder_id;
+        $folderDetails = Folder::where('id', $folder_id)->first();
+        $folderStack = new \SplStack();
+        $folderStack->push($folderDetails);
+        
+
+        
+        $navigation = [];
+        $navCounter = 0;
+
+        while (!$folderStack->isEmpty()) {
+            
+            $currentNode = $folderStack->pop();
+             
+            $globalFolderId = \DB::table('folder_ids')->where('folder_id', $currentNode->id )
+                                                            ->where('folder_type', 'folder')
+                                                            ->first()->id;
+                                                             
+            $navigation[$globalFolderId] =[];
+            $navigation[$globalFolderId]["label"] = $currentNode->name;
+            $navigation[$globalFolderId]["global_folder_id"] = $globalFolderId;
+
+            $navigation[$globalFolderId]["is_child"] = $currentNode->is_child;
+
+            $parentNode = FolderStructure::where('child', $currentNode->id)->first();
+
+            if (! $parentNode == null ) {
+                $navigation[$globalFolderId]["parent_id"] = $parentNode->parent;
+            }
+            else {
+                $navigation[$globalFolderId]["parent_id"] = null;
+            }
+
+            $childNodes = FolderStructure::where('parent', $currentNode->id)
+                                        ->orderBy('created_at', 'desc')
+                                        ->get();
+            
+            
+            if ( !$childNodes->isEmpty()) {
+                        
+                $counter = 0;
+                $children = [];
+                foreach ($childNodes as $childNode) {
+                   $child = Folder::where('id', $childNode->child)->first();
+                   array_push($children, $child);
+                }
+               
+               usort($children, function($a, $b)
+                {
+                    return strcmp($a->name, $b->name);
+                });
+
+               foreach ($children as $child) {
+                   $folderStack->push($child);
+                   $navigation[$globalFolderId]["children"][$counter] = [];
+                   $globalChildId = \DB::table('folder_ids')->where('folder_id', $child->id )
+                                                            ->where('folder_type', 'folder')
+                                                            ->first()->id;
+                   $navigation[$globalFolderId]["children"][$counter]["child_id"] = $globalChildId;
+                   $counter++;
+               }
+               unset($children);
+                
+            }
+            else{
+                
+                $navigation[$globalFolderId]["children"] = [];
+            }
+
+            if ($currentNode->has_weeks) {
+                $windowSize = $currentNode->week_window_size;
+                $weekWindow = FolderStructure::getWeekWindow($globalFolderId, $windowSize);
+                $counter = 0;
+                foreach ($weekWindow as $week) {
+                   
+                   $navigation[$globalFolderId]["weeks"][$counter] = [];
+                   $navigation[$globalFolderId]["weeks"][$counter]["week_id"] = $week->id;
+                   $navigation[$globalFolderId]["weeks"][$counter]["week"]= $week->week_number;
+                   $navigation[$globalFolderId]["weeks"][$counter]["global_id"] = \DB::table('folder_ids')->where('folder_id', $week->id )
+                                                                                                        ->where('folder_type', 'week')
+                                                                                                        ->first()->id;
+                   $counter++;
+                }
+            }
+            
+            $navCounter++;   
+        }
+        return  ( $navigation );
+    }
+
 }

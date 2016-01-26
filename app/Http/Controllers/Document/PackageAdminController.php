@@ -15,6 +15,7 @@ use App\Models\Document\DocumentPackage;
 use App\Models\Tag\Tag;
 use App\Models\Tag\ContentTag;
 use App\Models\UserSelectedBanner;
+use App\Models\Document\Folder;
 
 class PackageAdminController extends Controller
 {
@@ -50,12 +51,17 @@ class PackageAdminController extends Controller
         $banners = Banner::all();
 
         $fileFolderStructure = FileFolder::getFileFolderStructure($banner->id);
+        $folderStructure = FolderStructure::getNavigationStructure($banner->id);
+
+        // dd (Folder::getFolderChildrenTree(2));
+        // dd($folderStructure);
         $tags = Tag::where('banner_id', $banner->id)->lists('name', 'id');
-        
+            
         return view('admin.package.create')
                     ->with('banner', $banner)
                     ->with('banners',$banners)
                     ->with('navigation', $fileFolderStructure)
+                    ->with('folderStructure', $folderStructure)
                     ->with('tags', $tags);
                     
     }
@@ -69,6 +75,7 @@ class PackageAdminController extends Controller
     public function store(Request $request)
     {
         Package::storePackage($request);
+        
         return redirect()->action('AdminController@index');
     }
 
@@ -83,7 +90,7 @@ class PackageAdminController extends Controller
         $response = [];
         $response["package"] = Package::find($id);
         $response["documentDetails"] = Package::getPackageDocumentDetails($id);
-
+        $response["folderDetails"] = Folder::getFolderChildrenTree(1);
         return ($response);
 
     }
