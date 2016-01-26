@@ -7,15 +7,15 @@ $(document).ready(function() {
         var titleVal = $("#title"+fileIdVal).val();
         var descriptionVal = $("#description"+fileIdVal).val();
 
-        var tag_selector = "#select" + fileIdVal ;
-        var tags = $(tag_selector).val();
+        // var tag_selector = "#select" + fileIdVal ;
+        // var tags = $(tag_selector).val();
 
         var start = $("#start"+fileIdVal).val();
         var end =  $("#end"+fileIdVal).val();
         var selector = "#metadataform"+fileIdVal;
         var check = "#checkmark"+fileIdVal;
 
-        console.log(fileIdVal, titleVal, descriptionVal, selector, start, end, tags);
+        console.log(fileIdVal, titleVal, descriptionVal, selector, start, end);
        
         if (start == "") {
             
@@ -25,7 +25,7 @@ $(document).ready(function() {
             return false;
 
         }
-        $.post("/admin/document/add-meta-data",{ file_id: fileIdVal, title: titleVal, description: descriptionVal, start : start, end:end, _token:token , tags:tags})
+        $.post("/admin/document/add-meta-data",{ file_id: fileIdVal, title: titleVal, description: descriptionVal, start : start, end:end, _token:token })
             .done( function(data){
                 console.log(data);
                 $(check).fadeIn(1000);
@@ -38,7 +38,7 @@ $(document).ready(function() {
     $(".meta-data-done").on("click", function(){
         var banner_id = $("input[name='banner_id']").val();
         var folder_id = $("input[name='folder_id']").val()
-        window.location ='/admin/home?banner_id='+banner_id+'&parent='+folder_id;
+        window.location ='/admin/document/manager#!/'+folder_id;
     });
 
     $(".meta-data-add-all").on("click", function(){
@@ -48,7 +48,7 @@ $(document).ready(function() {
         }
     });
 
-    $('.chosen').chosen({
-        width:'100%'
-    })
+    // $('.chosen').chosen({
+    //     width:'100%'
+    // })
 });

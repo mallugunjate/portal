@@ -154,11 +154,11 @@
             <script type="text/javascript" src="/js/custom/admin/folders/folderStructure.js" ></script>
             <script type="text/javascript" src="/js/custom/admin/documents/fileTable.js"></script>
             <script type="text/javascript" src="/js/custom/admin/documents/deleteFile.js"></script>
-            <script type="text/javascript" src="/js/custom/admin/documents/getPackages.js"></script>
+{{--             <script type="text/javascript" src="/js/custom/admin/documents/getPackages.js"></script>
             <script type="text/javascript" src="/js/custom/admin/documents/deletePackage.js"></script>
-            <script type="text/javascript" src="/js/custom/admin/documents/showPackage.js"></script>
+            <script type="text/javascript" src="/js/custom/admin/documents/showPackage.js"></script> --}}
             <script type="text/javascript" src="/js/custom/admin/documents/breadcrumb.js"></script>
-            <script type="text/javascript" src="/js/custom/admin/documents/uploadDocument.js"></script>
+{{--             <script type="text/javascript" src="/js/custom/admin/documents/uploadDocument.js"></script> --}}
             <script type="text/javascript" src="/js/custom/tree.js"></script>
 
         

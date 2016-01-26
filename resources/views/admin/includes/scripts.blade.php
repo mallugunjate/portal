@@ -1,6 +1,7 @@
 <!-- Mainly scripts -->
 <script src="/js/env.js"></script>
 <script src="/js/jquery-2.1.1.min.js"></script>
+<script src="/js/custom/admin/global/bannerSelector.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 <script src="/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
@@ -41,9 +42,11 @@
 <script src="/js/plugins/sweetalert/sweetalert.min.js"></script>
 
 <!-- date range picker -->
+<script src="/js/vendor/moment.js"></script>
 <script src="/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+<script src="/js/vendor/bootstrap-datetimepicker.min.js"></script>
+
 
 <!-- editor -->
-<script src="/js/plugins/summernote/summernote.min.js"></script>
+{{-- <script src="/js/plugins/summernote/summernote.min.js"></script> --}}
 
-<script type="text/javascript" src="/js/custom/admin/global/bannerSelector.js"></script>

@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{!! csrf_token() !!}"/>
 </head>
 
-<body class="fixed-navigation" onload="checkDeepLink()">
+<body class="fixed-navigation">
     <div id="wrapper">
     <nav class="navbar-default navbar-static-side" role="navigation">
         <div class="sidebar-collapse">
@@ -70,12 +70,14 @@
 
         </div>
         <br>
+        <input type="hidden" name="folder_id" value="{{ $_REQUEST['parent'] }}">
     	@foreach($documents as $doc)
     		
     			
     			<form id="metadataform{{ $doc->id }}">
     				
             <input type="hidden" name="file_id" value="{{ $doc->id }}">
+            
     				
             
             <div class="row" >
@@ -146,7 +148,8 @@
       </div>
     </div>
 
-
+</div>
+</div>
 
                 @include('site.includes.footer')
                 
@@ -161,15 +164,16 @@
 
             <script type="text/javascript" src="/js/plugins/steps/jquery.steps.min.js"></script>
 
-            <script type="text/javascript" src="/js/custom/admin/folders/documentUploadFolderStructure.js" ></script>
-            <script type="text/javascript" src="/js/custom/admin/documents/fileTable.js"></script>
-            <script type="text/javascript" src="/js/custom/admin/documents/deleteFile.js"></script>
-            <script type="text/javascript" src="/js/custom/admin/documents/getPackages.js"></script>
+{{--             <script type="text/javascript" src="/js/custom/admin/folders/documentUploadFolderStructure.js" ></script> --}}
+{{--             <script type="text/javascript" src="/js/custom/admin/documents/fileTable.js"></script> --}}
+{{--             <script type="text/javascript" src="/js/custom/admin/documents/deleteFile.js"></script> --}}
+{{--             <script type="text/javascript" src="/js/custom/admin/documents/getPackages.js"></script>
             <script type="text/javascript" src="/js/custom/admin/documents/deletePackage.js"></script>
-            <script type="text/javascript" src="/js/custom/admin/documents/showPackage.js"></script>
+            <script type="text/javascript" src="/js/custom/admin/documents/showPackage.js"></script> --}}
             <script type="text/javascript" src="/js/custom/admin/documents/breadcrumb.js"></script>
-            <script type="text/javascript" src="/js/custom/admin/documents/uploadDocument.js"></script>
+{{--             <script type="text/javascript" src="/js/custom/admin/documents/uploadDocument.js"></script> --}}
             <script type="text/javascript" src="/js/custom/tree.js"></script>
+            <script type="text/javascript" src="/js/custom/submitmetadata.js"></script>
 
         
                 <script type="text/javascript">
@@ -182,8 +186,6 @@
                     });
 
                     $(document).ready(function() {
-
-
 
                         var form = $("#example-advanced-form").show();
                          
@@ -252,33 +254,42 @@
                               defaultDate : new Date()
                             });
                               
-                            $(".endDate").datetimepicker({
+                            $(".enddate").datetimepicker({
                               format: "YYYY-MM-DD HH:mm:ss"
                             });
                         });
 
                         
-                        $(".tree").treed({openedClass : 'fa-folder-open', closedClass : 'fa-folder'});
+                        // $(".tree").treed({openedClass : 'fa-folder-open', closedClass : 'fa-folder'});
 
-                        var defaultFolderId = $("input[name='default_folder']").val();
+                        var defaultFolderId = getParameterByName('parent');
+                        console.log("defautl folder id: " + defaultFolderId);
+                        // var defaultFolderId = $("input[name='default_folder']").val();
 
-                        if (defaultFolderId) {
-                            var folder = $("#"+defaultFolderId);
-                            $("#"+defaultFolderId).parent().click();
-                            $.ajax({
-                                url : '/admin/document',
-                                data : {
-                                    folder : defaultFolderId,
-                                    isWeekFolder : folder.attr("data-isweek")
-                                }
-                            })
-                            .done(function(data){
-                                console.log(data);
-                                fillTable(data);
-                            });
-                        }
+                        // if (defaultFolderId) {
+                        //     var folder = $("#"+defaultFolderId);
+                        //     $("#"+defaultFolderId).parent().click();
+                        //     $.ajax({
+                        //         url : '/admin/document',
+                        //         data : {
+                        //             folder : defaultFolderId,
+                        //             isWeekFolder : folder.attr("data-isweek")
+                        //         }
+                        //     })
+                        //     .done(function(data){
+                        //         console.log(data);
+                        //         fillTable(data);
+                        //     });
+                        // }
 
                     }); 
+
+                    function getParameterByName(name) {
+                        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+                        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                            results = regex.exec(location.search);
+                        return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+                    }
                 </script>
 
                 @include('site.includes.bugreport')
