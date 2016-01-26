@@ -56,7 +56,7 @@ class DocumentAdminController extends Controller
 
         $packageHash = sha1(time() . time());
         $folders = Folder::all();
-        return view('admin.docdev.document-view')
+        return view('admin.documentmanager.document-upload')
             ->with('folders', $folders)
             ->with('packageHash', $packageHash)
             ->with('banner', $banner)
@@ -88,10 +88,11 @@ class DocumentAdminController extends Controller
         $banners = Banner::all();
 
         $parent = $request->get('parent');
+        
         $tags = Tag::where('banner_id', $banner->id)->lists('name', 'id');
         $documents = Document::where('upload_package_id', $package)->get();
 
-        return view('admin.docdev.document-add-meta-data')
+        return view('admin.document-meta.document-add-meta-data')
                 ->with('documents', $documents)
                 ->with('banner', $banner)
                 ->with('banners', $banners)

@@ -1,6 +1,7 @@
 	var fillTable = function(data){
 
-		//console.log( data );
+		console.log("from fillTable");
+		console.log(data);
 
 		$("#file-container").removeClass('hidden').addClass('visible');
 		$("#file-uploader").removeClass('hidden').addClass('visible');
@@ -13,17 +14,24 @@
 		
 		if ( data.folder.type == "week") {
 			if( !(data.folder === null) ) {
-				$("#folder-title h2").html("Week " + data.folder.week_number)
+				$("#folder-title").html("<i class='fa fa-folder-open'></i> Week " + data.folder.week_number)
 				$("#folder-title").attr('data-folderId', data.folder.global_folder_id)
+				$("#add-files").attr('data-folderId', data.folder.global_folder_id)
 				$("#folder-title").attr('data-isWeekFolder', true)
 			}	
 		}
 		else {
 			if( !(data.folder === null) ) {
-				$("#folder-title h2").html(data.folder.name);
+				$("#folder-title").html("<i class='fa fa-folder-open'></i> " +  data.folder.name);
 				$("#folder-title").attr('data-folderId', data.folder.global_folder_id)
+				$("#add-files").attr('data-folderId', data.folder.global_folder_id)
+				var currentHref = $("#add-files").attr('href');
+				$("#add-files").attr('href', "/admin/document/create#!/"+data.folder.global_folder_id)
 				$("#folder-title").attr('data-isWeekFolder', false)
-			}	
+			} else{
+
+
+			}
 		}
 		
 
@@ -105,9 +113,9 @@
 											' <td>'+ i.start +'</td>' +
 											' <td>'+ i.end +'</td>' +
 											' <td> '+
-												'<a class="btn btn-xs btn-primary" data-lightbox= "'+i.title+'"  href="/images/documents/thumb/'+ i.filename +'.jpg"> Preview </a> '+
-												'<a class="btn btn-xs btn-warning" href="/admin/document/'+ i.id +'/edit"> Edit </a> '+
-												'<a class="deleteFile btn btn-xs btn-danger" id="'+ i.id +'" > Delete </a>'+
+												// '<a class="btn btn-xs btn-primary" data-lightbox= "'+i.title+'"  href="/images/documents/thumb/'+ i.filename +'.jpg"> Preview </a> '+
+												'<a class="btn btn-xs btn-primary" href="/admin/document/'+ i.id +'/edit"><i class="fa fa-pencil"></i></a> '+
+												'<a class="deleteFile btn btn-xs btn-danger" id="'+ i.id +'" ><i class="fa fa-trash"></i></a>'+
 											'</td> </tr>')
 			});
 			$('#file-table').append('</tbody>');

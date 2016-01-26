@@ -12,8 +12,6 @@ $("body").on("click", ".folder", function(e){
 		getFolderDocuments(this.id);
 	}
 
-	
-	
 });
 
 var getFolderDocuments = function(id){

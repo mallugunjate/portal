@@ -64,6 +64,7 @@
 
                         <div class="col-lg-12">
 
+
                         <div id="file-container" class="ibox">
 {{--                             <div class="ibox-title">
                                 <div class="ibox-tools">
@@ -72,113 +73,54 @@
                             </div> --}}
 
 
-                            <div class="ibox-content">
+                            <div class="ibox float-e-margins">
                             
-                                <input type="hidden" name="default_folder" value={{ $defaultFolder }}>
-                               {{--  @include('site.documents.document-table') --}}
-                                    @include('admin.documentmanager.document-table')
+
+                            <div class="ibox-title">
                                 
+                                <h5 id="folder-title"></h5>
+                            
+                                <div class="ibox-tools">
 
+                                     <a id="add-files" data-folderId="" href="/admin/document/create"><button type="button" class="btn btn-primary"><i class="fa fa-plus"></i> Add Files</button></a>
+                                     <a href="#"><button type="button" class="btn btn-primary"><i class="fa fa-folder-open-o"></i> Add Sub Folder</button></a>
+                                     <a href="#"><button type="button" class="btn btn-primary"><i class="fa fa-pencil"></i> Edit this Folder</button></a>
 
-                                    <hr />
-
-                                <h2>Add Files</h2>
-
-                                <form id="example-advanced-form" action="#">
-                                    <h3>Upload Files</h3>
-                                    <fieldset>
-                                {{--         <legend>Account Information</legend>
-                                 
-                                        <label for="userName-2">User name *</label>
-                                        <input id="userName-2" name="userName" type="text" class="required">
-                                        <label for="password-2">Password *</label>
-                                        <input id="password-2" name="password" type="text" class="required">
-                                        <label for="confirm-2">Confirm Password *</label>
-                                        <input id="confirm-2" name="confirm" type="text" class="required">
-                                        <p>(*) Mandatory</p> --}}
-                                        <div id="file-uploader" class="hidden">
-                                            <div id="watermark">Drag and drop documents here</div>
-                                            @include('admin.documentmanager.document-upload')
-                                        </div>
-
-                                    </fieldset>
-                                 
-                                    <h3>Meta Data</h3>
-                                    <fieldset>
-                                        <legend>Profile Information</legend>
-                                 
-                                        <label for="name-2">First name *</label>
-                                        <input id="name-2" name="name" type="text" class="required">
-                                        <label for="surname-2">Last name *</label>
-                                        <input id="surname-2" name="surname" type="text" class="required">
-                                        <label for="email-2">Email *</label>
-                                        <input id="email-2" name="email" type="text" class="required email">
-                                        <label for="address-2">Address</label>
-                                        <input id="address-2" name="address" type="text">
-                                        <label for="age-2">Age (The warning step will show up if age is less than 18) *</label>
-                                        <input id="age-2" name="age" type="text" class="required number">
-                                        <p>(*) Mandatory</p>
-                                    </fieldset>
-                                 
-
-                                </form>
-
-
-                                <!---     -->
-                                    
+                                </div>
                             </div>
+
+
+                            <div class="ibox-content">
+                                    <table class="table tablesorter" id="file-table"> 
+                                    </table>
+                            </div>
+
+
+
                         </div>
 
-                          
 
-                        <div class="topLevelNavItems">
-                        <h1>Documents</h1>
-                        @foreach ($navigation as $nav) 
 
-                            @if ( $nav["is_child"] == 0)
-                                
-                                <div class="file-box">
-                                    <div class="file">
-                                        <a id="{{ $nav['id'] }}" class="parent-folder folder branch" href="/documentmanager#!/{{ $nav['id'] }}">
-                                            <span class="corner"></span>
+                            
 
-{{--                                             <div class="icon">
-                                                <i class="fa fa-folder"></i>
-                                            </div> --}}
 
-                                        <div class="image">
-                                            <img alt="image" class="img-responsive" src="/images/p2.jpg">
-                                        </div>                                            
-
-                                            <div class="file-name">
-                                                {{ $nav["label"] }}
-                                                <br>
-                                                {{-- <small>Added: Jan 11, 2014</small> --}}
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>                                
-
-                            @endif
-
-                        @endforeach
-                        </div>
 
 
 
                             </div>
                         </div>
 
+                    
 
 
 
 
  
 
-                        </div>
+                </div>
 
           
-                    </div>
+            </div>
 
 
                     </div>

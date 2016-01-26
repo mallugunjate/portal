@@ -1,49 +1,52 @@
+<!DOCTYPE html>
 <html>
 
 <head>
-    <title>Update Meta Data</title>
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/vendor/bootstrap-datetimepicker.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/plugins/chosen/chosen.css">
-
-
-    <script type="text/javascript" src="/js/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/js/vendor/moment.js"></script>
-    <script type="text/javascript" src="/js/vendor/bootstrap-datetimepicker.min.js"></script>
-    <script type="text/javascript" src="/js/custom/submitmetadata.js"></script>
-    <script type="text/javascript" src="/js/plugins/chosen/chosen.jquery.js"></script>
-    <script type="text/javascript" src="/js/custom/admin/global/bannerSelector.js"></script>
-
-    <style>
-    .glyphicon-ok{
-    	color: #0c0; 
-    	font-size: 14px; 
-    	display: none;
-    }
-    </style>
+    @section('title', 'Upload New Documents')
+    @include('admin.includes.head')
+    <link rel="stylesheet" type="text/css" href="/css/custom/tree.css">
+    <meta name="csrf-token" content="{!! csrf_token() !!}"/>
 </head>
 
-<body>
-     <!-- navbar begins -->
-      <nav class="navbar navbar-default">
-        @include('admin.banner', ['banners'=>$banners])
-        
-      </nav>
-      <!-- navbar ends-->
-      <div id="admin-container" class= "col-md-10 col-md-offset-1">
-      <div class="row">
-          <div class="col-md-10">
-          <h4>View or Edit files just uploaded</h4>
-          </div>
-      </div>
+<body class="fixed-navigation" onload="checkDeepLink()">
+    <div id="wrapper">
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+          @include('admin.includes.sidenav')
+        </div>
+    </nav>
 
+    <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom">
+            @include('admin.includes.topbar')
+        </div>
+
+       <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h2>Update Meta Data <span id="folder-name-for-upload"></span></h2>
+{{--                 <ol class="breadcrumb">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/document">Documents</a></li>
+                </ol> --}}
+            </div>
+            <div class="col-lg-2">
+
+            </div>
+        </div>
+
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+
+
+                <div class="col-lg-12 animated fadeInRight">
+
+          <h4>View or Edit files just uploaded</h4>
+
+    
       <input type="hidden" name="banner_id" value="{{$banner->id}}">
       <input type="hidden" name="fo_id" value="{{$banner->id}}">
 
-      <div class="row well" id="document-record-container">
+      <div class="row" id="document-record-container">
         <div class="row">
             <div class="col-md-2">
                 <label>Filename</label><br>
@@ -54,9 +57,9 @@
             <div class="col-md-2">
                 <label >Description</label>
             
-            </div class="col-md-2">
+{{--             </div class="col-md-2">
                 <label>Tags</label>
-            <div>
+            <div> --}}
             </div>
             <div class="col-md-2">
                 <label>Start Date</label>
@@ -89,9 +92,9 @@
                 <input class="form-control" type="text" name="description{{ $doc->id }}" id="description{{ $doc->id }}">
   		        </div>
 
-              <div class="col-md-2">
+{{--               <div class="col-md-2">
                  {!! Form::select('tags[]', $tags, null, ['class'=>'chosen' , 'multiple'=>'true', 'id'=>"select$doc->id"]) !!}
-              </div>
+              </div> --}}
 
               <div class="col-md-2">
                 <div class="form-group">
@@ -142,19 +145,142 @@
           </div>
       </div>
     </div>
-    <script type="text/javascript">
-         $(function () {
-            $(".startdate").datetimepicker({
-              format: "YYYY-MM-DD HH:mm:ss",
-              defaultDate : new Date()
-            });
-              
-            $(".endDate").datetimepicker({
-              format: "YYYY-MM-DD HH:mm:ss"
-            });
-        });
-    </script>
-</body>
 
 
+
+                @include('site.includes.footer')
+                
+
+                @include('admin.includes.scripts')
+
+
+            <script type="text/javascript" src="/js/vendor/underscore-1.8.3.js"></script>
+            <script type="text/javascript" src="/js/vendor/dropzone.js"></script>
+            <script type="text/javascript" src="/js/vendor/tablesorter.min.js"></script>
+            <script type="text/javascript" src="/js/vendor/lightbox.min.js"></script>
+
+            <script type="text/javascript" src="/js/plugins/steps/jquery.steps.min.js"></script>
+
+            <script type="text/javascript" src="/js/custom/admin/folders/documentUploadFolderStructure.js" ></script>
+            <script type="text/javascript" src="/js/custom/admin/documents/fileTable.js"></script>
+            <script type="text/javascript" src="/js/custom/admin/documents/deleteFile.js"></script>
+            <script type="text/javascript" src="/js/custom/admin/documents/getPackages.js"></script>
+            <script type="text/javascript" src="/js/custom/admin/documents/deletePackage.js"></script>
+            <script type="text/javascript" src="/js/custom/admin/documents/showPackage.js"></script>
+            <script type="text/javascript" src="/js/custom/admin/documents/breadcrumb.js"></script>
+            <script type="text/javascript" src="/js/custom/admin/documents/uploadDocument.js"></script>
+            <script type="text/javascript" src="/js/custom/tree.js"></script>
+
+        
+                <script type="text/javascript">
+
+
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+
+                    $(document).ready(function() {
+
+
+
+                        var form = $("#example-advanced-form").show();
+                         
+                        form.steps({
+                            headerTag: "h3",
+                            bodyTag: "fieldset",
+                            transitionEffect: "slideLeft",
+                            onStepChanging: function (event, currentIndex, newIndex)
+                            {
+                                // Allways allow previous action even if the current form is not valid!
+                                if (currentIndex > newIndex)
+                                {
+                                    return true;
+                                }
+                                // Forbid next action on "Warning" step if the user is to young
+                                if (newIndex === 3 && Number($("#age-2").val()) < 18)
+                                {
+                                    return false;
+                                }
+                                // Needed in some cases if the user went back (clean up)
+                                if (currentIndex < newIndex)
+                                {
+                                    // To remove error styles
+                                    form.find(".body:eq(" + newIndex + ") label.error").remove();
+                                    form.find(".body:eq(" + newIndex + ") .error").removeClass("error");
+                                }
+                                form.validate().settings.ignore = ":disabled,:hidden";
+                                return form.valid();
+                            },
+                            onStepChanged: function (event, currentIndex, priorIndex)
+                            {
+                                // Used to skip the "Warning" step if the user is old enough.
+                                if (currentIndex === 2 && Number($("#age-2").val()) >= 18)
+                                {
+                                    form.steps("next");
+                                }
+                                // Used to skip the "Warning" step if the user is old enough and wants to the previous step.
+                                if (currentIndex === 2 && priorIndex === 3)
+                                {
+                                    form.steps("previous");
+                                }
+                            },
+                            onFinishing: function (event, currentIndex)
+                            {
+                                form.validate().settings.ignore = ":disabled";
+                                return form.valid();
+                            },
+                            onFinished: function (event, currentIndex)
+                            {
+                                alert("Submitted!");
+                            }
+                        // }).validate({
+                        //     errorPlacement: function errorPlacement(error, element) { element.before(error); },
+                        //     rules: {
+                        //         confirm: {
+                        //             equalTo: "#password-2"
+                        //         }
+                        //     }
+                        });
+
+
+
+                         $(function () {
+                            $(".startdate").datetimepicker({
+                              format: "YYYY-MM-DD HH:mm:ss",
+                              defaultDate : new Date()
+                            });
+                              
+                            $(".endDate").datetimepicker({
+                              format: "YYYY-MM-DD HH:mm:ss"
+                            });
+                        });
+
+                        
+                        $(".tree").treed({openedClass : 'fa-folder-open', closedClass : 'fa-folder'});
+
+                        var defaultFolderId = $("input[name='default_folder']").val();
+
+                        if (defaultFolderId) {
+                            var folder = $("#"+defaultFolderId);
+                            $("#"+defaultFolderId).parent().click();
+                            $.ajax({
+                                url : '/admin/document',
+                                data : {
+                                    folder : defaultFolderId,
+                                    isWeekFolder : folder.attr("data-isweek")
+                                }
+                            })
+                            .done(function(data){
+                                console.log(data);
+                                fillTable(data);
+                            });
+                        }
+
+                    }); 
+                </script>
+
+                @include('site.includes.bugreport')
+            </body>
 </html>

@@ -25,7 +25,7 @@ var myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
        console.log($('#folder-title').attr('data-folderid'));
       // Pass token. You can use the same method to pass any other values as well such as a id to associate the image with for example.
         formData.append("_token", $('[name=_token').val()); // Laravel expect the token post value to be named _token by default
-        formData.append("folder_id", $('#folder-title').attr('data-folderid'));
+        formData.append("folder_id", $('#folder_id').val());
         formData.append("upload_package_id", $('[name=upload_package_id').val());
         formData.append("banner_id", $('[name=banner_id]').val());
         formData.append("isWeekFolder", $('#folder-title').attr('data-isweekfolder') )
@@ -70,8 +70,8 @@ myDropzone.on("sending", function (file) {
 myDropzone.on("queuecomplete", function (progress) {
     document.querySelector("#total-progress").style.opacity = "0";
     var upload_package_id = $("#upload_package_id").val();
-    var banner_id = $('input[name="banner_id"]').val();
-    var folder_id = $("#folder-title").attr('data-folderid');
+    var banner_id = localStorage.getItem('admin-banner-id');
+    var folder_id = $('#folder_id').val();
     $(".file-row .delete").hide();
 //    window.location = '/admin/document/add-meta-data?package=' + upload_package_id + "&banner_id=" + banner_id + "&parent=" + folder_id;
     var metadatalink = $("<a class='btn btn-default next-action' href='/admin/document/add-meta-data?package="+upload_package_id+"&banner_id="+ banner_id +"&parent="+ folder_id +"'> Next >> Review Documents</a>");

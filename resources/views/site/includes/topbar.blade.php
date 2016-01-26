@@ -37,9 +37,111 @@
 
         <li class="dropdown">
             <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
+                <i class="fa fa-bell"></i> ALEERRTSSZZ <span class="label label-primary">8</span>
             </a>
             <ul class="dropdown-menu dropdown-alerts">
+
+
+<div class="feed-activity-list">
+
+                                                <div class="feed-element">
+                                                    <a href="#" class="pull-left">
+                                                        <h1><i class="fa fa-file-pdf-o"></i></h1>
+                                                    </a>
+                                                    <div class="media-body ">
+                                                        <small class="pull-right">5m ago</small>
+                                                        <strong>Place Holder File name</strong> was added to <strong>Folder Name</strong>. <br>
+                                                        <small class="text-muted">Today 5:60 pm - 12.06.2014</small>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="feed-element">
+                                                    <a href="#" class="pull-left">
+                                                        <h1><i class="fa fa-file-pdf-o"></i></h1>
+                                                    </a>
+                                                    <div class="media-body ">
+                                                        <small class="pull-right">2h ago</small>
+                                                        <strong>Place Holder File name</strong> was added to <strong>Folder Name</strong>. <br>
+                                                        <small class="text-muted">Today 2:10 pm - 12.06.2014</small>
+                                                    </div>
+                                                </div>
+                                                <div class="feed-element">
+                                                    <a href="#" class="pull-left">
+                                                        <h1><i class="fa fa-file-pdf-o"></i></h1>
+                                                    </a>
+                                                    <div class="media-body ">
+                                                        <small class="pull-right">2h ago</small>
+                                                        <strong>Place Holder File name</strong> was added to <strong>Folder Name</strong>. <br>
+                                                        <small class="text-muted">2 days ago at 8:30am</small>
+                                                    </div>
+                                                </div>
+                                                <div class="feed-element">
+                                                    <a href="#" class="pull-left">
+                                                        <h1><i class="fa fa-file-pdf-o"></i></h1>
+                                                    </a>
+                                                    <div class="media-body ">
+                                                        <small class="pull-right">5h ago</small>
+                                                        <strong>Place Holder File name</strong> was added to <strong>Folder Name</strong>. <br>
+                                                        <small class="text-muted">Yesterday 1:21 pm - 11.06.2014</small>
+
+                                                    </div>
+                                                </div>
+                                                <div class="feed-element">
+                                                    <a href="#" class="pull-left">
+                                                        <h1><i class="fa fa-file-pdf-o"></i></h1>
+                                                    </a>
+                                                    <div class="media-body ">
+                                                        <small class="pull-right">2h ago</small>
+                                                        <strong>Place Holder File name</strong> was added to <strong>Folder Name</strong>. <br>
+                                                        <small class="text-muted">Yesterday 5:20 pm - 12.06.2014</small>
+                                                        
+                                                        
+                                                    </div>
+                                                </div>
+                                                <div class="feed-element">
+                                                    <a href="#" class="pull-left">
+                                                        <h1><i class="fa fa-file-pdf-o"></i></h1>
+                                                    </a>
+                                                    <div class="media-body ">
+                                                        <small class="pull-right">23h ago</small>
+                                                        <strong>Place Holder File name</strong> was added to <strong>Folder Name</strong>. <br>
+                                                        <small class="text-muted">2 days ago at 2:30 am - 11.06.2014</small>
+                                                    </div>
+                                                </div>
+                                                <div class="feed-element">
+                                                    <a href="#" class="pull-left">
+                                                       <h1><i class="fa fa-file-pdf-o"></i></h1>
+                                                    </a>
+                                                    <div class="media-body ">
+                                                        <small class="pull-right">46h ago</small>
+                                                        <strong>Place Holder File name</strong> was added to <strong>Folder Name</strong>. <br>
+                                                        <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
+                                                    </div>
+                                                </div>
+
+                                                <div class="feed-element">
+                                                    <a href="#" class="pull-left">
+                                                        <h1><i class="fa fa-file-pdf-o"></i></h1>
+                                                    </a>
+                                                    <div class="media-body ">
+                                                        <small class="pull-right">46h ago</small>
+                                                        <strong>Place Holder File name</strong> was added to <strong>Folder Name</strong>. <br>
+                                                        <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
+                                                    </div>
+                                                </div>
+
+                                                <div class="feed-element">
+                                                    <a href="#" class="pull-left">
+                                                        <h1><i class="fa fa-file-pdf-o"></i></h1>
+                                                    </a>
+                                                    <div class="media-body ">
+                                                        <small class="pull-right">46h ago</small>
+                                                        <strong>Place Holder File name</strong> was added to <strong>Folder Name</strong>. <br>
+                                                        <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
+                                                    </div>
+                                                </div>
+                                            </div>
 
 
 
