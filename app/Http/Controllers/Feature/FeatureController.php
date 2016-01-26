@@ -48,7 +48,7 @@ class FeatureController extends Controller
      */
     public function show($id)
     {
-        //
+        return "show a feature";
     }
 
     /**

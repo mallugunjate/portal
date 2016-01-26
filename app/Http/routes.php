@@ -31,6 +31,9 @@ Route::get('/{storeno}/communication', array('uses' => 'Communication\Communicat
 Route::get('/{storeno}/communication/show/{id}', 'Communication\CommunicationController@show');
 Route::resource('/communication', 'Communication\CommunicationTargetController');
 
+//FEATURES
+Route::get('/{storeno}/feature/show/{id}', 'Feature\FeatureController@show');
+
 // Route::get('/home', function () {	
 // 	return view('home');
 // });
@@ -78,6 +81,9 @@ Route::resource('/admin/folder', 'Document\FolderAdminController');
 
 //PACKAGES
 Route::resource('/admin/package', 'Document\PackageAdminController');
+
+//FEATURES 
+Route::resource('/admin/feature', 'Feature\FeatureAdminController');
 
 //Dasboard ADMIN
 Route::resource('/admin/dashboard', 'Dashboard\DashboardAdminController');
