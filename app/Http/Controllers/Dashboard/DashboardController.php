@@ -30,10 +30,6 @@ class DashboardController extends Controller
         $banner = UserSelectedBanner::getBanner();
 
         $features = Feature::where('banner_id', $banner->id)->get();
-       
-        // $features = DB::table('features')
-        //     ->where('banner_id', $banner->id)
-        //     ->get();
 
         $communicationCount = DB::table('communications_target')
 	        ->where('store_id', $storeNumber)
