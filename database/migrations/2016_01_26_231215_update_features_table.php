@@ -13,7 +13,9 @@ class UpdateFeaturesTable extends Migration
     public function up()
     {
         Schema::table('features', function (Blueprint $table) {
-            $table->string('thumbnail')->after('background_image');
+            // $table->string('thumbnail')->after('background_image');
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 

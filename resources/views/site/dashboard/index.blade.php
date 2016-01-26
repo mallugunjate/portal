@@ -35,68 +35,8 @@
                       
                             <div class="ibox-content clearfix">
 
-
-                            <div class="col-md-3">     
-                                <div class="ibox-content product-box">
-
-                  {{--               <div class="product-imitation"> --}}
-
-                                        <div class="image">
-                                            <img alt="image" class="img-responsive" src="/images/featured-covers/canada-gold1.jpg">
-                                        </div>
-                                    {{-- <img src="/images/featured-covers/canada-gold1.jpg" /> --}}
-                                {{-- </div> --}}
-                                <div class="product-desc">
-                                    
-                                    
-                                    <a href="#" class="product-name"> Hockey Plus</a>
-
-                                    <div class="m-t text-righ">
-
-                                        <a href="#" class="btn btn-xs btn-outline btn-primary">Info <i class="fa fa-long-arrow-right"></i> </a>
-                                    </div>
-                                </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">     
-                                <div class="ibox-content product-box">
-
-                                <div class="image">
-                                            <img alt="image" class="img-responsive" src="/images/featured-covers/back-to-school.jpg">
-                                        </div>
-                                <div class="product-desc">
-                                    
-                                    
-                                    <a href="#" class="product-name"> Back to School</a>
-
-                                    <div class="m-t text-righ">
-
-                                        <a href="#" class="btn btn-xs btn-outline btn-primary">Info <i class="fa fa-long-arrow-right"></i> </a>
-                                    </div>
-                                </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">     
-                                <div class="ibox-content product-box">
-
-                                <div class="image">
-                                            <img alt="image" class="img-responsive" src="/images/featured-covers/footwear.jpg">
-                                        </div>
-                                <div class="product-desc">
-                                    
-                                    
-                                    <a href="#" class="product-name"> Footwear</a>
-
-                                    <div class="m-t text-righ">
-
-                                        <a href="#" class="btn btn-xs btn-outline btn-primary">Info <i class="fa fa-long-arrow-right"></i> </a>
-                                    </div>
-                                </div>
-                                </div>
-                            </div>
-
+                        
+                            @foreach($features as $feature)
                             <div class="col-md-3">     
                                 <div class="ibox-content product-box">
 
@@ -106,7 +46,7 @@
                                 <div class="product-desc">
                                     
                                     
-                                    <a href="#" class="product-name"> Athletic Apparel</a>
+                                    <a href="#" class="product-name"> {{ $feature->title }}</a>
 
                                     <div class="m-t text-righ">
 
@@ -115,7 +55,7 @@
                                 </div>
                                 </div>
                             </div>
-
+                            @endforeach
 
                             </div>
                         </div>
