@@ -97,7 +97,7 @@
 			            </div>
 			            <div class="modal-footer">
 			                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			                <button type="button" class="btn btn-primary" id="attach-selected-files">Select Folders</button>
+			                <button type="button" class="btn btn-primary" id="attach-selected-folders">Select Folders</button>
 			            </div>
 			        </div>
 			    </div>
@@ -110,6 +110,7 @@
 					
 
 			</div>
+			<div id="folders-selected"></div>
 		
 		</div>
 		
