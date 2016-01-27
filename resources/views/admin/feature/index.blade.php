@@ -47,7 +47,7 @@
 
 		                            <div class="ibox-tools">
 
-		                                <a href="/admin/communication/create" class="btn btn-primary btn"><i class="fa fa-plus"></i> Create New Feature</a>
+		                                <a href="/admin/feature/create" class="btn btn-primary btn"><i class="fa fa-plus"></i> Create New Feature</a>
 		                            </div>
 		                        </div>
 		                        <div class="ibox-content">

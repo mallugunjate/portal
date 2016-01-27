@@ -40,7 +40,12 @@ class FeatureAdminController extends Controller
      */
     public function create()
     {
-        //
+        $banner = UserSelectedBanner::getBanner();
+        $banners = Banner::all();
+
+        return view('admin.feature.create')
+                ->with('banner', $banner)
+                ->with('banners', $banners);
     }
 
     /**
