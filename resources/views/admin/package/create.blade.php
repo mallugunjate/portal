@@ -19,7 +19,7 @@
 		<div>
 			Package Name: <input type="text" name="package_name" >
 		</div>
-		<div>
+		<!-- <div>
 			Start :
 			<div class="input-group date" id="datetimepicker1">
 	          {!! Form::text('start', null, ['class'=>'form-control',  'required']) !!}
@@ -46,7 +46,7 @@
         <div>
         	{!! Form::label('tags[]', 'Tags') !!}
         	{!! Form::select('tags[]', $tags, null , ['class'=>'chosen', 'multiple'=>'true']) !!}
-        </div>
+        </div> -->
 
         <div>
 			
@@ -75,13 +75,42 @@
 			        </div>
 			    </div>
 			</div>
+
+			<div id="folder-listing" class="modal fade">
+			    <div class="modal-dialog">
+			        <div class="modal-content">
+			            <div class="modal-header">
+			                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			                <h4 class="modal-title">Select Folders</h4>
+			            </div>
+			            <div class="modal-body">
+			            	@foreach ($folderStructure as $folder)
+							
+								@if (isset($folder["is_child"]) && ($folder["is_child"] == 0) )
+									
+									@include('admin.package.folder-structure-partial', ['folderStructure' =>$folderStructure, 'currentnode' => $folder])
+									
+								@endif
+
+
+							@endforeach
+			            </div>
+			            <div class="modal-footer">
+			                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			                <button type="button" class="btn btn-primary" id="attach-selected-folders">Select Folders</button>
+			            </div>
+			        </div>
+			    </div>
+			</div>
 			
 
 			<input class="btn btn-default" type="button" id="add-documents" value="Add Documents" />
+			<input class="btn btn-default" type="button" id="add-folders" value="Add Folders" />
 			<div id="files-selected">
 					
 
 			</div>
+			<div id="folders-selected"></div>
 		
 		</div>
 		

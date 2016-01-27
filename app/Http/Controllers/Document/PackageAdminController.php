@@ -15,6 +15,8 @@ use App\Models\Document\DocumentPackage;
 use App\Models\Tag\Tag;
 use App\Models\Tag\ContentTag;
 use App\Models\UserSelectedBanner;
+use App\Models\Document\Folder;
+use App\Models\Document\FolderPackage;
 
 class PackageAdminController extends Controller
 {
@@ -50,12 +52,15 @@ class PackageAdminController extends Controller
         $banners = Banner::all();
 
         $fileFolderStructure = FileFolder::getFileFolderStructure($banner->id);
+        $folderStructure = FolderStructure::getNavigationStructure($banner->id);
+
         $tags = Tag::where('banner_id', $banner->id)->lists('name', 'id');
-        
+            
         return view('admin.package.create')
                     ->with('banner', $banner)
                     ->with('banners',$banners)
                     ->with('navigation', $fileFolderStructure)
+                    ->with('folderStructure', $folderStructure)
                     ->with('tags', $tags);
                     
     }
@@ -69,6 +74,7 @@ class PackageAdminController extends Controller
     public function store(Request $request)
     {
         Package::storePackage($request);
+        
         return redirect()->action('AdminController@index');
     }
 
@@ -83,7 +89,14 @@ class PackageAdminController extends Controller
         $response = [];
         $response["package"] = Package::find($id);
         $response["documentDetails"] = Package::getPackageDocumentDetails($id);
-
+        $packageFolders = FolderPackage::where('package_id', $id)->get()->pluck('folder_id');
+        
+        $counter = 0;
+        foreach ($packageFolders as $folder) {
+            $response["folderDetails"][$counter] = Folder::getFolderChildrenTree($folder);
+            $counter++;
+        } 
+        
         return ($response);
 
     }

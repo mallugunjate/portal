@@ -18,39 +18,52 @@ class Package extends Model
     public static function storePackage(Request $request)
     {
         $documents = $request["package_files"];
-    	
+    	$folders = $request["package_folders"];
         $package_screen_name = $request["package_name"];
     	$package_name = preg_replace('/\s+/', '_' , $package_screen_name);
     	$timestamp = sha1(time()*time());
     	$package_name .= "_".$timestamp ;
     	
-    	$start = strtotime($request["start"]);
-        $end = strtotime($request["end"]);
+    	// $start = strtotime($request["start"]);
+        // $end = strtotime($request["end"]);
 
-        $is_hidden = $request["is_hidden"];
-        if (!isset($is_hidden)) {
-            $is_hidden = 0;
-        }
+        // $is_hidden = $request["is_hidden"];
+        // if (!isset($is_hidden)) {
+        //     $is_hidden = 0;
+        // }
         $banner = UserSelectedBanner::getBanner();
 
     	$package = Package::create([
     			'package_screen_name' 	=> $package_screen_name,
     			'package_name'			=> $package_name,
     			'banner_id'				=> $banner->id,
-                'start'                 => $start,
-                'end'                   => $end,
-                'is_hidden'             => $is_hidden
+                // 'start'                 => $start,
+                // 'end'                   => $end,
+                // 'is_hidden'             => $is_hidden
     		]);
 
     	$package_id = $package->id;
 
-    	foreach ($documents as $document) {
-    		DocumentPackage::create([
-    			'document_id'	=> intval($document),
-    			'package_id'	=> $package_id	
-    		]);
-    	}
-        Package::updateTags($package_id, $request['tags']);
+        if(isset($documents)) {
+            foreach ($documents as $document) {
+                DocumentPackage::create([
+                    'document_id'   => intval($document),
+                    'package_id'    => $package_id  
+                ]);
+            
+            }    
+        }
+        if (isset($folders)) {
+            foreach ($folders as $folder) {
+                FolderPackage::create([
+                    'folder_id'   => intval($folder),
+                    'package_id'    => $package_id  
+                ]);        
+            }
+        }
+        
+    	
+        // Package::updateTags($package_id, $request['tags']);
     	return;
     }
 
@@ -80,16 +93,16 @@ class Package extends Model
         $package = Package::find($id);
         $package["package_screen_name"] = $request["package_name"];
 
-        $package["start"] = strtotime($request["start"]);
-        $package["end"] = strtotime($request["end"]);
+        // $package["start"] = strtotime($request["start"]);
+        // $package["end"] = strtotime($request["end"]);
         
-        $is_hidden = $request["is_hidden"];
-        if (isset($is_hidden)) {
-            $package["is_hidden"] = $is_hidden;
-        }
-        else{
-            $package["is_hidden"] = 0;
-        }
+        // $is_hidden = $request["is_hidden"];
+        // if (isset($is_hidden)) {
+        //     $package["is_hidden"] = $is_hidden;
+        // }
+        // else{
+        //     $package["is_hidden"] = 0;
+        // }
         $package->save();
 
         $remove_documents = $request["remove_document"];    
@@ -109,7 +122,7 @@ class Package extends Model
                 ]);
             }
         }
-        Package::updateTags($id, $request['tags']);
+        // Package::updateTags($id, $request['tags']);
         return;
     }
 
