@@ -35,26 +35,54 @@
                       
                             <div class="ibox-content clearfix">
 
-                        
+
                             @foreach($features as $feature)
-                            <div class="col-md-3">     
-                                <div class="ibox-content product-box">
+                               
 
-                                <div class="image">
-                                            <img alt="image" class="img-responsive" src="/images/featured-covers/athletic.jpg">
-                                        </div>
-                                <div class="product-desc">
-                                    
-                                    
-                                    <a href="#" class="product-name"> {{ $feature->title }}</a>
+{{-- 
+                            <div class="ibox">
+                        <div class="ibox-content product-box">
 
-                                    <div class="m-t text-righ">
+                            <div class="product-imitation">
+                                [ INFO ]
+                            </div>
+                            <div class="product-desc">
+                                <span class="product-price">
+                                    $10
+                                </span>
+                                <small class="text-muted">Category</small>
+                                <a href="#" class="product-name"> Product</a>
 
-                                        <a href="#" class="btn btn-xs btn-outline btn-primary">Info <i class="fa fa-long-arrow-right"></i> </a>
-                                    </div>
+
+
+                                <div class="small m-t-xs">
+                                    Many desktop publishing packages and web page editors now.
                                 </div>
+                                <div class="m-t text-righ">
+
+                                    <a href="#" class="btn btn-xs btn-outline btn-primary">Info <i class="fa fa-long-arrow-right"></i> </a>
                                 </div>
                             </div>
+                        </div>
+                    </div> --}}
+
+
+                            
+                                    <div class="product-box">
+                                        <a href="/{{ Request::segment(1) }}/feature/show/{{ $feature->id }}">
+                                            <div class="image">
+                                                <img alt="image" class="img-responsive" src="/images/featured-covers/athletic.jpg">
+                                            </div>
+                                            <div class="product-desc">
+                                                <span class="product-price">
+                                                {{ $feature->title }}
+                                                </span>
+                                               
+                                            </div>
+                                        </a>
+                                    </div>
+                            
+                            
                             @endforeach
 
                             </div>

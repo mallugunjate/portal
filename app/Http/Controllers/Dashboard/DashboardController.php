@@ -27,9 +27,13 @@ class DashboardController extends Controller
     {
     	$storeNumber = RequestFacade::segment(1);
 
-        $banner = UserSelectedBanner::getBanner();
+        $storeAPI = env('STORE_API_DOMAIN', false);
+        $storeInfoJson = file_get_contents( $storeAPI . "/store/" . $storeNumber);
+        $storeInfo = json_decode($storeInfoJson);
 
-        $features = Feature::where('banner_id', $banner->id)->get();
+        $storeBanner = $storeInfo->banner_id;
+
+        $features = Feature::where('banner_id', $storeBanner)->get();
 
         $communicationCount = DB::table('communications_target')
 	        ->where('store_id', $storeNumber)
