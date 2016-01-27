@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Feature;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request as RequestFacade; 
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Feature\Feature;
+use App\Skin;
 
 class FeatureController extends Controller
 {
@@ -49,10 +51,21 @@ class FeatureController extends Controller
      */
     public function show(Request $request)
     {
+        $storeNumber = RequestFacade::segment(1);
+
+        $storeAPI = env('STORE_API_DOMAIN', false);
+        $storeInfoJson = file_get_contents( $storeAPI . "/store/" . $storeNumber);
+        $storeInfo = json_decode($storeInfoJson);
+
+        $storeBanner = $storeInfo->banner_id;
+
+        $skin = Skin::getSkin($storeBanner);
+
         $id = $request->id;
         $feature = Feature::where('id', $id)->first();
 
         return view('site.feature.index')
+            ->with('skin', $skin)
             ->with('feature', $feature);
     }
 

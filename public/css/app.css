@@ -6,6 +6,11 @@
 */
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&lang=en");
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,300,500,700");
+
+@font-face { font-family: GalaxiePolarisCondensed-Book.; src: url('/fonts/GalaxiePolarisCondensed-Book.otf'); }
+@font-face { font-family: GalaxiePolarisCondensed-Bold; font-weight: bold; src: url('/fonts/GalaxiePolarisCondensed-Bold.otf'); }
+@font-face { font-family: GalaxiePolarisCondensed-Light; font-weight: bold; src: url('/fonts/GalaxiePolarisCondensed-Light.otf'); }
+
 h1,
 h2,
 h3,

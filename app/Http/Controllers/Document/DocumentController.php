@@ -15,7 +15,7 @@ use App\Models\Document\FileFolder;
 use App\Models\Document\Document;
 use App\Models\Banner;
 use App\Models\Document\Package;
-
+use App\Skin;
 use App\Models\Communication\Communication;
 use App\Models\Communication\CommunicationDocument;
 use App\Models\Communication\CommunicationPackage;
@@ -31,6 +31,14 @@ class DocumentController extends Controller
     public function index(Request $request)
     {
         $storeNumber = RequestFacade::segment(1);
+
+        $storeAPI = env('STORE_API_DOMAIN', false);
+        $storeInfoJson = file_get_contents( $storeAPI . "/store/" . $storeNumber);
+        $storeInfo = json_decode($storeInfoJson);
+
+        $storeBanner = $storeInfo->banner_id;
+
+        $skin = Skin::getSkin($storeBanner);
 
         $communicationCount = DB::table('communications_target')
             ->where('store_id', $storeNumber)
@@ -60,6 +68,7 @@ class DocumentController extends Controller
         }
 
         return view('site.documents.index')
+            ->with('skin', $skin)
             ->with('navigation', $navigation)
             ->with('folders', $folders)
             ->with('banner', $banner)

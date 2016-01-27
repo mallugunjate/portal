@@ -50,51 +50,51 @@
 
     <script type="text/javascript">
 
-    function loadjscssfile(filename, filetype){
-        if (filetype=="js"){ //if filename is a external JavaScript file
-            var fileref=document.createElement('script')
-            fileref.setAttribute("type","text/javascript")
-            fileref.setAttribute("src", filename)
-        }
-        else if (filetype=="css"){ //if filename is an external CSS file
-            var fileref=document.createElement("link")
-            fileref.setAttribute("rel", "stylesheet")
-            fileref.setAttribute("type", "text/css")
-            fileref.setAttribute("href", filename)
-        }
-        if (typeof fileref!="undefined")
-            document.getElementsByTagName("head")[0].appendChild(fileref)
-    }
+    // function loadjscssfile(filename, filetype){
+    //     if (filetype=="js"){ //if filename is a external JavaScript file
+    //         var fileref=document.createElement('script')
+    //         fileref.setAttribute("type","text/javascript")
+    //         fileref.setAttribute("src", filename)
+    //     }
+    //     else if (filetype=="css"){ //if filename is an external CSS file
+    //         var fileref=document.createElement("link")
+    //         fileref.setAttribute("rel", "stylesheet")
+    //         fileref.setAttribute("type", "text/css")
+    //         fileref.setAttribute("href", filename)
+    //     }
+    //     if (typeof fileref!="undefined")
+    //         document.getElementsByTagName("head")[0].appendChild(fileref)
+    // }
 
 
     
 
-    var banner = localStorage.getItem('userBanner');
-    console.log(banner);
+    // var banner = localStorage.getItem('userBanner');
+    // console.log(banner);
 
-    switch (banner) {
-        case "1": //sc
-            loadjscssfile("/css/skins/sportchek/skin.css", "css");
+    // switch (banner) {
+    //     case "1": //sc
+    //         loadjscssfile("/css/skins/sportchek/skin.css", "css");
 
-            @if (Request::is( Request::segment(1) ))
-            document.getElementById('page-wrapper').style.backgroundImage = 'url(/images/dashboard-banners/hockey.jpg)';
-            @endif
+    //         @if (Request::is( Request::segment(1) ))
+    //         document.getElementById('page-wrapper').style.backgroundImage = 'url(/images/dashboard-banners/hockey.jpg)';
+    //         @endif
 
-            console.log("loading the SC css");
-            break;
-        case "2": //atmo
-            loadjscssfile("/css/skins/atmosphere/skin.css", "css");
+    //         console.log("loading the SC css");
+    //         break;
+    //     case "2": //atmo
+    //         loadjscssfile("/css/skins/atmosphere/skin.css", "css");
             
-            @if (Request::is( Request::segment(1) ))
-            document.getElementById('page-wrapper').style.backgroundImage = 'url(/images/dashboard-banners/atmo-bg.jpg)';
-            @endif
+    //         @if (Request::is( Request::segment(1) ))
+    //         document.getElementById('page-wrapper').style.backgroundImage = 'url(/images/dashboard-banners/atmo-bg.jpg)';
+    //         @endif
 
-            console.log("loading the ATMO css");
-            break;
+    //         console.log("loading the ATMO css");
+    //         break;
 
-        default:
-            console.log('no skin css loaded');
-    }
+    //     default:
+    //         console.log('no skin css loaded');
+    // }
     
     
     </script>
