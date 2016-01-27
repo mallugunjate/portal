@@ -17,6 +17,7 @@ use App\Models\Communication\Communication;
 use App\Models\Communication\CommunicationDocument;
 use App\Models\Communication\CommunicationPackage;
 use App\Models\Communication\CommunicationTarget;
+use App\Skin;
 
 class CalendarController extends Controller
 {
@@ -28,18 +29,16 @@ class CalendarController extends Controller
     public function index(Request $request)
     {
 
-        // $banner_id = $request->get('banner_id');
-
-        // if(isset($banner_id)) {
-        //     $banner = Banner::where('id', $banner_id)->first();
-        // }
-        // else{
-        //     $banner = Banner::where('id', 1)->first();
-        // }        
-
-        // $events = Event::where('banner', $banner->id)->get();
-        // 
         $storeNumber = RequestFacade::segment(1);
+
+        $storeAPI = env('STORE_API_DOMAIN', false);
+        $storeInfoJson = file_get_contents( $storeAPI . "/store/" . $storeNumber);
+        $storeInfo = json_decode($storeInfoJson);
+
+        $storeBanner = $storeInfo->banner_id;
+
+        $skin = Skin::getSkin($storeBanner);
+
 
         $communicationCount = DB::table('communications_target')
             ->where('store_id', $storeNumber)
@@ -48,6 +47,7 @@ class CalendarController extends Controller
 
         $events = Event::where('banner_id', 1)->get(); 
         return view('site.calendar.index')
+                ->with('skin', $skin)
                 ->with('communicationCount', $communicationCount)
                 ->with('events', $events);
 

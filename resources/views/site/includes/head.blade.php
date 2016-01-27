@@ -16,4 +16,6 @@
     <link rel="stylesheet" type="text/css" href="/css/animate.css">
     <link rel="stylesheet" type="text/css" href="/css/app.css">
 
+    {!! $skin !!}
+
    

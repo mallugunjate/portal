@@ -19,6 +19,7 @@ use App\Models\Communication\CommunicationTarget;
 use App\Models\Tag\Tag;
 use App\Models\Tag\ContentTag;
 use App\Models\Feature\Feature;
+use App\Skin;
 
 class DashboardController extends Controller
 {
@@ -33,7 +34,11 @@ class DashboardController extends Controller
 
         $storeBanner = $storeInfo->banner_id;
 
+        $skin = Skin::getSkin($storeBanner);
+        
         $features = Feature::where('banner_id', $storeBanner)->get();
+
+        
 
         $communicationCount = DB::table('communications_target')
 	        ->where('store_id', $storeNumber)
@@ -41,6 +46,7 @@ class DashboardController extends Controller
 	        ->count();
 
         return view('site.dashboard.index')
+            ->with('skin', $skin)
         	->with('communicationCount', $communicationCount)
             ->with('features', $features);
     }

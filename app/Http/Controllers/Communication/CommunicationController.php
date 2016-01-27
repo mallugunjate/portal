@@ -17,7 +17,7 @@ use App\Models\Communication\CommunicationPackage;
 use App\Models\Communication\CommunicationTarget;
 use App\Models\Tag\Tag;
 use App\Models\Tag\ContentTag;
-
+use App\Skin;
 
 
 class CommunicationController extends Controller
@@ -31,6 +31,14 @@ class CommunicationController extends Controller
     {
         $storeNumber = RequestFacade::segment(1);
 
+        $storeAPI = env('STORE_API_DOMAIN', false);
+        $storeInfoJson = file_get_contents( $storeAPI . "/store/" . $storeNumber);
+        $storeInfo = json_decode($storeInfoJson);
+
+        $storeBanner = $storeInfo->banner_id;
+
+        $skin = Skin::getSkin($storeBanner);
+
         $targetedCommunications = DB::table('communications_target')
                 ->join('communications', 'communications_target.communication_id', '=', 'communications.id')
                 ->where('communications_target.store_id', '=', $storeNumber)
@@ -42,6 +50,7 @@ class CommunicationController extends Controller
                 ->count();
 
         return view('site.communications.index')
+            ->with('skin', $skin)
             ->with('communications', $targetedCommunications)
             ->with('communicationCount', $communicationCount);
     }
