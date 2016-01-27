@@ -55,11 +55,27 @@
 
 
 		                            <div class="table-responsive">
+		                            	<table class="table table-hover issue-tracker">
+			                            	<tr>
+												<td>id</td>
+												<td>Title</td>
+												<td>Thumb</td>
+												<td>Cover</td>
+												<td>Actions</td>
+											</tr>
+			                            	@foreach($features as $feature)
+			                            	<tr>
+			                            		<td>{{ $feature->id }}</td>
+			                            		<td><a href="">{{ $feature->title }}</a></td>
+			                            		<td><img src="/images/featured-covers/{{ $feature->thumbnail }}" height="75" width="75" /></td>
+			                            		<td><img src="/images/featured-backgrounds/{{ $feature->background_image }}" width="150" /></td>
+			                            		<td>
+			                            			<a class="eventtype-delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
 
-
-
-
-
+			                            		</td>
+			                            	</tr>
+			                            	@endforeach
+		                            	</table>
 		                            </div>
 		                        </div>
 

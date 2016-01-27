@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Banner;
 use App\Models\UserSelectedBanner;
+use App\Models\Feature\Feature;
 
 class FeatureAdminController extends Controller
 {
@@ -27,8 +28,10 @@ class FeatureAdminController extends Controller
     {
         $banner = UserSelectedBanner::getBanner();
         $banners = Banner::all();
+        $features = Feature::where('banner_id', $banner->id)->get();
                 
         return view('admin.feature.index')
+                ->with('features', $features)
                 ->with('banner', $banner)
                 ->with('banners', $banners);
     }
