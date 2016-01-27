@@ -162,40 +162,40 @@
 	</div>
 
 
-		        </div>
+</div>
 
-				@include('site.includes.footer')
+@include('site.includes.footer')
 
-			    @include('admin.includes.scripts')
+@include('admin.includes.scripts')
 
-				@include('site.includes.bugreport')
-
-
-                <script type="text/javascript">
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
-                    });
-
-                    $('.input-daterange').datepicker({
-                         format: 'yyyy-mm-dd',
-                        keyboardNavigation: false,
-                        forceParse: false,
-                        autoclose: true
-                    });                
-
-				</script>
-
-				
+@include('site.includes.bugreport')
 
 
-			</body>
-			</html>
-    
+<script type="text/javascript">
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $('.input-daterange').datepicker({
+         format: 'yyyy-mm-dd',
+        keyboardNavigation: false,
+        forceParse: false,
+        autoclose: true
+    });                
+
+</script>
+
+<script type="text/javascript" src="/js/custom/admin/packages/addPackage.js"></script>
+<script type="text/javascript" src="/js/custom/admin/global/bannerSelector.js"></script>			
+
+
+</body>
+</html>
+
 			
 	
 
 
-<script type="text/javascript" src="/js/custom/admin/packages/addPackage.js"></script>
-<script type="text/javascript" src="/js/custom/admin/global/bannerSelector.js"></script>
+

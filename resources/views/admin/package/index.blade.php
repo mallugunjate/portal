@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    @section('title', 'Calendar')
+    @section('title', 'Package')
     @include('admin.includes.head')
 
 	<meta name="csrf-token" content="{!! csrf_token() !!}"/>

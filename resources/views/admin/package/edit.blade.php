@@ -1,80 +1,149 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-	<title></title>
-	<link rel="stylesheet" href="/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="/css/custom/package.css">
-	<link rel="stylesheet" type="text/css" href="/css/plugins/chosen/chosen.css">
+    @section('title', 'Package')
+    @include('admin.includes.head')
+    
+    <link rel="stylesheet" type="text/css" href="/css/plugins/chosen/chosen.css">
+	
+	<meta name="csrf-token" content="{!! csrf_token() !!}"/>
 </head>
-<body class="container-fluid">
-	<!-- navbar begins -->
-	<nav class="navbar navbar-default">
-		@include('admin.banner', ['banners' =>$banners])    
-	    
-	</nav>
-	<!-- navbar ends-->
-	<div class="col-md-10 col-md-offset-1">
 
-		{!! Form::model($package, ['action' => ['Document\PackageAdminController@update', 'id'=>$package->id], 'method' => 'PATCH']) !!}
-		<input type="hidden" name="banner_id" value="{{$banner->id}}">
-		<h3>Edit Package : {{$package->package_screen_name}}</h3> 
-
-		<div class="edit-package-details row">
-			<label for="package-name"> Package Name</label>
-			<input type="text" name="package_name"  value="{{$package->package_screen_name}}">
-
-		</div>
-
-		<div>
-			Start :
-			<div class="input-group date" id="datetimepicker1">
-	          {!! Form::text('start', $package->start , ['class'=>'form-control',  'required']) !!}
-	          <span class="input-group-addon">
-	              <span class="glyphicon glyphicon-calendar"></span>
-	          </span>      
+<body class="fixed-navigation">
+    <div id="wrapper">
+	    <nav class="navbar-default navbar-static-side" role="navigation">
+	        <div class="sidebar-collapse">
+	          @include('admin.includes.sidenav')
 	        </div>
-        </div>
-        <div>
-			End :
-			<div class="input-group date" id="datetimepicker2">
-	          {!! Form::text('end', $package->end, ['class'=>'form-control',  'required']) !!}
-	          <span class="input-group-addon">
-	              <span class="glyphicon glyphicon-calendar"></span>
-	          </span>      
-	        </div>
-        </div>
-        <div>
-        	Package hidden from Store : <input type="checkbox" value=1 name="is_hidden" @if($package->is_hidden) {{"checked"}} @endif>
+	    </nav>
+
+	<div id="page-wrapper" class="gray-bg" >
+		<div class="row border-bottom">
+			@include('admin.includes.topbar')
         </div>
 
-        <div>
-        	{!! Form::label('tags[]', 'Tags') !!}
-        	{!! Form::select('tags[]', $tags, $selected_tags, ['class'=>'chosen', 'multiple'=>'true']) !!}
+		<div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-10">
+                    <h2>Edit an Package</h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="/admin">Home</a>
+                        </li>
+                        <li>
+                            <a href="/admin/package">Package</a>
+                        </li>
+                        <li class="active">
+                            <strong>Edit a Package</strong>
+                        </li>
+                    </ol>
+                </div>
+                <div class="col-lg-2">
 
-        </div>
-
-		<div class="existing-files row">
-			<div class="title">Existing Files</div>
-			<div class="existing-files-container">
-				@foreach($documentDetails as $doc)
-				<div class="row">
-					<div class="package-files col-md-8">
-						<div class="package-filename"> {{$doc->original_filename}} </div>
-						<div class="package-filepath"> File Location : {{$doc->folder_path}}</div>
-						<div class="package-timestamp"> Uploaded At : {{$doc->created_at}}</div>
-					</div>
-					<div class="col-md-1 remove-file btn btn-default" data-document-id="{{$doc->id}}">Remove</div>
-				</div>
-				@endforeach
-			</div>
-		</div>
-		<div id="files-staged-to-remove">
-
+                </div>
 		</div>
 
+		<div class="wrapper wrapper-content  animated fadeInRight">
+		            <div class="row">
+		                <div class="col-lg-12">
+		                    <div class="ibox">
+		                        <div class="ibox-title">
+		                            <h5>Edit Package: {{ $package->package_screen_name }}</h5>
+		                            <div class="ibox-tools">
+		                                <a href="/admin/package/create" class="btn btn-primary" role="button"><i class="fa fa-plus"></i> Add New Package</a>
+                                        
+		                            </div>
+		                        </div>
+		                        <div class="ibox-content">
 
-		<div class="row">
-			<div id="add-more-files" class="btn btn-default">Add More Files</div>
-		</div>
+                                    <form method="get" class="form-horizontal" >
+                                        <input type="hidden" name="packageID" id="packageID" value="{{ $package->id }}">
+                                        <input type="hidden" name="banner_id" value="{{$banner->id}}">
+
+                                        <div class="form-group"><label class="col-sm-2 control-label">Name</label>
+                                            <div class="col-sm-10"><input type="text" id="name" name="name" class="form-control" value="{{ $package->package_screen_name }}"></div>
+                                        </div>
+
+                                        <div class="hr-line-dashed"></div>
+                                        <div class="existing-files row">
+											<div class="form-group"><label class="col-sm-2 control-label">Files Attached</label>
+												<div class="existing-files-container col-md-10">
+													@foreach($documentDetails as $doc)
+													<div class="row">
+														<div class="package-files col-md-8">
+															<div class="package-filename"> {{$doc->original_filename}} </div>
+															<div class="package-filepath"> File Location : {{$doc->folder_path}}</div>
+															<div class="package-timestamp"> Uploaded At : {{$doc->created_at}}</div>
+														</div>
+
+														<div class="col-md-1 remove-file btn btn-default" data-document-id="{{$doc->id}}">Remove</div>
+													</div>
+													@endforeach
+													<div id="files-selected" class="row"></div>
+													<div class="row">
+														<div id="add-more-files" class="btn btn-default col-md-offset-8">Add More Files</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div id="files-staged-to-remove"></div>
+										<div id="files-selected"></div>
+
+                                        
+                                        <div class="hr-line-dashed"></div>
+
+                                        <div class="form-group">
+                                            <div class="col-sm-4 col-sm-offset-2">
+                                                <a class="btn btn-white" href="/admin/calendar"><i class="fa fa-close"></i> Cancel</a>
+                                                <button class="event-update btn btn-primary" type="submit"><i class="fa fa-check"></i> Save changes</button>
+
+                                            </div>
+                                        </div>
+                                    </form>
+
+
+                                </div>
+		                    </div>
+
+		                </div>
+
+                    </div>
+            </div>
+	</div>
+
+
+		        </div>
+
+				@include('site.includes.footer')
+
+			    @include('admin.includes.scripts')
+
+                <script type="text/javascript">
+					$.ajaxSetup({
+				        headers: {
+				            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				        }
+					});
+
+                    
+                    
+
+				</script>
+
+				@include('site.includes.bugreport')
+
+				<script type="text/javascript" src="/js/custom/admin/packages/editPackage.js"></script>
+				
+			</body>
+			</html>
+
+
+
+		<!-- {!! Form::model($package, ['action' => ['Document\PackageAdminController@update', 'id'=>$package->id], 'method' => 'PATCH']) !!} -->
+		
+
+
+		
 
 		<div id="document-listing" class="modal fade">
 		    <div class="modal-dialog">
@@ -102,32 +171,16 @@
 		    </div>
 		</div>
 
-		<div id="files-selected">
+		<!-- <div id="files-selected">
 
 		</div>
 				
-		{!! csrf_field() !!}
+		
 		<div class="row">
 			<button type="submit" class="btn btn-default">Update Package</button>
 		</div>
-		{!! Form::close() !!}
-	</div>
-<script type="text/javascript">
-	var start = {{$package->start}}
-	var end = {{$package->end}}
-</script>
+		{!! Form::close() !!} -->
+	<!-- </div> -->
 
-<script type="text/javascript" src="/js/jquery-2.1.1.min.js"></script>
-<script type="text/javascript" src="/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/js/custom/createpackage.js"></script>
-<script type="text/javascript" src="/js/custom/admin/global/bannerSelector.js"></script>
-<script type="text/javascript" src="/js/vendor/moment.js"></script>
-<script type="text/javascript" src="/js/vendor/bootstrap-datetimepicker.min.js"></script>
-<script type="text/javascript" src="/js/plugins/chosen/chosen.jquery.js"></script>
-<script type="text/javascript">
-	$(".date").datetimepicker({
-	          format: 'YYYY-MM-DD HH:mm:ss'
-	});
-</script>
-</body>
-</html>
+
+
