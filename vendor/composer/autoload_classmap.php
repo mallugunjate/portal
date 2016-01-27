@@ -41,6 +41,7 @@ return array(
     'CreateProfileHistoryTable' => $baseDir . '/database/migrations/future/2015_08_05_211709_create_profile_history_table.php',
     'CreateProfileSubscriptionsTable' => $baseDir . '/database/migrations/future/2015_08_19_172505_create_profile_subscriptions_table.php',
     'CreateProfilesTable' => $baseDir . '/database/migrations/future/2015_08_05_210613_create_profiles_table.php',
+    'CreateQuicklinksTable' => $baseDir . '/database/migrations/2016_01_27_214111_create_quicklinks_table.php',
     'CreateRolesTable' => $baseDir . '/database/migrations/future/2015_09_09_205316_create_roles_table.php',
     'CreateSubscriptionGroupsTable' => $baseDir . '/database/migrations/future/2015_08_18_222608_create_subscription_groups_table.php',
     'CreateTagsTable' => $baseDir . '/database/migrations/2015_12_07_234421_create_tags_table.php',
