@@ -17,6 +17,7 @@ use App\Models\Tag\ContentTag;
 use App\Models\UserSelectedBanner;
 use App\Models\Document\Folder;
 use App\Models\Document\FolderPackage;
+use App\Models\UserBanner;
 
 class PackageAdminController extends Controller
 {
@@ -36,9 +37,17 @@ class PackageAdminController extends Controller
      */
     public function index(Request $request)
     {
-        $banner = UserSelectedBanner::getBanner();
+        $user_id = \Auth::user()->id;
+        $banner_ids = UserBanner::where('user_id', $user_id)->get()->pluck('banner_id');
+        $banners = Banner::whereIn('id', $banner_ids)->get();        
+        $banner_id = UserSelectedBanner::where('user_id', \Auth::user()->id)->first()->selected_banner_id;
+        $banner  = Banner::find($banner_id);
+
         $packages = Package::getPackagesStructure($banner->id);
-        return $packages;
+        return view('admin/package/index')
+                ->with('banner', $banner)
+                ->with('banners',$banners)
+                ->with('packages',$packages);
     }
 
     /**
@@ -73,9 +82,10 @@ class PackageAdminController extends Controller
      */
     public function store(Request $request)
     {
+        
         Package::storePackage($request);
         
-        return redirect()->action('AdminController@index');
+        return;
     }
 
     /**

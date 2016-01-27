@@ -19,7 +19,7 @@ class Package extends Model
     {
         $documents = $request["package_files"];
     	$folders = $request["package_folders"];
-        $package_screen_name = $request["package_name"];
+        $package_screen_name = $request["name"];
     	$package_name = preg_replace('/\s+/', '_' , $package_screen_name);
     	$timestamp = sha1(time()*time());
     	$package_name .= "_".$timestamp ;
@@ -91,7 +91,7 @@ class Package extends Model
     {
         // dd($request->all());
         $package = Package::find($id);
-        $package["package_screen_name"] = $request["package_name"];
+        $package["package_screen_name"] = $request["name"];
 
         // $package["start"] = strtotime($request["start"]);
         // $package["end"] = strtotime($request["end"]);
