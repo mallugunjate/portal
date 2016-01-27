@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Models\Feature\Feature;
 
 class FeatureController extends Controller
 {
@@ -46,9 +47,13 @@ class FeatureController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        return "show a feature";
+        $id = $request->id;
+        $feature = Feature::where('id', $id)->first();
+
+        return view('site.feature.index')
+            ->with('feature', $feature);
     }
 
     /**
