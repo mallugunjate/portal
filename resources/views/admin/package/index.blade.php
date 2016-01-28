@@ -106,7 +106,7 @@
 
 				</script>
 
-				<script src="/js/custom/admin/events/deletePackage.js"></script>
+				<script src="/js/custom/admin/packages/deletePackage.js"></script>
 
 				@include('site.includes.bugreport')
 
