@@ -69,17 +69,61 @@
 
 		                            <div class="ibox-tools">
 
-		                                {{-- <a href="/admin/communication/create" class="btn btn-primary btn"><i class="fa fa-plus"></i> Create New Communication</a> --}}
+
+
+		                                <a href="/admin/communication/create" class="btn btn-primary btn"><i class="fa fa-plus"></i> Create New Quiclink</a>
 		                            </div>
 		                        </div>
 		                        <div class="ibox-content">
 
 
 
-		                            <div class="table-responsive">
+
+							<div class="dd" id="nestable2">
+                                <ol class="dd-list">
+                                	{{-- <div class="dd-placeholder" style="height: 42px;"></div> --}}
+                                    @foreach($quicklinks as $ql)
+                                 	<?php switch($ql->type) {
+                                    		case 1:
+                                    			$icon = '<i class="fa fa-folder-o"></i>';
+                                    			$type = "Folder";
+                                    			$link = '<a href="/admin/document/manager#!/'.$ql->url.'">'.$ql->link_name.'</a>';		
+                                    			break;
+                                    		case 2: 
+                                    			$icon = '<i class="fa fa-file-o"></i>';		
+                                    			$type = "File";
+                                    			$link = '<a class="launchPDFViewer" data-toggle="modal" data-file="/viewer/?file=/files/" data-target="#fileviewmodal" > '. $ql->link_name.'</a>';
+                                    			break;
+                                    		case 3:
+                                    			$icon = '<i class="fa fa-external-link"></i>';		
+                                    			$type = "External";
+                                    			$link = '<a target="_blank" href="'. $ql->url .'">'. $ql->link_name .'</a>';
+                                    			break;
+                                    		default:
+                                    			$icon = '<i class="fa fa-cog"></i>';		
+                                    			break;
+
+                                    	}?>
+                                    <li class="dd-item" data-id="{{ $ql->id }}">
+                                        	<span class="pull-left"><div class="dd-handle"><i class="fa fa-bars"></i></div></span>
+                                            <span class="pull-right"><a data-event="" id="" class="event-delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a></span>
+                                            <span class="label label-primary">
+   
+                                            	{{ $type }}
+
+                                            </span> {!! $link !!}
+                                        
+                                     </li>
+
+                                    @endforeach
+                                </ol>
+                            </div>
 
 
-		                            </div>
+
+
+		                            	
+
 		                        </div>
 
 		                    </div>
@@ -125,6 +169,46 @@
 					});
 
 				</script>
+				<script src="/js/plugins/nestable/jquery.nestable.js"></script>
+
+				<script>
+			         $(document).ready(function(){
+
+			             // var updateOutput = function (e) {
+			             //     var list = e.length ? e : $(e.target),
+			             //             output = list.data('output');
+			             //     if (window.JSON) {
+			             //         output.val(window.JSON.stringify(list.nestable('serialize')));//, null, 2));
+			             //     } else {
+			             //         output.val('JSON browser support required for this demo.');
+			             //     }
+			             // };
+			             // activate Nestable for list 1
+			             // $('#nestable').nestable({
+			             //     group: 1
+			             // }).on('change', updateOutput);
+
+			             // activate Nestable for list 2
+			             $('#nestable2').nestable({
+			                 group: 1
+			             });
+
+			             // output initial serialised data
+			             // updateOutput($('#nestable').data('output', $('#nestable-output')));
+			             // updateOutput($('#nestable2').data('output', $('#nestable2-output')));
+
+			             // $('#nestable-menu').on('click', function (e) {
+			             //     var target = $(e.target),
+			             //             action = target.data('action');
+			             //     if (action === 'expand-all') {
+			             //         $('.dd').nestable('expandAll');
+			             //     }
+			             //     if (action === 'collapse-all') {
+			             //         $('.dd').nestable('collapseAll');
+			             //     }
+			             // });
+			         });
+    </script>				
 
 {{-- 				<script type="text/javascript" src="/js/custom/admin/global/bannerSelector.js"></script> --}}
 

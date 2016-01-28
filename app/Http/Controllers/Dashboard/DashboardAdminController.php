@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Banner;
 use App\Models\UserBanner;
 use App\Models\UserSelectedBanner;
+use App\Models\Dashboard\Quicklinks;
 
 class DashboardAdminController extends Controller
 {
@@ -31,9 +32,14 @@ class DashboardAdminController extends Controller
         $banner_id = UserSelectedBanner::where('user_id', \Auth::user()->id)->first()->selected_banner_id;
         $banner  = Banner::find($banner_id);
 
+        //get the quicklinks
+        $quicklinks = Quicklinks::where('banner_id', $banner_id)->get();
+
+
         return view('admin.dashboard.index')
                 ->with('banner', $banner)
-                ->with('banners', $banners);  
+                ->with('banners', $banners)
+                ->with('quicklinks', $quicklinks);  
     }
 
     /**

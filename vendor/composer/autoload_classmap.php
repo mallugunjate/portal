@@ -569,6 +569,7 @@ return array(
     'UpdateFeaturesTable' => $baseDir . '/database/migrations/2016_01_26_231215_update_features_table.php',
     'UpdateFoldersTable' => $baseDir . '/database/migrations/2015_09_30_215422_update-folders-table.php',
     'UpdatePackagesTable' => $baseDir . '/database/migrations/2015_12_02_230415_update_packages_table.php',
+    'UpdateQuicklinksTable' => $baseDir . '/database/migrations/2016_01_28_180958_update_quicklinks_table.php',
     'UpdateQuicklinksTypesTable' => $baseDir . '/database/migrations/2016_01_27_231623_update_quicklinks_types_table.php',
     'UpdateUsersTable' => $baseDir . '/database/migrations/2015_12_15_182533_update_users_table.php',
     'UpdateWeeksTable' => $baseDir . '/database/migrations/2015_12_14_180605_update_weeks_table.php',
