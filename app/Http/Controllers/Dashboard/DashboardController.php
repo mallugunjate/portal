@@ -19,6 +19,8 @@ use App\Models\Communication\CommunicationTarget;
 use App\Models\Tag\Tag;
 use App\Models\Tag\ContentTag;
 use App\Models\Feature\Feature;
+use App\Models\Dashboard\Quicklinks;
+use App\Models\Dashboard\DashboardBranding;
 use App\Skin;
 
 class DashboardController extends Controller
@@ -38,7 +40,7 @@ class DashboardController extends Controller
         
         $features = Feature::where('banner_id', $storeBanner)->get();
 
-        
+        $quicklinks = Quicklinks::getLinks($storeBanner, $storeNumber);
 
         $communicationCount = DB::table('communications_target')
 	        ->where('store_id', $storeNumber)
@@ -47,6 +49,7 @@ class DashboardController extends Controller
 
         return view('site.dashboard.index')
             ->with('skin', $skin)
+            ->with('quicklinks', $quicklinks)
         	->with('communicationCount', $communicationCount)
             ->with('features', $features);
     }

@@ -99,34 +99,17 @@
                                         <div class="table-responsive">
                                             <table class="table table-striped table-hover">
                                                 <tbody>
+
+                                                @foreach($quicklinks as $ql)
                                                 <tr>
-                                                    
-                                                    <td><a data-toggle="tab" href="#contact-1" class="client-link"><i class="fa fa-external-link"></i>  Visit The North Face Website</a></td>
+                                                    {{-- <a data-toggle="tab" href="#contact-1" class="client-link"><i class="fa fa-external-link"></i>  Visit The North Face Website</a> --}}
+                                                    <td>{!! $ql !!}</td>
                                                     
                                                 </tr>
-                                                <tr>
-                                                    
-                                                    <td><a data-toggle="tab" href="#contact-1" class="client-link"><i class="fa fa-external-link"></i>  Visit the Nike University</a></td>
-                                                </tr>
-                                                <tr>
-                                                    
-                                                    <td><a data-toggle="tab" href="#contact-1" class="client-link"><i class="fa fa-file-pdf-o"></i>  OH&amp;S</a></td>
-                                                </tr>
-                                                <tr>
-                                                    
-                                                   <td><a data-toggle="tab" href="#contact-1" class="client-link"><i class="fa fa-file-pdf-o"></i>  Store Repairs</a></td>
-                                                </tr>
-                                                <tr>
-                                                    
-                                                    <td><a data-toggle="tab" href="#contact-1" class="client-link"><i class="fa fa-external-link"></i>  Corporate Web Portal</a></td>
-                                                </tr>
-                                                <tr>
-                                                    
-                                                    <td><a data-toggle="tab" href="#contact-1" class="client-link"><i class="fa fa-calendar"></i>  Week 46 Workload Calendar</a></td>
-                                                </tr>
+      
 
 
-
+                                                @endforeach
                                                 </tbody>
                                             </table>
                                         </div>
