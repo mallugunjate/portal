@@ -76,53 +76,43 @@
 		                        </div>
 		                        <div class="ibox-content">
 
+									<div class="dd" id="quicklinkslist">
+		                                <ol class="dd-list">
+		                                	{{-- <div class="dd-placeholder" style="height: 42px;"></div> --}}
+		                                    @foreach($quicklinks as $ql)
+		                                 	<?php switch($ql->type) {
+		                                    		case 1:
+		                                    			$icon = '<i class="fa fa-folder"></i>';
+		                                    			$type = "Folder";
+		                                    			$link = '<a href="/admin/document/manager#!/'.$ql->url.'">'.$ql->link_name.'</a>';		
+		                                    			break;
+		                                    		case 2: 
+		                                    			$icon = '<i class="fa fa-file-o"></i>';		
+		                                    			$type = "File";
+		                                    			$link = '<a class="launchPDFViewer" data-toggle="modal" data-file="/viewer/?file=/files/" data-target="#fileviewmodal" > '. $ql->link_name.'</a>';
+		                                    			break;
+		                                    		case 3:
+		                                    			$icon = '<i class="fa fa-external-link"></i>';		
+		                                    			$type = "Link";
+		                                    			$link = '<a target="_blank" href="'. $ql->url .'">'. $ql->link_name .'</a>';
+		                                    			break;
+		                                    		default:
+		                                    			$icon = '<i class="fa fa-cog"></i>';		
+		                                    			break;
 
-
-
-							<div class="dd" id="nestable2">
-                                <ol class="dd-list">
-                                	{{-- <div class="dd-placeholder" style="height: 42px;"></div> --}}
-                                    @foreach($quicklinks as $ql)
-                                 	<?php switch($ql->type) {
-                                    		case 1:
-                                    			$icon = '<i class="fa fa-folder-o"></i>';
-                                    			$type = "Folder";
-                                    			$link = '<a href="/admin/document/manager#!/'.$ql->url.'">'.$ql->link_name.'</a>';		
-                                    			break;
-                                    		case 2: 
-                                    			$icon = '<i class="fa fa-file-o"></i>';		
-                                    			$type = "File";
-                                    			$link = '<a class="launchPDFViewer" data-toggle="modal" data-file="/viewer/?file=/files/" data-target="#fileviewmodal" > '. $ql->link_name.'</a>';
-                                    			break;
-                                    		case 3:
-                                    			$icon = '<i class="fa fa-external-link"></i>';		
-                                    			$type = "External";
-                                    			$link = '<a target="_blank" href="'. $ql->url .'">'. $ql->link_name .'</a>';
-                                    			break;
-                                    		default:
-                                    			$icon = '<i class="fa fa-cog"></i>';		
-                                    			break;
-
-                                    	}?>
-                                    <li class="dd-item" data-id="{{ $ql->id }}">
-                                        	<span class="pull-left"><div class="dd-handle"><i class="fa fa-bars"></i></div></span>
-                                            <span class="pull-right"><a data-event="" id="" class="event-delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a></span>
-                                            <span class="label label-primary">
-   
-                                            	{{ $type }}
-
-                                            </span> {!! $link !!}
-                                        
-                                     </li>
-
-                                    @endforeach
-                                </ol>
-                            </div>
-
-
-
-
-		                            	
+		                                    	}?>
+		                                    <li class="dd-item" data-id="{{ $ql->id }}">
+												<span class="pull-left">
+													<div class="dd-handle"><i class="fa fa-bars"></i></div>
+													<span style="position: relative; top: 5px;">{!! $link !!} <span class="label label-default">{!! $icon !!} {{ $type }}</span> </span>
+												</span>
+												<span class="pull-right">
+													<a data-quicklink="{{ $ql->id }}" id="" class="event-delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>&nbsp;&nbsp;
+												</span>
+		                                     </li>
+		                                    @endforeach
+		                                </ol>
+		                            </div>     	
 
 		                        </div>
 
@@ -130,21 +120,28 @@
 
 		                    <div class="ibox">
 		                        <div class="ibox-title">
-		                            <h5>Featured Content</h5>
+		                            <h5>Order Featured Content</h5>
 
 		                            <div class="ibox-tools">
 
-		                                {{-- <a href="/admin/communication/create" class="btn btn-primary btn"><i class="fa fa-plus"></i> Create New Communication</a> --}}
+		                                <a href="/admin/feature" class="btn btn-primary btn"><i class="fa fa-pencil"></i> Edit Featured Content Pages</a>
 		                            </div>
 		                        </div>
 		                        <div class="ibox-content">
 
-
-
-		                            <div class="table-responsive">
-
-
-		                            </div>
+									<div class="dd" id="featuredcontentlist">
+		                                <ol class="dd-list">
+		                                	{{-- <div class="dd-placeholder" style="height: 42px;"></div> --}}
+		                                    @foreach($features as $f)
+		                                 
+		                                    <li class="dd-item" data-id="{{ $f->id }}">
+		                                        	<span class="pull-left"><div class="dd-handle"><i class="fa fa-bars"></i></div></span>
+		                                            {{-- <span class="pull-right"><a data-event="" id="" class="event-delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a></span> --}}
+		                                            <img src="/images/featured-covers/{{ $f->thumbnail }}" height="30" width="30" /><span class="client-link" style="margin:0px 10px;">{{ $f->title }}</span>
+		                                     </li>
+		                                    @endforeach
+		                                </ol>
+		                            </div> 
 		                        </div>
 
 		                    </div>		                    
@@ -189,9 +186,13 @@
 			             // }).on('change', updateOutput);
 
 			             // activate Nestable for list 2
-			             $('#nestable2').nestable({
+			             $('#quicklinkslist').nestable({
 			                 group: 1
 			             });
+
+			             $('#featuredcontentlist').nestable({
+			                 group: 1
+			             });			             
 
 			             // output initial serialised data
 			             // updateOutput($('#nestable').data('output', $('#nestable-output')));

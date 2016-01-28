@@ -564,6 +564,7 @@ return array(
     'SessionHandlerInterface' => $vendorDir . '/symfony/http-foundation/Resources/stubs/SessionHandlerInterface.php',
     'TestCase' => $baseDir . '/tests/TestCase.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
+    'UpdateBannersTable' => $baseDir . '/database/migrations/2016_01_28_204112_update_banners_table.php',
     'UpdateDashboardBrandingTable' => $baseDir . '/database/migrations/2016_01_27_230216_update_dashboard_branding_table.php',
     'UpdateDocumentsTable' => $baseDir . '/database/migrations/2015_10_27_145632_update_documents_table.php',
     'UpdateFeaturesTable' => $baseDir . '/database/migrations/2016_01_26_231215_update_features_table.php',

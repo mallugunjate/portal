@@ -15,7 +15,7 @@ class Quicklinks extends Model
 
  	public static function getLinks($id, $storeNumber)
  	{
- 		$links = Quicklinks::where("banner_id", $id)->get();
+ 		$links = Quicklinks::where("banner_id", $id)->orderBy('order')->get();
  		$linkarray = array();
  		foreach($links as $link){
 

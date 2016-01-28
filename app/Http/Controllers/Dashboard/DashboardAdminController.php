@@ -10,6 +10,7 @@ use App\Models\Banner;
 use App\Models\UserBanner;
 use App\Models\UserSelectedBanner;
 use App\Models\Dashboard\Quicklinks;
+use App\Models\Feature\Feature;
 
 class DashboardAdminController extends Controller
 {
@@ -33,12 +34,14 @@ class DashboardAdminController extends Controller
         $banner  = Banner::find($banner_id);
 
         //get the quicklinks
-        $quicklinks = Quicklinks::where('banner_id', $banner_id)->get();
+        $quicklinks = Quicklinks::where('banner_id', $banner_id)->orderBy('order')->get();
 
+        $features = Feature::where('banner_id', $banner_id)->get();
 
         return view('admin.dashboard.index')
                 ->with('banner', $banner)
                 ->with('banners', $banners)
+                ->with('features', $features)
                 ->with('quicklinks', $quicklinks);  
     }
 
