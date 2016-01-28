@@ -130,13 +130,30 @@ class PackageAdminController extends Controller
         $tag_ids = ContentTag::where('content_id', $id)->where('content_type', 'package')->get()->pluck('tag_id');
         $selected_tags = Tag::findMany($tag_ids)->pluck('id')->toArray();
 
+        $folderStructure = FolderStructure::getNavigationStructure($banner->id);
+        
+        $selected_folder_ids = FolderPackage::where('package_id', $id)->get()->pluck('folder_id');
+        $selected_folders = array();
+        foreach ($selected_folder_ids as $folder_id) {
+            $folder_details =  \DB::table('folder_ids')->where('id' , $folder_id)->first();
+
+            if ($folder_details->folder_type == 'folder') {
+                $folder_desc = Folder::where('id', $folder_details->folder_id)->first();
+                $folder_desc->folder_path = Folder::getFolderPath($folder_id);
+                $folder_desc->global_folder_id = $folder_details->id;
+                array_push($selected_folders, $folder_desc );
+            }
+        }
+        
         return view('admin.package.edit')->with('package', $package)
                                         ->with('documentDetails', $documentDetails)
                                         ->with('banner', $banner)
                                         ->with('banners', $banners)
                                         ->with('navigation', $fileFolderStructure)
                                         ->with('tags', $tags)
-                                        ->with('selected_tags', $selected_tags);
+                                        ->with('selected_tags', $selected_tags)
+                                        ->with('folders', $selected_folders)
+                                        ->with('folderStructure', $folderStructure);
     }
 
     /**
@@ -149,7 +166,7 @@ class PackageAdminController extends Controller
     public function update(Request $request, $id)
     {
         Package::updatePackage($request, $id);
-        return redirect()->action('AdminController@index');
+        
     }
 
     /**
