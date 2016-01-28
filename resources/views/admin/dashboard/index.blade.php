@@ -101,7 +101,7 @@
 		                                    			break;
 
 		                                    	}?>
-		                                    <li class="dd-item" data-id="{{ $ql->id }}">
+		                                    <li class="dd-item" data-id="{{ $ql->id }}" data-thingy="{{ $ql->link_name }}">
 												<span class="pull-left">
 													<div class="dd-handle"><i class="fa fa-bars"></i></div>
 													<span style="position: relative; top: 5px;">{!! $link !!} <span class="label label-default">{!! $icon !!} {{ $type }}</span> </span>
@@ -169,30 +169,73 @@
 				<script src="/js/plugins/nestable/jquery.nestable.js"></script>
 
 				<script>
+
+				         // $(document).ready(function(){
+
+				         //     var updateOutput = function (e) {
+				         //         var list = e.length ? e : $(e.target),
+				         //                 output = list.data('output');
+				         //         if (window.JSON) {
+				         //             output.val(window.JSON.stringify(list.nestable('serialize')));//, null, 2));
+				         //         } else {
+				         //             output.val('JSON browser support required for this demo.');
+				         //         }
+				         //     };
+				         //     // activate Nestable for list 1
+				         //     $('#nestable').nestable({
+				         //         group: 1
+				         //     }).on('change', updateOutput);
+
+				         //     // activate Nestable for list 2
+				         //     $('#nestable2').nestable({
+				         //         group: 1
+				         //     }).on('change', updateOutput);
+
+				         //     // output initial serialised data
+				         //     updateOutput($('#nestable').data('output', $('#nestable-output')));
+				         //     updateOutput($('#nestable2').data('output', $('#nestable2-output')));
+
+				         //     $('#nestable-menu').on('click', function (e) {
+				         //         var target = $(e.target),
+				         //                 action = target.data('action');
+				         //         if (action === 'expand-all') {
+				         //             $('.dd').nestable('expandAll');
+				         //         }
+				         //         if (action === 'collapse-all') {
+				         //             $('.dd').nestable('collapseAll');
+				         //         }
+				         //     });
+				         // });
+
+
+
+
 			         $(document).ready(function(){
 
-			             // var updateOutput = function (e) {
-			             //     var list = e.length ? e : $(e.target),
-			             //             output = list.data('output');
-			             //     if (window.JSON) {
-			             //         output.val(window.JSON.stringify(list.nestable('serialize')));//, null, 2));
-			             //     } else {
-			             //         output.val('JSON browser support required for this demo.');
-			             //     }
-			             // };
-			             // activate Nestable for list 1
-			             // $('#nestable').nestable({
-			             //     group: 1
-			             // }).on('change', updateOutput);
+
+						var updateOutput = function (e) {
+			                 var list = e.length ? e : $(e.target);			                        
+
+			                 var stuff = list.nestable('serialize');
+			                 console.log(stuff);
+			                 // if (window.JSON) {
+			                 //     output.val(window.JSON.stringify(list.nestable('serialize')));//, null, 2));
+			                 // } else {
+			                 //     output.val('JSON browser support required for this demo.');
+			                 // }
+			             };
+
 
 			             // activate Nestable for list 2
 			             $('#quicklinkslist').nestable({
 			                 group: 1
-			             });
+			             }).on('change', updateOutput);
+
 
 			             $('#featuredcontentlist').nestable({
-			                 group: 1
-			             });			             
+			                 group: 2
+			             });
+			             //}).on('change', updateOutput);			             
 
 			             // output initial serialised data
 			             // updateOutput($('#nestable').data('output', $('#nestable-output')));

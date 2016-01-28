@@ -36,7 +36,7 @@ class DashboardAdminController extends Controller
         //get the quicklinks
         $quicklinks = Quicklinks::where('banner_id', $banner_id)->orderBy('order')->get();
 
-        $features = Feature::where('banner_id', $banner_id)->get();
+        $features = Feature::where('banner_id', $banner_id)->orderBy('order')->get();
 
         return view('admin.dashboard.index')
                 ->with('banner', $banner)

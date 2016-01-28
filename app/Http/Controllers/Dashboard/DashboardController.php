@@ -38,7 +38,7 @@ class DashboardController extends Controller
 
         $skin = Skin::getSkin($storeBanner);
         
-        $features = Feature::where('banner_id', $storeBanner)->get();
+        $features = Feature::where('banner_id', $storeBanner)->orderBy('order')->get();
 
         $quicklinks = Quicklinks::getLinks($storeBanner, $storeNumber);
 
