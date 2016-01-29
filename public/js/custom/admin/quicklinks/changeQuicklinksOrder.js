@@ -16,26 +16,8 @@ function updateQuicklinksOrder(data){
 			    data: {
 			  		order: i
 			    }
-			  //   ,
-			  //   success: function(result) {
-			  //     //  $('#createNewEventForm')[0].reset(); // empty the form
-					// swal("Nice!", "'" + eventType +"' has been updated", "success");        
-			  //   }
 			});             
         }
     }
-	// if(hasError == false) {
 
-		// $.ajax({
-		//     url: '/admin/quicklinks/' + eventTypeID ,
-		//     type: 'PATCH',
-		//     data: {
-		//   		event_type: eventType
-		//     },
-		//     success: function(result) {
-		//       //  $('#createNewEventForm')[0].reset(); // empty the form
-		// 		swal("Nice!", "'" + eventType +"' has been updated", "success");        
-		//     }
-		// });    	
- //    }
 }
