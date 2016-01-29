@@ -87,7 +87,7 @@ $(document).on('click','.feature-create',function(){
 		  		start : featureStart,
 		  		end : featureEnd,
 		  		thumbnail : thumbnail,
-		  		backgound : background,
+		  		background : background,
 		  		feature_files: feature_files,
 		  		feature_packages: feature_packages
 		    },
