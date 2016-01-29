@@ -86,7 +86,7 @@
 														@foreach($documentDetails as $doc)
 														<div class="row">
 															<div class="package-files col-md-8">
-																<div class="package-filename"> <i class="fa fa-file-o"></i> {{$doc->original_filename}} </div>
+																<div class="package-filename" data-fileid = "{{$doc->id}}"> <i class="fa fa-file-o"></i> {{$doc->original_filename}} </div>
 																<div class="package-filepath"> File Location : {{$doc->folder_path}}</div>
 																<div class="package-timestamp"> Uploaded At : {{$doc->created_at}}</div>
 															</div>
@@ -124,7 +124,7 @@
 															@foreach($folders as $folder)
 															<div class="row">
 																<div class="package-folders col-md-8">
-																	<div class="package-foldername"> <i class="fa fa-folder-o"></i> {{$folder->name}} </div>
+																	<div class="package-foldername" data-folderid = {{$folder->global_folder_id}}> <i class="fa fa-folder-o"></i> {{$folder->name}} </div>
 																	<?php $folder_path = $folder->folder_path; ?>
 																	<div class="package-folderpath"> Folder Location :
 																		@foreach($folder_path as $path)

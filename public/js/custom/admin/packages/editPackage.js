@@ -169,3 +169,15 @@ $(".package-update").on('click', function(){
 
     return false;
 });
+
+$(".package-filename").on('click', function (){
+	var fileId = $(this).attr('data-fileid');
+	//open modal here to show the document
+});
+
+$(".package-foldername").on('click', function(){
+	var folderId = $(this).attr('data-folderid');
+	console.log("folderId : " + folderId);
+	console.log("/admin/document/manager#!/" + folderId);
+	window.location = "/admin/document/manager#!/"+ folderId;
+});
