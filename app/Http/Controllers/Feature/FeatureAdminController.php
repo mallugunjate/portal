@@ -10,6 +10,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Banner;
 use App\Models\UserSelectedBanner;
 use App\Models\Feature\Feature;
+use App\Models\Document\FileFolder;
+use App\Models\Document\Package;
 
 class FeatureAdminController extends Controller
 {
@@ -46,9 +48,13 @@ class FeatureAdminController extends Controller
         $banner = UserSelectedBanner::getBanner();
         $banners = Banner::all();
 
+        $packages = Package::all();
+        $fileFolderStructure = FileFolder::getFileFolderStructure($banner->id);
         return view('admin.feature.create')
                 ->with('banner', $banner)
-                ->with('banners', $banners);
+                ->with('banners', $banners)
+                ->with('navigation', $fileFolderStructure)
+                ->with('packages', $packages);
     }
 
     /**
@@ -59,7 +65,7 @@ class FeatureAdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $request->all();
     }
 
     /**
@@ -70,7 +76,7 @@ class FeatureAdminController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**

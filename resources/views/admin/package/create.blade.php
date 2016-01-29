@@ -187,8 +187,7 @@
 
 </script>
 
-<script type="text/javascript" src="/js/custom/admin/packages/addPackage.js"></script>
-<script type="text/javascript" src="/js/custom/admin/global/bannerSelector.js"></script>			
+<script type="text/javascript" src="/js/custom/admin/packages/addPackage.js"></script>			
 
 
 </body>

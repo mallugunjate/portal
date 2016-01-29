@@ -50,20 +50,77 @@
 
 		                            <div class="ibox-tools">
 
-		                                {{-- <a href="/admin/feature/create" class="btn btn-primary btn"><i class="fa fa-plus"></i> Create New Feature</a> --}}
+		                                
 		                            </div>
 		                        </div>
 		                        <div class="ibox-content">
+		                        	<form method="get" class="form-horizontal" id="createNewFeatureForm">
+                                        
+                                        <input type="hidden" name="banner_id" value="{{$banner->id}}">
+                                        <div class="form-group"><label class="col-sm-2 control-label">Feature Title</label>
+                                            <div class="col-sm-10"><input type="text" id="feature_title" name="feature_title" class="form-control" value=""></div>
+                                        </div>
+                                        <div class="form-group"><label class="col-sm-2 control-label">Tile Label</label>
+                                            <div class="col-sm-10"><input type="text" id="tile_label" name="tile_label" class="form-control" value=""></div>
+                                        </div>
+                                        <div class="form-group">
+
+                                                <label class="col-sm-2 control-label">Start &amp; End</label>
+
+                                                <div class="col-sm-10">
+                                                    <div class="input-daterange input-group" id="datepicker">
+                                                        <input type="text" class="input-sm form-control" name="start" id="start" value="" />
+                                                        <span class="input-group-addon">to</span>
+                                                        <input type="text" class="input-sm form-control" name="end" id="end" value="" />
+                                                    </div>
+                                                </div>
+                                        </div>
+
+                                        <div class="hr-line-dashed"></div>
+                                        <div class="form-group">
+                                        	<label class="col-sm-2 control-label">Thumbnail</label>
+                                        	<div class="col-md-10"><input type="file" name="thumbnail" id="thumbnail" class="form-control "></div>
+                                            
+                                        </div>
+
+                                        <div class="form-group">
+                                        	<label class="col-sm-2 control-label">Background Image</label>
+                                        	<div class="col-md-10"><input type="file" name="background" id="background" class="form-control "></div>
+                                            <div class="col-sm-10"></div>
+                                        </div>
+                                        
+                                        <div class="hr-line-dashed"></div>
+                                        
+                                        <div class="form-group"><label class="col-sm-2 control-label">Files</label>
+                                            <div class="col-md-10">
+                                               <input class="btn btn-default" type="button" id="add-documents" value="Add Documents" />
+                                            </div>
+                                        </div>
+                                        <div id="files-selected" class="col-sm-offset-2"></div>
+
+                                        <div class="hr-line-dashed"></div>
+                                        <div class="form-group"><label class="col-sm-2 control-label">Packages</label>
+                                            <div class="col-md-10">
+                                            	<input class="btn btn-default" type="button" id="add-packages" value="Add Packages" />
+                                            </div>
+                                        </div>
+                                        <div id="packages-selected" class="col-sm-offset-2"></div>
+		
+			
+		
+
+                                        <div class="form-group">
+                                            <div class="col-sm-10 col-sm-offset-2">
+                                                <a class="btn btn-white" href="/admin/feature"><i class="fa fa-close"></i> Cancel</a>
+                                                <button class="feature-create btn btn-primary" type="submit"><i class="fa fa-check"></i> Create New Feature</button>
+
+                                            </div>
+                                        </div>
+                                        
+                                    </form>
 
 
-
-		                            <div class="table-responsive">
-
-
-
-
-
-		                            </div>
+		                            
 		                        </div>
 
 		                    </div>
@@ -84,13 +141,65 @@
 				        }
 					});
 
+					$('.input-daterange').datepicker({
+                         format: 'yyyy-mm-dd',
+                        keyboardNavigation: false,
+                        forceParse: false,
+                        autoclose: true
+                    });
+
 				</script>
+				<script type="text/javascript" src="/js/custom/admin/features/addFeature.js"></script>
 
-
-				<script type="text/javascript" src="/js/custom/admin/global/bannerSelector.js"></script>
+				
 
 				@include('site.includes.bugreport')
 
+				<div id="document-listing" class="modal fade">
+				    <div class="modal-dialog">
+				        <div class="modal-content">
+				            <div class="modal-header">
+				                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				                <h4 class="modal-title">Select Documents</h4>
+				            </div>
+				            <div class="modal-body">
+				            	@foreach ($navigation as $nav) 
+								
+									@if (isset($nav["is_child"]) && ($nav["is_child"] == 0) )
+										
+										@include('admin.package.file-folder-structure-partial', ['navigation' =>$navigation, 'currentnode' => $nav])
+										
+									@endif
+
+								@endforeach
+				            </div>
+				            <div class="modal-footer">
+				                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				                <button type="button" class="btn btn-primary" id="attach-selected-files">Select Documents</button>
+				            </div>
+				        </div>
+				    </div>
+				</div>
+
+				<div id="package-listing" class="modal fade">
+				    <div class="modal-dialog">
+				        <div class="modal-content">
+				            <div class="modal-header">
+				                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				                <h4 class="modal-title">Select Packages</h4>
+				            </div>
+				            <div class="modal-body">
+				            	
+								@include('admin.package.package-structure-partial', ['packages' =>$packages])
+								
+				            </div>
+				            <div class="modal-footer">
+				                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				                <button type="button" class="btn btn-primary attach-selected-packages" id="attach-selected-packages">Select Packages</button>
+				            </div>
+				        </div>
+				    </div>
+				</div>
 
 
 			</body>
