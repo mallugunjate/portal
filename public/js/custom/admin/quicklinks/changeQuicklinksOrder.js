@@ -1,6 +1,6 @@
 function updateQuicklinksOrder(data){
-	console.log("made it over here");
-	console.log(data);
+	// console.log("made it over here");
+	// console.log(data);
 
 	for(var i=0;i<data.length;i++){
         var obj = data[i];

@@ -133,7 +133,7 @@ var fileFill = function(data)
 				case "avi":
 				case "mov":
 					icon = "fa-film";
-					row = '<tr> <td><div class="launchVideoViewer" data-toggle="modal" data-file="/files/'+i.filename +'?rnd='+ Math.random()*Math.random() + '" data-target="#videomodal"><i class="fa '+ icon +'"></i> ' + i.title +'</div></td>'+
+					row = '<tr> <td><div class="launchVideoViewer" data-file="/files/'+i.filename +'?rnd='+ Math.random()*Math.random() + '" data-target="#videomodal"><i class="fa '+ icon +'"></i> ' + i.title +'</div></td>'+
 			//$('#file-table').append('<tr> <td><a data-toggle="modal" data-target="#fileviewmodal" href="/viewer/?file=/files/'+i.filename+'"><i class="fa '+ icon +'"></i> ' + i.title +'</a></td>'+				
 										' <td>'+ i.description + '</td>'+
 										' <td>'+ i.created_at +'</td>'+
@@ -195,6 +195,8 @@ var fileFill = function(data)
 		$("body").on("click", ".launchVideoViewer", function(e){
 			var filepath = $(this).attr("data-file");
 			$("#videomodal").find('source').attr("src", filepath);
+			$('#videomodal').modal('show');
+			// data-toggle="modal"
 		});		
 
 		// $('#videomodal').on('shown.bs.modal', function() {

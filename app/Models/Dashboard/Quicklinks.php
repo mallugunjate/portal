@@ -26,7 +26,7 @@ class Quicklinks extends Model
 
  				case 2: //file
  					$doc = Document::getDocumentById($link->url);
- 					array_push($linkarray, '<a class="launchPDFViewer client-link" data-toggle="modal" data-file="/viewer/?file=/files/'.$doc->filename.'" data-target="#fileviewmodal" ><i class="fa fa-file-o"></i> '. $link->link_name.'</a>');
+ 					array_push($linkarray, '<a class="launchPDFViewer client-link" data-toggle="modal" data-file="/viewer/?file=/files/" data-target="#fileviewmodal" ><i class="fa fa-file-o"></i> '. $link->link_name.'</a>');
  					break;
 
  				case 3: //url
