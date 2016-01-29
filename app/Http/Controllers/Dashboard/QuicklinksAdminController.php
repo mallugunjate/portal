@@ -85,6 +85,7 @@ class QuicklinksAdminController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $quicklink = Quicklinks::find($id);
+        $quicklink->delete();
     }
 }
