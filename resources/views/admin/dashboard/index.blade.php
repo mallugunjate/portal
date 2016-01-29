@@ -101,7 +101,7 @@
 		                                    			break;
 
 		                                    	}?>
-		                                    <li class="dd-item" data-id="{{ $ql->id }}" data-thingy="{{ $ql->link_name }}">
+		                                    <li class="dd-item" data-id="{{ $ql->id }}">
 												<span class="pull-left">
 													<div class="dd-handle"><i class="fa fa-bars"></i></div>
 													<span style="position: relative; top: 5px;">{!! $link !!} <span class="label label-default">{!! $icon !!} {{ $type }}</span> </span>
@@ -167,6 +167,7 @@
 
 				</script>
 				<script src="/js/plugins/nestable/jquery.nestable.js"></script>
+				<script src="/js/custom/admin/quicklinks/changeQuicklinksOrder.js"></script>
 
 				<script>
 
@@ -212,45 +213,28 @@
 
 			         $(document).ready(function(){
 
-
-						var updateOutput = function (e) {
+						var serializeQuicklinksData = function (e) {
 			                 var list = e.length ? e : $(e.target);			                        
-
-			                 var stuff = list.nestable('serialize');
-			                 console.log(stuff);
-			                 // if (window.JSON) {
-			                 //     output.val(window.JSON.stringify(list.nestable('serialize')));//, null, 2));
-			                 // } else {
-			                 //     output.val('JSON browser support required for this demo.');
-			                 // }
+			                 var data = list.nestable('serialize');
+			                 updateQuicklinksOrder(data);
 			             };
 
+						var serializeFeaturedContentData = function (e) {
+			                 var list = e.length ? e : $(e.target);			                        
+			                 var data = list.nestable('serialize');
+			                 //updateQuicklinksOrder(data);
+			                 console.log(data);
+			             };			             
 
-			             // activate Nestable for list 2
 			             $('#quicklinkslist').nestable({
 			                 group: 1
-			             }).on('change', updateOutput);
+			             }).on('change', serializeQuicklinksData);
 
 
 			             $('#featuredcontentlist').nestable({
 			                 group: 2
-			             });
-			             //}).on('change', updateOutput);			             
+			             }).on('change', serializeFeaturedContentData);
 
-			             // output initial serialised data
-			             // updateOutput($('#nestable').data('output', $('#nestable-output')));
-			             // updateOutput($('#nestable2').data('output', $('#nestable2-output')));
-
-			             // $('#nestable-menu').on('click', function (e) {
-			             //     var target = $(e.target),
-			             //             action = target.data('action');
-			             //     if (action === 'expand-all') {
-			             //         $('.dd').nestable('expandAll');
-			             //     }
-			             //     if (action === 'collapse-all') {
-			             //         $('.dd').nestable('collapseAll');
-			             //     }
-			             // });
 			         });
     </script>				
 

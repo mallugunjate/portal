@@ -24,6 +24,7 @@ return array(
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\Dashboard\\DashboardAdminController' => $baseDir . '/app/Http/Controllers/Dashboard/DashboardAdminController.php',
     'App\\Http\\Controllers\\Dashboard\\DashboardController' => $baseDir . '/app/Http/Controllers/Dashboard/DashboardController.php',
+    'App\\Http\\Controllers\\Dashboard\\QuicklinksAdminController' => $baseDir . '/app/Http/Controllers/Dashboard/QuicklinksAdminController.php',
     'App\\Http\\Controllers\\Document\\DocumentAdminController' => $baseDir . '/app/Http/Controllers/Document/DocumentAdminController.php',
     'App\\Http\\Controllers\\Document\\DocumentController' => $baseDir . '/app/Http/Controllers/Document/DocumentController.php',
     'App\\Http\\Controllers\\Document\\DocumentManagerController' => $baseDir . '/app/Http/Controllers/Document/DocumentManagerController.php',

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Models\Dashboard\Quicklinks;
 
 class QuicklinksAdminController extends Controller
 {
@@ -71,7 +72,9 @@ class QuicklinksAdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $quicklink = Quicklinks::find($id);
+        $quicklink->order = $request['order'];
+        $quicklink->save();
     }
 
     /**
