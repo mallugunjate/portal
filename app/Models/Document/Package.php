@@ -19,7 +19,7 @@ class Package extends Model
     {
         $documents = $request["package_files"];
     	$folders = $request["package_folders"];
-        $package_screen_name = $request["package_name"];
+        $package_screen_name = $request["name"];
     	$package_name = preg_replace('/\s+/', '_' , $package_screen_name);
     	$timestamp = sha1(time()*time());
     	$package_name .= "_".$timestamp ;
@@ -91,7 +91,7 @@ class Package extends Model
     {
         // dd($request->all());
         $package = Package::find($id);
-        $package["package_screen_name"] = $request["package_name"];
+        $package["package_screen_name"] = $request["name"];
 
         // $package["start"] = strtotime($request["start"]);
         // $package["end"] = strtotime($request["end"]);
@@ -108,7 +108,7 @@ class Package extends Model
         $remove_documents = $request["remove_document"];    
         if (isset($remove_documents)) {
             foreach ($remove_documents as $remove) {
-               DocumentPackage::where('document_id', intval($remove))->delete();
+               DocumentPackage::where('package_id',$id)->where('document_id', intval($remove))->delete();
             }
         }
         
@@ -118,6 +118,25 @@ class Package extends Model
             foreach ($add_documents as $add) {
                 DocumentPackage::create([
                     'document_id'   => intval($add),
+                    'package_id'    => $id    
+                ]);
+            }
+        }
+
+        $remove_folders = $request["remove_folder"];    
+        if (isset($remove_folders)) {
+            foreach ($remove_folders as $remove_folder) {
+                \Log::info($remove_folder);
+               FolderPackage::where('package_id', $id)->where('folder_id', intval($remove_folder))->delete();
+            }
+        }
+        
+
+        $add_folders = $request["package_folders"];
+        if (isset($add_folders)) {
+            foreach ($add_folders as $add) {
+                FolderPackage::create([
+                    'folder_id'   => intval($add),
                     'package_id'    => $id    
                 ]);
             }

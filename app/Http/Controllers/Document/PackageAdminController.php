@@ -17,6 +17,7 @@ use App\Models\Tag\ContentTag;
 use App\Models\UserSelectedBanner;
 use App\Models\Document\Folder;
 use App\Models\Document\FolderPackage;
+use App\Models\UserBanner;
 
 class PackageAdminController extends Controller
 {
@@ -36,9 +37,17 @@ class PackageAdminController extends Controller
      */
     public function index(Request $request)
     {
-        $banner = UserSelectedBanner::getBanner();
+        $user_id = \Auth::user()->id;
+        $banner_ids = UserBanner::where('user_id', $user_id)->get()->pluck('banner_id');
+        $banners = Banner::whereIn('id', $banner_ids)->get();        
+        $banner_id = UserSelectedBanner::where('user_id', \Auth::user()->id)->first()->selected_banner_id;
+        $banner  = Banner::find($banner_id);
+
         $packages = Package::getPackagesStructure($banner->id);
-        return $packages;
+        return view('admin/package/index')
+                ->with('banner', $banner)
+                ->with('banners',$banners)
+                ->with('packages',$packages);
     }
 
     /**
@@ -73,9 +82,10 @@ class PackageAdminController extends Controller
      */
     public function store(Request $request)
     {
+        
         Package::storePackage($request);
         
-        return redirect()->action('AdminController@index');
+        return;
     }
 
     /**
@@ -120,13 +130,30 @@ class PackageAdminController extends Controller
         $tag_ids = ContentTag::where('content_id', $id)->where('content_type', 'package')->get()->pluck('tag_id');
         $selected_tags = Tag::findMany($tag_ids)->pluck('id')->toArray();
 
+        $folderStructure = FolderStructure::getNavigationStructure($banner->id);
+        
+        $selected_folder_ids = FolderPackage::where('package_id', $id)->get()->pluck('folder_id');
+        $selected_folders = array();
+        foreach ($selected_folder_ids as $folder_id) {
+            $folder_details =  \DB::table('folder_ids')->where('id' , $folder_id)->first();
+
+            if ($folder_details->folder_type == 'folder') {
+                $folder_desc = Folder::where('id', $folder_details->folder_id)->first();
+                $folder_desc->folder_path = Folder::getFolderPath($folder_id);
+                $folder_desc->global_folder_id = $folder_details->id;
+                array_push($selected_folders, $folder_desc );
+            }
+        }
+        
         return view('admin.package.edit')->with('package', $package)
                                         ->with('documentDetails', $documentDetails)
                                         ->with('banner', $banner)
                                         ->with('banners', $banners)
                                         ->with('navigation', $fileFolderStructure)
                                         ->with('tags', $tags)
-                                        ->with('selected_tags', $selected_tags);
+                                        ->with('selected_tags', $selected_tags)
+                                        ->with('folders', $selected_folders)
+                                        ->with('folderStructure', $folderStructure);
     }
 
     /**
@@ -139,7 +166,7 @@ class PackageAdminController extends Controller
     public function update(Request $request, $id)
     {
         Package::updatePackage($request, $id);
-        return redirect()->action('AdminController@index');
+        
     }
 
     /**
@@ -151,6 +178,7 @@ class PackageAdminController extends Controller
     public function destroy($id)
     {
         DocumentPackage::where('package_id', $id)->delete();
+        FolderPackage::where('package_id', $id)->delete();
         Package::find($id)->delete();
         return;
     }

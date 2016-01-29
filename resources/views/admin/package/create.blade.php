@@ -1,136 +1,201 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-	<title></title>
-	<link rel="stylesheet" href="/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="/css/plugins/chosen/chosen.css">
+    @section('title', 'Package')
+    @include('admin.includes.head')
+    <link rel="stylesheet" type="text/css" href="/css/plugins/chosen/chosen.css">
+	<meta name="csrf-token" content="{!! csrf_token() !!}"/>
 </head>
-<body class="container-fluid">
-	<!-- navbar begins -->
-	<nav class="navbar navbar-default">
-	    @include('admin.banner', ['banners' => $banners])
-	    
-	  </nav>
-	<!-- navbar ends-->
-	<div class="col-md-10 col-md-offset-1">
-		
-		{!! Form::open( ['action' => ['Document\PackageAdminController@store'], 'method'=>'POST']) !!}
-		<input type="hidden" name="banner_id" value="{{$banner->id}}">
-		<h3>Create Package</h3> 
-		<div>
-			Package Name: <input type="text" name="package_name" >
-		</div>
-		<!-- <div>
-			Start :
-			<div class="input-group date" id="datetimepicker1">
-	          {!! Form::text('start', null, ['class'=>'form-control',  'required']) !!}
-	          <span class="input-group-addon">
-	              <span class="glyphicon glyphicon-calendar"></span>
-	          </span>      
+
+<body class="fixed-navigation">
+    <div id="wrapper">
+	    <nav class="navbar-default navbar-static-side" role="navigation">
+	        <div class="sidebar-collapse">
+	          @include('admin.includes.sidenav')
 	        </div>
-        </div>
-        <div>
-			End :
-			<div class="input-group date" id="datetimepicker2">
-	          {!! Form::text('end', null, ['class'=>'form-control',  'required']) !!}
-	          <span class="input-group-addon">
-	              <span class="glyphicon glyphicon-calendar"></span>
-	          </span>      
-	        </div>
+	    </nav>
+
+	<div id="page-wrapper" class="gray-bg" >
+		<div class="row border-bottom">
+			@include('admin.includes.topbar')
         </div>
 
+		<div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-10">
+                    <h2>Create a Package</h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="/admin">Home</a>
+                        </li>
+                        <li>
+                            <a href="/admin/package">Package</a>
+                        </li>
+                        <li class="active">
+                            <strong>Create an Package</strong>
+                        </li>
+                    </ol>
+                </div>
+                <div class="col-lg-2">
 
-        <div>
-        	Package hidden from store : <input type="checkbox" value=1 name="is_hidden">
-        </div>
-
-        <div>
-        	{!! Form::label('tags[]', 'Tags') !!}
-        	{!! Form::select('tags[]', $tags, null , ['class'=>'chosen', 'multiple'=>'true']) !!}
-        </div> -->
-
-        <div>
-			
-			<div id="document-listing" class="modal fade">
-			    <div class="modal-dialog">
-			        <div class="modal-content">
-			            <div class="modal-header">
-			                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			                <h4 class="modal-title">Select Documents</h4>
-			            </div>
-			            <div class="modal-body">
-			            	@foreach ($navigation as $nav) 
-							
-								@if (isset($nav["is_child"]) && ($nav["is_child"] == 0) )
-									
-									@include('admin.package.file-folder-structure-partial', ['navigation' =>$navigation, 'currentnode' => $nav])
-									
-								@endif
-
-							@endforeach
-			            </div>
-			            <div class="modal-footer">
-			                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			                <button type="button" class="btn btn-primary" id="attach-selected-files">Select Documents</button>
-			            </div>
-			        </div>
-			    </div>
-			</div>
-
-			<div id="folder-listing" class="modal fade">
-			    <div class="modal-dialog">
-			        <div class="modal-content">
-			            <div class="modal-header">
-			                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			                <h4 class="modal-title">Select Folders</h4>
-			            </div>
-			            <div class="modal-body">
-			            	@foreach ($folderStructure as $folder)
-							
-								@if (isset($folder["is_child"]) && ($folder["is_child"] == 0) )
-									
-									@include('admin.package.folder-structure-partial', ['folderStructure' =>$folderStructure, 'currentnode' => $folder])
-									
-								@endif
-
-
-							@endforeach
-			            </div>
-			            <div class="modal-footer">
-			                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			                <button type="button" class="btn btn-primary" id="attach-selected-folders">Select Folders</button>
-			            </div>
-			        </div>
-			    </div>
-			</div>
-			
-
-			<input class="btn btn-default" type="button" id="add-documents" value="Add Documents" />
-			<input class="btn btn-default" type="button" id="add-folders" value="Add Folders" />
-			<div id="files-selected">
-					
-
-			</div>
-			<div id="folders-selected"></div>
-		
+                </div>
 		</div>
+
+		<div class="wrapper wrapper-content  animated fadeInRight">
+		            <div class="row">
+		                <div class="col-lg-12">
+		                    <div class="ibox">
+		                        <div class="ibox-title">
+		                            <h5>New Package</h5>
+		                            <div class="ibox-tools">
+		                               {{--  <a href="/admin/package/create" class="btn btn-primary" role="button"><i class="fa fa-plus"></i> Add New Package</a> --}}
+                                        
+		                            </div>
+		                        </div>
+		                        <div class="ibox-content">
+                                    @if (count($errors) > 0)
+                                        <div class="alert alert-danger">
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
+                                    
+                                    <form method="get" class="form-horizontal" id="createNewPackageForm">
+                                        
+                                        <input type="hidden" name="banner_id" value="{{$banner->id}}">
+                                        <div class="form-group"><label class="col-sm-2 control-label">Name</label>
+                                            <div class="col-sm-10"><input type="text" id="name" name="name" class="form-control" value=""></div>
+                                        </div>
+
+                                        <div class="hr-line-dashed"></div>
+
+                                        <div class="form-group"><label class="col-sm-2 control-label">Files</label>
+                                            <div class="col-md-10">
+                                               <input class="btn btn-default" type="button" id="add-documents" value="Add Documents" />
+                                            </div>
+                                        </div>
+                                        <div id="files-selected" class="col-sm-offset-2"></div>
+
+                                        <div class="hr-line-dashed"></div>
+                                        <div class="form-group"><label class="col-sm-2 control-label">Folders</label>
+                                            <div class="col-md-10">
+                                            	<input class="btn btn-default" type="button" id="add-folders" value="Add Folders" />
+                                            </div>
+                                        </div>
+                                        <div id="folders-selected" class="col-sm-offset-2"></div>
 		
-		<button type="submit"> Create Package</button>
-		{!! Form::close() !!}
+			
+		
+
+                                        <div class="form-group">
+                                            <div class="col-sm-10 col-sm-offset-2">
+                                                <a class="btn btn-white" href="/admin/package"><i class="fa fa-close"></i> Cancel</a>
+                                                <button class="package-create btn btn-primary" type="submit"><i class="fa fa-check"></i> Create New Package</button>
+
+                                            </div>
+                                        </div>
+                                        
+                                    </form>
+
+
+                                </div>
+		                    </div>
+		                    <div id="document-listing" class="modal fade">
+							    <div class="modal-dialog">
+							        <div class="modal-content">
+							            <div class="modal-header">
+							                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							                <h4 class="modal-title">Select Documents</h4>
+							            </div>
+							            <div class="modal-body">
+							            	@foreach ($navigation as $nav) 
+											
+												@if (isset($nav["is_child"]) && ($nav["is_child"] == 0) )
+													
+													@include('admin.package.file-folder-structure-partial', ['navigation' =>$navigation, 'currentnode' => $nav])
+													
+												@endif
+
+											@endforeach
+							            </div>
+							            <div class="modal-footer">
+							                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							                <button type="button" class="btn btn-primary" id="attach-selected-files">Select Documents</button>
+							            </div>
+							        </div>
+							    </div>
+							</div>
+
+							<div id="folder-listing" class="modal fade">
+							    <div class="modal-dialog">
+							        <div class="modal-content">
+							            <div class="modal-header">
+							                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							                <h4 class="modal-title">Select Folders</h4>
+							            </div>
+							            <div class="modal-body">
+							            	@foreach ($folderStructure as $folder)
+											
+												@if (isset($folder["is_child"]) && ($folder["is_child"] == 0) )
+													
+													@include('admin.package.folder-structure-partial', ['folderStructure' =>$folderStructure, 'currentnode' => $folder])
+													
+												@endif
+
+
+											@endforeach
+							            </div>
+							            <div class="modal-footer">
+							                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							                <button type="button" class="btn btn-primary" id="attach-selected-folders">Select Folders</button>
+							            </div>
+							        </div>
+							    </div>
+							</div>
+		                </div>
+
+                    </div>
+            </div>
 	</div>
 
 
-<script type="text/javascript" src="/js/jquery-2.1.1.min.js"></script>
-<script type="text/javascript" src="/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/js/custom/createpackage.js"></script>
-<script type="text/javascript" src="/js/custom/admin/global/bannerSelector.js"></script>
-<script type="text/javascript" src="/js/vendor/moment.js"></script>
-<script type="text/javascript" src="/js/vendor/bootstrap-datetimepicker.min.js"></script>
-<script type="text/javascript" src="/js/plugins/chosen/chosen.jquery.js"></script>
+</div>
+
+@include('site.includes.footer')
+
+@include('admin.includes.scripts')
+
+@include('site.includes.bugreport')
+
+
 <script type="text/javascript">
-	$(".date").datetimepicker({
-          format: 'YYYY-MM-DD HH:mm:ss'
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
     });
 
+    $('.input-daterange').datepicker({
+         format: 'yyyy-mm-dd',
+        keyboardNavigation: false,
+        forceParse: false,
+        autoclose: true
+    });                
+
 </script>
+
+<script type="text/javascript" src="/js/custom/admin/packages/addPackage.js"></script>
+<script type="text/javascript" src="/js/custom/admin/global/bannerSelector.js"></script>			
+
+
 </body>
 </html>
+
+			
+	
+
+
+
