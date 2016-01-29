@@ -25,7 +25,7 @@ class Feature extends Model
   		$background_image = $request["background"];
   		$banner = UserSelectedBanner::getBanner();
 
-  		Feature::create([
+  		$feature = Feature::create([
   				'banner_id'		=> $banner->id,
   				'title' 		=> $title,
   				'tile_label'	=> $tile_label,
@@ -40,20 +40,36 @@ class Feature extends Model
 
   		//save the thumbnails and background;
 
-  		Feature::updateFiles($request);
-  		Feature::updatePackages($request);
+  		Feature::updateFiles($request, $feature->id);
+  		Feature::updatePackages($request, $feature->id);
 
   		return;
 
   	}  
 
-  	public static function updateFiles($request)
+  	public static function updateFiles($request, $feature_id)
   	{
-
+  		$feature_files = $request["feature_files"];
+  		if (isset($feature_files)) {
+  			foreach ($feature_files as $file) {
+  				FeatureFile::create([
+  					'feature_id' => $feature_id,
+  					'file_id'	 => $files
+  					]);
+  			}
+  		}
   	}
 
-  	public static function updatePackages($request)
+  	public static function updatePackages($request, $package_id)
   	{
-
+  		$feature_packages = $request["feature_packages"];
+  		if (isset($feature_packages)) {
+  			foreach ($feature_packages as $package) {
+  				FeaturePackage::create([
+  					'feature_id' => $feature_id,
+  					'package_id'	 => $package_id
+  					]);
+  			}
+  		}
   	}
 }
