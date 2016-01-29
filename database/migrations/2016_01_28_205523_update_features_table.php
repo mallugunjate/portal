@@ -15,6 +15,8 @@ class UpdateFeaturesTable extends Migration
         Schema::table('features', function (Blueprint $table) {
             // $table->string('thumbnail')->after('background_image');
             $table->integer("order")->after("banner_id");
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 
