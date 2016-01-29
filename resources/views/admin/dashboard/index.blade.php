@@ -168,6 +168,7 @@
 				</script>
 				<script src="/js/plugins/nestable/jquery.nestable.js"></script>
 				<script src="/js/custom/admin/quicklinks/changeQuicklinksOrder.js"></script>
+				<script src="/js/custom/admin/features/changeFeaturesOrder.js"></script>
 
 				<script>
 
@@ -222,8 +223,7 @@
 						var serializeFeaturedContentData = function (e) {
 			                 var list = e.length ? e : $(e.target);			                        
 			                 var data = list.nestable('serialize');
-			                 //updateQuicklinksOrder(data);
-			                 console.log(data);
+			                 updateFeaturesOrder(data);
 			             };			             
 
 			             $('#quicklinkslist').nestable({
