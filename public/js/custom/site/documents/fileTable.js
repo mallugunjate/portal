@@ -95,6 +95,7 @@ var fileFill = function(data)
 		_.each(files, function(i){
 
 			var icon ="";
+			var row ="";
 			console.log("ext: "  + i.original_extension);
 
 			switch(i.original_extension){
@@ -103,10 +104,24 @@ var fileFill = function(data)
 				case "gif":
 				case "bmp":
 					icon = "fa-file-image-o";
+					row = '<tr> <td><div class="launchPDFViewer" data-toggle="modal" data-file="/viewer/?file=/files/'+i.filename+'" data-target="#fileviewmodal"><i class="fa '+ icon +'"></i> ' + i.title +'</div></td>'+
+			//$('#file-table').append('<tr> <td><a data-toggle="modal" data-target="#fileviewmodal" href="/viewer/?file=/files/'+i.filename+'"><i class="fa '+ icon +'"></i> ' + i.title +'</a></td>'+				
+										' <td>'+ i.description + '</td>'+
+										' <td>'+ i.created_at +'</td>'+
+										' <td>'+ i.start +'</td>' +
+										' <td>'+ i.end +'</td>' +
+										' <td></td> </tr>'					
 					break;
 
 				case "pdf":
 					icon = "fa-file-pdf-o";
+					row = '<tr> <td><div class="launchPDFViewer" data-toggle="modal" data-file="/viewer/?file=/files/'+i.filename+'" data-target="#fileviewmodal"><i class="fa '+ icon +'"></i> ' + i.title +'</div></td>'+
+			//$('#file-table').append('<tr> <td><a data-toggle="modal" data-target="#fileviewmodal" href="/viewer/?file=/files/'+i.filename+'"><i class="fa '+ icon +'"></i> ' + i.title +'</a></td>'+				
+										' <td>'+ i.description + '</td>'+
+										' <td>'+ i.created_at +'</td>'+
+										' <td>'+ i.start +'</td>' +
+										' <td>'+ i.end +'</td>' +
+										' <td></td> </tr>'
 					break;
 
 				case "xls":
@@ -118,6 +133,13 @@ var fileFill = function(data)
 				case "avi":
 				case "mov":
 					icon = "fa-film";
+					row = '<tr> <td><div class="launchVideoViewer" data-file="/files/'+i.filename +'?rnd='+ Math.random()*Math.random() + '" data-target="#videomodal"><i class="fa '+ icon +'"></i> ' + i.title +'</div></td>'+
+			//$('#file-table').append('<tr> <td><a data-toggle="modal" data-target="#fileviewmodal" href="/viewer/?file=/files/'+i.filename+'"><i class="fa '+ icon +'"></i> ' + i.title +'</a></td>'+				
+										' <td>'+ i.description + '</td>'+
+										' <td>'+ i.created_at +'</td>'+
+										' <td>'+ i.start +'</td>' +
+										' <td>'+ i.end +'</td>' +
+										' <td></td> </tr>'					
 					break;
 
 				case "doc":
@@ -150,15 +172,11 @@ var fileFill = function(data)
 					break;
 			}
 
-			$('#file-table').append('<tr> <td><div class="launchPDFViewer" data-toggle="modal" data-file="/viewer/?file=/files/'+i.filename+'" data-target="#fileviewmodal"><i class="fa '+ icon +'"></i> ' + i.title +'</div></td>'+
-			//$('#file-table').append('<tr> <td><a data-toggle="modal" data-target="#fileviewmodal" href="/viewer/?file=/files/'+i.filename+'"><i class="fa '+ icon +'"></i> ' + i.title +'</a></td>'+				
-										' <td>'+ i.description + '</td>'+
-										' <td>'+ i.created_at +'</td>'+
-										' <td>'+ i.start +'</td>' +
-										' <td>'+ i.end +'</td>' +
-										' <td></td> </tr>')
-			});
+			$('#file-table').append(row);
+		});
+
 		$('#file-table').append('</tbody>');
+
 		$("#file-table").tablesorter({
 			sortReset : true,
 			cssAsc: 'up',
@@ -173,6 +191,17 @@ var fileFill = function(data)
 			var filepath = $(this).attr("data-file");
 			$("#fileviewmodal").find('iframe').attr("src", filepath);
 		});
+
+		$("body").on("click", ".launchVideoViewer", function(e){
+			var filepath = $(this).attr("data-file");
+			$("#videomodal").find('source').attr("src", filepath);
+			$('#videomodal').modal('show');
+			// data-toggle="modal"
+		});		
+
+		// $('#videomodal').on('shown.bs.modal', function() {
+  //                   modalvideo[0].play();
+  //               });
 
 }	
 
