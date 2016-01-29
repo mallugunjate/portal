@@ -139,9 +139,8 @@ $(".package-update").on('click', function(){
 		$(window).scrollTop(0);
 	}
 
-	console.log('remove_folder');
-	console.log(remove_folder);
-
+	// console.log('remove_folder');
+	// console.log(remove_folder);
 
     if(hasError == false) {
 
