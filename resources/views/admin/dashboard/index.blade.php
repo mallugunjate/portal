@@ -6,6 +6,8 @@
     @include('admin.includes.head')
 
 	<meta name="csrf-token" content="{!! csrf_token() !!}"/>
+	<link href="/js/plugins/fileinput/fileinput.css" rel="stylesheet">
+
 </head>
 
 <body class="fixed-navigation">
@@ -51,8 +53,21 @@
 		                            </div>
 		                        </div>
 		                        <div class="ibox-content">
+		                        	<div class="row">
+		                        		<div class="col-lg-6">
+		                        		<img src="/images/dashboard-banners/{{ $banner->background }}" width="400" />
+		                        		</div>
+		                        		<div class="col-lg-6">
+		                        	
 
-		                        <img src="/images/dashboard-banners/{{ $banner->background }}" width="400" />
+
+
+<label class="control-label">Change Branding</label>
+<input id="input-25" name="input25[]" type="file" multiple class="file-loading">
+
+
+		                        		</div>
+		                        	</div>
 
 		                            
 		                        </div>
@@ -164,6 +179,7 @@
 
 				</script>
 				<script src="/js/plugins/nestable/jquery.nestable.js"></script>
+				<script src="/js/plugins/fileinput/fileinput.js"></script>
 				<script src="/js/custom/admin/quicklinks/changeQuicklinksOrder.js"></script>
 				<script src="/js/custom/admin/quicklinks/deleteQuicklink.js"></script>
 				<script src="/js/custom/admin/features/changeFeaturesOrder.js"></script>
@@ -171,6 +187,16 @@
 				<script>
 
 			         $(document).ready(function(){
+
+
+					    $("#input-25").fileinput({
+					        initialPreview: [
+
+					        ],
+					        overwriteInitial: true,
+					        initialCaption: ""
+					    });
+
 
 						var serializeQuicklinksData = function (e) {
 			                 var list = e.length ? e : $(e.target);			                        
