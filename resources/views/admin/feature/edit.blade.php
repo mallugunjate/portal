@@ -60,9 +60,43 @@
                                         <input type="hidden" name="featureID" id="featureID" value="{{ $feature->id }}">
                                         <input type="hidden" name="banner_id" value="{{$banner->id}}">
 
-                                        <div class="form-group"><label class="col-sm-2 control-label"> Name</label>
-                                            <div class="col-sm-10"><input type="text" id="name" name="name" class="form-control" value="{{ $feature->title }}"></div>
+                                        <div class="form-group"><label class="col-sm-2 control-label"> Title</label>
+                                            <div class="col-sm-10"><input type="text" id="feature_title" name="feature_title" class="form-control" value="{{ $feature->title }}"></div>
                                         </div>
+
+                                        <div class="form-group"><label class="col-sm-2 control-label"> Tile Label</label>
+                                            <div class="col-sm-10"><input type="text" id="tile_label" name="tile_label" class="form-control" value="{{ $feature->tile_label }}"></div>
+                                        </div>
+
+                                       <div class="form-group">
+
+                                                <label class="col-sm-2 control-label">Start &amp; End</label>
+
+                                                <div class="col-sm-10">
+                                                    <div class="input-daterange input-group" id="datepicker">
+                                                        <input type="text" class="input-sm form-control" name="start" id="start" value="{{ $feature->start }}" />
+                                                        <span class="input-group-addon">to</span>
+                                                        <input type="text" class="input-sm form-control" name="end" id="end" value="{{ $feature->end }}" />
+                                                    </div>
+                                                </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                        	
+                                        	<label class="col-sm-2 control-label">Thumbnail</label>
+                                        	<div ></div>
+                                        	<div class= "col-sm-10"><input type="file" id="thumbnail" name="thumbnail" class="form-control" value="{{ $feature->thumbnail }}"></div>
+
+                                        </div>
+
+                                        <div class="form-group">
+                                        	
+                                        	<label class="col-sm-2 control-label">Background</label>
+                                        	<div ></div>
+                                        	<div class= "col-sm-10"><input type="file" id="background" name="background" class="form-control" value="{{ $feature->background }}"></div>
+
+                                        </div>
+
                                         </form>
 
 
