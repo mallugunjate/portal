@@ -57,8 +57,12 @@ $(document).on('click','.feature-create',function(){
 	var featureTileLabel = $("#tile_label").val();
 	var featureStart = $("#start").val();
 	var featureEnd = $("#end").val();
-	var thumbnail = $("#thumbnail").val();
-	var background = $("#background").val();
+	var thumbnail = $("#thumbnail")[0].files[0];
+	var background = $("#background")[0].files[0];
+
+	console.log(thumbnail);
+	console.log(background);
+
 	var feature_files = [];
 	var feature_packages = [];
 	$(".selected-files").each(function(){
@@ -74,30 +78,44 @@ $(document).on('click','.feature-create',function(){
 		hasError = true;
 		$(window).scrollTop(0);
 	}
-	console.log(feature_files);
-	console.log(feature_packages);
-    if(hasError == false) {
 
+	
+     if(hasError == false) {
+     	var data = new FormData();
+     	data.append('name', featureTitle);
+     	data.append('tileLabel', featureTileLabel);
+     	data.append('start', featureStart);
+     	data.append('end', featureEnd);
+     	data.append('thumbnail', thumbnail);
+     	data.append('background', background );
+     	data.append('feature_files',  JSON.stringify(feature_files));
+     	data.append('feature_packages',  JSON.stringify(feature_packages));
+    
 		$.ajax({
 		    url: '/admin/feature',
 		    type: 'POST',
-		    data: {
-		  		name: featureTitle,
-		  		tileLabel : featureTileLabel,
-		  		start : featureStart,
-		  		end : featureEnd,
-		  		thumbnail : thumbnail,
-		  		background : background,
-		  		feature_files: feature_files,
-		  		feature_packages: feature_packages
-		    },
+		    data: data,
+		    // {
+		  		// name: featureTitle,
+		  		// tileLabel : featureTileLabel,
+		  		// start : featureStart,
+		  		// end : featureEnd,
+		  		// thumbnail : thumbnail,
+		  		// background : background,
+		  		// feature_files: feature_files,
+		  		// feature_packages: feature_packages
+
+		    // },
+		    
+            processData: false,  // tell jQuery not to process the data
+            contentType: false,   // tell jQuery not to set contentType
 		    success: function(result) {
-		        console.log(result);
+		        // console.log(result);
 		        $('#createNewFeatureForm')[0].reset(); // empty the form
 				swal("Nice!", "'" + featureTitle +"' has been created", "success");        
 		    }
 		}).done(function(response){
-			console.log(response);
+			// console.log(response);
 		});    	
     }
 

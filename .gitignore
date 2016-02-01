@@ -1,5 +1,7 @@
 /public/files
 /public/images/documents/thumb
+/public/images/featured-backgrounds
+/public/images/featured-covers
 /node_modules
 Homestead.yaml
 Homestead.json

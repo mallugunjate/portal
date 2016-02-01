@@ -23,6 +23,7 @@ return array(
     'CreateEducationLevelTable' => $baseDir . '/database/migrations/future/2015_08_21_151222_create_education_level_table.php',
     'CreateEventTypesTable' => $baseDir . '/database/migrations/2015_11_30_210139_create_event_types_table.php',
     'CreateEventsTable' => $baseDir . '/database/migrations/2015_11_30_222337_create_events_table.php',
+    'CreateFeatureDocumentPivotTable' => $baseDir . '/database/migrations/2016_02_01_173157_create_feature_document_pivot_table.php',
     'CreateFeatureFilePivot' => $baseDir . '/database/migrations/2016_01_29_233838_create_feature_file_pivot.php',
     'CreateFeaturePackagePivot' => $baseDir . '/database/migrations/2016_01_29_233852_create_feature_package_pivot.php',
     'CreateFeaturesTable' => $baseDir . '/database/migrations/2016_01_26_223339_create_features_table.php',

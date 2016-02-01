@@ -54,7 +54,7 @@
 		                            </div>
 		                        </div>
 		                        <div class="ibox-content">
-		                        	<form method="get" class="form-horizontal" id="createNewFeatureForm">
+		                        	<form method="get" class="form-horizontal" id="createNewFeatureForm" enctype="multipart/form-data">
                                         
                                         <input type="hidden" name="banner_id" value="{{$banner->id}}">
                                         <div class="form-group"><label class="col-sm-2 control-label">Feature Title</label>

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFeaturePackagePivot extends Migration
+class CreateFeatureDocumentPivotTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,13 +12,14 @@ class CreateFeaturePackagePivot extends Migration
      */
     public function up()
     {
-        Schema::create('feature_package', function (Blueprint $table) {
+        Schema::create('feature_document', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('package_id')->unsigned();
+            $table->integer('document_id')->unsigned();
             $table->integer('feature_id')->unsigned();
             $table->timestamps();
-            $table->foreign('package_id')->references('id')->on('packages')->onDelete('cascade');
+            $table->foreign('document_id')->references('id')->on('documents')->onDelete('cascade');
             $table->foreign('feature_id')->references('id')->on('features')->onDelete('cascade');
+
         });
     }
 
@@ -29,6 +30,6 @@ class CreateFeaturePackagePivot extends Migration
      */
     public function down()
     {
-        Schema::drop('feature_package');
+        Schema::drop('feature_document');
     }
 }
