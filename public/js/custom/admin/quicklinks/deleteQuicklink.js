@@ -20,7 +20,6 @@ $(document).on('click','.quicklink-delete',function(){
 		        swal("Deleted!", "This quicklink has been deleted.", "success");
 		    }
 		});
-        
     });
 
     return false;

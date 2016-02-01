@@ -52,12 +52,9 @@
 		                        </div>
 		                        <div class="ibox-content">
 
+		                        <img src="/images/dashboard-banners/{{ $banner->background }}" width="400" />
 
-
-		                            <div class="table-responsive">
-
-
-		                            </div>
+		                            
 		                        </div>
 
 		                    </div>
