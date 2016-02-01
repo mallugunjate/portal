@@ -66,7 +66,7 @@
 			                            	@foreach($features as $feature)
 			                            	<tr>
 			                            		<td>{{ $feature->id }}</td>
-			                            		<td><a href="">{{ $feature->title }}</a></td>
+			                            		<td><a href="/admin/feature/{{$feature->id}}/edit">{{ $feature->title }}</a></td>
 			                            		<td><img src="/images/featured-covers/{{ $feature->thumbnail }}" height="75" width="75" /></td>
 			                            		<td><img src="/images/featured-backgrounds/{{ $feature->background_image }}" width="150" /></td>
 			                            		<td>

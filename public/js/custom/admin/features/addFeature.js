@@ -110,12 +110,12 @@ $(document).on('click','.feature-create',function(){
             processData: false,  // tell jQuery not to process the data
             contentType: false,   // tell jQuery not to set contentType
 		    success: function(result) {
-		        // console.log(result);
+		        console.log(result);
 		        $('#createNewFeatureForm')[0].reset(); // empty the form
 				swal("Nice!", "'" + featureTitle +"' has been created", "success");        
 		    }
 		}).done(function(response){
-			// console.log(response);
+			console.log(response);
 		});    	
     }
 
