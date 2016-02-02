@@ -59,13 +59,9 @@
 		                        		</div>
 		                        		<div class="col-lg-6">
 		                        	
-
-
-
-<label class="control-label">Change Branding</label>
-<input id="input-25" name="input25[]" type="file" multiple class="file-loading">
-
-
+											<label class="control-label">Change Branding</label>
+											<input id="dashboardbackground" name="dashboardbackground[]" type="file" multiple class="file-loading">
+											<input type="hidden" value="{{ $banner->id }}" name="banner_id" id="banner_id">
 		                        		</div>
 		                        	</div>
 
@@ -183,20 +179,17 @@
 				<script src="/js/custom/admin/quicklinks/changeQuicklinksOrder.js"></script>
 				<script src="/js/custom/admin/quicklinks/deleteQuicklink.js"></script>
 				<script src="/js/custom/admin/features/changeFeaturesOrder.js"></script>
+				<script src="/js/custom/admin/dashboard/uploadBackground.js"></script>
 
 				<script>
 
 			         $(document).ready(function(){
 
-
-					    $("#input-25").fileinput({
-					        initialPreview: [
-
-					        ],
+					    $("#dashboardbackground").fileinput({
+					        initialPreview: [],
 					        overwriteInitial: true,
 					        initialCaption: ""
 					    });
-
 
 						var serializeQuicklinksData = function (e) {
 			                 var list = e.length ? e : $(e.target);			                        
