@@ -53,6 +53,15 @@ class Feature extends Model
 
   	}  
 
+    public static function updateFeature(Request $request, $id)
+    {
+        \Log::info($request["title"]);
+
+        $feature = Feature::find($id);
+        // $feature['title'] = $request['title'];
+        $feature->save();
+    }
+
   	public static function updateFiles($request, $feature_id)
   	{
   		$feature_files = json_decode($request["feature_files"]);

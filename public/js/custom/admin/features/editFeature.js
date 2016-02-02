@@ -72,23 +72,30 @@ $("body").on('click', ".remove-staged-package", function(){
 
 });
 
-$(document).on('click','.feature-create',function(){
+$(document).on('click','.feature-update',function(){
   	
  
   	var hasError = false;
- 
+ 	var featureID = $("#featureID").val();
+ 	
 	var featureTitle = $("#feature_title").val();
 	var featureTileLabel = $("#tile_label").val();
 	var featureStart = $("#start").val();
 	var featureEnd = $("#end").val();
 	var thumbnail = $("#thumbnail")[0].files[0];
 	var background = $("#background")[0].files[0];
-
-	console.log(thumbnail);
-	console.log(background);
-
+	var remove_document = [];
+	var remove_package   = [];
 	var feature_files = [];
 	var feature_packages = [];
+
+	$(".remove_document").each(function(){
+		remove_document.push($(this).attr('data-documentid'));
+	});
+	$(".remove_package").each(function(){
+		remove_package.push($(this).attr('data-packageid'));
+	});
+	
 	$(".selected-files").each(function(){
 		feature_files.push($(this).attr('data-fileid'));
 	});
@@ -103,39 +110,50 @@ $(document).on('click','.feature-create',function(){
 		$(window).scrollTop(0);
 	}
 
-	
-     if(hasError == false) {
-     	var data = new FormData();
-     	data.append('name', featureTitle);
-     	data.append('tileLabel', featureTileLabel);
-     	data.append('start', featureStart);
-     	data.append('end', featureEnd);
-     	data.append('thumbnail', thumbnail);
-     	data.append('background', background );
-     	data.append('feature_files',  JSON.stringify(feature_files));
-     	data.append('feature_packages',  JSON.stringify(feature_packages));
-    
-		$.ajax({
-		    url: '/admin/feature',
-		    type: 'POST',
-		    data: data,
-		    // {
-		  		// name: featureTitle,
-		  		// tileLabel : featureTileLabel,
-		  		// start : featureStart,
-		  		// end : featureEnd,
-		  		// thumbnail : thumbnail,
-		  		// background : background,
-		  		// feature_files: feature_files,
-		  		// feature_packages: feature_packages
+	console.log('featureID : ' + featureID);
+	console.log('featureTitle : ' + featureTitle);
+	console.log('featureStart : ' + featureStart);
+	console.log('featureEnd : ' + featureEnd);
+	console.log('thumb : ' + thumbnail);
+	console.log('back : ' + background);
+	console.log('remove_document : ' + remove_document);
+	console.log('remove_package : ' + remove_package);
+	console.log('add_document : ' + feature_files);
+	console.log('add_packages : ' + feature_packages);
 
-		    // },
+
+     if(hasError == false) {
+     	var dataObj = new FormData();
+     	console.log(typeof(dataObj));
+     	dataObj.append('title', featureTitle);
+     	dataObj.append('tileLabel', featureTileLabel);
+     	dataObj.append('start', featureStart);
+     	dataObj.append('end', featureEnd);
+     	dataObj.append('thumbnail', thumbnail);
+     	dataObj.append('background', background );
+     	dataObj.append('feature_files',  JSON.stringify(feature_files));
+     	dataObj.append('feature_packages',  JSON.stringify(feature_packages));
+     	dataObj.append('remove_document', JSON.stringify(remove_document));
+     	dataObj.append('remove_package', JSON.stringify(remove_package));
+
+		$.ajax({
+		    url: '/admin/feature/' + featureID ,
+		    type: 'PATCH',
+		    data: 
+		    {
+		  		title: featureTitle,
+		  		tileLabel : featureTileLabel,
+		  		start : featureStart,
+		  		end : featureEnd,
+		  		
+
+		    },
 		    
             processData: false,  // tell jQuery not to process the data
-            contentType: false,   // tell jQuery not to set contentType
-		    success: function(result) {
-		        console.log(result);
-		        $('#createNewFeatureForm')[0].reset(); // empty the form
+            contentType : false,
+		    success: function(data) {
+		        console.log(data);
+		        
 				swal("Nice!", "'" + featureTitle +"' has been created", "success");        
 		    }
 		}).done(function(response){

@@ -56,7 +56,7 @@
 		                        </div>
 		                        <div class="ibox-content">
 
-                                    <form method="get" class="form-horizontal" >
+                                    <form method="get" class="form-horizontal" enctype="multipart/form-data" >
                                         <input type="hidden" name="featureID" id="featureID" value="{{ $feature->id }}">
                                         <input type="hidden" name="banner_id" value="{{$banner->id}}">
 
@@ -182,8 +182,8 @@
 
                                         <div class="form-group">
                                             <div class="col-sm-4 col-sm-offset-2">
-                                                <a class="btn btn-white" href="/admin/package"><i class="fa fa-close"></i> Cancel</a>
-                                                <button class="package-update btn btn-primary" type="submit"><i class="fa fa-check"></i> Save changes</button>
+                                                <a class="btn btn-white" href="/admin/feature"><i class="fa fa-close"></i> Cancel</a>
+                                                <button class="feature-update btn btn-primary" type="submit"><i class="fa fa-check"></i> Save changes</button>
 
                                             </div>
                                         </div>
