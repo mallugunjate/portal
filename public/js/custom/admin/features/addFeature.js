@@ -7,22 +7,6 @@ $("#add-packages").click(function(){
 	$("#package-listing").modal('show');
 });
 
-// $(".folder-checkbox").on('click', function(){
-// 	if($(this).is(":checked")){
-// 		$(this).attr('data-folderRoot', 'true')
-// 		 $(this).siblings('ul')
-//             .find("input[type='checkbox']")
-//             .prop('checked', this.checked)
-//             .attr("disabled", true);
-
-// 	}else{
-// 		$(this).removeAttr('data-folderRoot')
-// 	    $(this).siblings('ul')
-//             .find("input[type='checkbox']")
-//             .prop('checked', false)
-//             .attr("disabled", false);
-// 	}	
-// });
 
 
 $('body').on('click', '#attach-selected-files', function(){
@@ -94,19 +78,7 @@ $(document).on('click','.feature-create',function(){
 		$.ajax({
 		    url: '/admin/feature',
 		    type: 'POST',
-		    data: data,
-		    // {
-		  		// name: featureTitle,
-		  		// tileLabel : featureTileLabel,
-		  		// start : featureStart,
-		  		// end : featureEnd,
-		  		// thumbnail : thumbnail,
-		  		// background : background,
-		  		// feature_files: feature_files,
-		  		// feature_packages: feature_packages
-
-		    // },
-		    
+		    data: data, 
             processData: false,  // tell jQuery not to process the data
             contentType: false,   // tell jQuery not to set contentType
 		    success: function(result) {

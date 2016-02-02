@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\UserSelectedBanner;
 use App\Models\Feature\FeatureDocument;
 use App\Models\Feature\FeaturePackage;
+use App\Http\Requests;
+
 
 class Feature extends Model
 {
@@ -46,8 +48,8 @@ class Feature extends Model
   		//save the thumbnails and background;
       Feature::updateFeatureBackground($background_image, $feature->id);
       Feature::updateFeatureThumbnail($thumbnail, $feature->id);
-  		Feature::updateFiles($request, $feature->id);
-  		Feature::updatePackages($request, $feature->id);
+  		Feature::addFiles(json_decode($request["feature_files"]), $feature->id);
+  		Feature::addPackages(json_decode($request['feature_packages']), $feature->id);
 
   		return;
 
@@ -55,41 +57,74 @@ class Feature extends Model
 
     public static function updateFeature(Request $request, $id)
     {
-        \Log::info($request["title"]);
-
+        
+        \Log::info($request['data']);
+        $decoded_data = json_decode($request['data']);
+        
         $feature = Feature::find($id);
-        // $feature['title'] = $request['title'];
+
+        $feature['title'] = $decoded_data->title;
+        $feature['tile_label'] = $decoded_data->tileLabel;
+        $feature['start'] = $decoded_data->start;
+        $feature['end'] = $decoded_data->end;
+
         $feature->save();
+
+        Feature::addFiles($decoded_data->feature_files, $id);
+        Feature::removeFiles($decoded_data->remove_document, $id);
+        Feature::addPackages($decoded_data->feature_packages, $id);
+        Feature::removePackages($decoded_data->remove_package, $id);
+        // Feature::updateFeatureBackground($request["background"], $id);
+        // Feature::updateFeatureThumbnail($request["thumbnail"], $id);
+        return;
+
     }
 
-  	public static function updateFiles($request, $feature_id)
+  	public static function addFiles($feature_files, $feature_id)
   	{
-  		$feature_files = json_decode($request["feature_files"]);
-  		if (isset($feature_files) && count($feature_files) >0 ) {
-  			foreach ($feature_files as $file) {
-  				FeatureDocument::create([
-  					'feature_id' => $feature_id,
-  					'document_id'	 => intval($file)
-  					]);
-          \Log::info('document_id :' . $file);
-  			}
-  		}
-      return;
+  		
+        if (isset($feature_files) && count($feature_files) >0 ) {
+    			foreach ($feature_files as $file) {
+    				FeatureDocument::create([
+    					'feature_id' => $feature_id,
+    					'document_id'	 => intval($file)
+    					]);
+            \Log::info('document_id :' . $file);
+    			}
+    		}
+        return;
   	}
 
-  	public static function updatePackages($request, $feature_id)
+    public static function removeFiles($feature_files, $feature_id)
+    {
+        foreach ($feature_files as $file) {
+          FeatureDocument::where('feature_id', $feature_id)->where('document_id', intval($file))->delete();  
+        }
+        return;
+    }
+
+  	public static function addPackages($feature_packages, $feature_id)
   	{
-  		$feature_packages = json_decode($request["feature_packages"]);
-  		if (isset($feature_packages)) {
-  			foreach ($feature_packages as $package) {
-  				FeaturePackage::create([
-  					'feature_id' => $feature_id,
-  					'package_id'	 => intval($package)
-  					]);
-  			}
-  		}
-      return;
+  		
+    		if (isset($feature_packages)) {
+    			foreach ($feature_packages as $package) {
+    				FeaturePackage::create([
+    					'feature_id' => $feature_id,
+    					'package_id'	 => intval($package)
+    					]);
+    			}
+    		}
+        return;
   	}
+
+    public static function removePackages($feature_packages, $feature_id)
+    {
+        foreach ($feature_packages as $package) {
+          FeaturePackage::where('feature_id', $feature_id)->where('package_id', intval($package))->delete();  
+        }
+        return; 
+    }
+
 
     public static function updateFeatureBackground($file, $feature_id)
     {

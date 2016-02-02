@@ -56,7 +56,7 @@
 		                        </div>
 		                        <div class="ibox-content">
 
-                                    <form method="get" class="form-horizontal" enctype="multipart/form-data" >
+                                    <form method="get" class="form-horizontal"  enctype="multipart/form-data" >
                                         <input type="hidden" name="featureID" id="featureID" value="{{ $feature->id }}">
                                         <input type="hidden" name="banner_id" value="{{$banner->id}}">
 

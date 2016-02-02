@@ -82,7 +82,7 @@ $(document).on('click','.feature-update',function(){
 	var featureTileLabel = $("#tile_label").val();
 	var featureStart = $("#start").val();
 	var featureEnd = $("#end").val();
-	var thumbnail = $("#thumbnail")[0].files[0];
+	var thumbnail = $("#thumbnail")[0].files;
 	var background = $("#background")[0].files[0];
 	var remove_document = [];
 	var remove_package   = [];
@@ -114,7 +114,7 @@ $(document).on('click','.feature-update',function(){
 	console.log('featureTitle : ' + featureTitle);
 	console.log('featureStart : ' + featureStart);
 	console.log('featureEnd : ' + featureEnd);
-	console.log('thumb : ' + thumbnail);
+	console.log('thumb : ' + JSON.stringify(thumbnail));
 	console.log('back : ' + background);
 	console.log('remove_document : ' + remove_document);
 	console.log('remove_package : ' + remove_package);
@@ -123,38 +123,32 @@ $(document).on('click','.feature-update',function(){
 
 
      if(hasError == false) {
-     	var dataObj = new FormData();
+     	var dataObj = {};
      	console.log(typeof(dataObj));
-     	dataObj.append('title', featureTitle);
-     	dataObj.append('tileLabel', featureTileLabel);
-     	dataObj.append('start', featureStart);
-     	dataObj.append('end', featureEnd);
-     	dataObj.append('thumbnail', thumbnail);
-     	dataObj.append('background', background );
-     	dataObj.append('feature_files',  JSON.stringify(feature_files));
-     	dataObj.append('feature_packages',  JSON.stringify(feature_packages));
-     	dataObj.append('remove_document', JSON.stringify(remove_document));
-     	dataObj.append('remove_package', JSON.stringify(remove_package));
-
+     	$.extend(dataObj, {title: featureTitle});
+     	$.extend(dataObj, {tileLabel: featureTileLabel});
+     	$.extend(dataObj, {start: featureStart});
+     	$.extend(dataObj, {end: featureEnd});
+     	$.extend(dataObj, {thumbnail: thumbnail});
+     	$.extend(dataObj, {background: background });
+     	$.extend(dataObj, {feature_files:  feature_files});
+     	$.extend(dataObj, {feature_packages:  feature_packages});
+     	$.extend(dataObj, {remove_document: remove_document});
+     	$.extend(dataObj, {remove_package: remove_package});
+     	var data = JSON.stringify(dataObj);
+     	console.log(data);
 		$.ajax({
 		    url: '/admin/feature/' + featureID ,
 		    type: 'PATCH',
-		    data: 
-		    {
-		  		title: featureTitle,
-		  		tileLabel : featureTileLabel,
-		  		start : featureStart,
-		  		end : featureEnd,
-		  		
-
-		    },
+		    data:{ data: data},
 		    
-            processData: false,  // tell jQuery not to process the data
-            contentType : false,
+            // processData: false,  // tell jQuery not to process the data
+            // contentType : 'application/json',
 		    success: function(data) {
-		        console.log(data);
 		        
-				swal("Nice!", "'" + featureTitle +"' has been created", "success");        
+		        console.log(data); 
+				swal("Nice!", "'" + featureTitle +"' has been created", "success");
+
 		    }
 		}).done(function(response){
 			console.log(response);
