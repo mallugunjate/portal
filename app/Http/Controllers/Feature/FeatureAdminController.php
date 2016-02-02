@@ -138,7 +138,7 @@ class FeatureAdminController extends Controller
     public function update(Request $request, $id)
     {
         Feature::updateFeature($request, $id);
-        return $request->all();
+        return ;
 
     }
 

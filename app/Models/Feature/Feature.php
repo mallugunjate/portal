@@ -22,8 +22,6 @@ class Feature extends Model
   	public static function storeFeature(Request $request)
   	{
   		
-      // \Log::info('request');
-      \Log::info($request->all());
       $title = $request["name"];
   		$tile_label = $request["tileLabel"];
   		$start = $request["start"];
@@ -45,7 +43,7 @@ class Feature extends Model
 
  			]);
 
-  		//save the thumbnails and background;
+  		
       Feature::updateFeatureBackground($background_image, $feature->id);
       Feature::updateFeatureThumbnail($thumbnail, $feature->id);
   		Feature::addFiles(json_decode($request["feature_files"]), $feature->id);
@@ -57,23 +55,21 @@ class Feature extends Model
 
     public static function updateFeature(Request $request, $id)
     {
-        
-        \Log::info($request['data']);
-        $decoded_data = json_decode($request['data']);
+        \Log::info($request->all());
         
         $feature = Feature::find($id);
 
-        $feature['title'] = $decoded_data->title;
-        $feature['tile_label'] = $decoded_data->tileLabel;
-        $feature['start'] = $decoded_data->start;
-        $feature['end'] = $decoded_data->end;
+        $feature['title'] = $request->title;
+        $feature['tile_label'] = $request->tileLabel;
+        $feature['start'] = $request->start;
+        $feature['end'] = $request->end;
 
         $feature->save();
 
-        Feature::addFiles($decoded_data->feature_files, $id);
-        Feature::removeFiles($decoded_data->remove_document, $id);
-        Feature::addPackages($decoded_data->feature_packages, $id);
-        Feature::removePackages($decoded_data->remove_package, $id);
+        Feature::addFiles($request->feature_files, $id);
+        Feature::removeFiles($request->remove_document, $id);
+        Feature::addPackages($request->feature_packages, $id);
+        Feature::removePackages($request->remove_package, $id);
         // Feature::updateFeatureBackground($request["background"], $id);
         // Feature::updateFeatureThumbnail($request["thumbnail"], $id);
         return;
@@ -97,8 +93,10 @@ class Feature extends Model
 
     public static function removeFiles($feature_files, $feature_id)
     {
-        foreach ($feature_files as $file) {
-          FeatureDocument::where('feature_id', $feature_id)->where('document_id', intval($file))->delete();  
+        if (isset($feature_files) && count($feature_files) >0 ) {
+          foreach ($feature_files as $file) {
+            FeatureDocument::where('feature_id', $feature_id)->where('document_id', intval($file))->delete();  
+          }
         }
         return;
     }
@@ -119,8 +117,10 @@ class Feature extends Model
 
     public static function removePackages($feature_packages, $feature_id)
     {
-        foreach ($feature_packages as $package) {
-          FeaturePackage::where('feature_id', $feature_id)->where('package_id', intval($package))->delete();  
+        if (isset($feature_packages)) {
+          foreach ($feature_packages as $package) {
+            FeaturePackage::where('feature_id', $feature_id)->where('package_id', intval($package))->delete();  
+          }
         }
         return; 
     }
