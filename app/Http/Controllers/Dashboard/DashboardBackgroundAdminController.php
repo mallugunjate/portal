@@ -39,8 +39,8 @@ class DashboardBackgroundAdminController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        Banner::updateBannerBackground($request->banner_id, $request);
     }
 
     /**
@@ -74,9 +74,7 @@ class DashboardBackgroundAdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Log::info("In the controller... id: " .  $id);
-        Banner::updateBannerBackground($id, $request);
-        
+
     }
 
     /**
