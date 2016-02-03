@@ -51,7 +51,7 @@ class DashboardBackgroundAdminController extends Controller
      */
     public function show($id)
     {
-        //
+        return Banner::getBannerBackground($id);
     }
 
     /**

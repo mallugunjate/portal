@@ -29,4 +29,11 @@ class Banner extends Model
     	 $banner->background =$filename;
     	 $banner->save();
     }
+
+
+    public static function getBannerBackground($id)
+    {
+    	$banner = Banner::find($id);
+    	return $banner->background;
+    }
 }

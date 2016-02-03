@@ -26,15 +26,30 @@ $("body").on("click", ".fileinput-upload-button", function(e) {
             url: '/admin/dashboardbackground',
             type: 'POST',
             data: data, 
-           processData: false,  // tell jQuery not to process the data
-           contentType: false,   // tell jQuery not to set contentType
+			processData: false,  // tell jQuery not to process the data
+			contentType: false,   // tell jQuery not to set contentType
             success: function(result) {
-                console.log(result);
-                //$('#createNewFeatureForm')[0].reset(); // empty the form
-                swal("Nice!", "'" + file.name +"' has been uploaded", "success");        
+                // console.log(result);
+                
+                swal("Nice!", "'" + file.name +"' has been uploaded", "success");   
+                $('.fileinput-remove').trigger( "click" ); //reset the form 
+                
+     //            	$.get( "/admin/dashboardbackground", { id: banner_id } )
+					// .done(function( data ) {
+					// 	console.log( "Data Loaded: " + data );
+					// });  
+					// 
+					$.get( "/admin/dashboardbackground/"+banner_id, { },
+                  		function(data) {
+                     		$("#background-preview").attr("src", "/images/dashboard-banners/"+data);
+                  		}
+               		);
+
+
+                //$('.kv-fileinput-caption')[0].reset();     
             }
         }).done(function(response){
-            console.log(response);
+            // console.log(response);
         });        
    });
 

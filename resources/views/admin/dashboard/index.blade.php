@@ -55,7 +55,7 @@
 		                        <div class="ibox-content">
 		                        	<div class="row">
 		                        		<div class="col-lg-6">
-		                        		<img src="/images/dashboard-banners/{{ $banner->background }}" width="400" />
+		                        		<img id="background-preview" src="/images/dashboard-banners/{{ $banner->background }}" width="400" />
 		                        		</div>
 		                        		<div class="col-lg-6">
 		                        	
