@@ -6,6 +6,20 @@
     <link href="/css/plugins/iCheck/custom.css" rel="stylesheet">
     @include('site.includes.head')
     
+    <style>
+    #page-wrapper{
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 65%, rgba(0, 0, 0, 1) 100%), url('/images/featured-backgrounds/{{ $feature->background_image }}') no-repeat 0px 60px; 
+        background-size: cover;
+        overflow: hidden;
+    }
+
+    #footer{
+        position: fixed;
+        bottom: 0px;
+    }
+
+/*style="background-size: 100%; background-image: url('/images/featured-backgrounds/{{ $feature->background_image }}'); background-color: #f3f3f4; background-position: top left; background-repeat: no-repeat; float: left; clear: both;"*/
+    </style>
 </head> 
 
 <body class="fixed-navigation">
@@ -16,7 +30,7 @@
             </div>
         </nav>
 
-        <div id="page-wrapper" class="gray-bg clearfix" style="background-size: 100%; background-image: url('/images/featured-backgrounds/{{ $feature->background_image }}'); background-color: #f3f3f4; background-position: top left; background-repeat: no-repeat; float: left; clear: both;">
+        <div id="page-wrapper" class="gray-bg clearfix">
             <div class="row border-bottom">
                 @include('site.includes.topbar')
             </div>

@@ -1,4 +1,4 @@
-        <div class="footer">
+        <div class="footer fixed">
             <div class="pull-right">
                 <a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-bug"></i> Report a Bug</a>
             </div>
