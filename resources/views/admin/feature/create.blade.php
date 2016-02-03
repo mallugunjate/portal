@@ -106,7 +106,30 @@
                                         </div>
                                         <div id="packages-selected" class="col-sm-offset-2"></div>
 		
-			
+										 <div class="hr-line-dashed"></div>
+
+										
+										<div class="form-group"><label class="col-sm-2 control-label">Latest Updates</label>
+											<div class="latest-updates-container col-md-10" >
+												
+												
+												<div class="row">
+													<div class="latest-update-option col-md-8">
+														{!! Form::radio('latest_updates_option', '1') !!} By Days
+														{!! Form::input('text', 'update_frequency', null, [ 'class' => 'update_frequency', 'disabled'=> 'disabled', 'placeholder'=>'Number of Days']) !!}
+													</div>
+													<div class="latest-update-option col-md-8">
+														{!! Form::radio('latest_updates_option', '2') !!} By Documents
+														{!! Form::input('text', 'update_frequency', null, [ 'class' => 'update_frequency','disabled'=> 'disabled', 'placeholder'=>'Number of Documents']) !!}
+													</div>
+													
+												</div>
+												
+												
+												
+											</div>
+										</div>
+											
 		
 
                                         <div class="form-group">

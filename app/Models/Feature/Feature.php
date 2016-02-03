@@ -26,6 +26,8 @@ class Feature extends Model
   		$tile_label = $request["tileLabel"];
   		$start = $request["start"];
   		$end = $request["end"];
+      $update_type_id = $request["update_type"];
+      $update_frequency = $request["update_frequency"];
   		$thumbnail = $request->file("thumbnail");
   		$background_image = $request->file("background");
   		$banner = UserSelectedBanner::getBanner();
@@ -36,8 +38,8 @@ class Feature extends Model
   				'tile_label'	  => $tile_label,
   				'start'         => $start,
   				'end' 			    => $end,
-  				'update_type_id'=> 1,
-  				'update_frequency' => 20,
+  				'update_type_id'=> $update_type_id,
+  				'update_frequency' => $update_frequency,
           'thumbnail'     => 'temp',
           'background_image' =>'temp'
 
@@ -55,7 +57,6 @@ class Feature extends Model
 
     public static function updateFeature(Request $request, $id)
     {
-        \Log::info($request->all());
         
         $feature = Feature::find($id);
 
@@ -63,6 +64,8 @@ class Feature extends Model
         $feature['tile_label'] = $request->tileLabel;
         $feature['start'] = $request->start;
         $feature['end'] = $request->end;
+        $feature['update_type_id'] = $request->update_type;
+        $feature['update_frequency'] = $request->update_frequency;
 
         $feature->save();
 
@@ -70,8 +73,6 @@ class Feature extends Model
         Feature::removeFiles($request->remove_document, $id);
         Feature::addPackages($request->feature_packages, $id);
         Feature::removePackages($request->remove_package, $id);
-        // Feature::updateFeatureBackground($request["background"], $id);
-        // Feature::updateFeatureThumbnail($request["thumbnail"], $id);
         return;
 
     }

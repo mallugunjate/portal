@@ -7,7 +7,13 @@ $("#add-packages").click(function(){
 	$("#package-listing").modal('show');
 });
 
-
+$('input[name="latest_updates_option"]').change( function(){
+	if($('input[name=latest_updates_option]').is(':checked')){
+		console.log($(this).next('input[name="update_frequency"]'));
+		$('.update_frequency').prop( "disabled", true );
+		$(this).next('.update_frequency').prop( "disabled", false );
+	}
+});
 
 $('body').on('click', '#attach-selected-files', function(){
 	$("#files-selected").empty();
@@ -23,7 +29,7 @@ $('body').on('click', '#attach-selected-packages', function(){
 
 	console.log('attach selected-packages');
 	$("#packages-selected").empty();
-	$("#packages-selected").append('<p>Packages attached :</p>');
+	$("#packages-selected").append('<p>Packagesattached :</p>');
 	$('input[name^="feature_packages"]').each(function(){
 		if($(this).is(":checked")){
 			$("#packages-selected").append('<ul class="selected-packages" data-packageid='+ $(this).attr('data-packageid') +'>'+ $(this).attr("data-packagename")+'</ul>')		
@@ -43,6 +49,8 @@ $(document).on('click','.feature-create',function(){
 	var featureEnd = $("#end").val();
 	var thumbnail = $("#thumbnail")[0].files[0];
 	var background = $("#background")[0].files[0];
+	var update_type = $('input:radio[name =  "latest_updates_option"]:checked').val();
+	var update_frequency =  $('input:radio[name ="latest_updates_option"]:checked').next(".update_frequency").val();
 
 	console.log(thumbnail);
 	console.log(background);
@@ -74,7 +82,9 @@ $(document).on('click','.feature-create',function(){
      	data.append('background', background );
      	data.append('feature_files',  JSON.stringify(feature_files));
      	data.append('feature_packages',  JSON.stringify(feature_packages));
-    
+    	data.append('update_type', update_type);
+    	data.append('update_frequency', update_frequency);
+
 		$.ajax({
 		    url: '/admin/feature',
 		    type: 'POST',

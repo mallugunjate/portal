@@ -123,6 +123,13 @@ $('input[id="background"]').on('change', function(){
 
 });
 
+$('input[name="latest_updates_option"]').change( function(){
+	if($('input[name=latest_updates_option]').is(':checked')){
+		$('input[name="update_frequency"]').prop('disabled', true).val("");
+		$(this).next('input[name="update_frequency"]').prop('disabled', false);
+	}
+});
+
 $(document).on('click','.feature-update',function(){
   	
  
@@ -139,6 +146,11 @@ $(document).on('click','.feature-update',function(){
 	var remove_package   = [];
 	var feature_files = [];
 	var feature_packages = [];
+	var update_type = $('input:radio[name =  "latest_updates_option"]:checked').val();
+	var update_frequency =  $('input:radio[name ="latest_updates_option"]:checked').next('input[name="update_frequency"]').val();
+	console.log('latest updates : ' + update_type);
+	console.log('latest update freq : ' + update_frequency);
+
 
 	$(".remove_document").each(function(){
 		remove_document.push($(this).attr('data-documentid'));
@@ -160,9 +172,6 @@ $(document).on('click','.feature-update',function(){
 		hasError = true;
 		$(window).scrollTop(0);
 	}
-	console.log(thumbnail);
-	console.log(background);
-
 
      if(hasError == false) {
      	var dataObj = {};
@@ -175,7 +184,9 @@ $(document).on('click','.feature-update',function(){
      	$.extend(dataObj, {feature_packages:  feature_packages});
      	$.extend(dataObj, {remove_document: remove_document});
      	$.extend(dataObj, {remove_package: remove_package});
-     	dataObj.thumbnail = thumbnail
+     	$.extend(dataObj, {update_type : update_type});
+     	$.extend(dataObj, {update_frequency : update_frequency});
+     	
 
      	var data = JSON.stringify(dataObj);
      	console.log(dataObj);
@@ -190,7 +201,7 @@ $(document).on('click','.feature-update',function(){
 		    success: function(data) {
 		        
 		        console.log(data); 
-				swal("Nice!", "'" + featureTitle +"' has been created", "success");
+				swal("Nice!", "'" + featureTitle +"' has been updated", "success");
 
 		    }
 		}).done(function(response){
