@@ -20,8 +20,7 @@ $(document).ready(function(){
 		$("#folders-selected").empty();
 		
 		$('input[name^="package_folders"]').each(function(){
-
-
+			
 			var attr = $(this).attr('data-folderRoot');
 
 			// For some browsers, `attr` is undefined; for others,
@@ -47,7 +46,6 @@ $("#add-more-files").on('click', function(){
 	$("#document-listing").modal('show');
 })
 $("#add-more-folders").on('click', function(){
-
 	$("#folder-listing").modal('show');
 })
 
@@ -59,8 +57,9 @@ $(".remove-file").on('click', function(){
 
 $("body").on('click', ".remove-staged-file", function(){
 	
-	$(".package-files[data-fileid = '" + document_id + "']").remove();
 	var document_id = $(this).attr('data-document-id');
+	$(".package-files[data-fileid = '" + document_id + "']").remove();
+	
 	$(this).parent().fadeOut(200);
 
 });
@@ -139,9 +138,8 @@ $(".package-update").on('click', function(){
 		$(window).scrollTop(0);
 	}
 
-	console.log('remove_folder');
-	console.log(remove_folder);
-
+	// console.log('remove_folder');
+	// console.log(remove_folder);
 
     if(hasError == false) {
 

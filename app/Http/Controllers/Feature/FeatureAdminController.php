@@ -10,6 +10,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Banner;
 use App\Models\UserSelectedBanner;
 use App\Models\Feature\Feature;
+use App\Models\Document\FileFolder;
+use App\Models\Document\Package;
+use App\Models\Document\Document;
+use App\Models\Feature\FeatureDocument;
+use App\Models\Feature\FeaturePackage;
 
 class FeatureAdminController extends Controller
 {
@@ -46,9 +51,13 @@ class FeatureAdminController extends Controller
         $banner = UserSelectedBanner::getBanner();
         $banners = Banner::all();
 
+        $packages = Package::all();
+        $fileFolderStructure = FileFolder::getFileFolderStructure($banner->id);
         return view('admin.feature.create')
                 ->with('banner', $banner)
-                ->with('banners', $banners);
+                ->with('banners', $banners)
+                ->with('navigation', $fileFolderStructure)
+                ->with('packages', $packages);
     }
 
     /**
@@ -59,7 +68,8 @@ class FeatureAdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Feature::storeFeature($request);
+        return;
     }
 
     /**
@@ -70,7 +80,7 @@ class FeatureAdminController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -81,7 +91,41 @@ class FeatureAdminController extends Controller
      */
     public function edit($id)
     {
-        //
+        $banner = UserSelectedBanner::getBanner();
+        $banners = Banner::all();
+        $feature = Feature::find($id);
+
+        $fileFolderStructure = FileFolder::getFileFolderStructure($banner->id);
+        $feature_documents = FeatureDocument::where('feature_id', $id)->get()->pluck('document_id');
+        $selected_documents = array();
+        foreach ($feature_documents as $doc_id) {
+            
+            $doc = Document::find($doc_id);
+            $doc->folder_path = Document::getFolderPathForDocument($doc_id);
+            array_push($selected_documents, $doc );
+            
+        }
+
+        $packages = Package::all();
+        $feature_packages = FeaturePackage::where('feature_id', $id)->get()->pluck('package_id');
+        $selected_packages = [];
+        foreach ($feature_packages as $package_id) {
+            $package = Package::find($package_id);
+            array_push($selected_packages, $package);
+        }
+
+        return view('admin.feature.edit')->with('feature', $feature)
+                                    
+                                        ->with('banner', $banner)
+                                        ->with('banners', $banners)
+                                        ->with('navigation', $fileFolderStructure)
+                                        ->with('feature_documents', $selected_documents )
+                                        ->with('packages', $packages)
+                                        ->with('feature_packages', $selected_packages);
+                                        // ->with('tags', $tags)
+                                        // ->with('selected_tags', $selected_tags)
+                                        // ->with('folders', $selected_folders)
+                                        // ->with('folderStructure', $folderStructure);
     }
 
     /**
@@ -93,7 +137,9 @@ class FeatureAdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Feature::updateFeature($request, $id);
+        return ;
+
     }
 
     /**
@@ -104,6 +150,7 @@ class FeatureAdminController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Feature::find($id)->delete();
+        return;
     }
 }

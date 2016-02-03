@@ -1,8 +1,8 @@
-$(".package-delete").on('click', function(){
+$(".feature-delete").on('click', function(){
 
 
-    var packageId = $(this).attr('data-package');
-    var selector = "#package"+packageId;
+    var featureId = $(this).attr('data-feature');
+    var selector = "#feature"+featureId;
 
     swal({
         title: "Are you sure?",
@@ -14,11 +14,11 @@ $(".package-delete").on('click', function(){
         closeOnConfirm: false
     }, function () {
     	$.ajax({
-		    url: '/admin/package/'+packageId,
+		    url: '/admin/feature/'+featureId,
 		    type: 'DELETE',
 		    success: function(result) {
 		        $(selector).closest('tr').fadeOut(1000);
-		        swal("Deleted!", "This Package has been deleted.", "success");
+		        swal("Deleted!", "This feature has been deleted.", "success");
 		    }
 		});
         
