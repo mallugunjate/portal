@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Models\Dashboard\Quicklinks;
+use App\Models\Banner;
+use Log;
 
-class QuicklinksAdminController extends Controller
+
+class DashboardBackgroundAdminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -37,8 +39,8 @@ class QuicklinksAdminController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        Banner::updateBannerBackground($request->banner_id, $request);
     }
 
     /**
@@ -49,7 +51,7 @@ class QuicklinksAdminController extends Controller
      */
     public function show($id)
     {
-        //
+        return Banner::getBannerBackground($id);
     }
 
     /**
@@ -72,9 +74,7 @@ class QuicklinksAdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $quicklink = Quicklinks::find($id);
-        $quicklink->order = $request['order'];
-        $quicklink->save();
+
     }
 
     /**
@@ -85,7 +85,6 @@ class QuicklinksAdminController extends Controller
      */
     public function destroy($id)
     {
-        $quicklink = Quicklinks::find($id);
-        $quicklink->delete();
+        //
     }
 }
