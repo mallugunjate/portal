@@ -89,6 +89,7 @@ $('input[id="thumbnail"]').on('change', function(){
             contentType: false,   // tell jQuery not to set contentType
 		    success: function(result) {
 		        console.log(result);
+		        $(".thumbnail-preview img").attr('src', "/images/featured-covers/"+result);
 		        // $('#createNewFeatureForm')[0].reset(); // empty the form
 				// swal("Nice!", "'" + featureTitle +"' has been created", "success");        
 		    }
@@ -114,6 +115,7 @@ $('input[id="background"]').on('change', function(){
             contentType: false,   // tell jQuery not to set contentType
 		    success: function(result) {
 		        console.log(result);
+		        $(".background-preview img").attr('src', "/images/featured-backgrounds/"+result);
 		        // $('#createNewFeatureForm')[0].reset(); // empty the form
 				// swal("Nice!", "'" + featureTitle +"' has been created", "success");        
 		    }

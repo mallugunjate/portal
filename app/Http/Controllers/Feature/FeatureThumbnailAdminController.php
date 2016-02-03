@@ -41,7 +41,7 @@ class FeatureThumbnailAdminController extends Controller
         $thumbnail = $request->file('thumbnail');
         $feature_id = $request['featureID'];
         Feature::updateFeatureThumbnail($thumbnail, $feature_id);
-        return;
+        return Feature::find($feature_id)->pluck('thumbnail');
     }
 
     /**

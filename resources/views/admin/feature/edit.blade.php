@@ -6,6 +6,7 @@
     @include('admin.includes.head')
     
     <link rel="stylesheet" type="text/css" href="/css/plugins/chosen/chosen.css">
+    <link rel="stylesheet" type="text/css" href="/css/custom/feature.css">
 	
 	<meta name="csrf-token" content="{!! csrf_token() !!}"/>
 </head>
@@ -83,16 +84,20 @@
                                         <div class="form-group">
                                         	
                                         	<label class="col-sm-2 control-label">Thumbnail</label>
-                                        	<div ></div>
-                                        	<div class= "col-sm-10"><input type="file" id="thumbnail" name="thumbnail" class="form-control" value="{{ $feature->thumbnail }}"></div>
+                                        	<div class="thumbnail-preview col-sm-5">
+                                        		<img src="/images/featured-covers/{{$feature->thumbnail}}">
+                                        	</div>
+                                        	<div class= "col-sm-10 col-sm-offset-2"><input type="file" id="thumbnail" name="thumbnail" class="form-control" value="{{ $feature->thumbnail }}"></div>
 
                                         </div>
 
                                         <div class="form-group">
                                         	
                                         	<label class="col-sm-2 control-label">Background</label>
-                                        	<div ></div>
-                                        	<div class= "col-sm-10"><input type="file" id="background" name="background" class="form-control" value="{{ $feature->background }}"></div>
+                                        	<div class="background-preview col-sm-5">
+                                        		<img src="/images/featured-backgrounds/{{$feature->background_image}}">
+                                        	</div>
+                                        	<div class= "col-sm-10 col-sm-offset-2"><input type="file" id="background" name="background" class="form-control" value="{{ $feature->background }}"></div>
 
                                         </div>
                                         </form>
@@ -181,11 +186,8 @@
 
 							<div class="ibox">
                             	<div class="ibox-title">
-                            		<h5> Packages </h5>
-                            		<div class="ibox-tools">
-                            			
-                            			<div id="add-more-packages" class="btn btn-primary col-md-offset-8" role="button" ><i class="fa fa-plus"></i> Add More Packages</div>
-                            		</div>
+                            		<h5> Notifications </h5>
+                            		
                             	</div>
 								<div class="ibox-content">
 
