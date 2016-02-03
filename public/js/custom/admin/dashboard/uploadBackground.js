@@ -32,5 +32,3 @@ $("body").on("click", ".fileinput-upload-button", function(e) {
             
         });        
 });
-
-
