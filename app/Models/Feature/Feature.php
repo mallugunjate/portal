@@ -150,6 +150,7 @@ class Feature extends Model
 
         $upload_success = $file->move($directory, $filename); //move and rename file  
         Feature::where('id', $feature_id)->update(['thumbnail' => $filename]);
+        \Log::info($filename);
         return ;
     }
 
