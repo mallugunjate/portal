@@ -18,7 +18,7 @@ $(".package-delete").on('click', function(){
 		    type: 'DELETE',
 		    success: function(result) {
 		        $(selector).closest('tr').fadeOut(1000);
-		        swal("Deleted!", "This Event Type has been deleted.", "success");
+		        swal("Deleted!", "This Package has been deleted.", "success");
 		    }
 		});
         
