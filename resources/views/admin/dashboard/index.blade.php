@@ -6,6 +6,8 @@
     @include('admin.includes.head')
 
 	<meta name="csrf-token" content="{!! csrf_token() !!}"/>
+	<link href="/js/plugins/fileinput/fileinput.css" rel="stylesheet">
+
 </head>
 
 <body class="fixed-navigation">
@@ -51,13 +53,19 @@
 		                            </div>
 		                        </div>
 		                        <div class="ibox-content">
+		                        	<div class="row">
+		                        		<div class="col-lg-6">
+		                        		<img id="background-preview" src="/images/dashboard-banners/{{ $banner->background }}" width="400" />
+		                        		</div>
+		                        		<div class="col-lg-6">
+		                        	
+											<label class="control-label">Change Branding</label>
+											<input id="dashboardbackground" name="dashboardbackground[]" type="file" multiple class="file-loading">
+											<input type="hidden" value="{{ $banner->id }}" name="banner_id" id="banner_id">
+		                        		</div>
+		                        	</div>
 
-
-
-		                            <div class="table-responsive">
-
-
-		                            </div>
+		                            
 		                        </div>
 
 		                    </div>
@@ -107,7 +115,7 @@
 													<span style="position: relative; top: 5px;">{!! $link !!} <span class="label label-default">{!! $icon !!} {{ $type }}</span> </span>
 												</span>
 												<span class="pull-right">
-													<a data-quicklink="{{ $ql->id }}" id="" class="event-delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>&nbsp;&nbsp;
+													<a data-quicklink="{{ $ql->id }}" id="quicklink-{{ $ql->id }}" class="quicklink-delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>&nbsp;&nbsp;
 												</span>
 		                                     </li>
 		                                    @endforeach
@@ -167,51 +175,21 @@
 
 				</script>
 				<script src="/js/plugins/nestable/jquery.nestable.js"></script>
+				<script src="/js/plugins/fileinput/fileinput.js"></script>
 				<script src="/js/custom/admin/quicklinks/changeQuicklinksOrder.js"></script>
+				<script src="/js/custom/admin/quicklinks/deleteQuicklink.js"></script>
+				<script src="/js/custom/admin/features/changeFeaturesOrder.js"></script>
+				<script src="/js/custom/admin/dashboard/uploadBackground.js"></script>
 
 				<script>
 
-				         // $(document).ready(function(){
-
-				         //     var updateOutput = function (e) {
-				         //         var list = e.length ? e : $(e.target),
-				         //                 output = list.data('output');
-				         //         if (window.JSON) {
-				         //             output.val(window.JSON.stringify(list.nestable('serialize')));//, null, 2));
-				         //         } else {
-				         //             output.val('JSON browser support required for this demo.');
-				         //         }
-				         //     };
-				         //     // activate Nestable for list 1
-				         //     $('#nestable').nestable({
-				         //         group: 1
-				         //     }).on('change', updateOutput);
-
-				         //     // activate Nestable for list 2
-				         //     $('#nestable2').nestable({
-				         //         group: 1
-				         //     }).on('change', updateOutput);
-
-				         //     // output initial serialised data
-				         //     updateOutput($('#nestable').data('output', $('#nestable-output')));
-				         //     updateOutput($('#nestable2').data('output', $('#nestable2-output')));
-
-				         //     $('#nestable-menu').on('click', function (e) {
-				         //         var target = $(e.target),
-				         //                 action = target.data('action');
-				         //         if (action === 'expand-all') {
-				         //             $('.dd').nestable('expandAll');
-				         //         }
-				         //         if (action === 'collapse-all') {
-				         //             $('.dd').nestable('collapseAll');
-				         //         }
-				         //     });
-				         // });
-
-
-
-
 			         $(document).ready(function(){
+
+					    $("#dashboardbackground").fileinput({
+					        initialPreview: [],
+					        overwriteInitial: true,
+					        initialCaption: ""
+					    });
 
 						var serializeQuicklinksData = function (e) {
 			                 var list = e.length ? e : $(e.target);			                        
@@ -222,8 +200,7 @@
 						var serializeFeaturedContentData = function (e) {
 			                 var list = e.length ? e : $(e.target);			                        
 			                 var data = list.nestable('serialize');
-			                 //updateQuicklinksOrder(data);
-			                 console.log(data);
+			                 updateFeaturesOrder(data);
 			             };			             
 
 			             $('#quicklinkslist').nestable({
@@ -236,9 +213,8 @@
 			             }).on('change', serializeFeaturedContentData);
 
 			         });
-    </script>				
+    			</script>				
 
-{{-- 				<script type="text/javascript" src="/js/custom/admin/global/bannerSelector.js"></script> --}}
 
 				@include('site.includes.bugreport')
 

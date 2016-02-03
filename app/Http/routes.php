@@ -84,6 +84,7 @@ Route::resource('/admin/package', 'Document\PackageAdminController');
 
 //FEATURES 
 Route::resource('/admin/feature', 'Feature\FeatureAdminController');
+Route::resource('/admin/featureOrder', 'Feature\FeatureOrderAdminController');
 
 //Dasboard ADMIN
 Route::resource('/admin/dashboard', 'Dashboard\DashboardAdminController');
@@ -102,6 +103,9 @@ Route::resource('/admin/tag', 'Tag\TagAdminController');
 
 //Quicklinks
 Route::resource('/admin/quicklinks', 'Dashboard\QuicklinksAdminController');
+
+//Dashboard Background
+Route::resource('/admin/dashboardbackground', 'Dashboard\DashboardBackgroundAdminController');
 
 //Users
 Route::resource('/admin/user', 'User\UserAdminController');

@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard;
+namespace App\Http\Controllers\Banner;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Models\Dashboard\Quicklinks;
+use App\Models\Banner;
 
-class QuicklinksAdminController extends Controller
+class BannerAdminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -72,9 +72,7 @@ class QuicklinksAdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $quicklink = Quicklinks::find($id);
-        $quicklink->order = $request['order'];
-        $quicklink->save();
+        //
     }
 
     /**
@@ -85,7 +83,6 @@ class QuicklinksAdminController extends Controller
      */
     public function destroy($id)
     {
-        $quicklink = Quicklinks::find($id);
-        $quicklink->delete();
+        //
     }
 }

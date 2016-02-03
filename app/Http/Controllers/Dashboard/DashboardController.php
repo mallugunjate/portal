@@ -36,6 +36,8 @@ class DashboardController extends Controller
 
         $storeBanner = $storeInfo->banner_id;
 
+        $banner  = Banner::find($storeInfo->banner_id);
+
         $skin = Skin::getSkin($storeBanner);
         
         $features = Feature::where('banner_id', $storeBanner)->orderBy('order')->get();
@@ -48,6 +50,7 @@ class DashboardController extends Controller
 	        ->count();
 
         return view('site.dashboard.index')
+            ->with('banner', $banner)
             ->with('skin', $skin)
             ->with('quicklinks', $quicklinks)
         	->with('communicationCount', $communicationCount)

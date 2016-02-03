@@ -16,7 +16,7 @@
             </div>
         </nav>
 
-        <div id="page-wrapper" class="gray-bg clearfix" style="background-color: #f3f3f4; background-position: top left; background-repeat: no-repeat; float: left; clear: both;">
+        <div id="page-wrapper" class="gray-bg clearfix" style="background-color: #f3f3f4; background-image: url('/images/dashboard-banners/{{ $banner->background }}'); background-position: top left; background-repeat: no-repeat; float: left; clear: both;">
             <div class="row border-bottom">
                 @include('site.includes.topbar')
             </div>
