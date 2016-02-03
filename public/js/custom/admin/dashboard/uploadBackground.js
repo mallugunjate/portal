@@ -1,12 +1,4 @@
-// var files;
-// $('input[type=file]').on('change', prepareUpload);
-
 var banner_id = $('#banner_id').val();
-
-// function prepareUpload(event)
-// {
-//   files = event.target.files;
-// }
 
 $("body").on("click", ".fileinput-upload-button", function(e) {
 
@@ -14,8 +6,6 @@ $("body").on("click", ".fileinput-upload-button", function(e) {
 	event.preventDefault(); 
 
 	var file = $('input[id="dashboardbackground"]')[0].files[0];
-	// data.append("filename", file.name);
- //    data.append("banner_id", banner_id);
 
     var data = new FormData();
         
@@ -26,65 +16,21 @@ $("body").on("click", ".fileinput-upload-button", function(e) {
             url: '/admin/dashboardbackground',
             type: 'POST',
             data: data, 
-			processData: false,  // tell jQuery not to process the data
-			contentType: false,   // tell jQuery not to set contentType
+			processData: false,
+			contentType: false,
             success: function(result) {
-                // console.log(result);
                 
                 swal("Nice!", "'" + file.name +"' has been uploaded", "success");   
                 $('.fileinput-remove').trigger( "click" ); //reset the form 
                 
-     //            	$.get( "/admin/dashboardbackground", { id: banner_id } )
-					// .done(function( data ) {
-					// 	console.log( "Data Loaded: " + data );
-					// });  
-					// 
-					$.get( "/admin/dashboardbackground/"+banner_id, { },
-                  		function(data) {
-                     		$("#background-preview").attr("src", "/images/dashboard-banners/"+data);
-                  		}
-               		);
-
-
-                //$('.kv-fileinput-caption')[0].reset();     
+				$.get( "/admin/dashboardbackground/"+banner_id, { },
+              		function(data) {
+                 		$("#background-preview").attr("src", "/images/dashboard-banners/"+data);
+              		}
+           		);   
             }
-        }).done(function(response){
-            // console.log(response);
+            
         });        
-   });
-
-
- //    console.log(data);
-	// $.ajax({
-	//         url: '/admin/dashboardbackground/',
-	//         type: 'POST',
-	//         data: data,
-	//         cache: false,
-	//         // dataType: 'json',
-	//         processData: false, // Don't process the files
-	//         contentType: false, // Set content type to false as jQuery will tell the server its a query string request
-	//         success: function(data, textStatus, jqXHR)
-	//         {
-	//             if(typeof data.error === 'undefined')
-	//             {
-	//                 // Success so call function to process the form
-	//                 //submitForm(event, data);
-	//                 console.log(data);
-	//             }
-	//             else
-	//             {
-	//                 // Handle errors here
-	//                 console.log('data error ERRORS: ' + data.error);
-	//             }
-	//         },
-	//         error: function(jqXHR, textStatus, errorThrown)
-	//         {
-	//             // Handle errors here
-	//             console.log('jqXHR ERRORS: ' + textStatus);
-	//             // STOP LOADING SPINNER
-	//         }
-	//     });
-
-
+});
 
 
