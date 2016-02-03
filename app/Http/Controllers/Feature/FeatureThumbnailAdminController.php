@@ -39,7 +39,7 @@ class FeatureThumbnailAdminController extends Controller
     public function store(Request $request)
     {
         $thumbnail = $request->file('thumbnail');
-        $feature_id = $request['feature_id'];
+        $feature_id = $request['featureID'];
         Feature::updateFeatureThumbnail($thumbnail, $feature_id);
         return;
     }

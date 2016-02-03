@@ -76,12 +76,38 @@ $('input[id="thumbnail"]').on('change', function(){
 
 	var featureID = $("#featureID").val();
 	var thumbnail = $('input[id="thumbnail"]')[0].files[0];
+	console.log(featureID);
 	var data = new FormData();
 	data.append('thumbnail', thumbnail);
 	data.append('featureID', featureID);
-
+	console.log(data);
 	$.ajax({
 		    url: '/admin/feature/thumbnail',
+		    type: 'POST',
+		    data: data, 
+            processData: false,  // tell jQuery not to process the data
+            contentType: false,   // tell jQuery not to set contentType
+		    success: function(result) {
+		        console.log(result);
+		        // $('#createNewFeatureForm')[0].reset(); // empty the form
+				// swal("Nice!", "'" + featureTitle +"' has been created", "success");        
+		    }
+		}).done(function(response){
+			console.log(response);
+		});    
+
+});
+
+$('input[id="background"]').on('change', function(){
+
+	var featureID = $("#featureID").val();
+	var background = $('input[id="background"]')[0].files[0];
+	var data = new FormData();
+	data.append('background', background);
+	data.append('featureID', featureID);
+
+	$.ajax({
+		    url: '/admin/feature/background',
 		    type: 'POST',
 		    data: data, 
             processData: false,  // tell jQuery not to process the data

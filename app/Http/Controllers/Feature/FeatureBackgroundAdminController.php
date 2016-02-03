@@ -39,7 +39,7 @@ class FeatureBackgroundAdminController extends Controller
     public function store(Request $request)
     {
         $background_image = $request->file('background');
-        $feature_id = $request['feature_id'];
+        $feature_id = $request['featureID'];
         Feature::updateFeatureBackground($background_image, $feature_id);
         return;
     }
