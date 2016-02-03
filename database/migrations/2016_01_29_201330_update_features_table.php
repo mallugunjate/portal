@@ -13,10 +13,13 @@ class UpdateFeaturesTable extends Migration
     public function up()
     {
         Schema::table('features', function (Blueprint $table) {
-            $table->string('tile_label')->after('title');
-            $table->string('thumbnail');
-            $table->integer('update_type_id')->unsigned();
-            $table->string('update_frequency');
+            // $table->integer("order")->after("banner_id");
+            // $table->softDeletes();
+            // $table->timestamps();
+            // $table->string('tile_label')->after('title');
+            // $table->string('thumbnail');
+            // $table->integer('update_type_id')->unsigned();
+            // $table->string('update_frequency');
             $table->foreign('update_type_id')->references('id')->on('feature_latest_update_types')->onDelete('cascade');
         });
     }
