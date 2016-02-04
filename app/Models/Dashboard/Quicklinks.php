@@ -41,4 +41,14 @@ class Quicklinks extends Model
 
  		return $linkarray;
  	}
+
+ 	public static function storeQuicklink($request)
+ 	{
+ 		$ql = Quicklinks::create([
+ 			'link_name' => $request->name,
+ 			'type' => intval($request->type),
+ 			'url'  => $request->url
+ 			]);
+ 		return $ql;
+ 	}
 }

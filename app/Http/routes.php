@@ -105,7 +105,7 @@ Route::resource('/admin/eventtypes', 'Calendar\EventTypesAdminController');
 Route::resource('/admin/tag', 'Tag\TagAdminController');
 
 //Quicklinks
-Route::resource('/admin/quicklinks', 'Dashboard\QuicklinksAdminController');
+Route::resource('/admin/quicklink', 'Dashboard\QuicklinksAdminController');
 
 //Users
 Route::resource('/admin/user', 'User\UserAdminController');

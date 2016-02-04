@@ -11,7 +11,7 @@ function updateQuicklinksOrder(data){
             console.log("pos:"+ i + ", name:" + attrName + ", value:"+ attrValue);
 
 			$.ajax({
-			    url: '/admin/quicklinks/' + attrValue ,
+			    url: '/admin/quicklink/' + attrValue ,
 			    type: 'PATCH',
 			    data: {
 			  		order: i
