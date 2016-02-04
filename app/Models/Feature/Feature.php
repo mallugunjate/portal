@@ -1,6 +1,4 @@
-<?php
-
-namespace App\Models\Feature;
+<?php namespace App\Models\Feature;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -9,11 +7,15 @@ use App\Models\UserSelectedBanner;
 use App\Models\Feature\FeatureDocument;
 use App\Models\Feature\FeaturePackage;
 use App\Http\Requests;
+use App\Models\Document\DocumentPackage;
+use App\Models\Document\Folder;
+use App\Models\Document\FolderPackage;
+use App\Models\Document\FileFolder;
 
 
 class Feature extends Model
 {
-	use SoftDeletes;
+	  use SoftDeletes;
     protected $table = 'features';
     protected $dates = ['deleted_at'];
     protected $fillable = ['banner_id', 'title', 'tile_label', 'description', 'start', 'end', 'background_image', 'thumbnail', 'update_type_id', 'update_frequency'];
@@ -173,8 +175,45 @@ class Feature extends Model
         return $response;
     }
 
-    public static function getFeatureDocumentIds($id)
+    //return ALL documents in a feature : independent documents , docs in packages included , docs in folders in package included
+    public static function getDocumentsIdsByFeatureId($id)
     {
-      
+        $feature_docs = FeatureDocument::where('feature_id', $id)->get()->pluck('document_id')->toArray();
+        
+        $feature_packages = FeaturePackage::where('feature_id', $id)->get()->pluck('package_id')->toArray();
+
+        $feature_folders = [];
+        
+        foreach ($feature_packages as $package_id) {
+          
+          $package_docs =  DocumentPackage::where('package_id', $package_id )->get()->pluck('document_id')->toArray();
+          $feature_docs = array_merge_recursive($feature_docs, $package_docs);
+          unset($package_docs);
+
+          $package_folders = FolderPackage::where('package_id', $package_id)->get()->pluck('folder_id')->toArray();
+          
+
+          foreach ($package_folders as $folderTreeRootId) {
+            $folderTree = Folder::getFolderChildrenTree($folderTreeRootId); 
+            
+            foreach ($folderTree as $folderNode) {
+              
+              array_push($feature_folders, $folderNode["global_folder_id"]);
+
+            }
+            
+          }
+          
+        }
+
+        foreach ($feature_folders as $folder_id) {
+          $docs = FileFolder::where('folder_id', $folder_id)->get()->pluck('document_id')->toArray();
+          $feature_docs = array_merge_recursive($feature_docs, $docs);
+        }
+        $feature_docs = array_unique($feature_docs);
+        
+        return $feature_docs;
+
+
     }
 }
