@@ -54,12 +54,14 @@ $(document).on('click','.quicklink-create',function(){
   	
   	var hasError = false;
  
+ 	var banner_id = $("input[name='banner_id']").val();
 	var name = $("#name").val();
-	var type = $('input[name="type"]').val();
+	var type = $('input[name="type"]:checked').val();
 	var url = $("#url").attr('data-url');
 	console.log("name : " + name);
 	console.log("url : " + url);
 	console.log("type : " + type);
+	console.log('banner_id : ' + banner_id);
 
  
 
@@ -77,11 +79,12 @@ $(document).on('click','.quicklink-create',function(){
 		    data: {
 		  		name: name,
 		  		type: type,
-		  		url:  url
+		  		url:  url,
+		  		banner_id : banner_id
 		    },
 		    success: function(result) {
 		        console.log(result);
-		        // $('#createNewPackageForm')[0].reset(); // empty the form
+		        // $('#createNewQuicklinkForm')[0].reset(); // empty the form
 				swal("Nice!", "'" + name + "' has been created", "success");        
 		    }
 		}).done(function(response){

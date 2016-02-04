@@ -45,9 +45,10 @@ class Quicklinks extends Model
  	public static function storeQuicklink($request)
  	{
  		$ql = Quicklinks::create([
+ 			'banner_id' => $request->banner_id,
  			'link_name' => $request->name,
- 			'type' => intval($request->type),
- 			'url'  => $request->url
+ 			'type' 		=> intval($request->type),
+ 			'url'  		=> $request->url
  			]);
  		return $ql;
  	}

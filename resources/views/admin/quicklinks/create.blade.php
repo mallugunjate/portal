@@ -63,7 +63,7 @@
                                         </div>
                                     @endif
                                     
-                                    <form method="get" class="form-horizontal" id="createNewPackageForm">
+                                    <form method="get" class="form-horizontal" id="createNewQuicklinkForm">
                                         
                                         <input type="hidden" name="banner_id" value="{{$banner->id}}">
                                         <div class="form-group"><label class="col-sm-2 control-label">Name</label>
@@ -91,27 +91,9 @@
                                         </div>
                                         <div class="hr-line-dashed"></div>
 
-                                        <!-- <div class="form-group"><label class="col-sm-2 control-label">Files</label>
-                                            <div class="col-md-10">
-                                               <input class="btn btn-default" type="button" id="add-documents" value="Add Documents" />
-                                            </div>
-                                        </div>
-                                        <div id="files-selected" class="col-sm-offset-2"></div>
-
-                                        <div class="hr-line-dashed"></div>
-                                        <div class="form-group"><label class="col-sm-2 control-label">Folders</label>
-                                            <div class="col-md-10">
-                                            	<input class="btn btn-default" type="button" id="add-folders" value="Add Folders" />
-                                            </div>
-                                        </div>
-                                        <div id="folders-selected" class="col-sm-offset-2"></div> -->
-		
-			
-		
-
                                         <div class="form-group">
                                             <div class="col-sm-10 col-sm-offset-2">
-                                                <a class="btn btn-white" href="/admin/quicklink"><i class="fa fa-close"></i> Cancel</a>
+                                                <a class="btn btn-white" href="/admin/dashboard"><i class="fa fa-close"></i> Cancel</a>
                                                 <button class="quicklink-create btn btn-primary" type="submit"><i class="fa fa-check"></i> Create New Quicklink</button>
 
                                             </div>
