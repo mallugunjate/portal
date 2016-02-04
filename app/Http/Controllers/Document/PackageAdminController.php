@@ -144,7 +144,6 @@ class PackageAdminController extends Controller
                 array_push($selected_folders, $folder_desc );
             }
         }
-        dd($fileFolderStructure);
         return view('admin.package.edit')->with('package', $package)
                                         ->with('documentDetails', $documentDetails)
                                         ->with('banner', $banner)
