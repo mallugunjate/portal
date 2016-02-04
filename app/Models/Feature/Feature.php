@@ -172,4 +172,9 @@ class Feature extends Model
 
         return $response;
     }
+
+    public static function getFeatureDocumentIds($id)
+    {
+      
+    }
 }
