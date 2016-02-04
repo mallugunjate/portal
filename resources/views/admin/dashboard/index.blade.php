@@ -154,6 +154,75 @@
 
 		                    </div>		                    
 
+		                    <div class="ibox">
+		                        <div class="ibox-title">
+		                            <h5>Notification Preferences</h5>
+
+		                            
+		                        </div>
+		                        <div class="ibox-content">
+
+									<div class="latest-updates row" >
+											<div class="form-group">
+												<label class="col-sm-2 control-label">Get Latest Updates</label>
+												<div class="latest-updates-container col-md-10" >
+													
+														<input type="text" id="update_type_id" hidden value={{$banner->update_type_id}}>
+														<input type="text" id="update_window_size" hidden value={{$banner->update_window_size}}>
+													
+
+														@if( $banner['update_type_id'] == 1 )
+														<div class="latest-update-option col-md-8" id="latest-update-option-1">
+															{!! Form::radio('latest_updates_option', '1', ['checked'=>'checked']) !!} By Days
+															{!! Form::input('text', 'update_frequency', $banner['update_window_size'] ,['class='=>'update_frequency']) !!}
+
+														</div>
+														<div class="latest-update-option col-md-8" id="latest-update-option-2">
+															{!! Form::radio('latest_updates_option', '2') !!} By Documents
+															{!! Form::input('text', 'update_frequency', null, ['class='=>'update_frequency', 'disabled'=> 'disabled', 'placeholder'=>'Number of Documents']) !!}
+														</div>
+														@elseif ($banner['update_type_id'] == 2)
+														<div class="latest-update-option col-md-8" id="latest-update-option-1">
+															{!! Form::radio('latest_updates_option', '1') !!} By Days
+															{!! Form::input('text', 'update_frequency', null, ['class='=>'update_frequency', 'disabled'=> 'disabled', 'placeholder'=>'Number of Days']) !!}
+
+														</div>
+														<div class="latest-update-option col-md-8" id="latest-update-option-2">
+															{!! Form::radio('latest_updates_option', '2', ['checked'=>'checked']) !!} By Documents
+															{!! Form::input('text', 'update_frequency', $banner['update_window_size'] , ['class='=>'update_frequency']) !!}
+														</div>
+														@else
+														<div class="latest-update-option col-md-8" id="latest-update-option-1">
+															{!! Form::radio('latest_updates_option', '1') !!} By Days
+															{!! Form::input('text', 'update_frequency', null, ['class='=>'update_frequency', 'disabled'=> 'disabled', 'placeholder'=>'Number of Days']) !!}
+
+														</div>
+														<div class="latest-update-option col-md-8" id="latest-update-option-2">
+															{!! Form::radio('latest_updates_option', '2') !!} By Documents
+															{!! Form::input('text', 'update_frequency', null, ['class='=>'update_frequency', 'disabled'=> 'disabled', 'placeholder'=>'Number of Documents']) !!}
+														</div>
+														@endif
+													
+													
+													
+													
+												</div>
+
+												
+											</div>
+											
+											<div class="form-group">
+				                                <div class="col-sm-4 col-sm-offset-9">
+				                               		<button class="btn btn-white" id="cancel-notification-preferences" ><i class="fa fa-close"></i> Cancel</a>
+				                                    <button class="update-notification-preferences btn btn-primary" type="submit"><i class="fa fa-check"></i> Save changes</button>
+
+				                                </div>
+				                            </div>
+											
+										</div>
+		                        </div>
+
+		                    </div>	
 
 
 		                </div>
@@ -180,6 +249,7 @@
 				<script src="/js/custom/admin/quicklinks/deleteQuicklink.js"></script>
 				<script src="/js/custom/admin/features/changeFeaturesOrder.js"></script>
 				<script src="/js/custom/admin/dashboard/uploadBackground.js"></script>
+				<script src="/js/custom/admin/dashboard/setNotificationPreferences.js"></script>
 
 				<script>
 
