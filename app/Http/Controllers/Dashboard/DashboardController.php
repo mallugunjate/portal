@@ -21,6 +21,7 @@ use App\Models\Tag\ContentTag;
 use App\Models\Feature\Feature;
 use App\Models\Dashboard\Quicklinks;
 use App\Models\Dashboard\DashboardBranding;
+use App\Models\Notification\Notification;
 use App\Skin;
 
 class DashboardController extends Controller
@@ -44,17 +45,21 @@ class DashboardController extends Controller
 
         $quicklinks = Quicklinks::getLinks($storeBanner, $storeNumber);
 
+        $notifications = Notification::getAllNotifications($storeInfo->banner_id, 2, 10);
+
         $communicationCount = DB::table('communications_target')
 	        ->where('store_id', $storeNumber)
 	        ->whereNull('is_read')
 	        ->count();
 
+            //dd($notifications);
         return view('site.dashboard.index')
             ->with('banner', $banner)
             ->with('skin', $skin)
             ->with('quicklinks', $quicklinks)
         	->with('communicationCount', $communicationCount)
-            ->with('features', $features);
+            ->with('features', $features)
+            ->with('notifications', $notifications);
     }
 
 
