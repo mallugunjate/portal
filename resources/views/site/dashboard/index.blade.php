@@ -5,6 +5,20 @@
     @section('title', 'Dashboard')
     <link href="/css/plugins/iCheck/custom.css" rel="stylesheet">
     @include('site.includes.head')
+
+    <style>
+    #page-wrapper{
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 65%, rgba(0, 0, 0, 1) 100%), url('/images/dashboard-banners/{{ $banner->background }}') no-repeat 0px 60px; 
+        background-size: cover;
+        overflow: hidden;
+    }
+
+    #footer{
+        position: fixed;
+        bottom: 0px;
+    }
+
+    </style>    
     
 </head> 
 
@@ -16,7 +30,7 @@
             </div>
         </nav>
 
-        <div id="page-wrapper" class="gray-bg clearfix" style="background-color: #f3f3f4; background-image: url('/images/dashboard-banners/{{ $banner->background }}'); background-position: top left; background-repeat: no-repeat; float: left; clear: both;">
+        <div id="page-wrapper" class="gray-bg clearfix">
             <div class="row border-bottom">
                 @include('site.includes.topbar')
             </div>

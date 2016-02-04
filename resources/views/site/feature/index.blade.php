@@ -18,7 +18,6 @@
         bottom: 0px;
     }
 
-/*style="background-size: 100%; background-image: url('/images/featured-backgrounds/{{ $feature->background_image }}'); background-color: #f3f3f4; background-position: top left; background-repeat: no-repeat; float: left; clear: both;"*/
     </style>
 </head> 
 
