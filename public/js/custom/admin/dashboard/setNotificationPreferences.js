@@ -1,7 +1,3 @@
-$(document).ready(function(){
-	setNotificationType();
-});
-
 $('input[name="latest_updates_option"]').change( function(){
 	if($('input[name=latest_updates_option]').is(':checked')){
 		$('input[name="update_frequency"]').prop('disabled', true).val("");
