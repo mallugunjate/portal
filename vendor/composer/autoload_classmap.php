@@ -7,7 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'AddBrandingToBannerTable' => $baseDir . '/database/migrations/2016_02_01_174829_add_branding_to_banner_table.php',
-    'AddNotificationsToBanner' => $baseDir . '/database/migrations/2016_02_04_230108_add_notifications_to_Banner.php',
     'AddNotificationsToBannerTable' => $baseDir . '/database/migrations/2016_02_04_230134_add_notifications_to_banner_table.php',
     'BannerTableSeeder' => $baseDir . '/database/seeds/BannerTableSeeder.php',
     'CreateActivitiesTable' => $baseDir . '/database/migrations/future/2015_08_05_203634_create_activities_table.php',
@@ -570,6 +569,7 @@ return array(
     'SessionHandlerInterface' => $vendorDir . '/symfony/http-foundation/Resources/stubs/SessionHandlerInterface.php',
     'TestCase' => $baseDir . '/tests/TestCase.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
+    'UpdateBannerTableAddTitle' => $baseDir . '/database/migrations/2016_02_05_164949_update_banner_table_add_title.php',
     'UpdateBannersTable' => $baseDir . '/database/migrations/2016_01_28_204112_update_banners_table.php',
     'UpdateDashboardBrandingTable' => $baseDir . '/database/migrations/2016_01_27_230216_update_dashboard_branding_table.php',
     'UpdateDocumentsTable' => $baseDir . '/database/migrations/2015_10_27_145632_update_documents_table.php',

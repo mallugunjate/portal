@@ -36,4 +36,44 @@ class Banner extends Model
     	$banner = Banner::find($id);
     	return $banner->background;
     }
+
+    public static function updateBannerInfo($id,Request $request)
+    {
+        \Log::info($request->all());
+        $requestType = $request->request_type;
+        if ($requestType == 'updateNotificationPreference') {
+            return Banner::updateNotificationPreference($id, $request);
+        }
+        else if($requestType == 'updateTitle') {
+            return Banner::updateTitle($id, $request);
+        }
+    }
+
+    public static function updateNotificationPreference($id, Request $request)
+    {
+        $update_type_id = $request->update_type;
+        $update_window_size = $request->update_frequency;
+
+        $banner = Banner::find($id);
+        $banner['update_type_id'] = $update_type_id;
+        $banner['update_window_size'] = $update_window_size;
+        $banner->save();
+
+        return $banner;
+
+    }
+
+    public static function udpateTitle($id,Request $request)
+    {
+        $title = $request->title;
+        $subtitle = $request->subtitle;
+
+        $banner = Banner::find($id);
+        $banner['title'] = $title;
+        $banner['subtitle'] = $subtitle;
+        $banner->save();
+
+        return $banner;
+
+    }
 }

@@ -12,6 +12,7 @@ use App\Models\UserSelectedBanner;
 use App\Models\Dashboard\Quicklinks;
 use App\Models\Feature\Feature;
 
+
 class DashboardAdminController extends Controller
 {
 
@@ -37,6 +38,7 @@ class DashboardAdminController extends Controller
         $quicklinks = Quicklinks::where('banner_id', $banner_id)->orderBy('order')->get();
 
         $features = Feature::where('banner_id', $banner_id)->orderBy('order')->get();
+
 
         return view('admin.dashboard.index')
                 ->with('banner', $banner)
@@ -95,9 +97,9 @@ class DashboardAdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id, Request $request)
     {
-        //
+        return Banner::updateBannerInfo($id, $request);
     }
 
     /**
