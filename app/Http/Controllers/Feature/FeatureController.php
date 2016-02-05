@@ -9,6 +9,10 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Feature\Feature;
 use App\Skin;
+use App\Models\Feature\FeatureDocument;
+use App\Models\Feature\FeaturePackage;
+use App\Models\Document\Document;
+use App\Models\Document\Package;
 
 class FeatureController extends Controller
 {
@@ -63,6 +67,27 @@ class FeatureController extends Controller
 
         $id = $request->id;
         $feature = Feature::where('id', $id)->first();
+
+
+        $feature_documents = FeatureDocument::where('feature_id', $id)->get()->pluck('document_id');
+        $selected_documents = array();
+        foreach ($feature_documents as $doc_id) {
+            
+            $doc = Document::find($doc_id);
+            $doc->folder_path = Document::getFolderPathForDocument($doc_id);
+            array_push($selected_documents, $doc );
+            
+        }
+
+        
+        $feature_packages = FeaturePackage::where('feature_id', $id)->get()->pluck('package_id');
+        $selected_packages = [];
+        foreach ($feature_packages as $package_id) {
+            $package = Package::find($package_id);
+            array_push($selected_packages, $package);
+        }
+
+        dd($selected_packages);
 
         return view('site.feature.index')
             ->with('skin', $skin)

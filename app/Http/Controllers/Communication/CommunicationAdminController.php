@@ -56,7 +56,7 @@ class CommunicationAdminController extends Controller
         $banners = Banner::all();
         $fileFolderStructure = FileFolder::getFileFolderStructure($banner->id);
         
-        $packages = Package::getPackagesStructure($banner->id);
+        $packages = Package::where('banner_id',$banner->id)->get();
         $importance = \DB::table('communication_importance_levels')->lists('name', 'id');
         $tags = Tag::where('banner_id', $banner->id)->lists('name', 'id');
         return view('admin.communication.create')->with('banner', $banner)
@@ -128,7 +128,7 @@ class CommunicationAdminController extends Controller
         $communication_target_stores = CommunicationTarget::where('communication_id', $id)->get()->pluck('store_id');
 
         $fileFolderStructure = FileFolder::getFileFolderStructure($banner->id);
-        $packages = Package::getPackagesStructure($banner->id);
+        $packages = Package::where('banner_id', $banner->id)->get();
         $importance = \DB::table('communication_importance_levels')->lists('name', 'id');
         $tags = Tag::where('banner_id', $banner->id)->lists('name', 'id');
         $tag_ids = ContentTag::where('content_id', $id)->where('content_type', 'communication')->get()->pluck('tag_id');

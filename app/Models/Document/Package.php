@@ -145,28 +145,29 @@ class Package extends Model
         return;
     }
 
-    public static function getPackagesStructure($banner_id)
-    {
-        $packages = Package::where('banner_id', $banner_id)->get();
+    // public static function getPackagesStructure($banner_id)
+    // {
+    //     $packages = Package::where('banner_id', $banner_id)->get();
         
-        foreach ($packages as $package) {
-            $package_doc_ids = DocumentPackage::where('package_id', $package->id)->get();
-            $package["documents"] = [];
-            $doc_counter = 0;
-            $doc_details = [];
-            foreach ($package_doc_ids as $record) {
-                $doc = Document::where('id', $record->document_id)->first();
-                $doc_details[$doc_counter] = $doc;
-                $doc_counter++;
+    //     foreach ($packages as $package) {
+    //         $package_doc_ids = DocumentPackage::where('package_id', $package->id)->get();
+    //         $package["documents"] = [];
+    //         $doc_counter = 0;
+    //         $doc_details = [];
+    //         foreach ($package_doc_ids as $record) {
+    //             $doc = Document::where('id', $record->document_id)->first();
+    //             $doc_details[$doc_counter] = $doc;
+    //             $doc_counter++;
                 
-            }
-            $package["documents"] = $doc_details;
-        }
-        return($packages);
+    //         }
+    //         $package["documents"] = $doc_details;
+    //     }
+    //     return($packages);
 
-    }
+    // }
 
-    public static function updateTags($id, $tags){
+    public static function updateTags($id, $tags)
+    {
         ContentTag::where('content_type', 'package')->where('content_id', $id)->delete();
          foreach ($tags as $tag) {
             ContentTag::create([
