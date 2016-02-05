@@ -169,29 +169,7 @@
 													
 														<input type="text" id="update_type_id" hidden value={{$banner->update_type_id}}>
 														<input type="text" id="update_window_size" hidden value={{$banner->update_window_size}}>
-													
-
-														@if( $banner['update_type_id'] == 1 )
-														<div class="latest-update-option col-md-8" id="latest-update-option-1">
-															{!! Form::radio('latest_updates_option', '1', ['checked'=>'checked']) !!} By Days
-															{!! Form::input('text', 'update_frequency', $banner['update_window_size'] ,['class='=>'update_frequency']) !!}
-
-														</div>
-														<div class="latest-update-option col-md-8" id="latest-update-option-2">
-															{!! Form::radio('latest_updates_option', '2') !!} By Documents
-															{!! Form::input('text', 'update_frequency', null, ['class='=>'update_frequency', 'disabled'=> 'disabled', 'placeholder'=>'Number of Documents']) !!}
-														</div>
-														@elseif ($banner['update_type_id'] == 2)
-														<div class="latest-update-option col-md-8" id="latest-update-option-1">
-															{!! Form::radio('latest_updates_option', '1') !!} By Days
-															{!! Form::input('text', 'update_frequency', null, ['class='=>'update_frequency', 'disabled'=> 'disabled', 'placeholder'=>'Number of Days']) !!}
-
-														</div>
-														<div class="latest-update-option col-md-8" id="latest-update-option-2">
-															{!! Form::radio('latest_updates_option', '2', ['checked'=>'checked']) !!} By Documents
-															{!! Form::input('text', 'update_frequency', $banner['update_window_size'] , ['class='=>'update_frequency']) !!}
-														</div>
-														@else
+														
 														<div class="latest-update-option col-md-8" id="latest-update-option-1">
 															{!! Form::radio('latest_updates_option', '1') !!} By Days
 															{!! Form::input('text', 'update_frequency', null, ['class='=>'update_frequency', 'disabled'=> 'disabled', 'placeholder'=>'Number of Days']) !!}
@@ -201,10 +179,6 @@
 															{!! Form::radio('latest_updates_option', '2') !!} By Documents
 															{!! Form::input('text', 'update_frequency', null, ['class='=>'update_frequency', 'disabled'=> 'disabled', 'placeholder'=>'Number of Documents']) !!}
 														</div>
-														@endif
-													
-													
-													
 													
 												</div>
 
