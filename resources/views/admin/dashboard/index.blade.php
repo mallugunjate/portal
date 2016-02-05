@@ -206,8 +206,8 @@
 													<label class="col-sm-2 control-label">Get Latest Updates</label>
 													<div class="latest-updates-container col-md-10" >
 														
-															<input type="text" id="update_type_id" hidden value="{{$banner->update_type_id}}">
-															<input type="text" id="update_window_size" hidden value="{{$banner->update_window_size}}">
+															<input type="text" id="update_type_id" hidden value={{$banner->update_type_id}}>
+															<input type="text" id="update_window_size" hidden value={{$banner->update_window_size}}>
 															
 															<div class="latest-update-option col-md-8" id="latest-update-option-1">
 																{!! Form::radio('latest_updates_option', '1') !!} By Days
@@ -223,7 +223,8 @@
 
 													
 												</div>
-												
+										</div><!--latest-update row -->
+										<div class="row">			
 												<div class="form-group">
 					                                <div class="ibox-tools">
 					                               		<button class="btn btn-white" id="cancel-notification-preferences" ><i class="fa fa-close"></i> Cancel</a>
@@ -232,7 +233,7 @@
 					                                </div>
 					                            </div>
 												
-										</div><!--latest-update row -->
+										</div>
 			                        </div><!-- ibox-content ends --> 
 
 			                    </div><!-- ibox ends -->	
