@@ -203,9 +203,9 @@
                                                         <h1><i class="fa {{ $icon }}"></i></h1>
                                                     </span>
                                                     <div class="media-body ">
-                                                        <small class="pull-right">5m ago</small>
+                                                        <small class="pull-right">{{ $n->since }} ago</small>
                                                         <strong><a href="{{ $n->filename }}">{{ $n->title }}</a></strong> was {{ $n->verb }} <strong><a href="{{ $n->global_folder_id }}">{{ $n->folder_name}}</a></strong>. <br>
-                                                        <small class="text-muted">{{ $n->updated_at }}</small>
+                                                        <small class="text-muted">{{ $n->prettyDate }}</small>
 
                                                     </div>
                                                 </div>

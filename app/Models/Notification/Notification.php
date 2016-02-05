@@ -39,6 +39,12 @@ class Notification extends Model
             $n->folder_name = $folder_info->name;
             $n->global_folder_id = $folder_info->global_folder_id;
 
+            $since = Carbon::now()->diffForHumans($n->updated_at, true);
+
+            $n->since = $since;
+            $updated_at = Carbon::create($n->udpated_at);
+            $n->prettyDate = $updated_at->toDayDateTimeString();
+
             if( $n->created_at == $n->updated_at ){
                 $n->verb = "added to";
             } else {
