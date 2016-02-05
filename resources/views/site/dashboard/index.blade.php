@@ -5,6 +5,20 @@
     @section('title', 'Dashboard')
     <link href="/css/plugins/iCheck/custom.css" rel="stylesheet">
     @include('site.includes.head')
+
+    <style>
+    #page-wrapper{
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 65%, rgba(0, 0, 0, 1) 100%), url('/images/dashboard-banners/{{ $banner->background }}') no-repeat 0px 60px; 
+        background-size: cover;
+        overflow: hidden;
+    }
+
+    #footer{
+        position: fixed;
+        bottom: 0px;
+    }
+
+    </style>    
     
 </head> 
 
@@ -16,14 +30,17 @@
             </div>
         </nav>
 
-        <div id="page-wrapper" class="gray-bg clearfix" style="background-color: #f3f3f4; background-image: url('/images/dashboard-banners/{{ $banner->background }}'); background-position: top left; background-repeat: no-repeat; float: left; clear: both;">
+        <div id="page-wrapper" class="gray-bg clearfix">
             <div class="row border-bottom">
                 @include('site.includes.topbar')
             </div>
 
 
 
-            <div class="wrapper wrapper-content" style="position: relative; top: 270px;">
+            <div class="wrapper wrapper-content" style="position: relative; top: 30px;">
+
+            <h1 style="color: #fff; font-size: 65px; text-transform: uppercase; font-family: GalaxiePolarisCondensed-Bold;text-shadow: 3px 3px 23px rgba(0, 0, 0, 1);padding-bottom: 0px; line-height: 50px;">Banner Name</h1>
+            <h1 style="color: #fff; font-size: 40px; text-transform: uppercase; font-family: GalaxiePolarisCondensed-Book;text-shadow: 3px 3px 23px rgba(0, 0, 0, 1);padding-bottom: 10px;">This is the Sub Title</h1>
 
 
                 <div class="row">
@@ -38,40 +55,10 @@
 
                             @foreach($features as $feature)
                                
-
-{{-- 
-                            <div class="ibox">
-                        <div class="ibox-content product-box">
-
-                            <div class="product-imitation">
-                                [ INFO ]
-                            </div>
-                            <div class="product-desc">
-                                <span class="product-price">
-                                    $10
-                                </span>
-                                <small class="text-muted">Category</small>
-                                <a href="#" class="product-name"> Product</a>
-
-
-
-                                <div class="small m-t-xs">
-                                    Many desktop publishing packages and web page editors now.
-                                </div>
-                                <div class="m-t text-righ">
-
-                                    <a href="#" class="btn btn-xs btn-outline btn-primary">Info <i class="fa fa-long-arrow-right"></i> </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div> --}}
-
-
-                            
                                     <div class="product-box">
                                         <a href="/{{ Request::segment(1) }}/feature/show/{{ $feature->id }}">
-                                            <div class="image">
-                                                <img alt="image" class="img-responsive" src="/images/featured-covers/{{ $feature->thumbnail }}">
+                                            <div class="image" style="background-image:url('/images/featured-covers/{{ $feature->thumbnail }}'); background-size: cover; background-position: 50%">
+                                                {{-- <img alt="image" class="img-responsive" src="> --}}
                                             </div>
                                             <div class="product-desc">
                                                 <span class="product-price">
@@ -81,7 +68,6 @@
                                             </div>
                                         </a>
                                     </div>
-                            
                             
                             @endforeach
 
@@ -107,8 +93,6 @@
                                                     
                                                 </tr>
       
-
-
                                                 @endforeach
                                                 </tbody>
                                             </table>
@@ -182,21 +166,49 @@
                                     <div class="ibox-title">
                                         <h2>Latest Updates</h2>
                                     </div>
-<div class="ibox-content">
+                                    
+                                    <div class="ibox-content">
 
                                         <div>
                                             <div class="feed-activity-list">
 
 
                                                 @foreach($notifications as $n)
+
+                                                <?php
+                                                    $icon ="";
+                                                    switch($n->original_extension){
+                                                        case "mp4":
+                                                            $icon ="fa-film";
+                                                            break;
+                                                        case "pdf":
+                                                            $icon  = "fa-file-pdf-o";
+                                                            break;
+                                                        case "xls":
+                                                        case "xlsx":
+                                                        case "xlsm":
+                                                            $icon = "fa-file-excel-o";
+                                                            break;
+                                                        case "jpg":
+                                                        case "png":
+                                                        case "bmp":
+                                                        case "gif":
+                                                        case "psd":
+                                                            $icon = "fa-file-image-o";
+                                                            break;
+                                                        default:
+                                                            $icon = "fa-file-o";
+                                                            break;
+                                                    }
+                                                ?>
                                                 <div class="feed-element">
-                                                    <a href="#" class="pull-left">
-                                                        <h1><i class="fa fa-file-pdf-o"></i></h1>
-                                                    </a>
+                                                    <span class="pull-left">
+                                                        <h1><i class="fa {{ $icon }}"></i></h1>
+                                                    </span>
                                                     <div class="media-body ">
-                                                        <small class="pull-right">5m ago</small>
-                                                        <strong>{{ $n->title }}</strong> was added to <strong>Folder Name</strong>. <br>
-                                                        <small class="text-muted">{{ $n->updated_at }}</small>
+                                                        <small class="pull-right">{{ $n->since }} ago</small>
+                                                        <strong><a href="{{ $n->filename }}">{{ $n->title }}</a></strong> was {{ $n->verb }} <strong><a href="{{ $n->global_folder_id }}">{{ $n->folder_name}}</a></strong>. <br>
+                                                        <small class="text-muted">{{ $n->prettyDate }}</small>
 
                                                     </div>
                                                 </div>
