@@ -73,6 +73,21 @@ class Package extends Model
     	return $packages;
     }
 
+    public static function getPackageDetails($id)
+    {
+        $package = Package::find($id);
+        $package["package_documents"] = Package::getPackageDocumentDetails($id);
+        $package["package_folders"] = Package::getPackageFolderDetails($id);
+
+        /*$package['package_folder_tree'] = [
+            [id1] = [tree],
+            [id2] = [tree]
+
+        ];*/
+        return ($package);
+        return $package;
+    }
+
     public static function getPackageDocumentDetails($id)
     {
 
@@ -161,17 +176,16 @@ class Package extends Model
 
     public static function getPackageFolderDetails($id)
     {
-        return [];
         $folder_package_list = FolderPackage::where('package_id', $id)->get()->pluck('folder_id');
         $folders = [];
         foreach ($folder_package_list as $list_item) {
             $folder_id = \DB::table('folder_ids')->where('id', $list_item)->first()->folder_id;
 
             $folder = Folder::where('id', $folder_id)->first();
-            $path = Document::getFolderPathForDocument($document->id); 
-            $document["folder_path"] = $path;
-            array_push($documents, $document);
+            $path = Folder::getFolderPath($folder_id); 
+            $folder["folder_path"] = $path;
+            array_push($folders, $folder);
         }
-        return ( $documents );
+        return ( $folders );
     }
 }
