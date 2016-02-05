@@ -5114,6 +5114,16 @@ del {
   padding: 0;
   border: 1px solid #e7eaec;
 }
+
+.product-box .image{
+  height: 164px;
+  width: 164px;
+}
+.product-box img{
+  height:164px;
+  width: auto;
+  overflow:hidden; 
+}
 .product-box:hover,
 .product-box.active {
   border: 1px solid transparent;
