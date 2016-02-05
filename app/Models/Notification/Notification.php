@@ -21,6 +21,7 @@ class Notification extends Model
     							->get();
     			break;
     		case 2:  //by number of documents
+
     			$notifications = Document::where('banner_id', $bannerId)
     							->orderBy('updated_at', 'desc')
     							->take($windowSize)
@@ -29,19 +30,19 @@ class Notification extends Model
 
     		default:
     			$notifications ="not a valid parameter in getAllNotifications()";
-                //return;
     			break;
     	}
 
        foreach($notifications as $n){
+
             $folder_info = Document::getFolderInfoByDocumentId($n->id);
             // Log::info( $folder_info->name);
             $n->folder_name = $folder_info->name;
             $n->global_folder_id = $folder_info->global_folder_id;
 
             $since = Carbon::now()->diffForHumans($n->updated_at, true);
-
             $n->since = $since;
+            
             $updated_at = Carbon::create($n->udpated_at);
             $n->prettyDate = $updated_at->toDayDateTimeString();
 

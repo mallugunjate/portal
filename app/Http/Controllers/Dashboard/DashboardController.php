@@ -49,13 +49,14 @@ class DashboardController extends Controller
 
         $communicationCount = Communication::getCommunicationCount($storeNumber);
 
-        
+        $communications = Communication::getCommunicationsByStoreNumber($storeNumber);
             //dd($notifications);
         return view('site.dashboard.index')
             ->with('banner', $banner)
             ->with('skin', $skin)
             ->with('quicklinks', $quicklinks)
         	->with('communicationCount', $communicationCount)
+            ->with('communications', $communications)
             ->with('features', $features)
             ->with('notifications', $notifications);
     }
