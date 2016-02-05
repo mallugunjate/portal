@@ -37,7 +37,10 @@
 
 
 
-            <div class="wrapper wrapper-content" style="position: relative; top: 270px;">
+            <div class="wrapper wrapper-content" style="position: relative; top: 30px;">
+
+            <h1 style="color: #fff; font-size: 65px; text-transform: uppercase; font-family: GalaxiePolarisCondensed-Bold;text-shadow: 3px 3px 23px rgba(0, 0, 0, 1);padding-bottom: 0px; line-height: 50px;">Banner Name</h1>
+            <h1 style="color: #fff; font-size: 40px; text-transform: uppercase; font-family: GalaxiePolarisCondensed-Book;text-shadow: 3px 3px 23px rgba(0, 0, 0, 1);padding-bottom: 10px;">This is the Sub Title</h1>
 
 
                 <div class="row">
