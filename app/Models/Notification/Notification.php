@@ -5,6 +5,7 @@ namespace App\Models\Notification;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Document\Document;
 use Carbon\Carbon;
+use Log;
 
 class Notification extends Model
 {
@@ -25,10 +26,25 @@ class Notification extends Model
     							->take($windowSize)
     							->get();
     			break;
+
     		default:
-    			$notifications ="";
+    			$notifications ="not a valid parameter in getAllNotifications()";
+                //return;
     			break;
     	}
+
+       foreach($notifications as $n){
+            $folder_info = Document::getFolderInfoByDocumentId($n->id);
+            // Log::info( $folder_info->name);
+            $n->folder_name = $folder_info->name;
+            $n->global_folder_id = $folder_info->global_folder_id;
+
+            if( $n->created_at == $n->updated_at ){
+                $n->verb = "added to";
+            } else {
+                $n->verb = "updated in";
+            }
+        }
 
     	return $notifications;
     	

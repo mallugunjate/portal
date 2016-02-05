@@ -171,13 +171,40 @@
 
 
                                                 @foreach($notifications as $n)
+
+                                                <?php
+                                                    $icon ="";
+                                                    switch($n->original_extension){
+                                                        case "mp4":
+                                                            $icon ="fa-film";
+                                                            break;
+                                                        case "pdf":
+                                                            $icon  = "fa-file-pdf-o";
+                                                            break;
+                                                        case "xls":
+                                                        case "xlsx":
+                                                        case "xlsm":
+                                                            $icon = "fa-file-excel-o";
+                                                            break;
+                                                        case "jpg":
+                                                        case "png":
+                                                        case "bmp":
+                                                        case "gif":
+                                                        case "psd":
+                                                            $icon = "fa-file-image-o";
+                                                            break;
+                                                        default:
+                                                            $icon = "fa-file-o";
+                                                            break;
+                                                    }
+                                                ?>
                                                 <div class="feed-element">
-                                                    <a href="#" class="pull-left">
-                                                        <h1><i class="fa fa-file-pdf-o"></i></h1>
-                                                    </a>
+                                                    <span class="pull-left">
+                                                        <h1><i class="fa {{ $icon }}"></i></h1>
+                                                    </span>
                                                     <div class="media-body ">
                                                         <small class="pull-right">5m ago</small>
-                                                        <strong>{{ $n->title }}</strong> was added to <strong>Folder Name</strong>. <br>
+                                                        <strong><a href="{{ $n->filename }}">{{ $n->title }}</a></strong> was {{ $n->verb }} <strong><a href="{{ $n->global_folder_id }}">{{ $n->folder_name}}</a></strong>. <br>
                                                         <small class="text-muted">{{ $n->updated_at }}</small>
 
                                                     </div>

@@ -347,7 +347,8 @@ class Document extends Model
                     ->first();
 
         $folderInfo->global_folder_id = $globalFolderId;
-
+    
         return $folderInfo;
+
     }
 }

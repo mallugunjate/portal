@@ -45,8 +45,8 @@ class DashboardController extends Controller
 
         $quicklinks = Quicklinks::getLinks($storeBanner, $storeNumber);
 
-        $notifications = Notification::getAllNotifications($storeInfo->banner_id, 2, 10);
-
+        $notifications = Notification::getAllNotifications($storeInfo->banner_id, 2, 10); //most recent 10 docs
+        // dd($notifications);
         $communicationCount = DB::table('communications_target')
 	        ->where('store_id', $storeNumber)
 	        ->whereNull('is_read')
