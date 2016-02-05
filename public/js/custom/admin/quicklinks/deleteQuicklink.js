@@ -13,7 +13,7 @@ $(document).on('click','.quicklink-delete',function(){
         closeOnConfirm: false
     }, function () {
     	$.ajax({
-		    url: '/admin/quicklinks/'+linkId,
+		    url: '/admin/quicklink/'+linkId,
 		    type: 'DELETE',
 		    success: function(result) {
                 $("#quicklinkslist").find("[data-id='" + linkId + "']").fadeOut(1000);

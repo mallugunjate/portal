@@ -17,7 +17,7 @@
 				@if(isset($navigation[$week["global_id"]]["documents"]))
 					@foreach($navigation[$week["global_id"]]["documents"] as $doc)
 						<br>
-						<input type="checkbox" name="package_files[]" value={{$doc->id}} data-filename = "{{ $doc->original_filename }}" > {{$doc->original_filename}}
+						<input class="document-checkbox" type="checkbox" name="package_files[]" value={{$doc->id}} data-filename = "{{ $doc->original_filename }}" > {{$doc->original_filename}}
 					@endforeach
 				@endif
 			</li>
@@ -31,7 +31,7 @@
 		@if(isset($nav["documents"]))
 			@foreach($nav["documents"] as $doc)
 				<br>
-				<input type="checkbox" name="package_files[]" value= {{$doc->id}} data-filename= "{{ $doc->original_filename }}" >  {{$doc->original_filename}}
+				<input class="document-checkbox" type="checkbox" name="package_files[]" value= {{$doc->id}} data-filename= "{{ $doc->original_filename }}" >  {{$doc->original_filename}}
 			@endforeach
 		@endif
 		<ul>

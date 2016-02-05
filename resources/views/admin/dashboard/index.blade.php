@@ -79,7 +79,7 @@
 
 
 
-		                                <a href="/admin/communication/create" class="btn btn-primary btn"><i class="fa fa-plus"></i> Create New Quiclink</a>
+		                                <a href="/admin/quicklink/create" class="btn btn-primary btn"><i class="fa fa-plus"></i> Create New Quicklink</a>
 		                            </div>
 		                        </div>
 		                        <div class="ibox-content">

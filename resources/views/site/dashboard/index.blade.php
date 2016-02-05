@@ -104,50 +104,48 @@
                                         <h2>Latest Communications</h2>
                                     </div>
                               
-<div class="ibox-content">
-                                <div class="feed-activity-list">
+                                    <div class="ibox-content">
+                                        <div class="feed-activity-list">
 
-                                    <div class="feed-element">
-                                        <div>
-                                            <small class="pull-right">1m ago</small>
-                                            <strong>Get Ready for Hockey Plus</strong>
-                                            <div>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum</div>
-                                            <small class="text-muted">Today 5:60 pm - 12.06.2014</small>
+{{--                                             <div class="feed-element">
+                                                <div>
+                                                    <small class="pull-right">1m ago</small>
+                                                    <strong>Get Ready for Hockey Plus</strong>
+                                                    <div>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum</div>
+                                                    <small class="text-muted">Today 5:60 pm - 12.06.2014</small>
+                                                </div>
+                                            </div>
+
+                                            <div class="feed-element">
+                                                <div>
+                                                    <small class="pull-right">2m ago</small>
+                                                    <strong>Back to School Primer</strong>
+                                                    <div>There are many variations of passages of Lorem Ipsum available</div>
+                                                    <small class="text-muted">Today 2:23 pm - 11.06.2014</small>
+                                                </div>
+                                            </div>
+
+                                            <div class="feed-element">
+                                                <div>
+                                                    <small class="pull-right">5m ago</small>
+                                                    <strong>Information on New Accessories Fixtures</strong>
+                                                    <div>Contrary to popular belief, Lorem Ipsum</div>
+                                                    <small class="text-muted">Today 1:00 pm - 08.06.2014</small>
+                                                </div>
+                                            </div>
+
+                                            <div class="feed-element">
+                                                <div>
+                                                    <small class="pull-right">5m ago</small>
+                                                    <strong>Jumpstart Update for March 2016</strong>
+                                                    <div>The generated Lorem Ipsum is therefore </div>
+                                                    <small class="text-muted">Yesterday 8:48 pm - 10.06.2014</small>
+                                                </div>
+                                            </div> --}}
+
+
                                         </div>
                                     </div>
-
-                                    <div class="feed-element">
-                                        <div>
-                                            <small class="pull-right">2m ago</small>
-                                            <strong>Back to School Primer</strong>
-                                            <div>There are many variations of passages of Lorem Ipsum available</div>
-                                            <small class="text-muted">Today 2:23 pm - 11.06.2014</small>
-                                        </div>
-                                    </div>
-
-                                    <div class="feed-element">
-                                        <div>
-                                            <small class="pull-right">5m ago</small>
-                                            <strong>Information on New Accessories Fixtures</strong>
-                                            <div>Contrary to popular belief, Lorem Ipsum</div>
-                                            <small class="text-muted">Today 1:00 pm - 08.06.2014</small>
-                                        </div>
-                                    </div>
-
-                                    <div class="feed-element">
-                                        <div>
-                                            <small class="pull-right">5m ago</small>
-                                            <strong>Jumpstart Update for March 2016</strong>
-                                            <div>The generated Lorem Ipsum is therefore </div>
-                                            <small class="text-muted">Yesterday 8:48 pm - 10.06.2014</small>
-                                        </div>
-                                    </div>
-
-
-
-
-                                </div>
-                            </div>
                                 </div>                              
                             </div>                            
                         </div>
@@ -171,19 +169,25 @@
                                         <div>
                                             <div class="feed-activity-list">
 
+
+                                                @foreach($notifications as $n)
                                                 <div class="feed-element">
                                                     <a href="#" class="pull-left">
                                                         <h1><i class="fa fa-file-pdf-o"></i></h1>
                                                     </a>
                                                     <div class="media-body ">
                                                         <small class="pull-right">5m ago</small>
-                                                        <strong>Place Holder File name</strong> was added to <strong>Folder Name</strong>. <br>
-                                                        <small class="text-muted">Today 5:60 pm - 12.06.2014</small>
+                                                        <strong>{{ $n->title }}</strong> was added to <strong>Folder Name</strong>. <br>
+                                                        <small class="text-muted">{{ $n->updated_at }}</small>
 
                                                     </div>
                                                 </div>
+                                                @endforeach
 
-                                                <div class="feed-element">
+
+
+
+{{--                                                 <div class="feed-element">
                                                     <a href="#" class="pull-left">
                                                         <h1><i class="fa fa-file-pdf-o"></i></h1>
                                                     </a>
@@ -267,7 +271,7 @@
                                                         <strong>Place Holder File name</strong> was added to <strong>Folder Name</strong>. <br>
                                                         <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                             </div>
 
                                            {{--  <button class="btn btn-primary btn-block m-t"><i class="fa fa-arrow-down"></i> Show More</button> --}}

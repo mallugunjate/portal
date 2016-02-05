@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use App\Models\Tag\Tag;
 use App\Models\Tag\ContentTag;
 use App\Models\UserSelectedBanner;
+use DB;
 
 class Document extends Model
 {
@@ -333,5 +334,20 @@ class Document extends Model
         }
             
         return;
+    }
+
+    public static function getFolderInfoByDocumentId($id)
+    {
+        $folder = FileFolder::where('document_id', $id)->first();
+        $globalFolderId = $folder->folder_id; 
+
+        $folderInfo = DB::table('folder_ids')
+                    ->join('folders', 'folder_ids.folder_id', '=', 'folders.id')
+                    ->where('folder_ids.id', $globalFolderId)
+                    ->first();
+
+        $folderInfo->global_folder_id = $globalFolderId;
+
+        return $folderInfo;
     }
 }
