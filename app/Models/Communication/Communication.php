@@ -10,6 +10,7 @@ use App\Models\Document\Document;
 use App\Models\Document\Package;
 use App\Models\Tag\ContentTag;
 use App\Models\Communication\CommunicationTarget;
+use DB;
 
 class Communication extends Model
 {
@@ -183,6 +184,15 @@ class Communication extends Model
          CommunicationTarget::where('communication_id', $id)->delete();
          ContentTag::where('content_id', $id)->where('content_type', 'communication')->delete();
          return;
+      }
 
+      public static function getCommunicationCount($storeNumber)
+      {
+         $communicationCount = DB::table('communications_target')
+           ->where('store_id', $storeNumber)
+           ->whereNull('is_read')
+           ->count();
+
+         return $communicationCount;
       }
 }
