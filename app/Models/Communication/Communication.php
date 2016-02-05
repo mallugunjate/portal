@@ -22,11 +22,12 @@ class Communication extends Model
          return $communicatons = Communication::where('banner_id', $banner_id)->get();
       }
 
-      public static function getCommunicationsByStoreNumber($storeNumber)
+      public static function getCommunicationsByStoreNumber($storeNumber, $maxToFetch)
       {
         
          $comm = DB::table('communications_target')->where('store_id', $storeNumber)
                             ->join('communications', 'communications.id', '=', 'communications_target.communication_id')
+                            ->take($maxToFetch)
                             ->get();
 
          foreach($comm as $c){
