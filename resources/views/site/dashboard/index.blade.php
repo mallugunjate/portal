@@ -114,7 +114,7 @@
                                             <div class="feed-element">
                                                 <div>
                                                     <small class="pull-right">{{ $c->since }} ago</small>
-                                                    <strong><a href="/{{ Request::segment(1) }}/communication/show/{$c->id}}">{{ $c->subject }}</strong></a><br />
+                                                    <strong><a href="/{{ Request::segment(1) }}/communication/show/{{ $c->id }}">{{ $c->subject }}</strong></a><br />
                                                     <small>{{ $c->prettyDate }}</small>
                                                     <div>{!! $c->trunc !!}</div>
                                                     <small class="text-muted"></small>
