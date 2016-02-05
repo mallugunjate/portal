@@ -58,7 +58,7 @@
                                     <div class="product-box">
                                         <a href="/{{ Request::segment(1) }}/feature/show/{{ $feature->id }}">
                                             <div class="image" style="background-image:url('/images/featured-covers/{{ $feature->thumbnail }}'); background-size: cover; background-position: 50%">
-                                                {{-- <img alt="image" class="img-responsive" src="> --}}
+                                                
                                             </div>
                                             <div class="product-desc">
                                                 <span class="product-price">

@@ -145,26 +145,6 @@ class Package extends Model
         return;
     }
 
-    // public static function getPackagesStructure($banner_id)
-    // {
-    //     $packages = Package::where('banner_id', $banner_id)->get();
-        
-    //     foreach ($packages as $package) {
-    //         $package_doc_ids = DocumentPackage::where('package_id', $package->id)->get();
-    //         $package["documents"] = [];
-    //         $doc_counter = 0;
-    //         $doc_details = [];
-    //         foreach ($package_doc_ids as $record) {
-    //             $doc = Document::where('id', $record->document_id)->first();
-    //             $doc_details[$doc_counter] = $doc;
-    //             $doc_counter++;
-                
-    //         }
-    //         $package["documents"] = $doc_details;
-    //     }
-    //     return($packages);
-
-    // }
 
     public static function updateTags($id, $tags)
     {
@@ -177,5 +157,21 @@ class Package extends Model
             ]);
          }
          return;
+    }
+
+    public static function getPackageFolderDetails($id)
+    {
+        return [];
+        $folder_package_list = FolderPackage::where('package_id', $id)->get()->pluck('folder_id');
+        $folders = [];
+        foreach ($folder_package_list as $list_item) {
+            $folder_id = \DB::table('folder_ids')->where('id', $list_item)->first()->folder_id;
+
+            $folder = Folder::where('id', $folder_id)->first();
+            $path = Document::getFolderPathForDocument($document->id); 
+            $document["folder_path"] = $path;
+            array_push($documents, $document);
+        }
+        return ( $documents );
     }
 }

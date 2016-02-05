@@ -49,19 +49,40 @@
                       
                             <div class="ibox-content clearfix">
 
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            @foreach ($feature_documents as $document)
+                                    <?php
+                                        $icon ="";
+                                        switch($document->original_extension){
+                                            case "mp4":
+                                                $icon ="fa-film";
+                                                break;
+                                            case "pdf":
+                                                $icon  = "fa-file-pdf-o";
+                                                break;
+                                            case "xls":
+                                            case "xlsx":
+                                            case "xlsm":
+                                                $icon = "fa-file-excel-o";
+                                                break;
+                                            case "jpg":
+                                            case "png":
+                                            case "bmp":
+                                            case "gif":
+                                            case "psd":
+                                                $icon = "fa-file-image-o";
+                                                break;
+                                            default:
+                                                $icon = "fa-file-o";
+                                                break;
+                                        }
+                                    ?>
+                                    
+                                    <div class="feature_documents">
+                                        <p><i class="fa {{ $icon }}"></i> {{$document->original_filename}} </p>
+                                    </div>
+                                        
+                                    
+                            @endforeach
 
                             </div>
                         </div>
@@ -76,8 +97,34 @@
                                     </div>
                               
                                     <div class="ibox-content clearfix">
+                                        <div class="row">
+                                            <div class="col-lg-4 package-listing">
+                                            @foreach($feature_packages as $package)
+                                                <div class="feature_package" id="feature-package-{{$package->id}}" data-packageId = {{$package->id}}>
+                                                    <h4><i class="fa fa-gift"></i> {{$package->package_screen_name}} </h4>
+                                                    <div class="package-folder-listing">
 
+                                                    </div>
+                                                </div>
+                                                
+                                            @endforeach
+                                            </div>
 
+                                            <div class="col-lg-8 package-document-listing">
+                                                <div class="package_documents" id="package-document-{{$document->id}}" data-packageId={{$package->id}}  data-packageDocumentId={{$document->id}}>
+                                                    <p><i class="fa {{ $icon }}"></i> {{$document->original_filename}} </p>
+                                                </div>
+                                                <div class="package_documents" id="package-document-{{$document->id}}" data-packageId={{$package->id}}  data-packageDocumentId={{$document->id}}>
+                                                    <p><i class="fa {{ $icon }}"></i> {{$document->original_filename}} </p>
+                                                </div>
+                                                <div class="package_documents" id="package-document-{{$document->id}}" data-packageId={{$package->id}}  data-packageDocumentId={{$document->id}}>
+                                                    <p><i class="fa {{ $icon }}"></i> {{$document->original_filename}} </p>
+                                                </div>
+                                                <div class="package_documents" id="package-document-{{$document->id}}" data-packageId={{$package->id}}  data-packageDocumentId={{$document->id}}>
+                                                    <p><i class="fa {{ $icon }}"></i> {{$document->original_filename}} </p>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -330,5 +377,7 @@
     @include('site.includes.scripts')
     @include('site.includes.bugreport')
 
+
+    <script type="text/javascript" src="/js/custom/site/features/getFeaturePackageDetails.js"></script>
 </body>
 </html> 

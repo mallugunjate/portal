@@ -87,11 +87,12 @@ class FeatureController extends Controller
             array_push($selected_packages, $package);
         }
 
-        dd($selected_packages);
 
         return view('site.feature.index')
             ->with('skin', $skin)
-            ->with('feature', $feature);
+            ->with('feature', $feature)
+            ->with('feature_documents', $selected_documents)
+            ->with('feature_packages', $selected_packages);
     }
 
     /**
