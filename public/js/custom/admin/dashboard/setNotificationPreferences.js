@@ -1,8 +1,18 @@
-$(document).ready(function(){
-	setNotificationType();
-});
+var setNotificationType = function(){
+	
+	var update_type_id = $("#update_type_id").val();
+	var update_frequency = $("#update_window_size").val();
 
-$('input[name="latest_updates_option"]').change( function(){
+	$("input:radio").prop('checked', false);
+	$("input[name=update_frequency]").val('');
+
+	$("input[name='latest_updates_option'][value=" + update_type_id + "]").prop('checked', true);
+	$("#latest-update-option-"+update_type_id).find("input[name='update_frequency']").val(update_frequency);
+}
+
+
+$('input[name="latest_updates_option"]:radio').on('change', function(){
+
 	if($('input[name=latest_updates_option]').is(':checked')){
 		$('input[name="update_frequency"]').prop('disabled', true).val("");
 		$(this).next('input[name="update_frequency"]').prop('disabled', false);
@@ -38,7 +48,10 @@ $(".update-notification-preferences").on('click', function(){
 		    success: function(data) {
 		        
 		        console.log(data); 
+		        $('#update_type_id').val(data.update_type_id);
+		        $("#update_window_size").val(data.update_window_size);
 				swal("Nice!", "Preferences have been updated", "success");
+
 
 		    }
 		}).done(function(response){
@@ -47,13 +60,3 @@ $(".update-notification-preferences").on('click', function(){
 	}	
 });
 
-var setNotificationType = function(){
-	var update_type_id = $("#update_type_id").val();
-	var update_frequency = $("#update_window_size").val();
-
-	$("input:radio").prop('checked', false);
-	$("input[name=update_frequency]").val('');
-
-	$("input[name='latest_updates_option'][value=" + update_type_id + "]").prop('checked', true);
-	$("#latest-update-option-"+update_type_id).find("input[name='update_frequency']").val(update_frequency);
-}

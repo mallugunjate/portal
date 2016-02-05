@@ -63,7 +63,7 @@ class Banner extends Model
 
     }
 
-    public static function udpateTitle($id,Request $request)
+    public static function updateTitle($id,Request $request)
     {
         $title = $request->title;
         $subtitle = $request->subtitle;
