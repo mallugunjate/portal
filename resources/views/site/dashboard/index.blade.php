@@ -110,18 +110,27 @@
                                     <div class="ibox-content">
                                         <div class="feed-activity-list">
 
-                                        @foreach($communications as $c)
-                                            <div class="feed-element">
-                                                <div>
-                                                    <small class="pull-right">{{ $c->since }} ago</small>
-                                                    <strong><a href="/{{ Request::segment(1) }}/communication/show/{{ $c->id }}">{{ $c->subject }}</strong></a><br />
-                                                    <small>{{ $c->prettyDate }}</small>
-                                                    <div>{!! $c->trunc !!}</div>
-                                                    <small class="text-muted"></small>
-                                                </div>
-                                            </div>
-                                        @endforeach
+                                        @if (count($communications) > 0)
 
+                                            @foreach($communications as $c)
+                                                <div class="feed-element">
+                                                    <div>
+                                                        <small class="pull-right">{{ $c->since }} ago</small>
+                                                        <strong><a href="/{{ Request::segment(1) }}/communication/show/{{ $c->id }}">{{ $c->subject }}</strong></a><br />
+                                                        <small>{{ $c->prettyDate }}</small>
+                                                        <div>{!! $c->trunc !!}</div>
+                                                        <small class="text-muted"></small>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        @else
+
+                                             <div class="feed-element">
+                                                    <div>
+                                                        <h4>No Current Communications</h4>
+                                                    </div>
+                                            </div>
+                                        @endif
 {{--                                             <div class="feed-element">
                                                 <div>
                                                     <small class="pull-right">1m ago</small>
