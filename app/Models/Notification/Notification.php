@@ -33,6 +33,21 @@ class Notification extends Model
     			break;
     	}
 
+        Notification::prettifyNotifications($notifications);
+
+    	return $notifications;
+    	
+    }
+
+    public static function getNotificationsByFeature($bannerId, $windowType, $windowSize, $featureId)
+    {
+
+    }
+
+
+
+    public static function prettifyNotifications($notifications)
+    {
        foreach($notifications as $n){
 
             $folder_info = Document::getFolderInfoByDocumentId($n->id);
@@ -52,14 +67,7 @@ class Notification extends Model
                 $n->verb = "updated in";
             }
         }
-
-    	return $notifications;
-    	
-    }
-
-    public static function getNotificationsByFeature($bannerId, $windowType, $windowSize, $featureId)
-    {
-
+        return $notifications;
     }
 
 }

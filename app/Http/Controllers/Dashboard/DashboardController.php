@@ -37,15 +37,15 @@ class DashboardController extends Controller
 
         $storeBanner = $storeInfo->banner_id;
 
-        $banner  = Banner::find($storeInfo->banner_id);
-
+        $banner = Banner::find($storeInfo->banner_id);
+    
         $skin = Skin::getSkin($storeBanner);
         
         $features = Feature::where('banner_id', $storeBanner)->orderBy('order')->get();
 
         $quicklinks = Quicklinks::getLinks($storeBanner, $storeNumber);
 
-        $notifications = Notification::getAllNotifications($storeInfo->banner_id, 2, 10); //most recent 10 docs
+        $notifications = Notification::getAllNotifications($storeInfo->banner_id, $banner->update_type_id, $banner->update_window_size); //most recent 10 docs
 
         $communicationCount = Communication::getCommunicationCount($storeNumber);
 
