@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Request as RequestFacade;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Feature\Feature;
+use App\Models\Notification\Notification;
 use App\Skin;
 use App\Models\Feature\FeatureDocument;
 use App\Models\Feature\FeaturePackage;
@@ -66,8 +67,10 @@ class FeatureController extends Controller
         $skin = Skin::getSkin($storeBanner);
 
         $id = $request->id;
-        $feature = Feature::where('id', $id)->first();
 
+		
+
+        $feature = Feature::where('id', $id)->first();
 
         $feature_documents = FeatureDocument::where('feature_id', $id)->get()->pluck('document_id');
         $selected_documents = array();
@@ -78,7 +81,6 @@ class FeatureController extends Controller
             array_push($selected_documents, $doc );
             
         }
-
         
         $feature_packages = FeaturePackage::where('feature_id', $id)->get()->pluck('package_id');
         $selected_packages = [];
@@ -89,10 +91,12 @@ class FeatureController extends Controller
             array_push($selected_packages, $package);
 
         }
-        // dd($selected_packages);
 
+		$notifications = Notification::getNotificationsByFeature($storeInfo->banner_id, $feature->update_type_id, $feature->update_frequency, $feature->id);
+        
         return view('site.feature.index')
             ->with('skin', $skin)
+			->with('notifications', $notifications)
             ->with('feature', $feature)
             ->with('feature_documents', $selected_documents)
             ->with('feature_packages', $selected_packages);
