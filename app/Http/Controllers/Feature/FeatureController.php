@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Request as RequestFacade;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Feature\Feature;
+use App\Models\Notification\Notification;
 use App\Skin;
 
 class FeatureController extends Controller
@@ -64,8 +65,11 @@ class FeatureController extends Controller
         $id = $request->id;
         $feature = Feature::where('id', $id)->first();
 
+        $notifications = Notification::getNotificationsByFeature($storeInfo->banner_id, $feature->update_type_id, $feature->update_frequency, $feature->id);
+
         return view('site.feature.index')
             ->with('skin', $skin)
+            ->with('notifications', $notifications)
             ->with('feature', $feature);
     }
 

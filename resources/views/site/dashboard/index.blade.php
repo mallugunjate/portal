@@ -8,7 +8,7 @@
 
     <style>
     #page-wrapper{
-        background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 65%, rgba(0, 0, 0, 1) 100%), url('/images/dashboard-banners/{{ $banner->background }}') no-repeat 0px 60px; 
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 65%, rgba(0, 0, 0, 1) 100%), url('/images/dashboard-banners/{{ $banner->background }}') no-repeat 0px 50px; 
         background-size: cover;
         overflow: hidden;
     }
@@ -37,10 +37,10 @@
 
 
 
-            <div class="wrapper wrapper-content" style="position: relative; top: 30px;">
+            <div class="wrapper wrapper-content">
 
-            <h1 style="color: #fff; font-size: 65px; text-transform: uppercase; font-family: GalaxiePolarisCondensed-Bold;text-shadow: 3px 3px 23px rgba(0, 0, 0, 1);padding-bottom: 0px; line-height: 50px;">Banner Name</h1>
-            <h1 style="color: #fff; font-size: 40px; text-transform: uppercase; font-family: GalaxiePolarisCondensed-Book;text-shadow: 3px 3px 23px rgba(0, 0, 0, 1);padding-bottom: 10px;">This is the Sub Title</h1>
+            <h1 style="color: #fff; font-size: 65px; text-transform: uppercase; font-family: GalaxiePolarisCondensed-Bold;text-shadow: 3px 3px 23px rgba(0, 0, 0, 1);padding-bottom: 0px; line-height: 50px;">{{ $banner->title }}</h1>
+            <h1 style="color: #fff; font-size: 40px; text-transform: uppercase; font-family: GalaxiePolarisCondensed-Book;text-shadow: 3px 3px 23px rgba(0, 0, 0, 1);padding-bottom: 10px;">{{ $banner->subtitle }}</h1>
 
 
                 <div class="row">
@@ -110,6 +110,27 @@
                                     <div class="ibox-content">
                                         <div class="feed-activity-list">
 
+                                        @if (count($communications) > 0)
+
+                                            @foreach($communications as $c)
+                                                <div class="feed-element">
+                                                    <div>
+                                                        <small class="pull-right">{{ $c->since }} ago</small>
+                                                        <strong><a href="/{{ Request::segment(1) }}/communication/show/{{ $c->id }}">{{ $c->subject }}</strong></a><br />
+                                                        <small>{{ $c->prettyDate }}</small>
+                                                        <div>{!! $c->trunc !!}</div>
+                                                        <small class="text-muted"></small>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        @else
+
+                                             <div class="feed-element">
+                                                    <div>
+                                                        <h4>No Current Communications</h4>
+                                                    </div>
+                                            </div>
+                                        @endif
 {{--                                             <div class="feed-element">
                                                 <div>
                                                     <small class="pull-right">1m ago</small>
@@ -214,94 +235,6 @@
                                                 </div>
                                                 @endforeach
 
-
-
-
-{{--                                                 <div class="feed-element">
-                                                    <a href="#" class="pull-left">
-                                                        <h1><i class="fa fa-file-pdf-o"></i></h1>
-                                                    </a>
-                                                    <div class="media-body ">
-                                                        <small class="pull-right">2h ago</small>
-                                                        <strong>Place Holder File name</strong> was added to <strong>Folder Name</strong>. <br>
-                                                        <small class="text-muted">Today 2:10 pm - 12.06.2014</small>
-                                                    </div>
-                                                </div>
-                                                <div class="feed-element">
-                                                    <a href="#" class="pull-left">
-                                                        <h1><i class="fa fa-file-pdf-o"></i></h1>
-                                                    </a>
-                                                    <div class="media-body ">
-                                                        <small class="pull-right">2h ago</small>
-                                                        <strong>Place Holder File name</strong> was added to <strong>Folder Name</strong>. <br>
-                                                        <small class="text-muted">2 days ago at 8:30am</small>
-                                                    </div>
-                                                </div>
-                                                <div class="feed-element">
-                                                    <a href="#" class="pull-left">
-                                                        <h1><i class="fa fa-file-pdf-o"></i></h1>
-                                                    </a>
-                                                    <div class="media-body ">
-                                                        <small class="pull-right">5h ago</small>
-                                                        <strong>Place Holder File name</strong> was added to <strong>Folder Name</strong>. <br>
-                                                        <small class="text-muted">Yesterday 1:21 pm - 11.06.2014</small>
-
-                                                    </div>
-                                                </div>
-                                                <div class="feed-element">
-                                                    <a href="#" class="pull-left">
-                                                        <h1><i class="fa fa-file-pdf-o"></i></h1>
-                                                    </a>
-                                                    <div class="media-body ">
-                                                        <small class="pull-right">2h ago</small>
-                                                        <strong>Place Holder File name</strong> was added to <strong>Folder Name</strong>. <br>
-                                                        <small class="text-muted">Yesterday 5:20 pm - 12.06.2014</small>
-                                                        
-                                                        
-                                                    </div>
-                                                </div>
-                                                <div class="feed-element">
-                                                    <a href="#" class="pull-left">
-                                                        <h1><i class="fa fa-file-pdf-o"></i></h1>
-                                                    </a>
-                                                    <div class="media-body ">
-                                                        <small class="pull-right">23h ago</small>
-                                                        <strong>Place Holder File name</strong> was added to <strong>Folder Name</strong>. <br>
-                                                        <small class="text-muted">2 days ago at 2:30 am - 11.06.2014</small>
-                                                    </div>
-                                                </div>
-                                                <div class="feed-element">
-                                                    <a href="#" class="pull-left">
-                                                       <h1><i class="fa fa-file-pdf-o"></i></h1>
-                                                    </a>
-                                                    <div class="media-body ">
-                                                        <small class="pull-right">46h ago</small>
-                                                        <strong>Place Holder File name</strong> was added to <strong>Folder Name</strong>. <br>
-                                                        <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
-                                                    </div>
-                                                </div>
-
-                                                <div class="feed-element">
-                                                    <a href="#" class="pull-left">
-                                                        <h1><i class="fa fa-file-pdf-o"></i></h1>
-                                                    </a>
-                                                    <div class="media-body ">
-                                                        <small class="pull-right">46h ago</small>
-                                                        <strong>Place Holder File name</strong> was added to <strong>Folder Name</strong>. <br>
-                                                        <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
-                                                    </div>
-                                                </div>
-
-                                                <div class="feed-element">
-                                                    <a href="#" class="pull-left">
-                                                        <h1><i class="fa fa-file-pdf-o"></i></h1>
-                                                    </a>
-                                                    <div class="media-body ">
-                                                        <small class="pull-right">46h ago</small>
-                                                        <strong>Place Holder File name</strong> was added to <strong>Folder Name</strong>. <br>
-                                                        <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
-                                                    </div>
-                                                </div> --}}
                                             </div>
 
                                            {{--  <button class="btn btn-primary btn-block m-t"><i class="fa fa-arrow-down"></i> Show More</button> --}}
