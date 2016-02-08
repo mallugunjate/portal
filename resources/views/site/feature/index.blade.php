@@ -4,9 +4,9 @@
 <head>
     @section('title', 'Feature: ' . $feature->title)
     <link href="/css/plugins/iCheck/custom.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/css/custom/site/feature.css">
-    @include('site.includes.head')
     
+    @include('site.includes.head')
+    <link rel="stylesheet" type="text/css" href="/css/custom/site/feature.css">
     <style>
     #page-wrapper{
         background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 65%, rgba(0, 0, 0, 1) 100%), url('/images/featured-backgrounds/{{ $feature->background_image }}') no-repeat 0px 50px; 
@@ -77,10 +77,10 @@
                                                 break;
                                         }
                                     ?>
-                                    
-                                    <div class="feature_documents">
-                                        <p><i class="fa {{ $icon }}"></i> {{$document->original_filename}} </p>
+                                    <div class="feature_documents launchPDFViewer" data-toggle="modal" id="package-document-{{$document->id}}" data-packageDocumentId={{$document->id}} data-file="/viewer/?file=/files/{{$document->filename}}" data-target="#fileviewmodal">
+                                        <i class="fa fa-file-pdf-o"></i>  {{$document->original_filename}} 
                                     </div>
+                                    
                                         
                                     
                             @endforeach
@@ -133,10 +133,8 @@
                                                     <div  class="package-document-listing hidden" data-packageid= {{$package->id}} >
 
                                                         @foreach ($package_document_listing as $document)
-
-                                                        <div class="package_documents" id="package-document-{{$document->id}}" data-packageDocumentId={{$document->id}}>
-                                                            <p><i class="fa file-o"></i> {{$document->original_filename}} </p>
-                                                        </div>
+                                                        <div class="package_documents launchPDFViewer" data-toggle="modal" id="package-document-{{$document->id}}" data-packageDocumentId={{$document->id}} data-file="/viewer/?file=/files/{{$document->filename}}" data-target="#fileviewmodal"><i class="fa fa-file-pdf-o"></i>  {{$document->original_filename}} </div>
+                                                        
                                                            
                                                         @endforeach
                                                     </div>
@@ -340,11 +338,15 @@
     @include('site.includes.footer')       
     @include('site.includes.scripts')
     @include('site.includes.bugreport')
+    @include('site.includes.modal')
 
 
     <script type="text/javascript" src="/js/vendor/underscore-1.8.3.js"></script>
     <script type="text/javascript" src="/js/custom/site/features/showFeaturePackageDetails.js"></script>
     <script type="text/javascript" src="/js/custom/tree.js"></script>
+    <script type="text/javascript" src="/js/vendor/lightbox.min.js"></script>
+    <script type="text/javascript" src="/js/custom/site/documents/fileTable.js"></script>
+    <script type="text/javascript" src="/js/custom/site/features/showFeaturePackageDetails.js"></script>
     <script type="text/javascript">
         $(".tree").treed({openedClass : 'fa-folder-open', closedClass : 'fa-folder'});
     </script>

@@ -27,11 +27,11 @@ var getFolderDocuments = function(global_folder_id, packageId) {
 		}
 	)
 	.done(function(data){
-		
+		console.log(data);
 		_.each(data.files, function(i){
 			$(".package-folder-document-listing[data-packageid= " + packageId + "]").empty().append(
-				'<div>'+
-				'<p><i class="fa fa-file-pdf-o"></i> ' + i.original_filename + '</p>' +
+				'<div class="package-folder-document launchPDFViewer" data-toggle="modal" id="package-folder-document-' + i.id +'" data-packageDocumentId="'+ i.id+'"  data-file="/viewer/?file=/files/' + i.filename+ '" data-target="#fileviewmodal">'+				
+				'<i class="fa fa-file-pdf-o"></i> ' + i.original_filename +
 				'</div>'
 
 			)
@@ -48,4 +48,9 @@ $(".folder-item").on('click', function(e){
 	var global_folder_id = $(this).attr('id');
 	var packageid = $(this).closest('.package-folder-listing').attr('data-packageid')
 	getFolderDocuments(global_folder_id, packageid);
+});
+
+$("body").on("click", ".launchPDFViewer", function(e){
+	var filepath = $(this).attr("data-file");
+	$("#fileviewmodal").find('iframe').attr("src", filepath);
 });
