@@ -4,6 +4,7 @@
 <head>
     @section('title', 'Feature: ' . $feature->title)
     <link href="/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/custom/site/feature.css">
     @include('site.includes.head')
     
     <style>
@@ -93,36 +94,54 @@
                             <div class="col-lg-12">
                                 <div class="ibox float-e-margins">
                                     <div class="ibox-title">
-                                        <h2>Packages (Tree Structure)</h2>
+                                        <h2>Packages</h2>
                                     </div>
                               
                                     <div class="ibox-content clearfix">
                                         <div class="row">
                                             <div class="col-lg-4 package-listing">
                                             @foreach($feature_packages as $package)
+
                                                 <div class="feature_package" id="feature-package-{{$package->id}}" data-packageId = {{$package->id}}>
                                                     <h4><i class="fa fa-gift"></i> {{$package->package_screen_name}} </h4>
-                                                    <div class="package-folder-listing">
-
+                                                    <?php  $package_folder_listing = $package['details']['package_folders']; ?>
+                                                    <?php  $package_folder_tree = $package['details']['package_folder_tree']; ?>
+                                                    <div class="package-folder-listing hidden" data-packageid= {{$package->id}}>
+                                                        
+                                                        @foreach ($package_folder_listing as $folder)
+                                                            <div class="package_folders" id="package-folder-{{$folder->global_folder_id}}" data-packageFolderId={{$folder->global_folder_id}}>
+                                                                <?php $folderstructure = ($package['details']['package_folder_tree'][$folder->global_folder_id]); ?>
+                                                                <?php $folder_root = ($package['details']['package_folder_tree'][$folder->global_folder_id][$folder->global_folder_id]); ?>
+                                                                <ul class="tree">
+                                                                @include('site.feature.folder-structure-partial', ['folderstructure' => $folderstructure, 'folder' =>$folder_root])
+                                                                </ul>
+                                                            </div>
+                                                            
+                                                        @endforeach
                                                     </div>
                                                 </div>
                                                 
                                             @endforeach
                                             </div>
 
-                                            <div class="col-lg-8 package-document-listing">
-                                                <div class="package_documents" id="package-document-{{$document->id}}" data-packageId={{$package->id}}  data-packageDocumentId={{$document->id}}>
-                                                    <p><i class="fa {{ $icon }}"></i> {{$document->original_filename}} </p>
-                                                </div>
-                                                <div class="package_documents" id="package-document-{{$document->id}}" data-packageId={{$package->id}}  data-packageDocumentId={{$document->id}}>
-                                                    <p><i class="fa {{ $icon }}"></i> {{$document->original_filename}} </p>
-                                                </div>
-                                                <div class="package_documents" id="package-document-{{$document->id}}" data-packageId={{$package->id}}  data-packageDocumentId={{$document->id}}>
-                                                    <p><i class="fa {{ $icon }}"></i> {{$document->original_filename}} </p>
-                                                </div>
-                                                <div class="package_documents" id="package-document-{{$document->id}}" data-packageId={{$package->id}}  data-packageDocumentId={{$document->id}}>
-                                                    <p><i class="fa {{ $icon }}"></i> {{$document->original_filename}} </p>
-                                                </div>
+                                            <div class="col-lg-8 package-document-container">
+
+
+                                                @foreach($feature_packages as $package)
+                                                    <?php $package_document_listing = $package['details']['package_documents']; ?>
+                                                    
+                                                    <div  class="package-document-listing hidden" data-packageid= {{$package->id}} >
+
+                                                        @foreach ($package_document_listing as $document)
+
+                                                        <div class="package_documents" id="package-document-{{$document->id}}" data-packageDocumentId={{$document->id}}>
+                                                            <p><i class="fa {{ $icon }}"></i> {{$document->original_filename}} </p>
+                                                        </div>
+                                                           
+                                                        @endforeach
+                                                    </div>
+
+                                                @endforeach
                                             </div>
                                         </div>
                                     </div>
@@ -182,7 +201,7 @@
                                         <h2>Latest Communications</h2>
                                     </div>
                               
-<div class="ibox-content">
+                                <div class="ibox-content">
                                 <div class="feed-activity-list">
 
                                     <div class="feed-element">
@@ -260,92 +279,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="feed-element">
-                                                    <a href="#" class="pull-left">
-                                                        <h1><i class="fa fa-file-pdf-o"></i></h1>
-                                                    </a>
-                                                    <div class="media-body ">
-                                                        <small class="pull-right">2h ago</small>
-                                                        <strong>Place Holder File name</strong> was added to <strong>Folder Name</strong>. <br>
-                                                        <small class="text-muted">Today 2:10 pm - 12.06.2014</small>
-                                                    </div>
-                                                </div>
-                                                <div class="feed-element">
-                                                    <a href="#" class="pull-left">
-                                                        <h1><i class="fa fa-file-pdf-o"></i></h1>
-                                                    </a>
-                                                    <div class="media-body ">
-                                                        <small class="pull-right">2h ago</small>
-                                                        <strong>Place Holder File name</strong> was added to <strong>Folder Name</strong>. <br>
-                                                        <small class="text-muted">2 days ago at 8:30am</small>
-                                                    </div>
-                                                </div>
-                                                <div class="feed-element">
-                                                    <a href="#" class="pull-left">
-                                                        <h1><i class="fa fa-file-pdf-o"></i></h1>
-                                                    </a>
-                                                    <div class="media-body ">
-                                                        <small class="pull-right">5h ago</small>
-                                                        <strong>Place Holder File name</strong> was added to <strong>Folder Name</strong>. <br>
-                                                        <small class="text-muted">Yesterday 1:21 pm - 11.06.2014</small>
-
-                                                    </div>
-                                                </div>
-                                                <div class="feed-element">
-                                                    <a href="#" class="pull-left">
-                                                        <h1><i class="fa fa-file-pdf-o"></i></h1>
-                                                    </a>
-                                                    <div class="media-body ">
-                                                        <small class="pull-right">2h ago</small>
-                                                        <strong>Place Holder File name</strong> was added to <strong>Folder Name</strong>. <br>
-                                                        <small class="text-muted">Yesterday 5:20 pm - 12.06.2014</small>
-                                                        
-                                                        
-                                                    </div>
-                                                </div>
-                                                <div class="feed-element">
-                                                    <a href="#" class="pull-left">
-                                                        <h1><i class="fa fa-file-pdf-o"></i></h1>
-                                                    </a>
-                                                    <div class="media-body ">
-                                                        <small class="pull-right">23h ago</small>
-                                                        <strong>Place Holder File name</strong> was added to <strong>Folder Name</strong>. <br>
-                                                        <small class="text-muted">2 days ago at 2:30 am - 11.06.2014</small>
-                                                    </div>
-                                                </div>
-                                                <div class="feed-element">
-                                                    <a href="#" class="pull-left">
-                                                       <h1><i class="fa fa-file-pdf-o"></i></h1>
-                                                    </a>
-                                                    <div class="media-body ">
-                                                        <small class="pull-right">46h ago</small>
-                                                        <strong>Place Holder File name</strong> was added to <strong>Folder Name</strong>. <br>
-                                                        <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
-                                                    </div>
-                                                </div>
-
-                                                <div class="feed-element">
-                                                    <a href="#" class="pull-left">
-                                                        <h1><i class="fa fa-file-pdf-o"></i></h1>
-                                                    </a>
-                                                    <div class="media-body ">
-                                                        <small class="pull-right">46h ago</small>
-                                                        <strong>Place Holder File name</strong> was added to <strong>Folder Name</strong>. <br>
-                                                        <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
-                                                    </div>
-                                                </div>
-
-                                                <div class="feed-element">
-                                                    <a href="#" class="pull-left">
-                                                        <h1><i class="fa fa-file-pdf-o"></i></h1>
-                                                    </a>
-                                                    <div class="media-body ">
-                                                        <small class="pull-right">46h ago</small>
-                                                        <strong>Place Holder File name</strong> was added to <strong>Folder Name</strong>. <br>
-                                                        <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                                
 
                                            {{--  <button class="btn btn-primary btn-block m-t"><i class="fa fa-arrow-down"></i> Show More</button> --}}
 
@@ -378,6 +312,10 @@
     @include('site.includes.bugreport')
 
 
-    <script type="text/javascript" src="/js/custom/site/features/getFeaturePackageDetails.js"></script>
+    <script type="text/javascript" src="/js/custom/site/features/showFeaturePackageDetails.js"></script>
+    <script type="text/javascript" src="/js/custom/tree.js"></script>
+    <script type="text/javascript">
+        $(".tree").treed({openedClass : 'fa-folder-open', closedClass : 'fa-folder'});
+    </script>
 </body>
 </html> 

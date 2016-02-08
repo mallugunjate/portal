@@ -84,9 +84,12 @@ class FeatureController extends Controller
         $selected_packages = [];
         foreach ($feature_packages as $package_id) {
             $package = Package::find($package_id);
+            $package_details = Package::getPackageDetails($package_id);
+            $package['details'] = $package_details;
             array_push($selected_packages, $package);
-        }
 
+        }
+        // dd($selected_packages);
 
         return view('site.feature.index')
             ->with('skin', $skin)

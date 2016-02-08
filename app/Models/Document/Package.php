@@ -78,13 +78,18 @@ class Package extends Model
         $package = Package::find($id);
         $package["package_documents"] = Package::getPackageDocumentDetails($id);
         $package["package_folders"] = Package::getPackageFolderDetails($id);
+        // $package['package_folder_tree']= [];
+        
+        $tree = Array();
 
-        /*$package['package_folder_tree'] = [
-            [id1] = [tree],
-            [id2] = [tree]
+        foreach ($package['package_folders'] as $folderRoot) {
+            $root_id = $folderRoot['global_folder_id'];
+            $tree[$root_id] = Folder::getFolderChildrenTree($folderRoot['global_folder_id']);
+            // array_merge_recursive( $package['package_folder_tree'], [$root_id => $tree]);
 
-        ];*/
-        return ($package);
+            
+        }
+        $package['package_folder_tree'] = $tree;
         return $package;
     }
 
@@ -184,6 +189,7 @@ class Package extends Model
             $folder = Folder::where('id', $folder_id)->first();
             $path = Folder::getFolderPath($folder_id); 
             $folder["folder_path"] = $path;
+            $folder["global_folder_id"] = $list_item;
             array_push($folders, $folder);
         }
         return ( $folders );
