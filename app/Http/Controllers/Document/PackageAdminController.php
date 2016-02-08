@@ -43,7 +43,7 @@ class PackageAdminController extends Controller
         $banner_id = UserSelectedBanner::where('user_id', \Auth::user()->id)->first()->selected_banner_id;
         $banner  = Banner::find($banner_id);
 
-        $packages = Package::getPackagesStructure($banner->id);
+        $packages = Package::where('banner_id', $banner->id)->get();
         return view('admin/package/index')
                 ->with('banner', $banner)
                 ->with('banners',$banners)

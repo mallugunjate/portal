@@ -10,6 +10,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Feature\Feature;
 use App\Models\Notification\Notification;
 use App\Skin;
+use App\Models\Feature\FeatureDocument;
+use App\Models\Feature\FeaturePackage;
+use App\Models\Document\Document;
+use App\Models\Document\Package;
 
 class FeatureController extends Controller
 {
@@ -63,14 +67,39 @@ class FeatureController extends Controller
         $skin = Skin::getSkin($storeBanner);
 
         $id = $request->id;
+
+		
+
         $feature = Feature::where('id', $id)->first();
 
-        $notifications = Notification::getNotificationsByFeature($storeInfo->banner_id, $feature->update_type_id, $feature->update_frequency, $feature->id);
+        $feature_documents = FeatureDocument::where('feature_id', $id)->get()->pluck('document_id');
+        $selected_documents = array();
+        foreach ($feature_documents as $doc_id) {
+            
+            $doc = Document::find($doc_id);
+            $doc->folder_path = Document::getFolderPathForDocument($doc_id);
+            array_push($selected_documents, $doc );
+            
+        }
+        
+        $feature_packages = FeaturePackage::where('feature_id', $id)->get()->pluck('package_id');
+        $selected_packages = [];
+        foreach ($feature_packages as $package_id) {
+            $package = Package::find($package_id);
+            $package_details = Package::getPackageDetails($package_id);
+            $package['details'] = $package_details;
+            array_push($selected_packages, $package);
 
+        }
+
+		$notifications = Notification::getNotificationsByFeature($storeInfo->banner_id, $feature->update_type_id, $feature->update_frequency, $feature->id);
+        
         return view('site.feature.index')
             ->with('skin', $skin)
-            ->with('notifications', $notifications)
-            ->with('feature', $feature);
+			->with('notifications', $notifications)
+            ->with('feature', $feature)
+            ->with('feature_documents', $selected_documents)
+            ->with('feature_packages', $selected_packages);
     }
 
     /**
