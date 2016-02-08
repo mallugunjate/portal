@@ -45,7 +45,7 @@ class DashboardController extends Controller
 
         $quicklinks = Quicklinks::getLinks($storeBanner, $storeNumber);
 
-        $notifications = Notification::getAllNotifications($storeInfo->banner_id, $banner->update_type_id, $banner->update_window_size); //most recent 10 docs
+        $notifications = Notification::getAllNotifications($storeInfo->banner_id, $banner->update_type_id, $banner->update_window_size);
 
         $communicationCount = Communication::getCommunicationCount($storeNumber);
 
