@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Models\UserSelectedBanner;
+use App\Models\UserBanner;
+use App\Models\Banner;
+use App\Models\UrgentNotice\UrgentNotice;
 
 class UrgentNoticeAdminController extends Controller
 {
@@ -16,7 +20,19 @@ class UrgentNoticeAdminController extends Controller
      */
     public function index()
     {
-        //
+        // return view('admin.urgent-notice.index');
+
+        $user_id = \Auth::user()->id;
+        $banner_ids = UserBanner::where('user_id', $user_id)->get()->pluck('banner_id');
+        $banners = Banner::whereIn('id', $banner_ids)->get();        
+        $banner_id = UserSelectedBanner::where('user_id', \Auth::user()->id)->first()->selected_banner_id;
+        $banner  = Banner::find($banner_id);
+
+        $urgent_notices = UrgentNotice::where('banner_id', $banner->id)->get();
+        return view('admin/urgent-notice/index')
+                ->with('banner', $banner)
+                ->with('banners',$banners)
+                ->with('urgent_notices',$urgent_notices);
     }
 
     /**
@@ -26,7 +42,7 @@ class UrgentNoticeAdminController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.urgent-notice.create');
     }
 
     /**
@@ -59,7 +75,7 @@ class UrgentNoticeAdminController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.urgent-notice.edit');
     }
 
     /**

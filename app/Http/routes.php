@@ -107,6 +107,9 @@ Route::resource('/admin/tag', 'Tag\TagAdminController');
 //Quicklinks
 Route::resource('/admin/quicklink', 'Dashboard\QuicklinksAdminController');
 
+//Urgent Notices
+Route::resource('/admin/urgentnotice', 'UrgentNotice\UrgentNoticeAdminController');
+
 //Users
 Route::resource('/admin/user', 'User\UserAdminController');
 
