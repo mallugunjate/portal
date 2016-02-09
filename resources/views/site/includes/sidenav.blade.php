@@ -19,6 +19,10 @@
                 </li>
 
 
+                <li style="background-color: red; color: white;">
+                    <a style="color: white" href="/{{ Request::segment(1) }}"><i class="fa fa-bolt"></i> <span class="nav-label">URGENT NOTICE</span><span class="label label-primary pull-right">5</span></a>
+                </li>
+
 
                 @if (Request::is( Request::segment(1) ))
                 <li class="active">
