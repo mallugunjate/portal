@@ -86,7 +86,7 @@ $(document).on('click','.urgentnotice-create',function(){
   	var hasError = false;
  
 	var title = $("#title").val();
-	var description = CKEDITOR.instances['description'].getData()
+	var description = CKEDITOR.instances['description'].getData();
 	var start = $("#start").val();
 	var end = $("#end").val();
 	var attachment_type  = $("input[name='attachment_type']").val();

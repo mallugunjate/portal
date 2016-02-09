@@ -14,6 +14,8 @@ use App\Models\UrgentNotice\UrgentNotice;
 use App\Models\Document\FileFolder;
 use App\Models\Document\FolderStructure;
 use App\Models\UrgentNotice\UrgentNoticeAttachmentType;
+use App\Models\UrgentNotice\UrgentNoticeAttachment;
+use App\Models\UrgentNotice\UrgentNoticeTarget;
 
 class UrgentNoticeAdminController extends Controller
 {
@@ -98,7 +100,36 @@ class UrgentNoticeAdminController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.urgent-notice.edit');
+        
+        $banner = UserSelectedBanner::getBanner();
+        $banners = Banner::all();
+
+        $urgent_notice = UrgentNotice::find($id);
+
+        $attachment_types = UrgentNoticeAttachmentType::all();
+        $urgent_notice_attachments = UrgentNoticeAttachment::where('urgent_notice_id', $id)->get();
+        
+        $storeList = StoreInfo::getStoreListing($banner->id);
+        $target_stores = UrgentNoticeTarget::where('urgent_notice_id', $id)->get()->pluck('store_id')->toArray();
+
+        $all_stores = false;
+        if (count($storeList) == count($target_stores)) {
+            $all_stores = true;
+        }
+        $fileFolderStructure = FileFolder::getFileFolderStructure($banner->id);
+        $folderStructure = FolderStructure::getNavigationStructure($banner->id);
+
+        
+        return view('admin.urgent-notice.edit')->with('banners', $banners)
+                                            ->with('banner', $banner)
+                                            ->with('urgent_notice', $urgent_notice)
+                                            ->with('urgent_notice_attachments', $urgent_notice_attachments)
+                                            ->with('attachment_types', $attachment_types)
+                                            ->with('target_stores', $target_stores)
+                                            ->with('storeList', $storeList)
+                                            ->with('all_stores', $all_stores)
+                                            ->with('navigation', $fileFolderStructure)
+                                            ->with('folderStructure', $folderStructure);
     }
 
     /**
@@ -110,7 +141,7 @@ class UrgentNoticeAdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        UrgentNotice::updateUrgentNotice($request, $id);
     }
 
     /**

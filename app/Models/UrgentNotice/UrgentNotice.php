@@ -49,4 +49,45 @@ class UrgentNotice extends Model
     	return $urgentNotice;
     	
     }
+
+    public static function updateUrgentNotice($request, $id)
+    {
+    	$banner_id = $request->banner_id;
+    	$title = $request->title;
+    	$description = $request->description;
+    	$start = $request->start;
+    	$end = $request->end;
+    	$attachment_type_id = $request->attachment_type;
+    	$attachments = $request->attachments;
+    	$target_stores = $request->target_stores;
+
+    	$urgentNotice = UrgentNotice::find($id);
+    	$urgentNotice->update([
+    		'banner_id' => $banner_id,
+    		'title'		=> $title,
+    		'description' => $description,
+    		'start'		=> $start,
+    		'end'		=> $end,
+    		'attachment_type_id'	=>$attachment_type_id
+    	]);
+    	$urgentNotice->save();
+
+    	UrgentNoticeAttachment::where('urgent_notice_id', $id)->delete();
+    	foreach ($attachments as $attachment) {
+    		UrgentNoticeAttachment::create([
+    			'urgent_notice_id' => $urgentNotice->id,
+    			'attachment_id' => $attachment
+    		]);
+    	}
+
+    	UrgentNoticeTarget::where('urgent_notice_id', $id)->delete();
+    	foreach ($target_stores as $store) {
+    		UrgentNoticeTarget::create([
+    			'urgent_notice_id' 	=> $urgentNotice->id,
+    			'store_id'			=> $store
+    		]);
+    	}
+
+
+    }
 }
