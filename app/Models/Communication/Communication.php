@@ -15,7 +15,7 @@ use DB;
 class Communication extends Model
 {
     protected $table = 'communications';
-    protected $fillable = ['subject', 'body', 'sender', 'importance', 'send_at', 'archive_at', 'is_draft', 'banner_id'];
+    protected $fillable = ['subject', 'body', 'sender', 'importance', 'communication_type_id', 'send_at', 'archive_at', 'is_draft', 'banner_id'];
 
    	public static function getAllCommunication($banner_id)
       {

@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'AddBrandingToBannerTable' => $baseDir . '/database/migrations/2016_02_01_174829_add_branding_to_banner_table.php',
     'AddNotificationsToBannerTable' => $baseDir . '/database/migrations/2016_02_04_230134_add_notifications_to_banner_table.php',
+    'AddTypesToCommunicationTable' => $baseDir . '/database/migrations/2016_02_09_175504_add_types_to_communication_table.php',
     'BannerTableSeeder' => $baseDir . '/database/seeds/BannerTableSeeder.php',
     'CreateActivitiesTable' => $baseDir . '/database/migrations/future/2015_08_05_203634_create_activities_table.php',
     'CreateActivityLevelsTable' => $baseDir . '/database/migrations/future/2015_08_05_210403_create_activity_levels_table.php',
