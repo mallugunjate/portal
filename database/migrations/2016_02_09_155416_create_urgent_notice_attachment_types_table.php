@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUrgentNoticeAttachmentTypeTable extends Migration
+class CreateUrgentNoticeAttachmentTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class CreateUrgentNoticeAttachmentTypeTable extends Migration
      */
     public function up()
     {
-        Schema::create('urgent_notice_attachment_type', function (Blueprint $table) {
+        Schema::create('urgent_notice_attachment_types', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->string('name');
             $table->timestamps();
@@ -26,6 +26,6 @@ class CreateUrgentNoticeAttachmentTypeTable extends Migration
      */
     public function down()
     {
-        Schema::drop('urgent_notice_attachment_type');
+        Schema::drop('urgent_notice_attachment_types');
     }
 }

@@ -10,6 +10,9 @@ use App\Models\UserSelectedBanner;
 use App\Models\UserBanner;
 use App\Models\Banner;
 use App\Models\UrgentNotice\UrgentNotice;
+use App\Models\Document\FileFolder;
+use App\Models\Document\FolderStructure;
+use App\Models\UrgentNotice\UrgentNoticeAttachmentType;
 
 class UrgentNoticeAdminController extends Controller
 {
@@ -42,7 +45,24 @@ class UrgentNoticeAdminController extends Controller
      */
     public function create()
     {
-        return view('admin.urgent-notice.create');
+        
+        $banner = UserSelectedBanner::getBanner();
+        $banners = Banner::all();
+
+        $fileFolderStructure = FileFolder::getFileFolderStructure($banner->id);
+        $folderStructure = FolderStructure::getNavigationStructure($banner->id);
+
+        $attachment_types = UrgentNoticeAttachmentType::all();
+
+        
+            
+        return view('admin.urgent-notice.create')
+                    ->with('banner', $banner)
+                    ->with('banners',$banners)
+                    ->with('navigation', $fileFolderStructure)
+                    ->with('folderStructure', $folderStructure)
+                    ->with('attachment_types', $attachment_types);
+        
     }
 
     /**

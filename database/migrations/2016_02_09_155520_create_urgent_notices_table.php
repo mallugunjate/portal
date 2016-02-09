@@ -22,7 +22,7 @@ class CreateUrgentNoticesTable extends Migration
             $table->date('end')->nullable();
             $table->timestamps();
             $table->foreign('banner_id')->references('id')->on('banners')->onDelete('cascade');
-            $table->foreign('attachment_type_id')->references('id')->on('urgent_notice_attachment_type')->onDelete('cascade');
+            $table->foreign('attachment_type_id')->references('id')->on('urgent_notice_attachment_types')->onDelete('cascade');
         });
     }
 

@@ -32,7 +32,7 @@
                             <a href="/admin/package">Package</a>
                         </li>
                         <li class="active">
-                            <strong>Create an Package</strong>
+                            <strong>Create a Package</strong>
                         </li>
                     </ol>
                 </div>
