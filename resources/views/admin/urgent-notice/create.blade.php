@@ -69,7 +69,7 @@
                                             <div class="col-sm-10"><input type="text" id="title" name="title" class="form-control" value=""></div>
                                         </div>
                                         <div class="form-group"><label class="col-sm-2 control-label">Description</label>
-                                            <div class="col-sm-10"><input type="text" id="description" name="description" class="form-control" value=""></div>
+                                            <div class="col-sm-10"><textarea id="description" name="description" class="form-control" value=""></textarea></div>
                                         </div>
 
                                         <div class="hr-line-dashed"></div>
@@ -201,7 +201,8 @@
 
 
 <script type="text/javascript" src="/js/custom/admin/urgent-notices/addUrgentNotice.js"></script>
-<script type="text/javascript" src="/js/plugins/chosen/chosen.jquery.js"></script>		
+<script type="text/javascript" src="/js/plugins/chosen/chosen.jquery.js"></script>	
+<script type="text/javascript" src="/js/plugins/ckeditor-standard/ckeditor.js"></script>	
 
 <script type="text/javascript">
     $.ajaxSetup({
@@ -217,7 +218,8 @@
         keyboardNavigation: false,
         forceParse: false,
         autoclose: true
-    });                
+    });            
+    CKEDITOR.replace('description');    
 
 </script>
 
