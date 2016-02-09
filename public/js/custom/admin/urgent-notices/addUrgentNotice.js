@@ -58,6 +58,26 @@ $('#attach-selected-files').on('click', function(){
 	$("#attachment-selected").parent().removeClass('hidden');
 });
 
+
+$("#allStores").change(function(){
+
+	if ($("#allStores").is(":checked")) {
+
+		$("#storeSelect option").each(function(index){			
+			$(this).attr('selected', 'selected');
+		});
+		$("#storeSelect").chosen();
+		
+	}
+	else if ($("#allStores").not(":checked")) {
+		$("#storeSelect option").each(function(){
+			$(this).removeAttr('selected');
+		});
+		$("#storeSelect").chosen();
+		
+	}
+});
+
 $(document).on('click','.urgentnotice-create',function(){
   	
   	var hasError = false;

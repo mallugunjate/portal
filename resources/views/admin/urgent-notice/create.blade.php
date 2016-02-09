@@ -104,6 +104,17 @@
 
                                         <div class="hr-line-dashed"></div>
 
+                                        <div class="form-group">
+                                            
+                                            <label class="col-sm-2 control-label">Target Stores</label>
+                                            <div class="col-sm-10">
+                                                {!! Form::select('stores', $storeList, null, [ 'class'=>'chosen', 'id'=> 'storeSelect', 'multiple'=>'true']) !!}
+                                                {!! Form::label('allStores', 'Or select all stores:') !!}
+                                                {!! Form::checkbox('allStores', null, false ,['id'=> 'allStores'] ) !!}
+                                            </div>
+
+                                        </div>
+
 
 
                                         <div class="form-group">
@@ -187,13 +198,20 @@
 @include('site.includes.bugreport')
 
 
+
+
+<script type="text/javascript" src="/js/custom/admin/urgent-notices/addUrgentNotice.js"></script>
+<script type="text/javascript" src="/js/plugins/chosen/chosen.jquery.js"></script>		
+
 <script type="text/javascript">
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-
+    $(".chosen").chosen({
+        width:'75%'
+    })
     $('.input-daterange').datepicker({
          format: 'yyyy-mm-dd',
         keyboardNavigation: false,
@@ -202,8 +220,6 @@
     });                
 
 </script>
-
-<script type="text/javascript" src="/js/custom/admin/urgent-notices/addUrgentNotice.js"></script>			
 
 
 </body>

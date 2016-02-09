@@ -69,7 +69,7 @@
 
 
 											<td>{{ $urgent_notice->id }}</td>
-											<td><a href="/admin/package/{{ $urgent_notice->id }}/edit">{{ $urgent_notice->title }}</a></td>
+											<td><a href="/admin/urgentnotice/{{ $urgent_notice->id }}/edit">{{ $urgent_notice->title }}</a></td>
 											
 											<td>
 

@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Models\UserSelectedBanner;
 use App\Models\UserBanner;
 use App\Models\Banner;
+use App\Models\StoreInfo;
 use App\Models\UrgentNotice\UrgentNotice;
 use App\Models\Document\FileFolder;
 use App\Models\Document\FolderStructure;
@@ -54,14 +55,16 @@ class UrgentNoticeAdminController extends Controller
 
         $attachment_types = UrgentNoticeAttachmentType::all();
 
+        $storeList = StoreInfo::getStoreListing($banner->id);
         
-            
+        
         return view('admin.urgent-notice.create')
                     ->with('banner', $banner)
                     ->with('banners',$banners)
                     ->with('navigation', $fileFolderStructure)
                     ->with('folderStructure', $folderStructure)
-                    ->with('attachment_types', $attachment_types);
+                    ->with('attachment_types', $attachment_types)
+                    ->with('storeList', $storeList);
         
     }
 
