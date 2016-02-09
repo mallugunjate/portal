@@ -18,6 +18,7 @@ return array(
     'CreateCommunicationImportanceTable' => $baseDir . '/database/migrations/2015_12_03_214110_create_communication_importance_table.php',
     'CreateCommunicationPackagePivotTable' => $baseDir . '/database/migrations/2015_12_04_222108_create_communication_package_pivot_table.php',
     'CreateCommunicationTargetTable' => $baseDir . '/database/migrations/2015_12_18_212934_CreateCommunicationTargetTable.php',
+    'CreateCommunicationTypesTable' => $baseDir . '/database/migrations/2016_02_09_164438_create_communication_types_table.php',
     'CreateCommunicationsTable' => $baseDir . '/database/migrations/2015_12_03_214558_create_communications_table.php',
     'CreateContentTagPivotTable' => $baseDir . '/database/migrations/2015_12_09_200212_create_content_tag_pivot_table.php',
     'CreateDashboardBrandingTable' => $baseDir . '/database/migrations/2016_01_27_220050_create_dashboard_branding_table.php',
