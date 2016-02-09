@@ -17,8 +17,8 @@
 
     <body class="gray-bg">
 
-    <div class="middle-box text-center animated fadeInDown">
-        <h1>NOPE</h1>
+    <div class=" text-center animated fadeInDown" style="width: 90% !important; margin: 0 auto; padding-top: 100px;">
+        <h1 style="font-size: 60px;">NOPE</h1>
         <h3 class="font-bold">This is what we call a 404 error, folks.</h3>
 
         
@@ -26,7 +26,7 @@
 
 
         <div class="error-desc">
-            <p>You've typed something wrong, or we've linked something wrong. <br />Either way, this is a <strong>fail</strong>.</p>
+            <p>You've made a typo or we did. <br />Either way, this is a <strong>fail</strong>.</p>
             <img src="/images/bloopers/<?php echo $images[$i]; ?>" alt="" />
         </div>
 
@@ -37,10 +37,11 @@
                 <button type="submit" class="btn btn-primary">Search</button>
             </form> -->
         
-        <p>
-            <h3>We Sugguest...</h3>
-            <a href="/">Go to the Home Page</a><br />
-            <a href="#" onclick="history.go(-1);">Go back to the page you just came from</a>
+        
+            <h2>We Sugguest...</h2>
+            <p>
+            <a href="/">Going to the home page</a><br />
+            <a href="#" onclick="history.go(-1);">Going back to the page you just came from</a>
         </p>
 
     </div>
