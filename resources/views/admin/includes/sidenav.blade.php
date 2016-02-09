@@ -66,7 +66,7 @@
         </ul>
     </li>
 
-    @if (Request::is('admin/communication/*') || Request::is('admin/communication'))
+    @if (Request::is('admin/communication/*') || Request::is('admin/communication') || Request::is('admin/communicationtypes') || Request::is('/admin/communicationtypes/*'))
     <li class="active">
     @else
     <li>

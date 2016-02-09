@@ -12,6 +12,7 @@ use App\Models\Document\Package;
 use App\Models\Communication\Communication;
 use App\Models\Communication\CommunicationDocument;
 use App\Models\Communication\CommunicationPackage;
+use App\Models\Communication\CommunicationType;
 use App\Models\Tag\Tag;
 use App\Models\Tag\ContentTag;
 use App\Models\UserSelectedBanner;
@@ -55,11 +56,12 @@ class CommunicationAdminController extends Controller
         $banner = UserSelectedBanner::getBanner();
         $banners = Banner::all();
         $fileFolderStructure = FileFolder::getFileFolderStructure($banner->id);
-        
+        $communicationTypes = CommunicationType::all();
         $packages = Package::where('banner_id',$banner->id)->get();
         $importance = \DB::table('communication_importance_levels')->lists('name', 'id');
         $tags = Tag::where('banner_id', $banner->id)->lists('name', 'id');
         return view('admin.communication.create')->with('banner', $banner)
+                                                ->with('communicationTypes', $communicationTypes)
                                                 ->with('banners', $banners)
                                                 ->with('importance', $importance)
                                                 ->with('navigation', $fileFolderStructure)
