@@ -29,6 +29,7 @@ $(".folder-checkbox").on('click', function(){
 $('#attach-selected-folders').on('click', function(){
 
 	var  attachment_type = $("input[name='attachment_type']").val();
+	var  attachment_type = $("input[name='attachment_type']").val();
 	$("#attachment-selected").empty();
 	$("#attachment-selected").append('<p>Folders attached :</p>');
 	$('input[name^="package_folders"]').each(function(){
@@ -49,8 +50,10 @@ $('#attach-selected-folders').on('click', function(){
 });
 
 $('#attach-selected-files').on('click', function(){
+	var  attachment_type = $("input[name='attachment_type']").val();
 	$("#attachment-selected").append('<p>Files attached :</p>');
 	$('input[name^="package_files"]').each(function(){
+		console.log('hello');
 		if($(this).is(":checked")){
 			$("#attachment-selected").append('<ul class="attachment" data-attachment-type="' + attachment_type +'" data-attachmentid='+ $(this).val() +'>'+$(this).attr("data-filename")+'</ul>')
 		}
@@ -87,9 +90,12 @@ $(document).on('click','.urgentnotice-create',function(){
 	var start = $("#start").val();
 	var end = $("#end").val();
 	var attachment_type  = $("input[name='attachment_type']").val();
-	var attachments = [];
 	var banner_id = $("input[name='banner_id']").val();
-	
+	var target_stores  = $("#storeSelect").val();
+	var attachments = [];
+
+	console.log(target_stores);
+
 	$(".attachment").each(function(){
 		attachments.push($(this).attr('data-attachmentid'));
 	});
@@ -115,6 +121,7 @@ $(document).on('click','.urgentnotice-create',function(){
 		  		attachment_type : attachment_type,
 		  		attachments : attachments,
 		  		banner_id : banner_id,
+		  		target_stores : target_stores
 		  		
 		    },
 		    success: function(result) {

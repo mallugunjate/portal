@@ -20,8 +20,10 @@ class UrgentNotice extends Model
     	$end = $request->end;
     	$attachment_type_id = $request->attachment_type;
     	$attachments = $request->attachments;
-
+    	$target_stores = $request->target_stores;
+    	
     	\Log::info($request->all());
+    	
     	$urgentNotice = UrgentNotice::create([
     		'banner_id' => $banner_id,
     		'title'		=> $title,
@@ -38,6 +40,12 @@ class UrgentNotice extends Model
     		]);
     	}
 
+    	foreach ($target_stores as $store) {
+    		UrgentNoticeTarget::create([
+    			'urgent_notice_id' 	=> $urgentNotice->id,
+    			'store_id'			=> $store
+    		]);
+    	}
     	return $urgentNotice;
     	
     }
