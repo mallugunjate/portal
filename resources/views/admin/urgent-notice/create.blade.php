@@ -62,7 +62,7 @@
                                         </div>
                                     @endif
                                     
-                                    <form method="get" class="form-horizontal" id="createNewPackageForm">
+                                    <form method="get" class="form-horizontal" id="createNewUrgentNoticeForm">
                                         
                                         <input type="hidden" name="banner_id" value="{{$banner->id}}">
                                         <div class="form-group"><label class="col-sm-2 control-label">Title</label>
@@ -77,8 +77,14 @@
                                             <div class="col-md-10">
                                                @foreach($attachment_types as $atype)
                                                <?php $id = "attachment-" . $atype->name ?>
-                                               	<div>{!! Form::input('radio', 'type', $atype->id , ['id'=> $id ]) !!} {{$atype->name}}</div>
+                                               	<div>{!! Form::input('radio', 'attachment_type', $atype->id , ['id'=> $id ]) !!} {{$atype->name}}</div>
                                                @endforeach
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group hidden"><label class="col-sm-2 control-label">Attachment Selected</label>
+                                            <div class="col-md-10" id="attachment-selected">
+                                               
                                             </div>
                                         </div>
 
@@ -103,7 +109,7 @@
                                         <div class="form-group">
                                             <div class="col-sm-10 col-sm-offset-2">
                                                 <a class="btn btn-white" href="/admin/urgentnotice"><i class="fa fa-close"></i> Cancel</a>
-                                                <button class="urgentnotice-create btn btn-primary" type="submit"><i class="fa fa-check"></i> Create New urgent Notice</button>
+                                                <button class="urgentnotice-create btn btn-primary" type="submit"><i class="fa fa-check"></i> Create New Urgent Notice</button>
 
                                             </div>
                                         </div>
@@ -197,7 +203,7 @@
 
 </script>
 
-<script type="text/javascript" src="/js/custom/admin/packages/addPackage.js"></script>			
+<script type="text/javascript" src="/js/custom/admin/urgent-notices/addUrgentNotice.js"></script>			
 
 
 </body>

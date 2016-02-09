@@ -73,7 +73,7 @@ class UrgentNoticeAdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return UrgentNotice::storeUrgentNotice($request);
     }
 
     /**
