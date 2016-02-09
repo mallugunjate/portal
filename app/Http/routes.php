@@ -126,8 +126,6 @@ Route::get('/api/v1/banner/{id}/document/recent/{days}', 'Api\V1\ApiController@g
 Route::get('/api/v1/folder/{id}/archived', 'Api\V1\ApiController@getArchivedDocuments');
 
 
-
-
 Route::get('/howyoulikemenow', function () {
     return view('site.howyoulikemenow');
 });

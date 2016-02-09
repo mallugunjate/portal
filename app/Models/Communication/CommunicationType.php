@@ -10,5 +10,5 @@ class CommunicationType extends Model
 	use SoftDeletes;
     protected $table = 'communication_types';
     protected $dates = ['deleted_at'];
-    protected $fillable = ['communication_type', 'banner_id'];
+    protected $fillable = ['communication_type', 'banner_id', 'colour'];
 }

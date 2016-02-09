@@ -573,6 +573,7 @@ return array(
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
     'UpdateBannerTableAddTitle' => $baseDir . '/database/migrations/2016_02_05_164949_update_banner_table_add_title.php',
     'UpdateBannersTable' => $baseDir . '/database/migrations/2016_01_28_204112_update_banners_table.php',
+    'UpdateCommunicationTypeTable' => $baseDir . '/database/migrations/2016_02_09_194959_update_communication_type_table.php',
     'UpdateDashboardBrandingTable' => $baseDir . '/database/migrations/2016_01_27_230216_update_dashboard_branding_table.php',
     'UpdateDocumentsTable' => $baseDir . '/database/migrations/2015_10_27_145632_update_documents_table.php',
     'UpdateFeaturesTable' => $baseDir . '/database/migrations/2016_01_29_201330_update_features_table.php',

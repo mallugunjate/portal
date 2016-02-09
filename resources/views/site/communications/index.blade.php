@@ -31,10 +31,10 @@
                         <div class="file-manager">
                             {{-- <a class="btn btn-block btn-primary compose-mail" href="mail_compose.html">Compose Mail</a> --}}
                             <div class="space-25"></div>
-                            <h5>Folders</h5>
+                            {{-- <h5>Folders</h5> --}}
                             <ul class="folder-list m-b-md" style="padding: 0">
                                 <li>
-                                    <a href="/{{ Request::segment(1) }}/communication"> <i class="fa fa-inbox "></i> Inbox 
+                                    <a href="/{{ Request::segment(1) }}/communication"> <i class="fa fa-inbox "></i> All Messages 
                                     @if($communicationCount > 0)
                                     <span class="label label-warning pull-right">{{ $communicationCount }}</span> 
                                     @endif
@@ -47,14 +47,20 @@
                             </ul>
                             <h5>Categories</h5>
                             <ul class="category-list" style="padding: 0">
-                                <li><a href="#"> <i class="fa fa-circle text-navy"></i> Work </a></li>
-                                <li><a href="#"> <i class="fa fa-circle text-danger"></i> Documents</a></li>
+                            @foreach($communicationTypes as $c)
+
+                                <li><a href="#"> <i class="fa fa-circle {{ $c->colour }}"></i> {{ $c->communication_type }} </a></li>
+
+                            @endforeach
+                            </ul>
+                                
+{{--                            <li><a href="#"> <i class="fa fa-circle text-danger"></i> Documents</a></li>
                                 <li><a href="#"> <i class="fa fa-circle text-primary"></i> Social</a></li>
                                 <li><a href="#"> <i class="fa fa-circle text-info"></i> Advertising</a></li>
-                                <li><a href="#"> <i class="fa fa-circle text-warning"></i> Clients</a></li>
-                            </ul>
+                                <li><a href="#"> <i class="fa fa-circle text-warning"></i> Clients</a></li> --}}
+                            
 
-                            <h5 class="tag-title">Labels</h5>
+{{--                             <h5 class="tag-title">Labels</h5>
                             <ul class="tag-list" style="padding: 0">
                                 <li><a href=""><i class="fa fa-tag"></i> Family</a></li>
                                 <li><a href=""><i class="fa fa-tag"></i> Work</a></li>
@@ -64,7 +70,7 @@
                                 <li><a href=""><i class="fa fa-tag"></i> Music</a></li>
                                 <li><a href=""><i class="fa fa-tag"></i> Photography</a></li>
                                 <li><a href=""><i class="fa fa-tag"></i> Film</a></li>
-                            </ul>
+                            </ul> --}}
                             <div class="clearfix"></div>
                         </div>
                     </div>
@@ -84,7 +90,7 @@
                     </div>
                 </form> --}}
                 <h2>
-                    Inbox <small>({{ count($communications) }})</small>
+                    All Messages <small>({{ count($communications) }} unread)</small>
                 </h2>
 
             </div>

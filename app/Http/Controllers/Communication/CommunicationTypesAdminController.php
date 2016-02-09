@@ -72,6 +72,7 @@ class CommunicationTypesAdminController extends Controller
     {
         $communicationTypeDetails = array(
             'communication_type' => $request['communication_type'],
+            'colour' => $request['colour'],
             'banner_id' => $request['banner_id']
         );
 

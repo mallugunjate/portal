@@ -59,6 +59,37 @@
                                             <div class="col-sm-10"><input type="text" class="form-control" name="communication_type" id="communication_type" value=""></div>
                                         </div>
 
+                                        <div class="form-group"><label class="col-sm-2 control-label">Label Colour</label>
+                                            <div class="col-sm-10">
+                                            	            <div class="btn-group" data-toggle="buttons">
+											                <label class="btn btn-outline btn-default">
+											                    <input type="radio" id="" name="colour" value="text-navy" /> <i class="fa fa-circle text-navy"></i>  
+											                </label> 
+											                <label class="btn btn-outline btn-default">
+											                    <input type="radio" id="" name="colour" value="text-danger" /> <i class="fa fa-circle text-danger"></i> 
+											                </label> 
+											                <label class="btn btn-outline btn-default">
+											                    <input type="radio" id="" name="colour" value="text-primary" /> <i class="fa fa-circle text-primary"></i> 
+											                </label> 
+											                <label class="btn btn-outline btn-default">
+											                    <input type="radio" id="" name="colour" value="text-info" /> <i class="fa fa-circle text-info"></i> 
+											                </label> 
+											                <label class="btn btn-outline btn-default">
+											                    <input type="radio" id="" name="colour" value="text-warning" /> <i class="fa fa-circle text-warning"></i> 
+											                </label>
+	<!-- 										                <label class="btn btn-outline btn-default">
+											                    <input type="radio" id="" name="colour" value="text-primary" /> <i class="fa fa-circle text-primary"></i> 
+											                </label> -->
+											            </div>
+
+											             
+
+
+
+                                            	{{-- <input type="text" class="form-control" name="communication_type" id="communication_type" value=""> --}}
+                                            </div>
+                                        </div>
+
 
                                         <div class="hr-line-dashed"></div>
 
