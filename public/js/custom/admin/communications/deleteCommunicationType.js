@@ -13,7 +13,7 @@ $(document).on('click','.communicationtype-delete',function(){
         closeOnConfirm: false
     }, function () {
     	$.ajax({
-		    url: '/admin/communicationtype/'+eventtypeidVal,
+		    url: '/admin/communicationtypes/'+eventtypeidVal,
 		    type: 'DELETE',
 		    success: function(result) {
 		        $(selector).closest('tr').fadeOut(1000);

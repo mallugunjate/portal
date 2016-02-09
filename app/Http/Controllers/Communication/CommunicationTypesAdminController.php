@@ -34,7 +34,6 @@ class CommunicationTypesAdminController extends Controller
         $banner_id = UserSelectedBanner::where('user_id', \Auth::user()->id)->first()->selected_banner_id;
         $banner  = Banner::find($banner_id);
 
-        // $communicationtypes = EventType::all();
         $communicationtypes = CommunicationType::where('banner_id', $banner_id)->get();
 
         return view('admin.communicationtypes.index')
@@ -56,9 +55,9 @@ class CommunicationTypesAdminController extends Controller
         $banner_id = UserSelectedBanner::where('user_id', \Auth::user()->id)->first()->selected_banner_id;
         $banner  = Banner::find($banner_id);
 
-        $event_types_list = CommunicationType::all();
+        $communication_types_list = CommunicationType::all();
         return view('admin.communicationtypes.create')
-            ->with('event_types_list', $event_types_list)
+            ->with('communication_types_list', $communication_types_list)
             ->with('banner', $banner)
             ->with('banners', $banners);
     }
@@ -71,13 +70,13 @@ class CommunicationTypesAdminController extends Controller
      */
     public function store(Request $request)
     {
-        $eventTypeDetails = array(
-            'event_type' => $request['event_type'],
+        $communicationTypeDetails = array(
+            'communication_type' => $request['communication_type'],
             'banner_id' => $request['banner_id']
         );
 
-        $eventType = CommunicationType::create($eventTypeDetails);
-        $eventType->save();
+        $communicationType = CommunicationType::create($communicationTypeDetails);
+        $communicationType->save();
     }
 
     /**
@@ -105,10 +104,10 @@ class CommunicationTypesAdminController extends Controller
         $banner_id = UserSelectedBanner::where('user_id', \Auth::user()->id)->first()->selected_banner_id;
         $banner  = Banner::find($banner_id);
 
-        $eventType = CommunicationType::find($id);
+        $communicationType = CommunicationType::find($id);
 
         return view('admin.communicationtypes.edit')
-            ->with('eventType', $eventType)
+            ->with('communicationType', $communicationType)
             ->with('banner', $banner)
             ->with('banners', $banners);
     }
@@ -123,11 +122,11 @@ class CommunicationTypesAdminController extends Controller
     public function update(Request $request, $id)
     {
 
-        $eventType = CommunicationType::find($id);
+        $communicationType = CommunicationType::find($id);
 
-        $eventType->event_type = $request['event_type'];
+        $communicationType->communication_type = $request['communication_type'];
     
-        $eventType->save();
+        $communicationType->save();
     }
 
     /**
@@ -138,9 +137,7 @@ class CommunicationTypesAdminController extends Controller
      */
     public function destroy($id)
     {
-        // $id = Request::input('event_id');
-        // $id = $request['event_id'];
-        $eventtype = CommunicationType::find($id);
-        $eventtype->delete();
+        $communicationtype = CommunicationType::find($id);
+        $communicationtype->delete();
     }
 }

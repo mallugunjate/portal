@@ -1,4 +1,4 @@
-$(document).on('click','.eventtype-create',function(){
+$(document).on('click','.communicationtype-create',function(){
   	
   	var hasError = false;
 
@@ -19,7 +19,7 @@ $(document).on('click','.eventtype-create',function(){
 		    type: 'POST',
 		    data: { communication_type: communicationTypeName, banner_id: bannerId },
 		    success: function(result) {
-		        $("#event_type").val(""); // empty the form
+		        $("#communication_type").val(""); // empty the form
 				swal("Nice!", "'" + communicationTypeName +"' has been created", "success");        
 		    }
 		});

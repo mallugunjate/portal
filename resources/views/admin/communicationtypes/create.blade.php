@@ -64,8 +64,8 @@
 
                                         <div class="form-group">
                                             <div class="col-sm-4 col-sm-offset-2">
-                                                <a class="btn btn-white" href="/admin/calendar"><i class="fa fa-close"></i> Cancel</a>
-                                                <button class="communicationtype-create btn btn-primary" type="submit"><i class="fa fa-check"></i> Create New Communication</button>
+                                                <a class="btn btn-white" href="/admin/communicationtypes"><i class="fa fa-close"></i> Cancel</a>
+                                                <button class="communicationtype-create btn btn-primary" type="submit"><i class="fa fa-check"></i> Create New Communication Type</button>
 
                                             </div>
                                         </div>

@@ -86,7 +86,7 @@
 
 											<td>
 
-												<a data-communicationtype="{{ $et->id }}" id="communicationtype{{$et->id}}" class="communicationtype-delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+												<a data-communicationtype="{{ $ct->id }}" id="communicationtype{{$ct->id}}" class="communicationtype-delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
 
 											</td>
 										</tr>
