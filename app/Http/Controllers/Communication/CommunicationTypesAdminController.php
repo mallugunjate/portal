@@ -34,11 +34,11 @@ class CommunicationTypesAdminController extends Controller
         $banner_id = UserSelectedBanner::where('user_id', \Auth::user()->id)->first()->selected_banner_id;
         $banner  = Banner::find($banner_id);
 
-        // $eventtypes = EventType::all();
-        $eventtypes = CommunicationType::where('banner_id', $banner_id)->get();
+        // $communicationtypes = EventType::all();
+        $communicationtypes = CommunicationType::where('banner_id', $banner_id)->get();
 
-        return view('admin.eventtypes.index')
-            ->with('eventtypes', $eventtypes)
+        return view('admin.communicationtypes.index')
+            ->with('communicationtypes', $communicationtypes)
             ->with('banner', $banner)
             ->with('banners', $banners);   
     }
@@ -57,7 +57,7 @@ class CommunicationTypesAdminController extends Controller
         $banner  = Banner::find($banner_id);
 
         $event_types_list = CommunicationType::all();
-        return view('admin.eventtypes.create')
+        return view('admin.communicationtypes.create')
             ->with('event_types_list', $event_types_list)
             ->with('banner', $banner)
             ->with('banners', $banners);
@@ -107,7 +107,7 @@ class CommunicationTypesAdminController extends Controller
 
         $eventType = CommunicationType::find($id);
 
-        return view('admin.eventtypes.edit')
+        return view('admin.communicationtypes.edit')
             ->with('eventType', $eventType)
             ->with('banner', $banner)
             ->with('banners', $banners);

@@ -56,7 +56,6 @@ Route::controllers([
 ]);
 
 
-
 //list of admin functions
 // Route::get('/admin', function(){
 // //	return view('admin.index');
@@ -94,6 +93,7 @@ Route::resource('/admin/dashboardbackground', 'Dashboard\DashboardBackgroundAdmi
 
 //Communications
 Route::resource('/admin/communication', 'Communication\CommunicationAdminController');
+Route::resource('/admin/communicationtypes', 'Communication\CommunicationTypesAdminController');
 
 //CALENDAR ADMIN
 Route::resource('/admin/calendar', 'Calendar\CalendarAdminController');
