@@ -17,6 +17,7 @@ class CreateUrgentNoticeAttachmentTable extends Migration
             $table->integer('urgent_notice_id')->unsigned();
             $table->integer('attachment_id')->unsigned();
             $table->timestamps();
+            $table->foreign('urgent_notice_id')->references('id')->on('urgent_notices')->onDelete('cascade');
         });
     }
 
