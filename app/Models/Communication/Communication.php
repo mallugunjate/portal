@@ -50,20 +50,20 @@ class Communication extends Model
    		}
    		$communication = Communication::create([
    			'subject' 	=> $request["subject"],
+            'communication_type_id' => $request["communication_type_id"],
    			'body'		=> $request["body"],
-   			'sender'	=> $request["sender"],
-   			'importance'=> $request["importance"],
+            'sender' => "",
+            'importance'=> 1,
+            'is_draft'  => $is_draft,
    			'send_at'	=> $request["send_at"],
    			'archive_at'=> $request["archive_at"],
-   			'is_draft'	=> $is_draft,
    			'banner_id' => $request["banner_id"]
-
    		]);
 
          Communication::updateTargetStores($communication->id, $request);
          Communication::updateCommunicationDocuments($communication->id, $request);
          Communication::updateCommunicationPackages($communication->id, $request);
-         Communication::updateTags($communication->id, $request["tags"]);
+         //Communication::updateTags($communication->id, $request["tags"]);
    		return;
    	}
 
@@ -99,7 +99,7 @@ class Communication extends Model
       {
          CommunicationTarget::where('communication_id', $id)->delete();
          
-         $stores = $request["stores"];
+         $stores = $request["target_stores"];
          if (count($stores>0)) {
             foreach ($stores as $store) {
                CommunicationTarget::create([

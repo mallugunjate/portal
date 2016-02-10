@@ -63,6 +63,7 @@ class CommunicationAdminController extends Controller
         // $importance = \DB::table('communication_importance_levels')->lists('name', 'id');
         // $tags = Tag::where('banner_id', $banner->id)->lists('name', 'id');
         return view('admin.communication.create')->with('banner', $banner)
+                                                ->with('storeList', $storeList)
                                                 ->with('communicationTypes', $communicationTypes)
                                                 ->with('banners', $banners)
                                                 ->with('navigation', $fileFolderStructure)

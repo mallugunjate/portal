@@ -57,7 +57,7 @@
 
 
 
-		{!! Form::open( ['action' => ['Communication\CommunicationAdminController@store'], 'method'=>'POST', 'class'=>'form-horizontal']) !!}
+	<form class="form-horizontal" id="createNewCommunicationForm">
 		
 
 		<input type="hidden" name="banner_id" value={{$banner->id}} >
@@ -101,57 +101,42 @@
 
         </div>
 
-		<div>
-			{!! Form::label('stores[]', 'Select Stores:') !!}
-			<select name="stores[]" id="storeSelect"  multiple ="true" ></select>
-			{!! Form::label('allStores', 'Or select all stores:') !!}
-			{!! Form::checkbox('allStores', null, false ,['id'=> 'allStores'] ) !!}
-		</div>
+        <div class="form-group">
+
+                <label class="col-sm-2 control-label">Start &amp; End</label>
+
+                <div class="col-sm-10">
+                    <div class="input-daterange input-group" id="datepicker">
+                        <input type="text" class="input-sm form-control" name="send_at" id="send_at" value="" />
+                        <span class="input-group-addon">to</span>
+                        <input type="text" class="input-sm form-control" name="archive_at" id="archive_at" value="" />
+                    </div>
+                </div>
+        </div>
 		
-		<div>
-			{!! Form::label('send_at', 'Send On') !!}
-			<div class="input-group date" id="datetimepicker1">
-	          {!! Form::text('send_at', null, ['class'=>'form-control',  'required']) !!}
-	          <span class="input-group-addon">
-	              <span class="glyphicon glyphicon-calendar"></span>
-	          </span>      
-	        </div>
-		</div>
-		<div>
-			{!! Form::label('archive_at', 'Archive On') !!}
-			<div class="input-group date" id="datetimepicker1">
-	          {!! Form::text('archive_at', null, ['class'=>'form-control',  'required']) !!}
-	          <span class="input-group-addon">
-	              <span class="glyphicon glyphicon-calendar"></span>
-	          </span>      
-	        </div>
-		</div>
 
-		<div>
-			<div id="add-documents" class="btn btn-default">Add Documents</div>
+		<div class="hr-line-dashed"></div>
+
+		<div class="form-group">
+			<div class="col-sm-10 col-sm-offset-2">
+				<div id="add-documents" class="btn btn-primary btn-outline"><i class="fa fa-plus"></i> Add Documents</div>
+				<div id="add-packages" class="btn btn-primary btn-outline"><i class="fa fa-plus"></i> Add Packages</div>		
+			</div>
 		</div>
-
-		<div>
-			<div id="add-packages" class="btn btn-default">Add packages</div>		
-		</div>
-
-<!-- 		<div>
-			{!! Form::label('tags[]', 'Tags:') !!}
-			{!! Form::select('tags[]', $tags , null,  ['class'=>'chosen', 'multiple'=>'true']) !!}
-			
-		</div> -->
-
 
 
 		<div id="files-selected"></div>
 		<div id="packages-selected"></div>
 
 		<div class="hr-line-dashed"></div>
-		<div>
-			<a class="btn btn-white" href="/admin/communication"><i class="fa fa-close"></i> Cancel</a>
-			<button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Send New Communication</button>
-		</div>
-		{!! Form::close() !!}
+		<div class="form-group">
+			<div class="col-sm-10 col-sm-offset-2">
+				<a class="btn btn-white" href="/admin/communication"><i class="fa fa-close"></i> Cancel</a>
+				<button class="btn btn-primary communication-create"><i class="fa fa-check"></i> Send New Communication</button>
+            </div>
+        </div>
+
+		</form>
 
 
 
@@ -229,6 +214,7 @@
 				</script>
 
 				<script type="text/javascript" src="/js/custom/communication.js"></script>
+				<script type="text/javascript" src="/js/custom/admin/communications/addCommunication.js"></script>
 
 				@include('site.includes.bugreport')
 
@@ -245,7 +231,19 @@
 				          format: 'YYYY-MM-DD HH:mm:ss'
 				    });
 
+				    $(".chosen").chosen({
+      				  width:'75%'
+    				});
+
+				    $('.input-daterange').datepicker({
+				         format: 'yyyy-mm-dd',
+				        keyboardNavigation: false,
+				        forceParse: false,
+				        autoclose: true
+				    });      				
+
 				    CKEDITOR.replace('body');
+
 				    $("#add-documents").click(function(){
 				    	$("#document-listing").modal('show');
 				    });

@@ -2,8 +2,6 @@ $(document).ready(function(){
 	
 	formatDate();
 
-	getStoreNumbers();
-
 	$('#attach-selected-packages').on('click', function(){
 		$("#packages-selected").append('<p>Packages Attached:</p>');
 		$('input[name^="packages"]').each(function(){			
@@ -49,8 +47,8 @@ var formatDate = function(){
 		var offsetSeconds = offset*60;
 		var startTime = moment.unix(start + offsetSeconds).format('YYYY-MM-DD HH:mm:ss');
 		var endTime = moment.unix(end + offsetSeconds ).format('YYYY-MM-DD HH:mm:ss');
-		$("input[name='start']").val(startTime);
-		$("input[name='end']").val(endTime);			
+		$("input[name='send_at']").val(startTime);
+		$("input[name='archive_at']").val(endTime);			
 	}
 	
 }
@@ -86,51 +84,51 @@ $(".delete-communication").click(function(){
     return false;
 });
 
-var getStoreNumbers = function(){
-	$("#storeSelect").empty();	
-	$("#storeSelect").append("<option></option>");
-	var banner = localStorage.getItem('admin-banner-id');
-	var jqxhr = $.getJSON( STORE_API_DOMAIN + "/banner/" + banner, function(json) {
+// var getStoreNumbers = function(){
+// 	$("#storeSelect").empty();	
+// 	$("#storeSelect").append("<option></option>");
+// 	var banner = localStorage.getItem('admin-banner-id');
+// 	var jqxhr = $.getJSON( STORE_API_DOMAIN + "/banner/" + banner, function(json) {
  	
- 		var target_stores = $(".target_stores");
-        var target = [];
-		if (! (typeof target_stores  == "undefined") ) {
-			$.each(target_stores ,function (index, element){
-				target.push(element.value);
-			});
-		}
+//  		var target_stores = $(".target_stores");
+//         var target = [];
+// 		if (! (typeof target_stores  == "undefined") ) {
+// 			$.each(target_stores ,function (index, element){
+// 				target.push(element.value);
+// 			});
+// 		}
 
-    	var i=0;
-    	console.log(target.length);
-    	console.log(json.length);
-        if ( (target.length - 1) == json.length){
-        	$("#allStores").prop('checked', true);
-        	$.each(json, function(index, element) {
-        		$("#storeSelect").append("<option value='"+ element.store_number +"'>"+ element.id + " " + element.name +"</option>");	
-        	});
-        }
-        else{
-        	$.each(json, function(index, element) {
+//     	var i=0;
+//     	console.log(target.length);
+//     	console.log(json.length);
+//         if ( (target.length - 1) == json.length){
+//         	$("#allStores").prop('checked', true);
+//         	$.each(json, function(index, element) {
+//         		$("#storeSelect").append("<option value='"+ element.store_number +"'>"+ element.id + " " + element.name +"</option>");	
+//         	});
+//         }
+//         else{
+//         	$.each(json, function(index, element) {
         	
-            if(  target.indexOf(element.store_number) >= 0) {
-            	$("#storeSelect").append("<option value='"+ element.store_number +"' selected>"+ element.id + " " + element.name +"</option>");
-            }
-            else{
-            	$("#storeSelect").append("<option value='"+ element.store_number +"'>"+ element.id + " " + element.name +"</option>");	
-            }
+//             if(  target.indexOf(element.store_number) >= 0) {
+//             	$("#storeSelect").append("<option value='"+ element.store_number +"' selected>"+ element.id + " " + element.name +"</option>");
+//             }
+//             else{
+//             	$("#storeSelect").append("<option value='"+ element.store_number +"'>"+ element.id + " " + element.name +"</option>");	
+//             }
             
-            i++;
-        });
-        }
+//             i++;
+//         });
+//         }
         
-        $("#storeSelect").chosen({
-        	width:"50%"
-        });		
+//         $("#storeSelect").chosen({
+//         	width:"50%"
+//         });		
         
-    });
+//     });
 
     
-}
+// }
 
 
 $("#allStores").change(function(){

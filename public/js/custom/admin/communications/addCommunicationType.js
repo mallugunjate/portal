@@ -7,7 +7,6 @@ $(document).on('click','.communicationtype-create',function(){
     var colour = $("input:radio[name='colour']:checked").val();
 
     //console.log(communicationTypeName +", "+ bannerId +", "+ colour);
-    alert(communicationTypeName +", "+ bannerId +", "+ colour);
 
     if(communicationTypeName == '') {
 		swal("Oops!", "This we need a name for this communication type.", "error"); 
