@@ -176,8 +176,7 @@ class UrgentNoticeAdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return $request->all();
-        //UrgentNotice::updateUrgentNotice($request, $id);
+        return UrgentNotice::updateUrgentNotice($request, $id);
     }
 
     /**

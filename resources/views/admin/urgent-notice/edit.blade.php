@@ -138,7 +138,7 @@
 															<i class="indicator fa fa-folder"></i>{{$folder->name}}
 														</div>
 													
-														<a data-attachment-type=1 data-attachment="{{ $folder->id }}" id="folder{{$folder->id}}" class="remove-folder btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+														<a data-attachment-type=1 data-attachmentid="{{ $folder->id }}" id="folder{{$folder->id}}" class="remove-folder btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
 													</div>
                                            		@endforeach
                                            		<div id="attachments-staged-to-remove"></div>

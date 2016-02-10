@@ -100,10 +100,9 @@ $(".remove-file").on('click', function(){
 });
 
 $(".remove-folder").on('click', function(){
-	var folder_id = $(this).attr('data-folder-id');
-	console.log(folder_id);
+	console.log($(this));
+	var folder_id = $(this).attr('data-attachmentid');
 	$(this).parent().fadeOut(200);
-	
 	$("#attachments-staged-to-remove").append('<div class="remove_attachment" data-attachment-type = 1 data-attachmentid='+ folder_id +'>')
 });
 
@@ -178,7 +177,7 @@ $(document).on('click','.urgentnotice-update',function(){
 	var description = CKEDITOR.instances['description'].getData();
 	var start = $("#start").val();
 	var end = $("#end").val();
-	var new_attachment_type  = $("input[name='attachment_type']").val();
+	var new_attachment_type  = $("input[name='attachment_type']:checked").val();
 	var banner_id = $("input[name='banner_id']").val();
 	var target_stores  = $("#storeSelect").val();
 	var new_attachments = [];
@@ -194,10 +193,7 @@ $(document).on('click','.urgentnotice-update',function(){
 
 		remove_attachments.push($(this).attr('data-attachmentid'));
 	});
-	// $(".remove-attachment").each(function(){
-	// 	console.log($(this));
-	// 	remove_attachments.push($(this).attr('data-attachmentid'));
-	// });
+	
 	console.log(remove_attachments);
  
     if(title == '' || description == '' || start == '') {
@@ -226,7 +222,7 @@ $(document).on('click','.urgentnotice-update',function(){
 		    success: function(result) {
 		        console.log(result);
 		        // $('#createNewUrgentNoticeForm')[0].reset(); // empty the form
-				swal("Nice!", "'" + title +"' has been created", "success");        
+				swal("Nice!", "'" + title +"' has been updated", "success");        
 		    }
 		}).done(function(response){
 			console.log(response);
