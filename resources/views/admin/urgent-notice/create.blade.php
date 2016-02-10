@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    @section('title', 'Package')
+    @section('title', 'Urgent Notice')
     @include('admin.includes.head')
     <link rel="stylesheet" type="text/css" href="/css/plugins/chosen/chosen.css">
 	<meta name="csrf-token" content="{!! csrf_token() !!}"/>
@@ -23,16 +23,16 @@
 
 		<div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
-                    <h2>Create a Package</h2>
+                    <h2>Create an Urgent Notice</h2>
                     <ol class="breadcrumb">
                         <li>
                             <a href="/admin">Home</a>
                         </li>
                         <li>
-                            <a href="/admin/package">Package</a>
+                            <a href="/admin/urgentnotice">Urgent Notice</a>
                         </li>
                         <li class="active">
-                            <strong>Create a Package</strong>
+                            <strong>Create an Urgent Notice</strong>
                         </li>
                     </ol>
                 </div>
@@ -46,9 +46,8 @@
 		                <div class="col-lg-12">
 		                    <div class="ibox">
 		                        <div class="ibox-title">
-		                            <h5>New Package</h5>
+		                            <h5>New Urgent Notice</h5>
 		                            <div class="ibox-tools">
-		                               {{--  <a href="/admin/package/create" class="btn btn-primary" role="button"><i class="fa fa-plus"></i> Add New Package</a> --}}
                                         
 		                            </div>
 		                        </div>
@@ -63,37 +62,65 @@
                                         </div>
                                     @endif
                                     
-                                    <form method="get" class="form-horizontal" id="createNewPackageForm">
+                                    <form method="get" class="form-horizontal" id="createNewUrgentNoticeForm">
                                         
                                         <input type="hidden" name="banner_id" value="{{$banner->id}}">
-                                        <div class="form-group"><label class="col-sm-2 control-label">Name</label>
-                                            <div class="col-sm-10"><input type="text" id="name" name="name" class="form-control" value=""></div>
+                                        <div class="form-group"><label class="col-sm-2 control-label">Title</label>
+                                            <div class="col-sm-10"><input type="text" id="title" name="title" class="form-control" value=""></div>
+                                        </div>
+                                        <div class="form-group"><label class="col-sm-2 control-label">Description</label>
+                                            <div class="col-sm-10"><textarea id="description" name="description" class="form-control" value=""></textarea></div>
+                                        </div>
+
+                                        <div class="hr-line-dashed"></div>
+                                         <div class="form-group"><label class="col-sm-2 control-label">Attachment Type</label>
+                                            <div class="col-md-10">
+                                               @foreach($attachment_types as $atype)
+                                               <?php $id = "attachment-" . $atype->name ?>
+                                               	<div>{!! Form::input('radio', 'attachment_type', $atype->id , ['id'=> $id ]) !!} {{$atype->name}}</div>
+                                               @endforeach
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group hidden"><label class="col-sm-2 control-label">Attachment Selected</label>
+                                            <div class="col-md-10" id="attachment-selected">
+                                               
+                                            </div>
+                                        </div>
+
+                                        <div class="hr-line-dashed"></div>
+                                        <div class="form-group">
+
+                                                <label class="col-sm-2 control-label">Start &amp; End</label>
+
+                                                <div class="col-sm-10">
+                                                    <div class="input-daterange input-group" id="datepicker">
+                                                        <input type="text" class="input-sm form-control" name="start" id="start" value="" />
+                                                        <span class="input-group-addon">to</span>
+                                                        <input type="text" class="input-sm form-control" name="end" id="end" value="" />
+                                                    </div>
+                                                </div>
                                         </div>
 
                                         <div class="hr-line-dashed"></div>
 
-                                        <div class="form-group"><label class="col-sm-2 control-label">Files</label>
-                                            <div class="col-md-10">
-                                               <input class="btn btn-default" type="button" id="add-documents" value="Add Documents" />
+                                        <div class="form-group">
+                                            
+                                            <label class="col-sm-2 control-label">Target Stores</label>
+                                            <div class="col-sm-10">
+                                                {!! Form::select('stores', $storeList, null, [ 'class'=>'chosen', 'id'=> 'storeSelect', 'multiple'=>'true']) !!}
+                                                {!! Form::label('allStores', 'Or select all stores:') !!}
+                                                {!! Form::checkbox('allStores', null, false ,['id'=> 'allStores'] ) !!}
                                             </div>
-                                        </div>
-                                        <div id="files-selected" class="col-sm-offset-2"></div>
 
-                                        <div class="hr-line-dashed"></div>
-                                        <div class="form-group"><label class="col-sm-2 control-label">Folders</label>
-                                            <div class="col-md-10">
-                                            	<input class="btn btn-default" type="button" id="add-folders" value="Add Folders" />
-                                            </div>
                                         </div>
-                                        <div id="folders-selected" class="col-sm-offset-2"></div>
-		
-			
-		
+
+
 
                                         <div class="form-group">
                                             <div class="col-sm-10 col-sm-offset-2">
-                                                <a class="btn btn-white" href="/admin/package"><i class="fa fa-close"></i> Cancel</a>
-                                                <button class="package-create btn btn-primary" type="submit"><i class="fa fa-check"></i> Create New Package</button>
+                                                <a class="btn btn-white" href="/admin/urgentnotice"><i class="fa fa-close"></i> Cancel</a>
+                                                <button class="urgentnotice-create btn btn-primary" type="submit"><i class="fa fa-check"></i> Create New Urgent Notice</button>
 
                                             </div>
                                         </div>
@@ -171,23 +198,30 @@
 @include('site.includes.bugreport')
 
 
+
+
+<script type="text/javascript" src="/js/custom/admin/urgent-notices/addUrgentNotice.js"></script>
+<script type="text/javascript" src="/js/plugins/chosen/chosen.jquery.js"></script>	
+<script type="text/javascript" src="/js/plugins/ckeditor-standard/ckeditor.js"></script>	
+
 <script type="text/javascript">
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-
+    $(".chosen").chosen({
+        width:'75%'
+    })
     $('.input-daterange').datepicker({
          format: 'yyyy-mm-dd',
         keyboardNavigation: false,
         forceParse: false,
         autoclose: true
-    });                
+    });            
+    CKEDITOR.replace('description');    
 
 </script>
-
-<script type="text/javascript" src="/js/custom/admin/packages/addPackage.js"></script>			
 
 
 </body>
