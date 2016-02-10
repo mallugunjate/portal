@@ -16,6 +16,8 @@ use App\Models\Document\FolderStructure;
 use App\Models\UrgentNotice\UrgentNoticeAttachmentType;
 use App\Models\UrgentNotice\UrgentNoticeAttachment;
 use App\Models\UrgentNotice\UrgentNoticeTarget;
+use App\Models\Document\Document;
+use App\Models\Document\Folder;
 
 class UrgentNoticeAdminController extends Controller
 {
@@ -116,24 +118,47 @@ class UrgentNoticeAdminController extends Controller
 
         $urgent_notice = UrgentNotice::find($id);
 
-        $attachment_types = UrgentNoticeAttachmentType::all();
-        $urgent_notice_attachments = UrgentNoticeAttachment::where('urgent_notice_id', $id)->get();
+        $urgent_notice_attachment_ids = UrgentNoticeAttachment::where('urgent_notice_id', $id)->get()->pluck('attachment_id');
+        
+        $attached_folders = [];
+        $attached_documents = [];
+
+        if ($urgent_notice->attachment_type_id == 1) { //folder
+            
+            foreach ($urgent_notice_attachment_ids as $key=>$global_folder_id) {
+                $folder_id = \DB::table('folder_ids')->where('id', $global_folder_id)->first()->folder_id;
+                $folder = Folder::find($folder_id);
+                array_push($attached_folders, $folder);
+                unset($folder);
+            }
+        }
+        else if ( $urgent_notice->attachment_type_id == 2 ) { //document
+            
+            foreach ($urgent_notice_attachment_ids as $document_id) {
+                
+                $document = Document::find($document_id);
+                array_push($attached_documents, $document);
+                unset($document);
+            }
+        }
         
         $storeList = StoreInfo::getStoreListing($banner->id);
         $target_stores = UrgentNoticeTarget::where('urgent_notice_id', $id)->get()->pluck('store_id')->toArray();
-
         $all_stores = false;
         if (count($storeList) == count($target_stores)) {
             $all_stores = true;
         }
+
         $fileFolderStructure = FileFolder::getFileFolderStructure($banner->id);
         $folderStructure = FolderStructure::getNavigationStructure($banner->id);
-
+        
+        $attachment_types = UrgentNoticeAttachmentType::all();
         
         return view('admin.urgent-notice.edit')->with('banners', $banners)
                                             ->with('banner', $banner)
                                             ->with('urgent_notice', $urgent_notice)
-                                            ->with('urgent_notice_attachments', $urgent_notice_attachments)
+                                            ->with('attached_folders', $attached_folders)
+                                            ->with('attached_documents', $attached_documents)
                                             ->with('attachment_types', $attachment_types)
                                             ->with('target_stores', $target_stores)
                                             ->with('storeList', $storeList)

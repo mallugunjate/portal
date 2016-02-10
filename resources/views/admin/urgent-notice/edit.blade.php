@@ -81,9 +81,17 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group hidden"><label class="col-sm-2 control-label">Attachment Selected</label>
+                                        <div class="form-group "><label class="col-sm-2 control-label">Attachment Selected</label>
                                             <div class="col-md-10" id="attachment-selected">
-                                               
+                                               @if($urgent_notice->attachment_type_id == 1)
+                                               		@foreach($attached_folders as $folder)
+														<p><i class="indicator fa fa-folder"></i>{{$folder->name}}</p>
+                                               		@endforeach
+                                               @elseif($urgent_notice->attachment_type_id == 2)
+                                               		@foreach($attached_documents as $document)
+                                               			<p><i class="indicator fa fa-file"></i>{{$document->original_filename}}</p>
+                                               		@endforeach
+                                               @endif
                                             </div>
                                         </div>
 
@@ -119,131 +127,129 @@
                                             </div>
 
                                         </div>
-                                        </form>
+                                    </form>
 
 
-                                </div>
-                            </div>
+                        		</div><!-- ibox content closes -->
+                    		</div><!-- ibox closes -->
 
                                         
 
 
 
-                                        <div class="form-group">
-                                            <div class="col-sm-4 col-sm-offset-2">
-                                                <a class="btn btn-white" href="/admin/package"><i class="fa fa-close"></i> Cancel</a>
-                                                <button class="package-update btn btn-primary" type="submit"><i class="fa fa-check"></i> Save changes</button>
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-2">
+                            <a class="btn btn-white" href="/admin/package"><i class="fa fa-close"></i> Cancel</a>
+                            <button class="package-update btn btn-primary" type="submit"><i class="fa fa-check"></i> Save changes</button>
 
-                                            </div>
-                                        </div>
-                                    
-
-
-                                </div>
-		                    </div>
-
-		           
-
+                        </div>
                     </div>
+                                
 
-				@include('site.includes.footer')
 
-			    @include('admin.includes.scripts')
-            </div>
+                </div>
+	        </div>
+
+        </div>
+
+			@include('site.includes.footer')
+
+		    @include('admin.includes.scripts')
+   	</div>
 	
 
 
 		     
 
 
-                <script type="text/javascript">
-					$.ajaxSetup({
-				        headers: {
-				            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-				        }
-					});
+    <script type="text/javascript">
+		$.ajaxSetup({
+	        headers: {
+	            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	        }
+		});
 
-                    
-                    
+        
+        
 
-				</script>
+	</script>
 
-				@include('site.includes.bugreport')
+	@include('site.includes.bugreport')
 
 				
-				<div id="document-listing" class="modal fade">
-				    <div class="modal-dialog">
-				        <div class="modal-content">
-				            <div class="modal-header">
-				                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				                <h4 class="modal-title">Select Documents</h4>
-				            </div>
-				            <div class="modal-body">
-				            	@foreach ($navigation as $nav) 
-								
-									@if (isset($nav["is_child"]) && ($nav["is_child"] == 0) )
-										
-										@include('admin.package.file-folder-structure-partial', ['navigation' =>$navigation, 'currentnode' => $nav])
-										
-									@endif
+	<div id="document-listing" class="modal fade">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	                <h4 class="modal-title">Select Documents</h4>
+	            </div>
+	            <div class="modal-body">
+	            	@foreach ($navigation as $nav) 
+					
+						@if (isset($nav["is_child"]) && ($nav["is_child"] == 0) )
+							
+							@include('admin.package.file-folder-structure-partial', ['navigation' =>$navigation, 'currentnode' => $nav])
+							
+						@endif
 
-								@endforeach
-				            </div>
-				            <div class="modal-footer">
-				                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				                <button type="button" class="btn btn-primary" id="attach-selected-files">Select Documents</button>
-				            </div>
-				        </div>
-				    </div>
-				</div>
+					@endforeach
+	            </div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	                <button type="button" class="btn btn-primary" id="attach-selected-files">Select Documents</button>
+	            </div>
+	        </div>
+	    </div>
+	</div>
 
-				<div id="folder-listing" class="modal fade">
-				    <div class="modal-dialog">
-				        <div class="modal-content">
-				            <div class="modal-header">
-				                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				                <h4 class="modal-title">Select Folders</h4>
-				            </div>
-				            <div class="modal-body">
-				            	@foreach ($folderStructure as $folder)
-								
-									@if (isset($folder["is_child"]) && ($folder["is_child"] == 0) )
-										
-										@include('admin.package.folder-structure-partial', ['folderStructure' =>$folderStructure, 'currentnode' => $folder])
-										
-									@endif
-
-
-								@endforeach
-				            </div>
-				            <div class="modal-footer">
-				                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				                <button type="button" class="btn btn-primary" id="attach-selected-folders">Select Folders</button>
-				            </div>
-				        </div>
-				    </div>
-				</div>
+	<div id="folder-listing" class="modal fade">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	                <h4 class="modal-title">Select Folders</h4>
+	            </div>
+	            <div class="modal-body">
+	            	@foreach ($folderStructure as $folder)
+					
+						@if (isset($folder["is_child"]) && ($folder["is_child"] == 0) )
+							
+							@include('admin.package.folder-structure-partial', ['folderStructure' =>$folderStructure, 'currentnode' => $folder])
+							
+						@endif
 
 
-				<script type="text/javascript" src="/js/plugins/chosen/chosen.jquery.js"></script>	
-				<script type="text/javascript" src="/js/plugins/ckeditor-standard/ckeditor.js"></script>	
-				<script type="text/javascript" src="/js/custom/admin/urgent-notices/editUrgentNotice.js"></script>
-				<script type="text/javascript">
-					$(".chosen").chosen({
-				        width:'75%'
-				    })
-				    $('.input-daterange').datepicker({
-				         format: 'yyyy-mm-dd',
-				        keyboardNavigation: false,
-				        forceParse: false,
-				        autoclose: true
-				    });            
-				    console.log($("textarea").attr('value'));
-				    CKEDITOR.replace('description');
-				    
-				    CKEDITOR.instances['description'].setData($("textarea").attr('value'));
+					@endforeach
+	            </div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	                <button type="button" class="btn btn-primary" id="attach-selected-folders">Select Folders</button>
+	            </div>
+	        </div>
+	    </div>
+	</div>
 
-				</script>
-			</body>
-			</html>
+
+	<script type="text/javascript" src="/js/plugins/chosen/chosen.jquery.js"></script>	
+	<script type="text/javascript" src="/js/plugins/ckeditor-standard/ckeditor.js"></script>	
+	<script type="text/javascript" src="/js/custom/admin/urgent-notices/editUrgentNotice.js"></script>
+	<script type="text/javascript">
+		$(".chosen").chosen({
+	        width:'75%'
+	    })
+	    $('.input-daterange').datepicker({
+	         format: 'yyyy-mm-dd',
+	        keyboardNavigation: false,
+	        forceParse: false,
+	        autoclose: true
+	    });            
+	    console.log($("textarea").attr('value'));
+	    CKEDITOR.replace('description');
+	    
+	    CKEDITOR.instances['description'].setData($("textarea").attr('value'));
+
+	</script>
+</body>
+</html>
 
