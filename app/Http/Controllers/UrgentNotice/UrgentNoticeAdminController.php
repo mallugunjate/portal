@@ -19,6 +19,16 @@ use App\Models\UrgentNotice\UrgentNoticeTarget;
 
 class UrgentNoticeAdminController extends Controller
 {
+    
+    /**
+     * Instantiate a new UrgentNoticeAdminController instance.
+     */
+    public function __construct()
+    {
+        $this->middleware('admin.auth');
+        $this->middleware('banner');
+    }
+    
     /**
      * Display a listing of the resource.
      *
