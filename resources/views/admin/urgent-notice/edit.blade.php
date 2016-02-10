@@ -69,33 +69,7 @@
                                         </div>
 
                                         <div class="hr-line-dashed"></div>
-                                         <div class="form-group"><label class="col-sm-2 control-label">Attachment Type</label>
-                                            <div class="col-md-10">
-                                            	<input hidden id="attachment_type_selected" value={{$urgent_notice->attachment_type_id}}>
-                                               @foreach($attachment_types as $atype)
-                                               <?php $id = "attachment-" . $atype->name ?>
-                                               	<div>{!! Form::radio('attachment_type', $atype->id , false, ['id'=> $id ]) !!} {{$atype->name}}</div>
-                                               @endforeach
-
-
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group "><label class="col-sm-2 control-label">Attachment Selected</label>
-                                            <div class="col-md-10" id="attachment-selected">
-                                               @if($urgent_notice->attachment_type_id == 1)
-                                               		@foreach($attached_folders as $folder)
-														<p><i class="indicator fa fa-folder"></i>{{$folder->name}}</p>
-                                               		@endforeach
-                                               @elseif($urgent_notice->attachment_type_id == 2)
-                                               		@foreach($attached_documents as $document)
-                                               			<p><i class="indicator fa fa-file"></i>{{$document->original_filename}}</p>
-                                               		@endforeach
-                                               @endif
-                                            </div>
-                                        </div>
-
-                                        <div class="hr-line-dashed"></div>
+                                         
                                         <div class="form-group">
 
                                                 <label class="col-sm-2 control-label">Start &amp; End</label>
@@ -132,7 +106,76 @@
 
                         		</div><!-- ibox content closes -->
                     		</div><!-- ibox closes -->
+                    		<div class="ibox">
+                            	<div class="ibox-title">
+                            		<h5> Attachments </h5>
+                            		
+                            	</div>
+                            	<div class="ibox-content">
+	                                <div class="attachment row" >
 
+	                                	<div class="form-group"><label class="col-sm-2 control-label">Attachment Type</label>
+                                            <div class="col-md-10">
+                                            	<input hidden id="attachment_type_selected" value={{$urgent_notice->attachment_type_id}}>
+                                            	<input hidden id="attachment_type_selected_latest" value={{$urgent_notice->attachment_type_id}}>
+                                               @foreach($attachment_types as $atype)
+                                               <?php $id = "attachment-" . $atype->name ?>
+                                               	<div>{!! Form::radio('attachment_type', $atype->id , false, ['id'=> $id ,'class'=>'i-checks']) !!} {{$atype->name}}</div>
+                                               @endforeach
+
+
+                                            </div>
+                                        </div>
+
+										<div class="form-group row">
+											<label class="col-sm-2 control-label">Attachments</label>
+											
+											<div class="existing-attachment-container col-md-10">
+											@if($urgent_notice->attachment_type_id == 1)
+                                           		@foreach($attached_folders as $folder)
+													<div class='attachments row' data-attachment-type=1 data-attachmentid="{{ $folder->id }}" id="folder{{$folder->id}}">
+														<div class="col-md-8">
+															<i class="indicator fa fa-folder"></i>{{$folder->name}}
+														</div>
+													
+														<a data-attachment-type=1 data-attachment="{{ $folder->id }}" id="folder{{$folder->id}}" class="remove-folder btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+													</div>
+                                           		@endforeach
+                                           		<div id="attachments-staged-to-remove"></div>
+												<div id="attachment-selected" class="row"></div>
+                                            </div><!-- existing-attachment-container closes -->
+                                        </div><!-- form group closes-->
+                                        <div class="row">
+                                       		<div id="add-more-folders" class="btn btn-primary btn-outline col-md-offset-2" role="button" >
+                                       			<i class="fa fa-plus"></i> Add More Folders
+                                       		</div>
+                                       	</div>
+                                           @elseif($urgent_notice->attachment_type_id == 2)
+                                           		@foreach($attached_documents as $document)
+                                           			<div class="attachments row" data-attachment-type=2 data-attachmentid="{{ $document->id }}" id="document{{$document->id}}">
+                                           				<div class="col-md-8">
+                                           				<i class="indicator fa fa-file"></i>{{$document->original_filename}}
+                                           				</div>
+                                           			
+                                           				<a data-attachment-type=2 data-attachmentid="{{ $document->id }}" id="document{{$document->id}}" class="remove-file btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                           			</div>
+                                           		@endforeach
+                                           		<div id="attachments-staged-to-remove"></div>
+												<div id="attachment-selected" class="row"></div>
+                                           	</div><!-- existing-attachment-container closes -->
+                                           </div> <!-- form group closes -->
+                                           	<div class="row">
+	                                           	<div id="add-more-documents" class="btn btn-primary btn-outline col-md-offset-2" role="button" >
+	                                       			<i class="fa fa-plus"></i> Add More Documents
+	                                       		</div>
+                                       		</div>
+                                           @endif
+										
+									</div><!-- row closes -->
+									
+								</div>	<!-- ibox content -->	
+
+                            </div><!-- ibox closes -->
                                         
 
 
@@ -140,7 +183,7 @@
                     <div class="form-group">
                         <div class="col-sm-4 col-sm-offset-2">
                             <a class="btn btn-white" href="/admin/package"><i class="fa fa-close"></i> Cancel</a>
-                            <button class="package-update btn btn-primary" type="submit"><i class="fa fa-check"></i> Save changes</button>
+                            <button class="urgentnotice-update btn btn-primary" type="submit"><i class="fa fa-check"></i> Save changes</button>
 
                         </div>
                     </div>
@@ -244,7 +287,7 @@
 	        forceParse: false,
 	        autoclose: true
 	    });            
-	    console.log($("textarea").attr('value'));
+
 	    CKEDITOR.replace('description');
 	    
 	    CKEDITOR.instances['description'].setData($("textarea").attr('value'));
