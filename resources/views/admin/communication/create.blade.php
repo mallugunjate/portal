@@ -83,21 +83,23 @@
 				</div>
 		</div>
 
-		
-
-
-		<div>
-			{!! Form::label('body', 'Body') !!}
-			{!! Form::textarea('body', null, ['class'=> 'communication_body']) !!}
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Body</label>
+				<div class="col-sm-10">
+					<textarea class="communication_body" name="body" cols="50" rows="10" id="body"></textarea>
+				</div>
 		</div>
-<!-- 		<div>
-			{!! Form::label('sender', 'Sender') !!}
-			{!! Form::input('text', 'sender', null, ['class'=>'form-control']) !!}
-		</div> -->
-<!-- 		<div>
-			{!! Form::label('importance', 'Importance') !!}
-			{!! Form::select('importance', $importance, null,  ['class'=>'form-control']) !!}
-		</div> -->
+
+		<div class="form-group">
+                                            
+                <label class="col-sm-2 control-label">Target Stores</label>
+                <div class="col-sm-10">
+                    {!! Form::select('stores', $storeList, null, [ 'class'=>'chosen', 'id'=> 'storeSelect', 'multiple'=>'true']) !!}
+                    {!! Form::label('allStores', 'Or select all stores:') !!}
+                    {!! Form::checkbox('allStores', null, false ,['id'=> 'allStores'] ) !!}
+                </div>
+
+        </div>
 
 		<div>
 			{!! Form::label('stores[]', 'Select Stores:') !!}
