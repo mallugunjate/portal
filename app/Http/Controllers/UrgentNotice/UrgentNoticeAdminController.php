@@ -187,6 +187,6 @@ class UrgentNoticeAdminController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return UrgentNotice::deleteUrgentNotice($id);
     }
 }

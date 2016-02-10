@@ -54,23 +54,19 @@ class UrgentNotice extends Model
     {
     	$urgentNotice = UrgentNotice::find($id);
         $attachment_type_id = $urgentNotice->attachment_type_id;
-        \Log::info('current');
-        \Log::info($attachment_type_id);
+
 
         $banner_id = $request->banner_id;
     	$title = $request->title;
     	$description = $request->description;
     	$start = $request->start;
-    	$end = $request->end;
-    	
+    	$end = $request->end;	
     	$new_attachments = $request->new_attachments;
         $remove_attachments = $request->remove_attachments;
     	$target_stores = $request->target_stores;
         
         $new_attachment_type_id = intval($request->new_attachment_type);
 
-        \Log::info("new");
-        \Log::info($new_attachment_type_id);
         if ($new_attachment_type_id != $attachment_type_id) {
             $attachment_type_id = $new_attachment_type_id;
             UrgentNoticeAttachment::where('urgent_notice_id', $id)->delete();
@@ -114,5 +110,10 @@ class UrgentNotice extends Model
     	}
         return $urgentNotice;
 
+    }
+
+    public static function deleteUrgentNotice($id)
+    {
+        UrgentNotice::find($id)->delete();
     }
 }
