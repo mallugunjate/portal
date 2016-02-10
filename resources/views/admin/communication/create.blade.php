@@ -57,27 +57,49 @@
 
 
 
-		{!! Form::open( ['action' => ['Communication\CommunicationAdminController@store'], 'method'=>'POST']) !!}
+		{!! Form::open( ['action' => ['Communication\CommunicationAdminController@store'], 'method'=>'POST', 'class'=>'form-horizontal']) !!}
+		
 
-		<div>
-			<input type="hidden" name="banner_id" value={{$banner->id}} >
+		<input type="hidden" name="banner_id" value={{$banner->id}} >
+
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Title</label>
+            <div class="col-sm-10"><input type="text" id="subject" name="subject" class="form-control" value=""></div>
 		</div>
-		<div>
-			{!! Form::label('subject', 'Subject') !!}
-			{!! Form::input('text', 'subject', null,  ['class'=>'form-control']) !!}
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Type</label>
+				<div class="col-sm-10">
+					<div class="btn-group" role="group" data-toggle="buttons">
+					@foreach($communicationTypes as $ct)
+
+					
+					<label class="btn btn-outline btn-default">
+						<input type="radio" id="" name="communication_type" value="{{ $ct->id }}"><i class="fa fa-circle {{ $ct->colour }}"></i> {{ $ct->communication_type }}
+					</label>	
+
+					@endforeach
+					</div>
+				</div>
 		</div>
-		<div>
-			{!! Form::label('body', 'Body') !!}
-			{!! Form::textarea('body', null, ['class'=> 'communication_body']) !!}
+
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Body</label>
+				<div class="col-sm-10">
+					<textarea class="communication_body" name="body" cols="50" rows="10" id="body"></textarea>
+				</div>
 		</div>
-		<div>
-			{!! Form::label('sender', 'Sender') !!}
-			{!! Form::input('text', 'sender', null, ['class'=>'form-control']) !!}
-		</div>
-		<div>
-			{!! Form::label('importance', 'Importance') !!}
-			{!! Form::select('importance', $importance, null,  ['class'=>'form-control']) !!}
-		</div>
+
+		<div class="form-group">
+                                            
+                <label class="col-sm-2 control-label">Target Stores</label>
+                <div class="col-sm-10">
+                    {!! Form::select('stores', $storeList, null, [ 'class'=>'chosen', 'id'=> 'storeSelect', 'multiple'=>'true']) !!}
+                    {!! Form::label('allStores', 'Or select all stores:') !!}
+                    {!! Form::checkbox('allStores', null, false ,['id'=> 'allStores'] ) !!}
+                </div>
+
+        </div>
 
 		<div>
 			{!! Form::label('stores[]', 'Select Stores:') !!}
@@ -113,11 +135,38 @@
 			<div id="add-packages" class="btn btn-default">Add packages</div>		
 		</div>
 
-		<div>
+<!-- 		<div>
 			{!! Form::label('tags[]', 'Tags:') !!}
 			{!! Form::select('tags[]', $tags , null,  ['class'=>'chosen', 'multiple'=>'true']) !!}
 			
+		</div> -->
+
+
+
+		<div id="files-selected"></div>
+		<div id="packages-selected"></div>
+
+		<div class="hr-line-dashed"></div>
+		<div>
+			<a class="btn btn-white" href="/admin/communication"><i class="fa fa-close"></i> Cancel</a>
+			<button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Send New Communication</button>
 		</div>
+		{!! Form::close() !!}
+
+
+
+
+		                        </div>
+
+		                    </div>
+		                </div>
+		            </div>
+
+
+		        </div>
+
+
+
 
 		<div id="document-listing" class="modal fade">
 		    <div class="modal-dialog">
@@ -165,24 +214,6 @@
 		    </div>
 		</div>
 
-		<div id="files-selected"></div>
-		<div id="packages-selected"></div>
-		<div>
-			<button type="submit" class="btn btn-default">Submit</button>
-		</div>
-		{!! Form::close() !!}
-
-
-
-
-		                        </div>
-
-		                    </div>
-		                </div>
-		            </div>
-
-
-		        </div>
 
 				@include('site.includes.footer')
 

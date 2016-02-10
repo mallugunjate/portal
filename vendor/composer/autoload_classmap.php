@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'AddBrandingToBannerTable' => $baseDir . '/database/migrations/2016_02_01_174829_add_branding_to_banner_table.php',
     'AddNotificationsToBannerTable' => $baseDir . '/database/migrations/2016_02_04_230134_add_notifications_to_banner_table.php',
+    'AddTypesToCommunicationTable' => $baseDir . '/database/migrations/2016_02_09_175504_add_types_to_communication_table.php',
     'BannerTableSeeder' => $baseDir . '/database/seeds/BannerTableSeeder.php',
     'CreateActivitiesTable' => $baseDir . '/database/migrations/future/2015_08_05_203634_create_activities_table.php',
     'CreateActivityLevelsTable' => $baseDir . '/database/migrations/future/2015_08_05_210403_create_activity_levels_table.php',
@@ -18,6 +19,7 @@ return array(
     'CreateCommunicationImportanceTable' => $baseDir . '/database/migrations/2015_12_03_214110_create_communication_importance_table.php',
     'CreateCommunicationPackagePivotTable' => $baseDir . '/database/migrations/2015_12_04_222108_create_communication_package_pivot_table.php',
     'CreateCommunicationTargetTable' => $baseDir . '/database/migrations/2015_12_18_212934_CreateCommunicationTargetTable.php',
+    'CreateCommunicationTypesTable' => $baseDir . '/database/migrations/2016_02_09_164438_create_communication_types_table.php',
     'CreateCommunicationsTable' => $baseDir . '/database/migrations/2015_12_03_214558_create_communications_table.php',
     'CreateContentTagPivotTable' => $baseDir . '/database/migrations/2015_12_09_200212_create_content_tag_pivot_table.php',
     'CreateDashboardBrandingTable' => $baseDir . '/database/migrations/2016_01_27_220050_create_dashboard_branding_table.php',
@@ -571,6 +573,7 @@ return array(
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
     'UpdateBannerTableAddTitle' => $baseDir . '/database/migrations/2016_02_05_164949_update_banner_table_add_title.php',
     'UpdateBannersTable' => $baseDir . '/database/migrations/2016_01_28_204112_update_banners_table.php',
+    'UpdateCommunicationTypeTable' => $baseDir . '/database/migrations/2016_02_09_194959_update_communication_type_table.php',
     'UpdateDashboardBrandingTable' => $baseDir . '/database/migrations/2016_01_27_230216_update_dashboard_branding_table.php',
     'UpdateDocumentsTable' => $baseDir . '/database/migrations/2015_10_27_145632_update_documents_table.php',
     'UpdateFeaturesTable' => $baseDir . '/database/migrations/2016_01_29_201330_update_features_table.php',

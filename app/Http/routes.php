@@ -56,7 +56,6 @@ Route::controllers([
 ]);
 
 
-
 //list of admin functions
 // Route::get('/admin', function(){
 // //	return view('admin.index');
@@ -94,6 +93,7 @@ Route::resource('/admin/dashboardbackground', 'Dashboard\DashboardBackgroundAdmi
 
 //Communications
 Route::resource('/admin/communication', 'Communication\CommunicationAdminController');
+Route::resource('/admin/communicationtypes', 'Communication\CommunicationTypesAdminController');
 
 //CALENDAR ADMIN
 Route::resource('/admin/calendar', 'Calendar\CalendarAdminController');
@@ -124,8 +124,6 @@ Route::get('/api/v1/document/{id}', 'Api\V1\ApiController@getDocumentById');
 Route::get('/api/v1/banner/{id}/document/recent/{days}', 'Api\V1\ApiController@getRecentDocuments');
 //get all douments in a folder 
 Route::get('/api/v1/folder/{id}/archived', 'Api\V1\ApiController@getArchivedDocuments');
-
-
 
 
 Route::get('/howyoulikemenow', function () {
