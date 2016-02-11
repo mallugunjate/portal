@@ -63,19 +63,19 @@
                                             <div class="col-sm-10">
                                             	            <div class="btn-group" data-toggle="buttons">
 											                <label class="btn btn-outline btn-default">
-											                    <input type="radio" id="" name="colour" value="text-navy" /> <i class="fa fa-circle text-navy"></i>  
+											                    <input type="radio" id="" name="colour" value="inverse" /> <i class="fa fa-circle text-inverse"></i>  
 											                </label> 
 											                <label class="btn btn-outline btn-default">
-											                    <input type="radio" id="" name="colour" value="text-danger" /> <i class="fa fa-circle text-danger"></i> 
+											                    <input type="radio" id="" name="colour" value="danger" /> <i class="fa fa-circle text-danger"></i> 
 											                </label> 
 											                <label class="btn btn-outline btn-default">
-											                    <input type="radio" id="" name="colour" value="text-primary" /> <i class="fa fa-circle text-primary"></i> 
+											                    <input type="radio" id="" name="colour" value="primary" /> <i class="fa fa-circle text-primary"></i> 
 											                </label> 
 											                <label class="btn btn-outline btn-default">
-											                    <input type="radio" id="" name="colour" value="text-info" /> <i class="fa fa-circle text-info"></i> 
+											                    <input type="radio" id="" name="colour" value="info" /> <i class="fa fa-circle text-info"></i> 
 											                </label> 
 											                <label class="btn btn-outline btn-default">
-											                    <input type="radio" id="" name="colour" value="text-warning" /> <i class="fa fa-circle text-warning"></i> 
+											                    <input type="radio" id="" name="colour" value="warning" /> <i class="fa fa-circle text-warning"></i> 
 											                </label>
 	<!-- 										                <label class="btn btn-outline btn-default">
 											                    <input type="radio" id="" name="colour" value="text-primary" /> <i class="fa fa-circle text-primary"></i> 

@@ -40,12 +40,16 @@ class CommunicationController extends Controller
 
         $skin = Skin::getSkin($storeBanner);
 
-        
-
         $targetedCommunications = DB::table('communications_target')
                 ->join('communications', 'communications_target.communication_id', '=', 'communications.id')
                 ->where('communications_target.store_id', '=', $storeNumber)
                 ->get();
+
+        $i=0;
+        foreach($targetedCommunications as $tc){
+            $targetedCommunications[$i]->trunc = Communication::truncateHtml($targetedCommunications[$i]->body);
+            $i++;
+        }
 
         $communicationCount = Communication::getCommunicationCount($storeNumber); 
 
