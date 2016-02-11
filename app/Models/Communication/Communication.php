@@ -217,6 +217,16 @@ class Communication extends Model
          return $communicationCount;
       }
 
+      public static function getCommunicationCountByCategory($storeNumber, $categoryId)
+      {
+         $count = DB::table('communications_target')
+           ->where('store_id', $storeNumber)
+           ->join('communications', 'communications.id', '=', 'communications_target.communication_id')
+           ->where('communications.communication_type_id', $categoryId)
+           ->count();
+         return $count;
+      }  
+
 
      public static function truncateHtml($text, $length = 100, $ending = '...', $exact = false, $considerHtml = true) {
          if ($considerHtml) {
