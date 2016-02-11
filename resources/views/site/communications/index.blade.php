@@ -48,28 +48,13 @@
                             <ul class="category-list" style="padding: 0">
                             @foreach($communicationTypes as $c)
 
+                                @if( $c->id != "1")
                                 <li><a href="#"> <span class="label label-{{ $c->colour }} pull-right">{{ $c->count }}</span> {{ $c->communication_type }}</a></li>
-
+                                @endif 
+                                
                             @endforeach
                             </ul>
                                 
-{{--                            <li><a href="#"> <i class="fa fa-circle text-danger"></i> Documents</a></li>
-                                <li><a href="#"> <i class="fa fa-circle text-primary"></i> Social</a></li>
-                                <li><a href="#"> <i class="fa fa-circle text-info"></i> Advertising</a></li>
-                                <li><a href="#"> <i class="fa fa-circle text-warning"></i> Clients</a></li> --}}
-                            
-
-{{--                             <h5 class="tag-title">Labels</h5>
-                            <ul class="tag-list" style="padding: 0">
-                                <li><a href=""><i class="fa fa-tag"></i> Family</a></li>
-                                <li><a href=""><i class="fa fa-tag"></i> Work</a></li>
-                                <li><a href=""><i class="fa fa-tag"></i> Home</a></li>
-                                <li><a href=""><i class="fa fa-tag"></i> Children</a></li>
-                                <li><a href=""><i class="fa fa-tag"></i> Holidays</a></li>
-                                <li><a href=""><i class="fa fa-tag"></i> Music</a></li>
-                                <li><a href=""><i class="fa fa-tag"></i> Photography</a></li>
-                                <li><a href=""><i class="fa fa-tag"></i> Film</a></li>
-                            </ul> --}}
                             <div class="clearfix"></div>
                         </div>
                     </div>
@@ -110,7 +95,12 @@
                     <td class="check-mail">
                         <div class="icheckbox_square-green" style="position: relative;"><input type="checkbox" class="i-checks" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
                     </td>
+                    @if( $communication->communication_type_id == "1")
+                    <td class="mail-subject"><a href="communication/show/{{ $communication->id }}">{{ $communication->subject }}</a></td>
+                    @else
                     <td class="mail-subject"><a href="communication/show/{{ $communication->id }}">{{ $communication->subject }}</a> <span class="label label-sm label-{!! $communication->label_colour !!}">{!! $communication->label_name !!}</span></td>
+                    @endif
+                    
                     <td class="mail-subject"><a href="communication/show/{{ $communication->id }}">{!! $communication->trunc !!}</a></td>
                     <td class=""><i class="fa fa-paperclip"></i></td>
                     <td class="text-right mail-date">{{ $communication->send_at }}</td>

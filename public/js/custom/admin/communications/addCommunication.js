@@ -64,6 +64,9 @@ $(document).on('click','.communication-create',function(){
 	var communication_packages = [];
 	var communication_documents = [];
 
+	if(!communication_type_id){
+		communication_type_id = 1; // no category
+	}
 
 	$(".selected-files").each(function(){
 		communication_documents.push($(this).attr('data-fileid'));
@@ -73,7 +76,7 @@ $(document).on('click','.communication-create',function(){
 		communication_packages.push($(this).attr('data-packageid'));
 	});
  
-    if(subject == '' || body == '' || start == '' || target_stores == '' || communication_type_id == '') {
+    if(subject == '' || body == '' || start == '' || target_stores == '' ) {
 		swal("Oops!", "This communication is missing something.", "error"); 
 		hasError = true;
 		$(window).scrollTop(0);
