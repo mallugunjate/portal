@@ -22,6 +22,7 @@ use App\Models\Feature\Feature;
 use App\Models\Dashboard\Quicklinks;
 use App\Models\Dashboard\DashboardBranding;
 use App\Models\Notification\Notification;
+use App\Models\UrgentNotice\UrgentNotice;
 use App\Skin;
 
 class DashboardController extends Controller
@@ -47,6 +48,8 @@ class DashboardController extends Controller
 
         $notifications = Notification::getAllNotifications($storeInfo->banner_id, $banner->update_type_id, $banner->update_window_size);
 
+        $urgentNoticeCount = UrgentNotice::getUrgentNoticeCount($storeNumber);
+
         $communicationCount = Communication::getCommunicationCount($storeNumber);
 
         $communications = Communication::getCommunicationsByStoreNumber($storeNumber, 3);
@@ -58,7 +61,8 @@ class DashboardController extends Controller
         	->with('communicationCount', $communicationCount)
             ->with('communications', $communications)
             ->with('features', $features)
-            ->with('notifications', $notifications);
+            ->with('notifications', $notifications)
+            ->with('urgentNoticeCount', $urgentNoticeCount);
     }
 
 

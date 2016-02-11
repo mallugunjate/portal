@@ -116,4 +116,11 @@ class UrgentNotice extends Model
     {
         UrgentNotice::find($id)->delete();
     }
+
+    public static function getUrgentNoticeCount($storeNumber)
+    {
+        return UrgentNoticeTarget::where('store_id', $storeNumber)
+                                ->where('is_read', 0)
+                                ->count();
+    }
 }
