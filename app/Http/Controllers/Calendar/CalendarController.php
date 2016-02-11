@@ -17,6 +17,7 @@ use App\Models\Communication\Communication;
 use App\Models\Communication\CommunicationDocument;
 use App\Models\Communication\CommunicationPackage;
 use App\Models\Communication\CommunicationTarget;
+use App\Models\UrgentNotice\UrgentNotice;
 use App\Skin;
 
 class CalendarController extends Controller
@@ -45,11 +46,14 @@ class CalendarController extends Controller
             ->whereNull('is_read')
             ->count();
 
+        $urgentNoticeCount = UrgentNotice::getUrgentNoticeCount($storeNumber);
+
         $events = Event::where('banner_id', 1)->get(); 
         return view('site.calendar.index')
                 ->with('skin', $skin)
                 ->with('communicationCount', $communicationCount)
-                ->with('events', $events);
+                ->with('events', $events)
+                ->with('urgentNoticeCount', $urgentNoticeCount);
 
     }
 

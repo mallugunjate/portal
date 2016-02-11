@@ -20,6 +20,7 @@ use App\Models\Communication\Communication;
 use App\Models\Communication\CommunicationDocument;
 use App\Models\Communication\CommunicationPackage;
 use App\Models\Communication\CommunicationTarget;
+use App\Models\UrgentNotice\UrgentNotice;
 
 class DocumentController extends Controller
 {
@@ -67,6 +68,8 @@ class DocumentController extends Controller
             $defaultFolder = null;
         }
 
+        $urgentNoticeCount = UrgentNotice::getUrgentNoticeCount($storeNumber);
+
         return view('site.documents.index')
             ->with('skin', $skin)
             ->with('navigation', $navigation)
@@ -74,7 +77,8 @@ class DocumentController extends Controller
             ->with('banner', $banner)
             ->with('packages', $packages)
             ->with('communicationCount', $communicationCount)
-            ->with('defaultFolder' , $defaultFolder);
+            ->with('defaultFolder' , $defaultFolder)
+            ->with('urgentNoticeCount', $urgentNoticeCount);
 
 
         // $banner_id  = $request->get('banner_id');
