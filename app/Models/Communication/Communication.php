@@ -37,7 +37,8 @@ class Communication extends Model
             $since = Carbon::now()->diffForHumans($updated_at, true);
             $c->since = $since;
             $c->prettyDate = $updated_at->toDayDateTimeString();
-            $c->trunc = Communication::truncateHtml($c->body);
+            $preview_string = strip_tags($c->body);
+            $c->trunc = Communication::truncateHtml($preview_string);
          }
          return $comm;
          

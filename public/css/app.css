@@ -8079,3 +8079,9 @@ body.md-skin {
 #folder-title{
   font-size: 20px;
 }
+
+
+.marker
+{
+  background-color: Yellow;
+}

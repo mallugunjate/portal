@@ -46,7 +46,8 @@ class CommunicationController extends Controller
 
         $i=0;
         foreach($targetedCommunications as $tc){
-            $targetedCommunications[$i]->trunc = Communication::truncateHtml($targetedCommunications[$i]->body);
+            $preview_string = strip_tags($targetedCommunications[$i]->body);
+            $targetedCommunications[$i]->trunc = Communication::truncateHtml($preview_string);
             $targetedCommunications[$i]->label_name = Communication::getCommunicationCategoryName($targetedCommunications[$i]->communication_type_id);
             $targetedCommunications[$i]->label_colour = Communication::getCommunicationCategoryColour($targetedCommunications[$i]->communication_type_id);
             $i++;
