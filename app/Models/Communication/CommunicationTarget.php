@@ -31,18 +31,18 @@ class CommunicationTarget extends Model
 
 	public static function prettifyCommunications($communications)
     {
-       foreach($communications as $c){
-            
-            // get the human readable days since send
-	       	$send_at = Carbon::createFromFormat('Y-m-d H:i:s', $c->send_at);
-            $since = Carbon::now()->diffForHumans($send_at, true);
-            $c->since = $since;
+     foreach($communications as $c){
+          
+        // get the human readable days since send
+        $send_at = Carbon::createFromFormat('Y-m-d H:i:s', $c->send_at);
+        $since = Carbon::now()->diffForHumans($send_at, true);
+        $c->since = $since;
 
-            //make the timestamp on the message a little nicer
-            
-            $c->prettyDate = $send_at->format('D j F');
-        }
-        return $communications;
+        //make the timestamp on the message a little nicer
+
+        $c->prettyDate = $send_at->format('D j F');
+      }
+      return $communications;
     }
 
 	public static function markAsRead($id, $store_id)

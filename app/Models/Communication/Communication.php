@@ -43,6 +43,15 @@ class Communication extends Model
          
       }
 
+
+      public static function getCommunication($id)
+      {
+         $communication = Communication::find($id);
+         Communication::prettify($communication);
+         return $communication;
+
+      }
+
       public static function storeCommunication($request)
    	{
    		\Log::info($request->all());
@@ -237,6 +246,19 @@ class Communication extends Model
       {
          return CommunicationType::where('id', $id)->first()->colour;
       }
+
+      public static function prettify($communication)
+      {
+        // get the human readable days since send
+        $send_at = Carbon::createFromFormat('Y-m-d H:i:s', $communication->send_at);
+        $since = Carbon::now()->diffForHumans($send_at, true);
+        $communication->since = $since;
+
+        //make the timestamp on the message a little nicer
+        $communication->prettyDate = $send_at->format('D j F');
+        
+        return $communication;
+      }      
 
      public static function truncateHtml($text, $length = 100, $ending = '...', $exact = false, $considerHtml = true) {
          if ($considerHtml) {

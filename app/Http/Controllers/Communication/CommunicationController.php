@@ -94,13 +94,29 @@ class CommunicationController extends Controller
      */
     public function show($sn, $id)
     {
-        $communication = Communication::find($id);
-        $tag_ids = ContentTag::where('content_id', $id)->where("content_type", "communication")->get()->pluck("tag_id");
-        $tags = Tag::findmany($tag_ids);
+        $storeNumber = RequestFacade::segment(1);
+        $storeInfo = StoreInfo::getStoreInfoByStoreId($storeNumber);
+        $storeBanner = $storeInfo->banner_id;
+
+        $skin = Skin::getSkin($storeBanner);
+
+        $communicationCount = Communication::getCommunicationCount($storeNumber); 
+        $communicationTypes = CommunicationType::all();
+
+        $i = 0;
+        foreach($communicationTypes as $ct){
+            $communicationTypes[$i]->count = Communication::getCommunicationCountByCategory($storeNumber, $ct->id);
+            $i++;
+        }        
+
+        $communication = Communication::getCommunication($id);
+        
         return view('site.communications.message')
-            ->with('communication', $communication)
-            ->with('tag_ids', $tag_ids)
-            ->with('tags', $tags);
+            ->with('skin', $skin)
+            ->with('communicationTypes', $communicationTypes)
+            ->with('communicationCount', $communicationCount)
+            ->with('communication', $communication);
+        
     }
 
     /**
