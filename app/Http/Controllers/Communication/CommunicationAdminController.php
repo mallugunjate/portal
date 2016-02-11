@@ -80,8 +80,7 @@ class CommunicationAdminController extends Controller
      */
     public function store(Request $request)
     {
-        Communication::storeCommunication($request);
-        return redirect()->action('AdminController@index');
+        return Communication::storeCommunication($request);
     }
 
     /**

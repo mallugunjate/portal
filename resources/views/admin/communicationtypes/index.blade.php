@@ -81,7 +81,7 @@
 
 
 											<td>{{ $ct->id }}</td>
-											<td><i class="fa fa-circle {{ $ct->colour }}"></i> &nbsp; <a href="/admin/communicationtype/{{ $ct->id }}/edit">{{ $ct->communication_type }}</a></td>
+											<td><i class="fa fa-circle text-{{ $ct->colour }}"></i> &nbsp; <a href="/admin/communicationtype/{{ $ct->id }}/edit">{{ $ct->communication_type }}</a></td>
 
 
 											<td>

@@ -30,7 +30,7 @@ class StoreInfo extends Model
     public static function getStoreInfoByStoreId($store_id)
     {
         $storeAPI = env('STORE_API_DOMAIN', false);
-        $storeInfoJson = file_get_contents( $storeAPI . "/banner/" . $banner_id);
+        $storeInfoJson = file_get_contents( $storeAPI . "/store/" . $store_id);
         $storeInfo = json_decode($storeInfoJson);
         return $storeInfo;
     }
