@@ -51,7 +51,7 @@
                                 @if( $c->id != "1")
                                 <li><a href="#"> <span class="label label-{{ $c->colour }} pull-right">{{ $c->count }}</span> {{ $c->communication_type }}</a></li>
                                 @endif 
-                                
+
                             @endforeach
                             </ul>
                                 
@@ -93,7 +93,8 @@
                 @endif
 
                     <td class="check-mail">
-                        <div class="icheckbox_square-green" style="position: relative;"><input type="checkbox" class="i-checks" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
+                        <i class="fa fa-envelope-o"></i>
+                      <!--   <div class="icheckbox_square-green" style="position: relative;"><input type="checkbox" class="i-checks" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div> -->
                     </td>
                     @if( $communication->communication_type_id == "1")
                     <td class="mail-subject"><a href="communication/show/{{ $communication->id }}">{{ $communication->subject }}</a></td>
@@ -101,9 +102,9 @@
                     <td class="mail-subject"><a href="communication/show/{{ $communication->id }}">{{ $communication->subject }}</a> <span class="label label-sm label-{!! $communication->label_colour !!}">{!! $communication->label_name !!}</span></td>
                     @endif
                     
-                    <td class="mail-subject"><a href="communication/show/{{ $communication->id }}">{!! $communication->trunc !!}</a></td>
-                    <td class=""><i class="fa fa-paperclip"></i></td>
-                    <td class="text-right mail-date">{{ $communication->send_at }}</td>
+                    <td class="mail-preview"><a href="communication/show/{{ $communication->id }}">{!! $communication->trunc !!}</a></td>
+                    <td class=""><!-- <i class="fa fa-paperclip"></i> --></td>
+                    <td class="text-right mail-date">{{ $communication->prettyDate }} <small style="font-weight: normal;padding-left: 10px;">({{ $communication->since }} ago)</small></td>
                 </tr>                
 
                 @endforeach

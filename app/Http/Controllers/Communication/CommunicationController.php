@@ -39,10 +39,7 @@ class CommunicationController extends Controller
 
         $skin = Skin::getSkin($storeBanner);
 
-        $targetedCommunications = DB::table('communications_target')
-                ->join('communications', 'communications_target.communication_id', '=', 'communications.id')
-                ->where('communications_target.store_id', '=', $storeNumber)
-                ->get();
+        $targetedCommunications = CommunicationTarget::getTargetedCommunications($storeNumber);
 
         $communicationCount = Communication::getCommunicationCount($storeNumber); 
         $communicationTypes = CommunicationType::all();
