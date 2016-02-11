@@ -35,9 +35,7 @@
                             <ul class="folder-list m-b-md" style="padding: 0">
                                 <li>
                                     <a href="/{{ Request::segment(1) }}/communication"> <i class="fa fa-inbox "></i> All Messages 
-                                    @if($communicationCount > 0)
-                                    <span class="label label-warning pull-right">{{ $communicationCount }}</span> 
-                                    @endif
+                                   
                                     </a>
                                 </li>
 {{--                                 <li><a href="mailbox.html"> <i class="fa fa-envelope-o"></i> Send Mail</a></li>
@@ -47,11 +45,7 @@
                             </ul>
                             <h5>Categories</h5>
                             <ul class="category-list" style="padding: 0">
-                            @foreach($communicationTypes as $c)
 
-                                <li><a href="#"> <i class="fa fa-circle {{ $c->colour }}"></i> {{ $c->communication_type }} </a></li>
-
-                            @endforeach
                             </ul>
                                 
 {{--                            <li><a href="#"> <i class="fa fa-circle text-danger"></i> Documents</a></li>
@@ -89,9 +83,9 @@
                         </div>
                     </div>
                 </form> --}}
-                <h2>
-                    All Messages <small>({{ count($communications) }} unread)</small>
-                </h2>
+                {{-- <h2>
+                                                    All Messages <small>({{ count($communications) }} unread)</small>
+                                                </h2> --}}
 
             </div>
                 <div class="mail-box">
@@ -100,7 +94,7 @@
                 <table class="table table-hover table-mail">
                 <tbody>
 
-                @foreach($communications as $communication)
+                {{-- @foreach($communications as $communication)
                 
                 @if( $communication->is_read == 1)
                 <tr class="read">
@@ -117,7 +111,7 @@
                     <td class="text-right mail-date">{{ $communication->send_at }}</td>
                 </tr>                
 
-                @endforeach
+                @endforeach--}}
                  
                 {{-- <tr class="unread">
                     <td class="check-mail">

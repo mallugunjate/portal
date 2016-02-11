@@ -1,85 +1,52 @@
-$("#attachment-Document").click(function(){
-	$("#attachment-selected").empty();
+$("#allStores").change(function(){
+
+	if ($("#allStores").is(":checked")) {
+
+		$("#storeSelect option").each(function(index){			
+			$(this).attr('selected', 'selected');
+		});
+		$("#storeSelect").chosen();
+		
+	}
+	else if ($("#allStores").not(":checked")) {
+		$("#storeSelect option").each(function(){
+			$(this).removeAttr('selected');
+		});
+		$("#storeSelect").chosen();
+		
+	}
+});
+
+$("#add-documents").click(function(){
 	$("#document-listing").modal('show');
 });
-
-$("#attachment-Folder").click(function(){
-	$("#attachment-selected").empty();
-	$("#folder-listing").modal('show');
+$("#add-packages").click(function(){
+	$("#package-listing").modal('show');	
 });
 
 
-// $(".folder-checkbox").on('click', function(){
-// 	if($(this).is(":checked")){
-// 		$(this).attr('data-folderRoot', 'true')
-// 		 $(this).siblings('ul')
-//             .find("input[type='checkbox']")
-//             .prop('checked', this.checked)
-//             .attr("disabled", true);
+$('body').on('click', '#attach-selected-files', function(){
+	$("#files-selected").empty();
+	$("#files-selected").append('<p>Files attached :</p>');
+	$('input[name^="package_files"]').each(function(){
+		if($(this).is(":checked")){
+			$("#files-selected").append('<ul class="selected-files" data-fileid='+ $(this).val() +'>'+$(this).attr("data-filename")+'</ul>')
+		}
+	});
+});
 
-// 	}else{
-// 		$(this).removeAttr('data-folderRoot')
-// 	    $(this).siblings('ul')
-//             .find("input[type='checkbox']")
-//             .prop('checked', false)
-//             .attr("disabled", false);
-// 	}	
-// });
+$('body').on('click', '#attach-selected-packages', function(){
 
-// $('#attach-selected-folders').on('click', function(){
-
-// 	var  attachment_type = $("input[name='attachment_type']").val();
-// 	var  attachment_type = $("input[name='attachment_type']").val();
-// 	$("#attachment-selected").empty();
-// 	$("#attachment-selected").append('<p>Folders attached :</p>');
-// 	$('input[name^="package_folders"]').each(function(){
-
-
-// 		var attr = $(this).attr('data-folderRoot');
+	console.log('attach selected-packages');
+	$("#packages-selected").empty();
+	$("#packages-selected").append('<p>Packages Attached :</p>');
+	$('input[name^="packages"]:checked').each(function(){
 		
-// 		// For some browsers, `attr` is undefined; for others,
-// 		// `attr` is false.  Check for both.
-// 		if (typeof attr !== typeof undefined && attr !== false) {
-		    
-// 		    $("#attachment-selected").append('<ul class="attachment" data-attachment-type="' + attachment_type +'" data-attachmentid='+ $(this).attr('data-folderid') +'>'+$(this).attr("data-foldername")+'</ul>')
-// 		}
+			$("#packages-selected").append('<ul class="selected-packages" data-packageid='+ $(this).val() +'>'+ $(this).attr("data-package-name")+'</ul>')		
 		
-// 	});
-
-// 	$("#attachment-selected").parent().removeClass('hidden');
-// });
-
-// $('#attach-selected-files').on('click', function(){
-// 	var  attachment_type = $("input[name='attachment_type']").val();
-// 	$("#attachment-selected").append('<p>Files attached :</p>');
-// 	$('input[name^="package_files"]').each(function(){
-// 		console.log('hello');
-// 		if($(this).is(":checked")){
-// 			$("#attachment-selected").append('<ul class="attachment" data-attachment-type="' + attachment_type +'" data-attachmentid='+ $(this).val() +'>'+$(this).attr("data-filename")+'</ul>')
-// 		}
-// 	});
-// 	$("#attachment-selected").parent().removeClass('hidden');
-// });
-
-
-// $("#allStores").change(function(){
-
-// 	if ($("#allStores").is(":checked")) {
-
-// 		$("#storeSelect option").each(function(index){			
-// 			$(this).attr('selected', 'selected');
-// 		});
-// 		$("#storeSelect").chosen();
 		
-// 	}
-// 	else if ($("#allStores").not(":checked")) {
-// 		$("#storeSelect option").each(function(){
-// 			$(this).removeAttr('selected');
-// 		});
-// 		$("#storeSelect").chosen();
-		
-// 	}
-// });
+	});
+});
 
 $(document).on('click','.communication-create',function(){
   	
@@ -94,10 +61,17 @@ $(document).on('click','.communication-create',function(){
 	var target_stores  = $("#storeSelect").val();
 	var importance = "1";
 	var sender = "";
-	var attachments = [];
+	var communication_packages = [];
+	var communication_documents = [];
 
-	// console.log(target_stores);
-	// console.log(communication_type_id);
+
+	$(".selected-files").each(function(){
+		communication_documents.push($(this).attr('data-fileid'));
+	});
+	
+	$(".selected-packages").each(function(){
+		communication_packages.push($(this).attr('data-packageid'));
+	});
  
     if(subject == '' || body == '' || start == '' || target_stores == '' || communication_type_id == '') {
 		swal("Oops!", "This communication is missing something.", "error"); 
@@ -118,14 +92,14 @@ $(document).on('click','.communication-create',function(){
 		  		importance: importance,
 		  		send_at : start,
 		  		archive_at : end,
-		  		// attachment_type : attachment_type,
-		  		// attachments : attachments,
 		  		banner_id : banner_id,
-		  		target_stores : target_stores
+		  		target_stores : target_stores,
+		  		communication_documents : communication_documents,
+		  		communication_packages : communication_packages
 		  		
 		    },
 		    success: function(result) {
-		        // console.log(result);
+		        console.log(result);
 		        $('#createNewCommunicationForm')[0].reset(); // empty the form
 				swal("Nice!", "'" + subject +"' has been created", "success");        
 		    }

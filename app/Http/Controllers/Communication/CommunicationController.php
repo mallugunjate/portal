@@ -19,6 +19,7 @@ use App\Models\Communication\CommunicationType;
 use App\Models\Tag\Tag;
 use App\Models\Tag\ContentTag;
 use App\Skin;
+use App\Models\StoreInfo;
 
 
 class CommunicationController extends Controller
@@ -32,9 +33,7 @@ class CommunicationController extends Controller
     {
         $storeNumber = RequestFacade::segment(1);
 
-        $storeAPI = env('STORE_API_DOMAIN', false);
-        $storeInfoJson = file_get_contents( $storeAPI . "/store/" . $storeNumber);
-        $storeInfo = json_decode($storeInfoJson);
+        $storeInfo = StoreInfo::getStoreInfoByStoreId($storeNumber);
 
         $storeBanner = $storeInfo->banner_id;
 
@@ -51,7 +50,7 @@ class CommunicationController extends Controller
                 ->where('store_id', $storeNumber)
                 ->whereNull('is_read')
                 ->count();
-
+             
         return view('site.communications.index')
             ->with('skin', $skin)
             ->with('communicationTypes', $communicationTypes)
