@@ -44,7 +44,8 @@ class Communication extends Model
 
       public static function storeCommunication($request)
    	{
-   		$is_draft = 0;
+   		\Log::info($request->all());
+         $is_draft = 0;
    		if ($request["send_at"]>Carbon::now()) {
    			$is_draft = 1;
    		}
@@ -64,7 +65,7 @@ class Communication extends Model
          Communication::updateCommunicationDocuments($communication->id, $request);
          Communication::updateCommunicationPackages($communication->id, $request);
          //Communication::updateTags($communication->id, $request["tags"]);
-   		return;
+   		return $communication;
    	}
 
       public static function updateCommunication($id, $request)
@@ -122,7 +123,7 @@ class Communication extends Model
             }
          }
 
-         $add_docs = $request["package_files"];
+         $add_docs = $request["communication_documents"];
          if (isset($add_docs)) {
             foreach ($add_docs as $doc) {
                CommunicationDocument::create([
@@ -142,7 +143,7 @@ class Communication extends Model
             }
          }
 
-         $add_packages = $request["packages"];
+         $add_packages = $request["communication_packages"];
          if (isset($add_packages)) {
             foreach ($add_packages as $package) {
                CommunicationPackage::create([

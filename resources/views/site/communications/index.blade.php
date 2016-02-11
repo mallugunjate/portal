@@ -34,9 +34,13 @@
                             <ul class="folder-list m-b-md" style="padding: 0">
                                 <li>
                                     <a href="/{{ Request::segment(1) }}/communication"> <i class="fa fa-inbox "></i> All Messages 
+<<<<<<< HEAD
+                                   
+=======
                                     @if($communicationCount > 0)
                                     <span class="label label-inverse pull-right">{{ $communicationCount }}</span> 
                                     @endif
+>>>>>>> 961c0dccf1bf8fa2c52f4703190d8c30c7416d07
                                     </a>
                                 </li>
 {{--                                 <li><a href="mailbox.html"> <i class="fa fa-envelope-o"></i> Send Mail</a></li>
@@ -46,11 +50,13 @@
                             </ul>
                             <h5>Categories</h5>
                             <ul class="category-list" style="padding: 0">
-                            @foreach($communicationTypes as $c)
 
+<<<<<<< HEAD
+=======
                                 <li><a href="#"> <span class="label label-{{ $c->colour }} pull-right">{{ $c->count }}</span> {{ $c->communication_type }}</a></li>
 
                             @endforeach
+>>>>>>> 961c0dccf1bf8fa2c52f4703190d8c30c7416d07
                             </ul>
                                 
 {{--                            <li><a href="#"> <i class="fa fa-circle text-danger"></i> Documents</a></li>
@@ -88,9 +94,9 @@
                         </div>
                     </div>
                 </form> --}}
-                <h2>
-                    All Messages <small>({{ count($communications) }} unread)</small>
-                </h2>
+                {{-- <h2>
+                                                    All Messages <small>({{ count($communications) }} unread)</small>
+                                                </h2> --}}
 
             </div>
                 <div class="mail-box">
@@ -99,7 +105,7 @@
                 <table class="table table-hover table-mail">
                 <tbody>
 
-                @foreach($communications as $communication)
+                {{-- @foreach($communications as $communication)
                 
                 @if( $communication->is_read == 1)
                 <tr class="read">
@@ -116,7 +122,7 @@
                     <td class="text-right mail-date">{{ $communication->send_at }}</td>
                 </tr>                
 
-                @endforeach
+                @endforeach--}}
                  
                 {{-- <tr class="unread">
                     <td class="check-mail">
