@@ -52,33 +52,54 @@ class UrgentNotice extends Model
 
     public static function updateUrgentNotice($request, $id)
     {
-    	$banner_id = $request->banner_id;
+    	$urgentNotice = UrgentNotice::find($id);
+        $attachment_type_id = $urgentNotice->attachment_type_id;
+
+
+        $banner_id = $request->banner_id;
     	$title = $request->title;
     	$description = $request->description;
     	$start = $request->start;
-    	$end = $request->end;
-    	$attachment_type_id = $request->attachment_type;
-    	$attachments = $request->attachments;
+    	$end = $request->end;	
+    	$new_attachments = $request->new_attachments;
+        $remove_attachments = $request->remove_attachments;
     	$target_stores = $request->target_stores;
+        
+        $new_attachment_type_id = intval($request->new_attachment_type);
 
-    	$urgentNotice = UrgentNotice::find($id);
+        if ($new_attachment_type_id != $attachment_type_id) {
+            $attachment_type_id = $new_attachment_type_id;
+            UrgentNoticeAttachment::where('urgent_notice_id', $id)->delete();
+        }
+        else{
+            if(isset($remove_attachments)) {
+                foreach ($remove_attachments as $attachment) {
+                UrgentNoticeAttachment::where('urgent_notice_id', $id)->where('attachment_id', $attachment)->delete();
+                } 
+            }
+            
+        } 
+    	
     	$urgentNotice->update([
     		'banner_id' => $banner_id,
     		'title'		=> $title,
     		'description' => $description,
     		'start'		=> $start,
     		'end'		=> $end,
-    		'attachment_type_id'	=>$attachment_type_id
+    		'attachment_type_id'	=> $attachment_type_id
     	]);
     	$urgentNotice->save();
 
-    	UrgentNoticeAttachment::where('urgent_notice_id', $id)->delete();
-    	foreach ($attachments as $attachment) {
-    		UrgentNoticeAttachment::create([
-    			'urgent_notice_id' => $urgentNotice->id,
-    			'attachment_id' => $attachment
-    		]);
-    	}
+    	
+    	if (isset($new_attachments)) {
+            foreach ($new_attachments as $attachment) {
+            UrgentNoticeAttachment::create([
+                'urgent_notice_id' => $urgentNotice->id,
+                'attachment_id' => $attachment
+            ]);
+        }
+        }
+        
 
     	UrgentNoticeTarget::where('urgent_notice_id', $id)->delete();
     	foreach ($target_stores as $store) {
@@ -87,7 +108,19 @@ class UrgentNotice extends Model
     			'store_id'			=> $store
     		]);
     	}
+        return $urgentNotice;
 
+    }
 
+    public static function deleteUrgentNotice($id)
+    {
+        UrgentNotice::find($id)->delete();
+    }
+
+    public static function getUrgentNoticeCount($storeNumber)
+    {
+        return UrgentNoticeTarget::where('store_id', $storeNumber)
+                                ->where('is_read', 0)
+                                ->count();
     }
 }

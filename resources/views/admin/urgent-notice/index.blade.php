@@ -73,7 +73,7 @@
 											
 											<td>
 
-												<a data-package="{{ $urgent_notice->id }}" id="urgent_notice{{$urgent_notice->id}}" class="urgent-notice-delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+												<a data-urgent-notice-id="{{ $urgent_notice->id }}" id="urgent_notice{{$urgent_notice->id}}" class="urgent-notice-delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
 
 											</td>
 										</tr>
@@ -106,7 +106,7 @@
 
 				</script>
 
-				<script src="/js/custom/admin/urgentnotice/delete.js"></script>
+				<script src="/js/custom/admin/urgent-notices/deleteUrgentNotice.js"></script>
 
 				@include('site.includes.bugreport')
 
