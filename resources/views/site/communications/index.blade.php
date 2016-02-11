@@ -36,7 +36,7 @@
                                 <li>
                                     <a href="/{{ Request::segment(1) }}/communication"> <i class="fa fa-inbox "></i> All Messages 
                                     @if($communicationCount > 0)
-                                    <span class="label label-warning pull-right">{{ $communicationCount }}</span> 
+                                    <span class="label label-inverse pull-right">{{ $communicationCount }}</span> 
                                     @endif
                                     </a>
                                 </li>
@@ -49,7 +49,7 @@
                             <ul class="category-list" style="padding: 0">
                             @foreach($communicationTypes as $c)
 
-                                <li><a href="#"> <i class="fa fa-circle {{ $c->colour }}"></i> {{ $c->communication_type }} </a></li>
+                                <li><a href="#"> <span class="label label-{{ $c->colour }} pull-right">{{ $c->count }}</span> {{ $c->communication_type }}</a></li>
 
                             @endforeach
                             </ul>
