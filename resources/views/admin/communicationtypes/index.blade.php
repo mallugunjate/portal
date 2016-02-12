@@ -77,6 +77,7 @@
 											<td></td>
 										</tr>
 										@foreach($communicationtypes as $ct)
+											@if($ct->id !="1") 
 										<tr>
 
 
@@ -90,6 +91,7 @@
 
 											</td>
 										</tr>
+											@endif
 										@endforeach
 
 										</table>

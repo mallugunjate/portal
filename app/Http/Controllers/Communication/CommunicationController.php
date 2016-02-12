@@ -16,6 +16,7 @@ use App\Models\Communication\CommunicationDocument;
 use App\Models\Communication\CommunicationPackage;
 use App\Models\Communication\CommunicationTarget;
 use App\Models\Communication\CommunicationType;
+use App\Models\UrgentNotice\UrgentNotice;
 use App\Models\Tag\Tag;
 use App\Models\Tag\ContentTag;
 use App\Skin;
@@ -39,17 +40,17 @@ class CommunicationController extends Controller
 
         $skin = Skin::getSkin($storeBanner);
 
-        $targetedCommunications = DB::table('communications_target')
-                ->join('communications', 'communications_target.communication_id', '=', 'communications.id')
-                ->where('communications_target.store_id', '=', $storeNumber)
-                ->get();
+        $targetedCommunications = CommunicationTarget::getTargetedCommunications($storeNumber);
 
         $communicationCount = Communication::getCommunicationCount($storeNumber); 
         $communicationTypes = CommunicationType::all();
 
+        $urgentNoticeCount = UrgentNotice::getUrgentNoticeCount($storeNumber);
+
         $i=0;
         foreach($targetedCommunications as $tc){
-            $targetedCommunications[$i]->trunc = Communication::truncateHtml($targetedCommunications[$i]->body);
+            $preview_string = strip_tags($targetedCommunications[$i]->body);
+            $targetedCommunications[$i]->trunc = Communication::truncateHtml($preview_string);
             $targetedCommunications[$i]->label_name = Communication::getCommunicationCategoryName($targetedCommunications[$i]->communication_type_id);
             $targetedCommunications[$i]->label_colour = Communication::getCommunicationCategoryColour($targetedCommunications[$i]->communication_type_id);
             $i++;
@@ -65,7 +66,8 @@ class CommunicationController extends Controller
             ->with('skin', $skin)
             ->with('communicationTypes', $communicationTypes)
             ->with('communications', $targetedCommunications)
-            ->with('communicationCount', $communicationCount);
+            ->with('communicationCount', $communicationCount)
+            ->with('urgentNoticeCount', $urgentNoticeCount);
     }
 
     /**
@@ -97,13 +99,32 @@ class CommunicationController extends Controller
      */
     public function show($sn, $id)
     {
-        $communication = Communication::find($id);
-        $tag_ids = ContentTag::where('content_id', $id)->where("content_type", "communication")->get()->pluck("tag_id");
-        $tags = Tag::findmany($tag_ids);
+        $storeNumber = RequestFacade::segment(1);
+        $storeInfo = StoreInfo::getStoreInfoByStoreId($storeNumber);
+        $storeBanner = $storeInfo->banner_id;
+
+        $skin = Skin::getSkin($storeBanner);
+
+        $communicationCount = Communication::getCommunicationCount($storeNumber); 
+        $communicationTypes = CommunicationType::all();
+
+        $urgentNoticeCount = UrgentNotice::getUrgentNoticeCount($storeNumber);
+
+        $i = 0;
+        foreach($communicationTypes as $ct){
+            $communicationTypes[$i]->count = Communication::getCommunicationCountByCategory($storeNumber, $ct->id);
+            $i++;
+        }        
+
+        $communication = Communication::getCommunication($id);
+        
         return view('site.communications.message')
+            ->with('skin', $skin)
+            ->with('communicationTypes', $communicationTypes)
+            ->with('communicationCount', $communicationCount)
             ->with('communication', $communication)
-            ->with('tag_ids', $tag_ids)
-            ->with('tags', $tags);
+            ->with('urgentNoticeCount', $urgentNoticeCount);
+        
     }
 
     /**

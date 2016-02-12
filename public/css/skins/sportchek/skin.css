@@ -9,6 +9,7 @@ body{
 }
 
 
+
 .metismenu > li.active{
 	border: none !important;
 }
@@ -16,6 +17,7 @@ body{
 .metismenu > li a{
 	border-left: 4px solid #2B2B2B !important;
 	border-left: none;
+	color: #ccc;
 }
 
 .metismenu > li.active a{
@@ -37,6 +39,15 @@ body{
 	border-left: none;
 }
 
+.metismenu li.urgetnNoticeNav {
+	border: none !important;
+	background-color: red; 
+	color: white;
+}
+
+.metismenu li.urgetnNoticeNav a{
+	border: none !important;
+}
 
 .navbar-minimalize{
 	background-color: #2B2B2B !important;
@@ -57,3 +68,7 @@ body{
 
 
 .product-box{ padding: 1px !important; margin: 10px !important; height: 168px; width: 168px; float: left;}
+
+
+
+

@@ -3694,11 +3694,19 @@ table.table-mail tr td {
   font-weight: normal;
   color: inherit;
 }
+
+.unread td.mail-preview a{
+  font-weight: normal !important; 
+}
+
 .unread td a,
 .unread td {
   font-weight: 600;
   color: inherit;
 }
+
+
+
 .read td {
   background-color: #f9f8f8;
 }
@@ -4773,6 +4781,19 @@ a.compose-mail {
 .mail-text {
   border-top: 1px solid #e7eaec;
 }
+
+.mail-preview {
+  font-weight: normal;
+
+  font-weight: 100 !important;
+
+}
+
+.mail-subject{
+ 
+  padding: 10px 5px;
+}
+
 .mail-text .note-toolbar {
   padding: 10px 15px;
 }
@@ -8057,4 +8078,10 @@ body.md-skin {
 
 #folder-title{
   font-size: 20px;
+}
+
+
+.marker
+{
+  background-color: Yellow;
 }

@@ -73,9 +73,12 @@
 					<div class="btn-group" role="group" data-toggle="buttons">
 					@foreach($communicationTypes as $ct)
 
-					
 					<label class="btn btn-outline btn-default">
-						<input type="radio" id="" name="communication_type" value="{{ $ct->id }}"><i class="fa fa-circle {{ $ct->colour }}"></i> {{ $ct->communication_type }}
+						@if( $ct->id == 1)
+						<input type="radio" id="" name="communication_type" value="{{ $ct->id }}"><i class="fa fa-times"></i> {{ $ct->communication_type }}
+						@else 
+						<input type="radio" id="" name="communication_type" value="{{ $ct->id }}"><i class="fa fa-circle text-{{ $ct->colour }}"></i> {{ $ct->communication_type }}
+						@endif
 					</label>	
 
 					@endforeach

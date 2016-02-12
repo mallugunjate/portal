@@ -37,10 +37,20 @@ class Communication extends Model
             $since = Carbon::now()->diffForHumans($updated_at, true);
             $c->since = $since;
             $c->prettyDate = $updated_at->toDayDateTimeString();
-            $c->trunc = Communication::truncateHtml($c->body);
+            $preview_string = strip_tags($c->body);
+            $c->trunc = Communication::truncateHtml($preview_string);
          }
          return $comm;
          
+      }
+
+
+      public static function getCommunication($id)
+      {
+         $communication = Communication::find($id);
+         Communication::prettify($communication);
+         return $communication;
+
       }
 
       public static function storeCommunication($request)
@@ -237,6 +247,19 @@ class Communication extends Model
       {
          return CommunicationType::where('id', $id)->first()->colour;
       }
+
+      public static function prettify($communication)
+      {
+        // get the human readable days since send
+        $send_at = Carbon::createFromFormat('Y-m-d H:i:s', $communication->send_at);
+        $since = Carbon::now()->diffForHumans($send_at, true);
+        $communication->since = $since;
+
+        //make the timestamp on the message a little nicer
+        $communication->prettyDate = $send_at->format('D j F');
+        
+        return $communication;
+      }      
 
      public static function truncateHtml($text, $length = 100, $ending = '...', $exact = false, $considerHtml = true) {
          if ($considerHtml) {
