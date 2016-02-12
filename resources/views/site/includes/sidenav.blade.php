@@ -61,9 +61,11 @@
                     </a>
                 </li>            
 
-
+                @if (Request::segment(2) == 'alerts')
+                <li class="active">
+                @else
                 <li>
-                    <a href="/{{ Request::segment(1) }}/alert"><i class="fa fa-bell"></i> <span class="nav-label">Alerts</span></a>
+                    <a href="/{{ Request::segment(1) }}/alerts"><i class="fa fa-bell"></i> <span class="nav-label">Alerts</span></a>
                 </li>   
                     
 
