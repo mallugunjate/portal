@@ -17,8 +17,7 @@ class AlertController extends Controller
      */
     public function index()
     {
-        $alerts = Alert::where('banner_id', 1)->get();
-        return $alerts;
+        
     }
 
     /**
