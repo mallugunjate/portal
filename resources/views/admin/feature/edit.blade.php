@@ -321,27 +321,3 @@
 	<script type="text/javascript" src="/js/custom/admin/features/editFeature.js"></script>
 </body>
 </html>
-
-
-
-		<!-- {!! Form::model($package, ['action' => ['Document\PackageAdminController@update', 'id'=>$package->id], 'method' => 'PATCH']) !!} -->
-		
-
-
-		
-
-		
-
-		<!-- <div id="files-selected">
-
-		</div>
-				
-		
-		<div class="row">
-			<button type="submit" class="btn btn-default">Update Package</button>
-		</div>
-		{!! Form::close() !!} -->
-	<!-- </div> -->
-
-
-
