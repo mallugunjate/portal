@@ -28,6 +28,18 @@ class Alert extends Model
     	return $alerts;
     }
 
+    public static function getAlertsByStore($store_id)
+    {
+        $alert_ids = \DB::table('alerts_target')->where('store_id', $store_id)->get();
+        $alerts = [];
+        foreach ($alert_ids as $alert_id) {
+            $alert = Alert::join('documents', 'alerts.document_id' , '=', 'documents.id')
+                            ->where('alerts.id', $alert_id->alert_id)
+                            ->first();
+            array_push($alerts, $alert);
+        }
+        return $alerts;
+    }
 
     public static function getTargetStoresForDocument($id)
     {
@@ -94,4 +106,5 @@ class Alert extends Model
         }
         return;
     }
+
 }

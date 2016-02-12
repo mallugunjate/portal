@@ -34,6 +34,9 @@ Route::resource('/communication', 'Communication\CommunicationTargetController')
 //FEATURES
 Route::get('/{storeno}/feature/show/{id}', 'Feature\FeatureController@show');
 
+
+//ALERTS
+Route::get('/{storeno}/alert', array('uses' => 'Alert\AlertController@index'));
 // Route::get('/home', function () {	
 // 	return view('home');
 // });
