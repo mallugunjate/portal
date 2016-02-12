@@ -20,7 +20,7 @@
 
 
                 @if($urgentNoticeCount > 0)
-                <li style="background-color: red; color: white;">
+                <li class="urgetnNoticeNav">
                     <a style="color: white" href="/{{ Request::segment(1) }}"><i class="fa fa-bolt"></i> <span class="nav-label">URGENT NOTICE</span>
                         @if(isset($urgentNoticeCount))
                         <span class="label label-primary pull-right">{{$urgentNoticeCount}}</span>
