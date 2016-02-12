@@ -44,22 +44,22 @@ class CommunicationController extends Controller
                 ->where('communications_target.store_id', '=', $storeNumber)
                 ->get();
 
+        $communicationCount = Communication::getCommunicationCount($storeNumber); 
+        $communicationTypes = CommunicationType::all();
+
         $i=0;
         foreach($targetedCommunications as $tc){
             $targetedCommunications[$i]->trunc = Communication::truncateHtml($targetedCommunications[$i]->body);
+            $targetedCommunications[$i]->label_name = Communication::getCommunicationCategoryName($targetedCommunications[$i]->communication_type_id);
+            $targetedCommunications[$i]->label_colour = Communication::getCommunicationCategoryColour($targetedCommunications[$i]->communication_type_id);
             $i++;
         }
-
-        $communicationCount = Communication::getCommunicationCount($storeNumber); 
-
-        $communicationTypes = CommunicationType::all();
 
         $i = 0;
         foreach($communicationTypes as $ct){
             $communicationTypes[$i]->count = Communication::getCommunicationCountByCategory($storeNumber, $ct->id);
             $i++;
         }
-
 
         return view('site.communications.index')
             ->with('skin', $skin)

@@ -10,6 +10,7 @@ use App\Models\Document\Document;
 use App\Models\Document\Package;
 use App\Models\Tag\ContentTag;
 use App\Models\Communication\CommunicationTarget;
+use App\Models\Communication\CommunicationType;
 use DB;
 
 class Communication extends Model
@@ -225,8 +226,17 @@ class Communication extends Model
            ->where('communications.communication_type_id', $categoryId)
            ->count();
          return $count;
-      }  
+      } 
 
+      public static function getCommunicationCategoryName($id)
+      {
+         return CommunicationType::where('id', $id)->first()->communication_type;
+      }
+
+      public static function getCommunicationCategoryColour($id)
+      {
+         return CommunicationType::where('id', $id)->first()->colour;
+      }
 
      public static function truncateHtml($text, $length = 100, $ending = '...', $exact = false, $considerHtml = true) {
          if ($considerHtml) {
