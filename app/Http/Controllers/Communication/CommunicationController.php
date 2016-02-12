@@ -108,6 +108,8 @@ class CommunicationController extends Controller
         $communicationCount = Communication::getCommunicationCount($storeNumber); 
         $communicationTypes = CommunicationType::all();
 
+        $urgentNoticeCount = UrgentNotice::getUrgentNoticeCount($storeNumber);
+
         $i = 0;
         foreach($communicationTypes as $ct){
             $communicationTypes[$i]->count = Communication::getCommunicationCountByCategory($storeNumber, $ct->id);
@@ -120,7 +122,8 @@ class CommunicationController extends Controller
             ->with('skin', $skin)
             ->with('communicationTypes', $communicationTypes)
             ->with('communicationCount', $communicationCount)
-            ->with('communication', $communication);
+            ->with('communication', $communication)
+            ->with('urgentNoticeCount', $urgentNoticeCount);
         
     }
 
