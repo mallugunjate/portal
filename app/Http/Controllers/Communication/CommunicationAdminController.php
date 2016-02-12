@@ -128,25 +128,32 @@ class CommunicationAdminController extends Controller
         $communication = Communication::find($id);
         $communication_documents  = Communication::getDocumentDetails($id);
         $communication_packages  = Communication::getPackageDetails($id);
-        $communication_target_stores = CommunicationTarget::where('communication_id', $id)->get()->pluck('store_id');
+        $communication_target_stores = CommunicationTarget::where('communication_id', $id)->get()->pluck('store_id')->toArray();
+        //$communication_target_stores = CommunicationTarget::where('communication_id', $id)->lists('store_id', 'id');
+        $communicationTypes = CommunicationType::all();
+
+       // dd($communication_target_stores);
+
+        $storeList = StoreInfo::getStoreListing($banner->id);
 
         $fileFolderStructure = FileFolder::getFileFolderStructure($banner->id);
         $packages = Package::where('banner_id', $banner->id)->get();
-        $importance = \DB::table('communication_importance_levels')->lists('name', 'id');
-        $tags = Tag::where('banner_id', $banner->id)->lists('name', 'id');
-        $tag_ids = ContentTag::where('content_id', $id)->where('content_type', 'communication')->get()->pluck('tag_id');
-        $selected_tags = Tag::findMany($tag_ids)->pluck('id')->toArray();
+        
+        // $tags = Tag::where('banner_id', $banner->id)->lists('name', 'id');
+        // $tag_ids = ContentTag::where('content_id', $id)->where('content_type', 'communication')->get()->pluck('tag_id');
+        // $selected_tags = Tag::findMany($tag_ids)->pluck('id')->toArray();
 
         return view('admin.communication.edit')->with('communication', $communication)
                                             ->with('communication_packages', $communication_packages)
                                             ->with('communication_documents', $communication_documents)
-                                            ->with('importance', $importance)
+                                            ->with('communicationTypes', $communicationTypes)
                                             ->with('banner', $banner)
+                                            ->with('storeList', $storeList)
                                             ->with('banners', $banners)
                                             ->with('navigation', $fileFolderStructure)
                                             ->with('packages', $packages)
-                                            ->with('tags', $tags)
-                                            ->with('selected_tags', $selected_tags)
+                                            // ->with('tags', $tags)
+                                            // ->with('selected_tags', $selected_tags)
                                             ->with('target_stores', $communication_target_stores);
     }
 
