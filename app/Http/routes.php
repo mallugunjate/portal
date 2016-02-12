@@ -110,6 +110,7 @@ Route::resource('/admin/quicklink', 'Dashboard\QuicklinksAdminController');
 //Urgent Notices
 Route::resource('/admin/urgentnotice', 'UrgentNotice\UrgentNoticeAdminController');
 
+Route::resource('/admin/alert', 'Alert\AlertAdminController' );
 //Users
 Route::resource('/admin/user', 'User\UserAdminController');
 
