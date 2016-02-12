@@ -44,8 +44,8 @@ class Alert extends Model
 
     public static function markDocumentAsAlert($request, $id)
     {
-        if (Alert::find($id)) {
-            $alert = Alert::find($id);
+        if (Alert::where('document_id', $id)->first()) {
+            $alert = Alert::where('document_id', $id)->first();
 
             $alert['alert_type_id'] = $request['alert_type_id'];
             $alert['alert_start']   = $request['start'];
@@ -83,6 +83,15 @@ class Alert extends Model
         }
         
         
+        return;
+    }
+
+    public static function deleteAlert($document_id)
+    {
+        $alert = Alert::where('document_id', $document_id)->first();
+        if ($alert) {
+            $alert->delete();
+        }
         return;
     }
 }

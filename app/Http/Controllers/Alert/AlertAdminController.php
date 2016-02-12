@@ -102,6 +102,7 @@ class AlertAdminController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Alert::find($id)->delete();
+        return;
     }
 }

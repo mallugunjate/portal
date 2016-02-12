@@ -145,7 +145,9 @@ class DocumentAdminController extends Controller
         if (count($storeList) == count($target_stores)) {
             $all_stores = true;
         }
-        $alert_types = \DB::table('alert_types')->lists('name', 'id');
+        
+        $alert_types = ["" =>'Select one'];
+        $alert_types += \DB::table('alert_types')->lists('name', 'id');
         
         $alert_details = [];
         if( Alert::where('document_id', $id)->first()) {

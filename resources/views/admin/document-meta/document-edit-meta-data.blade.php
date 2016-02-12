@@ -97,7 +97,7 @@
                               <div class="form-group">
                                 <label class="col-sm-2 control-label"> This document is an alert</label>
                                 <div class="col-sm-1">
-                                  @if( isset($alert_details))
+                                  @if( isset($alert_details->id))
                                     <input type="checkbox" id="is_alert" name="is_alert" value=1 checked>
                                   @else
                                     <input type="checkbox" id="is_alert" name="is_alert" value=1>
@@ -113,7 +113,7 @@
                                       @if( isset($alert_details->id) )
                                         {!! Form::select('alert_type', $alert_types, $alert_details->alert_type_id ,['class'=> 'form-control', 'id'=>'alert_type']) !!}
                                       @else
-                                        {!! Form::select('alert_type', $alert_types, [null=>'Please Select'] ,['class'=> 'form-control', 'id'=>'alert_type']) !!}
+                                        {!! Form::select('alert_type', $alert_types, null ,['class'=> 'form-control', 'id'=>'alert_type']) !!}
                                       @endif
                                   </div>
                               </div>
@@ -143,9 +143,15 @@
 
                                       <div class="col-sm-10">
                                           <div class="input-daterange input-group" id="datepicker">
+                                              @if(isset($alert_details->alert_start))
+                                              <input type="text" class="input-sm form-control" name="start" id="start" value="{{$alert_details->alert_start}}" />
+                                              <span class="input-group-addon">to</span>
+                                              <input type="text" class="input-sm form-control" name="end" id="end" value="{{$alert_details->alert_end}}" />
+                                              @else
                                               <input type="text" class="input-sm form-control" name="start" id="start" value="{{$document->start}}" />
                                               <span class="input-group-addon">to</span>
                                               <input type="text" class="input-sm form-control" name="end" id="end" value="{{$document->end}}" />
+                                              @endif
                                           </div>
                                       </div>
                               </div>

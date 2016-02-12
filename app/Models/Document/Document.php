@@ -202,6 +202,9 @@ class Document extends Model
         if( $is_alert == 1) {
             Alert::markDocumentAsAlert($request, $id);    
         }
+        else if ($is_alert == 0) {
+            Alert::deleteAlert($document->id); 
+        }
         
         return $document;
         
