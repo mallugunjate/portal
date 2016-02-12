@@ -145,13 +145,21 @@ class DocumentAdminController extends Controller
         if (count($storeList) == count($target_stores)) {
             $all_stores = true;
         }
-
+        $alert_types = \DB::table('alert_types')->lists('name', 'id');
+        
+        $alert_details = [];
+        if( Alert::where('document_id', $id)->first()) {
+            $alert_details = Alert::where('document_id', $id)->first();
+        }
+        
         return view('admin.document-meta.document-edit-meta-data')->with('document', $document)
                                                     ->with('banner', $banner)
                                                     ->with('banners', $banners)
                                                     ->with('storeList', $storeList)
                                                     ->with('target_stores', $target_stores)
-                                                    ->with('all_stores', $all_stores);
+                                                    ->with('all_stores', $all_stores)
+                                                    ->with('alert_types', $alert_types )
+                                                    ->with('alert_details', $alert_details);
     }
 
     /**
@@ -164,10 +172,8 @@ class DocumentAdminController extends Controller
     public function update(Request $request, $id)
     {
         
-        Document::updateMetaData($request, $id);
-        $parent = FileFolder::where('document_id', $id)->first()->folder_id;
-        $banner_id = $request->get('banner_id');
-        return redirect()->action('AdminController@index', ['parent'=>$parent]);
+        return Document::updateDocument($request, $id);
+    
     }
 
     /**

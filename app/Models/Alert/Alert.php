@@ -8,7 +8,7 @@ class Alert extends Model
 {
     protected $table = 'alerts';
 
-    protected $fillable = ['banner_id', 'document_id', 'alert_type_id'];
+    protected $fillable = ['banner_id', 'document_id', 'alert_type_id', 'alert_start', 'alert_end'];
 
     public static function getAllAlerts($banner_id)
     {
@@ -40,5 +40,49 @@ class Alert extends Model
     	}
     	
     	return [];
+    }
+
+    public static function markDocumentAsAlert($request, $id)
+    {
+        if (Alert::find($id)) {
+            $alert = Alert::find($id);
+
+            $alert['alert_type_id'] = $request['alert_type_id'];
+            $alert['alert_start']   = $request['start'];
+            $alert['alert_end']     = $request['end'];
+
+            $alert->save();
+
+            \DB::table('alerts_target')->where('alert_id', $alert->id)->delete();
+            $target_stores = $request['target_stores'];
+            foreach ($target_stores as $store) {
+                \DB::table('alerts_target')->insert([
+                    'alert_id' => $alert->id,
+                    'store_id' => $store
+                    ]);    
+            }
+
+        }
+        else {
+            $alert = Alert::create([
+
+            'document_id'   => $id,
+            'alert_type_id' => $request['alert_type_id'],
+            'alert_start'   => $request['start'],
+            'alert_end'     => $request['end'],
+            'banner_id'     => $request['banner_id']
+            ]);
+
+            $target_stores = $request['target_stores'];
+            foreach ($target_stores as $store) {
+                \DB::table('alerts_target')->insert([
+                    'alert_id' => $alert->id,
+                    'store_id' => $store
+                    ]);    
+            }
+        }
+        
+        
+        return;
     }
 }

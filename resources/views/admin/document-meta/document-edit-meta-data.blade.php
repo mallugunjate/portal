@@ -73,18 +73,7 @@
                                 {!! Form::select('tags[]', $tags, $selected_tags, ['class'=>'chosen', 'multiple'=>'true']) !!}
                               </div> --}}
                               
-                              <div class="form-group">
-
-                                      <label class="col-sm-2 control-label">Start &amp; End</label>
-
-                                      <div class="col-sm-10">
-                                          <div class="input-daterange input-group" id="datepicker">
-                                              <input type="text" class="input-sm form-control" name="start" id="start" value="{{$document->start}}" />
-                                              <span class="input-group-addon">to</span>
-                                              <input type="text" class="input-sm form-control" name="end" id="end" value="{{$document->end}}" />
-                                          </div>
-                                      </div>
-                              </div>
+                              
 
                       </form>
                   </div>
@@ -105,7 +94,30 @@
                               <input type="hidden" name="documentID" id="documentID" value="{{ $document->id }}">
                               <input type="hidden" name="banner_id" value="{{$banner->id}}">
                               
-                              
+                              <div class="form-group">
+                                <label class="col-sm-2 control-label"> This document is an alert</label>
+                                <div class="col-sm-1">
+                                  @if( isset($alert_details))
+                                    <input type="checkbox" id="is_alert" name="is_alert" value=1 checked>
+                                  @else
+                                    <input type="checkbox" id="is_alert" name="is_alert" value=1>
+                                  @endif
+                                    
+                                </div>
+                                
+
+                              </div>
+                               <div class="form-group">
+                                  <label class="control-label col-sm-2"> Alert Type </label>
+                                  <div class="col-sm-3">
+                                      @if( isset($alert_details->id) )
+                                        {!! Form::select('alert_type', $alert_types, $alert_details->alert_type_id ,['class'=> 'form-control', 'id'=>'alert_type']) !!}
+                                      @else
+                                        {!! Form::select('alert_type', $alert_types, [null=>'Please Select'] ,['class'=> 'form-control', 'id'=>'alert_type']) !!}
+                                      @endif
+                                  </div>
+                              </div>
+                              <div class="hr-line-dashed"></div>
                               <div class="form-group">
                                             
                                   <label class="col-sm-2 control-label">Target Stores</label>
@@ -122,6 +134,9 @@
                                   </div>
 
                               </div>
+
+                              <div class="hr-line-dashed"></div>
+
                               <div class="form-group">
 
                                       <label class="col-sm-2 control-label">Start &amp; End</label>
@@ -134,13 +149,21 @@
                                           </div>
                                       </div>
                               </div>
+                              <div class="form-group">
+                                <div class="col-sm-4 col-sm-offset-2">
+                                    <a class="btn btn-white" href="/admin/urgentnotice"><i class="fa fa-close"></i> Cancel</a>
+                                    <button class="alert-create btn btn-primary" type="submit"><i class="fa fa-check"></i> Save changes</button>
 
-                             
-
+                                </div>
+                              </div>
                       </form>
-                  </div>
+                  </div><!-- ibox content closes -->
+                     
 
-              </div>
+              </div> <!-- ibox closes -->
+
+
+
           </div>
       </div>
 
@@ -163,11 +186,11 @@
         <script type="text/javascript" src="/js/custom/admin/global/bannerSelector.js"></script>
         <script type="text/javascript" src="/js/plugins/chosen/chosen.jquery.js"></script>  
         <script type="text/javascript">
-        $(".chosen").chosen({
-          width:'75%'
-      })
-    </script>
-
+            $(".chosen").chosen({
+              width:'75%'
+            })
+        </script>
+        <script type="text/javascript" src="/js/custom/admin/alerts/createAlert.js"></script>
         @include('site.includes.bugreport')
 
 
