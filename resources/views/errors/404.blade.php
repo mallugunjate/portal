@@ -38,7 +38,7 @@
             </form> -->
         
         
-            <h2>We Sugguest...</h2>
+            <h2>We Suggest...</h2>
             <p>
             <a href="/">Going to the home page</a><br />
             <a href="#" onclick="history.go(-1);">Going back to the page you just came from</a>
