@@ -19,6 +19,7 @@
                 </li>
 
 
+                @if($urgentNoticeCount > 0)
                 <li style="background-color: red; color: white;">
                     <a style="color: white" href="/{{ Request::segment(1) }}"><i class="fa fa-bolt"></i> <span class="nav-label">URGENT NOTICE</span>
                         @if(isset($urgentNoticeCount))
@@ -26,7 +27,7 @@
                         @endif
                     </a>
                 </li>
-
+                @endif
 
                 @if (Request::is( Request::segment(1) ))
                 <li class="active">
@@ -55,7 +56,7 @@
                 @endif 
                     <a href="/{{ Request::segment(1) }}/communication"><i class="fa fa-bullhorn"></i> <span class="nav-label">Communications</span> 
                     @if( isset($communicationCount) ) 
-                    <span class="label label-primary pull-right">{{ $communicationCount }}</span>
+                    <span class="label label-inverse pull-right">{{ $communicationCount }}</span>
                     @endif
                     </a>
                 </li>            

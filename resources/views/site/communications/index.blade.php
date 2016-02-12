@@ -26,7 +26,7 @@
         <div class="row">
             <div class="col-lg-2">
 
-            @include('site.communications.commsidebar');
+            @include('site.communications.commsidebar')
 
             </div>
             <div class="col-lg-10 animated fadeInRight">

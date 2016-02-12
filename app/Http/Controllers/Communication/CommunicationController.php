@@ -16,6 +16,7 @@ use App\Models\Communication\CommunicationDocument;
 use App\Models\Communication\CommunicationPackage;
 use App\Models\Communication\CommunicationTarget;
 use App\Models\Communication\CommunicationType;
+use App\Models\UrgentNotice\UrgentNotice;
 use App\Models\Tag\Tag;
 use App\Models\Tag\ContentTag;
 use App\Skin;
@@ -44,6 +45,8 @@ class CommunicationController extends Controller
         $communicationCount = Communication::getCommunicationCount($storeNumber); 
         $communicationTypes = CommunicationType::all();
 
+        $urgentNoticeCount = UrgentNotice::getUrgentNoticeCount($storeNumber);
+
         $i=0;
         foreach($targetedCommunications as $tc){
             $preview_string = strip_tags($targetedCommunications[$i]->body);
@@ -63,7 +66,8 @@ class CommunicationController extends Controller
             ->with('skin', $skin)
             ->with('communicationTypes', $communicationTypes)
             ->with('communications', $targetedCommunications)
-            ->with('communicationCount', $communicationCount);
+            ->with('communicationCount', $communicationCount)
+            ->with('urgentNoticeCount', $urgentNoticeCount);
     }
 
     /**
