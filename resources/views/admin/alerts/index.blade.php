@@ -70,11 +70,20 @@
 										@foreach($alerts as $alert)
 										<tr>
 
-											<td><a href="/admin/document/{{ $alert->document_id }}/edit">{{ $alert->original_filename }}</a></td>
+											<td><a href="/admin/document/{{ $alert->document_id }}/edit">{{ $alert->document_name }}</a></td>
 											<td>{{ $alert->alert_start }}</td>
 											<td>{{ $alert->alert_end }}</td>
-											<td>{{ $alert->target_stores}} </td>
-											<td> {{$alert->type}}</td>
+											<td>
+												@if($alert->count_target_stores > 0)
+													<button type="button" class="btn btn-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="{{$alert->target_stores}}" data-original-title="" title="" aria-describedby="popover199167">
+						                                {{$alert->count_target_stores}} Stores
+						                            </button>
+													
+												@else
+													&mdash;
+												@endif
+											</td>
+											<td> {{$alert->alert_type}}</td>
 											<td>
 												
 												<a data-alert="{{ $alert->id }}" id="alert{{ $alert->id }}" class="delete-alert btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
@@ -110,7 +119,6 @@
 
 				</script>
 
-				<script type="text/javascript" src="/js/custom/communication.js"></script>
 				<script type="text/javascript" src="/js/custom/admin/global/bannerSelector.js"></script>
 
 				@include('site.includes.bugreport')

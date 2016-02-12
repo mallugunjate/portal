@@ -14,6 +14,8 @@ use App\Models\Banner;
 use App\Models\Tag\Tag;
 use App\Models\Tag\ContentTag;
 use App\Models\UserSelectedBanner;
+use App\Models\StoreInfo;
+use App\Models\Alert\Alert;
 
 class DocumentAdminController extends Controller
 {
@@ -134,14 +136,22 @@ class DocumentAdminController extends Controller
         $document = Document::find($id);
         $banner = UserSelectedBanner::getBanner();
         $banners = Banner::all();
-        $tags = Tag::where('banner_id', $banner->id)->lists('name', 'id');
-        $tag_ids = ContentTag::where('content_id', $id)->where('content_type', 'document')->get()->pluck('tag_id');
-        $selected_tags = Tag::findMany($tag_ids)->pluck('id')->toArray();
-        return view('admin.docdev.document-edit-meta-data')->with('document', $document)
+        // $tags = Tag::where('banner_id', $banner->id)->lists('name', 'id');
+        // $tag_ids = ContentTag::where('content_id', $id)->where('content_type', 'document')->get()->pluck('tag_id');
+        // $selected_tags = Tag::findMany($tag_ids)->pluck('id')->toArray();
+        $storeList = StoreInfo::getStoreListing($banner->id);
+        $target_stores = Alert::getTargetStoresForDocument($id);
+        $all_stores = false;
+        if (count($storeList) == count($target_stores)) {
+            $all_stores = true;
+        }
+
+        return view('admin.document-meta.document-edit-meta-data')->with('document', $document)
                                                     ->with('banner', $banner)
                                                     ->with('banners', $banners)
-                                                    ->with('tags', $tags)
-                                                    ->with('selected_tags', $selected_tags);
+                                                    ->with('storeList', $storeList)
+                                                    ->with('target_stores', $target_stores)
+                                                    ->with('all_stores', $all_stores);
     }
 
     /**
