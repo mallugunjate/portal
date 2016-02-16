@@ -128,13 +128,14 @@ class CommunicationAdminController extends Controller
         $communication = Communication::find($id);
         $communication_documents  = Communication::getDocumentDetails($id);
         $communication_packages  = Communication::getPackageDetails($id);
-        $communication_target_stores = CommunicationTarget::where('communication_id', $id)->get()->pluck('store_id')->toArray();
-        //$communication_target_stores = CommunicationTarget::where('communication_id', $id)->lists('store_id', 'id');
         $communicationTypes = CommunicationType::all();
-
-       // dd($communication_target_stores);
-
+        
+        $communication_target_stores = CommunicationTarget::where('communication_id', $id)->get()->pluck('store_id')->toArray();
         $storeList = StoreInfo::getStoreListing($banner->id);
+        $all_stores = false;
+        if (count($storeList) == count($communication_target_stores)) {
+            $all_stores = true;
+        }
 
         $fileFolderStructure = FileFolder::getFileFolderStructure($banner->id);
         $packages = Package::where('banner_id', $banner->id)->get();
@@ -154,7 +155,8 @@ class CommunicationAdminController extends Controller
                                             ->with('packages', $packages)
                                             // ->with('tags', $tags)
                                             // ->with('selected_tags', $selected_tags)
-                                            ->with('target_stores', $communication_target_stores);
+                                            ->with('target_stores', $communication_target_stores)
+                                            ->with('all_stores', $all_stores);
     }
 
     /**
@@ -165,9 +167,8 @@ class CommunicationAdminController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        Communication::updateCommunication($id, $request);
-        return redirect()->action('AdminController@index');
+    {        
+        return Communication::updateCommunication($id, $request);
     }
 
     /**
