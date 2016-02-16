@@ -27,10 +27,10 @@ $("#add-packages").click(function(){
 
 $('body').on('click', '#attach-selected-files', function(){
 	$("#files-selected").empty();
-	$("#files-selected").append('<p>Files attached :</p>');
+	$("#files-selected").append('<label class= "control-label col-sm-2 "> Files attached</label>');
 	$('input[name^="package_files"]').each(function(){
 		if($(this).is(":checked")){
-			$("#files-selected").append('<ul class="selected-files" data-fileid='+ $(this).val() +'>'+$(this).attr("data-filename")+'</ul>')
+			$("#files-selected").append('<div class="selected-files col-sm-10" data-fileid='+ $(this).val() +'>'+$(this).attr("data-filename")+'</div>')
 		}
 	});
 });
@@ -39,10 +39,10 @@ $('body').on('click', '#attach-selected-packages', function(){
 
 	console.log('attach selected-packages');
 	$("#packages-selected").empty();
-	$("#packages-selected").append('<p>Packages Attached :</p>');
+	$("#packages-selected").append('<label class= "control-label col-sm-2 ">Packages Attached</label>');
 	$('input[name^="packages"]:checked').each(function(){
 		
-			$("#packages-selected").append('<ul class="selected-packages" data-packageid='+ $(this).val() +'>'+ $(this).attr("data-package-name")+'</ul>')		
+			$("#packages-selected").append('<div class="selected-packages col-sm-10" data-packageid='+ $(this).val() +'>'+ $(this).attr("data-package-name")+'</div>')		
 		
 		
 	});
@@ -64,6 +64,7 @@ $(document).on('click','.communication-create',function(){
 	var communication_packages = [];
 	var communication_documents = [];
 
+	console.log(communication_type_id);
 	if(!communication_type_id){
 		communication_type_id = 1; // no category
 	}

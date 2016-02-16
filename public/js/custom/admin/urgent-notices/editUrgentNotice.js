@@ -56,7 +56,8 @@ $('#attach-selected-folders').on('click', function(){
 		
 		if (typeof attr !== typeof undefined && attr !== false) {
 		    
-		    $("#attachment-selected").append('<div class="attachment new-attachment col-md-8" data-attachment-type="' + attachment_type +'" data-attachmentid='+ $(this).attr('data-folderid') +'>'+
+		    $("#attachment-selected").append('<div class="row">'+
+		    								'<div class="attachment new-attachment col-md-8" data-attachment-type="' + attachment_type +'" data-attachmentid='+ $(this).attr('data-folderid') +'>'+
 									    		'<i class="fa fa-folder"></i> '+$(this).attr("data-foldername")+
 									    		
 									    	'</div>'+
@@ -64,7 +65,7 @@ $('#attach-selected-folders').on('click', function(){
 									    			'id="folder' + $(this).attr('data-folderid') + '"' +
 									    			'class="remove-staged-folder btn btn-danger btn-sm">'+ 
 									    		'<i class="fa fa-trash"></i>'+
-									    	'</a>');
+									    	'</a></div>');
 		}
 		
 	});
@@ -78,7 +79,8 @@ $('#attach-selected-files').on('click', function(){
 	$("#attachment-selected").append('<p>Additional Documents attached :</p>');
 	$('input[name^="package_files"]').each(function(){
 		if($(this).is(":checked")){
-			$("#attachment-selected").append('<div class="attachment new-attachment col-md-8" data-attachment-type="' + attachment_type +'" data-attachmentid='+ $(this).val() +'>'+
+			$("#attachment-selected").append('<div class="row">'+
+											'<div class="attachment new-attachment col-md-8" data-attachment-type="' + attachment_type +'" data-attachmentid='+ $(this).val() +'>'+
 												'<i class="fa fa-file"></i> '+$(this).attr("data-filename")+
 												
 											'</div>'+
@@ -86,7 +88,7 @@ $('#attach-selected-files').on('click', function(){
 													' id="file' + $(this).val() + '"'+
 													' class="remove-staged-file btn btn-danger btn-sm">'+
 												'<i class="fa fa-trash"></i>'+
-											'</a>');
+											'</a></div>');
 		}
 	});
 	$("#attachment-selected").parent().removeClass('hidden');

@@ -68,7 +68,7 @@ $(document).on('click','.communication-update',function(){
 		hasError = true;
 		$(window).scrollTop(0);
 	}
-
+	console.log(communication_type_id);
      if(hasError == false) {
 
 
