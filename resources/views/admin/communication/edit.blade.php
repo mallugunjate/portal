@@ -58,9 +58,10 @@
 
 
 
-							<form class="form-horizontal" id="createNewCommunicationForm">
+							<form class="form-horizontal" id="updateCommunicationForm">
 
 								<input type="hidden" name="banner_id" value={{$banner->id}} >
+								<input type="hidden" id="communicationId" name="communicationId" value={{$communication->id}}> 
 
 								<div class="form-group">
 									<label class="col-sm-2 control-label">Title</label>
@@ -106,9 +107,15 @@
 						                                            
 						                <label class="col-sm-2 control-label">Target Stores</label>
 						                <div class="col-sm-10">
-						                    {!! Form::select('stores', $storeList, $target_stores, [ 'class'=>'chosen', 'id'=> 'storeSelect', 'multiple'=>'true']) !!}
-						                    {!! Form::label('allStores', 'Or select all stores:') !!}
-						                    {!! Form::checkbox('allStores', null, false ,['id'=> 'allStores'] ) !!}
+						                	@if($all_stores)
+		                                        {!! Form::select('stores', $storeList, null, [ 'class'=>'chosen', 'id'=> 'storeSelect', 'multiple'=>'true']) !!}
+		                                        {!! Form::label('allStores', 'Or select all stores:') !!}
+		                                        {!! Form::checkbox('allStores', null, true ,['id'=> 'allStores'] ) !!}
+		                                    @else
+		                                        {!! Form::select('stores', $storeList, $target_stores, [ 'class'=>'chosen', 'id'=> 'storeSelect', 'multiple'=>'true']) !!}
+		                                        {!! Form::label('allStores', 'Or select all stores:') !!}
+		                                        {!! Form::checkbox('allStores', null, false ,['id'=> 'allStores'] ) !!}
+		                                    @endif
 						                </div>
 
 						        </div>
@@ -119,9 +126,9 @@
 
 						                <div class="col-sm-10">
 						                    <div class="input-daterange input-group" id="datepicker">
-						                        <input type="text" class="input-sm form-control" name="send_at" id="send_at" value="" />
+						                        <input type="text" class="input-sm form-control" name="send_at" id="send_at" value="{{$communication->send_at}}" />
 						                        <span class="input-group-addon">to</span>
-						                        <input type="text" class="input-sm form-control" name="archive_at" id="archive_at" value="" />
+						                        <input type="text" class="input-sm form-control" name="archive_at" id="archive_at" value="{{$communication->archive_at}}" />
 						                    </div>
 						                </div>
 						        </div>
@@ -199,7 +206,7 @@
 								<div class="form-group">
 									<div class="col-sm-10 col-sm-offset-2">
 										<a class="btn btn-white" href="/admin/communication"><i class="fa fa-close"></i> Cancel</a>
-										<button class="btn btn-primary communication-create"><i class="fa fa-check"></i> Send New Communication</button>
+										<button class="btn btn-primary communication-update"><i class="fa fa-check"></i> Send New Communication</button>
 						            </div>
 						        </div>
 

@@ -55,7 +55,6 @@ class Communication extends Model
 
       public static function storeCommunication($request)
    	{
-   		\Log::info($request->all());
          $is_draft = 0;
    		if ($request["send_at"]>Carbon::now()) {
    			$is_draft = 1;
@@ -85,6 +84,7 @@ class Communication extends Model
 
          $communication["subject"] = $request["subject"];
          $communication["body"] = $request["body"];
+         $communication["communication_type_id"] = $request["communication_type_id"];
          $communication["sender"] = $request["sender"];
          $communication["importance"] = $request["importance"];
          $communication["send_at"] = $request["send_at"];
@@ -97,12 +97,12 @@ class Communication extends Model
          }
          $communication->save();
 
-         Communication::updateTargetStores($id, $request);
-         Communication::updateCommunicationDocuments($id, $request);
-         Communication::updateCommunicationPackages($id, $request);
-         Communication::updateTags($communication->id, $request["tags"]);
+         Communication::updateTargetStores($communication->id, $request);
+         Communication::updateCommunicationDocuments($communication->id, $request);
+         Communication::updateCommunicationPackages($communication->id, $request);
+         // Communication::updateTags($communication->id, $request["tags"]);
 
-         return;
+         return $communication;
 
 
       }
