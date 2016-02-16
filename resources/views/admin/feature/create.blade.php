@@ -93,7 +93,7 @@
                                         
                                         <div class="form-group"><label class="col-sm-2 control-label">Files</label>
                                             <div class="col-md-10">
-                                               <input class="btn btn-default" type="button" id="add-documents" value="Add Documents" />
+                                               <a class="btn btn-primary btn-outline" type="button" id="add-documents" > <i class="fa fa-plus"></i> Add Documents </a>
                                             </div>
                                         </div>
                                         <div id="files-selected" class="col-sm-offset-2"></div>
@@ -101,7 +101,7 @@
                                         <div class="hr-line-dashed"></div>
                                         <div class="form-group"><label class="col-sm-2 control-label">Packages</label>
                                             <div class="col-md-10">
-                                            	<input class="btn btn-default" type="button" id="add-packages" value="Add Packages" />
+                                            	<a class="btn btn-primary btn-outline" type="button" id="add-packages"><i class="fa fa-plus"></i> Add Packages </a>
                                             </div>
                                         </div>
                                         <div id="packages-selected" class="col-sm-offset-2"></div>
@@ -157,22 +157,7 @@
 
 			    @include('admin.includes.scripts')
 
-				<script type="text/javascript">
-					$.ajaxSetup({
-				        headers: {
-				            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-				        }
-					});
-
-					$('.input-daterange').datepicker({
-                         format: 'yyyy-mm-dd',
-                        keyboardNavigation: false,
-                        forceParse: false,
-                        autoclose: true
-                    });
-
-				</script>
-				<script type="text/javascript" src="/js/custom/admin/features/addFeature.js"></script>
+				
 
 				
 
@@ -186,6 +171,7 @@
 				                <h4 class="modal-title">Select Documents</h4>
 				            </div>
 				            <div class="modal-body">
+				            	<ul class="tree">
 				            	@foreach ($navigation as $nav) 
 								
 									@if (isset($nav["is_child"]) && ($nav["is_child"] == 0) )
@@ -195,6 +181,7 @@
 									@endif
 
 								@endforeach
+								</ul>
 				            </div>
 				            <div class="modal-footer">
 				                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -212,9 +199,9 @@
 				                <h4 class="modal-title">Select Packages</h4>
 				            </div>
 				            <div class="modal-body">
-				            	
+				            	<ul class="tree">
 								@include('admin.package.package-structure-partial', ['packages' =>$packages])
-								
+								</ul>
 				            </div>
 				            <div class="modal-footer">
 				                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -224,6 +211,26 @@
 				    </div>
 				</div>
 
+				<script type="text/javascript" src="/js/custom/admin/features/addFeature.js"></script>
+				<script type="text/javascript" src="/js/custom/tree.js"></script>
+
+				<script type="text/javascript">
+					$.ajaxSetup({
+				        headers: {
+				            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				        }
+					});
+
+					$('.input-daterange').datepicker({
+                         format: 'yyyy-mm-dd',
+                        keyboardNavigation: false,
+                        forceParse: false,
+                        autoclose: true
+                    });
+                    $(".tree").treed({openedClass : 'fa fa-folder-open', closedClass : 'fa fa-folder'});
+
+				</script>
+				
 
 			</body>
 			</html>

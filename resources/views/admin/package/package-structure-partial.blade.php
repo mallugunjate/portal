@@ -1,4 +1,3 @@
-
 @if(count($packages)>0)
 	@foreach($packages as $package)
 		<div class="package_list_item">

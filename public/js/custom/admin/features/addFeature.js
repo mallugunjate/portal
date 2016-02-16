@@ -17,7 +17,7 @@ $('input[name="latest_updates_option"]').change( function(){
 
 $('body').on('click', '#attach-selected-files', function(){
 	$("#files-selected").empty();
-	$("#files-selected").append('<p>Files attached :</p>');
+	$("#files-selected").append('<p>Files Attached :</p>');
 	$('input[name^="package_files"]').each(function(){
 		if($(this).is(":checked")){
 			$("#files-selected").append('<ul class="selected-files" data-fileid='+ $(this).val() +'>'+$(this).attr("data-filename")+'</ul>')
@@ -29,7 +29,7 @@ $('body').on('click', '#attach-selected-packages', function(){
 
 	console.log('attach selected-packages');
 	$("#packages-selected").empty();
-	$("#packages-selected").append('<p>Packagesattached :</p>');
+	$("#packages-selected").append('<p>Packages Attached :</p>');
 	$('input[name^="feature_packages"]').each(function(){
 		if($(this).is(":checked")){
 			$("#packages-selected").append('<ul class="selected-packages" data-packageid='+ $(this).attr('data-packageid') +'>'+ $(this).attr("data-packagename")+'</ul>')		

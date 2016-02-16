@@ -8,6 +8,7 @@ use App\Models\Tag\ContentTag;
 use App\Models\Banner;
 use App\Models\UserBanner;
 use App\Models\UserSelectedBanner;
+use Carbon\Carbon;
 
 class Event extends Model
 {
@@ -61,8 +62,20 @@ class Event extends Model
         return;
     }
 
-    // public static function getEvents($banner){
+     public static function prettify($event)
+      {
+        // get the human readable days since send
+        $start  = Carbon::createFromFormat('Y-m-d', $event->start);
+        $end    = Carbon::createFromFormat('Y-m-d', $event->end);
+        $since  = Carbon::now()->diffForHumans($start, true);
         
-    // }
+        $event->since = $since;
+
+        //make the timestamp on the message a little nicer
+        $event->prettyDateStart = $start->format('D j F');
+        $event->prettyDateEnd = $end->format('D j F');
+        
+        return $event;
+      }  
 }
 

@@ -5,6 +5,7 @@
     @section('title', 'Edit Communication')
     @include('admin.includes.head')
     <link rel="stylesheet" type="text/css" href="/css/plugins/chosen/chosen.css">
+    <link rel="stylesheet" type="text/css" href="/css/custom/tree.css">
 	<meta name="csrf-token" content="{!! csrf_token() !!}"/>
 </head>
 
@@ -235,6 +236,7 @@
 		                <h4 class="modal-title">Select Documents</h4>
 		            </div>
 		            <div class="modal-body">
+		            	<ul class="tree">
 		            	@foreach ($navigation as $nav) 
 						
 							@if (isset($nav["is_child"]) && ($nav["is_child"] == 0) )
@@ -244,6 +246,7 @@
 							@endif
 
 						@endforeach
+						</ul>
 		            </div>
 		            <div class="modal-footer">
 		                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -263,7 +266,9 @@
 		                <h4 class="modal-title">Select Packages</h4>
 		            </div>
 		            <div class="modal-body">
+		            	<ul class="tree">
 		                @include('admin.package.package-structure-partial', ['packages'=>$packages])
+		                </ul>
 		            </div>
 		            <div class="modal-footer">
 		                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -278,6 +283,16 @@
 
 	    @include('admin.includes.scripts')
 
+	    @include('site.includes.bugreport')
+
+		<script type="text/javascript" src="/js/custom/admin/features/editFeature.js"></script>
+		<script type="text/javascript" src="/js/custom/admin/communications/editCommunication.js"></script>
+		<script type="text/javascript" src="/js/vendor/moment.js"></script>
+		<script type="text/javascript" src="/js/vendor/bootstrap-datetimepicker.min.js"></script>
+		<script type="text/javascript" src="/js/plugins/ckeditor-standard/ckeditor.js"></script>
+		<script type="text/javascript" src="/js/plugins/chosen/chosen.jquery.js"></script>
+		<script type="text/javascript" src="/js/custom/tree.js"></script>
+
 		<script type="text/javascript">
 			$.ajaxSetup({
 		        headers: {
@@ -285,19 +300,6 @@
 		        }
 			});
 
-		</script>
-
-		<script type="text/javascript" src="/js/custom/admin/features/editFeature.js"></script>
-		<script type="text/javascript" src="/js/custom/admin/communications/editCommunication.js"></script>
-
-		@include('site.includes.bugreport')
-
-		<script type="text/javascript" src="/js/vendor/moment.js"></script>
-		<script type="text/javascript" src="/js/vendor/bootstrap-datetimepicker.min.js"></script>
-		<script type="text/javascript" src="/js/plugins/ckeditor-standard/ckeditor.js"></script>
-		<script type="text/javascript" src="/js/plugins/chosen/chosen.jquery.js"></script>
-
-		<script type="text/javascript">
 			$(".date").datetimepicker({
 		          format: 'YYYY-MM-DD HH:mm:ss'
 		    });
@@ -315,12 +317,14 @@
 
 		    CKEDITOR.replace('body');
 
+		    $(".tree").treed({openedClass : 'fa fa-folder-open', closedClass : 'fa fa-folder'});
+
 
 
 		</script>
 
-			</body>
-			</html>
+	</body>
+	</html>
 
 
 

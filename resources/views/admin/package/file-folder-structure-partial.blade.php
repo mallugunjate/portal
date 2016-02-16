@@ -1,5 +1,9 @@
 @if(count($nav["children"]) >0 )
 	<li id={{$nav["id"]}} class="parent-folder"> {{$nav["label"]}} 
+		@foreach($nav["documents"] as $doc)
+			<br>
+			<input class="document-checkbox" type="checkbox" name="package_files[]" value= {{$doc->id}} data-filename= "{{ $doc->original_filename }}" >  {{$doc->original_filename}} 
+		@endforeach
 	<ul>
 	@foreach ($nav["children"] as $child)
 	<?php $nav = $navigation[$child["child_id"]] ?>

@@ -19,6 +19,7 @@ use App\Models\Communication\CommunicationPackage;
 use App\Models\Communication\CommunicationTarget;
 use App\Models\UrgentNotice\UrgentNotice;
 use App\Skin;
+use App\Models\StoreInfo;
 
 class CalendarController extends Controller
 {
@@ -32,9 +33,7 @@ class CalendarController extends Controller
 
         $storeNumber = RequestFacade::segment(1);
 
-        $storeAPI = env('STORE_API_DOMAIN', false);
-        $storeInfoJson = file_get_contents( $storeAPI . "/store/" . $storeNumber);
-        $storeInfo = json_decode($storeInfoJson);
+        $storeInfo = StoreInfo::getStoreInfoByStoreId($storeNumber);
 
         $storeBanner = $storeInfo->banner_id;
 
@@ -48,7 +47,12 @@ class CalendarController extends Controller
 
         $urgentNoticeCount = UrgentNotice::getUrgentNoticeCount($storeNumber);
 
-        $events = Event::where('banner_id', 1)->get(); 
+        $events = Event::where('banner_id', $storeBanner)->get(); 
+
+        foreach ($events as $event) {
+            Event::prettify($event);   
+        }
+
         return view('site.calendar.index')
                 ->with('skin', $skin)
                 ->with('communicationCount', $communicationCount)

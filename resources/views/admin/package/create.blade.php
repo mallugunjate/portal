@@ -5,6 +5,7 @@
     @section('title', 'Package')
     @include('admin.includes.head')
     <link rel="stylesheet" type="text/css" href="/css/plugins/chosen/chosen.css">
+    <link rel="stylesheet" type="text/css" href="/css/custom/tree.css">
 	<meta name="csrf-token" content="{!! csrf_token() !!}"/>
 </head>
 
@@ -74,7 +75,8 @@
 
                                         <div class="form-group"><label class="col-sm-2 control-label">Files</label>
                                             <div class="col-md-10">
-                                               <input class="btn btn-default" type="button" id="add-documents" value="Add Documents" />
+                                            	
+                                               <a class="btn btn-primary btn-outline" type="button" id="add-documents"> <i class="fa fa-plus"></i> Add Documents </a>
                                             </div>
                                         </div>
                                         <div id="files-selected" class="col-sm-offset-2"></div>
@@ -82,7 +84,7 @@
                                         <div class="hr-line-dashed"></div>
                                         <div class="form-group"><label class="col-sm-2 control-label">Folders</label>
                                             <div class="col-md-10">
-                                            	<input class="btn btn-default" type="button" id="add-folders" value="Add Folders" />
+                                            	<a class="btn btn-primary btn-outline" type="button" id="add-folders"> <i class='fa fa-plus'></i> Add Folders </a>
                                             </div>
                                         </div>
                                         <div id="folders-selected" class="col-sm-offset-2"></div>
@@ -111,6 +113,7 @@
 							                <h4 class="modal-title">Select Documents</h4>
 							            </div>
 							            <div class="modal-body">
+							            	<ul class="tree">
 							            	@foreach ($navigation as $nav) 
 											
 												@if (isset($nav["is_child"]) && ($nav["is_child"] == 0) )
@@ -120,6 +123,7 @@
 												@endif
 
 											@endforeach
+											</ul>
 							            </div>
 							            <div class="modal-footer">
 							                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -137,6 +141,7 @@
 							                <h4 class="modal-title">Select Folders</h4>
 							            </div>
 							            <div class="modal-body">
+							            	<ul class="tree">
 							            	@foreach ($folderStructure as $folder)
 											
 												@if (isset($folder["is_child"]) && ($folder["is_child"] == 0) )
@@ -147,6 +152,7 @@
 
 
 											@endforeach
+											</ul>
 							            </div>
 							            <div class="modal-footer">
 							                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -170,7 +176,8 @@
 
 @include('site.includes.bugreport')
 
-
+<script type="text/javascript" src="/js/custom/admin/packages/addPackage.js"></script>	
+<script type="text/javascript" src="/js/custom/tree.js"></script>
 <script type="text/javascript">
     $.ajaxSetup({
         headers: {
@@ -183,11 +190,12 @@
         keyboardNavigation: false,
         forceParse: false,
         autoclose: true
-    });                
+    });    
+    $(".tree").treed({openedClass : 'fa fa-folder-open', closedClass : 'fa fa-folder'});            
 
 </script>
 
-<script type="text/javascript" src="/js/custom/admin/packages/addPackage.js"></script>			
+		
 
 
 </body>
