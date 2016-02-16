@@ -6,7 +6,7 @@
                             {{-- <h5>Folders</h5> --}}
                             <ul class="folder-list m-b-md" style="padding: 0">
                                 <li>
-                                    <a href="/{{ Request::segment(1) }}/communication"> <i class="fa fa-inbox "></i> All Alerts 
+                                    <a href="/{{ Request::segment(1) }}/alerts"> <i class="fa fa-bell "></i> All Alerts 
                                     @if($alertCount > 0)
                                     <span class="label label-inverse pull-right">{{ $alertCount }}</span> 
                                     @endif

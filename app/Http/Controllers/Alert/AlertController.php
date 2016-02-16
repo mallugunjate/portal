@@ -17,6 +17,7 @@ use App\Models\StoreInfo;
 use App\Skin;
 use App\Models\Alert\Alert;
 use App\Models\Alert\AlertType;
+use App\Models\Document\Document;
 
 class AlertController extends Controller
 {
@@ -41,6 +42,46 @@ class AlertController extends Controller
         $alertTypes = AlertType::all();
         $alerts = Alert::getAlertsByStore($storeNumber);
         $alertCount = Alert::getAlertCountByStore($storeNumber);
+
+        $i = 0;
+        foreach($alerts as $a){
+            $doc = Document::getDocumentById($a->document_id);
+            $alertType = AlertType::find($a->alert_type_id);
+
+            switch($doc->original_extension){
+
+                case "pdf":
+                    $alerts[$i]->icon = "<i class='fa fa-file-pdf-o'></i>";
+                    break;
+
+                case "xls":
+                case "xlsx":
+                    $alerts[$i]->icon = "<i class='fa fa-file-excel-o'></i>";
+                    break;
+
+                case "doc":
+                    $alerts[$i]->icon = "<i class='fa fa-file-word-o'></i>";
+                    break;
+
+                case "mp4":
+                case "mov":
+                case "avi":
+                    $alerts[$i]->icon = "<i class='fa fa-film'></i>";
+                    break;
+
+                default:
+                    $alerts[$i]->icon = "<i class='fa fa-file-o'></i>";
+                    break;
+
+            }
+
+            $alerts[$i]->title = $doc->title;
+            $alerts[$i]->filename = $doc->filename;
+            $alerts[$i]->description = $doc->description;
+            $alerts[$i]->original_extension = $doc->original_extension;
+            $alerts[$i]->alertTypeName = $alertType->name;
+            $i++;
+        }        
 
         $i = 0;
         foreach($alertTypes as $at){

@@ -49,17 +49,12 @@
                 <tr class="unread">
 
                     <td class="check-mail">
-                        <i class="fa fa-envelope-o"></i>
-                      <!--   <div class="icheckbox_square-green" style="position: relative;"><input type="checkbox" class="i-checks" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div> -->
+                        <i class="fa fa-bell-o"></i>
                     </td>
-                    @if( $alert->alert_type_id == "1")
-                    <td class="mail-subject"><a href="alerts/show/{{ $alert->id }}"> this is an alert</a></td>
-                    @else
-                    <td class="mail-subject"><a href="alerts/show/{{ $alert->id }}">This is an alert</a> <span class="label label-sm label-danger">Some alert type</span></td>
-                    @endif
                     
-                    <td class="mail-preview"><a href="alerts/show/{{ $alert->id }}"></a></td>
-                    <td class=""><!-- <i class="fa fa-paperclip"></i> --></td>
+                    <td class="mail-subject"><a href="/files/{{ $alert->filename }}">{!! $alert->icon !!} {{ $alert->title }}</a> <span class="label label pull-right">{{ $alert->alertTypeName }}</span></td>
+                    <td class="mail-preview"><a href="/files/{{ $alert->filename }}">{{ $alert->description }}</a></td>
+                    <td class=""></td>
                     <td class="text-right mail-date">{{ $alert->prettyDate }} <small style="font-weight: normal;padding-left: 10px;">({{ $alert->since }} ago)</small></td>
                 </tr>                
 
