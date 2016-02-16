@@ -4,6 +4,7 @@ namespace App\Models\Alert;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use DB;
 
 class Alert extends Model
 {
@@ -35,6 +36,16 @@ class Alert extends Model
         return $alert_count;
     }
 
+    public static function getAlertCountByCategory($storeNumber, $alertId)
+    {
+         $count = DB::table('alerts_target')
+           ->where('store_id', $storeNumber)
+           ->join('alerts', 'alerts.id', '=', 'alerts_target.alert_id')
+           ->where('alerts.alert_type_id', $alertId)
+           ->count();
+         return $count;
+  
+    }
 
     public static function getAlertsByStore($store_id)
     {

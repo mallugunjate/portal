@@ -41,6 +41,12 @@ class AlertController extends Controller
         $alertTypes = AlertType::all();
         $alerts = Alert::getAlertsByStore($storeNumber);
         $alertCount = Alert::getAlertCountByStore($storeNumber);
+
+        $i = 0;
+        foreach($alertTypes as $at){
+            $alertTypes[$i]->count = Alert::getAlertCountByCategory($storeNumber, $at->id);
+            $i++;
+        }        
     
         return view('site.alerts.index')
             ->with('skin', $skin)
