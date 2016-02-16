@@ -6,6 +6,7 @@
 .package-files, .package-folders{
 	font-size: 16px;
 	margin: 10px 0 10px 0;
+	cursor: pointer;
 }
 .package-filepath, .package-folderpath{
 	font-size: 12px;

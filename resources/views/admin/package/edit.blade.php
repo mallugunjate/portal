@@ -6,7 +6,8 @@
     @include('admin.includes.head')
     
     <link rel="stylesheet" type="text/css" href="/css/plugins/chosen/chosen.css">
-	
+	<link rel="stylesheet" type="text/css" href="/css/custom/tree.css">
+
 	<meta name="csrf-token" content="{!! csrf_token() !!}"/>
 </head>
 
@@ -74,7 +75,7 @@
                             		<h5> Files </h5>
                             		<div class="ibox-tools">
                             			
-                            			<div id="add-more-files" class="btn btn-primary col-md-offset-8" role="button" ><i class="fa fa-plus"></i> Add More Files</div>
+                            			<div id="add-more-files" class="btn btn-primary btn-outline col-md-offset-8" role="button" ><i class="fa fa-plus"></i> Add More Files</div>
                             		</div>
 
                             	</div>
@@ -91,7 +92,6 @@
 														<div class="package-timestamp"> Uploaded At : {{$doc->created_at}}</div>
 													</div>
 
-													<!-- <div class="col-md-1 remove-file btn btn-default" data-document-id="{{$doc->id}}">Remove</div> -->
 													<a data-document-id="{{ $doc->id }}" id="document{{$doc->id}}" class="remove-file btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
 												</div>
 												@endforeach
@@ -112,7 +112,7 @@
                             		<h5> Folders </h5>
                             		<div class="ibox-tools">
                             			
-                            			<div id="add-more-folders" class="btn btn-primary col-md-offset-8" role="button" ><i class="fa fa-plus"></i> Add More Folders</div>
+                            			<div id="add-more-folders" class="btn btn-primary btn-outline col-md-offset-8" role="button" ><i class="fa fa-plus"></i> Add More Folders</div>
                             		</div>
                             	</div>
                             	<div class="ibox-content">
@@ -179,17 +179,7 @@
  
 
 
-    <script type="text/javascript">
-		$.ajaxSetup({
-	        headers: {
-	            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-	        }
-		});
-
-        
-        
-
-	</script>
+  
 
 	@include('site.includes.bugreport')
 
@@ -202,6 +192,7 @@
 	                <h4 class="modal-title">Select Documents</h4>
 	            </div>
 	            <div class="modal-body">
+	            	<ul class="tree">
 	            	@foreach ($navigation as $nav) 
 					
 						@if (isset($nav["is_child"]) && ($nav["is_child"] == 0) )
@@ -211,6 +202,7 @@
 						@endif
 
 					@endforeach
+				</ul>
 	            </div>
 	            <div class="modal-footer">
 	                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -228,6 +220,7 @@
 	                <h4 class="modal-title">Select Folders</h4>
 	            </div>
 	            <div class="modal-body">
+	            	<ul class="tree">
 	            	@foreach ($folderStructure as $folder)
 					
 						@if (isset($folder["is_child"]) && ($folder["is_child"] == 0) )
@@ -238,6 +231,7 @@
 
 
 					@endforeach
+					</ul>
 	            </div>
 	            <div class="modal-footer">
 	                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -250,5 +244,17 @@
 
 
 	<script type="text/javascript" src="/js/custom/admin/packages/editPackage.js"></script>
+	<script type="text/javascript" src="/js/custom/tree.js"></script>
+	  <script type="text/javascript">
+		$.ajaxSetup({
+	        headers: {
+	            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	        }
+		});
+
+        $(".tree").treed({openedClass : 'fa fa-folder-open', closedClass : 'fa fa-folder'});
+        
+
+	</script>
 </body>
 </html>

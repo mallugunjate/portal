@@ -30,7 +30,10 @@
 	<style>
 		.modal-lg{ height: 95%; width: 80% !important; padding: 0; }
 		.modal-content{ height: 100% !important;}
-		.modal-body{ padding: 0; margin: 0; height: 100% !important; }
+		.modal-body{ padding: 10px; margin: 0; height: 100% !important; }
+			.modal-body .document-checkbox {
+				margin-left: 10px;
+			}
 	</style>  
 
 	{{-- <link href="/css/plugins/summernote/summernote-bs3.css" rel="stylesheet"> --}}
