@@ -114,7 +114,7 @@
                             		<h5> Files </h5>
                             		<div class="ibox-tools">
                             			
-                            			<div id="add-more-files" class="btn btn-primary col-md-offset-8" role="button" ><i class="fa fa-plus"></i> Add More Files</div>
+                            			<div id="add-more-files" class="btn btn-primary btn-outline col-md-offset-8" role="button" ><i class="fa fa-plus"></i> Add More Files</div>
                             		</div>
 
                             	</div>
@@ -152,7 +152,7 @@
                             		<h5> Packages </h5>
                             		<div class="ibox-tools">
                             			
-                            			<div id="add-more-packages" class="btn btn-primary col-md-offset-8" role="button" ><i class="fa fa-plus"></i> Add More Packages</div>
+                            			<div id="add-more-packages" class="btn btn-primary btn-outline col-md-offset-8" role="button" ><i class="fa fa-plus"></i> Add More Packages</div>
                             		</div>
                             	</div>
                             	<div class="ibox-content">
@@ -257,18 +257,7 @@
 		     
 
 
-    <script type="text/javascript">
-		$.ajaxSetup({
-	        headers: {
-	            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-	        }
-		});
-
-        
-        
-
-	</script>
-
+    
 	@include('site.includes.bugreport')
 
 	
@@ -280,6 +269,7 @@
 	                <h4 class="modal-title">Select Documents</h4>
 	            </div>
 	            <div class="modal-body">
+	            	<ul class="tree">
 	            	@foreach ($navigation as $nav) 
 					
 						@if (isset($nav["is_child"]) && ($nav["is_child"] == 0) )
@@ -289,6 +279,7 @@
 						@endif
 
 					@endforeach
+					</ul>
 	            </div>
 	            <div class="modal-footer">
 	                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -306,7 +297,9 @@
 	                <h4 class="modal-title">Select Folders</h4>
 	            </div>
 	            <div class="modal-body">
+	            	<ul class="tree">
 	            	@include('admin.package.package-structure-partial', ['packages' =>$packages])
+	            	</ul>
 	            </div>
 	            <div class="modal-footer">
 	                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -319,5 +312,19 @@
 
 
 	<script type="text/javascript" src="/js/custom/admin/features/editFeature.js"></script>
+	<script type="text/javascript" src="/js/custom/tree.js"></script>
+	<script type="text/javascript">
+		$.ajaxSetup({
+	        headers: {
+	            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	        }
+		});
+
+        
+    	$(".tree").treed({openedClass : 'fa fa-folder-open', closedClass : 'fa fa-folder'});    
+
+	</script>
+
+	
 </body>
 </html>
