@@ -3,6 +3,8 @@
 namespace App\Models\Alert;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
+use DB;
 
 class Alert extends Model
 {
@@ -28,6 +30,45 @@ class Alert extends Model
     	return $alerts;
     }
 
+    public static function getAlertCountByStore($store_id)
+    {
+        $alert_count = \DB::table('alerts_target')->where('store_id', $store_id)->count();
+        return $alert_count;
+    }
+
+    public static function getAlertCountByCategory($storeNumber, $alertId)
+    {
+         $count = DB::table('alerts_target')
+           ->where('store_id', $storeNumber)
+           ->join('alerts', 'alerts.id', '=', 'alerts_target.alert_id')
+           ->where('alerts.alert_type_id', $alertId)
+           ->count();
+         return $count;
+  
+    }
+
+    public static function getAlertsByStore($store_id)
+    {
+        $alert_ids = \DB::table('alerts_target')->where('store_id', $store_id)->get();
+        
+        $alerts = [];
+        foreach ($alert_ids as $alert_id) {
+            $alert = Alert::join('documents', 'alerts.document_id' , '=', 'documents.id')
+                            ->where('alerts.id', $alert_id->alert_id)
+                            ->first();
+            array_push($alerts, $alert);
+        }
+
+        foreach($alerts as $a){
+            $updated_at = new Carbon($a->updated_at);
+
+            $since = Carbon::now()->diffForHumans($updated_at, true);
+            $a->since = $since;
+            $a->prettyDate = $updated_at->toDayDateTimeString();
+            
+         }
+        return $alerts;
+    }
 
     public static function getTargetStoresForDocument($id)
     {
@@ -94,4 +135,18 @@ class Alert extends Model
         }
         return;
     }
+
+    public static function prettify($alert)
+      {
+        // get the human readable days since send
+        $send_at = Carbon::createFromFormat('Y-m-d H:i:s', $alert->alert_start);
+        $since = Carbon::now()->diffForHumans($send_at, true);
+        $alert->since = $since;
+
+        //make the timestamp on the message a little nicer
+        $alert->prettyDate = $send_at->format('D j F');
+        
+        return $alerts;
+      }   
+
 }
