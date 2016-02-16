@@ -33,7 +33,13 @@
             <div class="mail-box-header">
 
                 <h2>
-                    All Alerts <small>( {{ $alertCount }} active alert)</small>
+                	@if($title == "")
+                		All Alerts <small>( {{ $alertCount }} active alert)</small>	
+                	@else
+                		{{ $title }}
+                	@endif
+
+                    
                 </h2>
 
             </div>

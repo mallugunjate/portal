@@ -18,7 +18,7 @@
                             <ul class="category-list" style="padding: 0">
                             @foreach($alertTypes as $at)
 
-                                <li><a href="#"> <span class="label label pull-right">{{ $at->count }}</span> {{ $at->name }}</a></li>
+                                <li><a href="/{{ Request::segment(1) }}/alerts?type={{ $at->id }}"> <span class="label label pull-right">{{ $at->count }}</span> {{ $at->name }}</a></li>
                                
                             @endforeach
                             </ul>

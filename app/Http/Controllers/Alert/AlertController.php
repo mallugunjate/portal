@@ -26,7 +26,7 @@ class AlertController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(request $request)
     {
         $storeNumber = RequestFacade::segment(1);
         $storeInfo = StoreInfo::getStoreInfoByStoreId($storeNumber);
@@ -40,9 +40,23 @@ class AlertController extends Controller
         $urgentNoticeCount = UrgentNotice::getUrgentNoticeCount($storeNumber);
 
         $alertTypes = AlertType::all();
-        $alerts = Alert::getAlertsByStore($storeNumber);
         $alertCount = Alert::getAlertCountByStore($storeNumber);
 
+        $alerts = Alert::getAlertsByStore($storeNumber);
+
+        $title ="";
+        if($request['type']){
+            $i = 0;
+            foreach($alerts as $a){
+                if($a->alert_type_id != $request['type']){
+                    unset($alerts[$i]);
+                }
+                $i++;
+            }
+            $title = AlertType::where('id','=',$request['type'])->pluck('name');
+            $alerts= array_values($alerts);
+        }
+        
         $i = 0;
         foreach($alerts as $a){
             $doc = Document::getDocumentById($a->document_id);
@@ -72,7 +86,6 @@ class AlertController extends Controller
                 default:
                     $alerts[$i]->icon = "<i class='fa fa-file-o'></i>";
                     break;
-
             }
 
             $alerts[$i]->title = $doc->title;
@@ -88,13 +101,14 @@ class AlertController extends Controller
             $alertTypes[$i]->count = Alert::getAlertCountByCategory($storeNumber, $at->id);
             $i++;
         }        
-    
+
         return view('site.alerts.index')
             ->with('skin', $skin)
             ->with('communicationCount', $communicationCount)
             ->with('alerts', $alerts)
             ->with('alertTypes', $alertTypes)
             ->with('alertCount', $alertCount)
+            ->with('title', $title)
             ->with('urgentNoticeCount', $urgentNoticeCount);
     }
 
