@@ -29,9 +29,17 @@ class Alert extends Model
     	return $alerts;
     }
 
+    public static function getAlertCountByStore($store_id)
+    {
+        $alert_count = \DB::table('alerts_target')->where('store_id', $store_id)->count();
+        return $alert_count;
+    }
+
+
     public static function getAlertsByStore($store_id)
     {
         $alert_ids = \DB::table('alerts_target')->where('store_id', $store_id)->get();
+        
         $alerts = [];
         foreach ($alert_ids as $alert_id) {
             $alert = Alert::join('documents', 'alerts.document_id' , '=', 'documents.id')
