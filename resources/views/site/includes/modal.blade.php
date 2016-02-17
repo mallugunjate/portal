@@ -32,10 +32,7 @@
                 </div> -->
                 <div class="modal-body">
 
-                    <video autoplay="true" controls="true">
-                        <source src="" type="video/mp4">
-                        Your browser does not support the video tag or the file format of this video.
-                    </video>
+                    
                 {{-- <iframe src="" frameborder="0" height="100%" width="100%" allowtransparency="true"></iframe>  --}}
                 <!--     <p><strong>Lorem Ipsum is simply dummy</strong> text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown
                         printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
