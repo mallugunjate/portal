@@ -5,7 +5,11 @@
     @section('title', 'alerts')
     <link href="/css/plugins/iCheck/custom.css" rel="stylesheet">
     @include('site.includes.head')
-    
+    <style>
+    .modal-lg{ height: 95%; width: 80% !important; padding: 0; }
+    .modal-content{ height: 100% !important;}
+    .modal-body{ padding: 0; margin: 0; height: 100% !important; }
+    </style>    
 </head>	
 
 <body class="fixed-navigation">
@@ -49,6 +53,7 @@
                 <table class="table table-hover table-mail">
                 <tbody>
 
+
                 @foreach($alerts as $alert)
                 
 
@@ -58,8 +63,8 @@
                         <i class="fa fa-bell-o"></i>
                     </td>
                     
-                    <td class="mail-subject"><a href="/files/{{ $alert->filename }}">{!! $alert->icon !!} {{ $alert->title }}</a> <span class="label label pull-right">{{ $alert->alertTypeName }}</span></td>
-                    <td class="mail-preview"><a href="/files/{{ $alert->filename }}">{{ $alert->description }}</a></td>
+                    <td class="mail-subject"><div class="launchPDFViewer" data-toggle="modal" data-target="#fileviewmodal" data-file="/files/{{ $alert->filename }}">{!! $alert->icon !!} {{ $alert->title }}</div> <span class="label label pull-right">{{ $alert->alertTypeName }}</span></td>
+                    <td class="mail-preview">{{ $alert->description }}</td>
                     <td class=""></td>
                     <td class="text-right mail-date">{{ $alert->prettyDate }} <small style="font-weight: normal;padding-left: 10px;">({{ $alert->since }} ago)</small></td>
                 </tr>                
@@ -78,22 +83,19 @@
 
 
     @include('site.includes.footer')       
-
-    <script type="text/javascript" src="/js/plugins/fullcalendar/moment.min.js"></script>
   
     @include('site.includes.scripts')
-    <script src="/js/plugins/iCheck/icheck.min.js"></script>
- 
-	<script>
-        $(document).ready(function(){
-            $('.i-checks').iCheck({
-                checkboxClass: 'icheckbox_square-green',
-                radioClass: 'iradio_square-green',
-            });
+
+    <script type="text/javascript">
+        $("body").on("click", ".launchPDFViewer", function(e){
+            var filepath = $(this).attr("data-file");
+            $("#fileviewmodal").find('iframe').attr("src", filepath);
         });
     </script>
 
+
     @include('site.includes.bugreport')
+    @include('site.includes.modal')
 
 </body>
 </html> 
