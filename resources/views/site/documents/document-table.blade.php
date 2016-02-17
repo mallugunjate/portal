@@ -4,11 +4,11 @@
 	</div>
 
 	
-	<table class="table tablesorter" id="folder-table"> 
+	<table class="table tablesorter table-hover table-mail" id="folder-table"> 
 	</table>
 
 	
-	<table class="table tablesorter" id="file-table"> 
+	<table class="table tablesorter table-hover table-mail" id="file-table"> 
 	</table>
 
 </div>

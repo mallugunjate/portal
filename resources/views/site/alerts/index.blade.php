@@ -2,10 +2,14 @@
 <html>
 
 <head>
-    @section('title', 'alerts')
+    @section('title', 'Alerts')
     <link href="/css/plugins/iCheck/custom.css" rel="stylesheet">
     @include('site.includes.head')
-    
+    <style>
+    .modal-lg{ height: 95%; width: 80% !important; padding: 0; }
+    .modal-content{ height: 100% !important;}
+    .modal-body{ padding: 0; margin: 0; height: 100% !important; }
+    </style>    
 </head>	
 
 <body class="fixed-navigation">
@@ -34,7 +38,7 @@
 
                 <h2>
                 	@if($title == "")
-                		All Alerts <small>( {{ $alertCount }} active alert)</small>	
+                		All Alerts <small>({{ $alertCount }} active alert)</small>	
                 	@else
                 		{{ $title }}
                 	@endif
@@ -48,6 +52,15 @@
 
                 <table class="table table-hover table-mail">
                 <tbody>
+                    <thead>
+                        <tr> 
+                            <th>&nbsp;</th>
+                            <th> Alert File </th>
+                            <th> Alert Type</th>
+                            <th> Description </th>
+                            <th> Date </th> 
+                        </tr>
+                    </thead>
 
                 @foreach($alerts as $alert)
                 
@@ -58,10 +71,11 @@
                         <i class="fa fa-bell-o"></i>
                     </td>
                     
-                    <td class="mail-subject"><a href="/files/{{ $alert->filename }}">{!! $alert->icon !!} {{ $alert->title }}</a> <span class="label label pull-right">{{ $alert->alertTypeName }}</span></td>
-                    <td class="mail-preview"><a href="/files/{{ $alert->filename }}">{{ $alert->description }}</a></td>
-                    <td class=""></td>
-                    <td class="text-right mail-date">{{ $alert->prettyDate }} <small style="font-weight: normal;padding-left: 10px;">({{ $alert->since }} ago)</small></td>
+                    <td class="mail-subject"><a href="#" class="launchPDFViewer" data-toggle="modal" data-target="#fileviewmodal" data-file="/files/{{ $alert->filename }}">{!! $alert->icon !!} {{ $alert->title }}</a></td>
+                    <td><span class="label label pull-left">{{ $alert->alertTypeName }}</span></td>
+                    <td class="mail-preview">{{ $alert->description }}</td>
+                    
+                    <td class="mail-date">{{ $alert->prettyDate }} <small style="font-weight: normal;padding-left: 10px;">({{ $alert->since }} ago)</small></td>
                 </tr>                
 
                 @endforeach
@@ -78,22 +92,19 @@
 
 
     @include('site.includes.footer')       
-
-    <script type="text/javascript" src="/js/plugins/fullcalendar/moment.min.js"></script>
   
     @include('site.includes.scripts')
-    <script src="/js/plugins/iCheck/icheck.min.js"></script>
- 
-	<script>
-        $(document).ready(function(){
-            $('.i-checks').iCheck({
-                checkboxClass: 'icheckbox_square-green',
-                radioClass: 'iradio_square-green',
-            });
+
+    <script type="text/javascript">
+        $("body").on("click", ".launchPDFViewer", function(e){
+            var filepath = $(this).attr("data-file");
+            $("#fileviewmodal").find('iframe').attr("src", filepath);
         });
     </script>
 
+
     @include('site.includes.bugreport')
+    @include('site.includes.modal')
 
 </body>
 </html> 
