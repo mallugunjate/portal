@@ -102,6 +102,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $user['lastname']  = $request['lastname'];
         $user['email']     = $request['email'];
         $user['group_id']     = intval($request['group']);
+
+        if(isset($request['password']) && $request['password'] != ''){
+            $user['password'] = Hash::make($request['password']);
+        }
         $user->save();
 
         UserBanner::where('user_id', $id)->delete();

@@ -29,7 +29,7 @@
                             <a href="/admin/home">Home</a>
                         </li>
                         <li>
-                            <a href="/admin/home">User</a>
+                            <a href="/admin/user">User</a>
                         </li>
                         <li class="active">
                             <strong>Edit an Admin</strong>
@@ -90,23 +90,44 @@
                                                     {!! Form::select('banners[]', $banners_list, $selected_banners, ['class'=>'chosen', 'multiple'=>'true', 'id'=>'select-banner']) !!}  
                                                 </div>
                                         </div>
-
-                                        <div class="hr-line-dashed"></div>
-
-
-                                        <div class="form-group">
-                                            <div class="col-sm-4 col-sm-offset-2">
-                                                <a class="btn btn-white" href="/admin/home"><i class="fa fa-close"></i> Cancel</a>
-                                                <button class="user-update btn btn-primary" type="submit"><i class="fa fa-check"></i> Save changes</button>
-
-                                            </div>
-                                        </div>
+                                        
                                     </form>
 
 
                                 </div>
-		                    </div>
+		                    </div> <!-- ibox closes -->
+                            <div class="ibox">
+                                <div class="ibox-title">
+                                    <h5>Update Password</h5>
+                                    
+                                </div>
+                                <div class="ibox-content">
+                                    <form class="form-horizontal">
+                                    <div class="form-group"><label class="col-sm-2 control-label">New Password</label>
+                                        <div class="col-sm-10">
+                                            <input type="password" name="password" value class="form-control">
+                                        </div>
+                                    </div>
 
+                                    <div class="form-group"><label class="col-sm-2 control-label">Confirm New Password</label>
+                                        <div class="col-sm-10">
+                                            <input type="password" name="confirm_password" value class="form-control">
+                                        </div>
+                                    </div>                                        
+
+                                    </form>
+                                </div>
+                                 
+                            </div> <!-- ibox closes -->
+                            <div class="ibox">
+                                <div class="form-group">
+                                    <div class="col-sm-4 col-sm-offset-2">
+                                        <a class="btn btn-white" href="/admin/home"><i class="fa fa-close"></i> Cancel</a>
+                                        <button class="user-update btn btn-primary" type="submit"><i class="fa fa-check"></i> Save changes</button>
+
+                                    </div>
+                                </div>
+                            </div>
 		                </div>
 
                     </div>
