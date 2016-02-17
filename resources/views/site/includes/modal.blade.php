@@ -23,7 +23,7 @@
 
     <div class="modal inmodal" id="videomodal" tabindex="-1" role="video" aria-hidden="true" style="display: none;">
         <div class="modal-dialog modal-lg" role="video">
-        <div class="modal-content">
+        <div class="modal-content videomodaltransparent">
                 <!-- <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
                     <i class="fa fa-bug modal-icon"></i>
