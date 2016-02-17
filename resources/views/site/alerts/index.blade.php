@@ -52,7 +52,15 @@
 
                 <table class="table table-hover table-mail">
                 <tbody>
-
+                    <thead>
+                        <tr> 
+                            <th>&nbsp;</th>
+                            <th> Alert File </th>
+                            <th> Alert Type</th>
+                            <th> Description </th>
+                            <th> Date </th> 
+                        </tr>
+                    </thead>
 
                 @foreach($alerts as $alert)
                 
@@ -63,10 +71,11 @@
                         <i class="fa fa-bell-o"></i>
                     </td>
                     
-                    <td class="mail-subject"><div class="launchPDFViewer" data-toggle="modal" data-target="#fileviewmodal" data-file="/files/{{ $alert->filename }}">{!! $alert->icon !!} {{ $alert->title }}</div> <span class="label label pull-right">{{ $alert->alertTypeName }}</span></td>
+                    <td class="mail-subject"><a href="#" class="launchPDFViewer" data-toggle="modal" data-target="#fileviewmodal" data-file="/files/{{ $alert->filename }}">{!! $alert->icon !!} {{ $alert->title }}</a></td>
+                    <td><span class="label label pull-left">{{ $alert->alertTypeName }}</span></td>
                     <td class="mail-preview">{{ $alert->description }}</td>
-                    <td class=""></td>
-                    <td class="text-right mail-date">{{ $alert->prettyDate }} <small style="font-weight: normal;padding-left: 10px;">({{ $alert->since }} ago)</small></td>
+                    
+                    <td class="mail-date">{{ $alert->prettyDate }} <small style="font-weight: normal;padding-left: 10px;">({{ $alert->since }} ago)</small></td>
                 </tr>                
 
                 @endforeach
