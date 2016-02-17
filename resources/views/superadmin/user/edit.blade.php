@@ -87,7 +87,7 @@
 
                                                 <div class="col-sm-10">
 
-                                                    {!! Form::select('banners[]', $banners, $selected_banners, ['class'=>'chosen', 'multiple'=>'true', 'id'=>'select-banner']) !!}  
+                                                    {!! Form::select('banners[]', $banners_list, $selected_banners, ['class'=>'chosen', 'multiple'=>'true', 'id'=>'select-banner']) !!}  
                                                 </div>
                                         </div>
 

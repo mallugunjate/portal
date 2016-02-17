@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Hash;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -77,7 +78,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             'firstname' => $request['firstname'],
             'lastname'  => $request['lastname'],
             'email'     => $request['email'],
-            'group_id'  => intval($request['group'])
+            'group_id'  => intval($request['group']),
+            'password'  => Hash::make($request['password'])
         ]);
 
         $banners = $request['banners'];

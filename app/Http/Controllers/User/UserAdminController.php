@@ -52,18 +52,19 @@ class UserAdminController extends Controller
     public function create()
     {
         $banner_ids = UserBanner::where('user_id',  \Auth::user()->id)->get()->pluck('banner_id');
-        
         $banners = Banner::whereIn('id', $banner_ids)->get();
 
         $groups = UserGroup::lists('name', 'id');
         
         $banner_id = UserSelectedBanner::where('user_id', \Auth::user()->id)->first()->selected_banner_id;
-
         $banner  = Banner::find($banner_id);
+
+        $banners_list = Banner::all()->lists('name', 'id');
 
         return view('superadmin.user.create')->with('banners', $banners)
                                             ->with('banner', $banner)
-                                            ->with('groups', $groups);
+                                            ->with('groups', $groups)
+                                            ->with('banners_list', $banners_list);
     }
 
     /**
@@ -101,6 +102,7 @@ class UserAdminController extends Controller
         
         $banner_ids = UserBanner::where('user_id', \Auth::user()->id)->get()->pluck('banner_id');
         $banners = Banner::whereIn('id', $banner_ids)->get();    
+        $banners_list = Banner::all()->lists('name', 'id');
 
         $banner_id = UserSelectedBanner::where('user_id', \Auth::user()->id)->first()->selected_banner_id;
         $banner  = Banner::find($banner_id);
@@ -112,6 +114,7 @@ class UserAdminController extends Controller
         
         return view('superadmin.user.edit')->with('user', $user)
                                             ->with('banners', $banners)
+                                            ->with('banners_list', $banners_list)
                                             ->with('banner', $banner)
                                             ->with('selected_banners', $selected_banners)
                                             ->with('groups', $groups);

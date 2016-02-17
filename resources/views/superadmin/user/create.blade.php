@@ -63,7 +63,8 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group"><label class="col-sm-2 control-label">Email</label>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Email</label>
                                             <div class="col-sm-10">
                                                 <input name="email" value class="form-control">
                                             </div>
@@ -78,15 +79,30 @@
                                         </div>
 
                                         <div class="hr-line-dashed"></div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Password</label>
+                                            <div class="col-sm-10">
+                                                <input type="password" name="password" value class="form-control">
+                                            </div>
 
+                                        </div>
 
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Confirm Password</label>
+                                            <div class="col-sm-10">
+                                                <input type="password" name="confirm_password" value class="form-control">
+                                            </div>
+
+                                        </div>
+
+                                        <div class="hr-line-dashed"></div>
                                         <div class="form-group">
 
                                                 <label class="col-sm-2 control-label">Banners</label>
 
                                                 <div class="col-sm-10">
 
-                                                    {!! Form::select('banners[]', $banners, null, ['class'=>'chosen', 'multiple'=>'true', 'id'=>'select-banner']) !!}  
+                                                    {!! Form::select('banners[]', $banners_list, null, ['class'=>'chosen', 'multiple'=>'true', 'id'=>'select-banner']) !!}  
                                                 </div>
                                         </div>
 
@@ -113,32 +129,32 @@
 	</div>
 
 
-		        </div>
+</div>
 
-				@include('site.includes.footer')
+@include('site.includes.footer')
 
-			    @include('admin.includes.scripts')
+@include('admin.includes.scripts')
 
-                <script type="text/javascript" src="/js/plugins/chosen/chosen.jquery.js"></script>
-                <script type="text/javascript">
-					$.ajaxSetup({
-				        headers: {
-				            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-				        }
-					});
-                    $(".chosen").chosen({
-                        width:'50%'
-                    });
+<script type="text/javascript" src="/js/plugins/chosen/chosen.jquery.js"></script>
+<script type="text/javascript">
+	$.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+	});
+    $(".chosen").chosen({
+        width:'50%'
+    });
 
-				</script>
-
-
-				<script src="/js/custom/superadmin/user/addUser.js"></script>
-
-				@include('site.includes.bugreport')
+</script>
 
 
+<script src="/js/custom/superadmin/user/addUser.js"></script>
+
+@include('site.includes.bugreport')
 
 
-			</body>
-			</html>
+
+
+</body>
+</html>
