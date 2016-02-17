@@ -99,13 +99,13 @@ var fileFill = function(data)
 								' <th> End </th>' +
 								' </tr></thead>');
 		var files = data.files
-		console.log(files)
+		
 		$('#file-table').append('<tbody>');
 		_.each(files, function(i){
 
 			var icon ="";
 			var row ="";
-			console.log("ext: "  + i.original_extension);
+			
 
 			switch(i.original_extension){
 				case "png":
