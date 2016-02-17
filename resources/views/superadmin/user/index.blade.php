@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    @section('title', 'Package')
+    @section('title', 'Users')
     @include('admin.includes.head')
 
 	<meta name="csrf-token" content="{!! csrf_token() !!}"/>
@@ -15,6 +15,7 @@
 	          @include('admin.includes.sidenav')
 	        </div>
 	    </nav>
+
 	<div id="page-wrapper" class="gray-bg" >
 		<div class="row border-bottom">
 			@include('admin.includes.topbar')
@@ -22,16 +23,13 @@
 
 		<div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
-                    <h2>Packages</h2>
+                    <h2>Users</h2>
                     <ol class="breadcrumb">
                         <li>
-                            <a href="/admin">Home</a>
-                        </li>
-                        <li>
-                            <a>Package</a>
+                            <a href="/admin/home">Home</a>
                         </li>
                         <li class="active">
-                            <strong>Manage Packages</strong>
+                            <strong>Users</strong>
                         </li>
                     </ol>
                 </div>
@@ -45,12 +43,14 @@
 		                <div class="col-lg-12">
 		                    <div class="ibox">
 		                        <div class="ibox-title">
-		                            <h5>Package List</h5>
+		                            <h5>Users List</h5>
+
 		                            <div class="ibox-tools">
-		                                <a href="/admin/package/create" class="btn btn-primary btn"><i class="fa fa-plus"></i> Add New Package</a>
+		                                <a href="/admin/user/create" class="btn btn-primary btn"><i class="fa fa-plus"></i> Create New User</a>
 		                            </div>
 		                        </div>
 		                        <div class="ibox-content">
+
 
 
 		                            <div class="table-responsive">
@@ -58,22 +58,21 @@
 										<table class="table table-hover issue-tracker">
 
 										<tr>
-											<td>id</td>
-											<td>Title</td>
-											
+											<td>Id</td>
+											<td>Name</td>
 											<td></td>
-
 										</tr>
-										@foreach($packages as $package)
+
+										@foreach($users as $user)
 										<tr>
-
-
-											<td>{{ $package->id }}</td>
-											<td><a href="/admin/package/{{ $package->id }}/edit">{{ $package->package_screen_name }}</a></td>
+											<td> {{$user->id}} </td>
+											<td><a href="/admin/user/{{ $user->id }}/edit">{{ $user->firstname }} {{ $user->lastname }}</a></td>
+											
+											
 											
 											<td>
-
-												<a data-package="{{ $package->id }}" id="package{{$package->id}}" class="package-delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+												
+												<a data-user="{{ $user->id }}" id="user{{ $user->id }}" class="delete-user btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
 
 											</td>
 										</tr>
@@ -81,7 +80,6 @@
 
 										</table>
 
-										
 
 		                            </div>
 		                        </div>
@@ -106,7 +104,7 @@
 
 				</script>
 
-				<script src="/js/custom/admin/packages/deletePackage.js"></script>
+				<script type="text/javascript" src="/js/custom/superadmin/user/deleteUser.js"></script>
 
 				@include('site.includes.bugreport')
 

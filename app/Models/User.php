@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Hash;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -73,12 +74,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     
     public static function createAdminUser($request)
     {
-        \Log::info("here");
         $user = User::create([
             'firstname' => $request['firstname'],
             'lastname'  => $request['lastname'],
             'email'     => $request['email'],
-            'group_id'  => intval($request['group'])
+            'group_id'  => intval($request['group']),
+            'password'  => Hash::make($request['password'])
         ]);
 
         $banners = $request['banners'];
@@ -101,6 +102,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $user['lastname']  = $request['lastname'];
         $user['email']     = $request['email'];
         $user['group_id']     = intval($request['group']);
+
+        if(isset($request['password']) && $request['password'] != ''){
+            $user['password'] = Hash::make($request['password']);
+        }
         $user->save();
 
         UserBanner::where('user_id', $id)->delete();

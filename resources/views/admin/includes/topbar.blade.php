@@ -30,11 +30,11 @@
             </a>
         </li> --}}
 
-                <li>
-                    <a href="/admin/logout">
-                        <i class="fa fa-sign-out"></i> Log out
-                    </a>
-                </li>
+        <li>
+            <a href="/admin/logout">
+                <i class="fa fa-sign-out"></i> Log out
+            </a>
+        </li>
     </ul>
 
 </nav>

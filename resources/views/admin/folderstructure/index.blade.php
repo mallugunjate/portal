@@ -42,13 +42,13 @@
                     <h2>Folders</h2>
                     <ol class="breadcrumb">
                         <li>
-                            <a href="index.html">Home</a>
+                            <a href="/admin">Home</a>
                         </li>
                         <li>
-                            <a>Calendar</a>
+                            <a>Folders</a>
                         </li>
                         <li class="active">
-                            <strong>Manage Events</strong>
+                            <strong>Manage Folders</strong>
                         </li>
                     </ol>
                 </div>

@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Banner;
 use App\Models\UserGroup;
 use App\Models\UserBanner;
+use App\Models\UserSelectedBanner;
 
 
 class UserAdminController extends Controller
@@ -32,8 +33,15 @@ class UserAdminController extends Controller
     public function index()
     {
         
-        $user = User::getAdminUsers();
-        return $user;
+        $banner_id = UserSelectedBanner::where('user_id', \Auth::user()->id)->first()->selected_banner_id;
+        $banner  = Banner::find($banner_id);
+
+        $banners = Banner::all();
+        $users = User::getAdminUsers();
+
+        return view('superadmin.user.index')->with('banners', $banners)
+                                        ->with('banner', $banner)
+                                        ->with('users', $users);
     }
 
     /**
@@ -43,12 +51,20 @@ class UserAdminController extends Controller
      */
     public function create()
     {
-        $banners = Banner::lists('name', 'id');
+        $banner_ids = UserBanner::where('user_id',  \Auth::user()->id)->get()->pluck('banner_id');
+        $banners = Banner::whereIn('id', $banner_ids)->get();
 
         $groups = UserGroup::lists('name', 'id');
         
+        $banner_id = UserSelectedBanner::where('user_id', \Auth::user()->id)->first()->selected_banner_id;
+        $banner  = Banner::find($banner_id);
+
+        $banners_list = Banner::all()->lists('name', 'id');
+
         return view('superadmin.user.create')->with('banners', $banners)
-                                        ->with('groups', $groups);
+                                            ->with('banner', $banner)
+                                            ->with('groups', $groups)
+                                            ->with('banners_list', $banners_list);
     }
 
     /**
@@ -83,7 +99,14 @@ class UserAdminController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        $banners = Banner::lists('name', 'id');
+        
+        $banner_ids = UserBanner::where('user_id', \Auth::user()->id)->get()->pluck('banner_id');
+        $banners = Banner::whereIn('id', $banner_ids)->get();    
+        $banners_list = Banner::all()->lists('name', 'id');
+
+        $banner_id = UserSelectedBanner::where('user_id', \Auth::user()->id)->first()->selected_banner_id;
+        $banner  = Banner::find($banner_id);
+
         $selected_banner_ids = UserBanner::where('user_id', $id)->get()->pluck('banner_id');
         $selected_banners = Banner::findMany($selected_banner_ids)->pluck('id')->toArray();
 
@@ -91,6 +114,8 @@ class UserAdminController extends Controller
         
         return view('superadmin.user.edit')->with('user', $user)
                                             ->with('banners', $banners)
+                                            ->with('banners_list', $banners_list)
+                                            ->with('banner', $banner)
                                             ->with('selected_banners', $selected_banners)
                                             ->with('groups', $groups);
     }

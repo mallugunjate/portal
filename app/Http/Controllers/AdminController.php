@@ -45,54 +45,10 @@ class AdminController extends Controller
 
         $banner  = Banner::find($banner_id);
 
-        $navigation = FolderStructure::getNavigationStructure($banner->id);
+        $banners = Banner::all();
 
-        $packages = Package::getAllPackages($banner->id);
-
-        $packageHash = sha1(time() . time());
-
-        $folders = Folder::all();
-
-        $defaultFolder = $request->get('parent');
-
-        if (!isset($defaultFolder)) {
-            $defaultFolder = null;
-        }
-
-
-        if ($this->group_id == 1) {
-
-            $banners = Banner::all();
-            $admin_users = User::whereIn('group_id',[1,2])->get();
-            $navigation = FolderStructure::getNavigationStructure($banner->id);
-            return view('superadmin.home')->with('banners', $banners)
-                                                ->with('admin_users', $admin_users)
-                                                ->with('navigation', $navigation) 
-                                                ->with('folders', $folders)
-                                                ->with('packageHash', $packageHash)
-                                                ->with('banner', $banner)
-                                                ->with('packages', $packages)
-                                                ->with('defaultFolder' , $defaultFolder);
-        }
-        else if ($this->group_id == 2) {
-
-            $banner_ids = UserBanner::where('user_id', $this->user_id)->get()->pluck('banner_id');
-            $banners = Banner::whereIn('id', $banner_ids)->get();
-            
-            //return view('admin.document-view')
-            // return view('admin.document.document-view')
-            //     ->with('navigation', $navigation)
-            //     ->with('folders', $folders)
-            //     ->with('packageHash', $packageHash)
-            //     ->with('banner', $banner)
-            //     ->with('banners', $banners)
-            //     ->with('packages', $packages)
-            //     ->with('defaultFolder' , $defaultFolder);
-            //     
-            return view('admin.home.index')
-                ->with('banner', $banner)
-                ->with('banners', $banners);           
-        }
+        return view('admin.index')->with('banner', $banner)
+                    ->with('banners', $banners);
         
     }
 

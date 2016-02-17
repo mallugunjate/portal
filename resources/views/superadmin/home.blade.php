@@ -22,39 +22,9 @@
   <div id="admin-container" >
     
     <!-- <div class="row"> -->
-  		<div class="navigation-container">
-  			<!-- <div class="ui-widget-content"> -->
-        <div id="admins">
-          <h4>Admins</h4>
-        </div>
-         
-        <div id="banners">  
-          <h4>Banners</h4>
-        </div>
-        
-        <h4>Folders</h4>
-          @include('admin.navigation-view', ['navigation'=>$navigation])
-        <h4>Packages</h4>
-          <a href="/admin/package/create"> Create New Package</a>
-          <br>
-          @include('admin.package.list', ['packages'=>$packages])
-        <h4>Communications</h4>
-          <a href="/admin/communication/create"> Create New Communication</a>
-          <br>
-          <a href="/admin/communication">View Communications</a>
-  		</div>
+  		
   		<div class="content-container">
-        <div id="empty-container" class="visible">
-          <h4>Select a folder to view</h4>
-        </div>
-        <div id="file-container" class="hidden">
-          <ol class="breadcrumbs"></ol>
-          <input type="hidden" name="default_folder" value={{$defaultFolder}}>
-          @include('admin.document-table')
-        </div>
-        <div id="package-viewer" class="hidden">
-          @include('admin.package.view')
-        </div>
+        
         <div id="user-viewer" class="hidden">
           @include('superadmin.user.view')
         </div>
