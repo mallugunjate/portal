@@ -9,7 +9,6 @@ $(document).on('click','.event-update',function(){
     var eventDescription = $("#description").val();
     var eventStart = $("#start").val();
     var eventEnd = $("#end").val();
-    var tags = $('#tags').val();
 
     console.log(tags);
     if(eventTitle == '') {
@@ -41,8 +40,7 @@ $(document).on('click','.event-update',function(){
 		  		description: eventDescription,
 		    	event_type: eventType,
 		    	start: eventStart,
-		    	end: eventEnd,
-		    	tags: tags
+		    	end: eventEnd
 		    },
 		    success: function(result) {
 		      //  $('#createNewEventForm')[0].reset(); // empty the form
