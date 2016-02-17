@@ -12,18 +12,44 @@
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-        <link rel="stylesheet" href="css/main.css">
+
+
+
+
+        <style>
+
+/*        .video-js {padding-top: 56.25%}
+        .vjs-fullscreen {padding-top: 0px}
+*/
+
+        body {
+        background: none transparent;
+        }
+
+        /*body{ background: transparent url('/images/FFFFFF-0.0.png') top left repeat !important; } */
+     /*   html{ background: transparent url('/images/FFFFFF-0.0.png') top left repeat !important; padding: 0; margin: 0; height: auto;}*/
+
+        /*html{ background-color: lime; }*/
+        
+            video
+            {
+                width: 100%;
+                height: auto;
+                max-height: 100%;
+                background: transparent url('/images/FFFFFF-0.0.png') top left repeat !important; 
+            }
+        </style>
+
     </head>
 
     <body>
-
             <?php
                 $video = $_REQUEST['v'];
-                CBV_Softgoods_1_mp4_c05979bc41e3d3154bb2e78fb18280a1393298cf.mp4
+                $token = md5( time() . time() );
             ?>
 
-            <video autoplay="true" controls="true">
-                <source src="/files/<?=$video?>?rnd=0.5850993715613688" type="video/mp4">
+            <video autoplay="true" controls="true" id="current_video" width="auto" height="auto" class="video-js vjs-default-skin" data-setup="{}">
+                <source src="/files/<?=$video?>?<?=$token?>" type="video/mp4">
                 Your browser does not support the video tag or the file format of this video.
             </video>
 

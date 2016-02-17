@@ -142,7 +142,7 @@ var fileFill = function(data)
 				case "avi":
 				case "mov":
 					icon = "fa-film";
-					row = '<tr> <td class="mail-subject"><div class="launchVideoViewer" data-file="/files/'+i.filename +'?rnd='+ Math.random()*Math.random() + '" data-target="#videomodal"><i class="fa '+ icon +'"></i> ' + i.title +'</div></td>'+
+					row = '<tr> <td class="mail-subject"><a href="#" class="launchVideoViewer" data-file="'+i.filename+'" data-target="#videomodal"><i class="fa '+ icon +'"></i> ' + i.title +'</a></td>'+
 			//$('#file-table').append('<tr> <td><a data-toggle="modal" data-target="#fileviewmodal" href="/viewer/?file=/files/'+i.filename+'"><i class="fa '+ icon +'"></i> ' + i.title +'</a></td>'+				
 										' <td>'+ i.description + '</td>'+
 										' <td>'+ i.created_at +'</td>'+
@@ -194,23 +194,23 @@ var fileFill = function(data)
 
 	}
 
-	
-		
-		$("body").on("click", ".launchPDFViewer", function(e){
-			var filepath = $(this).attr("data-file");
-			$("#fileviewmodal").find('iframe').attr("src", filepath);
-		});
-
-		$("body").on("click", ".launchVideoViewer", function(e){
-			var filepath = $(this).attr("data-file");
-			$("#videomodal").find('source').attr("src", filepath);
-			$('#videomodal').modal('show');
-			// data-toggle="modal"
-		});		
-
-		// $('#videomodal').on('shown.bs.modal', function() {
-  //                   modalvideo[0].play();
-  //               });
-
 }	
 
+$("body").on("click", ".launchPDFViewer", function(e){
+	var filepath = $(this).attr("data-file");
+	$("#fileviewmodal").find('iframe').attr("src", filepath);
+});
+
+$("body").on("click", ".launchVideoViewer", function(e){
+	var filepath = $(this).attr("data-file");
+	$("#videomodal").find('iframe').attr("src", "/video.php?v="+filepath);
+	$('#videomodal').modal('show');
+
+	$("#videomodal").find('iframe').css({backgroundColor: 'transparent'});
+	
+	// data-toggle="modal"
+});
+
+$('body').on('hidden.bs.modal', function () {
+   $('iframe').attr('src', $('iframe').attr('src'));
+});

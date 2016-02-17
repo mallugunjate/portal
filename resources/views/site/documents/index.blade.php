@@ -11,6 +11,7 @@
     .modal-lg{ height: 95%; width: 80% !important; padding: 0; }
     .modal-content{ height: 100% !important;}
     .modal-body{ padding: 0; margin: 0; height: 100% !important; }
+
     </style>
 </head> 
 
