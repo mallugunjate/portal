@@ -38,7 +38,7 @@
 
                 <h2>
                 	@if($title == "")
-                		All Alerts <small>( {{ $alertCount }} active alert)</small>	
+                		All Alerts <small>({{ $alertCount }} active alert)</small>	
                 	@else
                 		{{ $title }}
                 	@endif
