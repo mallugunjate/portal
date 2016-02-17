@@ -38,7 +38,7 @@ class SuperadminAuthenticate
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
             } else {
-                return redirect()->guest('admin/dashboard');
+                return redirect()->guest('admin/home');
             }
         }
         

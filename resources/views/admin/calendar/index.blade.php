@@ -25,7 +25,7 @@
                     <h2>Calendar Events</h2>
                     <ol class="breadcrumb">
                         <li>
-                            <a href="index.html">Home</a>
+                            <a href="/admin">Home</a>
                         </li>
                         <li>
                             <a>Calendar</a>

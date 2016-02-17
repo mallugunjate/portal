@@ -99,7 +99,6 @@ class CommunicationTypesAdminController extends Controller
      */
     public function edit($id)
     {
-        $user_id = \Auth::user()->id;
         $banner_ids = UserBanner::where('user_id', $user_id)->get()->pluck('banner_id');
         $banners = Banner::whereIn('id', $banner_ids)->get();        
         $banner_id = UserSelectedBanner::where('user_id', \Auth::user()->id)->first()->selected_banner_id;

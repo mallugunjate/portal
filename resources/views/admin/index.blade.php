@@ -26,15 +26,7 @@
                 <div class="col-lg-10">
                     <h2>Admin Home</h2>
                     <ol class="breadcrumb">
-{{--                         <li>
-                            <a href="index.html">Home</a>
-                        </li>
-                        <li>
-                            <a>Calendar</a>
-                        </li>
-                        <li class="active">
-                            <strong>Manage Events</strong>
-                        </li> --}}
+
                     </ol>
                 </div>
                 <div class="col-lg-2">
@@ -51,7 +43,7 @@
 
 		                    <div class="ibox">
 		                        <div class="ibox-title">
-		                            <h5>Admin Functions</h5>
+		                            <h5>Admin Home</h5>
 		                            
 		                        </div>
 		                        <div class="ibox-content">
@@ -60,18 +52,6 @@
 
 		                               		                
 
-<h3>Documents</h3>
-<a href="/admin/document/create">Upload a document</a><br />
-
-<h3>Folders</h3>
-<a href="/admin/folder">View Folder Structure</a><br />
-<a href="/admin/folder/create">Add a folder</a><br />
-
-<h3>Calendar</h3>
-<a href="/admin/calendar/">Event CRUD</a>
-
-
-<h3>Communications</h3>
 
 
 
