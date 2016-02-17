@@ -55,6 +55,12 @@ $(document).ready(function(){
 			    	email : email,
 			    	group : group,
 			    	banners : banners
+			    },
+			    success: function(data) {
+			        
+			        console.log(data); 
+					swal("Nice!", "'" + firstname +" "+ lastname +"' has been updated", "success");
+
 			    }
 			}).done(function(data){
 				console.log(data);

@@ -1,19 +1,31 @@
-$(document).ready(function(){
+$(".delete-user").click(function(){
 
-	$("body").on('click', '.delete-user', function(e){
-		console.log('delete called');
-		var user_id = e.target.id;
-		console.log(user_id);
-		e.preventDefault();
-		if (confirm('Are you sure you want to delete this user?')) {
-		    $(this).closest('tr').fadeOut(500);
-			$.ajax({
-				method : "DELETE",
-				url : "/admin/user/" + user_id,
-				data : { "_token" : $('[name="_token"]').val()}
-			}).done(function( data ){
-				console.log(data);
-			});
-		}
-	});
+	var user_id = $(this).attr('data-user');
+	
+	var selector = "#user"+user_id;
+
+	swal({
+		title: "Are you sure?",
+		//text: "You will not be able to recover this imaginary file!",
+		type: "warning",
+		showCancelButton: true,
+		confirmButtonColor: "#DD6B55",
+		confirmButtonText: "Yes, delete it!",
+		closeOnConfirm: false
+    	}, function () {
+	    
+		$.ajax({
+		    url: '/admin/user/'+ user_id,
+		    type: 'DELETE',
+
+		    success: function(result) {
+		        $(selector).closest('tr').fadeOut(1000);
+		        swal("Deleted!", "This user has been deleted.", "success");
+		    }
+
+		});
+        
+    });
+
+    return false;
 });

@@ -4,6 +4,7 @@ $(document).ready(function(){
 		var lastname = $('input[name="lastname"]').val();
 		var email = $('input[name="email"]').val();
 		var group = $('#select-group option:selected').val();
+		var groupname = $('#select-group option:selected').text();
 		var banners = [];
 		$('#select-banner option:selected').each(function(){ banners.push($(this).val()); });
 
@@ -55,6 +56,11 @@ $(document).ready(function(){
 			    	email : email,
 			    	group : group,
 			    	banners : banners
+			    },
+			    success: function(result) {
+			        console.log(result);
+			        $('form')[0].reset(); // empty the form
+					swal("Nice!", groupname+ " '" + firstname + " " + lastname +"' has been created", "success");        
 			    }
 			}).done(function(data){
 				console.log(data);

@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    @section('title', 'Communications')
+    @section('title', 'Users')
     @include('admin.includes.head')
 
 	<meta name="csrf-token" content="{!! csrf_token() !!}"/>
@@ -23,13 +23,13 @@
 
 		<div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
-                    <h2>Communications</h2>
+                    <h2>Users</h2>
                     <ol class="breadcrumb">
                         <li>
-                            <a href="/admin">Home</a>
+                            <a href="/admin/home">Home</a>
                         </li>
                         <li class="active">
-                            <strong>Communications</strong>
+                            <strong>Users</strong>
                         </li>
                     </ol>
                 </div>
@@ -43,11 +43,10 @@
 		                <div class="col-lg-12">
 		                    <div class="ibox">
 		                        <div class="ibox-title">
-		                            <h5>Communications List</h5>
+		                            <h5>Users List</h5>
 
 		                            <div class="ibox-tools">
-
-		                                <a href="/admin/communication/create" class="btn btn-primary btn"><i class="fa fa-plus"></i> Create New Communication</a>
+		                                <a href="/admin/user/create" class="btn btn-primary btn"><i class="fa fa-plus"></i> Create New User</a>
 		                            </div>
 		                        </div>
 		                        <div class="ibox-content">
@@ -59,22 +58,21 @@
 										<table class="table table-hover issue-tracker">
 
 										<tr>
-											<td>Subject</td>
-											<td>Sender</td>
-											<td>Date</td>
+											<td>Id</td>
+											<td>Name</td>
 											<td></td>
 										</tr>
 
-										@foreach($communications as $communication)
+										@foreach($users as $user)
 										<tr>
-
-											<td><a href="/admin/communication/{{ $communication->id }}/edit">{{ $communication->subject }}</a></td>
-											<td>{{ $communication->sender }}</td>
-											<td>{{ $communication->send_at }}</td>
+											<td> {{$user->id}} </td>
+											<td><a href="/admin/user/{{ $user->id }}/edit">{{ $user->firstname }} {{ $user->lastname }}</a></td>
+											
+											
 											
 											<td>
 												
-												<a data-communication="{{ $communication->id }}" id="communication{{ $communication->id }}" class="delete-communication btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+												<a data-user="{{ $user->id }}" id="user{{ $user->id }}" class="delete-user btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
 
 											</td>
 										</tr>
@@ -82,7 +80,6 @@
 
 										</table>
 
-{{-- 										{!! $events->render() !!} --}}
 
 		                            </div>
 		                        </div>
@@ -107,8 +104,7 @@
 
 				</script>
 
-				<script type="text/javascript" src="/js/custom/admin/communications/deleteCommunication.js"></script>
-				<script type="text/javascript" src="/js/custom/admin/global/bannerSelector.js"></script>
+				<script type="text/javascript" src="/js/custom/superadmin/user/deleteUser.js"></script>
 
 				@include('site.includes.bugreport')
 

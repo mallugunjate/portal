@@ -73,7 +73,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     
     public static function createAdminUser($request)
     {
-        \Log::info("here");
         $user = User::create([
             'firstname' => $request['firstname'],
             'lastname'  => $request['lastname'],

@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Banner;
 use App\Models\UserGroup;
 use App\Models\UserBanner;
+use App\Models\UserSelectedBanner;
 
 
 class UserAdminController extends Controller
@@ -32,8 +33,13 @@ class UserAdminController extends Controller
     public function index()
     {
         
-        $user = User::getAdminUsers();
-        return $user;
+        $banner = UserSelectedBanner::getBanner();
+        $banners = Banner::all();
+        $users = User::getAdminUsers();
+
+        return view('superadmin.user.index')->with('banners', $banners)
+                                        ->with('banner', $banner)
+                                        ->with('users', $users);
     }
 
     /**
@@ -47,8 +53,10 @@ class UserAdminController extends Controller
 
         $groups = UserGroup::lists('name', 'id');
         
+        $banner = Banner::find(1);
         return view('superadmin.user.create')->with('banners', $banners)
-                                        ->with('groups', $groups);
+                                            ->with('banner', $banner)
+                                            ->with('groups', $groups);
     }
 
     /**

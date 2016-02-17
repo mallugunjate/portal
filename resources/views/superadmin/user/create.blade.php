@@ -29,7 +29,7 @@
                             <a href="/admin/home">Home</a>
                         </li>
                         <li>
-                            <a href="/admin/home">User</a>
+                            <a href="/admin/user">User</a>
                         </li>
                         <li class="active">
                             <strong>Add an Admin</strong>
@@ -58,8 +58,8 @@
                                          
                                         <div class="form-group"><label class="col-sm-2 control-label">Name</label>
                                             <div class="col-sm-10">
-                                                <input name="firstname" value class="form-control">
-                                                <input name="lastname" value class="form-control">
+                                                <input name="firstname" value class="form-control" placeholder="First Name">
+                                                <input name="lastname" value class="form-control" placeholder="Last Name">
                                             </div>
                                         </div>
 
@@ -95,7 +95,7 @@
 
                                         <div class="form-group">
                                             <div class="col-sm-4 col-sm-offset-2">
-                                                <a class="btn btn-white" href="/admin/home"><i class="fa fa-close"></i> Cancel</a>
+                                                <a class="btn btn-white" href="/admin/user"><i class="fa fa-close"></i> Cancel</a>
                                                 <button class="user-create btn btn-primary" type="submit"><i class="fa fa-check"></i> Save changes</button>
 
                                             </div>
