@@ -74,7 +74,6 @@ class Communication extends Model
          Communication::updateTargetStores($communication->id, $request);
          Communication::updateCommunicationDocuments($communication->id, $request);
          Communication::updateCommunicationPackages($communication->id, $request);
-         //Communication::updateTags($communication->id, $request["tags"]);
    		return $communication;
    	}
 
@@ -82,9 +81,14 @@ class Communication extends Model
       {
          $communication = Communication::find($id);
 
+         
+            
+         
          $communication["subject"] = $request["subject"];
          $communication["body"] = $request["body"];
-         $communication["communication_type_id"] = $request["communication_type_id"];
+         if (isset($request['communication_type_id'])) {
+            $communication["communication_type_id"] = $request["communication_type_id"];
+         }
          $communication["sender"] = $request["sender"];
          $communication["importance"] = $request["importance"];
          $communication["send_at"] = $request["send_at"];
@@ -95,15 +99,20 @@ class Communication extends Model
          else {
             $communication["is_draft"] = 0;
          }
-         $communication->save();
+         
+         $communication->save();   
+
+         \Log::info('**********************************');
+         \Log::info('Type : Communication updated');
+         \Log::info($request->all());
+         \Log::info('**********************************');
+         
 
          Communication::updateTargetStores($communication->id, $request);
          Communication::updateCommunicationDocuments($communication->id, $request);
          Communication::updateCommunicationPackages($communication->id, $request);
-         // Communication::updateTags($communication->id, $request["tags"]);
 
          return $communication;
-
 
       }
 

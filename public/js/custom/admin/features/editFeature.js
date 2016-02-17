@@ -173,6 +173,19 @@ $(document).on('click','.feature-update',function(){
 		swal("Oops!", "This feature needs a name.", "error"); 
 		hasError = true;
 		$(window).scrollTop(0);
+		return false;
+	}
+	if(featureStart == '' || featureEnd == '') {
+		swal("Oops!", "Start and end dates cannot be empty", "error"); 
+		hasError = true;
+		$(window).scrollTop(0);
+		return false;
+	}
+	if(update_frequency == '') {
+		swal("Oops!", "Notification window size cannot be empty", "error"); 
+		hasError = true;
+		$(window).scrollTop(0);
+		return false;	
 	}
 
      if(hasError == false) {

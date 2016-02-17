@@ -16,13 +16,8 @@ $(document).on('click','.event-update',function(){
 		swal("Oops!", "This event needs a title.", "error"); 
 		hasError = true;
 		$(window).scrollTop(0);
+		return false;
 	}	
-
-    if(eventBanner == '') {
-		swal("Oops!", "We need a banner.", "error"); 
-		hasError = true;
-		$(window).scrollTop(0);
-	}
 
     if(eventStart == '') {
 		swal("Oops!", "This event needs a start date.", "error"); 

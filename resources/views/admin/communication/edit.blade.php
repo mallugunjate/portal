@@ -207,7 +207,7 @@
 								<div class="form-group">
 									<div class="col-sm-10 col-sm-offset-2">
 										<a class="btn btn-white" href="/admin/communication"><i class="fa fa-close"></i> Cancel</a>
-										<button class="btn btn-primary communication-update"><i class="fa fa-check"></i> Send New Communication</button>
+										<button class="btn btn-primary communication-update"><i class="fa fa-check"></i> Update Communication</button>
 						            </div>
 						        </div>
 
