@@ -1,4 +1,5 @@
 
+
 var fillTable = function(data){
 
 	//console.log( data );
@@ -27,12 +28,16 @@ var fillTable = function(data){
 		}	
 	}
 
+
 	$('#folder-table').empty();
+	$('#folder-table').hide();
+
 	$('#file-table').empty();
 
-	// if( (data.folder.folder_children).length > 0){
-	if( !(data.folder.folder_children === null) ) {		
+	if( (data.folder.folder_children).length > 0){
+	// if( !(data.folder.folder_children === null) ) {		
 		folderFill(data);
+		$('#folder-table').show();
 	}	
 	
 	fileFill(data);
@@ -40,7 +45,10 @@ var fillTable = function(data){
 
 var folderFill = function(data)
 {
+
 	if( !(data.folder.folder_children === null) ) {
+
+		
 		$('#folder-table').append('<thead>'+
 								'<tr> <th> Name </th>'+
 								'<th> Updated At </th>'+
@@ -68,6 +76,7 @@ var folderFill = function(data)
 			
 		});
 		$('#folder-table').append('</tbody>');
+	
 		$("#folder-table").tablesorter({
 			sortReset : true,
 			cssAsc: 'up',
@@ -88,7 +97,7 @@ var fileFill = function(data)
 								' <th> Uploaded At </th>'+
 								' <th> Start </th>' +
 								' <th> End </th>' +
-								' <th> Action </th> </tr></thead>');
+								' </tr></thead>');
 		var files = data.files
 		console.log(files)
 		$('#file-table').append('<tbody>');
@@ -104,24 +113,24 @@ var fileFill = function(data)
 				case "gif":
 				case "bmp":
 					icon = "fa-file-image-o";
-					row = '<tr> <td><div class="launchPDFViewer" data-toggle="modal" data-file="/viewer/?file=/files/'+i.filename+'" data-target="#fileviewmodal"><i class="fa '+ icon +'"></i> ' + i.title +'</div></td>'+
+					row = '<tr> <td class="mail-subject"><a href="#" class="launchPDFViewer" data-toggle="modal" data-file="/viewer/?file=/files/'+i.filename+'" data-target="#fileviewmodal"><i class="fa '+ icon +'"></i> ' + i.title +'</a></td>'+
 			//$('#file-table').append('<tr> <td><a data-toggle="modal" data-target="#fileviewmodal" href="/viewer/?file=/files/'+i.filename+'"><i class="fa '+ icon +'"></i> ' + i.title +'</a></td>'+				
 										' <td>'+ i.description + '</td>'+
 										' <td>'+ i.created_at +'</td>'+
 										' <td>'+ i.start +'</td>' +
 										' <td>'+ i.end +'</td>' +
-										' <td></td> </tr>'					
+										' </tr>'					
 					break;
 
 				case "pdf":
 					icon = "fa-file-pdf-o";
-					row = '<tr> <td><div class="launchPDFViewer" data-toggle="modal" data-file="/viewer/?file=/files/'+i.filename+'" data-target="#fileviewmodal"><i class="fa '+ icon +'"></i> ' + i.title +'</div></td>'+
+					row = '<tr> <td class="mail-subject"><a href="#" class="launchPDFViewer" data-toggle="modal" data-file="/viewer/?file=/files/'+i.filename+'" data-target="#fileviewmodal"><i class="fa '+ icon +'"></i> ' + i.title +'</a></td>'+
 			//$('#file-table').append('<tr> <td><a data-toggle="modal" data-target="#fileviewmodal" href="/viewer/?file=/files/'+i.filename+'"><i class="fa '+ icon +'"></i> ' + i.title +'</a></td>'+				
 										' <td>'+ i.description + '</td>'+
 										' <td>'+ i.created_at +'</td>'+
 										' <td>'+ i.start +'</td>' +
 										' <td>'+ i.end +'</td>' +
-										' <td></td> </tr>'
+										' </tr>'
 					break;
 
 				case "xls":
@@ -133,7 +142,7 @@ var fileFill = function(data)
 				case "avi":
 				case "mov":
 					icon = "fa-film";
-					row = '<tr> <td><div class="launchVideoViewer" data-file="/files/'+i.filename +'?rnd='+ Math.random()*Math.random() + '" data-target="#videomodal"><i class="fa '+ icon +'"></i> ' + i.title +'</div></td>'+
+					row = '<tr> <td class="mail-subject"><div class="launchVideoViewer" data-file="/files/'+i.filename +'?rnd='+ Math.random()*Math.random() + '" data-target="#videomodal"><i class="fa '+ icon +'"></i> ' + i.title +'</div></td>'+
 			//$('#file-table').append('<tr> <td><a data-toggle="modal" data-target="#fileviewmodal" href="/viewer/?file=/files/'+i.filename+'"><i class="fa '+ icon +'"></i> ' + i.title +'</a></td>'+				
 										' <td>'+ i.description + '</td>'+
 										' <td>'+ i.created_at +'</td>'+

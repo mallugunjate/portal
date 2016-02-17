@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    @section('title', 'alerts')
+    @section('title', 'Alerts')
     <link href="/css/plugins/iCheck/custom.css" rel="stylesheet">
     @include('site.includes.head')
     <style>
