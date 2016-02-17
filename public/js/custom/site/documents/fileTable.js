@@ -15,14 +15,14 @@ var fillTable = function(data){
 	
 	if ( data.folder.type == "week") {
 		if( !(data.folder === null) ) {
-			$("#folder-title h2").html("Week " + data.folder.week_number)
+			$("#folder-title h2").html('&nbsp;&nbsp;<i class="fa fa-folder-open"></i> ' + "Week " + data.folder.week_number)
 			$("#folder-title").attr('data-folderId', data.folder.global_folder_id)
 			$("#folder-title").attr('data-isWeekFolder', true)
 		}	
 	}
 	else {
 		if( !(data.folder === null) ) {
-			$("#folder-title h2").html(data.folder.name);
+			$("#folder-title h2").html('&nbsp;&nbsp;<i class="fa fa-folder-open"></i> ' + data.folder.name);
 			$("#folder-title").attr('data-folderId', data.folder.global_folder_id)
 			$("#folder-title").attr('data-isWeekFolder', false)
 		}	
