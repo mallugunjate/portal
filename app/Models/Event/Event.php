@@ -30,7 +30,6 @@ class Event extends Model
             'end' => $request['end']
     	]);
 
-    	Event::updateTags($event->id, $request['tags']);
     	return;
     }
 

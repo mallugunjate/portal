@@ -119,7 +119,6 @@
 
 				</script>
 
-				<script type="text/javascript" src="/js/custom/admin/global/bannerSelector.js"></script>
 				<script type="text/javascript" src="/js/custom/admin/alerts/deleteAlert.js"></script>
 				@include('site.includes.bugreport')
 

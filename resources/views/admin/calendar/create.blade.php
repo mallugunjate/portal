@@ -110,15 +110,14 @@
 
                                         <div class="hr-line-dashed"></div>
 
-                                        <div class="form-group"><label class="col-sm-2 control-label">Tags</label>
-                                            <div class="col-md  -10">
-                                                {!! Form::select('tags[]', $tags, null, ['class'=>'chosen', 'multiple'=>'true', 'id'=>'tags']) !!}
-                                                
-                                            </div>
-                                        </div>
+                                       {{-- <div class="form-group"><label class="col-sm-2 control-label">Tags</label>
+                                                <div class="col-md  -10">
+                                                    {!! Form::select('tags[]', $tags, null, ['class'=>'chosen', 'multiple'=>'true', 'id'=>'tags']) !!}
+                                                </div>
+                                        </div> 
 
                                         <div class="hr-line-dashed"></div>
-
+                                        --}}
 
                                         <div class="form-group">
                                             <div class="col-sm-10 col-sm-offset-2">
