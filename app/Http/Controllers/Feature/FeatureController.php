@@ -14,6 +14,8 @@ use App\Models\Feature\FeatureDocument;
 use App\Models\Feature\FeaturePackage;
 use App\Models\Document\Document;
 use App\Models\Document\Package;
+use App\Models\StoreInfo;
+use App\Models\UrgentNotice\UrgentNotice;
 
 class FeatureController extends Controller
 {
@@ -58,17 +60,13 @@ class FeatureController extends Controller
     {
         $storeNumber = RequestFacade::segment(1);
 
-        $storeAPI = env('STORE_API_DOMAIN', false);
-        $storeInfoJson = file_get_contents( $storeAPI . "/store/" . $storeNumber);
-        $storeInfo = json_decode($storeInfoJson);
+        $storeInfo = StoreInfo::getStoreInfoByStoreId($storeNumber);
 
         $storeBanner = $storeInfo->banner_id;
 
         $skin = Skin::getSkin($storeBanner);
 
-        $id = $request->id;
-
-		
+        $id = $request->id;		
 
         $feature = Feature::where('id', $id)->first();
 
@@ -93,13 +91,14 @@ class FeatureController extends Controller
         }
 
 		$notifications = Notification::getNotificationsByFeature($storeInfo->banner_id, $feature->update_type_id, $feature->update_frequency, $feature->id);
-        
+        $urgentNoticeCount = UrgentNotice::getUrgentNoticeCount($storeNumber);
         return view('site.feature.index')
             ->with('skin', $skin)
 			->with('notifications', $notifications)
             ->with('feature', $feature)
             ->with('feature_documents', $selected_documents)
-            ->with('feature_packages', $selected_packages);
+            ->with('feature_packages', $selected_packages)
+            ->with('urgentNoticeCount', $urgentNoticeCount);
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Models\UrgentNotice;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
@@ -123,8 +124,13 @@ class UrgentNotice extends Model
 
     public static function getUrgentNoticeCount($storeNumber)
     {
-        return UrgentNoticeTarget::where('store_id', $storeNumber)
-                                ->where('is_read', 0)
+         $today = Carbon::today()->toDateString();
+ 
+        return UrgentNoticeTarget::join('urgent_notices', 'urgent_notices.id' , '=', 'urgent_notice_target.urgent_notice_id')
+                                ->where('urgent_notice_target.store_id', $storeNumber)
+                                ->where('urgent_notice_target.is_read', 0)
+                                ->where('urgent_notices.start' , '<=', $today)
+                                ->where('urgent_notices.end', '>=', $today)
                                 ->count();
     }
 }
