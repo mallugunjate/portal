@@ -14,6 +14,7 @@ use App\Models\Feature\FeatureDocument;
 use App\Models\Feature\FeaturePackage;
 use App\Models\Document\Document;
 use App\Models\Document\Package;
+use App\Models\UrgentNotice\UrgentNotice;
 
 class FeatureController extends Controller
 {
@@ -62,6 +63,8 @@ class FeatureController extends Controller
         $storeInfoJson = file_get_contents( $storeAPI . "/store/" . $storeNumber);
         $storeInfo = json_decode($storeInfoJson);
 
+        $urgentNoticeCount = UrgentNotice::getUrgentNoticeCount($storeNumber);
+
         $storeBanner = $storeInfo->banner_id;
 
         $skin = Skin::getSkin($storeBanner);
@@ -96,6 +99,7 @@ class FeatureController extends Controller
         
         return view('site.feature.index')
             ->with('skin', $skin)
+            ->with('urgentNoticeCount', $urgentNoticeCount)
 			->with('notifications', $notifications)
             ->with('feature', $feature)
             ->with('feature_documents', $selected_documents)
