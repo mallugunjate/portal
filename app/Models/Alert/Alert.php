@@ -30,18 +30,29 @@ class Alert extends Model
     	return $alerts;
     }
 
-    public static function getAlertCountByStore($store_id)
+    public static function getActiveAlertCountByStore($store_id)
     {
-        $alert_count = \DB::table('alerts_target')->where('store_id', $store_id)->count();
+        $today = Carbon::today()->toDateString();
+
+        $alert_count = Alert::join('alerts_target', 'alerts.id' , '=', 'alerts_target.alert_id')
+                            ->where('store_id', $store_id)
+                            ->where('alerts.alert_start' , '<=', $today)
+                            ->where('alerts.alert_end', '>=', $today)
+                            ->count();
+
         return $alert_count;
     }
 
-    public static function getAlertCountByCategory($storeNumber, $alertId)
+    public static function getActiveAlertCountByCategory($storeNumber, $alertId)
     {
+         $today = Carbon::today()->toDateString();
+
          $count = DB::table('alerts_target')
            ->where('store_id', $storeNumber)
            ->join('alerts', 'alerts.id', '=', 'alerts_target.alert_id')
            ->where('alerts.alert_type_id', $alertId)
+           ->where('alerts.alert_start' , '<=', $today)
+           ->where('alerts.alert_end', '>=', $today)
            ->count();
          return $count;
   
@@ -49,24 +60,34 @@ class Alert extends Model
 
     public static function getAlertsByStore($store_id)
     {
-        $alert_ids = \DB::table('alerts_target')->where('store_id', $store_id)->get();
+        $today = Carbon::today()->toDateString();
+        
+        $alert_ids = \DB::table('alerts_target')->where('store_id', $store_id)
+                                                ->get();
         
         $alerts = [];
         foreach ($alert_ids as $alert_id) {
             $alert = Alert::join('documents', 'alerts.document_id' , '=', 'documents.id')
                             ->where('alerts.id', $alert_id->alert_id)
+                            ->where('alerts.alert_start' , '<=', $today)
+                            ->where('alerts.alert_end', '>=', $today)
                             ->first();
-            array_push($alerts, $alert);
+            if($alert) {
+                array_push($alerts, $alert);    
+            }
+            
+        }
+        if (count($alerts) >0) {
+            foreach($alerts as $a){
+                $updated_at = new Carbon($a->updated_at);
+
+                $since = Carbon::now()->diffForHumans($updated_at, true);
+                $a->since = $since;
+                $a->prettyDate = $updated_at->toDayDateTimeString();
+                
+            }
         }
 
-        foreach($alerts as $a){
-            $updated_at = new Carbon($a->updated_at);
-
-            $since = Carbon::now()->diffForHumans($updated_at, true);
-            $a->since = $since;
-            $a->prettyDate = $updated_at->toDayDateTimeString();
-            
-         }
         return $alerts;
     }
 

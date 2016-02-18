@@ -40,7 +40,7 @@ class AlertController extends Controller
         $urgentNoticeCount = UrgentNotice::getUrgentNoticeCount($storeNumber);
 
         $alertTypes = AlertType::all();
-        $alertCount = Alert::getAlertCountByStore($storeNumber);
+        $alertCount = Alert::getActiveAlertCountByStore($storeNumber);
 
         $alerts = Alert::getAlertsByStore($storeNumber);
 
@@ -128,7 +128,7 @@ class AlertController extends Controller
 
         $i = 0;
         foreach($alertTypes as $at){
-            $alertTypes[$i]->count = Alert::getAlertCountByCategory($storeNumber, $at->id);
+            $alertTypes[$i]->count = Alert::getActiveAlertCountByCategory($storeNumber, $at->id);
             $i++;
         }        
 
