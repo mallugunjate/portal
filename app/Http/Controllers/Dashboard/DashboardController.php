@@ -24,6 +24,7 @@ use App\Models\Dashboard\DashboardBranding;
 use App\Models\Notification\Notification;
 use App\Models\UrgentNotice\UrgentNotice;
 use App\Skin;
+use App\Models\StoreInfo;
 
 class DashboardController extends Controller
 {
@@ -32,17 +33,15 @@ class DashboardController extends Controller
     {
     	$storeNumber = RequestFacade::segment(1);
 
-        $storeAPI = env('STORE_API_DOMAIN', false);
-        $storeInfoJson = file_get_contents( $storeAPI . "/store/" . $storeNumber);
-        $storeInfo = json_decode($storeInfoJson);
+        $storeInfo = StoreInfo::getStoreInfoByStoreId($storeNumber);
 
         $storeBanner = $storeInfo->banner_id;
 
-        $banner = Banner::find($storeInfo->banner_id);
+        $banner = Banner::find($storeBanner);
     
         $skin = Skin::getSkin($storeBanner);
         
-        $features = Feature::where('banner_id', $storeBanner)->orderBy('order')->get();
+        $features = Feature::getActiveFeatureByBannerId($storeBanner);
 
         $quicklinks = Quicklinks::getLinks($storeBanner, $storeNumber);
 
@@ -53,7 +52,7 @@ class DashboardController extends Controller
         $communicationCount = Communication::getCommunicationCount($storeNumber);
 
         $communications = Communication::getCommunicationsByStoreNumber($storeNumber, 3);
-            //dd($notifications);
+        
         return view('site.dashboard.index')
             ->with('banner', $banner)
             ->with('skin', $skin)

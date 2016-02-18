@@ -45,34 +45,38 @@
 
                 <div class="row">
                     <div class="col-lg-8">
+                        @if (count($features) > 0)
                         <div class="ibox float-e-margins">
+                            
                             <div class="ibox-title">
                                 <h2>Featured Content</h2>
                             </div>
                       
                             <div class="ibox-content clearfix">
 
-
-                            @foreach($features as $feature)
-                               
-                                    <div class="product-box">
-                                        <a href="/{{ Request::segment(1) }}/feature/show/{{ $feature->id }}">
-                                            <div class="image" style="background-image:url('/images/featured-covers/{{ $feature->thumbnail }}'); background-size: cover; background-position: 50%">
-                                                
-                                            </div>
-                                            <div class="product-desc">
-                                                <span class="product-price">
-                                                {{ $feature->title }}
-                                                </span>
-                                               
-                                            </div>
-                                        </a>
-                                    </div>
                             
-                            @endforeach
+                                @foreach($features as $feature)
+                                   
+                                        <div class="product-box">
+                                            <a href="/{{ Request::segment(1) }}/feature/show/{{ $feature->id }}">
+                                                <div class="image" style="background-image:url('/images/featured-covers/{{ $feature->thumbnail }}'); background-size: cover; background-position: 50%">
+                                                    
+                                                </div>
+                                                <div class="product-desc">
+                                                    <span class="product-price">
+                                                    {{ $feature->title }}
+                                                    </span>
+                                                   
+                                                </div>
+                                            </a>
+                                        </div>
+                                
+                                @endforeach
 
                             </div>
+                       
                         </div>
+                        @endif
 
                         <div class="row">
                             <div class="col-lg-6">
@@ -85,15 +89,16 @@
                                         <div class="table-responsive">
                                             <table class="table table-striped table-hover">
                                                 <tbody>
-
-                                                @foreach($quicklinks as $ql)
-                                                <tr>
-                                                    {{-- <a data-toggle="tab" href="#contact-1" class="client-link"><i class="fa fa-external-link"></i>  Visit The North Face Website</a> --}}
-                                                    <td>{!! $ql !!}</td>
-                                                    
-                                                </tr>
-      
-                                                @endforeach
+                                                @if (count($quicklinks)>0)
+                                                    @foreach($quicklinks as $ql)
+                                                    <tr>
+                                                        {{-- <a data-toggle="tab" href="#contact-1" class="client-link"><i class="fa fa-external-link"></i>  Visit The North Face Website</a> --}}
+                                                        <td>{!! $ql !!}</td>
+                                                        
+                                                    </tr>
+          
+                                                    @endforeach
+                                                @endif
                                                 </tbody>
                                             </table>
                                         </div>
@@ -131,41 +136,6 @@
                                                     </div>
                                             </div>
                                         @endif
-{{--                                             <div class="feed-element">
-                                                <div>
-                                                    <small class="pull-right">1m ago</small>
-                                                    <strong>Get Ready for Hockey Plus</strong>
-                                                    <div>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum</div>
-                                                    <small class="text-muted">Today 5:60 pm - 12.06.2014</small>
-                                                </div>
-                                            </div>
-
-                                            <div class="feed-element">
-                                                <div>
-                                                    <small class="pull-right">2m ago</small>
-                                                    <strong>Back to School Primer</strong>
-                                                    <div>There are many variations of passages of Lorem Ipsum available</div>
-                                                    <small class="text-muted">Today 2:23 pm - 11.06.2014</small>
-                                                </div>
-                                            </div>
-
-                                            <div class="feed-element">
-                                                <div>
-                                                    <small class="pull-right">5m ago</small>
-                                                    <strong>Information on New Accessories Fixtures</strong>
-                                                    <div>Contrary to popular belief, Lorem Ipsum</div>
-                                                    <small class="text-muted">Today 1:00 pm - 08.06.2014</small>
-                                                </div>
-                                            </div>
-
-                                            <div class="feed-element">
-                                                <div>
-                                                    <small class="pull-right">5m ago</small>
-                                                    <strong>Jumpstart Update for March 2016</strong>
-                                                    <div>The generated Lorem Ipsum is therefore </div>
-                                                    <small class="text-muted">Yesterday 8:48 pm - 10.06.2014</small>
-                                                </div>
-                                            </div> --}}
 
 
                                         </div>
@@ -192,48 +162,49 @@
 
                                         <div>
                                             <div class="feed-activity-list">
+                                                @if(count($notifications)>0)
 
+                                                    @foreach($notifications as $n)
 
-                                                @foreach($notifications as $n)
+                                                    <?php
+                                                        $icon ="";
+                                                        switch($n->original_extension){
+                                                            case "mp4":
+                                                                $icon ="fa-film";
+                                                                break;
+                                                            case "pdf":
+                                                                $icon  = "fa-file-pdf-o";
+                                                                break;
+                                                            case "xls":
+                                                            case "xlsx":
+                                                            case "xlsm":
+                                                                $icon = "fa-file-excel-o";
+                                                                break;
+                                                            case "jpg":
+                                                            case "png":
+                                                            case "bmp":
+                                                            case "gif":
+                                                            case "psd":
+                                                                $icon = "fa-file-image-o";
+                                                                break;
+                                                            default:
+                                                                $icon = "fa-file-o";
+                                                                break;
+                                                        }
+                                                    ?>
+                                                    <div class="feed-element">
+                                                        <span class="pull-left">
+                                                            <h1><i class="fa {{ $icon }}"></i></h1>
+                                                        </span>
+                                                        <div class="media-body ">
+                                                            <small class="pull-right">{{ $n->since }} ago</small>
+                                                            <strong><a href="{{ $n->filename }}">{{ $n->title }}</a></strong> was {{ $n->verb }} <strong><a href="{{ $n->global_folder_id }}">{{ $n->folder_name}}</a></strong>. <br>
+                                                            <small class="text-muted">{{ $n->prettyDate }}</small>
 
-                                                <?php
-                                                    $icon ="";
-                                                    switch($n->original_extension){
-                                                        case "mp4":
-                                                            $icon ="fa-film";
-                                                            break;
-                                                        case "pdf":
-                                                            $icon  = "fa-file-pdf-o";
-                                                            break;
-                                                        case "xls":
-                                                        case "xlsx":
-                                                        case "xlsm":
-                                                            $icon = "fa-file-excel-o";
-                                                            break;
-                                                        case "jpg":
-                                                        case "png":
-                                                        case "bmp":
-                                                        case "gif":
-                                                        case "psd":
-                                                            $icon = "fa-file-image-o";
-                                                            break;
-                                                        default:
-                                                            $icon = "fa-file-o";
-                                                            break;
-                                                    }
-                                                ?>
-                                                <div class="feed-element">
-                                                    <span class="pull-left">
-                                                        <h1><i class="fa {{ $icon }}"></i></h1>
-                                                    </span>
-                                                    <div class="media-body ">
-                                                        <small class="pull-right">{{ $n->since }} ago</small>
-                                                        <strong><a href="{{ $n->filename }}">{{ $n->title }}</a></strong> was {{ $n->verb }} <strong><a href="{{ $n->global_folder_id }}">{{ $n->folder_name}}</a></strong>. <br>
-                                                        <small class="text-muted">{{ $n->prettyDate }}</small>
-
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                @endforeach
+                                                    @endforeach
+                                                @endif
 
                                             </div>
 
