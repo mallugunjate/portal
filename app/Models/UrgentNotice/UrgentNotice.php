@@ -132,6 +132,13 @@ class UrgentNotice extends Model
                                 ->count();
     }
 
+    public static function getUrgentNotice($id)
+    {    
+         $notice = UrgentNotice::find($id);
+         UrgentNotice::prettify($notice);
+         return $notice;
+    }
+
 
     public static function getUrgentNoticesByStore($storeNumber)
     {
@@ -151,6 +158,24 @@ class UrgentNotice extends Model
          return $notices;        
 
     }
+
+      public static function prettify($notice)
+      {
+
+        
+        // get the human readable days since send
+        //$send_at = Carbon::createFromFormat('Y-m-d H:i:s', $notice->start);
+
+        $send_at = Carbon::createFromFormat('Y-m-d', $notice->start);
+
+        $since = Carbon::now()->diffForHumans($send_at, true);
+        $notice->since = $since;
+
+        //make the timestamp on the message a little nicer
+        $notice->prettyDate = $send_at->format('D j F');
+        
+        return $notice;
+      }     
 
 
 }

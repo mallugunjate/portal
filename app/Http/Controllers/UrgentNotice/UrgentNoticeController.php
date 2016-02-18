@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Skin;
 use App\Models\Banner;
 use App\Models\StoreInfo;
+use App\Models\Communication\Communication;
 use App\Models\UrgentNotice\UrgentNotice;
 
 
@@ -62,9 +63,25 @@ class UrgentNoticeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($sn, $id)
     {
-        //
+        $storeNumber = RequestFacade::segment(1);
+        $storeInfo = StoreInfo::getStoreInfoByStoreId($storeNumber);
+        $storeBanner = $storeInfo->banner_id;
+
+        $skin = Skin::getSkin($storeBanner);
+
+        $communicationCount = Communication::getCommunicationCount($storeNumber); 
+
+        $urgentNoticeCount = UrgentNotice::getUrgentNoticeCount($storeNumber);
+
+        $notice = UrgentNotice::getUrgentNotice($id);
+
+        return view('site.urgentnotices.notice')
+            ->with('skin', $skin)
+            ->with('notice', $notice)
+            ->with('communicationCount', $communicationCount)
+            ->with('urgentNoticeCount', $urgentNoticeCount);        
     }
 
     /**
