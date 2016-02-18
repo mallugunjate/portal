@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use App\Models\Communication\Communication;
 use DB;
-use Carbon\Carbon;
-
 
 class UrgentNotice extends Model
 {
