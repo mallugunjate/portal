@@ -40,6 +40,10 @@ Route::get('/{storeno}/alerts', array('uses' => 'Alert\AlertController@index'));
 // Route::get('/home', function () {	
 // 	return view('home');
 // });
+// 
+
+//URGENT NOTICES
+Route::get('/{storeno}/urgentnotice', array('uses' => 'UrgentNotice\UrgentNoticeController@index'));
 
 //Authentication Routes
 Route::get('/admin/login', 'Auth\AuthController@getLogin');
