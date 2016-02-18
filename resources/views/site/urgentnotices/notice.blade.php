@@ -48,9 +48,33 @@
 
 
                 @if($notice->attachment_type_id == 1) {{-- folders --}}
+                <div class="mail-attachment">
+                    <h3>
+                        <span><i class="fa fa-paperclip"></i> {{ count($attached_folders) }} attachments</span>
+                    </h3>
+                    @foreach($attached_folders as $folder)
 
+                            <div class="file-box">
+                                <div class="file">
+                                    <a href="/{{ Request::segment(1) }}/document#!/{{ $folder->global_folder_id }}">
 
+                                        <div class="icon">
+                                            <i class="fa fa-folder-open"></i>
+                                        </div>
 
+                                        <div class="file-name">
+                                            <div style="font-size: 16px; padding-bottom: 10px;"> {{ $folder->name }}</div>
+                                            
+                                            <small class="clearfix"><span class="text-muted pull-left">{{ $folder->prettyDate }}</span> <span class="text-muted pull-right">{{ $folder->since }} ago</span></small>
+                                        </div>
+                                    </a>
+                                </div>
+
+                            </div>                    
+                    
+                    @endforeach
+                    <div class="clearfix"></div>
+                </div>
                 @endif
 
                 @if($notice->attachment_type_id == 2) {{-- files --}}
@@ -142,9 +166,10 @@
 
 
                                         <div class="file-name">
-                                            {{ $doc->title }}
-                                            <br />
-                                            <small>{{ $doc->prettyDate }} &mdash; {{ $doc->since }} ago</small>
+                                            <div style="font-size: 16px; padding-bottom: 10px;"> {{ $doc->title }}</div>
+                                            
+                                            <small class="clearfix"><span class="text-muted pull-left">{{ $doc->prettyDate }}</span> <span class="text-muted pull-right">{{ $doc->since }} ago</span></small>
+
                                         </div>
                                     </a>
                                 </div>
