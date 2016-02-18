@@ -4,6 +4,10 @@ namespace App\Models\UrgentNotice;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use App\Models\Communication\Communication;
+use DB;
+use Carbon\Carbon;
+
 
 class UrgentNotice extends Model
 {
@@ -127,4 +131,51 @@ class UrgentNotice extends Model
                                 ->where('is_read', 0)
                                 ->count();
     }
+
+    public static function getUrgentNotice($id)
+    {    
+         $notice = UrgentNotice::find($id);
+         UrgentNotice::prettify($notice);
+         return $notice;
+    }
+
+
+    public static function getUrgentNoticesByStore($storeNumber)
+    {
+         $notices = DB::table('urgent_notice_target')->where('store_id', $storeNumber)
+                            ->join('urgent_notices', 'urgent_notices.id', '=', 'urgent_notice_target.urgent_notice_id')
+                            ->get();
+
+         foreach($notices as $n){
+            $updated_at = new Carbon($n->updated_at);
+
+            $since = Carbon::now()->diffForHumans($updated_at, true);
+            $n->since = $since;
+            $n->prettyDate = $updated_at->toDayDateTimeString();
+            $preview_string = strip_tags($n->description);
+            $n->trunc = Communication::truncateHtml($preview_string);
+         }
+         return $notices;        
+
+    }
+
+      public static function prettify($notice)
+      {
+
+        
+        // get the human readable days since send
+        //$send_at = Carbon::createFromFormat('Y-m-d H:i:s', $notice->start);
+
+        $send_at = Carbon::createFromFormat('Y-m-d', $notice->start);
+
+        $since = Carbon::now()->diffForHumans($send_at, true);
+        $notice->since = $since;
+
+        //make the timestamp on the message a little nicer
+        $notice->prettyDate = $send_at->format('D j F');
+        
+        return $notice;
+      }     
+
+
 }
