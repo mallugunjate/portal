@@ -4,6 +4,7 @@ namespace App\Http\Controllers\UrgentNotice;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Request as RequestFacade; 
+use Carbon\Carbon;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Skin;
@@ -82,7 +83,7 @@ class UrgentNoticeController extends Controller
         $notice = UrgentNotice::getUrgentNotice($id);
 
         $attachment_types = UrgentNoticeAttachmentType::all();
-        
+
         $urgent_notice_attachment_ids = UrgentNoticeAttachment::where('urgent_notice_id', $id)->get()->pluck('attachment_id');
 
         $attached_folders = [];
@@ -105,8 +106,17 @@ class UrgentNoticeController extends Controller
                 array_push($attached_documents, $document);
                 unset($document);
             }
-        }        
+        } 
 
+         foreach($attached_documents as $doc){
+            $updated_at = new Carbon($doc->updated_at);
+
+            $since = Carbon::now()->diffForHumans($updated_at, true);
+            $doc->since = $since;
+            //$doc->prettyDate = $updated_at->toDayDateTimeString();
+            $doc->prettyDate = $updated_at->format('D F j');
+         }
+         
         return view('site.urgentnotices.notice')
             ->with('skin', $skin)
             ->with('notice', $notice)
