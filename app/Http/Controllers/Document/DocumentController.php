@@ -21,6 +21,7 @@ use App\Models\Communication\CommunicationDocument;
 use App\Models\Communication\CommunicationPackage;
 use App\Models\Communication\CommunicationTarget;
 use App\Models\UrgentNotice\UrgentNotice;
+use App\Models\StoreInfo;
 
 class DocumentController extends Controller
 {
@@ -33,9 +34,7 @@ class DocumentController extends Controller
     {
         $storeNumber = RequestFacade::segment(1);
 
-        $storeAPI = env('STORE_API_DOMAIN', false);
-        $storeInfoJson = file_get_contents( $storeAPI . "/store/" . $storeNumber);
-        $storeInfo = json_decode($storeInfoJson);
+        $storeInfo = StoreInfo::getStoreInfoByStoreId($storeNumber);
 
         $storeBanner = $storeInfo->banner_id;
 
@@ -46,19 +45,11 @@ class DocumentController extends Controller
             ->whereNull('is_read')
             ->count();        
 
-        $banner_id = $request->get('banner_id');
-
-        if(isset($banner_id)) {
-            
-            $banner = Banner::where('id', $banner_id)->first();
-        }
-        else{
-            $banner = Banner::where('id', 1)->first();
-        }
+        
+        $banner = Banner::where('id', $storeBanner)->first();
+        
 
         $navigation = FolderStructure::getNavigationStructure($banner->id);
-
-        $packages = Package::getAllPackages($banner->id);
 
         $folders = Folder::all();
 
@@ -75,24 +66,9 @@ class DocumentController extends Controller
             ->with('navigation', $navigation)
             ->with('folders', $folders)
             ->with('banner', $banner)
-            ->with('packages', $packages)
             ->with('communicationCount', $communicationCount)
             ->with('defaultFolder' , $defaultFolder)
-            ->with('urgentNoticeCount', $urgentNoticeCount);
-
-
-        // $banner_id  = $request->get('banner_id');
-        // if (isset($banner_id)) {
-        //     $banner = Banner::where('id', $banner_id)->first();
-        // }
-        // else {
-        //     $banner = Banner::where('id', 1)->first();
-        // }  
-
-        // $navigation = FolderStructure::getNavigationStructure($banner->id);
-        // return view('site.documents.index')
-        //     ->with('navigation', $navigation)
-        //     ->with('banner', $banner);        
+            ->with('urgentNoticeCount', $urgentNoticeCount);  
 
     }
 

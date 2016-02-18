@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Models\Document\Document;
+use App\Models\Document\Folder;
 
 class FolderController extends Controller
 {
@@ -48,7 +50,13 @@ class FolderController extends Controller
      */
     public function show($id)
     {
-        //
+        $folder_id = $id;
+        $documents = Document::getDocuments($folder_id);
+        $folder = Folder::getFolderDescription($folder_id);
+        $response = [];
+        $response["files"] = $documents;
+        $response["folder"] = $folder;
+        return $response;
     }
 
     /**

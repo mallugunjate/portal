@@ -21,11 +21,7 @@ var getFolderDocuments = function(id){
 	var folder_id = id;
 	$.ajax(
 		{
-			url : '/admin/document',
-			data : {
-						folder : folder_id,
-						isWeekFolder : $(this).attr("data-isweek")
-				   }
+			url : '/folder/' + folder_id
 		}
 	)
 	.done(function(data){

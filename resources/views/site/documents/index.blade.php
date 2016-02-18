@@ -188,11 +188,7 @@
                         var folder = $("#"+defaultFolderId);
                         $("#"+defaultFolderId).parent().click();
                         $.ajax({
-                            url : '/admin/document',
-                            data : {
-                                folder : defaultFolderId,
-                                isWeekFolder : folder.attr("data-isweek")
-                            }
+                            url : '/folder/' + defaultFolderId
                         })
                         .done(function(data){
                             console.log(data);
