@@ -131,42 +131,6 @@
                                                     </div>
                                             </div>
                                         @endif
-{{--                                             <div class="feed-element">
-                                                <div>
-                                                    <small class="pull-right">1m ago</small>
-                                                    <strong>Get Ready for Hockey Plus</strong>
-                                                    <div>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum</div>
-                                                    <small class="text-muted">Today 5:60 pm - 12.06.2014</small>
-                                                </div>
-                                            </div>
-
-                                            <div class="feed-element">
-                                                <div>
-                                                    <small class="pull-right">2m ago</small>
-                                                    <strong>Back to School Primer</strong>
-                                                    <div>There are many variations of passages of Lorem Ipsum available</div>
-                                                    <small class="text-muted">Today 2:23 pm - 11.06.2014</small>
-                                                </div>
-                                            </div>
-
-                                            <div class="feed-element">
-                                                <div>
-                                                    <small class="pull-right">5m ago</small>
-                                                    <strong>Information on New Accessories Fixtures</strong>
-                                                    <div>Contrary to popular belief, Lorem Ipsum</div>
-                                                    <small class="text-muted">Today 1:00 pm - 08.06.2014</small>
-                                                </div>
-                                            </div>
-
-                                            <div class="feed-element">
-                                                <div>
-                                                    <small class="pull-right">5m ago</small>
-                                                    <strong>Jumpstart Update for March 2016</strong>
-                                                    <div>The generated Lorem Ipsum is therefore </div>
-                                                    <small class="text-muted">Yesterday 8:48 pm - 10.06.2014</small>
-                                                </div>
-                                            </div> --}}
-
 
                                         </div>
                                     </div>
@@ -199,27 +163,66 @@
                                                 <?php
                                                     $icon ="";
                                                     switch($n->original_extension){
-                                                        case "mp4":
-                                                            $icon ="fa-film";
+                                                        case "png":
+                                                        case "jpg":
+                                                        case "gif":
+                                                        case "bmp":
+                                                            $icon = "fa-file-image-o";              
+                                                            $link = '<a href="#">';
                                                             break;
+
                                                         case "pdf":
-                                                            $icon  = "fa-file-pdf-o";
+                                                            $icon = "fa-file-pdf-o";
+                                                            $link = '<a href="#" class="launchPDFViewer" data-toggle="modal" data-file="/viewer/?file=/files/'.$n->filename.'" data-target="#fileviewmodal">';
                                                             break;
+
                                                         case "xls":
                                                         case "xlsx":
-                                                        case "xlsm":
                                                             $icon = "fa-file-excel-o";
+                                                            $link = '<a href="#">';
                                                             break;
-                                                        case "jpg":
-                                                        case "png":
-                                                        case "bmp":
-                                                        case "gif":
-                                                        case "psd":
-                                                            $icon = "fa-file-image-o";
+
+                                                        case "mp4":
+                                                        case "avi":
+                                                        case "mov":
+                                                            $icon = "fa-film";
+                                                            $link = '<a href="#" class="launchVideoViewer" data-file="'.$n->filename.'" data-target="#videomodal">';              
                                                             break;
-                                                        default:
+
+                                                        case "doc":
+                                                        case "docx":
+                                                            $icon = "fa-file-word-o";
+                                                            $link = '<a href="#">';
+                                                            break;
+
+                                                        case "mp3":
+                                                        case "wav":
+                                                            $icon = "fa-file-audio-o";
+                                                            $link = '<a href="#">';
+                                                            break;
+
+                                                        case "ppt":
+                                                        case "pptx":
+                                                            $icon = "fa-file-powerpoint-o";
+                                                            $link = '<a href="#">';
+                                                            break;
+
+                                                        case "zip":
+                                                            $icon = "fa-file-archive-o";
+                                                            $link = '<a href="#">';
+                                                            break;
+
+                                                        case "html":
+                                                        case "css":
+                                                        case "js":
+                                                            $icon = "fa-file-code-o";
+                                                            $link = '<a href="#">';
+                                                            break;
+                                                            
+                                                        default: 
                                                             $icon = "fa-file-o";
-                                                            break;
+                                                            $link = '<a href="#">';
+                                                            break;               
                                                     }
                                                 ?>
                                                 <div class="feed-element">
@@ -228,7 +231,7 @@
                                                     </span>
                                                     <div class="media-body ">
                                                         <small class="pull-right">{{ $n->since }} ago</small>
-                                                        <strong><a href="{{ $n->filename }}">{{ $n->title }}</a></strong> was {{ $n->verb }} <strong><a href="{{ $n->global_folder_id }}">{{ $n->folder_name}}</a></strong>. <br>
+                                                        <strong>{!! $link !!}{{ $n->title }}</a></strong> was {{ $n->verb }} <strong><a href="/{{ Request::segment(1) }}/document#!/{{ $n->global_folder_id }}">{{ $n->folder_name}}</a></strong>. <br>
                                                         <small class="text-muted">{{ $n->prettyDate }}</small>
 
                                                     </div>
@@ -266,6 +269,9 @@
     @include('site.includes.footer')       
     @include('site.includes.scripts')
     @include('site.includes.bugreport')
+    @include('site.includes.modal')
+
 
 </body>
 </html> 
+

@@ -4,13 +4,7 @@
 <head>
     @section('title', 'Urgent Notice')
     @include('site.includes.head')
-    <meta name="csrf-token" content="{!! csrf_token() !!}"/>
-    <style>
-    .modal-lg{ height: 95%; width: 80% !important; padding: 0; }
-    .modal-content{ height: 100% !important;}
-    .modal-body{ padding: 0; margin: 0; height: 100% !important; }
-
-    </style>    
+    <meta name="csrf-token" content="{!! csrf_token() !!}"/> 
 </head>	
 
 <body class="fixed-navigation">
