@@ -19,11 +19,7 @@ var showPackageFolders = function(packageId) {
 var getFolderDocuments = function(global_folder_id, packageId) {
 	$.ajax(
 		{
-			url : '/admin/document',
-			data : {
-						folder : global_folder_id,
-						isWeekFolder : $(this).attr("data-isweek")
-				   }
+			url : '/folder/' + global_folder_id
 		}
 	)
 	.done(function(data){

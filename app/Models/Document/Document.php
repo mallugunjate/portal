@@ -20,7 +20,7 @@ class Document extends Model
     protected $table = 'documents';
     protected $fillable = array('upload_package_id', 'original_filename','original_extension', 'filename', 'title', 'description', 'start', 'end', 'banner_id');
 
-    public static function getDocuments($global_folder_id, $forApi=null)
+    public static function getDocuments($global_folder_id, $forStore=null)
     {
         if (isset($global_folder_id)) {
             
@@ -28,11 +28,12 @@ class Document extends Model
             $folder_type = $global_folder_details->folder_type;
             $folder_id = $global_folder_details->folder_id;
             
-            if ($forApi) {
+            if ($forStore) {
                 $files = \DB::table('file_folder')
                             ->join('documents', 'file_folder.document_id', '=', 'documents.id')
                             ->where('file_folder.folder_id', '=', $global_folder_id)
-                            ->where('documents.start', '<=', Carbon::now() )
+                            ->where('documents.start', '<=', Carbon::today()->toDateString() )
+                            ->where('documents.end', '>=', Carbon::today()->toDateString() )
                             ->select('documents.*')
                             ->get();  
             }

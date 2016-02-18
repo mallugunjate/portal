@@ -23,12 +23,10 @@ class ApiController extends Controller
     public function getDocumentsInFolder($id, Request $request)
     {
         $folder_id = $id;
-        
-        $isWeek = $request->get('isWeeek');
 
         $forApi = true;
 
-        return Document::getDocuments($folder_id, $isWeek, $forApi);
+        return Document::getDocuments($folder_id $forApi);
 
     }
 
