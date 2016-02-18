@@ -62,6 +62,8 @@ class FeatureController extends Controller
 
         $storeInfo = StoreInfo::getStoreInfoByStoreId($storeNumber);
 
+        $urgentNoticeCount = UrgentNotice::getUrgentNoticeCount($storeNumber);
+
         $storeBanner = $storeInfo->banner_id;
 
         $skin = Skin::getSkin($storeBanner);
@@ -94,6 +96,7 @@ class FeatureController extends Controller
         $urgentNoticeCount = UrgentNotice::getUrgentNoticeCount($storeNumber);
         return view('site.feature.index')
             ->with('skin', $skin)
+            ->with('urgentNoticeCount', $urgentNoticeCount)
 			->with('notifications', $notifications)
             ->with('feature', $feature)
             ->with('feature_documents', $selected_documents)

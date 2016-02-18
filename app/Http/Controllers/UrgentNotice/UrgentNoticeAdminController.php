@@ -71,6 +71,7 @@ class UrgentNoticeAdminController extends Controller
 
         $storeList = StoreInfo::getStoreListing($banner->id);
         
+        // dd($fileFolderStructure);
         
         return view('admin.urgent-notice.create')
                     ->with('banner', $banner)
