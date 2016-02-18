@@ -11,7 +11,11 @@ use App\Models\Banner;
 use App\Models\StoreInfo;
 use App\Models\Communication\Communication;
 use App\Models\UrgentNotice\UrgentNotice;
-
+use App\Models\UrgentNotice\UrgentNoticeAttachmentType;
+use App\Models\UrgentNotice\UrgentNoticeAttachment;
+use App\Models\UrgentNotice\UrgentNoticeTarget;
+use App\Models\Document\Document;
+use App\Models\Document\Folder;
 
 class UrgentNoticeController extends Controller
 {
@@ -77,11 +81,40 @@ class UrgentNoticeController extends Controller
 
         $notice = UrgentNotice::getUrgentNotice($id);
 
+        $attachment_types = UrgentNoticeAttachmentType::all();
+        
+        $urgent_notice_attachment_ids = UrgentNoticeAttachment::where('urgent_notice_id', $id)->get()->pluck('attachment_id');
+
+        $attached_folders = [];
+        $attached_documents = [];
+
+        if ($notice->attachment_type_id == 1) { //folder
+            
+            foreach ($urgent_notice_attachment_ids as $key=>$global_folder_id) {
+                $folder_id = \DB::table('folder_ids')->where('id', $global_folder_id)->first()->folder_id;
+                $folder = Folder::find($folder_id);
+                array_push($attached_folders, $folder);
+                unset($folder);
+            }
+        }
+        else if ($notice->attachment_type_id == 2 ) { //document
+            
+            foreach ($urgent_notice_attachment_ids as $document_id) {
+                
+                $document = Document::find($document_id);
+                array_push($attached_documents, $document);
+                unset($document);
+            }
+        }        
+
         return view('site.urgentnotices.notice')
             ->with('skin', $skin)
             ->with('notice', $notice)
             ->with('communicationCount', $communicationCount)
-            ->with('urgentNoticeCount', $urgentNoticeCount);        
+            ->with('urgentNoticeCount', $urgentNoticeCount)
+            ->with('attached_folders', $attached_folders)
+            ->with('attached_documents', $attached_documents)
+            ->with('attachment_types', $attachment_types);
     }
 
     /**

@@ -37,7 +37,7 @@
                     {{ $notice->title }}
                      <span class="pull-right font-normal" style="font-size: 16px;">{{ $notice->prettyDate }} <small style="font-weight: normal;padding-left: 10px;">({{ $notice->since }} ago)</small></span>
                 </h2>
-
+                <a href="../"><i class="fa fa-chevron-left"></i> Back</a>
             </div>
                 <div class="mail-box">
 
@@ -45,13 +45,11 @@
                 <div class="mail-body">
                     {!! $notice->description !!}
                 </div>
-{{--                     <div class="mail-attachment">
-                        <p>
-                            <span><i class="fa fa-paperclip"></i> 2 attachments - </span>
-                            <a href="#">Download all</a>
-                            |
-                            <a href="#">View all images</a>
-                        </p>
+
+                   <div class="mail-attachment">
+                        <h3>
+                            <span><i class="fa fa-paperclip"></i> 2 attachments</span>
+                        </h3>
 
                         <div class="attachment">
                             <div class="file-box">
@@ -107,6 +105,8 @@
                             <div class="clearfix"></div>
                         </div>
                         </div>
+
+{{--                          
                         <div class="mail-body text-right tooltip-demo">
                                 <a class="btn btn-sm btn-white" href="mail_compose.html"><i class="fa fa-reply"></i> Reply</a>
                                 <a class="btn btn-sm btn-white" href="mail_compose.html"><i class="fa fa-arrow-right"></i> Forward</a>
