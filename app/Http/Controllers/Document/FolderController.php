@@ -51,7 +51,7 @@ class FolderController extends Controller
     public function show($id)
     {
         $folder_id = $id;
-        $documents = Document::getDocuments($folder_id);
+        $documents = Document::getDocuments($folder_id, true);
         $folder = Folder::getFolderDescription($folder_id);
         $response = [];
         $response["files"] = $documents;

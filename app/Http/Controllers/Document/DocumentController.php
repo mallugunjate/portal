@@ -47,7 +47,6 @@ class DocumentController extends Controller
 
         
         $banner = Banner::where('id', $storeBanner)->first();
-        
 
         $navigation = FolderStructure::getNavigationStructure($banner->id);
 
