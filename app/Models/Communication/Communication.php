@@ -229,21 +229,30 @@ class Communication extends Model
 
       public static function getCommunicationCount($storeNumber)
       {
+         $today = $today = Carbon::today()->toDateString();
+
          $communicationCount = DB::table('communications_target')
-           ->where('store_id', $storeNumber)
-           ->whereNull('is_read')
-           ->count();
+            ->join('communications', 'communications_target.communication_id', '=', 'communications.id')
+            ->where('store_id', $storeNumber)
+            ->where('communications.send_at' , '<=', $today)
+            ->where('communications.archive_at', '>=', $today)
+            ->whereNull('is_read')
+            ->count();
 
          return $communicationCount;
       }
 
       public static function getCommunicationCountByCategory($storeNumber, $categoryId)
       {
+         $today = $today = Carbon::today()->toDateString();
+
          $count = DB::table('communications_target')
-           ->where('store_id', $storeNumber)
-           ->join('communications', 'communications.id', '=', 'communications_target.communication_id')
-           ->where('communications.communication_type_id', $categoryId)
-           ->count();
+            ->where('store_id', $storeNumber)
+            ->join('communications', 'communications.id', '=', 'communications_target.communication_id')
+            ->where('communications.communication_type_id', $categoryId)
+            ->where('communications.send_at' , '<=', $today)
+            ->where('communications.archive_at', '>=', $today)
+            ->count();
          return $count;
       } 
 

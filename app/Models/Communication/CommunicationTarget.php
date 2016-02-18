@@ -15,15 +15,15 @@ class CommunicationTarget extends Model
 
 	public static function getTargetedCommunications($storeNumber)
 	{
-		// $communications = DB::table('communications_target')
-  //               ->join('communications', 'communications_target.communication_id', '=', 'communications.id')
-  //               ->where('communications_target.store_id', '=', $storeNumber)
-  //               ->get();
+        $today = Carbon::today()->toDateString();
 
         $communications = CommunicationTarget::where('communications_target.store_id', '=', $storeNumber)
         				->join('communications', 'communications_target.communication_id', '=', 'communications.id')
+                ->where('communications.send_at' , '<=', $today)
+                ->where('communications.archive_at', '>=', $today)
         				->orderBy('communications.send_at', 'desc')
         				->get();
+
 
         CommunicationTarget::prettifyCommunications($communications);
         return $communications;
