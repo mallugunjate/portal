@@ -35,9 +35,18 @@ class Document extends Model
                             ->join('documents', 'file_folder.document_id', '=', 'documents.id')
                             ->where('file_folder.folder_id', '=', $global_folder_id)
                             ->where('documents.start', '<=', Carbon::today()->toDateString() )
-                            ->where('documents.end', '>=', Carbon::today()->toDateString() )
                             ->select('documents.*')
-                            ->get();  
+                            ->get();
+                $counter = 0;
+                foreach ($files as $file) {
+                    
+                    if (!( $file->end >= Carbon::today()->toDateString() || $file->end == '0000-00-00 00:00:00' ) ) {
+
+                        unset($files[$counter]);
+                    }
+                    $counter++;
+                }  
+                $files = array_values($files);
             }
             else{
                 $files = \DB::table('file_folder')
@@ -52,7 +61,7 @@ class Document extends Model
                 return $files;
             }
             else{
-                return null;
+                return [];
             }
 
         }
