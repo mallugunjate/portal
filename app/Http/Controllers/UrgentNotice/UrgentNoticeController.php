@@ -94,6 +94,13 @@ class UrgentNoticeController extends Controller
             foreach ($urgent_notice_attachment_ids as $key=>$global_folder_id) {
                 $folder_id = \DB::table('folder_ids')->where('id', $global_folder_id)->first()->folder_id;
                 $folder = Folder::find($folder_id);
+                $folder->global_folder_id = $global_folder_id;
+
+                $updated_at = new Carbon($folder->updated_at);
+                $since = Carbon::now()->diffForHumans($updated_at, true);
+                $folder->since = $since;
+                $folder->prettyDate = $updated_at->format('D F j');
+
                 array_push($attached_folders, $folder);
                 unset($folder);
             }

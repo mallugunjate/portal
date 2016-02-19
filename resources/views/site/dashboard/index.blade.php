@@ -162,46 +162,88 @@
 
                                         <div>
                                             <div class="feed-activity-list">
+
                                                 @if(count($notifications)>0)
 
-                                                    @foreach($notifications as $n)
 
-                                                    <?php
-                                                        $icon ="";
-                                                        switch($n->original_extension){
-                                                            case "mp4":
-                                                                $icon ="fa-film";
-                                                                break;
-                                                            case "pdf":
-                                                                $icon  = "fa-file-pdf-o";
-                                                                break;
-                                                            case "xls":
-                                                            case "xlsx":
-                                                            case "xlsm":
-                                                                $icon = "fa-file-excel-o";
-                                                                break;
-                                                            case "jpg":
-                                                            case "png":
-                                                            case "bmp":
-                                                            case "gif":
-                                                            case "psd":
-                                                                $icon = "fa-file-image-o";
-                                                                break;
-                                                            default:
-                                                                $icon = "fa-file-o";
-                                                                break;
-                                                        }
-                                                    ?>
-                                                    <div class="feed-element">
-                                                        <span class="pull-left">
-                                                            <h1><i class="fa {{ $icon }}"></i></h1>
-                                                        </span>
-                                                        <div class="media-body ">
-                                                            <small class="pull-right">{{ $n->since }} ago</small>
-                                                            <strong><a href="{{ $n->filename }}">{{ $n->title }}</a></strong> was {{ $n->verb }} <strong><a href="{{ $n->global_folder_id }}">{{ $n->folder_name}}</a></strong>. <br>
-                                                            <small class="text-muted">{{ $n->prettyDate }}</small>
 
-                                                        </div>
+
+                                                @foreach($notifications as $n)
+
+                                                <?php
+                                                    $icon ="";
+                                                    switch($n->original_extension){
+                                                        case "png":
+                                                        case "jpg":
+                                                        case "gif":
+                                                        case "bmp":
+                                                            $icon = "fa-file-image-o";              
+                                                            $link = '<a href="#">';
+                                                            break;
+
+                                                        case "pdf":
+                                                            $icon = "fa-file-pdf-o";
+                                                            $link = '<a href="#" class="launchPDFViewer" data-toggle="modal" data-file="/viewer/?file=/files/'.$n->filename.'" data-target="#fileviewmodal">';
+                                                            break;
+
+                                                        case "xls":
+                                                        case "xlsx":
+                                                            $icon = "fa-file-excel-o";
+                                                            $link = '<a href="#">';
+                                                            break;
+
+                                                        case "mp4":
+                                                        case "avi":
+                                                        case "mov":
+                                                            $icon = "fa-film";
+                                                            $link = '<a href="#" class="launchVideoViewer" data-file="'.$n->filename.'" data-target="#videomodal">';              
+                                                            break;
+
+                                                        case "doc":
+                                                        case "docx":
+                                                            $icon = "fa-file-word-o";
+                                                            $link = '<a href="#">';
+                                                            break;
+
+                                                        case "mp3":
+                                                        case "wav":
+                                                            $icon = "fa-file-audio-o";
+                                                            $link = '<a href="#">';
+                                                            break;
+
+                                                        case "ppt":
+                                                        case "pptx":
+                                                            $icon = "fa-file-powerpoint-o";
+                                                            $link = '<a href="#">';
+                                                            break;
+
+                                                        case "zip":
+                                                            $icon = "fa-file-archive-o";
+                                                            $link = '<a href="#">';
+                                                            break;
+
+                                                        case "html":
+                                                        case "css":
+                                                        case "js":
+                                                            $icon = "fa-file-code-o";
+                                                            $link = '<a href="#">';
+                                                            break;
+                                                            
+                                                        default: 
+                                                            $icon = "fa-file-o";
+                                                            $link = '<a href="#">';
+                                                            break;               
+                                                    }
+                                                ?>
+                                                <div class="feed-element">
+                                                    <span class="pull-left">
+                                                        <h1><i class="fa {{ $icon }}"></i></h1>
+                                                    </span>
+                                                    <div class="media-body ">
+                                                        <small class="pull-right">{{ $n->since }} ago</small>
+                                                        <strong>{!! $link !!}{{ $n->title }}</a></strong> was {{ $n->verb }} <strong><a href="/{{ Request::segment(1) }}/document#!/{{ $n->global_folder_id }}">{{ $n->folder_name}}</a></strong>. <br>
+                                                        <small class="text-muted">{{ $n->prettyDate }}</small>
+
                                                     </div>
                                                     @endforeach
                                                 @endif
@@ -237,6 +279,9 @@
     @include('site.includes.footer')       
     @include('site.includes.scripts')
     @include('site.includes.bugreport')
+    @include('site.includes.modal')
+
 
 </body>
 </html> 
+
