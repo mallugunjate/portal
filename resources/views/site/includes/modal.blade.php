@@ -32,31 +32,17 @@
     </div>    
 
 
-     <div class="modal inmodal" id="fullCalModal" tabindex="-1" role="video" aria-hidden="true" style="display: none;" >
+     <div class="modal inmodal" id="fullCalModal" tabindex="-1" role="event" aria-hidden="true" style="display: none;" >
 
-        <i class="fa fa-times-circle-o pull-right" data-dismiss="modal" style="font-size: 40px !important; color: #fff; cursor: pointer; padding: 20px;"></i>
-
-<!--         <div class="modal-dialog" role="event">
-        <div class="modal-content">
-                <div class="modal-header">
-                    <h4 id="modalTitle" class="modal-title"></h4>
-                </div>
-                <div class="modal-body">
-
-        
-                </div>
-
-            </div>
-        </div> -->
         <div class="modal-dialog">
             <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header clearfix">
                         
                         <h4 id="modalTitle" class="modal-title"></h4>
                     </div>
-                    <div id="modalBody" class="modal-body"></div>
+                    <div id="modalBody" class="modal-body event-modal-body"></div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary btn-sm btn-outline" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
                     </div>
             </div>
         </div>

@@ -1,4 +1,10 @@
 .event-span{
-	float:right;
+	
 	padding-bottom: 10px;
+	font-size: 12px;
+	font-weight: normal;
+}
+
+.event-modal-body{
+	padding: 15px;
 }

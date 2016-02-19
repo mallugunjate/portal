@@ -76,8 +76,8 @@
             eventLimit: true, // allow "more" link when too many events
             eventClick:  function(event, jsEvent, view) {
                 console.log(event.start);
-                $('#modalTitle').html("<span class='event-title'>" + event.title +"</span>");
-                $('#modalTitle').append("<span class='event-span'>" + event.prettyStart+ " to " + event.prettyEnd + "</span>");
+                $('#modalTitle').html("<span class='event-title pull-left'>" + event.title +"</span>");
+                $('#modalTitle').append("<span class='event-span pull-right'>" + event.prettyStart+ " to " + event.prettyEnd + "</span>");
                 $('#modalBody').html(event.description);
                 $('#fullCalModal').modal();
             },
