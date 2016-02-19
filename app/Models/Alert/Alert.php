@@ -107,6 +107,7 @@ class Alert extends Model
     public static function markDocumentAsAlert($request, $id)
     {
         if (Alert::where('document_id', $id)->first()) {
+            
             $alert = Alert::where('document_id', $id)->first();
 
             $alert['alert_type_id'] = $request['alert_type_id'];
@@ -115,13 +116,18 @@ class Alert extends Model
 
             $alert->save();
 
-            \DB::table('alerts_target')->where('alert_id', $alert->id)->delete();
-            $target_stores = $request['target_stores'];
-            foreach ($target_stores as $store) {
-                \DB::table('alerts_target')->insert([
-                    'alert_id' => $alert->id,
-                    'store_id' => $store
-                    ]);    
+            
+            if ($request['target_stores'] != '') {
+                
+                \DB::table('alerts_target')->where('alert_id', $alert->id)->delete();
+                $target_stores = $request['target_stores'];
+                
+                foreach ($target_stores as $store) {
+                    \DB::table('alerts_target')->insert([
+                        'alert_id' => $alert->id,
+                        'store_id' => $store
+                        ]);    
+                }
             }
 
         }
@@ -136,6 +142,7 @@ class Alert extends Model
             ]);
 
             $target_stores = $request['target_stores'];
+
             foreach ($target_stores as $store) {
                 \DB::table('alerts_target')->insert([
                     'alert_id' => $alert->id,

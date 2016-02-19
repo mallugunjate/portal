@@ -144,13 +144,18 @@ class UrgentNotice extends Model
     }
 
 
-    public static function getUrgentNoticesByStore($storeNumber)
+    public static function getActiveUrgentNoticesByStore($storeNumber)
     {
-         $notices = DB::table('urgent_notice_target')->where('store_id', $storeNumber)
+        
+        $today = Carbon::today()->toDateString();
+
+        $notices = DB::table('urgent_notice_target')->where('store_id', $storeNumber)
                             ->join('urgent_notices', 'urgent_notices.id', '=', 'urgent_notice_target.urgent_notice_id')
+                            ->where('urgent_notices.start' , '<=', $today)
+                            ->where('urgent_notices.end', '>=', $today)
                             ->get();
 
-         foreach($notices as $n){
+        foreach($notices as $n){
             $updated_at = new Carbon($n->updated_at);
 
             $since = Carbon::now()->diffForHumans($updated_at, true);
@@ -158,8 +163,8 @@ class UrgentNotice extends Model
             $n->prettyDate = $updated_at->toDayDateTimeString();
             $preview_string = strip_tags($n->description);
             $n->trunc = Communication::truncateHtml($preview_string);
-         }
-         return $notices;        
+        }
+        return $notices;        
 
     }
 

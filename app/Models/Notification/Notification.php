@@ -22,17 +22,42 @@ class Notification extends Model
     			$notifications = Document::where('banner_id', $bannerId)
     							->where('updated_at', '>=', $dateSince)
                                 ->where('start', '<=', $today)
-                                ->where('end', '>=', $today)
+                                // ->where('end', '>=', $today)
     							->orderBy('updated_at', 'desc')
     							->get();
+                $counter = 0;
+                foreach ($notifications as $notification) {
+                    
+                    if (!( $notification->end >= Carbon::today()->toDateString() || $notification->end == '0000-00-00 00:00:00' ) ) {
+
+                        $notifications->forget($counter);
+                    }
+                    $counter++;
+                }  
+                // $notifications = array_values($notifications);
+
+
     			break;
     		case 2:  //by number of documents
     			$notifications = Document::where('banner_id', $bannerId)
     							->orderBy('updated_at', 'desc')
                                 ->where('start', '<=', $today)
-                                ->where('end', '>=', $today)
-    							->take($windowSize)
+                                // ->where('end', '>=', $today)
+    							// ->take($windowSize)
     							->get();
+
+                $counter = 0;
+                foreach ($notifications as $notification) {
+                    
+                    if (!( $notification->end >= Carbon::today()->toDateString() || $notification->end == '0000-00-00 00:00:00' ) ) {
+
+                        $notifications->forget($counter);
+                    }
+                    $counter++;
+                }
+                // return $notifications;   
+                $waste_chunk = $notifications->splice($windowSize);
+                
     			break;
 
     		default:
@@ -55,8 +80,8 @@ class Notification extends Model
                 $dateSince = Carbon::now()->subDays($windowSize)->toDateTimeString();
                 $notifications = Document::whereIn('id', $documentIdArray)
                                             ->orderBy('updated_at', 'desc')
-                                            ->where('start', '<=', $today)
-                                            ->where('end', '>=', $today)
+                                            // ->where('start', '<=', $today)
+                                            // ->where('end', '>=', $today)
                                             ->get();
 
                 $i=0;
@@ -71,8 +96,8 @@ class Notification extends Model
             case 2:  //by number of documents
                 $notifications = Document::whereIn('id', $documentIdArray)
                                         ->orderBy('updated_at', 'desc')
-                                        ->where('start', '<=', $today)
-                                        ->where('end', '>=', $today)
+                                        // ->where('start', '<=', $today)
+                                        // ->where('end', '>=', $today)
                                         ->take($windowSize)
                                         ->get();
                 break;
