@@ -1,23 +1,10 @@
 
             <ul class="nav metismenu" id="side-menu">
                 <li class="nav-header">
-{{--                     <div class="dropdown profile-element"> <span>
-                            <img alt="image" class="img-circle" src="/wireframes/img/profile_small.jpg" />
-                             </span>
-                        <a data-toggle="dropdown" class="" href="#">
-                            <span class="clear"> 
-                                <span class="block m-t-xs"> <strong class="font-bold">Brent Garner</strong>
-                             </span> 
-                             <span class="text-muted text-xs block">Sr. Web Developer</span><br />
-                             <a href="profile"><span class="text-muted text-xs"> <i class="fa fa-user"></i> My Profile</span></a>   |   
-                             <a href="/wireframe/login"><span class="text-muted text-xs"> <i class="fa fa-sign-out"></i> Log out</span></a>
-                    </div> --}}
-
                     <div class="logo-element">
                         P
                     </div>
                 </li>
-
 
                 @if($urgentNoticeCount > 0)
                 <li class="urgetnNoticeNav">
@@ -29,7 +16,7 @@
                 </li>
                 @endif
 
-                @if (Request::is( Request::segment(1) ))
+                @if (  Request::is( Request::segment(1) ) )
                 <li class="active">
                 @else
                 <li>
@@ -38,7 +25,6 @@
                 </li>
 
 
-                <!-- CALENDAR NAV -->
                 @if (Request::segment(2) == 'calendar')
                 <li class="active">
                 @else
@@ -46,7 +32,6 @@
                 @endif                
                     <a href="/{{ Request::segment(1) }}/calendar"><i class="fa fa-calendar"></i> <span class="nav-label">Calendar</span></a>
                 </li>                
-
 
 
                 @if (Request::segment(2) == 'communication')
@@ -77,6 +62,5 @@
                 @endif 
                     <a href="/{{ Request::segment(1) }}/document"><i class="fa fa-file"></i> <span class="nav-label">Documents</span></a>
                 </li>                
-
 
             </ul>

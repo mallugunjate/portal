@@ -42,7 +42,7 @@ class CommunicationController extends Controller
 
         $targetedCommunications = CommunicationTarget::getTargetedCommunications($storeNumber);
 
-        $communicationCount = Communication::getCommunicationCount($storeNumber); 
+        $communicationCount = Communication::getActiveCommunicationCount($storeNumber); 
         $communicationTypes = CommunicationType::all();
 
         $urgentNoticeCount = UrgentNotice::getUrgentNoticeCount($storeNumber);
@@ -59,7 +59,7 @@ class CommunicationController extends Controller
 
         $i = 0;
         foreach($communicationTypes as $ct){
-            $communicationTypes[$i]->count = Communication::getCommunicationCountByCategory($storeNumber, $ct->id);
+            $communicationTypes[$i]->count = Communication::getActiveCommunicationCountByCategory($storeNumber, $ct->id);
             $i++;
         }
 
@@ -108,14 +108,14 @@ class CommunicationController extends Controller
 
         $skin = Skin::getSkin($storeBanner);
 
-        $communicationCount = Communication::getCommunicationCount($storeNumber); 
+        $communicationCount = Communication::getActiveCommunicationCount($storeNumber); 
         $communicationTypes = CommunicationType::all();
 
         $urgentNoticeCount = UrgentNotice::getUrgentNoticeCount($storeNumber);
 
         $i = 0;
         foreach($communicationTypes as $ct){
-            $communicationTypes[$i]->count = Communication::getCommunicationCountByCategory($storeNumber, $ct->id);
+            $communicationTypes[$i]->count = Communication::getActiveCommunicationCountByCategory($storeNumber, $ct->id);
             $i++;
         }        
 

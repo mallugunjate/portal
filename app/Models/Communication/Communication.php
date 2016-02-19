@@ -23,14 +23,16 @@ class Communication extends Model
          return $communicatons = Communication::where('banner_id', $banner_id)->get();
       }
 
-      public static function getCommunicationsByStoreNumber($storeNumber, $maxToFetch)
+      public static function getActiveCommunicationsByStoreNumber($storeNumber, $maxToFetch)
       {
         
          $comm = DB::table('communications_target')->where('store_id', $storeNumber)
                             ->join('communications', 'communications.id', '=', 'communications_target.communication_id')
+                            ->where('communications.send_at', '<=', Carbon::today()->toDateString() )
+                            ->where('communications.archive_at', '>=', Carbon::today()->toDateString() )
                             ->take($maxToFetch)
+                            ->orderBy('communications.updated_at', 'desc')
                             ->get();
-
          foreach($comm as $c){
             $updated_at = new Carbon($c->updated_at);
 
@@ -227,7 +229,7 @@ class Communication extends Model
          return;
       }
 
-      public static function getCommunicationCount($storeNumber)
+      public static function getActiveCommunicationCount($storeNumber)
       {
          $today = Carbon::today()->toDateString();
 
@@ -242,7 +244,7 @@ class Communication extends Model
          return $communicationCount;
       }
 
-      public static function getCommunicationCountByCategory($storeNumber, $categoryId)
+      public static function getActiveCommunicationCountByCategory($storeNumber, $categoryId)
       {
          $today = $today = Carbon::today()->toDateString();
 
