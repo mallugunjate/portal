@@ -92,9 +92,7 @@
                                                 @if (count($quicklinks)>0)
                                                     @foreach($quicklinks as $ql)
                                                     <tr>
-                                                        {{-- <a data-toggle="tab" href="#contact-1" class="client-link"><i class="fa fa-external-link"></i>  Visit The North Face Website</a> --}}
                                                         <td>{!! $ql !!}</td>
-                                                        
                                                     </tr>
           
                                                     @endforeach
@@ -163,7 +161,7 @@
                                         <div>
                                             <div class="feed-activity-list">
 
-                                                @if(count($notifications)>0)
+                                            @if(count($notifications)>0)
 
 
 
@@ -268,10 +266,6 @@
 
                 <br class="clearfix" />
             </div>
-
-
-
-
 
         </div>
     </div>
