@@ -1,7 +1,7 @@
 .package-document-listing {
 	border-bottom:thin solid #e9e9e9;
 }
-.feature_package {
+.feature_package, .package-folder-document, .package-document-listing , .feature_documents {
 	cursor: pointer;
 }
 ul{

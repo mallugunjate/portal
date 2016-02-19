@@ -45,34 +45,38 @@
 
                 <div class="row">
                     <div class="col-lg-8">
+                        @if (count($features) > 0)
                         <div class="ibox float-e-margins">
+                            
                             <div class="ibox-title">
                                 <h2>Featured Content</h2>
                             </div>
                       
                             <div class="ibox-content clearfix">
 
-
-                            @foreach($features as $feature)
-                               
-                                    <div class="product-box">
-                                        <a href="/{{ Request::segment(1) }}/feature/show/{{ $feature->id }}">
-                                            <div class="image" style="background-image:url('/images/featured-covers/{{ $feature->thumbnail }}'); background-size: cover; background-position: 50%">
-                                                
-                                            </div>
-                                            <div class="product-desc">
-                                                <span class="product-price">
-                                                {{ $feature->title }}
-                                                </span>
-                                               
-                                            </div>
-                                        </a>
-                                    </div>
                             
-                            @endforeach
+                                @foreach($features as $feature)
+                                   
+                                        <div class="product-box">
+                                            <a href="/{{ Request::segment(1) }}/feature/show/{{ $feature->id }}">
+                                                <div class="image" style="background-image:url('/images/featured-covers/{{ $feature->thumbnail }}'); background-size: cover; background-position: 50%">
+                                                    
+                                                </div>
+                                                <div class="product-desc">
+                                                    <span class="product-price">
+                                                    {{ $feature->title }}
+                                                    </span>
+                                                   
+                                                </div>
+                                            </a>
+                                        </div>
+                                
+                                @endforeach
 
                             </div>
+                       
                         </div>
+                        @endif
 
                         <div class="row">
                             <div class="col-lg-6">
@@ -85,15 +89,16 @@
                                         <div class="table-responsive">
                                             <table class="table table-striped table-hover">
                                                 <tbody>
-
-                                                @foreach($quicklinks as $ql)
-                                                <tr>
-                                                    {{-- <a data-toggle="tab" href="#contact-1" class="client-link"><i class="fa fa-external-link"></i>  Visit The North Face Website</a> --}}
-                                                    <td>{!! $ql !!}</td>
-                                                    
-                                                </tr>
-      
-                                                @endforeach
+                                                @if (count($quicklinks)>0)
+                                                    @foreach($quicklinks as $ql)
+                                                    <tr>
+                                                        {{-- <a data-toggle="tab" href="#contact-1" class="client-link"><i class="fa fa-external-link"></i>  Visit The North Face Website</a> --}}
+                                                        <td>{!! $ql !!}</td>
+                                                        
+                                                    </tr>
+          
+                                                    @endforeach
+                                                @endif
                                                 </tbody>
                                             </table>
                                         </div>
@@ -132,6 +137,7 @@
                                             </div>
                                         @endif
 
+
                                         </div>
                                     </div>
                                 </div>                              
@@ -156,6 +162,10 @@
 
                                         <div>
                                             <div class="feed-activity-list">
+
+                                                @if(count($notifications)>0)
+
+
 
 
                                                 @foreach($notifications as $n)
@@ -235,8 +245,8 @@
                                                         <small class="text-muted">{{ $n->prettyDate }}</small>
 
                                                     </div>
-                                                </div>
-                                                @endforeach
+                                                    @endforeach
+                                                @endif
 
                                             </div>
 

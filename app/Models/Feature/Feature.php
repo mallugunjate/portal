@@ -1,5 +1,6 @@
 <?php namespace App\Models\Feature;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
@@ -214,6 +215,15 @@ class Feature extends Model
         
         return $feature_docs;
 
+
+    }
+
+    public static function getActiveFeatureByBannerId($banner_id)
+    {
+        return Feature::where('banner_id', $banner_id)
+              ->where('start', '<=', Carbon::today()->toDateString())
+              ->where('end', '>=', Carbon::today()->toDateString())
+              ->orderBy('order')->get();
 
     }
 }
