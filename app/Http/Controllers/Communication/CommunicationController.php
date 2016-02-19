@@ -21,6 +21,8 @@ use App\Models\Tag\Tag;
 use App\Models\Tag\ContentTag;
 use App\Skin;
 use App\Models\StoreInfo;
+use App\Models\Document\Document;
+use Carbon\Carbon;
 
 
 class CommunicationController extends Controller
@@ -117,12 +119,39 @@ class CommunicationController extends Controller
         }        
 
         $communication = Communication::getCommunication($id);
+
+        $communication_documents = CommunicationDocument::where('communication_id', $id)->get()->pluck('document_id');
+        $selected_documents = array();
+        foreach ($communication_documents as $doc_id) {
+            
+            $doc = Document::find($doc_id);
+            $doc->folder_path = Document::getFolderPathForDocument($doc_id);
+
+            $updated_at = new Carbon($doc->updated_at);
+            $since = Carbon::now()->diffForHumans($updated_at, true);
+            $doc->since = $since;
+           // $doc->prettyDate = $updated_at->toDayDateTimeString();
+            $doc->prettyDate = $updated_at->format('D, j F');
+            array_push($selected_documents, $doc );
+        }
         
+        $communication_packages = CommunicationPackage::where('communication_id', $id)->get()->pluck('package_id');
+        $selected_packages = [];
+        foreach ($communication_packages as $package_id) {
+            $package = Package::find($package_id);
+            $package_details = Package::getPackageDetails($package_id);
+            $package['details'] = $package_details;
+            array_push($selected_packages, $package);
+
+        }
+
         return view('site.communications.message')
             ->with('skin', $skin)
             ->with('communicationTypes', $communicationTypes)
             ->with('communicationCount', $communicationCount)
             ->with('communication', $communication)
+             ->with('communication_documents', $selected_documents)
+            ->with('communication_packages', $selected_packages)
             ->with('urgentNoticeCount', $urgentNoticeCount);
         
     }
