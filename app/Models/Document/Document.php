@@ -22,9 +22,11 @@ class Document extends Model
 
     public static function getDocuments($global_folder_id, $forStore=null)
     {
+
         if (isset($global_folder_id)) {
+                
+            $global_folder_details = \DB::table('folder_ids')->where('id', $global_folder_id )->first();
             
-            $global_folder_details = \DB::table('folder_ids')->where('id', $global_folder_id )->first();                                                            
             $folder_type = $global_folder_details->folder_type;
             $folder_id = $global_folder_details->folder_id;
             
@@ -50,7 +52,6 @@ class Document extends Model
                 return $files;
             }
             else{
-                
                 return null;
             }
 

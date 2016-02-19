@@ -9,7 +9,6 @@ use App\Models\Document\Document;
 
 class Quicklinks extends Model
 {
-
     protected $table = 'quicklinks';
     protected $fillable = ['banner_id', 'type', 'link_name', 'url'];
 
@@ -17,20 +16,87 @@ class Quicklinks extends Model
  	{
  		$links = Quicklinks::where("banner_id", $id)->orderBy('order')->get();
  		$linkarray = array();
+
  		foreach($links as $link){
 
  			switch($link->type){
  				case 1: //folder
- 					array_push($linkarray, '<a href="/'.$storeNumber.'/document#!/'.$link->url.'" class="client-link"><i class="fa fa-folder-o"></i> '.$link->link_name.'</a>');
+ 					array_push($linkarray, '<a href="/'.$storeNumber.'/document#!/'.$link->url.'" class="client-link"><i class="fa fa-folder-open"></i> '.$link->link_name.'</a>');
  					break;
 
  				case 2: //file
  					$doc = Document::getDocumentById($link->url);
- 					array_push($linkarray, '<a class="launchPDFViewer client-link" data-toggle="modal" data-file="/viewer/?file=/files/" data-target="#fileviewmodal" ><i class="fa fa-file-o"></i> '. $link->link_name.'</a>');
- 					break;
+ 					$icon = "";
+ 					$linkUrl = "";
+ 					switch($doc->original_extension){
+	                    case "png":
+	                    case "jpg":
+	                    case "gif":
+	                    case "bmp":
+	                        $icon = "fa-file-image-o";              
+	                        $linkUrl = '<a href="#" class="client-link">';
+	                        break;
+
+	                    case "pdf":
+	                        $icon = "fa-file-pdf-o";
+	                        $linkUrl = '<a href="#" class="launchPDFViewer client-link" data-toggle="modal" data-file="/viewer/?file=/files/'.$doc->filename.'" data-target="#fileviewmodal" class="client-link"> ';
+	                        break;
+
+	                    case "xls":
+	                    case "xlsx":
+	                        $icon = "fa-file-excel-o";
+	                        $linkUrl = '<a href="#">';
+	                        break;
+
+	                    case "mp4":
+	                    case "avi":
+	                    case "mov":
+	                        $icon = "fa-film";
+	                        $linkUrl = '<a href="#" class="launchVideoViewer client-link" data-file="'.$doc->filename.'" data-target="#videomodal"> ';
+	                        break;
+
+	                    case "doc":
+	                    case "docx":
+	                        $icon = "fa-file-word-o";
+	                        $linkUrl = '<a href="#" class="client-link">';
+	                        break;
+
+	                    case "mp3":
+	                    case "wav":
+	                        $icon = "fa-file-audio-o";
+	                        $linkUrl = '<a href="#" class="client-link">';
+	                        break;
+
+	                    case "ppt":
+	                    case "pptx":
+	                        $icon = "fa-file-powerpoint-o";
+	                        $linkUrl = '<a href="#" class="client-link">';
+	                        break;
+
+	                    case "zip":
+	                        $icon = "fa-file-archive-o";
+	                        $linkUrl = '<a href="#" class="client-link">';
+	                        break;
+
+	                    case "html":
+	                    case "css":
+	                    case "js":
+	                        $icon = "fa-file-code-o";
+	                        $linkUrl = '<a href="#" class="client-link">';
+	                        break;
+	                        
+	                    default: 
+	                        $icon = "fa-file-o";
+	                        $linkUrl = '<a href="#" class="client-link">';
+	                        break;  
+ 					}
+
+ 					$finallink = $linkUrl .' <i class="fa '.$icon.'"></i>&nbsp;'. $link->link_name.'</a>';
+ 					array_push($linkarray, $finallink);
+ 					break; 					
 
  				case 3: //url
- 					array_push($linkarray, '<a target="_blank" href="'.$link->url.'" class="client-link"><i class="fa fa-external-link"></i> '.$link->link_name.'</a>');
+ 					array_push($linkarray, '<a target="_blank" href="'.$link->url.'" class="client-link"><i class="fa fa-external-link"></i>&nbsp;'.$link->link_name.'</a>');
  					break;
 
  				default:
