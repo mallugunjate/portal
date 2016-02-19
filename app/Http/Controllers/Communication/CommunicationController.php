@@ -53,6 +53,7 @@ class CommunicationController extends Controller
             $targetedCommunications[$i]->trunc = Communication::truncateHtml($preview_string);
             $targetedCommunications[$i]->label_name = Communication::getCommunicationCategoryName($targetedCommunications[$i]->communication_type_id);
             $targetedCommunications[$i]->label_colour = Communication::getCommunicationCategoryColour($targetedCommunications[$i]->communication_type_id);
+            $targetedCommunications[$i]->has_attachments = Communication::hasAttachments($targetedCommunications[$i]->id);
             $i++;
         }
 
@@ -61,6 +62,8 @@ class CommunicationController extends Controller
             $communicationTypes[$i]->count = Communication::getCommunicationCountByCategory($storeNumber, $ct->id);
             $i++;
         }
+
+        // dd($targetedCommunications);
 
         return view('site.communications.index')
             ->with('skin', $skin)
@@ -118,6 +121,11 @@ class CommunicationController extends Controller
 
         $communication = Communication::getCommunication($id);
         
+        $communicationPackages = Communication::getPackageDetails($id);
+        $communicationDocuments = Communication::getDocumentDetails($id);
+
+        // dd($communicationDocuments);
+
         return view('site.communications.message')
             ->with('skin', $skin)
             ->with('communicationTypes', $communicationTypes)

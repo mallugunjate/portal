@@ -229,7 +229,7 @@ class Communication extends Model
 
       public static function getCommunicationCount($storeNumber)
       {
-         $today = $today = Carbon::today()->toDateString();
+         $today = Carbon::today()->toDateString();
 
          $communicationCount = DB::table('communications_target')
             ->join('communications', 'communications_target.communication_id', '=', 'communications.id')
@@ -277,7 +277,20 @@ class Communication extends Model
         $communication->prettyDate = $send_at->format('D j F');
         
         return $communication;
-      }      
+      }     
+
+
+      public static function hasAttachments($id)
+      {
+         $hasAttachments = CommunicationDocument::where('communication_id', $id)->get();
+         $hasPackages = CommunicationPackage::where('communication_id', $id)->get();
+
+         if( count($hasAttachments)>0 || count($hasPackages) >0 ){
+            return true;
+         } 
+
+         return false;
+      } 
 
      public static function truncateHtml($text, $length = 100, $ending = '...', $exact = false, $considerHtml = true) {
          if ($considerHtml) {
