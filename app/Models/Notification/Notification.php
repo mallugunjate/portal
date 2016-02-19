@@ -13,18 +13,24 @@ class Notification extends Model
 {
     public static function getAllNotifications($bannerId, $windowType, $windowSize)
     {
+
+        $today = Carbon::today()->toDateString();
     	switch($windowType){
     		case 1:  //by number of days
     			$dateSince = Carbon::now()->subDays($windowSize)->toDateTimeString();
 
     			$notifications = Document::where('banner_id', $bannerId)
-    							->where('created_at', '>=', $dateSince)
+    							->where('updated_at', '>=', $dateSince)
+                                ->where('start', '<=', $today)
+                                ->where('end', '>=', $today)
     							->orderBy('updated_at', 'desc')
     							->get();
     			break;
     		case 2:  //by number of documents
     			$notifications = Document::where('banner_id', $bannerId)
     							->orderBy('updated_at', 'desc')
+                                ->where('start', '<=', $today)
+                                ->where('end', '>=', $today)
     							->take($windowSize)
     							->get();
     			break;
@@ -40,13 +46,18 @@ class Notification extends Model
 
     public static function getNotificationsByFeature($bannerId, $windowType, $windowSize, $featureId)
     {
+        $today = Carbon::today()->toDateString();
         $documentIdArray = Feature::getDocumentsIdsByFeatureId($featureId);
         $documentIdArray = array_values($documentIdArray);
 
         switch($windowType){
             case 1:  //by number of days
                 $dateSince = Carbon::now()->subDays($windowSize)->toDateTimeString();
-                $notifications = Document::findMany($documentIdArray)->sortBy('updated_at')->reverse();
+                $notifications = Document::whereIn('id', $documentIdArray)
+                                            ->orderBy('updated_at', 'desc')
+                                            ->where('start', '<=', $today)
+                                            ->where('end', '>=', $today)
+                                            ->get();
 
                 $i=0;
                 foreach($notifications as $n){
@@ -58,7 +69,12 @@ class Notification extends Model
                 
                 break;
             case 2:  //by number of documents
-                $notifications = Document::findMany($documentIdArray)->sortBy('updated_at')->reverse()->take($windowSize);
+                $notifications = Document::whereIn('id', $documentIdArray)
+                                        ->orderBy('updated_at', 'desc')
+                                        ->where('start', '<=', $today)
+                                        ->where('end', '>=', $today)
+                                        ->take($windowSize)
+                                        ->get();
                 break;
 
             default:
