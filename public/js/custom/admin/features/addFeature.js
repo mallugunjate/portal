@@ -54,7 +54,8 @@ $(document).on('click','.feature-create',function(){
 
 	console.log(thumbnail);
 	console.log(background);
-
+	console.log(update_type);
+	console.log(update_frequency);
 	var feature_files = [];
 	var feature_packages = [];
 	$(".selected-files").each(function(){
@@ -69,7 +70,19 @@ $(document).on('click','.feature-create',function(){
 		swal("Oops!", "This feature needs a name.", "error"); 
 		hasError = true;
 		$(window).scrollTop(0);
+		return false;
 	}
+	if(featureStart == '' || featureEnd == '') {
+		swal("Oops!", "This feature needs start and end dates.", "error"); 
+		hasError = true;
+		return false;
+	}
+
+	if (typeof update_type === 'undefined' || update_frequency == '') {
+		swal("Oops!", "Update type and update window size needs to be filled", "error"); 
+		hasError = true;
+		return false;
+	};
 
 	
      if(hasError == false) {
