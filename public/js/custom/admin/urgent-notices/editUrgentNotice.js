@@ -198,10 +198,11 @@ $(document).on('click','.urgentnotice-update',function(){
 	
 	console.log(remove_attachments);
  
-    if(title == '' || description == '' || start == '') {
+    if(title == '' || description == '' || start == '' || end == '' ) {
 		swal("Oops!", "This notice is not complete.", "error"); 
 		hasError = true;
 		$(window).scrollTop(0);
+		return false;
 	}
 
     if(hasError == false) {

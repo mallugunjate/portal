@@ -102,10 +102,11 @@ $(document).on('click','.urgentnotice-create',function(){
 
  
 	console.log(description);
-    if(title == '' || description == '' || start == '') {
+    if(title == '' || description == '' || typeof attachment_type === 'undefined' || start == '' || end == '') {
 		swal("Oops!", "This notice is not complete.", "error"); 
 		hasError = true;
 		$(window).scrollTop(0);
+		return false;
 	}
 
     if(hasError == false) {
