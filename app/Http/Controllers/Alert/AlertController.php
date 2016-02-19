@@ -31,7 +31,7 @@ class AlertController extends Controller
         $storeNumber = RequestFacade::segment(1);
         $storeInfo = StoreInfo::getStoreInfoByStoreId($storeNumber);
         $storeBanner = $storeInfo->banner_id;
-        $communicationCount = Communication::getCommunicationCount($storeNumber);
+        $communicationCount = Communication::getActiveCommunicationCount($storeNumber);
         $storeBanner = $storeInfo->banner_id;
 
         $skin = Skin::getSkin($storeBanner);

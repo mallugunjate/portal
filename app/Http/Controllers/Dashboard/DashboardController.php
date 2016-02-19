@@ -49,10 +49,10 @@ class DashboardController extends Controller
 
         $urgentNoticeCount = UrgentNotice::getUrgentNoticeCount($storeNumber);
 
-        $communicationCount = Communication::getCommunicationCount($storeNumber);
+        $communicationCount = Communication::getActiveCommunicationCount($storeNumber);
 
-        $communications = Communication::getCommunicationsByStoreNumber($storeNumber, 3);
-        
+        $communications = Communication::getActiveCommunicationsByStoreNumber($storeNumber, 3);
+
         return view('site.dashboard.index')
             ->with('banner', $banner)
             ->with('skin', $skin)

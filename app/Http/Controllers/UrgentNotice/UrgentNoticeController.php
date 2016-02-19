@@ -76,7 +76,7 @@ class UrgentNoticeController extends Controller
 
         $skin = Skin::getSkin($storeBanner);
 
-        $communicationCount = Communication::getCommunicationCount($storeNumber); 
+        $communicationCount = Communication::getActiveCommunicationCount($storeNumber); 
 
         $urgentNoticeCount = UrgentNotice::getUrgentNoticeCount($storeNumber);
 
