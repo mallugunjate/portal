@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Feature;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Request as RequestFacade; 
-
+use Carbon\Carbon;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Feature\Feature;
@@ -78,8 +78,13 @@ class FeatureController extends Controller
             
             $doc = Document::find($doc_id);
             $doc->folder_path = Document::getFolderPathForDocument($doc_id);
+
+            $updated_at = new Carbon($doc->updated_at);
+            $since = Carbon::now()->diffForHumans($updated_at, true);
+            $doc->since = $since;
+           // $doc->prettyDate = $updated_at->toDayDateTimeString();
+            $doc->prettyDate = $updated_at->format('D, j F');
             array_push($selected_documents, $doc );
-            
         }
         
         $feature_packages = FeaturePackage::where('feature_id', $id)->get()->pluck('package_id');
