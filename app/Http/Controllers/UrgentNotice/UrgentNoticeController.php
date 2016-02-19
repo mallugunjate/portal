@@ -33,7 +33,7 @@ class UrgentNoticeController extends Controller
         $skin = Skin::getSkin($storeBanner);
 
         $urgentNoticeCount = UrgentNotice::getUrgentNoticeCount($storeNumber);
-        $urgentNotices = UrgentNotice::getUrgentNoticesByStore($storeNumber);
+        $urgentNotices = UrgentNotice::getActiveUrgentNoticesByStore($storeNumber);
 
         return view('site.urgentnotices.index')
             ->with('skin', $skin)
