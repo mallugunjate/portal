@@ -19,6 +19,10 @@
         bottom: 0px;
     }
 
+    .modal-lg{ height: 95%; width: 80% !important; padding: 0; }
+    .modal-content{ height: 100% !important;}
+    .modal-body{ padding: 0; margin: 0; height: 100% !important; }    
+
     </style>
 </head> 
 
@@ -35,120 +39,108 @@
                 @include('site.includes.topbar')
             </div>
 
-
-
             <div class="wrapper wrapper-content">
 
             <h1 style="color: #fff; font-size: 65px; text-transform: uppercase; font-family: GalaxiePolarisCondensed-Bold;text-shadow: 3px 3px 23px rgba(0, 0, 0, 1);padding-bottom: 10px;">{{ $feature->title }}</h1>
 
                 <div class="row">
                     <div class="col-lg-8">
-                        <div id="file-container" class="ibox float-e-margins">
+                        <div class="ibox float-e-margins">
                             <div class="ibox-title">
                                 <h2>Featured Documents</h2>
                             </div>
                       
                             <div class="ibox-content clearfix">
 
-
                                 <table class="table tablesorter table-hover table-mail" id="file-table"> 
-                                <thead>
-                                    <tr> 
-                                        <th> Title </th>
-                                        <th> Description </th>
-                                        <th> Last Updated </th>
-                                    </tr>
-                                </thead>
+                                    <thead>
+                                        <tr> 
+                                            <th> Title </th>
+                                            <th> Description </th>
+                                            <th> Last Updated </th>
+                                        </tr>
+                                    </thead>
 
-                                <?php
-                                // dd($feature_documents);
-                                ?>
-                            @foreach ($feature_documents as $document)
-                                    <?php
-                                        $icon ="";
-                                        $link ="";
-                                        switch($document->original_extension){
-                                            case "png":
-                                            case "jpg":
-                                            case "gif":
-                                            case "bmp":
-                                                $icon = "fa-file-image-o";              
-                                                $link = '<a href="#">';
-                                                break;
+                                    @foreach ($feature_documents as $document)
+                                        <?php
+                                            $icon ="";
+                                            $link ="";
+                                            switch($document->original_extension){
+                                                case "png":
+                                                case "jpg":
+                                                case "gif":
+                                                case "bmp":
+                                                    $icon = "fa-file-image-o";              
+                                                    $link = '<a href="#">';
+                                                    break;
 
-                                            case "pdf":
-                                                $icon = "fa-file-pdf-o";
-                                                $link = '<a href="#" class="launchPDFViewer" data-toggle="modal" data-file="/viewer/?file=/files/'.$document->filename.'" data-target="#fileviewmodal">';
-                                                break;
+                                                case "pdf":
+                                                    $icon = "fa-file-pdf-o";
+                                                    $link = '<a href="#" class="launchPDFViewer" data-toggle="modal" data-file="/viewer/?file=/files/'.$document->filename.'" data-target="#fileviewmodal">';
+                                                    break;
 
-                                            case "xls":
-                                            case "xlsx":
-                                                $icon = "fa-file-excel-o";
-                                                $link = '<a href="#">';
-                                                break;
+                                                case "xls":
+                                                case "xlsx":
+                                                    $icon = "fa-file-excel-o";
+                                                    $link = '<a href="#">';
+                                                    break;
 
-                                            case "mp4":
-                                            case "avi":
-                                            case "mov":
-                                                $icon = "fa-film";
-                                                $link = '<a href="#" class="launchVideoViewer" data-file="'.$document->filename.'" data-target="#videomodal">';              
-                                                break;
+                                                case "mp4":
+                                                case "avi":
+                                                case "mov":
+                                                    $icon = "fa-film";
+                                                    $link = '<a href="#" class="launchVideoViewer" data-file="'.$document->filename.'" data-target="#videomodal">';              
+                                                    break;
 
-                                            case "doc":
-                                            case "docx":
-                                                $icon = "fa-file-word-o";
-                                                $link = '<a href="#">';
-                                                break;
+                                                case "doc":
+                                                case "docx":
+                                                    $icon = "fa-file-word-o";
+                                                    $link = '<a href="#">';
+                                                    break;
 
-                                            case "mp3":
-                                            case "wav":
-                                                $icon = "fa-file-audio-o";
-                                                $link = '<a href="#">';
-                                                break;
+                                                case "mp3":
+                                                case "wav":
+                                                    $icon = "fa-file-audio-o";
+                                                    $link = '<a href="#">';
+                                                    break;
 
-                                            case "ppt":
-                                            case "pptx":
-                                                $icon = "fa-file-powerpoint-o";
-                                                $link = '<a href="#">';
-                                                break;
+                                                case "ppt":
+                                                case "pptx":
+                                                    $icon = "fa-file-powerpoint-o";
+                                                    $link = '<a href="#">';
+                                                    break;
 
-                                            case "zip":
-                                                $icon = "fa-file-archive-o";
-                                                $link = '<a href="#">';
-                                                break;
+                                                case "zip":
+                                                    $icon = "fa-file-archive-o";
+                                                    $link = '<a href="#">';
+                                                    break;
 
-                                            case "html":
-                                            case "css":
-                                            case "js":
-                                                $icon = "fa-file-code-o";
-                                                $link = '<a href="#">';
-                                                break;
-                                                
-                                            default: 
-                                                $icon = "fa-file-o";
-                                                $link = '<a href="#">';
-                                                break; 
-                                        }
-                                    ?>
+                                                case "html":
+                                                case "css":
+                                                case "js":
+                                                    $icon = "fa-file-code-o";
+                                                    $link = '<a href="#">';
+                                                    break;
+                                                    
+                                                default: 
+                                                    $icon = "fa-file-o";
+                                                    $link = '<a href="#">';
+                                                    break; 
+                                            }
+                                        ?>
 
-                                    <tr> 
-                                        <td>{!! $link !!}<i class="fa {{$icon}}"></i>&nbsp; {{$document->title}}</a></td>
-                                        <td>{{$document->description}}</td>
-                                        <td>{{$document->prettyDate}} <small class="text-muted pull-right"> {{ $document->since }} ago</small></td>                             
-                                    </tr>    
-
-<!--                                     <div class="feature_documents launchPDFViewer" data-toggle="modal" id="package-document-{{$document->id}}" data-packageDocumentId={{$document->id}} data-file="/viewer/?file=/files/{{$document->filename}}" data-target="#fileviewmodal">
-                                        <i class="fa {{ $icon }}"></i>  {{$document->original_filename}} 
-                                    </div> -->
+                                        <tr> 
+                                            <td>{!! $link !!}<i class="fa {{$icon}}"></i>&nbsp; {{$document->title}}</a></td>
+                                            <td>{{$document->description}}</td>
+                                            <td>{{$document->prettyDate}} <small class="text-muted pull-right"> {{ $document->since }} ago</small></td>                             
+                                        </tr>                                        
                                     
-                                
-                                    
-                            @endforeach
+                                    @endforeach
+
                                 </table>
                             </div>
                         </div>
                         
-
 
                         <div class="row">
                             <div class="col-lg-12">
@@ -211,108 +203,6 @@
 
                             </div>
                         </div>
-{{--                         <div class="row">
-                            <div class="col-lg-6">
-                                <div class="ibox float-e-margins">
-                                    <div class="ibox-title">
-                                        <h2>Quick Links</h2>
-                                    </div>
-                              
-                                    <div class="ibox-content">
-                                        <div class="table-responsive">
-                                            <table class="table table-striped table-hover">
-                                                <tbody>
-                                                <tr>
-                                                    
-                                                    <td><a data-toggle="tab" href="#contact-1" class="client-link"><i class="fa fa-external-link"></i>  Visit The North Face Website</a></td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                    
-                                                    <td><a data-toggle="tab" href="#contact-1" class="client-link"><i class="fa fa-external-link"></i>  Visit the Nike University</a></td>
-                                                </tr>
-                                                <tr>
-                                                    
-                                                    <td><a data-toggle="tab" href="#contact-1" class="client-link"><i class="fa fa-file-pdf-o"></i>  OH&amp;S</a></td>
-                                                </tr>
-                                                <tr>
-                                                    
-                                                   <td><a data-toggle="tab" href="#contact-1" class="client-link"><i class="fa fa-file-pdf-o"></i>  Store Repairs</a></td>
-                                                </tr>
-                                                <tr>
-                                                    
-                                                    <td><a data-toggle="tab" href="#contact-1" class="client-link"><i class="fa fa-external-link"></i>  Corporate Web Portal</a></td>
-                                                </tr>
-                                                <tr>
-                                                    
-                                                    <td><a data-toggle="tab" href="#contact-1" class="client-link"><i class="fa fa-calendar"></i>  Week 46 Workload Calendar</a></td>
-                                                </tr>
-
-
-
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>                              
-                            </div>
-
-                            <div class="col-lg-6">
-                                <div class="ibox float-e-margins">
-                                    <div class="ibox-title">
-                                        <h2>Latest Communications</h2>
-                                    </div>
-                              
-                                <div class="ibox-content">
-                                <div class="feed-activity-list">
-
-                                    <div class="feed-element">
-                                        <div>
-                                            <small class="pull-right">1m ago</small>
-                                            <strong>Get Ready for Hockey Plus</strong>
-                                            <div>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum</div>
-                                            <small class="text-muted">Today 5:60 pm - 12.06.2014</small>
-                                        </div>
-                                    </div>
-
-                                    <div class="feed-element">
-                                        <div>
-                                            <small class="pull-right">2m ago</small>
-                                            <strong>Back to School Primer</strong>
-                                            <div>There are many variations of passages of Lorem Ipsum available</div>
-                                            <small class="text-muted">Today 2:23 pm - 11.06.2014</small>
-                                        </div>
-                                    </div>
-
-                                    <div class="feed-element">
-                                        <div>
-                                            <small class="pull-right">5m ago</small>
-                                            <strong>Information on New Accessories Fixtures</strong>
-                                            <div>Contrary to popular belief, Lorem Ipsum</div>
-                                            <small class="text-muted">Today 1:00 pm - 08.06.2014</small>
-                                        </div>
-                                    </div>
-
-                                    <div class="feed-element">
-                                        <div>
-                                            <small class="pull-right">5m ago</small>
-                                            <strong>Jumpstart Update for March 2016</strong>
-                                            <div>The generated Lorem Ipsum is therefore </div>
-                                            <small class="text-muted">Yesterday 8:48 pm - 10.06.2014</small>
-                                        </div>
-                                    </div>
-
-
-
-
-                                </div>
-                            </div>
-                                </div>                              
-                            </div>                            
-                        </div> --}}
-
-
-                      
                     </div>
 
                     <div class="col-lg-4">
@@ -326,120 +216,109 @@
                                     </div>
                                     <div class="ibox-content">
 
-                                        <div>
+                                        
                                             <div class="feed-activity-list">
 
+                                                @if(count($notifications)>0)
 
-                                                @foreach($notifications as $n)
+                                                    @foreach($notifications as $n)
+                                                        <?php
+                                                            $icon ="";
+                                                            $link ="";
+                                                            switch($n->original_extension){
+                                                                case "png":
+                                                                case "jpg":
+                                                                case "gif":
+                                                                case "bmp":
+                                                                    $icon = "fa-file-image-o";              
+                                                                    $link = '<a href="#">';
+                                                                    break;
 
-                                                <?php
-                                                    $icon ="";
-                                                    $link ="";
-                                                    switch($n->original_extension){
-                                                        case "png":
-                                                        case "jpg":
-                                                        case "gif":
-                                                        case "bmp":
-                                                            $icon = "fa-file-image-o";              
-                                                            $link = '<a href="#">';
-                                                            break;
+                                                                case "pdf":
+                                                                    $icon = "fa-file-pdf-o";
+                                                                    $link = '<a href="#" class="launchPDFViewer" data-toggle="modal" data-file="/viewer/?file=/files/'.$n->filename.'" data-target="#fileviewmodal">';
+                                                                    break;
 
-                                                        case "pdf":
-                                                            $icon = "fa-file-pdf-o";
-                                                            $link = '<a href="#" class="launchPDFViewer" data-toggle="modal" data-file="/viewer/?file=/files/'.$n->filename.'" data-target="#fileviewmodal">';
-                                                            break;
+                                                                case "xls":
+                                                                case "xlsx":
+                                                                    $icon = "fa-file-excel-o";
+                                                                    $link = '<a href="#">';
+                                                                    break;
 
-                                                        case "xls":
-                                                        case "xlsx":
-                                                            $icon = "fa-file-excel-o";
-                                                            $link = '<a href="#">';
-                                                            break;
+                                                                case "mp4":
+                                                                case "avi":
+                                                                case "mov":
+                                                                    $icon = "fa-film";
+                                                                    $link = '<a href="#" class="launchVideoViewer" data-file="'.$n->filename.'" data-target="#videomodal">';              
+                                                                    break;
 
-                                                        case "mp4":
-                                                        case "avi":
-                                                        case "mov":
-                                                            $icon = "fa-film";
-                                                            $link = '<a href="#" class="launchVideoViewer" data-file="'.$n->filename.'" data-target="#videomodal">';              
-                                                            break;
+                                                                case "doc":
+                                                                case "docx":
+                                                                    $icon = "fa-file-word-o";
+                                                                    $link = '<a href="#">';
+                                                                    break;
 
-                                                        case "doc":
-                                                        case "docx":
-                                                            $icon = "fa-file-word-o";
-                                                            $link = '<a href="#">';
-                                                            break;
+                                                                case "mp3":
+                                                                case "wav":
+                                                                    $icon = "fa-file-audio-o";
+                                                                    $link = '<a href="#">';
+                                                                    break;
 
-                                                        case "mp3":
-                                                        case "wav":
-                                                            $icon = "fa-file-audio-o";
-                                                            $link = '<a href="#">';
-                                                            break;
+                                                                case "ppt":
+                                                                case "pptx":
+                                                                    $icon = "fa-file-powerpoint-o";
+                                                                    $link = '<a href="#">';
+                                                                    break;
 
-                                                        case "ppt":
-                                                        case "pptx":
-                                                            $icon = "fa-file-powerpoint-o";
-                                                            $link = '<a href="#">';
-                                                            break;
+                                                                case "zip":
+                                                                    $icon = "fa-file-archive-o";
+                                                                    $link = '<a href="#">';
+                                                                    break;
 
-                                                        case "zip":
-                                                            $icon = "fa-file-archive-o";
-                                                            $link = '<a href="#">';
-                                                            break;
+                                                                case "html":
+                                                                case "css":
+                                                                case "js":
+                                                                    $icon = "fa-file-code-o";
+                                                                    $link = '<a href="#">';
+                                                                    break;
+                                                                    
+                                                                default: 
+                                                                    $icon = "fa-file-o";
+                                                                    $link = '<a href="#">';
+                                                                    break; 
+                                                            }
+                                                        ?>
+                                                        <div class="feed-element">
+                                                            <span class="pull-left">
+                                                                <h1><i class="fa {{ $icon }}"></i></h1>
+                                                            </span>
+                                                            <div class="media-body ">
+                                                                <small class="pull-right">{{ $n->since }} ago</small>
+                                                                <strong>{!! $link !!}{{ $n->title }}</a></strong> was {{ $n->verb }} <strong><a href="/{{ Request::segment(1) }}/document#!/{{ $n->global_folder_id }}">{{ $n->folder_name}}</a></strong>. <br>
+                                                                <small class="text-muted">{{ $n->prettyDate }}</small>
 
-                                                        case "html":
-                                                        case "css":
-                                                        case "js":
-                                                            $icon = "fa-file-code-o";
-                                                            $link = '<a href="#">';
-                                                            break;
-                                                            
-                                                        default: 
-                                                            $icon = "fa-file-o";
-                                                            $link = '<a href="#">';
-                                                            break; 
-                                                    }
-                                                ?>
-                                                <div class="feed-element">
-                                                    <span class="pull-left">
-                                                        <h1><i class="fa {{ $icon }}"></i></h1>
-                                                    </span>
-                                                    <div class="media-body ">
-                                                        <small class="pull-right">{{ $n->since }} ago</small>
-                                                        <strong>{!! $link !!}{{ $n->title }}</a></strong> was {{ $n->verb }} <strong><a href="/{{ Request::segment(1) }}/document#!/{{ $n->global_folder_id }}">{{ $n->folder_name}}</a></strong>. <br>
-                                                        <small class="text-muted">{{ $n->prettyDate }}</small>
-
-                                                    </div>
-                                                </div>
-                                                @endforeach
-
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                @endif
                                             </div>      
 
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
-
-
                 </div>
            
 
                 <br class="clearfix" />
             </div>
 
-
-
-
-
         </div>
     </div>
 
     @include('site.includes.footer')       
     @include('site.includes.scripts')
-    @include('site.includes.bugreport')
-    @include('site.includes.modal')
-
 
     <script type="text/javascript" src="/js/vendor/underscore-1.8.3.js"></script>
     <script type="text/javascript" src="/js/custom/site/features/showFeaturePackageDetails.js"></script>
@@ -450,5 +329,10 @@
     <script type="text/javascript">
         $(".tree").treed({openedClass : 'fa-folder-open', closedClass : 'fa-folder'});
     </script>
+
+    @include('site.includes.bugreport')
+    @include('site.includes.modal')
+
+
 </body>
 </html> 

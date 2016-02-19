@@ -160,12 +160,10 @@
     </div>
 
 </div>
+            @include('site.includes.footer')       
+            @include('site.includes.scripts')
+                
 
-@include('site.includes.modal')
-
-{{--                 @include('site.includes.footer') --}}
-
-                @include('site.includes.scripts')
                 <script type="text/javascript" src="/js/vendor/underscore-1.8.3.js"></script>
                 <script type="text/javascript" src="/js/custom/tree.js"></script>
                 <script type="text/javascript" src="/js/custom/site/documents/folderStructure.js" ></script>
@@ -199,5 +197,6 @@
 
 
                 @include('site.includes.bugreport')
+                @include('site.includes.modal')
 
             </body>
