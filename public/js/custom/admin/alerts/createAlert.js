@@ -24,7 +24,9 @@ $(document).on('click','.alert-create',function(){
  	var document_id = $("#documentID").val();
 	var title = $("#title").val();
 	var description = $("#description").val();
-	
+	var document_start = $("#document_start").val();
+	var document_end = $("#document_end").val();
+
 	var is_alert = 0;
 	if ($("#is_alert").prop("checked")){
 		is_alert = 1;	
@@ -65,6 +67,8 @@ $(document).on('click','.alert-create',function(){
 		  		end: end,
 		  		banner_id : banner_id,
 		  		target_stores : target_stores,
+		  		document_start : document_start,
+		  		document_end : document_end,
 		  		
 		    },
 		    success: function(result) {
