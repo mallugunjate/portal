@@ -63,10 +63,10 @@ class CalendarAdminController extends Controller
 
         // $event_types_list = EventType::all();
         $event_types_list = EventType::where('banner_id', $banner_id)->get();
-        $tags = Tag::where('banner_id', $banner_id)->lists('name', 'id');
+        // $tags = Tag::where('banner_id', $banner_id)->lists('name', 'id');
         return view('admin.calendar.create')
             ->with('event_types_list', $event_types_list)
-            ->with('tags', $tags)
+            // ->with('tags', $tags)
             ->with('banner', $banner)
             ->with('banners', $banners);     
     }
@@ -111,17 +111,17 @@ class CalendarAdminController extends Controller
         $event = Event::find($id);
         $event_type = EventType::find($id);
         $event_types_list = EventType::all();
-        // $banner = UserSelectedBanner::getBanner();
-        $tags = Tag::where('banner_id', $banner->id)->lists('name', 'id');
-        $tag_ids = ContentTag::where('content_id', $id)->where('content_type', 'event')->get()->pluck('tag_id');
-        $selected_tags = Tag::findMany($tag_ids)->pluck('id')->toArray();
+        $banner = UserSelectedBanner::getBanner();
+        // $tags = Tag::where('banner_id', $banner->id)->lists('name', 'id');
+        // $tag_ids = ContentTag::where('content_id', $id)->where('content_type', 'event')->get()->pluck('tag_id');
+        // $selected_tags = Tag::findMany($tag_ids)->pluck('id')->toArray();
 
         return view('admin.calendar.edit')
             ->with('event', $event)
             ->with('event_type', $event_type)
             ->with('event_types_list', $event_types_list)
-            ->with('tags', $tags)
-            ->with('selected_tags', $selected_tags)
+            // ->with('tags', $tags)
+            // ->with('selected_tags', $selected_tags)
             ->with('banner', $banner)
             ->with('banners', $banners);
     }

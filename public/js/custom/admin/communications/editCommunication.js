@@ -39,6 +39,7 @@ $(document).on('click','.communication-update',function(){
 	var end = $("#archive_at").val();
 	var banner_id = $("input[name='banner_id']").val();
 	var target_stores  = $("#storeSelect").val();
+	var allStores  = $("allStores:checked").val();
 	var importance = "1";
 	var sender = "";
 
@@ -63,10 +64,23 @@ $(document).on('click','.communication-update',function(){
 	});
  
 
-    if(subject == '') {
-		swal("Oops!", "This feature needs a name.", "error"); 
+     if(subject == '' || body == '') {
+		swal("Oops!", "Communication title/body incomplete.", "error"); 
 		hasError = true;
 		$(window).scrollTop(0);
+		return false;
+	}
+	if(  start == '' || end == '' ) {
+		swal("Oops!", "Start and end dated needed.", "error"); 
+		hasError = true;
+		$(window).scrollTop(0);
+		return false;
+	}
+	if( target_stores == null && typeof allStores === 'undefined' ) {
+		swal("Oops!", "Target stores not selected.", "error"); 
+		hasError = true;
+		$(window).scrollTop(0);
+		return false;
 	}
 	console.log(communication_type_id);
      if(hasError == false) {

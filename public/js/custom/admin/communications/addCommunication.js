@@ -63,11 +63,15 @@ $(document).on('click','.communication-create',function(){
 	var sender = "";
 	var communication_packages = [];
 	var communication_documents = [];
+	var allStores  = $("allStores:checked").val();
 
+	console.log(target_stores);
+	console.log(allStores);
 	console.log(communication_type_id);
 	if(!communication_type_id){
 		communication_type_id = 1; // no category
 	}
+	console.log(communication_type_id);
 
 	$(".selected-files").each(function(){
 		communication_documents.push($(this).attr('data-fileid'));
@@ -77,10 +81,23 @@ $(document).on('click','.communication-create',function(){
 		communication_packages.push($(this).attr('data-packageid'));
 	});
  
-    if(subject == '' || body == '' || start == '' || target_stores == '' ) {
-		swal("Oops!", "This communication is missing something.", "error"); 
+    if(subject == '' || body == '') {
+		swal("Oops!", "Communication title/body incomplete.", "error"); 
 		hasError = true;
 		$(window).scrollTop(0);
+		return false;
+	}
+	if(  start == '' || end == '' ) {
+		swal("Oops!", "Start and end dated needed.", "error"); 
+		hasError = true;
+		$(window).scrollTop(0);
+		return false;
+	}
+	if( target_stores == null && typeof allStores === 'undefined' ) {
+		swal("Oops!", "Target stores not selected.", "error"); 
+		hasError = true;
+		$(window).scrollTop(0);
+		return false;
 	}
 
     if(hasError == false) {

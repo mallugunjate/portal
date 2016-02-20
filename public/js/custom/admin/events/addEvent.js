@@ -15,18 +15,14 @@ $(document).on('click','.event-create',function(){
 		swal("Oops!", "This event needs a title.", "error"); 
 		hasError = true;
 		$(window).scrollTop(0);
+		return false;
 	}	
 
-    if(eventBanner == '') {
-		swal("Oops!", "We need a banner.", "error"); 
+    if(eventStart == '' || eventEnd == '') {
+		swal("Oops!", "This event needs a start and end date.", "error"); 
 		hasError = true;
 		$(window).scrollTop(0);
-	}
-
-    if(eventStart == '') {
-		swal("Oops!", "This event needs a start date.", "error"); 
-		hasError = true;
-		$(window).scrollTop(0);
+		return false;
 	}	
 
     if(hasError == false) {
