@@ -56,7 +56,7 @@
 		                        <div class="ibox-content">
 
 		                            <div class="m-b-lg">
-		                            <div class="alert alert-warning" role="alert"><p><strong>IMPORTANT</strong> - Don't delete an event type if there are existing events of that type.</p></div>
+		                            <!-- <div class="alert alert-warning" role="alert"><p><strong>IMPORTANT</strong> - Don't delete an event type if there are existing events of that type.</p></div> -->
 		                            
 {{-- 		                                <div class="input-group">
 		                                    <input type="text" placeholder="Search event by title..." class=" form-control">
