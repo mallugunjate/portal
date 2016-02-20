@@ -72,6 +72,7 @@ $(document).on('click','.package-create',function(){
 		swal("Oops!", "This package needs a name.", "error"); 
 		hasError = true;
 		$(window).scrollTop(0);
+		return false;
 	}
 	console.log(package_files);
 	console.log(package_folders);

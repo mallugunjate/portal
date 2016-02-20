@@ -6,13 +6,22 @@ $(document).on('click','.communicationtype-create',function(){
     var bannerId = localStorage.getItem('admin-banner-id');
     var colour = $("input:radio[name='colour']:checked").val();
 
-    //console.log(communicationTypeName +", "+ bannerId +", "+ colour);
+    console.log(communicationTypeName +", "+ bannerId +", "+ colour);
 
     if(communicationTypeName == '') {
 		swal("Oops!", "This we need a name for this communication type.", "error"); 
 		hasError = true;
 		$(window).scrollTop(0);
-	}	
+		return false;
+
+	}
+	  if(typeof colour === 'undefined') {
+		swal("Oops!", "This we need a tag color for this communication type.", "error"); 
+		hasError = true;
+		$(window).scrollTop(0);
+		return false;
+
+	}		
 
 	if(hasError == false) {
 		$.ajax({
