@@ -23,6 +23,7 @@ use App\Skin;
 use App\Models\StoreInfo;
 use App\Models\Document\Document;
 use Carbon\Carbon;
+use App\Models\Utility\Utility;
 
 
 class CommunicationController extends Controller
@@ -130,11 +131,9 @@ class CommunicationController extends Controller
             $doc = Document::find($doc_id);
             $doc->folder_path = Document::getFolderPathForDocument($doc_id);
 
-            $updated_at = new Carbon($doc->updated_at);
-            $since = Carbon::now()->diffForHumans($updated_at, true);
-            $doc->since = $since;
-           // $doc->prettyDate = $updated_at->toDayDateTimeString();
-            $doc->prettyDate = $updated_at->format('D, j F');
+            $doc->prettyDate = Utility::prettifyDate($doc->updated_at);
+            $doc->since = Utility::getTimePastSinceDate($doc->updated_at);
+
             array_push($selected_documents, $doc );
         }
         
