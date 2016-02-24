@@ -51,7 +51,6 @@ class CalendarController extends Controller
         $events = Event::where('banner_id', $storeBanner)->get(); 
 
         foreach ($events as $event) {
-            // Event::prettify($event);
             $event->prettyDateStart = Utility::prettifyDate($event->start);
             $event->prettyDateEnd = Utility::prettifyDate($event->end);
             $event->since = Utility::getTimePastSinceDate($event->start);
