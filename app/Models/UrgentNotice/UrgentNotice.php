@@ -140,7 +140,8 @@ class UrgentNotice extends Model
     public static function getUrgentNotice($id)
     {    
          $notice = UrgentNotice::find($id);
-         UrgentNotice::prettify($notice);
+         $notice->prettyDate = Utility::prettifyDate($notice->updated_at);
+         $notice->since = Utility::getTimePastSinceDate($notice->updated_at);
          return $notice;
     }
 
