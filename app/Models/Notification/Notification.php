@@ -8,6 +8,7 @@ use App\Models\Feature\Feature;
 use Carbon\Carbon;
 use Log;
 use DB;
+use App\Models\Utility\Utility;
 
 class Notification extends Model
 {
@@ -120,8 +121,8 @@ class Notification extends Model
             $n->global_folder_id = $folder_info->global_folder_id;
 
             // get the human readable days since 
-            $since = Carbon::now()->diffForHumans($n->updated_at, true);
-            $n->since = $since;
+            $n->since =  Utility::getTimePastSinceDate($n->updated_at);
+
             //adjust the verbage
             if( $n->created_at == $n->updated_at ){
                 $n->verb = "added to";
@@ -130,8 +131,7 @@ class Notification extends Model
             }            
             
             //make the timestamp on the file a little nicer
-            $updated_at = Carbon::create($n->udpated_at);
-            $n->prettyDate = $updated_at->toDayDateTimeString();
+            $n->prettyDate =  Utility::prettifyDate($n->updated_at);
         }
         return $notifications;
     }
