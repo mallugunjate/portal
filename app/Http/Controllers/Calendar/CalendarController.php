@@ -20,6 +20,7 @@ use App\Models\Communication\CommunicationTarget;
 use App\Models\UrgentNotice\UrgentNotice;
 use App\Skin;
 use App\Models\StoreInfo;
+use App\Models\Utility\Utility;
 
 class CalendarController extends Controller
 {
@@ -50,7 +51,11 @@ class CalendarController extends Controller
         $events = Event::where('banner_id', $storeBanner)->get(); 
 
         foreach ($events as $event) {
-            Event::prettify($event);   
+            // Event::prettify($event);
+            $event->prettyDateStart = Utility::prettifyDate($event->start);
+            $event->prettyDateEnd = Utility::prettifyDate($event->end);
+            $event->since = Utility::getTimePastSinceDate($event->start);
+
         }
 
         return view('site.calendar.index')
