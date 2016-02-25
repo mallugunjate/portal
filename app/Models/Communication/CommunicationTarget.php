@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Carbon\Carbon;
 use DB; 
+use App\Models\Utility\Utility;
 
 
 class CommunicationTarget extends Model
@@ -24,26 +25,12 @@ class CommunicationTarget extends Model
         				->orderBy('communications.send_at', 'desc')
         				->get();
 
-
-        CommunicationTarget::prettifyCommunications($communications);
+        foreach ($communications as $c) {
+            $c->prettyDate = Utility::prettifyDate($c->send_at);
+            $c->since = Utility::getTimePastSinceDate($c->send_at);
+        }
         return $communications;
 	}
-
-	public static function prettifyCommunications($communications)
-    {
-     foreach($communications as $c){
-          
-        // get the human readable days since send
-        $send_at = Carbon::createFromFormat('Y-m-d H:i:s', $c->send_at);
-        $since = Carbon::now()->diffForHumans($send_at, true);
-        $c->since = $since;
-
-        //make the timestamp on the message a little nicer
-
-        $c->prettyDate = $send_at->format('D j F');
-      }
-      return $communications;
-    }
 
 	public static function markAsRead($id, $store_id)
 	{

@@ -5,6 +5,7 @@ namespace App\Models\Alert;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use DB;
+use App\Models\Utility\Utility;
 
 class Alert extends Model
 {
@@ -79,11 +80,9 @@ class Alert extends Model
         }
         if (count($alerts) >0) {
             foreach($alerts as $a){
-                $updated_at = new Carbon($a->updated_at);
-
-                $since = Carbon::now()->diffForHumans($updated_at, true);
-                $a->since = $since;
-                $a->prettyDate = $updated_at->toDayDateTimeString();
+                
+                $a->prettyDate =  Utility::prettifyDate($a->updated_at);
+                $a->since =  Utility::getTimePastSinceDate($a->updated_at);
                 
             }
         }
@@ -163,18 +162,5 @@ class Alert extends Model
         }
         return;
     }
-
-    public static function prettify($alert)
-      {
-        // get the human readable days since send
-        $send_at = Carbon::createFromFormat('Y-m-d H:i:s', $alert->alert_start);
-        $since = Carbon::now()->diffForHumans($send_at, true);
-        $alert->since = $since;
-
-        //make the timestamp on the message a little nicer
-        $alert->prettyDate = $send_at->format('D j F');
-        
-        return $alerts;
-      }   
 
 }
