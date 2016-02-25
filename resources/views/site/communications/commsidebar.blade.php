@@ -22,7 +22,7 @@
                             @foreach($communicationTypes as $c)
 
                                 @if( $c->id != "1")
-                                <li><a href="#"> <span class="label label-{{ $c->colour }} pull-right">{{ $c->count }}</span> {{ $c->communication_type }}</a></li>
+                                <li><a href="/{{ Request::segment(1) }}/communication?type={{ $c->id }}"> <span class="label label-{{ $c->colour }} pull-right">{{ $c->count }}</span> {{ $c->communication_type }}</a></li>
                                 @endif 
 
                             @endforeach

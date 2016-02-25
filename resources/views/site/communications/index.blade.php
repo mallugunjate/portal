@@ -43,7 +43,11 @@
                     </div>
                 </form> --}}
                 <h2>
-                    All Messages <small>({{ $communicationCount }} unread)</small>
+                    @if($title == "")
+                        All Messages <small>({{ $communicationCount }} unread)</small>
+                    @else
+                        {{ $title }}
+                    @endif
                 </h2>
 
             </div>
