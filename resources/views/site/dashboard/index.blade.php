@@ -54,7 +54,6 @@
                       
                             <div class="ibox-content clearfix">
 
-                            
                                 @foreach($features as $feature)
                                    
                                         <div class="product-box">
