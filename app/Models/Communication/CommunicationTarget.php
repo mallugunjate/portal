@@ -32,7 +32,6 @@ class CommunicationTarget extends Model
         return $communications;
 	}
 
-
     public static function getTargetedCommunicationsByCategory($storeNumber, $type_id)
     {
         $today = Carbon::today()->toDateString();
@@ -45,25 +44,12 @@ class CommunicationTarget extends Model
                         ->orderBy('communications.send_at', 'desc')
                         ->get();
 
+        foreach ($communications as $c) {
+            $c->prettyDate = Utility::prettifyDate($c->send_at);
+            $c->since = Utility::getTimePastSinceDate($c->send_at);
+        }
 
-        CommunicationTarget::prettifyCommunications($communications);
         return $communications;
-    }
-
-	public static function prettifyCommunications($communications)
-    {
-     foreach($communications as $c){
-          
-        // get the human readable days since send
-        $send_at = Carbon::createFromFormat('Y-m-d H:i:s', $c->send_at);
-        $since = Carbon::now()->diffForHumans($send_at, true);
-        $c->since = $since;
-
-        //make the timestamp on the message a little nicer
-
-        $c->prettyDate = $send_at->format('D j F');
-      }
-      return $communications;
     }
 
 	public static function markAsRead($id, $store_id)
