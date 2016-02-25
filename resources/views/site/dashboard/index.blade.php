@@ -234,6 +234,7 @@
                                                     }
                                                 ?>
                                                 <div class="feed-element">
+                                                    
                                                     <span class="pull-left">
                                                         <h1><i class="fa {{ $icon }}"></i></h1>
                                                     </span>
@@ -243,10 +244,11 @@
                                                         <small class="text-muted">{{ $n->prettyDate }}</small>
 
                                                     </div>
-                                                    @endforeach
-                                                @endif
+                                                    
 
-                                            </div>
+                                                </div>
+                                            @endforeach
+                                            @endif
 
                                            {{--  <button class="btn btn-primary btn-block m-t"><i class="fa fa-arrow-down"></i> Show More</button> --}}
 
