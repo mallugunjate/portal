@@ -19,8 +19,8 @@ class CommunicationTarget extends Model
 
         $communications = CommunicationTarget::where('communications_target.store_id', '=', $storeNumber)
         				->join('communications', 'communications_target.communication_id', '=', 'communications.id')
-                ->where('communications.send_at' , '<=', $today)
-                ->where('communications.archive_at', '>=', $today)
+                        ->where('communications.send_at' , '<=', $today)
+                        ->where('communications.archive_at', '>=', $today)
         				->orderBy('communications.send_at', 'desc')
         				->get();
 
@@ -28,6 +28,23 @@ class CommunicationTarget extends Model
         CommunicationTarget::prettifyCommunications($communications);
         return $communications;
 	}
+
+    public static function getTargetedCommunicationsByCategory($storeNumber, $type_id)
+    {
+        $today = Carbon::today()->toDateString();
+
+        $communications = CommunicationTarget::where('communications_target.store_id', '=', $storeNumber)
+                        ->join('communications', 'communications_target.communication_id', '=', 'communications.id')
+                        ->where('communications.send_at' , '<=', $today)
+                        ->where('communications.archive_at', '>=', $today)
+                        ->where('communications.communication_type_id', '=', $type_id)
+                        ->orderBy('communications.send_at', 'desc')
+                        ->get();
+
+
+        CommunicationTarget::prettifyCommunications($communications);
+        return $communications;
+    }
 
 	public static function prettifyCommunications($communications)
     {

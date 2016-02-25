@@ -42,13 +42,22 @@ class CommunicationController extends Controller
 
         $skin = Skin::getSkin($storeBanner);
 
-        $targetedCommunications = CommunicationTarget::getTargetedCommunications($storeNumber);
-
         $communicationCount = Communication::getActiveCommunicationCount($storeNumber); 
+        
         $communicationTypes = CommunicationType::all();
 
         $urgentNoticeCount = UrgentNotice::getUrgentNoticeCount($storeNumber);
 
+        if (isset($request['type'])) {
+            $targetedCommunications = CommunicationTarget::getTargetedCommunicationsByCategory($storeNumber, $request['type']);
+            $title = \DB::table('communication_types')->where('id', $request['type'])->first()->communication_type;
+        }
+        else {
+            $targetedCommunications = CommunicationTarget::getTargetedCommunications($storeNumber);
+            $title = "";
+        }
+            
+        
         $i=0;
         foreach($targetedCommunications as $tc){
             $preview_string = strip_tags($targetedCommunications[$i]->body);
@@ -72,7 +81,8 @@ class CommunicationController extends Controller
             ->with('communicationTypes', $communicationTypes)
             ->with('communications', $targetedCommunications)
             ->with('communicationCount', $communicationCount)
-            ->with('urgentNoticeCount', $urgentNoticeCount);
+            ->with('urgentNoticeCount', $urgentNoticeCount)
+            ->with('title', $title);
     }
 
     /**
