@@ -26,6 +26,7 @@ class Notification extends Model
                                 // ->where('end', '>=', $today)
     							->orderBy('updated_at', 'desc')
     							->get();
+
                 $counter = 0;
                 foreach ($notifications as $notification) {
                     
@@ -67,6 +68,21 @@ class Notification extends Model
     	}
 
         Notification::prettifyNotifications($notifications);
+
+        $i=0;
+        foreach($notifications as $n){
+
+            $link = Utility::getModalLink($n->filename, $n->title, $n->original_extension, 0);
+            $link_with_icon = Utility::getModalLink($n->filename, $n->title, $n->original_extension, 1);
+            $icon = Utility::getIcon($n->original_extension);
+
+            $n->icon = $icon;
+            $n->link = $link;
+            $n->link_with_icon = $link_with_icon;
+
+            $i++;
+        }
+
     	return $notifications;
     }
 

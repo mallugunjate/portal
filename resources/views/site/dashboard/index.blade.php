@@ -167,80 +167,16 @@
 
                                                 @foreach($notifications as $n)
 
-                                                <?php
-                                                    $icon ="";
-                                                    switch($n->original_extension){
-                                                        case "png":
-                                                        case "jpg":
-                                                        case "gif":
-                                                        case "bmp":
-                                                            $icon = "fa-file-image-o";              
-                                                            $link = '<a href="#">';
-                                                            break;
-
-                                                        case "pdf":
-                                                            $icon = "fa-file-pdf-o";
-                                                            $link = '<a href="#" class="launchPDFViewer" data-toggle="modal" data-file="/viewer/?file=/files/'.$n->filename.'" data-target="#fileviewmodal">';
-                                                            break;
-
-                                                        case "xls":
-                                                        case "xlsx":
-                                                            $icon = "fa-file-excel-o";
-                                                            $link = '<a href="#">';
-                                                            break;
-
-                                                        case "mp4":
-                                                        case "avi":
-                                                        case "mov":
-                                                            $icon = "fa-film";
-                                                            $link = '<a href="#" class="launchVideoViewer" data-file="'.$n->filename.'" data-target="#videomodal">';              
-                                                            break;
-
-                                                        case "doc":
-                                                        case "docx":
-                                                            $icon = "fa-file-word-o";
-                                                            $link = '<a href="#">';
-                                                            break;
-
-                                                        case "mp3":
-                                                        case "wav":
-                                                            $icon = "fa-file-audio-o";
-                                                            $link = '<a href="#">';
-                                                            break;
-
-                                                        case "ppt":
-                                                        case "pptx":
-                                                            $icon = "fa-file-powerpoint-o";
-                                                            $link = '<a href="#">';
-                                                            break;
-
-                                                        case "zip":
-                                                            $icon = "fa-file-archive-o";
-                                                            $link = '<a href="#">';
-                                                            break;
-
-                                                        case "html":
-                                                        case "css":
-                                                        case "js":
-                                                            $icon = "fa-file-code-o";
-                                                            $link = '<a href="#">';
-                                                            break;
-                                                            
-                                                        default: 
-                                                            $icon = "fa-file-o";
-                                                            $link = '<a href="#">';
-                                                            break;               
-                                                    }
-                                                ?>
+    
                                                 <div class="feed-element">
                                                     
                                                     <span class="pull-left">
-                                                        <h1><i class="fa {{ $icon }}"></i></h1>
+                                                        <h1>{!! $n->icon !!}</h1>
                                                     </span>
-                                                    <div class="media-body ">
+                                                    <div class="media-body">
                                                         <small class="pull-right">{{ $n->since }} ago</small>
-                                                        <strong>{!! $link !!}{{ $n->title }}</a></strong> was {{ $n->verb }} <strong><a href="/{{ Request::segment(1) }}/document#!/{{ $n->global_folder_id }}">{{ $n->folder_name}}</a></strong>. <br>
-                                                        <small class="text-muted">{{ $n->prettyDate }}</small>
+                                                        <strong>{!! $n->link !!}</strong> was {{ $n->verb }} <strong><a href="/{{ Request::segment(1) }}/document#!/{{ $n->global_folder_id }}">{{ $n->folder_name}}</a></strong>. <br>
+                                                       <!--  <small class="text-muted">{{ $n->prettyDate }}</small> -->
 
                                                     </div>
                                                     
