@@ -162,11 +162,7 @@
 
                                             @if(count($notifications)>0)
 
-
-
-
                                                 @foreach($notifications as $n)
-
     
                                                 <div class="feed-element">
                                                     
@@ -176,13 +172,13 @@
                                                     <div class="media-body">
                                                         <small class="pull-right">{{ $n->since }} ago</small>
                                                         <strong>{!! $n->link !!}</strong> was {{ $n->verb }} <strong><a href="/{{ Request::segment(1) }}/document#!/{{ $n->global_folder_id }}">{{ $n->folder_name}}</a></strong>. <br>
-                                                       <!--  <small class="text-muted">{{ $n->prettyDate }}</small> -->
-
                                                     </div>
                                                     
 
                                                 </div>
-                                            @endforeach
+
+                                                @endforeach
+                                                
                                             @endif
 
                                            {{--  <button class="btn btn-primary btn-block m-t"><i class="fa fa-arrow-down"></i> Show More</button> --}}

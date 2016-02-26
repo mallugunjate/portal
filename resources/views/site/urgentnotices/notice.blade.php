@@ -87,26 +87,27 @@
                         <div class="attachment">
 
                         	@foreach($attached_documents as $doc)
-                       	
-                            <div class="file-box">
-                                <div class="file">
-                                    {!! $doc->link !!}
+                       	    
+                                <div class="file-box">
+                                    <div class="file">
+                                        {!! $doc->anchor_only !!}
 
-										<div class="icon">
-                                            {!! $doc->icon !!}
-                                        </div>
+    										<div class="icon">
+                                                {!! $doc->icon !!}
+                                            </div>
 
 
-                                        <div class="file-name">
-                                            <div style="font-size: 16px; padding-bottom: 10px;"> {{ $doc->title }}</div>
-                                            
-                                            <small class="clearfix"><span class="text-muted pull-left">{{ $doc->prettyDate }}</span> <span class="text-muted pull-right">{{ $doc->since }} ago</span></small>
+                                            <div class="file-name">
+                                                <div style="font-size: 16px; padding-bottom: 10px;"> {{ $doc->title }}</div>
+                                                
+                                                <small class="clearfix"><span class="text-muted pull-left">{{ $doc->prettyDate }}</span> <span class="text-muted pull-right">{{ $doc->since }} ago</span></small>
 
-                                        </div>
-                                    
+                                            </div>
+                                        </a>
+                                        
+                                    </div>
+
                                 </div>
-
-                            </div>
 
                             @endforeach
 

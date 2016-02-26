@@ -112,6 +112,7 @@ class UrgentNoticeController extends Controller
 
                 $document->link = Utility::getModalLink($document->filename, $document->title, $document->original_extension, 0);
                 $document->link_with_icon = Utility::getModalLink($document->filename, $document->title, $document->original_extension, 1);
+                $document->anchor_only =  Utility::getModalLink($document->filename, $document->title, $document->original_extension, 1, 1);
                 $document->icon = Utility::getIcon($document->original_extension);
 
                 array_push($attached_documents, $document);

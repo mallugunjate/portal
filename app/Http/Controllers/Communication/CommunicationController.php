@@ -141,6 +141,12 @@ class CommunicationController extends Controller
             $doc = Document::find($doc_id);
             $doc->folder_path = Document::getFolderPathForDocument($doc_id);
 
+            $doc->link = Utility::getModalLink($doc->filename, $doc->title, $doc->original_extension, 0);
+            $doc->link_with_icon = Utility::getModalLink($doc->filename, $doc->title, $doc->original_extension, 1);
+            $doc->anchor_only =  Utility::getModalLink($doc->filename, $doc->title, $doc->original_extension, 1, 1);
+            $doc->icon = Utility::getIcon($doc->original_extension);
+
+
             $doc->prettyDate = Utility::prettifyDate($doc->updated_at);
             $doc->since = Utility::getTimePastSinceDate($doc->updated_at);
 
