@@ -66,9 +66,9 @@ class Utility extends Model
 		return $icon;
 	}
 
-	public static function getModalLink($file, $anchortext, $extension, $withIcon=0)
+	public static function getModalLink($file, $anchortext, $extension, $withIcon=null, $justAnchor=null)
 	{
-		if($withIcon == 1){
+		if($withIcon){
 			$icon = Utility::getIcon($extension). " ";	
 		} else {
 			$icon = "";
@@ -140,32 +140,42 @@ class Utility extends Model
 		switch($class){
 
 			case "launchImageViewer":
-				$link = "<a href=''>".$icon.$anchortext."</a>";	
+				$link = "<a href=''>".$icon.$anchortext."</a>";
+				$anchorOnly = "<a href=''>";	
 				break;
 
 			case  "launchPDFViewer":
 				$link = '<a href="#" class="launchPDFViewer" data-toggle="modal" data-file="/viewer/?file=/files/'.$file.'" data-target="#fileviewmodal">'.$icon.$anchortext.'</a>';
+				$anchorOnly = '<a href="#" class="launchPDFViewer" data-toggle="modal" data-file="/viewer/?file=/files/'.$file.'" data-target="#fileviewmodal">';	
 				break;
 
 			case "launchVideoViewer":
 				$link = '<a href="#" class="launchVideoViewer" data-file="'.$file.'" data-target="#videomodal">'.$icon.$anchortext.'</a>';
+				$anchorOnly = '<a href="#" class="launchVideoViewer" data-file="'.$file.'" data-target="#videomodal">';
 				break;
 
 			case "download":
 				$link = '<a href="/files/'.$file.'" class="launchVideoViewer" data-file="'.$file.'" data-target="#videomodal">'.$icon.$anchortext.'</a>';
+				$anchorOnly = '<a href="/files/'.$file.'" class="launchVideoViewer" data-file="'.$file.'" data-target="#videomodal">';
 				break;
 
 			case "newwindow":
 				$link = '<a href="/files/'.$file.'" target="_blank">'.$icon.$anchortext.'</a>';
+				$anchorOnly = '<a href="/files/'.$file.'" target="_blank">';
 				break;	
 
 			case "nolink":
 				$link = '<a href="#">'.$icon.$anchortext.'</a>';
+				$anchorOnly = '<a href="#">';
 				break;
 
 			default:
 				$link = "";
 				break;
+		}
+
+		if($justAnchor){
+			return $anchorOnly;
 		}
 						
 		return $link;
