@@ -59,10 +59,10 @@
 
                             <div class="file-box">
                                <div class="file">
-                                    
+                                    {!! $doc->anchor_only !!}
 
                                         <div class="icon">
-                                            <i class="fa fa-file"></i>
+                                            {!! $doc->icon !!}
                                         </div>
 
 
@@ -72,6 +72,7 @@
                                             <small class="clearfix"><span class="text-muted pull-left">{{ $doc->prettyDate }}</span> <span class="text-muted pull-right">{{ $doc->since }} ago</span></small>
 
                                         </div>
+                                    </a>
                                 
                                 </div>
 
