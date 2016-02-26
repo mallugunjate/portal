@@ -109,6 +109,11 @@ class UrgentNoticeController extends Controller
             foreach ($urgent_notice_attachment_ids as $document_id) {
                 
                 $document = Document::find($document_id);
+
+                $document->link = Utility::getModalLink($document->filename, $document->title, $document->original_extension, 0);
+                $document->link_with_icon = Utility::getModalLink($document->filename, $document->title, $document->original_extension, 1);
+                $document->icon = Utility::getIcon($document->original_extension);
+
                 array_push($attached_documents, $document);
                 unset($document);
             }

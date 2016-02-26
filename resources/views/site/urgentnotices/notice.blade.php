@@ -87,81 +87,13 @@
                         <div class="attachment">
 
                         	@foreach($attached_documents as $doc)
-
-	                            <?php
-	                            $icon="";
-	                            $link="";
-	                            switch($doc->original_extension){
-
-									case "png":
-									case "jpg":
-									case "gif":
-									case "bmp":
-										$icon = "fa-file-image-o";				
-										$link = '<a href="#">';
-										break;
-
-									case "pdf":
-										$icon = "fa-file-pdf-o";
-										$link = '<a href="#" class="launchPDFViewer" data-toggle="modal" data-file="/viewer/?file=/files/'.$doc->filename.'" data-target="#fileviewmodal">';
-										break;
-
-									case "xls":
-									case "xlsx":
-										$icon = "fa-file-excel-o";
-										$link = '<a href="#">';
-										break;
-
-									case "mp4":
-									case "avi":
-									case "mov":
-										$icon = "fa-film";
-										$link = '<a href="#" class="launchVideoViewer" data-file="'.$doc->filename.'" data-target="#videomodal">';				
-										break;
-
-									case "doc":
-									case "docx":
-										$icon = "fa-file-word-o";
-										$link = '<a href="#">';
-										break;
-
-									case "mp3":
-									case "wav":
-										$icon = "fa-file-audio-o";
-										$link = '<a href="#">';
-										break;
-
-									case "ppt":
-									case "pptx":
-										$icon = "fa-file-powerpoint-o";
-										$link = '<a href="#">';
-										break;
-
-									case "zip":
-										$icon = "fa-file-archive-o";
-										$link = '<a href="#">';
-										break;
-
-									case "html":
-									case "css":
-									case "js":
-										$icon = "fa-file-code-o";
-										$link = '<a href="#">';
-										break;
-										
-									default: 
-										$icon = "fa-file-o";
-										$link = '<a href="#">';
-										break;                                        	
-
-									}
-									?>                        	
+                       	
                             <div class="file-box">
                                 <div class="file">
-                                    {!! $link !!}
+                                    {!! $doc->link !!}
 
 										<div class="icon">
-                                            <i class="fa {{ $icon }}"></i>
+                                            {!! $doc->icon !!}
                                         </div>
 
 
@@ -171,7 +103,7 @@
                                             <small class="clearfix"><span class="text-muted pull-left">{{ $doc->prettyDate }}</span> <span class="text-muted pull-right">{{ $doc->since }} ago</span></small>
 
                                         </div>
-                                    </a>
+                                    
                                 </div>
 
                             </div>
@@ -204,7 +136,8 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
-        });     
+        });  
+  
     </script>
 <!--     <script type="text/javascript" src="/js/custom/site/communications/markAsRead.js"></script> -->
 

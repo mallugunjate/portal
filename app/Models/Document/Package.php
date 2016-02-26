@@ -8,6 +8,7 @@ use App\Models\Document\Document;
 use App\Models\Tag\Tag;
 use App\Models\Tag\ContentTag;
 use App\Models\UserSelectedBanner;
+use App\Models\Utility\Utility;
 
 class Package extends Model
 {
@@ -102,6 +103,9 @@ class Package extends Model
     		$document = Document::where('id', $list_item->document_id)->first();
     		$path = Document::getFolderPathForDocument($document->id); 
     		$document["folder_path"] = $path;
+            $document->link = Utility::getModalLink($document->filename, $document->title, $document->original_extension, 0);
+            $document->link_with_icon = Utility::getModalLink($document->filename, $document->title, $document->original_extension, 1);
+            $document->icon = Utility::getIcon($document->original_extension);
     		array_push($documents, $document);
     	}
     	return ( $documents );

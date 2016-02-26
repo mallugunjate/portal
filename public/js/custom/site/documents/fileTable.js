@@ -105,82 +105,12 @@ var fileFill = function(data)
 
 			var icon ="";
 			var row ="";
-			
-
-			switch(i.original_extension){
-				case "png":
-				case "jpg":
-				case "gif":
-				case "bmp":
-					icon = "fa-file-image-o";
-					row = '<tr> <td class="mail-subject"><a href="#" class="launchPDFViewer" data-toggle="modal" data-file="/viewer/?file=/files/'+i.filename+'" data-target="#fileviewmodal"><i class="fa '+ icon +'"></i> ' + i.title +'</a></td>'+
-			//$('#file-table').append('<tr> <td><a data-toggle="modal" data-target="#fileviewmodal" href="/viewer/?file=/files/'+i.filename+'"><i class="fa '+ icon +'"></i> ' + i.title +'</a></td>'+				
-										' <td>'+ i.description + '</td>'+
-										' <td>'+ i.created_at +'</td>'+
-										' <td>'+ i.start +'</td>' +
-										' <td>'+ i.end +'</td>' +
-										' </tr>'					
-					break;
-
-				case "pdf":
-					icon = "fa-file-pdf-o";
-					row = '<tr> <td class="mail-subject"><a href="#" class="launchPDFViewer" data-toggle="modal" data-file="/viewer/?file=/files/'+i.filename+'" data-target="#fileviewmodal"><i class="fa '+ icon +'"></i> ' + i.title +'</a></td>'+
-			//$('#file-table').append('<tr> <td><a data-toggle="modal" data-target="#fileviewmodal" href="/viewer/?file=/files/'+i.filename+'"><i class="fa '+ icon +'"></i> ' + i.title +'</a></td>'+				
-										' <td>'+ i.description + '</td>'+
-										' <td>'+ i.created_at +'</td>'+
-										' <td>'+ i.start +'</td>' +
-										' <td>'+ i.end +'</td>' +
-										' </tr>'
-					break;
-
-				case "xls":
-				case "xlsx":
-					icon = "fa-file-excel-o";
-					break;
-
-				case "mp4":
-				case "avi":
-				case "mov":
-					icon = "fa-film";
-					row = '<tr> <td class="mail-subject"><a href="#" class="launchVideoViewer" data-file="'+i.filename+'" data-target="#videomodal"><i class="fa '+ icon +'"></i> ' + i.title +'</a></td>'+
-			//$('#file-table').append('<tr> <td><a data-toggle="modal" data-target="#fileviewmodal" href="/viewer/?file=/files/'+i.filename+'"><i class="fa '+ icon +'"></i> ' + i.title +'</a></td>'+				
-										' <td>'+ i.description + '</td>'+
-										' <td>'+ i.created_at +'</td>'+
-										' <td>'+ i.start +'</td>' +
-										' <td>'+ i.end +'</td>' +
-										' <td></td> </tr>'					
-					break;
-
-				case "doc":
-				case "docx":
-					icon = "fa-file-word-o";
-					break;
-
-				case "mp3":
-				case "wav":
-					icon = "fa-file-audio-o";
-					break;
-
-				case "ppt":
-				case "pptx":
-					icon = "fa-file-powerpoint-o";
-					break;
-
-				case "zip":
-					icon = "fa-file-archive-o";
-					break;
-
-				case "html":
-				case "css":
-				case "js":
-					icon = "fa-file-code-o";
-					break;
-					
-				default: 
-					icon = "fa-file-o";
-					break;
-			}
-
+			var row = '<tr> <td class="mail-subject">'+ i.link_with_icon + '</td>'+
+							' <td>'+ i.description + '</td>'+
+							' <td>'+ i.created_at +'</td>'+
+							' <td>'+ i.start +'</td>' +
+							' <td>'+ i.end +'</td>' +
+							' <td></td> </tr>'		
 			$('#file-table').append(row);
 		});
 

@@ -23,7 +23,6 @@ class Notification extends Model
     			$notifications = Document::where('banner_id', $bannerId)
     							->where('updated_at', '>=', $dateSince)
                                 ->where('start', '<=', $today)
-                                // ->where('end', '>=', $today)
     							->orderBy('updated_at', 'desc')
     							->get();
 
@@ -36,7 +35,6 @@ class Notification extends Model
                     }
                     $counter++;
                 }  
-                // $notifications = array_values($notifications);
 
 
     			break;
@@ -44,8 +42,6 @@ class Notification extends Model
     			$notifications = Document::where('banner_id', $bannerId)
     							->orderBy('updated_at', 'desc')
                                 ->where('start', '<=', $today)
-                                // ->where('end', '>=', $today)
-    							// ->take($windowSize)
     							->get();
 
                 $counter = 0;
@@ -125,6 +121,14 @@ class Notification extends Model
         }
 
         Notification::prettifyNotifications($notifications);
+        foreach($notifications as $n){
+
+            $n->link = Utility::getModalLink($n->filename, $n->title, $n->original_extension, 0);
+            $n->link_with_icon = Utility::getModalLink($n->filename, $n->title, $n->original_extension, 1);
+            $n->icon = Utility::getIcon($n->original_extension);
+
+        }
+
         return $notifications;
     }
 
