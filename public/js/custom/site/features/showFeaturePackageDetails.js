@@ -25,12 +25,7 @@ var getFolderDocuments = function(global_folder_id, packageId) {
 	.done(function(data){
 		console.log(data);
 		_.each(data.files, function(i){
-			$(".package-folder-document-listing[data-packageid= " + packageId + "]").empty().append(
-				'<div class="package-folder-document launchPDFViewer" data-toggle="modal" id="package-folder-document-' + i.id +'" data-packageDocumentId="'+ i.id+'"  data-file="/viewer/?file=/files/' + i.filename+ '" data-target="#fileviewmodal">'+				
-				'<i class="fa fa-file-pdf-o"></i> ' + i.original_filename +
-				'</div>'
-
-			)
+			$(".package-folder-document-listing[data-packageid= " + packageId + "]").empty().append( i.link_with_icon );
 		});
 		$(".package-folder-document-listing[data-packageid= " + packageId + "]").removeClass('hidden');
 		$(".package-document-listing[data-packageid= " + packageId + "]").addClass('hidden');

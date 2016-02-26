@@ -18,6 +18,7 @@ use App\Skin;
 use App\Models\Alert\Alert;
 use App\Models\Alert\AlertType;
 use App\Models\Document\Document;
+use App\Models\Utility\Utility;
 
 class AlertController extends Controller
 {
@@ -57,79 +58,25 @@ class AlertController extends Controller
             $alerts= array_values($alerts);
         }
         
-        $i = 0;
+        
         foreach($alerts as $a){
             $doc = Document::getDocumentById($a->document_id);
             $alertType = AlertType::find($a->alert_type_id);
 
-            switch($doc->original_extension){
-
-
-                case "png":
-                case "jpg":
-                case "gif":
-                case "bmp":
-                    $alerts[$i]->icon = "<i class='fa fa-file-image-o'></i>";
-                    break;
-
-                case "pdf":
-                    $alerts[$i]->icon = "<i class='fa fa-file-pdf-o'></i>";
-                    break;
-
-                case "xls":
-                case "xlsx":
-                    $alerts[$i]->icon = "<i class='fa fa-file-excel-o'></i>";
-                    break;
-
-                case "mp4":
-                case "avi":
-                case "mov":
-                    $alerts[$i]->icon = "<i class='fa fa-film'></i>";
-                    break;
-
-                case "doc":
-                case "docx":
-                    $alerts[$i]->icon = "<i class='fa fa-file-word-o'></i>";
-                    break;
-
-                case "mp3":
-                case "wav":
-                    $alerts[$i]->icon = "<i class='fa fa-file-audio-o'></i>";
-                    break;
-
-                case "ppt":
-                case "pptx":
-                    $alerts[$i]->icon = "<i class='fa fa-file-powerpoint-o'></i>";
-                    break;
-
-                case "zip":
-                    $alerts[$i]->icon = "<i class='fa fa-file-archive-o'></i>";
-                    break;
-
-                case "html":
-                case "css":
-                case "js":
-                    $alerts[$i]->icon = "<i class='fa fa-file-code-o'></i>";
-                    break;
-                    
-                default: 
-                    $alerts[$i]->icon = "<i class='fa fa-file-o'></i>";
-                    break;
-
-            }
-
-            $alerts[$i]->title = $doc->title;
-            $alerts[$i]->filename = $doc->filename;
-            $alerts[$i]->description = $doc->description;
-            $alerts[$i]->original_extension = $doc->original_extension;
-            $alerts[$i]->alertTypeName = $alertType->name;
-            $i++;
+            $a->icon = Utility::getIcon($doc->original_extension);
+            $a->link_with_icon = Utility::getModalLink($doc->filename, $doc->title, $doc->original_extension, 1);
+            $a->link = Utility::getModalLink($doc->filename, $doc->title, $doc->original_extension, 0);
+            $a->title = $doc->title;
+            $a->filename = $doc->filename;
+            $a->description = $doc->description;
+            $a->original_extension = $doc->original_extension;
+            $a->alertTypeName = $alertType->name;
+            
         }        
 
-        $i = 0;
+        
         foreach($alertTypes as $at){
-            $alertTypes[$i]->count = Alert::getActiveAlertCountByCategory($storeNumber, $at->id);
-            $i++;
+            $at->count = Alert::getActiveAlertCountByCategory($storeNumber, $at->id);
         }        
 
         return view('site.alerts.index')

@@ -104,7 +104,7 @@
                                     <div  class="package-document-listing hidden" data-packageid= {{$package->id}} >
 
                                         @foreach ($package_document_listing as $document)
-                                        <div class="package_documents launchPDFViewer" data-toggle="modal" id="package-document-{{$document->id}}" data-packageDocumentId={{$document->id}} data-file="/viewer/?file=/files/{{$document->filename}}" data-target="#fileviewmodal"><i class="fa fa-file-pdf-o"></i>  {{$document->original_filename}} </div>
+                                        {!! $document->link_with_icon !!}
                                         
                                            
                                         @endforeach
@@ -153,7 +153,9 @@
 
     </script>
 
+    @include('site.includes.modal')
     @include('site.includes.bugreport')
+
 
 </body>
 </html> 
