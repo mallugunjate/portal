@@ -64,6 +64,15 @@ class Document extends Model
                     $file->link = Utility::getModalLink($file->filename, $file->title, $file->original_extension, 0);
                     $file->link_with_icon = Utility::getModalLink($file->filename, $file->title, $file->original_extension, 1);
                     $file->icon = Utility::getIcon($file->original_extension);
+                    $file->prettyDateCreated = Utility::prettifyDate($file->created_at);
+                    $file->prettyDateStart = Utility::prettifyDate($file->start);
+                    $file->prettyDateEnd = Utility::prettifyDate($file->end);
+
+                    $file->is_alert = '';
+                    if (Alert::where('document_id', $file->id)->first()) {
+                        $file->is_alert = Utility::getAlertIcon();
+                    }
+
                 }
                 return $files;
             }
