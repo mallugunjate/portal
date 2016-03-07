@@ -181,10 +181,17 @@ class Utility extends Model
 		return $link;
 	}
 
+	public static function getAlertIcon()
+	{
+		return "<i class='fa fa-bell-o'></i>";
+	}
 
 	public static function prettifyDate($date)
 	{
-		$prettyDate = Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('D j F');
+		if($date == '0000-00-00 00:00:00') {
+			return "";
+		}
+		$prettyDate = Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('D, M d, Y h:i a');
 		return $prettyDate;
 	}
 
