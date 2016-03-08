@@ -139,6 +139,34 @@
 			                    </div>
 
 
+			                    <div class="ibox">
+			                        <div class="ibox-title">
+			                            <h5>Order Featured Content</h5>
+
+			                            <div class="ibox-tools">
+
+			                                <a href="/admin/feature" class="btn btn-primary btn"><i class="fa fa-pencil"></i> Edit Featured Content Pages</a>
+			                            </div>
+			                        </div>
+			                        <div class="ibox-content">
+
+										<div class="dd" id="featuredcontentlist">
+			                                <ol class="dd-list">
+			                                	{{-- <div class="dd-placeholder" style="height: 42px;"></div> --}}
+			                                    @foreach($features as $f)
+			                                 
+			                                    <li class="dd-item" data-id="{{ $f->id }}">
+			                                        	<span class="pull-left"><div class="dd-handle"><i class="fa fa-bars"></i></div></span>
+			                                            {{-- <span class="pull-right"><a data-event="" id="" class="event-delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a></span> --}}
+			                                            <img src="/images/featured-covers/{{ $f->thumbnail }}" height="30" width="30" /><span class="client-link" style="margin:0px 10px;">{{ $f->title }}</span>
+			                                     </li>
+			                                    @endforeach
+			                                </ol>
+			                            </div> 
+			                        </div>
+
+			                    </div>
+			                    
 
 			                    <div class="ibox">
 			                        <div class="ibox-title">
@@ -195,33 +223,7 @@
 
 			                    </div>
 
-			                    <div class="ibox">
-			                        <div class="ibox-title">
-			                            <h5>Order Featured Content</h5>
-
-			                            <div class="ibox-tools">
-
-			                                <a href="/admin/feature" class="btn btn-primary btn"><i class="fa fa-pencil"></i> Edit Featured Content Pages</a>
-			                            </div>
-			                        </div>
-			                        <div class="ibox-content">
-
-										<div class="dd" id="featuredcontentlist">
-			                                <ol class="dd-list">
-			                                	{{-- <div class="dd-placeholder" style="height: 42px;"></div> --}}
-			                                    @foreach($features as $f)
-			                                 
-			                                    <li class="dd-item" data-id="{{ $f->id }}">
-			                                        	<span class="pull-left"><div class="dd-handle"><i class="fa fa-bars"></i></div></span>
-			                                            {{-- <span class="pull-right"><a data-event="" id="" class="event-delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a></span> --}}
-			                                            <img src="/images/featured-covers/{{ $f->thumbnail }}" height="30" width="30" /><span class="client-link" style="margin:0px 10px;">{{ $f->title }}</span>
-			                                     </li>
-			                                    @endforeach
-			                                </ol>
-			                            </div> 
-			                        </div>
-
-			                    </div>		                    
+		                    
 
 			                    <div class="ibox">
 			                        <div class="ibox-title">
