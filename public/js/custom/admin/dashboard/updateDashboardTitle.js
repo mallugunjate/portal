@@ -34,7 +34,7 @@ $(".update-dashboard").on('click', function(){
 		        console.log(data); 
 		        $("#dashboard_title").val(data.title);
 		        $("#dashboard_subtitle").val(data.subtitle);
-				swal("Nice!", "Dashboard Title updated", "success");
+				swal("Nice!", "Dashboard updated", "success");
 
 		    }
 		}).done(function(response){

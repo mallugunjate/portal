@@ -45,7 +45,7 @@
 			                <div class="col-lg-12">
 			                    <div class="ibox">
 			                        <div class="ibox-title">
-			                            <h5>Title &amp; Branding</h5>
+			                            <h5>Branding</h5>
 
 			                            <div class="ibox-tools">
 
@@ -56,44 +56,48 @@
 
 			                       		<input type="text" id="dashboard_title" hidden value="{{$banner->title}}">
 										<input type="text" id="dashboard_subtitle" hidden value="{{$banner->subtitle}}">
-										<div class="row" >
-												<div class="form-group">
+										<div class="row">
 
-													<div class="col-sm-2">
-													<label class="control_label" for="dashboard_title">Title <span class="req">*</span></label>
+												<div class="col-md-6">
+
+													<div class="form-group">
+
+														<div class="col-sm-2">
+														<label class="control_label" for="dashboard_title">Title <span class="req">*</span></label>
+														</div>
+														<div class="col-sm-offset-2">
+														{!! Form::input('text', 'dashboard_title', $banner->title , ['class' => 'form-control'] ) !!}
+														</div>	
+														
 													</div>
-													<div class="col-sm-offset-2">
-													{!! Form::input('text', 'dashboard_title', $banner->title , ['class' => 'form-control'] ) !!}
-													</div>	
+													<div class="form-group">
+														<div class="col-sm-2">
+															{!! Form::label('dashboard_subtitle', 'Subtitle', ['class' => 'control_label']) !!}
+														</div>
+														<div class="col-sm-offset-2">
+															{!! Form::input('text', 'dashboard_subtitle', $banner->subtitle, ['class' => 'form-control'] ) !!}
+														</div>
+
+													</div>
 													
 												</div>
-												<div class="form-group">
-													<div class="col-sm-2">
-														{!! Form::label('dashboard_subtitle', 'Subtitle', ['class' => 'control_label']) !!}
-													</div>
-													<div class="col-sm-offset-2">
-														{!! Form::input('text', 'dashboard_subtitle', $banner->subtitle, ['class' => 'form-control'] ) !!}
-													</div>
 
-												</div>
-												
-												<div class="form-group">
-					                                <div class="ibox-tools">
-					                               		<button class="btn btn-white" id="cancel-dashboard-title-update" ><i class="fa fa-close"></i> Cancel</a>
-					                                    <button class="update-dashboard btn btn-primary" type="submit"><i class="fa fa-check"></i> Save changes</button>
-					                                </div>
-					                            </div>
-												
-										</div>
-			                        	<div class="row">
-			                        		<div class="col-sm-2">
-			                        		<label class="control-label">Change Branding</label>
-			                        		
-			                        		</div>
-			                        		<div class="col-lg-6">
+												<div class="col-md-6">
 
-			                        		<h4>Current Background</h4>
-											<img id="background-preview" src="/images/dashboard-banners/{{ $banner->background }}" width="200" />				                        			
+													<label class="control-label">Background</label>
+
+													<div class="row">
+														<div class="col-sm-8">
+															<img id="background-preview" src="/images/dashboard-banners/{{ $banner->background }}" width="100%" style="padding-bottom: 15px;" />
+															
+															<input id="dashboardbackground" name="dashboardbackground[]" type="file" multiple class="file-loading">
+															<input type="hidden" value="{{ $banner->id }}" name="banner_id" id="banner_id">
+
+														</div>
+														<div class="col-sm-4">
+															<small><p>For best results, background images should have an aspect ratio of 16:9 and be at least 1000 pixels wide.</p></small>
+														</div>
+													</div>
 
 {{--
 		                        		<h4>Choose from Existing</h4>	
@@ -109,14 +113,24 @@
 			                        		@endforeach 
 			                        		<br /><br />
 
---}}										
+--}}		
+													
+													
+									
+												</div>
+										</div>
 
-			                        			
-												<h4>Upload New Background</h4>	
-												<input id="dashboardbackground" name="dashboardbackground[]" type="file" multiple class="file-loading">
-												<input type="hidden" value="{{ $banner->id }}" name="banner_id" id="banner_id">
-												<p><i>For best results, background images should have an aspect ratio of 16:9 and be at least 1000 pixels wide.</i></p>
-			                        		</div>
+			                        	<div class="row">
+			    
+											<div class="form-group">
+				                                <div class="ibox-tools">
+				                                	<br /><br />
+				                               		<button class="btn btn-white" id="cancel-dashboard-title-update" ><i class="fa fa-undo"></i> Undo</button>
+				                                    <button class="update-dashboard btn btn-primary" type="submit"><i class="fa fa-floppy-o"></i> Save changes</button>
+				                                </div>
+				                            </div>
+
+
 			                        	</div>
 
 			                            
