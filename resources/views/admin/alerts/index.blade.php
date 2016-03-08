@@ -28,8 +28,11 @@
                         <li>
                             <a href="/admin">Home</a>
                         </li>
+                        <li>
+                            <a>Alerts</a>
+                        </li>
                         <li class="active">
-                            <strong>Alerts</strong>
+                            <strong>Manage Alerts</strong>
                         </li>
                     </ol>
                 </div>
@@ -121,7 +124,6 @@
 
 				<script type="text/javascript" src="/js/custom/admin/alerts/deleteAlert.js"></script>
 				@include('site.includes.bugreport')
-
 
 
 			</body>
