@@ -39,9 +39,11 @@ class DashboardAdminController extends Controller
 
         $features = Feature::where('banner_id', $banner_id)->orderBy('order')->get();
 
+        $oldBackgrounds = Banner::getOldBannerBackgrounds($banner_id);
 
         return view('admin.dashboard.index')
                 ->with('banner', $banner)
+                ->with('oldBackgrounds', $oldBackgrounds)
                 ->with('banners', $banners)
                 ->with('features', $features)
                 ->with('quicklinks', $quicklinks);  

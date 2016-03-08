@@ -45,7 +45,7 @@
 			                <div class="col-lg-12">
 			                    <div class="ibox">
 			                        <div class="ibox-title">
-			                            <h5>Branding</h5>
+			                            <h5>Title &amp; Branding</h5>
 
 			                            <div class="ibox-tools">
 
@@ -53,30 +53,8 @@
 			                            </div>
 			                        </div>
 			                        <div class="ibox-content">
-			                        	<div class="row">
-			                        		<div class="col-lg-6">
-			                        		<img id="background-preview" src="/images/dashboard-banners/{{ $banner->background }}" width="400" />
-			                        		</div>
-			                        		<div class="col-lg-6">
-			                        	
-												<label class="control-label">Change Branding</label>
-												<input id="dashboardbackground" name="dashboardbackground[]" type="file" multiple class="file-loading">
-												<input type="hidden" value="{{ $banner->id }}" name="banner_id" id="banner_id">
-			                        		</div>
-			                        	</div>
 
-			                            
-			                        </div>
-
-			                    </div>
-
-			                    <div class="ibox">
-			                        <div class="ibox-title">
-			                            <h5>Dashboard Title</h5>
-			                        </div>
-			                        <div class="ibox-content">
-
-			                        	<input type="text" id="dashboard_title" hidden value="{{$banner->title}}">
+			                       		<input type="text" id="dashboard_title" hidden value="{{$banner->title}}">
 										<input type="text" id="dashboard_subtitle" hidden value="{{$banner->subtitle}}">
 										<div class="row" >
 												<div class="form-group">
@@ -103,14 +81,50 @@
 					                                <div class="ibox-tools">
 					                               		<button class="btn btn-white" id="cancel-dashboard-title-update" ><i class="fa fa-close"></i> Cancel</a>
 					                                    <button class="update-dashboard btn btn-primary" type="submit"><i class="fa fa-check"></i> Save changes</button>
-
 					                                </div>
 					                            </div>
 												
-										</div><!--latest-update row -->
-			                        </div><!-- ibox-content ends --> 
+										</div>
+			                        	<div class="row">
+			                        		<div class="col-sm-2">
+			                        		<label class="control-label">Change Branding</label>
+			                        		
+			                        		</div>
+			                        		<div class="col-lg-6">
 
-			                    </div><!-- ibox ends -->	
+			                        		<h4>Current Background</h4>
+											<img id="background-preview" src="/images/dashboard-banners/{{ $banner->background }}" width="200" />				                        			
+
+{{--
+		                        		<h4>Choose from Existing</h4>	
+			                        		@foreach($oldBackgrounds as $ob)
+			                        			<div class="backgroundOption">
+			                        				@if( "images/dashboard-banners/" . $banner->background == $ob )
+			                        				<i class="fa fa-check-circle-o" style="color: lime; font-size: 48px;"></i>
+			                        				@endif
+
+			                        				<img src="/{{ $ob }}"  height="100"/>
+
+			                        			</div>
+			                        		@endforeach 
+			                        		<br /><br />
+
+--}}										
+
+			                        			
+												<h4>Upload New Background</h4>	
+												<input id="dashboardbackground" name="dashboardbackground[]" type="file" multiple class="file-loading">
+												<input type="hidden" value="{{ $banner->id }}" name="banner_id" id="banner_id">
+												<p><i>For best results, background images should have an aspect ratio of 16:9 and be at least 1000 pixels wide.</i></p>
+			                        		</div>
+			                        	</div>
+
+			                            
+			                        </div>
+
+			                    </div>
+
+
 
 			                    <div class="ibox">
 			                        <div class="ibox-title">
