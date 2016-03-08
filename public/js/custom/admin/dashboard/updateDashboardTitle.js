@@ -1,9 +1,7 @@
-
 $("#cancel-dashboard-title-update").on('click', function(){
 	
 	var dashboard_title = $("#dashboard_title").val();
 	var dashboard_subtitle = $("#dashboard_subtitle").val();
-
 
 	$('input[name="dashboard_title"]').val(dashboard_title);
 	$('input[name="dashboard_subtitle"]').val(dashboard_subtitle);
@@ -36,7 +34,7 @@ $(".update-dashboard").on('click', function(){
 		        console.log(data); 
 		        $("#dashboard_title").val(data.title);
 		        $("#dashboard_subtitle").val(data.subtitle);
-				swal("Nice!", "Dashboard updated", "success");
+				swal("Nice!", "Dashboard Title updated", "success");
 
 		    }
 		}).done(function(response){
