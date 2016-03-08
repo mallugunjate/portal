@@ -205,7 +205,14 @@
         <script type="text/javascript">
             $(".chosen").chosen({
               width:'75%'
-            })
+            });
+            $('.input-daterange').datepicker({
+                format: 'yyyy-mm-dd',
+                keyboardNavigation: false,
+                forceParse: false,
+                autoclose: true
+            });             
+
         </script>
         <script type="text/javascript" src="/js/custom/admin/alerts/createAlert.js"></script>
         @include('site.includes.bugreport')
