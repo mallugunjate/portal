@@ -16,6 +16,7 @@ use App\Models\Document\Document;
 use App\Models\Document\Package;
 use App\Models\StoreInfo;
 use App\Models\UrgentNotice\UrgentNotice;
+use App\Models\Utility\Utility;
 
 class FeatureController extends Controller
 {
@@ -76,14 +77,14 @@ class FeatureController extends Controller
         $selected_documents = array();
         foreach ($feature_documents as $doc_id) {
             
-            $doc = Document::find($doc_id);
-            $doc->folder_path = Document::getFolderPathForDocument($doc_id);
+            $doc                = Document::find($doc_id);
+            $doc->folder_path   = Document::getFolderPathForDocument($doc_id);
+            $doc->link          = Utility::getModalLink($doc->filename, $doc->title, $doc->original_extension, 0);
+            $doc->link_with_icon= Utility::getModalLink($doc->filename, $doc->title, $doc->original_extension, 1);
+            $doc->icon          = Utility::getIcon($doc->original_extension);
 
-            $updated_at = new Carbon($doc->updated_at);
-            $since = Carbon::now()->diffForHumans($updated_at, true);
-            $doc->since = $since;
-           // $doc->prettyDate = $updated_at->toDayDateTimeString();
-            $doc->prettyDate = $updated_at->format('D, j F');
+            $doc->prettyDate = Utility::prettifyDate($doc->updated_at);
+            $doc->since = Utility::getTimePastSinceDate($doc->updated_at);
             array_push($selected_documents, $doc );
         }
         

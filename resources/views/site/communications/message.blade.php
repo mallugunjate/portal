@@ -5,6 +5,7 @@
     @section('title', 'Communications')
     @include('site.includes.head')
     <meta name="csrf-token" content="{!! csrf_token() !!}"/>
+    <link rel="stylesheet" type="text/css" href="/css/custom/site/feature.css">
 </head>	
 
 <body class="fixed-navigation">
@@ -46,81 +47,83 @@
                 <div class="mail-box">
 
 
-                <div class="mail-body">
-                    {!! $communication->body !!}
-                </div>
-{{--                     <div class="mail-attachment">
-                        <p>
-                            <span><i class="fa fa-paperclip"></i> 2 attachments - </span>
-                            <a href="#">Download all</a>
-                            |
-                            <a href="#">View all images</a>
-                        </p>
+                    <div class="mail-body">
+                        {!! $communication->body !!}
+                    </div>
 
-                        <div class="attachment">
+                    <div class="mail-attachment">
+                    <h3>
+                        <span><i class="fa fa-paperclip"></i> {{ count($communication_documents) }} Document</span>
+                    </h3>
+                    @foreach($communication_documents as $doc)
+
                             <div class="file-box">
-                                <div class="file">
-                                    <a href="#">
-                                        <span class="corner"></span>
+                               <div class="file">
+                                    {!! $doc->anchor_only !!}
 
                                         <div class="icon">
-                                            <i class="fa fa-file"></i>
+                                            {!! $doc->icon !!}
                                         </div>
+
+
                                         <div class="file-name">
-                                            Document_2014.doc
-                                            <br>
-                                            <small>Added: Jan 11, 2014</small>
+                                            <div style="font-size: 16px; padding-bottom: 10px;"> {{ $doc->title }}</div>
+                                            
+                                            <small class="clearfix"><span class="text-muted pull-left">{{ $doc->prettyDate }}</span> <span class="text-muted pull-right">{{ $doc->since }} ago</span></small>
+
                                         </div>
                                     </a>
+                                
                                 </div>
 
+                            </div>                    
+                    
+                    @endforeach
+                    <div class="clearfix"></div>
+                    </div>
+
+                    <div class="mail-attachment">
+                        <h3>
+                            <span><i class="fa fa-paperclip"></i> {{ count($communication_packages) }} Packages</span>
+                        </h3>
+            
+                        <div class="row">
+                            <div class="col-lg-4 package-listing">
+                            @foreach($communication_packages as $package)
+
+                                @include('site.feature.package-listing', ['package'=>$package])
+                                
+                            @endforeach
                             </div>
-                            <div class="file-box">
-                                <div class="file">
-                                    <a href="#">
-                                        <span class="corner"></span>
 
-                                        <div class="image">
-                                            <img alt="image" class="img-responsive" src="img/p1.jpg">
-                                        </div>
-                                        <div class="file-name">
-                                            Italy street.jpg
-                                            <br>
-                                            <small>Added: Jan 6, 2014</small>
-                                        </div>
-                                    </a>
+                            <div class="col-lg-8 package-document-container">
 
-                                </div>
+
+                                @foreach($communication_packages as $package)
+                                    <?php $package_document_listing = $package['details']['package_documents']; ?>
+                                    
+                                    <div  class="package-document-listing hidden" data-packageid= {{$package->id}} >
+
+                                        @foreach ($package_document_listing as $document)
+                                        {!! $document->link_with_icon !!}
+                                        
+                                           
+                                        @endforeach
+                                    </div>
+
+                                    <div class="package-folder-document-listing hidden" data-packageid = {{$package->id}}>
+
+                                    </div>
+
+                                @endforeach
                             </div>
-                            <div class="file-box">
-                                <div class="file">
-                                    <a href="#">
-                                        <span class="corner"></span>
-
-                                        <div class="image">
-                                            <img alt="image" class="img-responsive" src="img/p2.jpg">
-                                        </div>
-                                        <div class="file-name">
-                                            My feel.png
-                                            <br>
-                                            <small>Added: Jan 7, 2014</small>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                        </div>
-                        <div class="mail-body text-right tooltip-demo">
-                                <a class="btn btn-sm btn-white" href="mail_compose.html"><i class="fa fa-reply"></i> Reply</a>
-                                <a class="btn btn-sm btn-white" href="mail_compose.html"><i class="fa fa-arrow-right"></i> Forward</a>
-                                <button title="" data-placement="top" data-toggle="tooltip" type="button" data-original-title="Print" class="btn btn-sm btn-white"><i class="fa fa-print"></i> Print</button>
-                                <button title="" data-placement="top" data-toggle="tooltip" data-original-title="Trash" class="btn btn-sm btn-white"><i class="fa fa-trash-o"></i> Remove</button>
-                        </div>
-                        <div class="clearfix"></div>
+                        </div>               
+                    
+                    <div class="clearfix"></div>
+                    </div>
 
 
-                </div> --}}
+
             </div>            
 
                 
@@ -134,18 +137,26 @@
     <script type="text/javascript" src="/js/plugins/fullcalendar/moment.min.js"></script>
     
     @include('site.includes.scripts')
-    <script type="text/javascript">
+   
+    <script type="text/javascript" src="/js/custom/tree.js"></script>
+    <script type="text/javascript" src="/js/custom/site/communications/markAsRead.js"></script>
+    <script type="text/javascript" src="/js/vendor/underscore-1.8.3.js"></script>
+    <script type="text/javascript" src="/js/custom/site/features/showFeaturePackageDetails.js"></script>
+
+     <script type="text/javascript">
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+
+        $(".tree").treed({openedClass : 'fa-folder-open', closedClass : 'fa-folder'});
+
     </script>
-    <script type="text/javascript" src="/js/custom/site/communications/markAsRead.js"></script>
 
- 
-
+    @include('site.includes.modal')
     @include('site.includes.bugreport')
+
 
 </body>
 </html> 

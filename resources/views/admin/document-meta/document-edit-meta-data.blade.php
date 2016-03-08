@@ -73,7 +73,20 @@
                                 {!! Form::select('tags[]', $tags, $selected_tags, ['class'=>'chosen', 'multiple'=>'true']) !!}
                               </div> --}}
                               
-                              
+                               <div class="form-group">
+
+                                      <label class="col-sm-2 control-label">Start &amp; End</label>
+
+                                      <div class="col-sm-10">
+                                          <div class="input-daterange input-group" id="datepicker">
+                                              
+                                              <input type="text" class="input-sm form-control" name="document_start" id="document_start" value="{{$document->start}}" />
+                                              <span class="input-group-addon">to</span>
+                                              <input type="text" class="input-sm form-control" name="document_end" id="document_end" value="{{$document->end}}" />
+                                              
+                                          </div>
+                                      </div>
+                              </div>
 
                       </form>
                   </div>
@@ -188,8 +201,6 @@
           });
 
         </script>
-
-        <script type="text/javascript" src="/js/custom/admin/global/bannerSelector.js"></script>
         <script type="text/javascript" src="/js/plugins/chosen/chosen.jquery.js"></script>  
         <script type="text/javascript">
             $(".chosen").chosen({

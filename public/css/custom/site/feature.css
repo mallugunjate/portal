@@ -4,12 +4,12 @@
 .feature_package, .package-folder-document, .package-document-listing , .feature_documents {
 	cursor: pointer;
 }
-ul{
+
+.feature_package ul{
 	margin-left: -30px;
 }
-li{
+
+.feature_package li{
 	list-style:none;
 }
-.modal-lg{ height: 95%; width: 80% !important; padding: 0; }
-    .modal-content{ height: 100% !important;}
-    .modal-body{ padding: 0; margin: 0; height: 100% !important; }
+

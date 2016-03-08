@@ -39,39 +39,21 @@
                     <div class="col-lg-12">
                         <div class="ibox float-e-margins">
                 
-                        <div class="ibox-content">
-                            <div id="calendar"></div>                        
+                            <div class="ibox-content">
+                                <div id="calendar"></div>                        
+                            </div>
                         </div>
-
+                        
                     </div>
                 </div>
          </div>
-         <div id="fullCalModal" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                        <div class="modal-header">
-                            
-                            <h4 id="modalTitle" class="modal-title"></h4>
-                        </div>
-                        <div id="modalBody" class="modal-body"></div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
-                </div>
-            </div>
-        </div>
-{{-- 
-         @foreach($events as $event)
-            {{ $event->id }} - {{ $event->banner }} - {{ $event->title }} - {{$event->start}}::{{$event->end}}<br />
-         @endforeach 
---}}    
+
+
 
     @include('site.includes.footer')       
-
-    <script type="text/javascript" src="/js/plugins/fullcalendar/moment.min.js"></script>
-    
     @include('site.includes.scripts')
 
+    <script type="text/javascript" src="/js/plugins/fullcalendar/moment.min.js"></script>
     <script type="text/javascript" src="/js/plugins/fullcalendar/fullcalendar.min.js"></script>
     
     <script type="text/javascript">
@@ -94,8 +76,8 @@
             eventLimit: true, // allow "more" link when too many events
             eventClick:  function(event, jsEvent, view) {
                 console.log(event.start);
-                $('#modalTitle').html("<span class='event-title'>" + event.title +"</span>");
-                $('#modalTitle').append("<span class='event-span'>" + event.prettyStart+ " to " + event.prettyEnd + "</span>");
+                $('#modalTitle').html("<span class='event-title pull-left'>" + event.title +"</span>");
+                $('#modalTitle').append("<span class='event-span pull-right'>" + event.prettyStart+ " to " + event.prettyEnd + "</span>");
                 $('#modalBody').html(event.description);
                 $('#fullCalModal').modal();
             },
@@ -116,7 +98,7 @@
     </script>
 
     @include('site.includes.bugreport')
-    
+    @include('site.includes.modal')
 
 </body>
 </html>                

@@ -12,6 +12,7 @@ use App\Models\Tag\ContentTag;
 use App\Models\Communication\CommunicationTarget;
 use App\Models\Communication\CommunicationType;
 use DB;
+use App\Models\Utility\Utility;
 
 class Communication extends Model
 {
@@ -34,11 +35,9 @@ class Communication extends Model
                             ->orderBy('communications.updated_at', 'desc')
                             ->get();
          foreach($comm as $c){
-            $updated_at = new Carbon($c->updated_at);
 
-            $since = Carbon::now()->diffForHumans($updated_at, true);
-            $c->since = $since;
-            $c->prettyDate = $updated_at->toDayDateTimeString();
+            $c->since = Utility::getTimePastSinceDate($c->updated_at);
+            $c->prettyDate = Utility::prettifyDate($c->updated_at);
             $preview_string = strip_tags($c->body);
             $c->trunc = Communication::truncateHtml($preview_string);
          }
@@ -50,7 +49,8 @@ class Communication extends Model
       public static function getCommunication($id)
       {
          $communication = Communication::find($id);
-         Communication::prettify($communication);
+         $communication->since = Utility::getTimePastSinceDate($communication->send_at);
+         $communication->prettyDate = Utility::prettifyDate($communication->send_at);
          return $communication;
 
       }
@@ -231,7 +231,7 @@ class Communication extends Model
 
       public static function getActiveCommunicationCount($storeNumber)
       {
-         $today = $today = Carbon::today()->toDateString();
+         $today = Carbon::today()->toDateString();
 
          $communicationCount = DB::table('communications_target')
             ->join('communications', 'communications_target.communication_id', '=', 'communications.id')
@@ -266,20 +266,20 @@ class Communication extends Model
       public static function getCommunicationCategoryColour($id)
       {
          return CommunicationType::where('id', $id)->first()->colour;
-      }
+      }    
 
-      public static function prettify($communication)
+
+      public static function hasAttachments($id)
       {
-        // get the human readable days since send
-        $send_at = Carbon::createFromFormat('Y-m-d H:i:s', $communication->send_at);
-        $since = Carbon::now()->diffForHumans($send_at, true);
-        $communication->since = $since;
+         $hasAttachments = CommunicationDocument::where('communication_id', $id)->get();
+         $hasPackages = CommunicationPackage::where('communication_id', $id)->get();
 
-        //make the timestamp on the message a little nicer
-        $communication->prettyDate = $send_at->format('D j F');
-        
-        return $communication;
-      }      
+         if( count($hasAttachments)>0 || count($hasPackages) >0 ){
+            return true;
+         } 
+
+         return false;
+      } 
 
      public static function truncateHtml($text, $length = 100, $ending = '...', $exact = false, $considerHtml = true) {
          if ($considerHtml) {

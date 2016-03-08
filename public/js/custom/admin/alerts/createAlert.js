@@ -24,7 +24,9 @@ $(document).on('click','.alert-create',function(){
  	var document_id = $("#documentID").val();
 	var title = $("#title").val();
 	var description = $("#description").val();
-	
+	var document_start = $("#document_start").val();
+	var document_end = $("#document_end").val();
+
 	var is_alert = 0;
 	if ($("#is_alert").prop("checked")){
 		is_alert = 1;	
@@ -35,6 +37,7 @@ $(document).on('click','.alert-create',function(){
 	var end = $("#end").val();
 	var banner_id = $("input[name='banner_id']").val();
 	var target_stores  = $("#storeSelect").val();
+	var allStores = $("#allStores:checked").val()
 	 
 	console.log('title : ' + title);
 	console.log('description : ' + description);
@@ -44,13 +47,34 @@ $(document).on('click','.alert-create',function(){
 	console.log('end : ' + end);
 	console.log('target_stores : ' + target_stores);
 	console.log('banner_id : ' + banner_id);
+	console.log('all stores : ' + allStores);
 
     if(title == '') {
 		swal("Oops!", "This communication is missing something.", "error"); 
 		hasError = true;
 		$(window).scrollTop(0);
+		return false;
 	}
-
+	if(is_alert == 1){
+		if(alert_type_id == '' ) {
+			swal("Oops!", "Alert type missing", "error"); 
+			hasError = true;
+			$(window).scrollTop(0);
+			return false;
+		}
+		if(start == '' || end == '' ) {
+			swal("Oops!", "Start and End dates required for alert", "error"); 
+			hasError = true;
+			$(window).scrollTop(0);
+			return false;
+		}
+		if(target_stores == null || typeof allStores === 'undefined' ) {
+			swal("Oops!", "Target stores missing", "error"); 
+			hasError = true;
+			$(window).scrollTop(0);
+			return false;
+		}
+	} 
     if(hasError == false) {
 
 		$.ajax({
@@ -65,6 +89,8 @@ $(document).on('click','.alert-create',function(){
 		  		end: end,
 		  		banner_id : banner_id,
 		  		target_stores : target_stores,
+		  		document_start : document_start,
+		  		document_end : document_end,
 		  		
 		    },
 		    success: function(result) {

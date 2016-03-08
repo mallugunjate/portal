@@ -9,6 +9,8 @@ $(document).on('click','.eventtype-edit',function(){
 		swal("Oops!", "This event type needs a name.", "error"); 
 		hasError = true;
 		$(window).scrollTop(0);
+		return false;
+
 	}	
 	
     if(hasError == false) {

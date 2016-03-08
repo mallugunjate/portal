@@ -71,7 +71,7 @@
                         <i class="fa fa-bell-o"></i>
                     </td>
                     
-                    <td class="mail-subject"><a href="#" class="launchPDFViewer" data-toggle="modal" data-target="#fileviewmodal" data-file="/files/{{ $alert->filename }}">{!! $alert->icon !!} {{ $alert->title }}</a></td>
+                    <td class="mail-subject">{!! $alert->link_with_icon !!}</td>
                     <td><span class="label label pull-left">{{ $alert->alertTypeName }}</span></td>
                     <td class="mail-preview">{{ $alert->description }}</td>
                     

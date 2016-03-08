@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use App\Models\Communication\Communication;
 use DB;
+use App\Models\Utility\Utility;
 
 class UrgentNotice extends Model
 {
@@ -139,47 +140,33 @@ class UrgentNotice extends Model
     public static function getUrgentNotice($id)
     {    
          $notice = UrgentNotice::find($id);
-         UrgentNotice::prettify($notice);
+         $notice->prettyDate = Utility::prettifyDate($notice->updated_at);
+         $notice->since = Utility::getTimePastSinceDate($notice->updated_at);
          return $notice;
     }
 
 
-    public static function getUrgentNoticesByStore($storeNumber)
+    public static function getActiveUrgentNoticesByStore($storeNumber)
     {
-         $notices = DB::table('urgent_notice_target')->where('store_id', $storeNumber)
+        
+        $today = Carbon::today()->toDateString();
+
+        $notices = DB::table('urgent_notice_target')->where('store_id', $storeNumber)
                             ->join('urgent_notices', 'urgent_notices.id', '=', 'urgent_notice_target.urgent_notice_id')
+                            ->where('urgent_notices.start' , '<=', $today)
+                            ->where('urgent_notices.end', '>=', $today)
                             ->get();
 
-         foreach($notices as $n){
-            $updated_at = new Carbon($n->updated_at);
-
-            $since = Carbon::now()->diffForHumans($updated_at, true);
-            $n->since = $since;
-            $n->prettyDate = $updated_at->toDayDateTimeString();
+        foreach($notices as $n){
+            
+            $n->since =  Utility::getTimePastSinceDate($n->updated_at);
+            $n->prettyDate =  Utility::prettifyDate($n->updated_at);
             $preview_string = strip_tags($n->description);
             $n->trunc = Communication::truncateHtml($preview_string);
-         }
-         return $notices;        
+        }
+        return $notices;        
 
-    }
-
-      public static function prettify($notice)
-      {
-
-        
-        // get the human readable days since send
-        //$send_at = Carbon::createFromFormat('Y-m-d H:i:s', $notice->start);
-
-        $send_at = Carbon::createFromFormat('Y-m-d', $notice->start);
-
-        $since = Carbon::now()->diffForHumans($send_at, true);
-        $notice->since = $since;
-
-        //make the timestamp on the message a little nicer
-        $notice->prettyDate = $send_at->format('D j F');
-        
-        return $notice;
-      }     
+    }   
 
 
 }

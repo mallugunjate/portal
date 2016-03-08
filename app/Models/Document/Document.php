@@ -14,7 +14,7 @@ use App\Models\Tag\ContentTag;
 use App\Models\UserSelectedBanner;
 use DB;
 use App\Models\Alert\Alert;
-
+use App\Models\Utility\Utility;
 class Document extends Model
 {
     protected $table = 'documents';
@@ -35,9 +35,18 @@ class Document extends Model
                             ->join('documents', 'file_folder.document_id', '=', 'documents.id')
                             ->where('file_folder.folder_id', '=', $global_folder_id)
                             ->where('documents.start', '<=', Carbon::today()->toDateString() )
-                            ->where('documents.end', '>=', Carbon::today()->toDateString() )
                             ->select('documents.*')
-                            ->get();  
+                            ->get();
+                $counter = 0;
+                foreach ($files as $file) {
+                    
+                    if (!( $file->end >= Carbon::today()->toDateString() || $file->end == '0000-00-00 00:00:00' ) ) {
+
+                        unset($files[$counter]);
+                    }
+                    $counter++;
+                }  
+                $files = array_values($files);
             }
             else{
                 $files = \DB::table('file_folder')
@@ -47,12 +56,19 @@ class Document extends Model
                             ->get();            
             }
             
+
+
             
             if (count($files) > 0) {
+                foreach ($files as $file) {
+                    $file->link = Utility::getModalLink($file->filename, $file->title, $file->original_extension, 0);
+                    $file->link_with_icon = Utility::getModalLink($file->filename, $file->title, $file->original_extension, 1);
+                    $file->icon = Utility::getIcon($file->original_extension);
+                }
                 return $files;
             }
             else{
-                return null;
+                return [];
             }
 
         }
@@ -194,9 +210,13 @@ class Document extends Model
         $document       = Document::find($id);
         $title          = $request->get('title');
         $description    = $request->get('description');
+        $doc_start      = $request->get('document_start');
+        $doc_end        = $request->get('document_end');
 
-        $document['title'] = $title;
+        $document['title']  = $title;
         $document['description'] = $description;
+        $document['start']  = $doc_start;
+        $document['end']  = $doc_end; 
 
         $document->save();
 

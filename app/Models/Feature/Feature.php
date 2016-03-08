@@ -48,9 +48,13 @@ class Feature extends Model
 
  			]);
 
-  		
-      Feature::updateFeatureBackground($background_image, $feature->id);
-      Feature::updateFeatureThumbnail($thumbnail, $feature->id);
+  		if(isset($background_image)) {
+        Feature::updateFeatureBackground($background_image, $feature->id);  
+      }
+      if(isset($thumbnail)) {
+        Feature::updateFeatureThumbnail($thumbnail, $feature->id);  
+      }
+      
   		Feature::addFiles(json_decode($request["feature_files"]), $feature->id);
   		Feature::addPackages(json_decode($request['feature_packages']), $feature->id);
 

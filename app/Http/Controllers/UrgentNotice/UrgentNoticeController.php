@@ -17,6 +17,7 @@ use App\Models\UrgentNotice\UrgentNoticeAttachment;
 use App\Models\UrgentNotice\UrgentNoticeTarget;
 use App\Models\Document\Document;
 use App\Models\Document\Folder;
+use App\Models\Utility\Utility;
 
 class UrgentNoticeController extends Controller
 {
@@ -33,7 +34,7 @@ class UrgentNoticeController extends Controller
         $skin = Skin::getSkin($storeBanner);
 
         $urgentNoticeCount = UrgentNotice::getUrgentNoticeCount($storeNumber);
-        $urgentNotices = UrgentNotice::getUrgentNoticesByStore($storeNumber);
+        $urgentNotices = UrgentNotice::getActiveUrgentNoticesByStore($storeNumber);
 
         return view('site.urgentnotices.index')
             ->with('skin', $skin)
@@ -96,10 +97,8 @@ class UrgentNoticeController extends Controller
                 $folder = Folder::find($folder_id);
                 $folder->global_folder_id = $global_folder_id;
 
-                $updated_at = new Carbon($folder->updated_at);
-                $since = Carbon::now()->diffForHumans($updated_at, true);
-                $folder->since = $since;
-                $folder->prettyDate = $updated_at->format('D F j');
+                $folder->since = Utility::getTimePastSinceDate($folder->updated_at);
+                $folder->prettyDate = Utility::prettifyDate($folder->updated_at);
 
                 array_push($attached_folders, $folder);
                 unset($folder);
@@ -110,18 +109,21 @@ class UrgentNoticeController extends Controller
             foreach ($urgent_notice_attachment_ids as $document_id) {
                 
                 $document = Document::find($document_id);
+
+                $document->link = Utility::getModalLink($document->filename, $document->title, $document->original_extension, 0);
+                $document->link_with_icon = Utility::getModalLink($document->filename, $document->title, $document->original_extension, 1);
+                $document->anchor_only =  Utility::getModalLink($document->filename, $document->title, $document->original_extension, 1, 1);
+                $document->icon = Utility::getIcon($document->original_extension);
+
                 array_push($attached_documents, $document);
                 unset($document);
             }
         } 
 
          foreach($attached_documents as $doc){
-            $updated_at = new Carbon($doc->updated_at);
-
-            $since = Carbon::now()->diffForHumans($updated_at, true);
-            $doc->since = $since;
-            //$doc->prettyDate = $updated_at->toDayDateTimeString();
-            $doc->prettyDate = $updated_at->format('D F j');
+            
+            $doc->since = Utility::getTimePastSinceDate($doc->updated_at);
+            $doc->prettyDate =  Utility::prettifyDate($doc->updated_at);
          }
          
         return view('site.urgentnotices.notice')

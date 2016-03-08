@@ -89,7 +89,7 @@ $(document).on('click','.urgentnotice-create',function(){
 	var description = CKEDITOR.instances['description'].getData();
 	var start = $("#start").val();
 	var end = $("#end").val();
-	var attachment_type  = $("input[name='attachment_type']").val();
+	var attachment_type  = $("input[name='attachment_type']:checked").val();
 	var banner_id = $("input[name='banner_id']").val();
 	var target_stores  = $("#storeSelect").val();
 	var attachments = [];
@@ -102,10 +102,11 @@ $(document).on('click','.urgentnotice-create',function(){
 
  
 	console.log(description);
-    if(title == '' || description == '' || start == '') {
+    if(title == '' || description == '' || typeof attachment_type === 'undefined' || start == '' || end == '') {
 		swal("Oops!", "This notice is not complete.", "error"); 
 		hasError = true;
 		$(window).scrollTop(0);
+		return false;
 	}
 
     if(hasError == false) {

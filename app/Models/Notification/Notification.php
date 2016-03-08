@@ -8,6 +8,7 @@ use App\Models\Feature\Feature;
 use Carbon\Carbon;
 use Log;
 use DB;
+use App\Models\Utility\Utility;
 
 class Notification extends Model
 {
@@ -22,17 +23,39 @@ class Notification extends Model
     			$notifications = Document::where('banner_id', $bannerId)
     							->where('updated_at', '>=', $dateSince)
                                 ->where('start', '<=', $today)
-                                ->where('end', '>=', $today)
     							->orderBy('updated_at', 'desc')
     							->get();
+
+                $counter = 0;
+                foreach ($notifications as $notification) {
+                    
+                    if (!( $notification->end >= Carbon::today()->toDateString() || $notification->end == '0000-00-00 00:00:00' ) ) {
+
+                        $notifications->forget($counter);
+                    }
+                    $counter++;
+                }  
+
+
     			break;
     		case 2:  //by number of documents
     			$notifications = Document::where('banner_id', $bannerId)
     							->orderBy('updated_at', 'desc')
                                 ->where('start', '<=', $today)
-                                ->where('end', '>=', $today)
-    							->take($windowSize)
     							->get();
+
+                $counter = 0;
+                foreach ($notifications as $notification) {
+                    
+                    if (!( $notification->end >= Carbon::today()->toDateString() || $notification->end == '0000-00-00 00:00:00' ) ) {
+
+                        $notifications->forget($counter);
+                    }
+                    $counter++;
+                }
+                // return $notifications;   
+                $waste_chunk = $notifications->splice($windowSize);
+                
     			break;
 
     		default:
@@ -41,6 +64,21 @@ class Notification extends Model
     	}
 
         Notification::prettifyNotifications($notifications);
+
+        $i=0;
+        foreach($notifications as $n){
+
+            $link = Utility::getModalLink($n->filename, $n->title, $n->original_extension, 0);
+            $link_with_icon = Utility::getModalLink($n->filename, $n->title, $n->original_extension, 1);
+            $icon = Utility::getIcon($n->original_extension);
+
+            $n->icon = $icon;
+            $n->link = $link;
+            $n->link_with_icon = $link_with_icon;
+
+            $i++;
+        }
+
     	return $notifications;
     }
 
@@ -55,8 +93,8 @@ class Notification extends Model
                 $dateSince = Carbon::now()->subDays($windowSize)->toDateTimeString();
                 $notifications = Document::whereIn('id', $documentIdArray)
                                             ->orderBy('updated_at', 'desc')
-                                            ->where('start', '<=', $today)
-                                            ->where('end', '>=', $today)
+                                            // ->where('start', '<=', $today)
+                                            // ->where('end', '>=', $today)
                                             ->get();
 
                 $i=0;
@@ -71,8 +109,8 @@ class Notification extends Model
             case 2:  //by number of documents
                 $notifications = Document::whereIn('id', $documentIdArray)
                                         ->orderBy('updated_at', 'desc')
-                                        ->where('start', '<=', $today)
-                                        ->where('end', '>=', $today)
+                                        // ->where('start', '<=', $today)
+                                        // ->where('end', '>=', $today)
                                         ->take($windowSize)
                                         ->get();
                 break;
@@ -83,6 +121,14 @@ class Notification extends Model
         }
 
         Notification::prettifyNotifications($notifications);
+        foreach($notifications as $n){
+
+            $n->link = Utility::getModalLink($n->filename, $n->title, $n->original_extension, 0);
+            $n->link_with_icon = Utility::getModalLink($n->filename, $n->title, $n->original_extension, 1);
+            $n->icon = Utility::getIcon($n->original_extension);
+
+        }
+
         return $notifications;
     }
 
@@ -95,8 +141,8 @@ class Notification extends Model
             $n->global_folder_id = $folder_info->global_folder_id;
 
             // get the human readable days since 
-            $since = Carbon::now()->diffForHumans($n->updated_at, true);
-            $n->since = $since;
+            $n->since =  Utility::getTimePastSinceDate($n->updated_at);
+
             //adjust the verbage
             if( $n->created_at == $n->updated_at ){
                 $n->verb = "added to";
@@ -105,8 +151,7 @@ class Notification extends Model
             }            
             
             //make the timestamp on the file a little nicer
-            $updated_at = Carbon::create($n->udpated_at);
-            $n->prettyDate = $updated_at->toDayDateTimeString();
+            $n->prettyDate =  Utility::prettifyDate($n->updated_at);
         }
         return $notifications;
     }
