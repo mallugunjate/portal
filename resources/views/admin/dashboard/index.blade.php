@@ -170,17 +170,17 @@
 
 			                    <div class="ibox">
 			                        <div class="ibox-title">
-			                            <h5>QuickLinks</h5>
+			                            <h5>QuickLinks Management</h5>
 
 			                            <div class="ibox-tools">
 
 
 
-			                                <a href="/admin/quicklink/create" class="btn btn-primary btn"><i class="fa fa-plus"></i> Create New Quicklink</a>
+			                                <a href="/admin/quicklink/create" class="btn btn-primary btn"><i class="fa fa-plus"></i> Create new Quicklink</a>
 			                            </div>
 			                        </div>
 			                        <div class="ibox-content">
-
+			                        <small>Drag Quicklinks to reorder</small>
 										<div class="dd" id="quicklinkslist">
 			                                <ol class="dd-list">
 			                                	{{-- <div class="dd-placeholder" style="height: 42px;"></div> --}}
