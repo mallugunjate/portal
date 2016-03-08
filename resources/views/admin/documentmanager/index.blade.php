@@ -46,7 +46,7 @@
                         <div class="ibox-content">
                             <div class="file-manager">
 
-                                <h5>Folders</h5>
+                                <h5>{{$banner->name}}</h5>
                                     @include('admin.navigation-view', ['navigation'=>$navigation])
                                     <div id="file-container" class="hidden">
                                     <ol class="breadcrumbs"></ol>
@@ -79,13 +79,13 @@
 
                                     <div class="ibox-title">
                                         
-                                        <h5 id="folder-title"></h5>
+                                        <h5 id="folder-title"> <i class="fa fa-folder-open"></i> {{$banner->name}}</h5>
                                     
                                         <div class="ibox-tools">
 
                                              <a id="add-files" data-folderId="" href="/admin/document/create"><button type="button" class="btn btn-primary"><i class="fa fa-plus"></i> Add Files</button></a>
-                                             <!-- <a href="#"><button type="button" class="btn btn-primary"><i class="fa fa-folder-open-o"></i> Add Sub Folder</button></a>
-                                             <a href="#"><button type="button" class="btn btn-primary"><i class="fa fa-pencil"></i> Edit this Folder</button></a> -->
+                                             <a id="add-folder" href="/admin/folder/create"><button type="button" class="btn btn-primary"><i class="fa fa-folder-open-o"></i> Add Sub Folder</button></a>
+                                             <a id="edit-folder" href=""><button type="button" class="btn btn-primary" disabled><i class="fa fa-pencil"></i> Edit this Folder</button></a>
 
                                         </div>
                                     </div>
@@ -142,6 +142,8 @@
     <script type="text/javascript" src="/js/custom/admin/documents/deleteFile.js"></script>
     <script type="text/javascript" src="/js/custom/admin/documents/breadcrumb.js"></script>
     <script type="text/javascript" src="/js/custom/tree.js"></script>
+    <script type="text/javascript" src="/js/custom/admin/documents/editFolder.js"></script>
+    <script type="text/javascript" src="/js/custom/admin/documents/addFolder.js"></script>
     <script type="text/javascript" src="/js/custom/site/launchModal.js" ></script>
 
 
@@ -239,6 +241,7 @@
         </script>
 
         @include('site.includes.modal')
+        @include('admin.folder.foldermodal')
         @include('site.includes.bugreport')
     </body>
 </html>
