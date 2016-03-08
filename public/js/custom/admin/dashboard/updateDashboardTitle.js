@@ -19,8 +19,9 @@ $(".update-dashboard").on('click', function(){
 	var request_type = 'updateTitle'
 	
 
-	if(dashboard_title == '' || dashboard_subtitle == '') {
-		swal("Oops!", "Oops! We need a Title and a Subtitle for the Dashboard.", "error"); 
+	//if(dashboard_title == '' || dashboard_subtitle == '') {
+	if(dashboard_title == '') {		
+		swal("Oops!", "Oops! We need a Title for the Dashboard.", "error"); 
 		hasError = true;
 	}
 

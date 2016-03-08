@@ -9,14 +9,16 @@ $("body").on("click", ".fileinput-upload-button", function(e) {
 
     var data = new FormData();
         
-		data.append("banner_id", banner_id);        
-        data.append('background', file);
+	data.append("banner_id", banner_id);        
+    data.append('background', file);
+
+    console.log(banner_id);
         
         $.ajax({
             url: '/admin/dashboardbackground',
             type: 'POST',
             data: data, 
-			processData: false,
+			processData: false,  
 			contentType: false,
             success: function(result) {
                 
