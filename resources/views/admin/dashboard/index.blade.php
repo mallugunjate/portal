@@ -60,7 +60,7 @@
 												<div class="form-group">
 
 													<div class="col-sm-2">
-													{!! Form::label('dashboard_title', 'Title' , ['class' => 'control_label']) !!}
+													<label class="control_label" for="dashboard_title">Title <span class="req">*</span></label>
 													</div>
 													<div class="col-sm-offset-2">
 													{!! Form::input('text', 'dashboard_title', $banner->title , ['class' => 'form-control'] ) !!}
