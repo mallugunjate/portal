@@ -16,11 +16,13 @@
 			if( !(data.folder === null) ) {
 				$("#folder-title").html("<i class='fa fa-folder-open'></i> Week " + data.folder.week_number);
 				$("#folder-title").attr('data-folderId', data.folder.global_folder_id);
+				$("#add-files").removeClass('hidden').addClass('visible');
 				$("#add-files").attr('data-folderId', data.folder.global_folder_id);
 				$("#add-folder").attr('data-folderId', data.folder.global_folder_id );
 				$("#add-folder").attr('href', "/admin/folder/create?parent="+data.folder.global_folder_id);
 				$("#parent-folder-id").val(data.folder.global_folder_id);
 
+				$("#edit-folder").removeClass('hidden').addClass('visible');
 				$("#edit-folder").attr('data-folderId', data.folder.global_folder_id );
 				$("#edit-folder").attr('href', "/admin/folder/"+data.folder.global_folder_id+"/edit");
 				$("#edit-folder").find('button').removeAttr('disabled');
@@ -32,6 +34,7 @@
 			if( !(data.folder === null) ) {
 				$("#folder-title").html("<i class='fa fa-folder-open'></i> " +  data.folder.name);
 				$("#folder-title").attr('data-folderId', data.folder.global_folder_id);
+				$("#add-files").removeClass('hidden').addClass('visible');
 				$("#add-files").attr('data-folderId', data.folder.global_folder_id);
 				var currentHref = $("#add-files").attr('href');
 				$("#add-files").attr('href', "/admin/document/create#!/"+data.folder.global_folder_id);
@@ -40,6 +43,7 @@
 				$("#add-folder").attr('href', "/admin/folder/create?parent="+data.folder.global_folder_id);
 				$("#parent-folder-id").val(data.folder.global_folder_id);
 				
+				$("#edit-folder").removeClass('hidden').addClass('visible');
 				$("#edit-folder").attr('data-folderId', data.folder.global_folder_id );
 				$("#edit-folder").attr('href', "/admin/folder/"+data.folder.global_folder_id+"/edit");
 				$("#edit-folder").find('button').removeAttr('disabled');

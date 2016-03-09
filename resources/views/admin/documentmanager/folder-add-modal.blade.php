@@ -13,7 +13,7 @@
         <input type="hidden" name="parent" value={{$parent}}>
 
         <div class="form-group">                                
-            <label>Subfolder Name <span class="req">*</span></label>
+            <label>Subfolder name <span class="req">*</span></label>
             
             <input type="text" name="name"  class="form-control">
         </div>
@@ -23,8 +23,8 @@
 
     <div class="modal-footer">
 
-        <button type="button" class="btn btn-white cancel-modal" data-dismiss="modal"><i class="fa fa-close"></i> Cancel</button>
-        <button class="btn btn-primary"><i class='fa fa-check'></i> Save changes</button>
+        <button type="button" class="btn btn-white cancel-modal" data-dismiss="modal"><i class="fa fa-ban"></i> Cancel</button>
+        <button class="btn btn-primary"><i class='fa fa-check'></i> Create subfolder</button>
     </div>
 
 {!! Form::close() !!}

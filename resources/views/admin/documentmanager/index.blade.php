@@ -87,9 +87,9 @@
                                     
                                         <div class="ibox-tools">
 
-                                             <a id="add-files" data-folderId="" href="/admin/document/create"><button type="button" class="btn btn-primary"><i class="fa fa-plus"></i> Add Files</button></a>
+                                             <a id="add-files" class="hidden" data-folderId="" href="/admin/document/create"><button type="button" class="btn btn-primary"><i class="fa fa-plus"></i> Add Files</button></a>
                                              <a id="add-folder" href="/admin/folder/create"><button type="button" class="btn btn-primary"><i class="fa fa-folder-open-o"></i> Add Sub Folder</button></a>
-                                             <a id="edit-folder" href=""><button type="button" class="btn btn-primary" disabled><i class="fa fa-pencil"></i> Edit this Folder</button></a>
+                                             <a id="edit-folder" class="hidden" href=""><button type="button" class="btn btn-primary" disabled><i class="fa fa-pencil"></i> Edit this Folder</button></a>
 
                                         </div>
                                     </div>

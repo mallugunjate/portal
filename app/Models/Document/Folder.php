@@ -32,45 +32,31 @@ class Folder extends Model
 
     public static function storeFolder(Request $request)
     {
-        $is_child = 0; 
-        
-        if ( null !==  $request->get('subfolder')) {
-            $is_child = $request->get('subfolder');
-            $banner_id = $request->get("banner_id");
+        $parent = $request['parent'];
+        $is_child = 0;
+
+        if($parent != ""){
+            $is_child = 1;
         }
 
-        $has_weeks = 0;
-        $week_window_size = 0;
-        $has_child = 0;
-        if ( null !==  $request->get('has_weeks')) {
-            $has_weeks = $request->get('has_weeks');
-            $week_window_size = $request->get('week_window_size');
-            $has_child = 1;
-
-        }
-
-        $banner =  UserSelectedBanner::getBanner();      
-
-        $folderdetails = array(
-            'name'      => $request->get('name'),
-            'is_child'  => $is_child,
-            'banner_id' => $banner->id,
-            'has_weeks' => $has_weeks,
-            'week_window_size' =>$week_window_size,
-            'has_child'  => $has_child
-
-
-        );
-
-        // dd($folderdetails);
-        $folder = Folder::create($folderdetails);
-        $folder->save();
-
+        $folder = Folder::create([
+                'name' => $request['name'],
+                'is_child' => $is_child,
+                'banner_id'=>$request['banner_id']
+        ]);
         \DB::table('folder_ids')->insert([
-                'folder_id'    => $folder->id,
-                'folder_type'  => 'folder' 
-            ]);
+            'folder_id'    => $folder->id,
+            'folder_type'  => 'folder' 
+        ]);
 
+        if ($parent != "") {
+            $parent_id = \DB::table('folder_ids')->find($parent)->folder_id;
+             FolderStructure::create([
+                'parent' => intval($parent_id),
+                'child'  => $folder->id
+            ]);
+        }
+            
         return;
     }
 

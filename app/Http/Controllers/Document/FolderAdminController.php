@@ -72,7 +72,7 @@ class FolderAdminController extends Controller
     public function store(Request $request)
     {
         Folder::storeFolder($request);
-        return redirect()->action('Document\FolderAdminController@index');
+        return redirect('/admin/document/manager#!/'.$request['parent']);
 
     }
 
