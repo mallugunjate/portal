@@ -5,14 +5,18 @@ $("#add-folder").on('click', function(e){
     localStorage.setItem('lastClickedtoTriggerModal', $(this).attr('data-folderId') );
 
     modalBody.empty();
+    var parentFolder = $(this).attr('data-folderId');
     var folderCreateLink = e.delegateTarget.href;
     console.log(folderCreateLink);
     
     modal
         .on('show.bs.modal', function() {
-            modalBody.load(folderCreateLink)
+            modalBody.load(folderCreateLink);
+            console.log($(this).find("#parent-folder-id"));
+            $(this).find("#parent-folder-id").val(parentFolder);
         })
         .modal({show:true});
+
     
     e.preventDefault();
 });

@@ -52,7 +52,7 @@ class Folder extends Model
         $banner =  UserSelectedBanner::getBanner();      
 
         $folderdetails = array(
-            'name'      => $request->get('foldername'),
+            'name'      => $request->get('name'),
             'is_child'  => $is_child,
             'banner_id' => $banner->id,
             'has_weeks' => $has_weeks,
@@ -190,7 +190,7 @@ class Folder extends Model
         $update = [];
         $update ["name"] = $params["name"] ;
         
-
+        /** deprecated 
         //add child
         if (isset($params["children"])) {
             $update["has_child"] = 1;
@@ -215,7 +215,7 @@ class Folder extends Model
                 'has_child' => 0                
             ];      
         }
-
+        **/
         $folder->update($update);
 
         $global_folder_id = \DB::table('folder_ids')->where('folder_id', $folder->id)->where('folder_type', 'folder')->first()->id;

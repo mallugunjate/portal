@@ -19,6 +19,7 @@
 				$("#add-files").attr('data-folderId', data.folder.global_folder_id);
 				$("#add-folder").attr('data-folderId', data.folder.global_folder_id );
 				$("#add-folder").attr('href', "/admin/folder/create?parent="+data.folder.global_folder_id);
+				$("#parent-folder-id").val(data.folder.global_folder_id);
 
 				$("#edit-folder").attr('data-folderId', data.folder.global_folder_id );
 				$("#edit-folder").attr('href', "/admin/folder/"+data.folder.global_folder_id+"/edit");
@@ -37,6 +38,7 @@
 				
 				$("#add-folder").attr('data-folderId', data.folder.global_folder_id );
 				$("#add-folder").attr('href', "/admin/folder/create?parent="+data.folder.global_folder_id);
+				$("#parent-folder-id").val(data.folder.global_folder_id);
 				
 				$("#edit-folder").attr('data-folderId', data.folder.global_folder_id );
 				$("#edit-folder").attr('href', "/admin/folder/"+data.folder.global_folder_id+"/edit");

@@ -8,6 +8,10 @@
         .action{
             white-space: nowrap;
         }
+
+        .top-level-folder{
+            color: #444;
+        }
     </style>
     <link rel="stylesheet" type="text/css" href="/css/custom/tree.css">
     <meta name="csrf-token" content="{!! csrf_token() !!}"/>
@@ -46,7 +50,7 @@
                         <div class="ibox-content">
                             <div class="file-manager">
 
-                                <h5>{{$banner->name}}</h5>
+                                <a href="/admin/document/manager" class="top-level-folder"> <h5><i class="fa fa-folder"></i> {{$banner->name}}</h5> </a>
                                     @include('admin.navigation-view', ['navigation'=>$navigation])
                                     <div id="file-container" class="hidden">
                                     <ol class="breadcrumbs"></ol>
@@ -91,7 +95,7 @@
                                     </div>
 
 
-                                    <div class="ibox-content">
+                                    <div class="ibox-content">                                            
                                             <table class="table tablesorter" id="file-table"> 
                                             </table>
                                     </div>

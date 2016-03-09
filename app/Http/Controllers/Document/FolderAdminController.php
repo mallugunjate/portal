@@ -53,9 +53,14 @@ class FolderAdminController extends Controller
     {
         
         $banner = UserSelectedBanner::getBanner();
-        $banners = Banner::all();          
+        $banners = Banner::all();   
+        $parent = null;
+        if (isset($request['parent'])) {
+            $parent = $request['parent'];
+        }       
         return view('admin.documentmanager.folder-add-modal')->with('banner', $banner)
-                                         ->with('banners', $banners);
+                                         ->with('banners', $banners)
+                                         ->with('parent', $parent);
     }
 
     /**
@@ -66,9 +71,7 @@ class FolderAdminController extends Controller
      */
     public function store(Request $request)
     {
-            
         Folder::storeFolder($request);
-
         return redirect()->action('Document\FolderAdminController@index');
 
     }
