@@ -60,22 +60,23 @@ class Folder extends Model
         return;
     }
 
-    public static function deleteFolder($id)
+    public static function deleteFolder($id, Request $request)
     {
         
-        $banner_id = Folder::find($id)->banner_id;
+        $banner_id = $request['banner_id'];
 
         $files = FileFolder::where('folder_id', $id)->get();
 
         if (count($files)>0) {
             foreach ($files as $file) {
                 Document::where('id', $file->document_id)->delete();
-                unlink(public_path()."/files/".$file->filename);
+                // unlink(public_path()."/files/".$file->filename);
             }  
             FileFolder::where('folder_id', $id)->delete();
         }
 
-        $parentChildStructure = FolderStructure::where('child', $id)->first();
+        $folder_id = \DB::table('folder_ids')->find($id)->folder_id;
+        $parentChildStructure = FolderStructure::where('child', $folder_id)->first();
         if (isset($parentChildStructure)) {
             
             $parent = $parentChildStructure->parent;
@@ -95,11 +96,11 @@ class Folder extends Model
         }
         
         
-        $folder = Folder::find($id)->delete();  
+        $folder = Folder::find($folder_id)->delete();  
 
-        \DB::table('folder_ids')->where('folder_id', $id)->where('folder_type', 'folder')->delete();
+        \DB::table('folder_ids')->where('folder_id', $folder_id)->where('folder_type', 'folder')->delete();
 
-        return $banner_id;
+        return;
         
     }
 

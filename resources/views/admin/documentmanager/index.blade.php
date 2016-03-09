@@ -55,6 +55,7 @@
                                     <div id="file-container" class="hidden">
                                     <ol class="breadcrumbs"></ol>
                                     <input type="hidden" name="default_folder" value={{$defaultFolder}}>
+                                    <input type="hidden" name="banner_id" value={{$banner->id}}>
                             {{--         @include('admin.documentmanager.document-table') --}}
                                     </div>
                                     <div id="package-viewer" class="hidden">
@@ -87,9 +88,10 @@
                                     
                                         <div class="ibox-tools">
 
-                                             <a id="add-files" class="hidden" data-folderId="" href="/admin/document/create"><button type="button" class="btn btn-primary"><i class="fa fa-plus"></i> Add Files</button></a>
-                                             <a id="add-folder" href="/admin/folder/create"><button type="button" class="btn btn-primary"><i class="fa fa-folder-open-o"></i> Add Sub Folder</button></a>
-                                             <a id="edit-folder" class="hidden" href=""><button type="button" class="btn btn-primary" disabled><i class="fa fa-pencil"></i> Edit this Folder</button></a>
+                                             <a id="add-files" class="hidden" data-folderId="" href="/admin/document/create"><button type="button" class="btn btn-primary"><i class="fa fa-plus"></i> Add Files </i></button></a>
+                                             <a id="add-folder" href="/admin/folder/create"><button type="button" class="btn btn-primary"><i class="fa fa-plus"></i> <i class="fa fa-folder-o"></i></button></a>
+                                             <a id="edit-folder" class="hidden" href=""><button type="button" class="btn btn-primary"><i class="fa fa-pencil"></i></button></a>
+                                             <a id="delete-folder" class="hidden" href=""><button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button></a>
 
                                         </div>
                                     </div>
@@ -148,6 +150,7 @@
     <script type="text/javascript" src="/js/custom/tree.js"></script>
     <script type="text/javascript" src="/js/custom/admin/documents/editFolder.js"></script>
     <script type="text/javascript" src="/js/custom/admin/documents/addFolder.js"></script>
+    <script type="text/javascript" src="/js/custom/admin/documents/deleteFolder.js"></script>
     <script type="text/javascript" src="/js/custom/site/launchModal.js" ></script>
 
 

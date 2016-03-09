@@ -25,8 +25,9 @@
 				$("#edit-folder").removeClass('hidden').addClass('visible');
 				$("#edit-folder").attr('data-folderId', data.folder.global_folder_id );
 				$("#edit-folder").attr('href', "/admin/folder/"+data.folder.global_folder_id+"/edit");
-				$("#edit-folder").find('button').removeAttr('disabled');
 
+				$("#delete-folder").removeClass('hidden').addClass('visible');
+				$("#delete-folder").attr('data-folderId', data.folder.global_folder_id );
 				$("#folder-title").attr('data-isWeekFolder', true);
 			}	
 		}
@@ -46,7 +47,10 @@
 				$("#edit-folder").removeClass('hidden').addClass('visible');
 				$("#edit-folder").attr('data-folderId', data.folder.global_folder_id );
 				$("#edit-folder").attr('href', "/admin/folder/"+data.folder.global_folder_id+"/edit");
-				$("#edit-folder").find('button').removeAttr('disabled');
+				
+
+				$("#delete-folder").removeClass('hidden').addClass('visible');
+				$("#delete-folder").attr('data-folderId', data.folder.global_folder_id );
 				$("#folder-title").attr('data-isWeekFolder', false);
 			} else{
 
