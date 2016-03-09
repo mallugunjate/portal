@@ -4787,6 +4787,17 @@ a.compose-mail {
   border-bottom: 0;
   padding: 30px 20px 20px 20px;
 }
+
+.search-box-header {
+  background-color: #ffffff;
+  border: 1px solid #e7eaec;
+  border-bottom: 0;
+  padding: 5px 20px 10px 20px;
+}
+  .search-box-header small{
+    padding-left: 20px;
+  }
+
 .mail-box-header h2 {
   margin-top: 0px;
 }
@@ -8137,4 +8148,10 @@ body.md-skin {
   font-family: 'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;
   font-weight: lighter;
   font-size: 16px;
+}
+
+.search-query{
+  font-style: italic;
+  font-size: 20px;
+  padding-left: 20px;
 }
