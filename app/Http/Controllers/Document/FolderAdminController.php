@@ -146,14 +146,14 @@ class FolderAdminController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
         
-        $children = FolderStructure::where('parent', $id)->get();
-        if (count($children)>0) {
-            return "Delete inner Folders first";
-        }
-        Folder::deleteFolder($id);
+        // $children = FolderStructure::where('parent', $id)->get();
+        // if (count($children)>0) {
+        //     return "Delete inner Folders first";
+        // }
+        Folder::deleteFolder($id, $request);
         return;
     }
 }
