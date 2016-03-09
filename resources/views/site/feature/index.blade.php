@@ -183,7 +183,6 @@
         $(".tree").treed({openedClass : 'fa-folder-open', closedClass : 'fa-folder'});
     </script>
 
-    @include('site.includes.bugreport')
     @include('site.includes.modal')
 
 

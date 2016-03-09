@@ -205,7 +205,6 @@
 
     @include('site.includes.footer')       
     @include('site.includes.scripts')
-    @include('site.includes.bugreport')
     @include('site.includes.modal')
 
 
