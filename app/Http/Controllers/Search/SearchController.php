@@ -31,14 +31,13 @@ class SearchController extends Controller
         $folders = [];
         $communications = [];
         $alerts = [];
-        
+
         if ( isset($query) && ($query != '')){
             $docs = Search::searchDocuments($query);
             $folders = Search::searchFolders($query);
             $communications = Search::searchCommunications($query, $store);
             $alerts = Search::searchAlerts($query, $store);
         }
-        dd($alerts);
 
         $storeNumber = RequestFacade::segment(1);
 
