@@ -61,12 +61,31 @@
                 <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
             </div>
 
-            <div class="modal-body" style="padding: 0px 10px;">
-                <p><strong>Lorem Ipsum is simply dummy</strong> text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
-                    remaining essentially unchanged.</p>
-                        <div class="form-group"><label>Sample Input</label> <input type="email" placeholder="Enter your email" class="form-control"></div>
+            <div class="modal-body" style="padding: 10px 10px;">
+                <div class="form-group">
+                    
+                    <input type="hidden" name="bugreport_store_number" id="bugreport_store_number" value="{{ Request::segment(1) }}" />
+                    <input type="hidden" name="bugreport_user" id="bugreport_user" value="" />
+                    <input type="hidden" name="bugreport_url" id="bugreport_url" value="{{ Request::path() }}" />
+
+                    <textarea rows="5" class="form-control" name="bugreport_desc" id="bugreport_desc" placeholder="Please describe the issue"></textarea>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-8">
+                            <input type="email" placeholder="Enter your email (optional)" class="form-control" name="bugreport_email"  id="bugreport_email" value="" />
+                        </div>
+                        <div class="col-md-4">
+                            <label>
+                                <input class="" type="checkbox" value="1" name="bugreport_followup" id="bugreport_followup"</input> Need a Follow Up? 
+                            </label>
+                        </div>
+                    </div>
+                    
+
+                </div>
+        
             </div>
+
             <div class="modal-footer">
                 <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary sendBugReport" data-dismiss="modal">Send</button>

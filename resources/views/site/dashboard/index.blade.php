@@ -207,7 +207,6 @@
     @include('site.includes.scripts')
     @include('site.includes.modal')
 
-
 </body>
 </html> 
 
