@@ -27,11 +27,18 @@ class SearchController extends Controller
         $query = $request['q'];
         $store = RequestFacade::segment(1);
         
+        $docs = [];
+        $folders = [];
+        $communications = [];
+        $alerts = [];
+        
         if ( isset($query) && ($query != '')){
-            $docs = Search::searchDocuments($query, $store);
-
+            $docs = Search::searchDocuments($query);
+            $folders = Search::searchFolders($query);
+            $communications = Search::searchCommunications($query, $store);
+            $alerts = Search::searchAlerts($query, $store);
         }
-        dd($docs);
+        dd($alerts);
 
         $storeNumber = RequestFacade::segment(1);
 
@@ -47,7 +54,11 @@ class SearchController extends Controller
 
         return view('site.search.index')
             ->with('skin', $skin)
-            ->with('urgentNoticeCount', $urgentNoticeCount);
+            ->with('urgentNoticeCount', $urgentNoticeCount)
+            ->with('docs', $docs)
+            ->with('folders', $folders)
+            ->with('communications', $communications)
+            ->with('alerts', $alerts);
     }
 
     /**
