@@ -48,7 +48,7 @@ Route::get('/{storeno}/alerts', array('uses' => 'Alert\AlertController@index'));
 Route::get('/{storeno}/urgentnotice', array('uses' => 'UrgentNotice\UrgentNoticeController@index'));
 Route::get('/{storeno}/urgentnotice/show/{id}', array('uses' => 'UrgentNotice\UrgentNoticeController@show'));
 
-//CALENDAR
+//Search
 Route::get('/{storeno}/search', array('uses' => 'Search\SearchController@index'));
 
 //Authentication Routes

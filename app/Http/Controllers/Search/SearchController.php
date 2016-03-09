@@ -12,6 +12,7 @@ use App\Models\StoreInfo;
 use App\Skin;
 use App\Models\UrgentNotice\UrgentNotice;
 use App\Models\Utility\Utility;
+use App\Models\Search\Search;
 
 class SearchController extends Controller
 {
@@ -23,6 +24,15 @@ class SearchController extends Controller
     public function index(Request $request)
     {
 
+        $query = $request['q'];
+        $store = RequestFacade::segment(1);
+        
+        if ( isset($query) && ($query != '')){
+            $docs = Search::searchDocuments($query, $store);
+
+        }
+        dd($docs);
+
         $storeNumber = RequestFacade::segment(1);
 
         $storeInfo = StoreInfo::getStoreInfoByStoreId($storeNumber);
@@ -32,6 +42,8 @@ class SearchController extends Controller
         $skin = Skin::getSkin($storeBanner);
 
         $urgentNoticeCount = UrgentNotice::getUrgentNoticeCount($storeNumber);
+
+        
 
         return view('site.search.index')
             ->with('skin', $skin)
