@@ -155,8 +155,6 @@
     </script>
 
     @include('site.includes.modal')
-    @include('site.includes.bugreport')
-
 
 </body>
 </html> 

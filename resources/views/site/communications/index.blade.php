@@ -118,7 +118,7 @@
         });
     </script>
 
-    @include('site.includes.bugreport')
+    @include('site.includes.modal')
 
 </body>
 </html> 
