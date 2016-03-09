@@ -32,10 +32,10 @@
 
        <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
-                <h2>Document Manager</h2>
+                <h2>Library</h2>
                 <ol class="breadcrumb">
                     <li><a href="/">Home</a></li>
-                    <li><a href="/document">Documents</a></li>
+                    <li><a href="/admin/document/manager">Library</a></li>
                 </ol>
             </div>
             <div class="col-lg-2">

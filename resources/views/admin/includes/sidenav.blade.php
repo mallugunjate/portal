@@ -80,17 +80,14 @@
 
 
     @if (Request::is('admin/document/*') || Request::is('admin/document'))
+
     <li class="active">
     @else
     <li>
     @endif
-        <a href="/document"><i class="fa fa-file"></i> <span class="nav-label">Documents</span><span class="fa arrow"></span></a>
-        <ul class="nav nav-second-level collapse">
-            <li><a href="/admin/folder">Manage Folders</a></li>
-            {{-- <li><a href="/admin/folder/create">Create New Folder</a></li> --}}
-            <li><a href="/admin/document/manager">Document Manager</a></li>
-        </ul>        
+        <a href="/admin/document/manager"><i class="fa fa-book"></i> <span class="nav-label">Library</span></a>
     </li>
+    
 
     @if (Request::is('admin/alert/*') || Request::is('admin/alert') || Request::is('admin/urgentnotice') || Request::is('admin/urgentnotice/*')) 
     <li class="active">
