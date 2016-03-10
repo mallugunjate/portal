@@ -8,6 +8,10 @@
         .action{
             white-space: nowrap;
         }
+
+        .top-level-folder{
+            color: #444;
+        }
     </style>
     <link rel="stylesheet" type="text/css" href="/css/custom/tree.css">
     <meta name="csrf-token" content="{!! csrf_token() !!}"/>
@@ -28,10 +32,10 @@
 
        <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
-                <h2>Document Manager</h2>
+                <h2>Library</h2>
                 <ol class="breadcrumb">
                     <li><a href="/">Home</a></li>
-                    <li><a href="/document">Documents</a></li>
+                    <li><a href="/admin/document/manager">Library</a></li>
                 </ol>
             </div>
             <div class="col-lg-2">
@@ -46,11 +50,12 @@
                         <div class="ibox-content">
                             <div class="file-manager">
 
-                                <h5>Folders</h5>
+                                <a href="/admin/document/manager" class="top-level-folder"> <h5><i class="fa fa-folder"></i> {{$banner->name}}</h5> </a>
                                     @include('admin.navigation-view', ['navigation'=>$navigation])
                                     <div id="file-container" class="hidden">
                                     <ol class="breadcrumbs"></ol>
                                     <input type="hidden" name="default_folder" value={{$defaultFolder}}>
+                                    <input type="hidden" name="banner_id" value={{$banner->id}}>
                             {{--         @include('admin.documentmanager.document-table') --}}
                                     </div>
                                     <div id="package-viewer" class="hidden">
@@ -79,19 +84,20 @@
 
                                     <div class="ibox-title">
                                         
-                                        <h5 id="folder-title"></h5>
+                                        <h5 id="folder-title"> <i class="fa fa-folder-open"></i> {{$banner->name}}</h5>
                                     
                                         <div class="ibox-tools">
 
-                                             <a id="add-files" data-folderId="" href="/admin/document/create"><button type="button" class="btn btn-primary"><i class="fa fa-plus"></i> Add Files</button></a>
-                                             <!-- <a href="#"><button type="button" class="btn btn-primary"><i class="fa fa-folder-open-o"></i> Add Sub Folder</button></a>
-                                             <a href="#"><button type="button" class="btn btn-primary"><i class="fa fa-pencil"></i> Edit this Folder</button></a> -->
+                                             <a id="add-files" class="hidden" data-folderId="" href="/admin/document/create"><button type="button" class="btn btn-primary"><i class="fa fa-plus"></i> Add Files </i></button></a>
+                                             <a id="add-folder" href="/admin/folder/create"><button type="button" class="btn btn-primary"><i class="fa fa-plus"></i> <i class="fa fa-folder-o"></i></button></a>
+                                             <a id="edit-folder" class="hidden" href=""><button type="button" class="btn btn-primary"><i class="fa fa-pencil"></i></button></a>
+                                             <a id="delete-folder" class="hidden" href=""><button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button></a>
 
                                         </div>
                                     </div>
 
 
-                                    <div class="ibox-content">
+                                    <div class="ibox-content">                                            
                                             <table class="table tablesorter" id="file-table"> 
                                             </table>
                                     </div>
@@ -142,6 +148,9 @@
     <script type="text/javascript" src="/js/custom/admin/documents/deleteFile.js"></script>
     <script type="text/javascript" src="/js/custom/admin/documents/breadcrumb.js"></script>
     <script type="text/javascript" src="/js/custom/tree.js"></script>
+    <script type="text/javascript" src="/js/custom/admin/documents/editFolder.js"></script>
+    <script type="text/javascript" src="/js/custom/admin/documents/addFolder.js"></script>
+    <script type="text/javascript" src="/js/custom/admin/documents/deleteFolder.js"></script>
     <script type="text/javascript" src="/js/custom/site/launchModal.js" ></script>
 
 
@@ -239,6 +248,7 @@
         </script>
 
         @include('site.includes.modal')
+        @include('admin.folder.foldermodal')
         @include('site.includes.bugreport')
     </body>
 </html>

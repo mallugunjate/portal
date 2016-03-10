@@ -53,9 +53,14 @@ class FolderAdminController extends Controller
     {
         
         $banner = UserSelectedBanner::getBanner();
-        $banners = Banner::all();          
-        return view('admin.folder.create-folder')->with('banner', $banner)
-                                         ->with('banners', $banners);
+        $banners = Banner::all();   
+        $parent = null;
+        if (isset($request['parent'])) {
+            $parent = $request['parent'];
+        }       
+        return view('admin.documentmanager.folder-add-modal')->with('banner', $banner)
+                                         ->with('banners', $banners)
+                                         ->with('parent', $parent);
     }
 
     /**
@@ -66,10 +71,8 @@ class FolderAdminController extends Controller
      */
     public function store(Request $request)
     {
-            
         Folder::storeFolder($request);
-
-        return redirect()->action('Document\FolderAdminController@index');
+        return redirect('/admin/document/manager#!/'.$request['parent']);
 
     }
 
@@ -105,7 +108,7 @@ class FolderAdminController extends Controller
         $tag_ids = ContentTag::where('content_id', $id)->where('content_type', 'folder')->get()->pluck('tag_id');
         $selected_tags = Tag::findMany($tag_ids)->pluck('id')->toArray();
 
-        return view('admin.folder.folder-edit')->with('folder', $folder)
+        return view('admin.documentmanager.folder-edit-modal')->with('folder', $folder)
                                         ->with('params', $params)
                                         ->with('banner', $banner)
                                         ->with('banners', $banners)
@@ -134,7 +137,7 @@ class FolderAdminController extends Controller
         Folder::updateTags($global_folder_id, $request["tags"]);
         $banner_id = Folder::editFolderDetails(compact('id', 'name', 'children', 'weekWindowSize', 'removeWeeks'));
 
-        return redirect()->action('Document\FolderAdminController@index');
+        return redirect('/admin/document/manager#!/'.$global_folder_id);
     }
 
     /**
@@ -143,14 +146,14 @@ class FolderAdminController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
         
-        $children = FolderStructure::where('parent', $id)->get();
-        if (count($children)>0) {
-            return "Delete inner Folders first";
-        }
-        Folder::deleteFolder($id);
+        // $children = FolderStructure::where('parent', $id)->get();
+        // if (count($children)>0) {
+        //     return "Delete inner Folders first";
+        // }
+        Folder::deleteFolder($id, $request);
         return;
     }
 }
