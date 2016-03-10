@@ -49,15 +49,14 @@ class SearchController extends Controller
 
         $urgentNoticeCount = UrgentNotice::getUrgentNoticeCount($storeNumber);
 
-        
-
         return view('site.search.index')
             ->with('skin', $skin)
             ->with('urgentNoticeCount', $urgentNoticeCount)
             ->with('docs', $docs)
             ->with('folders', $folders)
             ->with('communications', $communications)
-            ->with('alerts', $alerts);
+            ->with('alerts', $alerts)
+            ->with('query', $query);
     }
 
     /**
