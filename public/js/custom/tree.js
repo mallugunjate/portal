@@ -22,17 +22,31 @@ $.fn.extend({
             branch.addClass('branch');
             branch.on('click', function (e) {
                 if (this == e.target) {                    
-                    //close all other folders
-                    $(".indicator").removeClass('fa-folder-open').addClass('fa-folder')
                     
-                    if (!$(this).hasClass('parent-folder')) {
+                    //close all other folders
+                    $(".indicator").removeClass('fa-folder-open').addClass('fa-folder');
+                    
+                    //get top-level parent folder
+                    var topLevelParent = $(this).closest('.top-level');
+                    
+                    if( $(this).attr('id') != topLevelParent.attr('id')) {
+                        
+                        topLevelParent.children("i:first").removeClass('fa-folder').addClass('fa-folder-open');
 
-                        $(this).closest('.parent-folder').children('i').removeClass('fa-folder').addClass('fa-folder-open');
+                        allParents = $(this).parentsUntil(".top-level");
 
+                        allParents.each(function(item){
+                            
+                            if ($(this).is('li')) {
+                               $(this).children("i:first").removeClass('fa-folder').addClass('fa-folder-open');
+                            }
+
+                        });
                     }
                     else{
-                        $(this).closest('.parent-folder').children('i').toggleClass(openedClass + " " + closedClass);
+
                     }
+                   
                     var icon = $(this).children('i:first');
                     icon.toggleClass(openedClass + " " + closedClass);
                     $(this).children().children().toggle();
