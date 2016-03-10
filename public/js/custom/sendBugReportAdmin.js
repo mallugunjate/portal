@@ -2,7 +2,7 @@ $(document).ready(function() {
 
 	$('.sendBugReport').click(function(){
 
-		var banner = localStorage.getItem('adminBanner');
+		var banner = localStorage.getItem('admin-banner-id');
 		var store_number = $("#bugreport_store_number").val();
 		var user = $("#bugreport_user").val();
 		var current_url = $("#bugreport_url").val();
