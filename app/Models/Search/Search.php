@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Document\Document;
 use App\Models\Document\Folder;
 use App\Models\Communication\Communication;
+use App\Models\Utility\Utility;
 use Carbon\Carbon;
+
 class Search extends Model
 {
     public static function searchDocuments($query)
@@ -34,7 +36,13 @@ class Search extends Model
     		return $sort->updated_at;
 		})->reverse();
 
-
+        foreach($docs as $doc){
+            $doc->modalLink = Utility::getModalLink($doc->filename, $doc->title, $doc->original_extension, 1, 0);
+            $doc->since = Utility::getTimePastSinceDate($doc->updated_at);
+            $doc->prettyStart = Utility::prettifyDate($doc->start);
+            $doc->prettyEnd = Utility::prettifyDate($doc->end);
+            //public static function getModalLink($file, $anchortext, $extension, $withIcon=null, $justAnchor=null)
+        }
 
     	return $docs;	
     }

@@ -33,7 +33,7 @@
 
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-12">
-                <h2>Search <span class="search-query">{{ $query }}}</span></h2>
+                <h2>Search results for: <span class="search-query">{{ $query }}</span></h2>
 <!--                 <ol class="breadcrumb">
                     <li>jdaf ja fl aslk salk adslkd aslkdsa lksad</li>
                 </ol> -->
@@ -52,22 +52,39 @@
 
                     <div class="col-lg-12 animated fadeInRight">
                         <div class="search-box-header">
-                            <h2>Documents <small>45 results</small></h2>
+                            <h2>Documents <small>{{ count($docs) }} results</small></h2>
                         </div>
 
                         <div class="mail-box">
 
 
-<table class="table tablesorter table-hover table-mail tablesorter-default" id="file-table" role="grid">
-<thead>
-    <tr> 
-        <th> Title </th> 
-        <th> Description </th> 
-        <th> Uploaded At </th> 
-        <th> Start </th> 
-        <th> End </th> 
-    </tr>
-    </thead><tbody><tr> <td class="mail-subject"><a href="#"><i class="fa fa-file-o"></i> no title</a></td> <td>no description</td> <td>2013-06-27 23:24:07</td> <td>0000-00-00 00:00:00</td> <td>0000-00-00 00:00:00</td> <td></td> </tr><tr> <td class="mail-subject"><a href=""><i class="fa fa-file-image-o"></i> no title</a></td> <td>no description</td> <td>2016-01-25 23:24:08</td> <td>0000-00-00 00:00:00</td> <td>0000-00-00 00:00:00</td> <td></td> </tr></tbody></table>
+                        <table class="table tablesorter table-hover table-mail tablesorter-default" id="file-table" role="grid">
+                        <thead>
+                            <tr> 
+                                <th> Title </th> 
+                                <th> Description </th> 
+                                <th> Uploaded </th> 
+                                <th> Start </th> 
+                                <th> End </th> 
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            @foreach($docs as $doc)
+                            <tr> 
+                                <td class="mail-subject">
+                                    {!! $doc->modalLink !!}
+                                </td> 
+                                <td>{{ $doc->description }}</td> 
+                                <td>{{ $doc->since }} ago</td> 
+                                <td>{{ $doc->prettyStart }}</td> 
+                                <td>{{ $doc->prettyEnd }}</td> 
+                                <td></td> 
+                            </tr>
+                            @endforeach
+
+                            </tbody>
+                        </table>
 <!-- 
                             <table class="table table-hover table-mail">
                                 <tbody>
