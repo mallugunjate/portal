@@ -9,7 +9,7 @@
     <style>
     #page-wrapper{
         background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 65%, rgba(0, 0, 0, 1) 100%), url('/images/dashboard-banners/{{ $banner->background }}') no-repeat 0px 50px; 
-        background-size: cover;
+        background-size: cover !important;
         overflow: hidden;
     }
 
@@ -155,7 +155,7 @@
                                         <h2>Latest Updates</h2>
                                     </div>
                                     
-                                    <div class="ibox-content">
+                                    <div class="ibox-content" style="max-height: 550px; overflow-y: scroll;">
 
                                         <div>
                                             <div class="feed-activity-list">
