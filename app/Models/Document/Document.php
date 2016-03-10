@@ -29,18 +29,20 @@ class Document extends Model
             
             $folder_type = $global_folder_details->folder_type;
             $folder_id = $global_folder_details->folder_id;
+
+            $now = Carbon::now()->toDatetimeString();
             
             if ($forStore) {
                 $files = \DB::table('file_folder')
                             ->join('documents', 'file_folder.document_id', '=', 'documents.id')
                             ->where('file_folder.folder_id', '=', $global_folder_id)
-                            ->where('documents.start', '<=', Carbon::today()->toDateString() )
+                            ->where('documents.start', '<=', $now )
                             ->select('documents.*')
                             ->get();
                 $counter = 0;
                 foreach ($files as $file) {
                     
-                    if (!( $file->end >= Carbon::today()->toDateString() || $file->end == '0000-00-00 00:00:00' ) ) {
+                    if (!( $file->end >= $now || $file->end == '0000-00-00 00:00:00' ) ) {
 
                         unset($files[$counter]);
                     }
