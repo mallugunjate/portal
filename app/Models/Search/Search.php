@@ -66,7 +66,29 @@ class Search extends Model
     		return $sort->updated_at;
 		})->reverse();
 
+        foreach($folders as $folder){
+            
+            $folder->globalId = Folder::getGlobalFolderId($folder->id);
+            $folder->lastActivity = Utility::getTimePastSinceDate($folder->last_activity_at);
 
+            $path = Folder::getFolderPath($folder->globalId);
+            $pathString = "";
+
+           // dd($path);
+            $i = 1;
+            foreach($path as $p){
+                if( $i < count($path) ){
+                    $pathString .= " ". $p['name'] . " <i class='fa fa-caret-right'></i> "; 
+                    
+                } else {
+                    $pathString .= " ". $p['name'];   
+                }
+                
+                $i++;
+            }
+
+            $folder->path = $pathString;
+        }
 
     	return $folders;	
     }

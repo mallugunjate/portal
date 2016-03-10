@@ -11,6 +11,7 @@ use App\Models\Tag\Tag;
 use App\Models\Tag\ContentTag;
 use Carbon\Carbon;
 use App\Models\UserSelectedBanner;
+use DB;
 
 
 class Folder extends Model
@@ -312,8 +313,7 @@ class Folder extends Model
                         $parent = Folder::where('id', $currentFolder->folder_id)->first();
                         $finalPath[$counter]["name"] = $parent->name;
                         $finalPath[$counter]["global_folder_id"]  = $currentFolder->id;
-                        
-
+        
                     }
                 }     
             }
@@ -499,6 +499,11 @@ class Folder extends Model
             $navCounter++;   
         }
         return  ( $navigation );
+    }
+
+    public static function getGlobalFolderId($folderId)
+    {
+         return DB::table('folder_ids')->where('folder_id', $folderId)->first()->id;
     }
 
 }

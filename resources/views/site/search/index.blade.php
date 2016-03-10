@@ -45,71 +45,47 @@
 
             <div class="wrapper wrapper-content">
 
-    
-
-
                 <div class="row">
+
 
                     <div class="col-lg-12 animated fadeInRight">
                         <div class="search-box-header">
                             <h2>Documents <small>{{ count($docs) }} results</small></h2>
                         </div>
 
+                        @if( count($docs) > 0)
                         <div class="mail-box">
 
+                            <table class="table tablesorter table-hover table-mail tablesorter-default" id="file-table" role="grid">
+                                <thead>
+                                    <tr> 
+                                        <th> Title </th> 
+                                        <th> Description </th> 
+                                        <th> Uploaded </th> 
+                                        <th> Start </th> 
+                                        <th> End </th> 
+                                    </tr>
+                                </thead>
 
-                        <table class="table tablesorter table-hover table-mail tablesorter-default" id="file-table" role="grid">
-                        <thead>
-                            <tr> 
-                                <th> Title </th> 
-                                <th> Description </th> 
-                                <th> Uploaded </th> 
-                                <th> Start </th> 
-                                <th> End </th> 
-                            </tr>
-                            </thead>
-                            <tbody>
-
-                            @foreach($docs as $doc)
-                            <tr> 
-                                <td class="mail-subject">
-                                    {!! $doc->modalLink !!}
-                                </td> 
-                                <td>{{ $doc->description }}</td> 
-                                <td>{{ $doc->since }} ago</td> 
-                                <td>{{ $doc->prettyStart }}</td> 
-                                <td>{{ $doc->prettyEnd }}</td> 
-                                <td></td> 
-                            </tr>
-                            @endforeach
-
-                            </tbody>
-                        </table>
-<!-- 
-                            <table class="table table-hover table-mail">
                                 <tbody>
+                                @foreach($docs as $doc)
+                                    <tr> 
+                                        <td class="mail-subject">
+                                            {!! $doc->modalLink !!}
+                                        </td> 
+                                        <td>{{ $doc->description }}</td> 
+                                        <td>{{ $doc->since }} ago</td> 
+                                        <td>{{ $doc->prettyStart }}</td> 
+                                        <td>{{ $doc->prettyEnd }}</td> 
+                                        <td></td> 
+                                    </tr>
+                                @endforeach
 
-                                    <tr class="read">
-                                    
-                                        <td class="check-mail">
-                                            <i class="fa fa-envelope-o"></i>
-                                        </td>
-
-                                                                <td class="mail-subject">
-                                                                            <a href="communication/show/18">this is a message</a>
-                                            </td>
-                                                            
-                                        <td class="mail-preview"><a href="communication/show/18">dsdasdsa</a></td>
-                                        
-                                        <td class="text-right mail-date">Thu, Feb 11, 2016 12:00 am <small style="font-weight: normal;padding-left: 10px;">(3 weeks ago)</small></td>
-                                    </tr>                
-
-                                                 
                                 </tbody>
-                            </table> -->
-
+                            </table>
 
                         </div>
+                        @endif
                     </div>
 
                 </div>
@@ -119,36 +95,50 @@
 
                     <div class="col-lg-12 animated fadeInRight">
                         <div class="search-box-header">
-                            <h2>Folders <small>4 results</small></h2>
+                            <h2>Folders <small>{{ count($folders) }} results</small></h2>
                         </div>
-
+                        @if( count($folders) > 0)
                         <div class="mail-box">
 
-
                             <table class="table table-hover table-mail">
-                                <tbody>
 
-                                    <tr class="read">
+                                <thead>
+                                    <tr> 
+                                        <th></th>
+                                        <th> Folder </th> 
+                                        <th> Folder Path </th> 
+                                        <th> Last Updated </th> 
+                                       
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                @foreach($folders as $folder)
+                                    <tr>
                                     
                                         <td class="check-mail">
-                                            <i class="fa fa-envelope-o"></i>
+                                            <i class="fa fa-folder-open"></i>
                                         </td>
 
-                                                                <td class="mail-subject">
-                                                                            <a href="communication/show/18">this is a message</a>
+                                            <td class="mail-subject">
+                                               <a href="/{{ Request::segment(1) }}/document#!/{{ $folder->globalId }}"> {{ $folder->name }}</a>
                                             </td>
-                                                            
-                                        <td class="mail-preview"><a href="communication/show/18">dsdasdsa</a></td>
-                                        <td class=""><!-- <i class="fa fa-paperclip"></i> --></td>
-                                        <td class="text-right mail-date">Thu, Feb 11, 2016 12:00 am <small style="font-weight: normal;padding-left: 10px;">(3 weeks ago)</small></td>
+                                        
+                                        <td>
+                                            
+                                            {!! $folder->path !!}
+                                        </td>                 
+                                        
+                                        <td class="mail-date">{{ $folder->lastActivity }} ago</td>
                                     </tr>                
-
+                                @endforeach
                                                  
                                 </tbody>
                             </table>
 
 
                         </div>
+                        @endif
                     </div>
 
                 </div>                
