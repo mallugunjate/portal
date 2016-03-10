@@ -1,5 +1,5 @@
 @if(count($nav["children"]) >0 )
-	<li id={{$nav["id"]}} class="parent-folder folder"> {{$nav["label"]}} 
+	<li id={{$nav["id"]}} class="parent-folder top-level folder"> {{$nav["label"]}} 
 	<ul>
 	@foreach ($nav["children"] as $child)
 	<?php $nav = $navigation[$child["child_id"]] ?>
