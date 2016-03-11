@@ -5197,8 +5197,11 @@ del {
   padding: 120px 0;
 }
 .product-desc {
-  padding: 20px;
+/*  padding: 20px;*/
   position: relative;
+  
+  bottom: 164px;
+  height: 164px;
 }
 .ecommerce .tag-list {
   padding: 0;
@@ -5224,14 +5227,14 @@ del {
   color: #489bd5;
 }
 .product-price {
-  font-size: 14px;
+/*  font-size: 14px;
   font-weight: 600;
   color: #ffffff;
   background-color: #489bd5;
   padding: 6px 12px;
   position: absolute;
   top: -32px;
-  right: 0;
+  right: 0;*/
 }
 .product-detail .ibox-content {
   padding: 30px 30px 30px 30px;
