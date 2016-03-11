@@ -39,7 +39,11 @@ $(document).on('click','.communication-update',function(){
 	var end = $("#archive_at").val();
 	var banner_id = $("input[name='banner_id']").val();
 	var target_stores  = $("#storeSelect").val();
-	var allStores  = $("allStores:checked").val();
+	var allStores  = $("#allStores:checked").val();
+
+	console.log(allStores);
+	console.log(target_stores);
+	
 	var importance = "1";
 	var sender = "";
 
@@ -85,7 +89,6 @@ $(document).on('click','.communication-update',function(){
 	console.log(communication_type_id);
      if(hasError == false) {
 
-
 		$.ajax({
 		    url: '/admin/communication/' + communicationId,
 		    type: 'PATCH',
@@ -100,6 +103,7 @@ $(document).on('click','.communication-update',function(){
 		  		archive_at : end,
 		  		banner_id : banner_id,
 		  		target_stores : target_stores,
+		  		allStores : allStores,
 		  		communication_documents : communication_documents,
 		  		communication_packages : communication_packages,
 		  		remove_document : remove_document,

@@ -121,17 +121,20 @@ class Communication extends Model
 
       public static function updateTargetStores($id, $request)
       {
-         CommunicationTarget::where('communication_id', $id)->delete();
+         $target_stores = $request['target_stores'];
+         $allStores = $request['allStores'];
          
-         $stores = $request["target_stores"];
-         if (count($stores>0)) {
-            foreach ($stores as $store) {
-               CommunicationTarget::create([
-                  'communication_id'   => $id,
-                  'store_id'           => $store
-               ]);
-            
-            }
+         if (!( $target_stores == '' && $allStores == 'on' )) {
+             CommunicationTarget::where('communication_id', $id)->delete();
+             if (count($target_stores) > 0) {
+                 foreach ($target_stores as $store) {
+                     CommunicationTarget::create([
+                        'communication_id'   => $id,
+                        'store_id'           => $store
+                     ]);
+               
+                  } 
+             }            
          }
          
          return;
