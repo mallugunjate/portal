@@ -178,7 +178,7 @@ class UrgentNotice extends Model
                             ->get();
 
         foreach($notices as $n){
-            
+            $n->archived= true;
             $n->since =  Utility::getTimePastSinceDate($n->updated_at);
             $n->prettyDate =  Utility::prettifyDate($n->updated_at);
             $preview_string = strip_tags($n->description);

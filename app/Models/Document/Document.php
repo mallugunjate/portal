@@ -285,6 +285,7 @@ class Document extends Model
         
         if (count($files) > 0) {
             foreach ($files as $file) {
+                $file->archived = true;
                 $file->link = Utility::getModalLink($file->filename, $file->title, $file->original_extension, 0);
                 $file->link_with_icon = Utility::getModalLink($file->filename, $file->title, $file->original_extension, 1);
                 $file->icon = Utility::getIcon($file->original_extension);

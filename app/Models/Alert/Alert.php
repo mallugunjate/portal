@@ -106,6 +106,7 @@ class Alert extends Model
         if (count($alerts) >0) {
             foreach($alerts as $a){
                 
+                $a->archived = true;
                 $a->prettyDate =  Utility::prettifyDate($a->updated_at);
                 $a->since =  Utility::getTimePastSinceDate($a->updated_at);
                 

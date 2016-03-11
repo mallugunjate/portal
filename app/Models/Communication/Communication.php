@@ -56,7 +56,7 @@ class Communication extends Model
                               ->get();
          
          foreach($comm as $c){
-
+            $c->archived = true;
             $c->since = Utility::getTimePastSinceDate($c->updated_at);
             $c->prettyDate = Utility::prettifyDate($c->updated_at);
             $preview_string = strip_tags($c->body);
