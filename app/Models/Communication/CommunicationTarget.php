@@ -16,12 +16,12 @@ class CommunicationTarget extends Model
 
 	public static function getTargetedCommunications($storeNumber)
 	{
-        $today = Carbon::today()->toDateString();
+        $now = Carbon::now()->toDatetimeString();
 
         $communications = CommunicationTarget::where('communications_target.store_id', '=', $storeNumber)
         				->join('communications', 'communications_target.communication_id', '=', 'communications.id')
-                        ->where('communications.send_at' , '<=', $today)
-                        ->where('communications.archive_at', '>=', $today)
+                        ->where('communications.send_at' , '<=', $now)
+                        ->where('communications.archive_at', '>=', $now)
         				->orderBy('communications.send_at', 'desc')
         				->get();
 
@@ -34,12 +34,12 @@ class CommunicationTarget extends Model
 
     public static function getTargetedCommunicationsByCategory($storeNumber, $type_id)
     {
-        $today = Carbon::today()->toDateString();
+        $now = Carbon::now()->toDatetimeString();
 
         $communications = CommunicationTarget::where('communications_target.store_id', '=', $storeNumber)
                         ->join('communications', 'communications_target.communication_id', '=', 'communications.id')
-                        ->where('communications.send_at' , '<=', $today)
-                        ->where('communications.archive_at', '>=', $today)
+                        ->where('communications.send_at' , '<=', $now)
+                        ->where('communications.archive_at', '>=', $now)
                         ->where('communications.communication_type_id', '=', $type_id)
                         ->orderBy('communications.send_at', 'desc')
                         ->get();

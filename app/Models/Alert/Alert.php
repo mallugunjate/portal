@@ -33,12 +33,12 @@ class Alert extends Model
 
     public static function getActiveAlertCountByStore($store_id)
     {
-        $today = Carbon::today()->toDateString();
+        $now = Carbon::now()->toDatetimeString();
 
         $alert_count = Alert::join('alerts_target', 'alerts.id' , '=', 'alerts_target.alert_id')
                             ->where('store_id', $store_id)
-                            ->where('alerts.alert_start' , '<=', $today)
-                            ->where('alerts.alert_end', '>=', $today)
+                            ->where('alerts.alert_start' , '<=', $now)
+                            ->where('alerts.alert_end', '>=', $now)
                             ->count();
 
         return $alert_count;
@@ -46,14 +46,14 @@ class Alert extends Model
 
     public static function getActiveAlertCountByCategory($storeNumber, $alertId)
     {
-         $today = Carbon::today()->toDateString();
+         $now = Carbon::now()->toDatetimeString();
 
          $count = DB::table('alerts_target')
            ->where('store_id', $storeNumber)
            ->join('alerts', 'alerts.id', '=', 'alerts_target.alert_id')
            ->where('alerts.alert_type_id', $alertId)
-           ->where('alerts.alert_start' , '<=', $today)
-           ->where('alerts.alert_end', '>=', $today)
+           ->where('alerts.alert_start' , '<=', $now)
+           ->where('alerts.alert_end', '>=', $now)
            ->count();
          return $count;
   
@@ -61,7 +61,7 @@ class Alert extends Model
 
     public static function getAlertsByStore($store_id)
     {
-        $today = Carbon::today()->toDateString();
+        $now = Carbon::now()->toDatetimeString();
         
         $alert_ids = \DB::table('alerts_target')->where('store_id', $store_id)
                                                 ->get();
@@ -70,8 +70,8 @@ class Alert extends Model
         foreach ($alert_ids as $alert_id) {
             $alert = Alert::join('documents', 'alerts.document_id' , '=', 'documents.id')
                             ->where('alerts.id', $alert_id->alert_id)
-                            ->where('alerts.alert_start' , '<=', $today)
-                            ->where('alerts.alert_end', '>=', $today)
+                            ->where('alerts.alert_start' , '<=', $now)
+                            ->where('alerts.alert_end', '>=', $now)
                             ->first();
             if($alert) {
                 array_push($alerts, $alert);    

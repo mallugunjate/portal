@@ -27,10 +27,11 @@ class Communication extends Model
       public static function getActiveCommunicationsByStoreNumber($storeNumber, $maxToFetch)
       {
         
+         $now = Carbon::now()->toDatetimeString();
          $comm = DB::table('communications_target')->where('store_id', $storeNumber)
                             ->join('communications', 'communications.id', '=', 'communications_target.communication_id')
-                            ->where('communications.send_at', '<=', Carbon::today()->toDateString() )
-                            ->where('communications.archive_at', '>=', Carbon::today()->toDateString() )
+                            ->where('communications.send_at', '<=', $now )
+                            ->where('communications.archive_at', '>=', $now )
                             ->take($maxToFetch)
                             ->orderBy('communications.updated_at', 'desc')
                             ->get();
@@ -231,13 +232,13 @@ class Communication extends Model
 
       public static function getActiveCommunicationCount($storeNumber)
       {
-         $today = Carbon::today()->toDateString();
+         $now = Carbon::now()->toDatetimeString();
 
          $communicationCount = DB::table('communications_target')
             ->join('communications', 'communications_target.communication_id', '=', 'communications.id')
             ->where('store_id', $storeNumber)
-            ->where('communications.send_at' , '<=', $today)
-            ->where('communications.archive_at', '>=', $today)
+            ->where('communications.send_at' , '<=', $now)
+            ->where('communications.archive_at', '>=', $now)
             ->whereNull('is_read')
             ->count();
 
@@ -246,14 +247,14 @@ class Communication extends Model
 
       public static function getActiveCommunicationCountByCategory($storeNumber, $categoryId)
       {
-         $today = $today = Carbon::today()->toDateString();
+         $now = Carbon::now()->toDatetimeString();
 
          $count = DB::table('communications_target')
             ->where('store_id', $storeNumber)
             ->join('communications', 'communications.id', '=', 'communications_target.communication_id')
             ->where('communications.communication_type_id', $categoryId)
-            ->where('communications.send_at' , '<=', $today)
-            ->where('communications.archive_at', '>=', $today)
+            ->where('communications.send_at' , '<=', $now)
+            ->where('communications.archive_at', '>=', $now)
             ->count();
          return $count;
       } 

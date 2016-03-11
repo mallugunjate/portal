@@ -225,8 +225,8 @@ class Feature extends Model
     public static function getActiveFeatureByBannerId($banner_id)
     {
         return Feature::where('banner_id', $banner_id)
-              ->where('start', '<=', Carbon::today()->toDateString())
-              ->where('end', '>=', Carbon::today()->toDateString())
+              ->where('start', '<=', Carbon::now()->toDatetimeString())
+              ->where('end', '>=', Carbon::now()->toDatetimeString())
               ->orderBy('order')->get();
 
     }

@@ -15,21 +15,21 @@ class Notification extends Model
     public static function getAllNotifications($bannerId, $windowType, $windowSize)
     {
 
-        $today = Carbon::today()->toDateString();
+        $now = Carbon::now()->toDatetimeString();
     	switch($windowType){
     		case 1:  //by number of days
     			$dateSince = Carbon::now()->subDays($windowSize)->toDateTimeString();
 
     			$notifications = Document::where('banner_id', $bannerId)
     							->where('updated_at', '>=', $dateSince)
-                                ->where('start', '<=', $today)
+                                ->where('start', '<=', $now)
     							->orderBy('updated_at', 'desc')
     							->get();
 
                 $counter = 0;
                 foreach ($notifications as $notification) {
                     
-                    if (!( $notification->end >= Carbon::today()->toDateString() || $notification->end == '0000-00-00 00:00:00' ) ) {
+                    if (!( $notification->end >= $now || $notification->end == '0000-00-00 00:00:00' ) ) {
 
                         $notifications->forget($counter);
                     }
@@ -41,13 +41,13 @@ class Notification extends Model
     		case 2:  //by number of documents
     			$notifications = Document::where('banner_id', $bannerId)
     							->orderBy('updated_at', 'desc')
-                                ->where('start', '<=', $today)
+                                ->where('start', '<=', $now)
     							->get();
 
                 $counter = 0;
                 foreach ($notifications as $notification) {
                     
-                    if (!( $notification->end >= Carbon::today()->toDateString() || $notification->end == '0000-00-00 00:00:00' ) ) {
+                    if (!( $notification->end >= $now || $notification->end == '0000-00-00 00:00:00' ) ) {
 
                         $notifications->forget($counter);
                     }
@@ -84,7 +84,7 @@ class Notification extends Model
 
     public static function getNotificationsByFeature($bannerId, $windowType, $windowSize, $featureId)
     {
-        $today = Carbon::today()->toDateString();
+        $now = Carbon::now()->toDatetimeString();
         $documentIdArray = Feature::getDocumentsIdsByFeatureId($featureId);
         $documentIdArray = array_values($documentIdArray);
 
