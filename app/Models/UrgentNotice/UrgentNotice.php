@@ -127,13 +127,13 @@ class UrgentNotice extends Model
 
     public static function getUrgentNoticeCount($storeNumber)
     {
-         $today = Carbon::today()->toDateString();
+         $now = Carbon::now()->toDatetimeString();
  
         return UrgentNoticeTarget::join('urgent_notices', 'urgent_notices.id' , '=', 'urgent_notice_target.urgent_notice_id')
                                 ->where('urgent_notice_target.store_id', $storeNumber)
                                 ->where('urgent_notice_target.is_read', 0)
-                                ->where('urgent_notices.start' , '<=', $today)
-                                ->where('urgent_notices.end', '>=', $today)
+                                ->where('urgent_notices.start' , '<=', $now)
+                                ->where('urgent_notices.end', '>=', $now)
                                 ->count();
     }
 
@@ -149,12 +149,12 @@ class UrgentNotice extends Model
     public static function getActiveUrgentNoticesByStore($storeNumber)
     {
         
-        $today = Carbon::today()->toDateString();
+        $now = Carbon::now()->toDatetimeString();
 
         $notices = DB::table('urgent_notice_target')->where('store_id', $storeNumber)
                             ->join('urgent_notices', 'urgent_notices.id', '=', 'urgent_notice_target.urgent_notice_id')
-                            ->where('urgent_notices.start' , '<=', $today)
-                            ->where('urgent_notices.end', '>=', $today)
+                            ->where('urgent_notices.start' , '<=', $now)
+                            ->where('urgent_notices.end', '>=', $now)
                             ->get();
 
         foreach($notices as $n){
