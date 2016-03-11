@@ -39,9 +39,6 @@ class Search extends Model
         foreach($docs as $doc){
             $doc->modalLink = Utility::getModalLink($doc->filename, $doc->title, $doc->original_extension, 1, 0);
             $doc->since = Utility::getTimePastSinceDate($doc->updated_at);
-            $doc->prettyStart = Utility::prettifyDate($doc->start);
-            $doc->prettyEnd = Utility::prettifyDate($doc->end);
-            //public static function getModalLink($file, $anchortext, $extension, $withIcon=null, $justAnchor=null)
         }
 
     	return $docs;	
@@ -157,6 +154,11 @@ class Search extends Model
     	$alerts = $alerts->sortBy(function($sort){
     		return $sort->updated_at;
 		})->reverse();
+
+        foreach ($alerts as $alert) {
+            $alert->modalLink = Utility::getModalLink($alert->filename, $alert->title, $alert->original_extension, 1, 0);
+            $alert->since = Utility::getTimePastSinceDate($alert->start);
+        }
 
     	return $alerts;
     }

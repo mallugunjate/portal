@@ -61,9 +61,7 @@
                                     <tr> 
                                         <th> Title </th> 
                                         <th> Description </th> 
-                                        <th> Uploaded </th> 
-                                        <th> Start </th> 
-                                        <th> End </th> 
+                                        <th> Last Updated </th> 
                                     </tr>
                                 </thead>
 
@@ -73,8 +71,6 @@
                                         <td class="mail-subject">{!! $doc->modalLink !!}</td> 
                                         <td>{{ $doc->description }}</td> 
                                         <td>{{ $doc->since }} ago</td> 
-                                        <td>{{ $doc->prettyStart }}</td> 
-                                        <td>{{ $doc->prettyEnd }}</td> 
                                         <td></td> 
                                     </tr>
                                 @endforeach
@@ -93,6 +89,46 @@
 
                     <div class="col-lg-12 animated fadeInRight">
                         <div class="search-box-header">
+                            <h2>Alerts <small>{{ count($alerts) }} results</small></h2>
+                        </div>
+
+
+                        @if( count($alerts) > 0)
+                        <div class="mail-box">
+
+                            <table class="table tablesorter table-hover table-mail tablesorter-default" id="file-table" role="grid">
+                                <thead>
+                                    <tr> 
+                                        <th> Title </th> 
+<!--                                         <th> Description </th>  -->
+                                        <th> Active Since </th> 
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                @foreach($alerts as $alert)
+                                    <tr> 
+                                        <td class="mail-subject">{!! $alert->modalLink !!}</td> 
+<!--                                         <td>{{ $alert->description }}</td>  -->
+                                        <td>{{ $alert->since }} ago</td> 
+                                        <td></td> 
+                                    </tr>
+                                @endforeach
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                        @endif
+                    </div>
+
+                </div>                 
+
+
+                <div class="row">
+
+                    <div class="col-lg-12 animated fadeInRight">
+                        <div class="search-box-header">
                             <h2>Folders <small>{{ count($folders) }} results</small></h2>
                         </div>
                         @if( count($folders) > 0)
@@ -101,7 +137,8 @@
                             <table class="table table-hover table-mail">
 
                                 <thead>
-                                    <tr> 
+                                    <tr>
+                                        <th></th>
                                         <th> Folder </th> 
                                         <th> Path </th> 
                                         <th> Last Updated </th> 
@@ -111,7 +148,8 @@
                                 <tbody>
                                 @foreach($folders as $folder)
                                     <tr>
-                                        <td class="mail-subject"><a href="/{{ Request::segment(1) }}/document#!/{{ $folder->globalId }}"><i class="fa fa-folder"></i> {{ $folder->name }}</a></td>
+                                        <td class="check-mail"><i class="fa fa-folder-open"></i></td>
+                                        <td class="mail-subject"><a href="/{{ Request::segment(1) }}/document#!/{{ $folder->globalId }}">{{ $folder->name }}</a></td>
                                         <td>{!! $folder->path !!}</td>                 
                                         <td class="mail-date">{{ $folder->lastActivity }} ago</td>
                                     </tr>                
@@ -134,7 +172,7 @@
                         <div class="search-box-header">
                             <h2>Communications <small>{{ count($communications) }} results</small></h2>
                         </div>
-
+                        @if( count($communications) > 0)
                         <div class="mail-box">
 
 
@@ -163,89 +201,15 @@
                                 </tbody>
                             </table>
 
-
                         </div>
+                        @endif
                     </div>
 
                 </div> 
 
+   
 
-                <div class="row">
-
-                    <div class="col-lg-12 animated fadeInRight">
-                        <div class="search-box-header">
-                            <h2>Alerts <small>3 results</small></h2>
-                        </div>
-
-                        <div class="mail-box">
-
-
-                            <table class="table table-hover table-mail">
-                                <tbody>
-
-                                    <tr class="read">
-                                    
-                                        <td class="check-mail">
-                                            <i class="fa fa-envelope-o"></i>
-                                        </td>
-
-                                                                <td class="mail-subject">
-                                                                            <a href="communication/show/18">this is a message</a>
-                                            </td>
-                                                            
-                                        <td class="mail-preview"><a href="communication/show/18">dsdasdsa</a></td>
-                                        <td class=""><!-- <i class="fa fa-paperclip"></i> --></td>
-                                        <td class="text-right mail-date">Thu, Feb 11, 2016 12:00 am <small style="font-weight: normal;padding-left: 10px;">(3 weeks ago)</small></td>
-                                    </tr>                
-
-                                                 
-                                </tbody>
-                            </table>
-
-
-                        </div>
-                    </div>
-
-                </div>    
-
-
-                <div class="row">
-
-                    <div class="col-lg-12 animated fadeInRight">
-                        <div class="search-box-header">
-                            <h2>Communications <small>0 results</small></h2>
-                        </div>
-
-<!--                         <div class="mail-box">
-
-
-                            <table class="table table-hover table-mail">
-                                <tbody>
-
-                                    <tr class="read">
-                                    
-                                        <td class="check-mail">
-                                            <i class="fa fa-envelope-o"></i>
-                                        </td>
-
-                                                                <td class="mail-subject">
-                                                                            <a href="communication/show/18">this is a message</a>
-                                            </td>
-                                                            
-                                        <td class="mail-preview"><a href="communication/show/18">dsdasdsa</a></td>
-                                        
-                                        <td class="text-right mail-date">Thu, Feb 11, 2016 12:00 am <small style="font-weight: normal;padding-left: 10px;">(3 weeks ago)</small></td>
-                                    </tr>                 
-
-                                                 
-                                </tbody>
-                            </table>
-
-
-                        </div> -->
-                    </div>
-
-                </div>                              
+                            
 
                 <br class="clearfix" />
             </div>

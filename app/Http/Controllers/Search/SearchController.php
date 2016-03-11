@@ -48,7 +48,7 @@ class SearchController extends Controller
         $skin = Skin::getSkin($storeBanner);
 
         $urgentNoticeCount = UrgentNotice::getUrgentNoticeCount($storeNumber);
-        // dd($communications);
+
         return view('site.search.index')
             ->with('skin', $skin)
             ->with('urgentNoticeCount', $urgentNoticeCount)
