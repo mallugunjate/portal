@@ -46,6 +46,25 @@ class Communication extends Model
          
       }
 
+      public static function getArchivedCommunicationsByStore($storeNumber)
+      {
+         $now = Carbon::now()->toDatetimeString();
+
+         $comm = Communication::join('communications_target', 'communications.id' , '=', 'communications_target.communication_id')
+                              ->where('store_id', $storeNumber)
+                              ->where('archive_at', '<=', $now)
+                              ->get();
+         
+         foreach($comm as $c){
+
+            $c->since = Utility::getTimePastSinceDate($c->updated_at);
+            $c->prettyDate = Utility::prettifyDate($c->updated_at);
+            $preview_string = strip_tags($c->body);
+            $c->trunc = Communication::truncateHtml($preview_string);
+         }
+         return $comm;               
+      }
+
 
       public static function getCommunication($id)
       {
