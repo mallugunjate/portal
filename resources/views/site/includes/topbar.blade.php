@@ -3,13 +3,13 @@
 {{-- <div class="navbar-header" style="">
 
 </div> --}}
-
+    
     <div class="row">
         <div class="col-md-8 col-sm-6" style="padding-right: 10px;">
 
-                <form class="form-inline" style="width: 100%; padding-left: 10px; padding-top: 5px;">
+                <form class="form-inline" style="width: 100%; padding-left: 10px; padding-top: 5px;" method="get" action="/{{ Request::segment(1) }}/search">
                     <i class="fa fa-search" style="display: inline !important; font-size: 24px; color: #ccc; line-height: 10px; position:relative; top: 12px; width: 10%;"></i>
-                    <input type="text" class="form-control" name="top-search" id="top-search" placeholder="" style="box-sizing: border-box; display: inline; border: none; border-bottom: 1px solid #ccc; font-size: 20px; width: 90% !important; ">
+                    <input type="text" class="form-control" name="q" id="top-search" placeholder="" id="search" style="box-sizing: border-box; display: inline; border: none; border-bottom: 1px solid #ccc; font-size: 20px; width: 90% !important; ">
                 </form>
           
 

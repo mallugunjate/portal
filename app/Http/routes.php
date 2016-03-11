@@ -37,20 +37,19 @@ Route::resource('/communication', 'Communication\CommunicationTargetController')
 //FEATURES
 Route::get('/{storeno}/feature/show/{id}', 'Feature\FeatureController@show');
 
-
 //ALERTS
 Route::get('/{storeno}/alerts', array('uses' => 'Alert\AlertController@index'));
-// Route::get('/home', function () {	
-// 	return view('home');
-// });
-// 
 
 //URGENT NOTICES
 Route::get('/{storeno}/urgentnotice', array('uses' => 'UrgentNotice\UrgentNoticeController@index'));
 Route::get('/{storeno}/urgentnotice/show/{id}', array('uses' => 'UrgentNotice\UrgentNoticeController@show'));
 
+//Search
+Route::get('/{storeno}/search', array('uses' => 'Search\SearchController@index'));
+
 //BUG REPORTER
 Route::resource('/bugreport', 'BugReport\BugReportController');
+
 
 //Authentication Routes
 Route::get('/admin/login', 'Auth\AuthController@getLogin');
