@@ -91,7 +91,7 @@ class Utility extends Model
 			case "xls":
 			case "xlsx":
 				$class = 'download';
-				$modalTarget = '';
+				$modalTarget = 'ExcelDownload';
 				break;
 
 			case "mp4":
@@ -104,24 +104,24 @@ class Utility extends Model
 			case "doc":
 			case "docx":
 				$class = 'download';
-				$modalTarget = '';
+				$modalTarget = '#';
 				break;
 
 			case "mp3":
 			case "wav":
 				$class = 'newwindow';
-				$modalTarget = '';
+				$modalTarget = '#';
 				break;
 
 			case "ppt":
 			case "pptx":
 				$class = 'download';
-				$modalTarget = '';
+				$modalTarget = '#';
 				break;
 
 			case "zip":
 				$class = 'download';
-				$modalTarget = '';
+				$modalTarget = '#';
 				break;
 
 			case "html":
@@ -133,7 +133,7 @@ class Utility extends Model
 			case "js":				
 			default: 
 				$class = 'nolink';
-				$modalTarget = '';
+				$modalTarget = '#';
 				break;                                        	
 		}
 
@@ -155,8 +155,8 @@ class Utility extends Model
 				break;
 
 			case "download":
-				$link = '<a href="/files/'.$file.'" class="launchVideoViewer" data-file="'.$file.'" data-target="#videomodal">'.$icon.$anchortext.'</a>';
-				$anchorOnly = '<a href="/files/'.$file.'" class="launchVideoViewer" data-file="'.$file.'" data-target="#videomodal">';
+				$link = '<a href="/files/'.$file.'" class="" data-file="'.$file.'" data-target="#">'.$icon.$anchortext.'</a>';
+				$anchorOnly = '<a href="/files/'.$file.'" class="" data-file="'.$file.'" data-target="#">';
 				break;
 
 			case "newwindow":
