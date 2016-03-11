@@ -120,6 +120,12 @@ class Search extends Model
     		return $sort->updated_at;
 		})->reverse();
 
+        foreach($communications as $comm){
+            $comm->since = Utility::getTimePastSinceDate($comm->updated_at);
+            $preview_string = strip_tags($comm->body);         
+            $comm->trunc = Communication::truncateHtml($preview_string, 150);
+        }
+
     	return $communications;
     }
 

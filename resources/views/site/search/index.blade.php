@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    @section('title', 'Search')
+    @section('title', 'Search: '. $query)
     <link href="/css/plugins/iCheck/custom.css" rel="stylesheet">
     @include('site.includes.head')
 
@@ -70,9 +70,7 @@
                                 <tbody>
                                 @foreach($docs as $doc)
                                     <tr> 
-                                        <td class="mail-subject">
-                                            {!! $doc->modalLink !!}
-                                        </td> 
+                                        <td class="mail-subject">{!! $doc->modalLink !!}</td> 
                                         <td>{{ $doc->description }}</td> 
                                         <td>{{ $doc->since }} ago</td> 
                                         <td>{{ $doc->prettyStart }}</td> 
@@ -104,31 +102,17 @@
 
                                 <thead>
                                     <tr> 
-                                        <th></th>
                                         <th> Folder </th> 
-                                        <th> Folder Path </th> 
+                                        <th> Path </th> 
                                         <th> Last Updated </th> 
-                                       
                                     </tr>
                                 </thead>
 
                                 <tbody>
                                 @foreach($folders as $folder)
                                     <tr>
-                                    
-                                        <td class="check-mail">
-                                            <i class="fa fa-folder-open"></i>
-                                        </td>
-
-                                            <td class="mail-subject">
-                                               <a href="/{{ Request::segment(1) }}/document#!/{{ $folder->globalId }}"> {{ $folder->name }}</a>
-                                            </td>
-                                        
-                                        <td>
-                                            
-                                            {!! $folder->path !!}
-                                        </td>                 
-                                        
+                                        <td class="mail-subject"><a href="/{{ Request::segment(1) }}/document#!/{{ $folder->globalId }}"><i class="fa fa-folder"></i> {{ $folder->name }}</a></td>
+                                        <td>{!! $folder->path !!}</td>                 
                                         <td class="mail-date">{{ $folder->lastActivity }} ago</td>
                                     </tr>                
                                 @endforeach
@@ -148,30 +132,33 @@
 
                     <div class="col-lg-12 animated fadeInRight">
                         <div class="search-box-header">
-                            <h2>Communications <small>3 results</small></h2>
+                            <h2>Communications <small>{{ count($communications) }} results</small></h2>
                         </div>
 
                         <div class="mail-box">
 
 
                             <table class="table table-hover table-mail">
+
+                                <thead>
+                                    <tr> 
+                                        <th></th>
+                                        <th> Subject </th> 
+                                        <th>  </th> 
+                                        <th> Posted </th> 
+                                    </tr>
+                                </thead>
+
                                 <tbody>
 
-                                    <tr class="read">
-                                    
-                                        <td class="check-mail">
-                                            <i class="fa fa-envelope-o"></i>
-                                        </td>
-
-                                                                <td class="mail-subject">
-                                                                            <a href="communication/show/18">this is a message</a>
-                                            </td>
-                                                            
-                                        <td class="mail-preview"><a href="communication/show/18">dsdasdsa</a></td>
-                                        <td class=""><!-- <i class="fa fa-paperclip"></i> --></td>
-                                        <td class="text-right mail-date">Thu, Feb 11, 2016 12:00 am <small style="font-weight: normal;padding-left: 10px;">(3 weeks ago)</small></td>
+                                    @foreach($communications as $comm)
+                                    <tr>
+                                        <td class="check-mail"><i class="fa fa-envelope-o"></i></td>
+                                        <td class="mail-subject"><a href="/{{ Request::segment(1) }}/communication/show/{{ $comm->communication_id }}">{{ $comm->subject }}</a></td>
+                                        <td>{{ $comm->trunc }}</td>
+                                        <td>{{ $comm->since }} ago</td>
                                     </tr>                
-
+                                    @endforeach
                                                  
                                 </tbody>
                             </table>
