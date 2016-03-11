@@ -17,6 +17,7 @@ return array(
     'CreateAlertsTargetTable' => $baseDir . '/database/migrations/2016_02_11_205948_create_alerts_target_table.php',
     'CreateBannerUserPivotTable' => $baseDir . '/database/migrations/2015_12_16_200336_create_banner_user_pivot_table.php',
     'CreateBannersTable' => $baseDir . '/database/migrations/2015_09_30_213442_create-banners-table.php',
+    'CreateBugReportTable' => $baseDir . '/database/migrations/2016_03_09_212129_CreateBugReportTable.php',
     'CreateCareerPathsTable' => $baseDir . '/database/migrations/future/2015_08_05_210456_create_career_paths_table.php',
     'CreateCommunicationDocumentPivotTable' => $baseDir . '/database/migrations/2015_12_04_222116_create_communication_document_pivot_table.php',
     'CreateCommunicationImportanceTable' => $baseDir . '/database/migrations/2015_12_03_214110_create_communication_importance_table.php',

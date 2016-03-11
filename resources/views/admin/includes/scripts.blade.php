@@ -45,7 +45,7 @@
 <script src="/js/vendor/moment.js"></script>
 <script src="/js/plugins/datapicker/bootstrap-datepicker.js"></script>
 <script src="/js/vendor/bootstrap-datetimepicker.min.js"></script>
-
+<script src="/js/custom/sendBugReportAdmin.js"></script>
 
 <!-- editor -->
 {{-- <script src="/js/plugins/summernote/summernote.min.js"></script> --}}
