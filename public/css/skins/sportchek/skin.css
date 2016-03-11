@@ -58,7 +58,18 @@ body{
 	background-color: #E20000 !important;
 }
 
+
 .product-price{
+
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #489bd5;
+  padding: 6px 12px;
+  position: absolute;
+  bottom: 0px;
+  right: 0;
+
 	background-color: none;
 	width: 100%;
 	background: transparent url('/images/2B2B2B-0.6.png') top left repeat;
