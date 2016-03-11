@@ -43,7 +43,7 @@ class AlertController extends Controller
         $alertTypes = AlertType::all();
         $alertCount = Alert::getActiveAlertCountByStore($storeNumber);
 
-        $alerts = Alert::getAlertsByStore($storeNumber);
+        $alerts = Alert::getActiveAlertsByStore($storeNumber);
 
         $title ="";
         if($request['type']){

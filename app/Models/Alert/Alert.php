@@ -59,7 +59,7 @@ class Alert extends Model
   
     }
 
-    public static function getAlertsByStore($store_id)
+    public static function getActiveAlertsByStore($store_id)
     {
         $now = Carbon::now()->toDatetimeString();
         
@@ -78,6 +78,31 @@ class Alert extends Model
             }
             
         }
+        if (count($alerts) >0) {
+            foreach($alerts as $a){
+                
+                $a->prettyDate =  Utility::prettifyDate($a->updated_at);
+                $a->since =  Utility::getTimePastSinceDate($a->updated_at);
+                
+            }
+        }
+
+        return $alerts;
+    }
+
+    public static function getArchivedAlertsByStore($store_id)
+    {
+        $now = Carbon::now()->toDatetimeString();
+        
+        $alerts = Alert::join('documents', 'alerts.document_id', '=', 'documents.id')
+                        ->join('alerts_target', 'alerts.id', '=', 'alerts_target.alert_id')
+                        ->where('alerts_target.store_id', '=', $store_id)
+                        ->where('alerts.alert_end', '<=', $now)
+                        ->where('alerts.alert_end', '!=', '0000-00-00 00:00:00')
+                        ->get();
+
+        return $alerts;
+
         if (count($alerts) >0) {
             foreach($alerts as $a){
                 
