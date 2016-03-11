@@ -45,8 +45,7 @@ class CommunicationController extends Controller
 
         $communicationCount = Communication::getActiveCommunicationCount($storeNumber); 
         
-        $communicationTypes = CommunicationType::all();
-
+        $communicationTypes = CommunicationType::getCommunicationTypeCount($storeNumber);
         $urgentNoticeCount = UrgentNotice::getUrgentNoticeCount($storeNumber);
 
         if (isset($request['type'])) {
@@ -57,24 +56,7 @@ class CommunicationController extends Controller
             $targetedCommunications = CommunicationTarget::getTargetedCommunications($storeNumber);
             $title = "";
         }
-            
-        
-        $i=0;
-        foreach($targetedCommunications as $tc){
-            $preview_string = strip_tags($targetedCommunications[$i]->body);
-            $targetedCommunications[$i]->trunc = Communication::truncateHtml($preview_string);
-            $targetedCommunications[$i]->label_name = Communication::getCommunicationCategoryName($targetedCommunications[$i]->communication_type_id);
-            $targetedCommunications[$i]->label_colour = Communication::getCommunicationCategoryColour($targetedCommunications[$i]->communication_type_id);
-            $targetedCommunications[$i]->has_attachments = Communication::hasAttachments($targetedCommunications[$i]->id);
-            $i++;
-        }
-
-        $i = 0;
-        foreach($communicationTypes as $ct){
-            $communicationTypes[$i]->count = Communication::getActiveCommunicationCountByCategory($storeNumber, $ct->id);
-            $i++;
-        }
-
+       
         // dd($targetedCommunications);
 
         return view('site.communications.index')

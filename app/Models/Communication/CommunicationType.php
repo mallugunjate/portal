@@ -11,4 +11,13 @@ class CommunicationType extends Model
     protected $table = 'communication_types';
     protected $dates = ['deleted_at'];
     protected $fillable = ['communication_type', 'banner_id', 'colour'];
+
+    public static function getCommunicationTypeCount($storeNumber)
+    {
+    	$communicationTypes = CommunicationType::all();
+    	 foreach($communicationTypes as $ct){
+            $ct->count = Communication::getActiveCommunicationCountByCategory($storeNumber, $ct->id);
+        }
+        return $communicationTypes;	
+    }
 }
