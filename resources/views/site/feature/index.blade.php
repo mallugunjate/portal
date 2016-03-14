@@ -56,8 +56,7 @@
                                     <thead>
                                         <tr> 
                                             <th> Title </th>
-                                            <th> Description </th>
-                                            <th> Last Updated </th>
+                                            <th><span class="pull-right" style="padding-right: 50px;"> Added </span></th>
                                         </tr>
                                     </thead>
 
@@ -66,8 +65,7 @@
 
                                         <tr> 
                                             <td>{!! $document->link_with_icon !!} </td>
-                                            <td>{{$document->description}}</td>
-                                            <td>{{$document->prettyDate}} <small class="text-muted pull-right"> {{ $document->since }} ago</small></td>                             
+                                            <td><span class="pull-right"> {{$document->prettyDate}}</span></td>                             
                                         </tr>                                        
                                     
                                     @endforeach
