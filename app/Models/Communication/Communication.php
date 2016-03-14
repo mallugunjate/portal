@@ -69,7 +69,8 @@ class Communication extends Model
          $now = Carbon::now()->toDatetimeString();
 
          $comm = Communication::join('communications_target', 'communications.id' , '=', 'communications_target.communication_id')
-                              ->join('communication_types', 'communication_types.id', '=', 'communications.communication_types_id' )
+                              ->join('communication_types', 'communication_types.id', '=', 'communications.communication_type_id' )
+                              ->where('communications.communication_type_id' , $category)
                               ->where('store_id', $storeNumber)
                               ->where('archive_at', '<=', $now)
                               ->get();
