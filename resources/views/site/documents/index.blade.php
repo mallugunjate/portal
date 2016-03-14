@@ -29,13 +29,10 @@
         </div>
 
 	   <div class="row wrapper border-bottom white-bg page-heading">
-<<<<<<< HEAD
+
             <div class="col-lg-8">
-                <h2>Documents</h2>
-=======
-            <div class="col-lg-10">
                 <h2>Library</h2>
->>>>>>> master
+
                 <ol class="breadcrumb">
                     <li><a href="/{{ Request::segment(1) }}">Home</a></li>
                     <li><a href="/{{ Request::segment(1) }}/document">Library</a></li>
