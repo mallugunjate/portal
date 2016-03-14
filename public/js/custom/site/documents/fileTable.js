@@ -36,7 +36,7 @@ var fillTable = function(data){
 
 	if( (data.folder.folder_children).length > 0){
 	// if( !(data.folder.folder_children === null) ) {		
-		folderFill(data);
+		//folderFill(data);
 		$('#folder-table').show();
 	}	
 	
@@ -93,10 +93,10 @@ var fileFill = function(data)
 	if( !(data.files === null) ) {
 		$('#file-table').append('<thead>'+
 								'<tr> <th> Title </th>'+
-								' <th> Description </th>'+
-								' <th> Uploaded At </th>'+
-								' <th> Start </th>' +
-								' <th> End </th>' +
+								// ' <th> Description </th>'+
+								' <th><span class="pull-right" style="padding-right: 50px;"> Added </span></th>'+
+								// ' <th> Start </th>' +
+								// ' <th> End </th>' +
 								' </tr></thead>');
 		var files = data.files
 		
@@ -106,10 +106,10 @@ var fileFill = function(data)
 			var icon ="";
 			var row ="";
 			var row = '<tr> <td class="mail-subject">'+ i.link_with_icon + '</td>'+
-							' <td>'+ i.description + '</td>'+
-							' <td>'+ i.created_at +'</td>'+
-							' <td>'+ i.start +'</td>' +
-							' <td>'+ i.end +'</td>' +
+							// ' <td>'+ i.description + '</td>'+
+							' <td><span class="pull-right">'+ i.created_at +'</span></td>'+
+							// ' <td>'+ i.start +'</td>' +
+							// ' <td>'+ i.end +'</td>' +
 							' <td></td> </tr>'		
 			$('#file-table').append(row);
 		});
