@@ -581,6 +581,7 @@ return array(
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
     'UpdateAlertsTableAddStartend' => $baseDir . '/database/migrations/2016_03_10_160342_update_alerts_table_add_startend.php',
     'UpdateAlertsTableDropStartend' => $baseDir . '/database/migrations/2016_03_10_160335_update_alerts_table_drop_startend.php',
+    'UpdateAlertstargetTableChangeStoreidDatatype' => $baseDir . '/database/migrations/2016_03_14_085852_update_alertstarget_table_change_storeid_datatype.php',
     'UpdateBannerTableAddTitle' => $baseDir . '/database/migrations/2016_02_05_164949_update_banner_table_add_title.php',
     'UpdateBannersTable' => $baseDir . '/database/migrations/2016_01_28_204112_update_banners_table.php',
     'UpdateCommunicationTypeTable' => $baseDir . '/database/migrations/2016_02_09_194959_update_communication_type_table.php',

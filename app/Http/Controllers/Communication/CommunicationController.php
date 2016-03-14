@@ -56,8 +56,26 @@ class CommunicationController extends Controller
             $targetedCommunications = CommunicationTarget::getTargetedCommunications($storeNumber);
             $title = "";
         }
-       
-        // dd($targetedCommunications);
+
+        if (isset($request['archives']) && $request['archives']) {
+            // $targetedCommunications = $targetedCommunications->merge(Communication::getArchivedCommunicationsByStore($storeNumber));
+
+            if(isset($request['type'])){
+                $archivedCommunication = Communication::getArchivedCommunicationsByCategory($request['type'], $storeNumber);
+                foreach ($archivedCommunication as $ac) {
+                    $targetedCommunications->add($ac);
+                }
+            }
+            else{
+
+                $archivedCommunication = Communication::getArchivedCommunicationsByStore($storeNumber);
+                foreach ($archivedCommunication as $ac) {
+                    $targetedCommunications->add($ac);
+                }
+            }
+        }
+
+        
 
         return view('site.communications.index')
             ->with('skin', $skin)
