@@ -44,6 +44,35 @@ class Search extends Model
     	return $docs;	
     }
 
+    public static function searchArchivedDocuments($query)
+    {
+        $docs = collect();
+        
+        $query_terms = explode( ' ', $query);
+        
+        $today = Carbon::now()->toDateString();
+        foreach ($query_terms as $term) {
+            $docs = $docs->merge(
+                        Document::where('original_filename', 'LIKE', '%'.$term.'%')
+                                ->where('end', '<=', $today )
+                                ->get()
+                    );      
+
+        }
+
+        $docs = $docs->sortBy(function($sort){
+            return $sort->updated_at;
+        })->reverse();
+
+        foreach($docs as $doc){
+            $doc->archived = true;
+            $doc->modalLink = Utility::getModalLink($doc->filename, $doc->title, $doc->original_extension, 1, 0);
+            $doc->since = Utility::getTimePastSinceDate($doc->updated_at);
+        }
+
+        return $docs;   
+    }
+
     public static function searchFolders($query)
     {
     	$folders = collect();
@@ -126,6 +155,38 @@ class Search extends Model
     	return $communications;
     }
 
+    public static function searchArchivedCommunications($query, $store)
+    {
+        $communications = collect();
+        
+        $query_terms = explode( ' ', $query);
+        
+        $today = Carbon::now()->toDateString();
+        foreach ($query_terms as $term) {
+            $communications = $communications->merge(
+                                Communication::join('communications_target', 'communications_target.communication_id', '=', 'communications.id')
+                                ->where('subject', 'LIKE', '%'.$term.'%')
+                                ->where('store_id', '=', $store)
+                                ->where('archive_at', '<=', $today)
+                                ->get()
+                    );
+        }
+        
+
+        $communications = $communications->sortBy(function($sort){
+            return $sort->updated_at;
+        })->reverse();
+
+        foreach($communications as $comm){
+            $comm->archived = true;
+            $comm->since = Utility::getTimePastSinceDate($comm->updated_at);
+            $preview_string = strip_tags($comm->body);         
+            $comm->trunc = Communication::truncateHtml($preview_string, 150);
+        }
+
+        return $communications;
+    }
+
     public static function searchAlerts($query, $store)
     {
     	$alerts = collect();
@@ -161,5 +222,38 @@ class Search extends Model
         }
 
     	return $alerts;
+    }
+
+    public static function searchArchivedAlerts($query, $store)
+    {
+        $alerts = collect();
+        
+        $query_terms = explode( ' ', $query);
+        
+        $today = Carbon::now()->toDateString();
+        
+        foreach ($query_terms as $term) {
+            $alerts = $alerts->merge(
+                                Document::join('alerts', 'documents.id', '=', 'alerts.document_id')
+                                ->join('alerts_target', 'alerts.id', '=', 'alerts_target.alert_id')
+                                ->where('original_filename', 'LIKE', '%'.$term.'%')
+                                ->where('store_id', '=', $store)
+                                ->where('alerts.alert_end', '<=', $today )
+                                ->get()
+                    );
+        }
+        
+
+        $alerts = $alerts->sortBy(function($sort){
+            return $sort->updated_at;
+        })->reverse();
+
+        foreach ($alerts as $alert) {
+            $alert->archived = true;
+            $alert->modalLink = Utility::getModalLink($alert->filename, $alert->title, $alert->original_extension, 1, 0);
+            $alert->since = Utility::getTimePastSinceDate($alert->start);
+        }
+
+        return $alerts;
     }
 }

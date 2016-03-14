@@ -82,7 +82,8 @@ class AlertController extends Controller
             ->with('alertTypes', $alertTypes)
             ->with('alertCount', $alertCount)
             ->with('title', $title)
-            ->with('urgentNoticeCount', $urgentNoticeCount);
+            ->with('urgentNoticeCount', $urgentNoticeCount)
+            ->with('archives', $request['archives']);
     }
 
     /**

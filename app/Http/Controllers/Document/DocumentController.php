@@ -59,7 +59,7 @@ class DocumentController extends Controller
         }
 
         $urgentNoticeCount = UrgentNotice::getUrgentNoticeCount($storeNumber);
-
+        
         return view('site.documents.index')
             ->with('skin', $skin)
             ->with('navigation', $navigation)
@@ -67,7 +67,7 @@ class DocumentController extends Controller
             ->with('banner', $banner)
             ->with('communicationCount', $communicationCount)
             ->with('defaultFolder' , $defaultFolder)
-            ->with('urgentNoticeCount', $urgentNoticeCount);  
+            ->with('urgentNoticeCount', $urgentNoticeCount);
 
     }
 
