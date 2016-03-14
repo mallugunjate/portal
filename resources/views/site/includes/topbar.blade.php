@@ -8,7 +8,7 @@
 
 
         <div class="col-md-4 col-sm-4">
-            <div class="pull-left" style="padding: 10px 10px 0px 20px;">
+            <div class="pull-left" style="padding: 8px 10px 0px 20px;">
                 <script>document.write( localStorage.getItem('userStoreName') );</script>
                 <br /><a id="storeswitch" style="display: inline;"><i class="fa fa-sitemap "></i> Change Store</a>
             </div>
