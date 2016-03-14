@@ -17,7 +17,7 @@
 
         <div class="col-md-4 col-sm-6">
             <div class="pull-right" style="padding-right: 10px; padding-top: 20px;">
-                        <script>document.write( localStorage.getItem('userStoreName') );</script> &nbsp; &nbsp; &nbsp; <a id="storeswitch" style="display: inline;"><i class="fa fa-sign-out "></i> Log out</a>
+                        <script>document.write( localStorage.getItem('userStoreName') );</script> &nbsp; &nbsp; &nbsp; <a id="storeswitch" style="display: inline;"><i class="fa fa-sitemap "></i> Change Store</a>
             </div>
         </div>
     </div>
