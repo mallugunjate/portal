@@ -20,7 +20,8 @@ class Search extends Model
     	$today = Carbon::now()->toDateString();
     	foreach ($query_terms as $term) {
     		$docs = $docs->merge(
-    					Document::where('original_filename', 'LIKE', '%'.$term.'%')
+    					//Document::where('original_filename', 'LIKE', '%'.$term.'%')
+                        Document::where('title', 'LIKE', '%'.$term.'%')                        
     							->where('start', '<=', $today )
     							->where(function($q) use($today) {
     								$q->where('end', '>=', $today)
@@ -138,7 +139,8 @@ class Search extends Model
     		$alerts = $alerts->merge(
     							Document::join('alerts', 'documents.id', '=', 'alerts.document_id')
     							->join('alerts_target', 'alerts.id', '=', 'alerts_target.alert_id')
-    							->where('original_filename', 'LIKE', '%'.$term.'%')
+    							//->where('original_filename', 'LIKE', '%'.$term.'%')
+                                ->where('title', 'LIKE', '%'.$term.'%')
     							->where('store_id', '=', $store)
     							->where('alerts.alert_start', '<=', $today )
     							->where(function($q) use($today) {
