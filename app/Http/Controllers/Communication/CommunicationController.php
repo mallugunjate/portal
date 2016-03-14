@@ -82,7 +82,9 @@ class CommunicationController extends Controller
             ->with('communications', $targetedCommunications)
             ->with('communicationCount', $communicationCount)
             ->with('urgentNoticeCount', $urgentNoticeCount)
-            ->with('title', $title);
+            ->with('title', $title)
+            ->with('archives', $request['archives']);
+
     }
 
     /**

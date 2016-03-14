@@ -32,8 +32,33 @@
 
 
         <div class="row wrapper border-bottom white-bg page-heading">
-            <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-8">
                 <h2>Search results for: <span class="search-query">{{ $query }}</span></h2>
+                </div>
+               <div class="col-lg-2 col-lg-offset-2" >
+                    <form class="form-inline" >
+                        <div tyle="float:right">
+                            <label>Archives</label>
+                            
+                                <div class="switch">
+                                    <div class="onoffswitch">
+                                        
+                                        @if(isset($archives))
+                                        <input type="checkbox" checked="" class="onoffswitch-checkbox" id="archives" name="archives">
+                                        @else
+                                        <input type="checkbox" class="onoffswitch-checkbox" id="archives" name="archives">
+                                        @endif
+                                        <label class="onoffswitch-label" for="archives">
+                                            <span class="onoffswitch-inner"></span>
+                                            <span class="onoffswitch-switch"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                           
+                        </div>
+                    </form>
+                </div>
 <!--                 <ol class="breadcrumb">
                     <li>jdaf ja fl aslk salk adslkd aslkdsa lksad</li>
                 </ol> -->
@@ -223,6 +248,7 @@
     @include('site.includes.scripts')
     @include('site.includes.bugreport')
     @include('site.includes.modal')
+    <script type="text/javascript" src="/js/custom/site/getArchivedContent.js"></script>
 
 
 </body>

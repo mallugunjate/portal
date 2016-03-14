@@ -1,10 +1,12 @@
 
 $("body").on("click", ".folder", function(e){
 	
+	$("#archive-switch").removeClass('hidden').addClass('visible');
 	console.log(e);
 	console.log(this.id);
 	e.stopPropagation();
 	var id = e.target.id;
+
 
 	if(id){
 		getFolderDocuments(e.target.id);
@@ -19,10 +21,11 @@ $("body").on("click", ".folder", function(e){
 var getFolderDocuments = function(id){
 	
 	var folder_id = id;
-	// var archives = $("#archives:checked").val();
-	var archives = false;
+	
+	var archives = $("#archives:checked").val();
+	console.log(archives);
 	var url = '/folder/' + folder_id ;
-	if(archives == true) {
+	if(archives == 'on') {
 		url = '/folder/' + folder_id +"?archives=true";
 	}
 	$.ajax(

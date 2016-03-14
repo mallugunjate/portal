@@ -26,6 +26,7 @@ class SearchController extends Controller
 
         $query = $request['q'];
         $store = RequestFacade::segment(1);
+
         
         $docs = [];
         $folders = [];
@@ -37,6 +38,13 @@ class SearchController extends Controller
             $folders = Search::searchFolders($query);
             $communications = Search::searchCommunications($query, $store);
             $alerts = Search::searchAlerts($query, $store);
+
+            if( isset($request['archives']) && $request['archives'])
+            {
+                $docs = $docs->merge(Search::searchArchivedDocuments($query));
+                $communications = $communications->merge(Search::searchArchivedCommunications($query, $store));
+                $alerts = $alerts->merge(Search::searchArchivedAlerts($query, $store));
+            }
         }
 
         $storeNumber = RequestFacade::segment(1);
@@ -56,7 +64,8 @@ class SearchController extends Controller
             ->with('folders', $folders)
             ->with('communications', $communications)
             ->with('alerts', $alerts)
-            ->with('query', $query);
+            ->with('query', $query)
+            ->with('archives', $request['archives']);
     }
 
     /**

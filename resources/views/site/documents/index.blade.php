@@ -29,15 +29,38 @@
         </div>
 
 	   <div class="row wrapper border-bottom white-bg page-heading">
+<<<<<<< HEAD
+            <div class="col-lg-8">
+                <h2>Documents</h2>
+=======
             <div class="col-lg-10">
                 <h2>Library</h2>
+>>>>>>> master
                 <ol class="breadcrumb">
                     <li><a href="/{{ Request::segment(1) }}">Home</a></li>
                     <li><a href="/{{ Request::segment(1) }}/document">Library</a></li>
                 </ol>
             </div>
-            <div class="col-lg-2">
 
+            <div class="col-lg-2 col-lg-offset-2 hidden" id="archive-switch" >
+                <form class="form-inline" >
+                    <div tyle="float:right">
+                        <label>Archives</label>
+                        
+                            <div class="switch">
+                                <div class="onoffswitch">
+                                    
+                                    <input type="checkbox" class="onoffswitch-checkbox" id="archives" name="archives">
+                                    
+                                    <label class="onoffswitch-label" for="archives">
+                                        <span class="onoffswitch-inner"></span>
+                                        <span class="onoffswitch-switch"></span>
+                                    </label>
+                                </div>
+                            </div>
+                       
+                    </div>
+                </form>
             </div>
         </div>
 
@@ -173,6 +196,7 @@
                 <script type="text/javascript" src="/js/custom/site/documents/fileTable.js" ></script>
                 <script type="text/javascript" src="/js/vendor/tablesorter.min.js"></script>
                 <script type="text/javascript" src="/js/vendor/lightbox.min.js"></script>
+                <script type="text/javascript" src="/js/custom/site/getArchivedContent.js"></script>
                 <script type="text/javascript">
                     $.ajaxSetup({
                         headers: {

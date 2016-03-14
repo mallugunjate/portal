@@ -31,24 +31,39 @@
             </div>
             <div class="col-lg-10 animated fadeInRight">
             <div class="mail-box-header">
-
-{{--                 <form method="get" action="index.html" class="pull-right mail-search">
-                    <div class="input-group">
-                        <input type="text" class="form-control input-sm" name="search" placeholder="Search email">
-                        <div class="input-group-btn">
-                            <button type="submit" class="btn btn-sm btn-primary">
-                                Search
-                            </button>
-                        </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <h2>
+                            @if($title == "")
+                                All Messages <small>({{ $communicationCount }} unread)</small>
+                            @else
+                                {{ $title }}
+                            @endif
+                        </h2>
                     </div>
-                </form> --}}
-                <h2>
-                    @if($title == "")
-                        All Messages <small>({{ $communicationCount }} unread)</small>
-                    @else
-                        {{ $title }}
-                    @endif
-                </h2>
+                    <div class="col-md-2 col-md-offset-2">
+                        <form class="form-inline" >
+                            <div tyle="float:right">
+                                <label>Archives</label>
+                                
+                                    <div class="switch">
+                                        <div class="onoffswitch">
+                                            @if($archives)
+                                            <input type="checkbox" checked="" class="onoffswitch-checkbox" id="archives" name="archives">
+                                            @else
+                                            <input type="checkbox" class="onoffswitch-checkbox" id="archives" name="archives">
+                                            @endif
+                                            <label class="onoffswitch-label" for="archives">
+                                                <span class="onoffswitch-inner"></span>
+                                                <span class="onoffswitch-switch"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                               
+                            </div>
+                        </form>
+                    </div>
+                </div>
 
             </div>
                 <div class="mail-box">
@@ -105,8 +120,8 @@
     @include('site.includes.footer')       
 
     <script type="text/javascript" src="/js/plugins/fullcalendar/moment.min.js"></script>
-  
     @include('site.includes.scripts')
+    <script src="/js/custom/site/getArchivedContent.js"></script>
     <script src="/js/plugins/iCheck/icheck.min.js"></script>
  
 	<script>

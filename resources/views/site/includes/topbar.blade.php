@@ -6,14 +6,12 @@
     
     <div class="row">
 
-
         <div class="col-md-4 col-sm-4">
             <div class="pull-left" style="padding: 8px 10px 0px 20px;">
                 <script>document.write( localStorage.getItem('userStoreName') );</script>
                 <br /><a id="storeswitch" style="display: inline;"><i class="fa fa-sitemap "></i> Change Store</a>
             </div>
         </div>
-
 
         <div class="col-md-8 col-sm-8">
             <div class="pull-right" style="padding-right: 20px;">
@@ -24,6 +22,7 @@
 
                     <button type="submit" class="btn btn-primary btn-sm" style="display: inline">Search</button>
                 </form>
+
             </div>
 
         </div>
