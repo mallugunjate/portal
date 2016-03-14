@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Models\Document;
-
 
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
@@ -15,6 +13,7 @@ use App\Models\UserSelectedBanner;
 use DB;
 use App\Models\Alert\Alert;
 use App\Models\Utility\Utility;
+
 class Document extends Model
 {
     protected $table = 'documents';
