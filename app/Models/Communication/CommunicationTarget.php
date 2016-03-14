@@ -28,6 +28,10 @@ class CommunicationTarget extends Model
         foreach ($communications as $c) {
             $c->prettyDate = Utility::prettifyDate($c->send_at);
             $c->since = Utility::getTimePastSinceDate($c->send_at);
+            $c->trunc = Communication::truncateHtml(strip_tags($c->body));
+            $c->label_name = Communication::getCommunicationCategoryName($c->communication_type_id);
+            $c->label_colour = Communication::getCommunicationCategoryColour($c->communication_type_id);
+            $c->has_attachments = Communication::hasAttachments($c->id);
         }
         return $communications;
 	}
@@ -47,6 +51,10 @@ class CommunicationTarget extends Model
         foreach ($communications as $c) {
             $c->prettyDate = Utility::prettifyDate($c->send_at);
             $c->since = Utility::getTimePastSinceDate($c->send_at);
+            $c->trunc = Communication::truncateHtml(strip_tags($c->body));
+            $c->label_name = Communication::getCommunicationCategoryName($c->communication_type_id);
+            $c->label_colour = Communication::getCommunicationCategoryColour($c->communication_type_id);
+            $c->has_attachments = Communication::hasAttachments($c->id);
         }
 
         return $communications;
@@ -61,4 +69,5 @@ class CommunicationTarget extends Model
 	    $communication->is_read = '1';
 	    $communication->save();
 	}
+
 }

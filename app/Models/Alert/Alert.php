@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use DB;
 use App\Models\Utility\Utility;
-
+use App\Models\Document\Document;
 class Alert extends Model
 {
     protected $table = 'alerts';
@@ -59,35 +59,108 @@ class Alert extends Model
   
     }
 
-    public static function getAlertsByStore($store_id)
+    public static function getActiveAlertsByStore($store_id)
+    {
+
+        $now = Carbon::now()->toDatetimeString();
+        
+        $alerts = Alert::join('documents', 'alerts.document_id' , '=', 'documents.id')
+                        ->join('alerts_target' , 'alerts_target.alert_id' , '=', 'alerts.id')
+                        ->where('alerts_target.store_id', '=', $store_id)
+                        ->where('alerts.alert_start' , '<=', Carbon::now()->toDatetimeString())
+                        ->where('alerts.alert_end', '>=', Carbon::now()->toDatetimeString())
+                        ->get();
+
+        if (count($alerts) >0) {
+            Alert::addStoreViewData($alerts);
+        }
+
+        return $alerts;
+    }
+
+    public static function getActiveAlertsByCategory($alert_type, $store_id)
     {
         $now = Carbon::now()->toDatetimeString();
         
-        $alert_ids = \DB::table('alerts_target')->where('store_id', $store_id)
-                                                ->get();
         
-        $alerts = [];
-        foreach ($alert_ids as $alert_id) {
-            $alert = Alert::join('documents', 'alerts.document_id' , '=', 'documents.id')
-                            ->where('alerts.id', $alert_id->alert_id)
-                            ->where('alerts.alert_start' , '<=', $now)
-                            ->where('alerts.alert_end', '>=', $now)
-                            ->first();
-            if($alert) {
-                array_push($alerts, $alert);    
-            }
-            
-        }
+        $alerts = Alert::join('documents', 'alerts.document_id' , '=', 'documents.id')
+                        ->join('alerts_target' , 'alerts_target.alert_id' , '=', 'alerts.id')
+                        ->join('alert_types', 'alert_types.id', '=', 'alerts.alert_type_id')
+                        ->where('alerts_target.store_id', '=', $store_id)
+                        ->where('alerts.alert_start' , '<=', Carbon::now()->toDatetimeString())
+                        ->where('alerts.alert_end', '>=', Carbon::now()->toDatetimeString())
+                        ->where('alert_type_id' , $alert_type)
+                        ->get();
+        
         if (count($alerts) >0) {
-            foreach($alerts as $a){
-                
-                $a->prettyDate =  Utility::prettifyDate($a->updated_at);
-                $a->since =  Utility::getTimePastSinceDate($a->updated_at);
-                
+            Alert::addStoreViewData($alerts);
+        }
+
+        return $alerts;
+    }
+
+    public static function getArchivedAlertsByStore($store_id)
+    {
+        $now = Carbon::now()->toDatetimeString();
+        
+        $alerts = Alert::join('documents', 'alerts.document_id', '=', 'documents.id')
+                        ->join('alerts_target', 'alerts.id', '=', 'alerts_target.alert_id')
+                        ->where('alerts_target.store_id', '=', $store_id)
+                        ->where('alerts.alert_end', '<=', Carbon::now()->toDatetimeString())
+                        ->where('alerts.alert_end', '!=', '0000-00-00 00:00:00')
+                        ->get();
+
+
+        if (count($alerts) >0) {
+            Alert::addStoreViewData($alerts);
+            foreach ($alerts as $a) {
+                $a->archived = true;
             }
         }
 
         return $alerts;
+    }
+
+    public static function  getArchivedAlertsByCategory($alert_type, $store_id) {
+        
+        $alerts = Alert::join('documents', 'alerts.document_id' , '=', 'documents.id')
+                        ->join('alerts_target' , 'alerts_target.alert_id' , '=', 'alerts.id')
+                        ->join('alert_types', 'alert_types.id', '=', 'alerts.alert_type_id')
+                        ->where('alerts_target.store_id', '=', $store_id)
+                        ->where('alerts.alert_end', '<=', Carbon::now()->toDatetimeString())
+                        ->where('alerts.alert_end', '!=', '0000-00-00 00:00:00')
+                        ->where('alert_type_id' , $alert_type)
+                        ->get();
+
+        if (count($alerts) >0) {
+            Alert::addStoreViewData($alerts);
+            foreach ($alerts as $a) {
+                $a->archived = true;
+            }
+        }
+
+        return $alerts;
+    }
+
+    public static function addStoreViewData($alerts)
+    {
+        foreach($alerts as $a){
+                
+                $a->prettyDate =  Utility::prettifyDate($a->updated_at->toDatetimeString());
+                $a->since =  Utility::getTimePastSinceDate($a->updated_at->toDatetimeString());
+                $doc = Document::getDocumentById($a->document_id);
+                $alertType = AlertType::find($a->alert_type_id);
+
+                $a->icon = Utility::getIcon($doc->original_extension);
+                $a->link_with_icon = Utility::getModalLink($doc->filename, $doc->title, $doc->original_extension, 1);
+                $a->link = Utility::getModalLink($doc->filename, $doc->title, $doc->original_extension, 0);
+                $a->title = $doc->title;
+                $a->filename = $doc->filename;
+                $a->description = $doc->description;
+                $a->original_extension = $doc->original_extension;
+                $a->alertTypeName = $alertType->name;
+                
+            }
     }
 
     public static function getTargetStoresForDocument($id)

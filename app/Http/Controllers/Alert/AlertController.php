@@ -43,41 +43,37 @@ class AlertController extends Controller
         $alertTypes = AlertType::all();
         $alertCount = Alert::getActiveAlertCountByStore($storeNumber);
 
-        $alerts = Alert::getAlertsByStore($storeNumber);
+        $alerts = Alert::getActiveAlertsByStore($storeNumber);
 
         $title ="";
-        if($request['type']){
-            $i = 0;
-            foreach($alerts as $a){
-                if($a->alert_type_id != $request['type']){
-                    unset($alerts[$i]);
-                }
-                $i++;
-            }
+        if(isset($request['type'])){
+            $alerts = Alert::getActiveAlertsByCategory($request['type'], $storeNumber);
             $title = AlertType::where('id','=',$request['type'])->pluck('name');
-            $alerts= array_values($alerts);
         }
-        
-        
-        foreach($alerts as $a){
-            $doc = Document::getDocumentById($a->document_id);
-            $alertType = AlertType::find($a->alert_type_id);
+        else{
+            $alerts = Alert::getActiveAlertsByStore($storeNumber);
+        }
 
-            $a->icon = Utility::getIcon($doc->original_extension);
-            $a->link_with_icon = Utility::getModalLink($doc->filename, $doc->title, $doc->original_extension, 1);
-            $a->link = Utility::getModalLink($doc->filename, $doc->title, $doc->original_extension, 0);
-            $a->title = $doc->title;
-            $a->filename = $doc->filename;
-            $a->description = $doc->description;
-            $a->original_extension = $doc->original_extension;
-            $a->alertTypeName = $alertType->name;
-            
-        }        
+        if (isset($request['archives']) && $request['archives']) {
+            if(isset($request['type'])){
+                $archivedAlerts = Alert::getArchivedAlertsByCategory($request['type'], $storeNumber);
+                foreach ($archivedAlerts as $aa) {
+                    $alerts->add($aa);
+                }
+            }
+            else{
+
+                $archivedAlerts = Alert::getArchivedAlertsByStore($storeNumber);
+                foreach ($archivedAlerts as $aa) {
+                    $alerts->add($aa);
+                }
+            }
+        }
 
         
         foreach($alertTypes as $at){
             $at->count = Alert::getActiveAlertCountByCategory($storeNumber, $at->id);
-        }        
+        }   
 
         return view('site.alerts.index')
             ->with('skin', $skin)

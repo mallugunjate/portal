@@ -19,9 +19,15 @@ $("body").on("click", ".folder", function(e){
 var getFolderDocuments = function(id){
 	
 	var folder_id = id;
+	// var archives = $("#archives:checked").val();
+	var archives = false;
+	var url = '/folder/' + folder_id ;
+	if(archives == true) {
+		url = '/folder/' + folder_id +"?archives=true";
+	}
 	$.ajax(
 		{
-			url : '/folder/' + folder_id
+			url : url
 		}
 	)
 	.done(function(data){

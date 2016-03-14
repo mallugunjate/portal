@@ -37,18 +37,13 @@ class Document extends Model
                             ->join('documents', 'file_folder.document_id', '=', 'documents.id')
                             ->where('file_folder.folder_id', '=', $global_folder_id)
                             ->where('documents.start', '<=', $now )
+                            ->where(function($query) use ($now) {
+                                $query->where('documents.end', '>=', $now)
+                                    ->orWhere('documents.end', '=', '0000-00-00 00:00:00' ); 
+                            })
                             ->select('documents.*')
                             ->get();
-                $counter = 0;
-                foreach ($files as $file) {
-                    
-                    if (!( $file->end >= $now || $file->end == '0000-00-00 00:00:00' ) ) {
-
-                        unset($files[$counter]);
-                    }
-                    $counter++;
-                }  
-                $files = array_values($files);
+                
             }
             else{
                 $files = \DB::table('file_folder')
@@ -275,48 +270,39 @@ class Document extends Model
         return $documents;
     }
 
-    public static function getArchivedDocuments($folder_id)
+    public static function getArchivedDocumentsByStoreNumber($global_folder_id, $storeNumber)
     {
-        $folder = Folder::find($folder_id);
-        $archivedDocuments = [];
-        if($folder->has_weeks == 1) {
-            $weeksInFolder = Week::where('parent_id', $folder_id)->get();
-            $counter = 0;
-            foreach ($weeksInFolder as $weekInFolder) {
-                $weekFolderId = $weekInFolder->id;
-                $global_folder_id = \DB::table('folder_ids')->where('folder_id', $weekFolderId)
-                                                            ->where('folder_type', 'week')
-                                                            ->first()->id;
-                $docs = FileFolder::where('folder_id', $global_folder_id)->get();
-                if(count($docs)>0) {
-                    $archivedDocuments[$counter]["folder"] = $weekInFolder;
-                    $archivedDocuments[$counter]["number_of_documents"] = count($docs);
-                    // $archivedDocuments[$counter]["docs"] = $docs;
-                    $archivedDocuments[$counter]["doc_ids"] = [];
-                    foreach ($docs as $doc) {
-                        // $doc_details = Document::where('id', $doc->document_id)->first();
-                        array_push($archivedDocuments[$counter]["doc_ids"], $doc);
-                        unset($doc_details);
-                    }
-                    
-                    $counter++;    
-                }
-                
-            }
-            return $archivedDocuments;
-        }     
-        
-        
-        else{
-            $global_folder_id = \DB::table('folder_ids')->where('folder_id', $folder_id)
-                                                            ->where('folder_type', 'folder')
-                                                            ->first()->id;
-            $docs = FileFolder::where('folder_id', $global_folder_id)->get();
-            $archivedDocuments[0]["folder"] = $folder;
-            $archivedDocuments[0]["number_of_documents"] = count($docs);
-            $archivedDocuments[0]["docs"] = $docs;
-            return $archivedDocuments;
 
+        $now = Carbon::now()->toDatetimeString();
+    
+        $files = \DB::table('file_folder')
+                    ->join('documents', 'file_folder.document_id', '=', 'documents.id')
+                    ->where('file_folder.folder_id', '=', $global_folder_id)
+                    ->where('documents.end', '<=', $now)
+                    ->where('documents.end', '!=', '0000-00-00 00:00:00')
+                    ->select('documents.*')
+                    ->get();
+        
+        if (count($files) > 0) {
+            foreach ($files as $file) {
+                $file->archived = true;
+                $file->link = Utility::getModalLink($file->filename, $file->title, $file->original_extension, 0);
+                $file->link_with_icon = Utility::getModalLink($file->filename, $file->title, $file->original_extension, 1);
+                $file->icon = Utility::getIcon($file->original_extension);
+                $file->prettyDateCreated = Utility::prettifyDate($file->created_at);
+                $file->prettyDateStart = Utility::prettifyDate($file->start);
+                $file->prettyDateEnd = Utility::prettifyDate($file->end);
+
+                $file->is_alert = '';
+                if (Alert::where('document_id', $file->id)->first()) {
+                    $file->is_alert = Utility::getAlertIcon();
+                }
+
+            }
+            return $files;
+        }
+        else{
+            return [];
         }
     }
 
