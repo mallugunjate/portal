@@ -60,7 +60,8 @@
                                 <thead>
                                     <tr> 
                                         <th> Title </th> 
-                                        <th> Description </th> 
+                                        <!-- <th> Description </th>  -->
+                                        <th>Folder</th>
                                         <th> Last Updated </th> 
                                     </tr>
                                 </thead>
@@ -69,7 +70,8 @@
                                 @foreach($docs as $doc)
                                     <tr> 
                                         <td class="mail-subject">{!! $doc->modalLink !!}</td> 
-                                        <td>{{ $doc->description }}</td> 
+                                        <!-- <td>{{ $doc->description }}</td>  -->
+                                        <td><a href="/{{ Request::segment(1) }}/document#!/{{ $doc->global_folder_id}}">{{ $doc->folder_name }}</a></td>
                                         <td>{{ $doc->since }} ago</td> 
                                         <td></td> 
                                     </tr>

@@ -40,6 +40,12 @@ class Search extends Model
         foreach($docs as $doc){
             $doc->modalLink = Utility::getModalLink($doc->filename, $doc->title, $doc->original_extension, 1, 0);
             $doc->since = Utility::getTimePastSinceDate($doc->updated_at);
+
+            $folder_info = Document::getFolderInfoByDocumentId($doc->id);
+
+            $doc->folder_name = $folder_info->name;
+            $doc->global_folder_id = $folder_info->global_folder_id;
+            // $doc->folderPath = Document::getFolderPathForDocument($doc->id);
         }
 
     	return $docs;	
@@ -59,7 +65,6 @@ class Search extends Model
 
     	}
     	
-
     	$folders = $folders->sortBy(function($sort){
     		return $sort->updated_at;
 		})->reverse();
