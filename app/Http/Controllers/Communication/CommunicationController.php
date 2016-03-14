@@ -58,7 +58,6 @@ class CommunicationController extends Controller
         }
 
         if (isset($request['archives']) && $request['archives']) {
-            // $targetedCommunications = $targetedCommunications->merge(Communication::getArchivedCommunicationsByStore($storeNumber));
 
             if(isset($request['type'])){
                 $archivedCommunication = Communication::getArchivedCommunicationsByCategory($request['type'], $storeNumber);

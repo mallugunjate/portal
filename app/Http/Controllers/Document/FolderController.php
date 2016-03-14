@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Document;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Request as RequestFacade; 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Document\Document;
@@ -48,13 +48,24 @@ class FolderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
         $folder_id = $id;
         $documents = Document::getDocuments($folder_id, true);
+        $storeNumber = RequestFacade::segment(1);
+
         $folder = Folder::getFolderDescription($folder_id);
         $response = [];
         $response["files"] = $documents;
+
+        if (isset($request['archives']) && $request['archives'] == true) {
+            $archivedDocuments = Document::getArchivedDocumentsByStoreNumber($id, $storeNumber);
+            foreach ($archivedDocuments as $archivedDocument) {
+                array_push($response["files"], $archivedDocument);
+            }
+        }
+        
+
         $response["folder"] = $folder;
         return $response;
     }
