@@ -35,12 +35,12 @@
             </div>
             <div class="col-lg-10 animated fadeInRight">
             <div class="mail-box-header">
-<<<<<<< HEAD
+
                 <div class="row">
                     <div class="col-md-8">
                         <h2>
                         	@if($title == "")
-                        		All Alerts <small>({{ $alertCount }} active alert)</small>	
+                        		All Alerts 
                         	@else
                         		{{ $title }}
                         	@endif
@@ -70,18 +70,7 @@
                         </form>
                     </div>
                 </div>
-=======
 
-                <h2>
-                	@if($title == "")
-                		All Alerts 
-                	@else
-                		{{ $title }}
-                	@endif
-
-                    
-                </h2>
->>>>>>> master
 
             </div>
                 <div class="mail-box">
