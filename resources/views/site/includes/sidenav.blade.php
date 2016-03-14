@@ -60,7 +60,7 @@
                 @else
                 <li>
                 @endif 
-                    <a href="/{{ Request::segment(1) }}/document"><i class="fa fa-file"></i> <span class="nav-label">Documents</span></a>
+                    <a href="/{{ Request::segment(1) }}/document"><i class="fa fa-book"></i> <span class="nav-label">Library</span></a>
                 </li>                
 
             </ul>
