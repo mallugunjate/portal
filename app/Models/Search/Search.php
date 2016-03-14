@@ -20,7 +20,8 @@ class Search extends Model
     	$today = Carbon::now()->toDateString();
     	foreach ($query_terms as $term) {
     		$docs = $docs->merge(
-    					Document::where('original_filename', 'LIKE', '%'.$term.'%')
+    					//Document::where('original_filename', 'LIKE', '%'.$term.'%')
+                        Document::where('title', 'LIKE', '%'.$term.'%')                        
     							->where('start', '<=', $today )
     							->where(function($q) use($today) {
     								$q->where('end', '>=', $today)
@@ -39,6 +40,12 @@ class Search extends Model
         foreach($docs as $doc){
             $doc->modalLink = Utility::getModalLink($doc->filename, $doc->title, $doc->original_extension, 1, 0);
             $doc->since = Utility::getTimePastSinceDate($doc->updated_at);
+
+            $folder_info = Document::getFolderInfoByDocumentId($doc->id);
+
+            $doc->folder_name = $folder_info->name;
+            $doc->global_folder_id = $folder_info->global_folder_id;
+            // $doc->folderPath = Document::getFolderPathForDocument($doc->id);
         }
 
     	return $docs;	
@@ -87,7 +94,6 @@ class Search extends Model
 
     	}
     	
-
     	$folders = $folders->sortBy(function($sort){
     		return $sort->updated_at;
 		})->reverse();
@@ -199,7 +205,8 @@ class Search extends Model
     		$alerts = $alerts->merge(
     							Document::join('alerts', 'documents.id', '=', 'alerts.document_id')
     							->join('alerts_target', 'alerts.id', '=', 'alerts_target.alert_id')
-    							->where('original_filename', 'LIKE', '%'.$term.'%')
+    							//->where('original_filename', 'LIKE', '%'.$term.'%')
+                                ->where('title', 'LIKE', '%'.$term.'%')
     							->where('store_id', '=', $store)
     							->where('alerts.alert_start', '<=', $today )
     							->where(function($q) use($today) {

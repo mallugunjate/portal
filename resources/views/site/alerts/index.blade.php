@@ -35,6 +35,7 @@
             </div>
             <div class="col-lg-10 animated fadeInRight">
             <div class="mail-box-header">
+<<<<<<< HEAD
                 <div class="row">
                     <div class="col-md-8">
                         <h2>
@@ -69,6 +70,18 @@
                         </form>
                     </div>
                 </div>
+=======
+
+                <h2>
+                	@if($title == "")
+                		All Alerts 
+                	@else
+                		{{ $title }}
+                	@endif
+
+                    
+                </h2>
+>>>>>>> master
 
             </div>
                 <div class="mail-box">
@@ -79,9 +92,9 @@
                     <thead>
                         <tr> 
                             <th>&nbsp;</th>
-                            <th> Alert File </th>
-                            <th> Alert Type</th>
-                            <th> Description </th>
+                            <th> Type</th>
+                            <th> Title </th>
+                            <!-- <th> Description </th> -->
                             <th> Date </th> 
                         </tr>
                     </thead>
@@ -95,9 +108,10 @@
                         <i class="fa fa-bell-o"></i>
                     </td>
                     
-                    <td class="mail-subject">{!! $alert->link_with_icon !!}</td>
+                    
                     <td><span class="label label pull-left">{{ $alert->alertTypeName }}</span></td>
-                    <td class="mail-preview">{{ $alert->description }}</td>
+                    <td class="mail-subject">{!! $alert->link_with_icon !!}</td>
+                    <!-- <td class="mail-preview">{{ $alert->description }}</td> -->
                     
                     <td class="mail-date">{{ $alert->prettyDate }} <small style="font-weight: normal;padding-left: 10px;">({{ $alert->since }} ago)</small></td>
                 </tr>                

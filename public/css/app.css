@@ -8158,3 +8158,7 @@ body.md-skin {
   font-size: 20px;
   padding-left: 10px;
 }
+
+.ibox-content table{
+  font-size: 14px;
+}

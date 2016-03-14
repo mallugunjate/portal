@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    @section('title', 'Documents')
+    @section('title', 'Library')
     @include('site.includes.head')
     <link rel="stylesheet" type="text/css" href="/css/custom/tree.css">
 {{--     <link rel="stylesheet" type="text/css" href="/css/skins/admin/skin.css"> --}}
@@ -29,11 +29,16 @@
         </div>
 
 	   <div class="row wrapper border-bottom white-bg page-heading">
+<<<<<<< HEAD
             <div class="col-lg-8">
                 <h2>Documents</h2>
+=======
+            <div class="col-lg-10">
+                <h2>Library</h2>
+>>>>>>> master
                 <ol class="breadcrumb">
                     <li><a href="/{{ Request::segment(1) }}">Home</a></li>
-                    <li><a href="/{{ Request::segment(1) }}/document">Documents</a></li>
+                    <li><a href="/{{ Request::segment(1) }}/document">Library</a></li>
                 </ol>
             </div>
 
@@ -127,10 +132,12 @@
 
                         <div class="topLevelNavItems">
 <!--                         <h1>Folders</h1> -->
+                        <div style="font-weight: bold; color: #ddd; text-align: center; font-size: 30px; padding-top: 30px;">Select folders on the left</div>
                         @foreach ($navigation as $nav) 
 
                             @if ( $nav["is_child"] == 0)
-                                
+
+{{--
                                 <div class="file-box">
                                     <div class="file">
                                         <a id="{{ $nav['id'] }}" class="parent-folder folder branch" href="/document#!/{{ $nav['id'] }}">
@@ -145,12 +152,12 @@
                                             <div class="file-name">
                                                 {{ $nav["label"] }}
                                                 <br>
-                                                {{-- <small>Added: Jan 11, 2014</small> --}}
+
                                             </div>
                                         </a>
                                     </div>
                                 </div>                                
-
+--}}                                
                             @endif
 
                         @endforeach
