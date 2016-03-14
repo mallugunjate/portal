@@ -38,7 +38,7 @@
 
                 <h2>
                 	@if($title == "")
-                		All Alerts <small>({{ $alertCount }} active alert)</small>	
+                		All Alerts 
                 	@else
                 		{{ $title }}
                 	@endif
@@ -55,9 +55,9 @@
                     <thead>
                         <tr> 
                             <th>&nbsp;</th>
-                            <th> Alert File </th>
-                            <th> Alert Type</th>
-                            <th> Description </th>
+                            <th> Type</th>
+                            <th> Title </th>
+                            <!-- <th> Description </th> -->
                             <th> Date </th> 
                         </tr>
                     </thead>
@@ -71,9 +71,10 @@
                         <i class="fa fa-bell-o"></i>
                     </td>
                     
-                    <td class="mail-subject">{!! $alert->link_with_icon !!}</td>
+                    
                     <td><span class="label label pull-left">{{ $alert->alertTypeName }}</span></td>
-                    <td class="mail-preview">{{ $alert->description }}</td>
+                    <td class="mail-subject">{!! $alert->link_with_icon !!}</td>
+                    <!-- <td class="mail-preview">{{ $alert->description }}</td> -->
                     
                     <td class="mail-date">{{ $alert->prettyDate }} <small style="font-weight: normal;padding-left: 10px;">({{ $alert->since }} ago)</small></td>
                 </tr>                
