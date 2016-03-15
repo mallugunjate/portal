@@ -93,7 +93,11 @@
 
                                 <tbody>
                                 @foreach($docs as $doc)
-                                    <tr> 
+                                    @if($doc->archived)
+                                        <tr class="archived">
+                                    @else
+                                        <tr> 
+                                    @endif
                                         <td class="mail-subject">{!! $doc->modalLink !!}</td> 
                                         <!-- <td>{{ $doc->description }}</td>  -->
                                         <td><a href="/{{ Request::segment(1) }}/document#!/{{ $doc->global_folder_id}}">{{ $doc->folder_name }}</a></td>
@@ -134,7 +138,11 @@
 
                                 <tbody>
                                 @foreach($alerts as $alert)
-                                    <tr> 
+                                    @if($alert->archived)
+                                        <tr class="archived">
+                                    @else
+                                        <tr>
+                                    @endif 
                                         <td class="mail-subject">{!! $alert->modalLink !!}</td> 
 <!--                                         <td>{{ $alert->description }}</td>  -->
                                         <td>{{ $alert->since }} ago</td> 
@@ -217,7 +225,11 @@
                                 <tbody>
 
                                     @foreach($communications as $comm)
-                                    <tr>
+                                    @if($comm->archived)
+                                        <tr class="archived">
+                                    @else    
+                                        <tr>
+                                    @endif
                                         <td class="check-mail"><i class="fa fa-envelope-o"></i></td>
                                         <td class="mail-subject"><a href="/{{ Request::segment(1) }}/communication/show/{{ $comm->communication_id }}">{{ $comm->subject }}</a></td>
                                         <td>{{ $comm->trunc }}</td>
