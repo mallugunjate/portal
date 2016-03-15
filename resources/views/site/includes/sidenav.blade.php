@@ -16,7 +16,7 @@
                 </li>
                 @endif
 
-                @if (  Request::is( Request::segment(1) ) )
+                @if ( Request::is( Request::segment(1) ) )
                 <li class="active">
                 @else
                 <li>
@@ -46,14 +46,21 @@
                     </a>
                 </li>            
 
+
+                
+        
                 @if (Request::segment(2) == 'alerts')
                 <li class="active">
-                @else
+                @else 
                 <li>
-                @endif 
+                @endif
                     <a href="/{{ Request::segment(1) }}/alerts"><i class="fa fa-bell"></i> <span class="nav-label">Alerts</span>
                     @if( isset($alertCount) ) 
-                    <span class="label label-inverse pull-right">{{ $alertCount }}</span>
+                        @if( $alertCount > 0)
+                            <span class="label label-danger pull-right">{{ $alertCount }}</span>
+                        @else 
+                            <span class="label label-inverse pull-right">{{ $alertCount }}</span>
+                        @endif
                     @endif
                     </a>
                 </li>   
