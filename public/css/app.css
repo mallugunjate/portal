@@ -8162,3 +8162,16 @@ body.md-skin {
 .ibox-content table{
   font-size: 14px;
 }
+
+.archived{
+  background-color: #f1f6fa;
+}
+
+.onoffswitch-switch, 
+.onoffswitch-label 
+{
+      border: 1px solid #337ab7;
+}
+.onoffswitch-inner:before{
+  background-color: #337ab7 
+}
