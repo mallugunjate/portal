@@ -23,6 +23,11 @@
     .modal-content{ height: 100% !important;}
     .modal-body{ padding: 0; margin: 0; height: 100% !important; }    
 
+    #file-table tr td:last-child {
+    white-space: nowrap;
+    width: 1%
+    }
+
     </style>
 </head> 
 
@@ -52,20 +57,19 @@
                       
                             <div class="ibox-content clearfix">
 
-                                <table class="table tablesorter table-hover table-mail" id="file-table"> 
+                                <table class="table tablesorter table-hover" id="file-table"> 
                                     <thead>
                                         <tr> 
                                             <th> Title </th>
-                                            <th><span class="pull-right" style="padding-right: 50px;"> Added </span></th>
+                                            <th> Added </th>
                                         </tr>
                                     </thead>
 
                                     @foreach ($feature_documents as $document)
-                                        
 
                                         <tr> 
-                                            <td>{!! $document->link_with_icon !!} </td>
-                                            <td><span class="pull-right"> {{$document->prettyDate}}</span></td>                             
+                                            <td> {!! $document->link_with_icon !!} </td>
+                                            <td> {{ $document->prettyDate }} </td>                             
                                         </tr>                                        
                                     
                                     @endforeach
