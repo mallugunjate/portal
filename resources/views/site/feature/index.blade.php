@@ -126,10 +126,7 @@
                                                             <div class="folder-name" data-packageid= {{$package->id}}><h3></h3></div>
                                                             <div class="package-folder-documents col-md-12" data-packageid= {{$package->id}}>
                                                                 <table class="table tablesorter tablesorter-default">
-                                                                    <tr>
-                                                                        <th>Title</th>
-                                                                        <th>Added</th>
-                                                                    </tr>
+                                                                    
                                                                 </table>
 
                                                             </div>

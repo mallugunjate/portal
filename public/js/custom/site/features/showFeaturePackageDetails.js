@@ -46,17 +46,22 @@ var getFolderDocuments = function(global_folder_id, packageId) {
 		package_folder_name.empty().append("<i class='fa fa-folder-open-o'></i> " + data.folder.name)
 		
 		$(".package-folder-documents[data-packageid= " + packageId + "]").find('table').empty();
-		$(".package-folder-documents[data-packageid= " + packageId + "]").find('table').append("<tr>"+
+		
+		if(data.files.length > 0 ) {
+			$(".package-folder-documents[data-packageid= " + packageId + "]").find('table').append("<tr>"+
 																									"<th> Title </th>"+
 																									"<th> Added </th>"+
 																								"</tr>" );
 
-		_.each(data.files, function(i){
-			$(".package-folder-documents[data-packageid= " + packageId + "]").find('.table').append("<tr>"+
-																										"<td><div>" + i.link_with_icon + "</div></td>"+
-																										"<td>" + i.prettyDateStart + "</td>"+
-																									"</tr>" );
-		});
+			_.each(data.files, function(i){
+				$(".package-folder-documents[data-packageid= " + packageId + "]").find('.table').append("<tr>"+
+																											"<td><div>" + i.link_with_icon + "</div></td>"+
+																											"<td>" + i.prettyDateStart + "</td>"+
+																										"</tr>" );
+			});
+		}
+
+		
 	});
 }
 
