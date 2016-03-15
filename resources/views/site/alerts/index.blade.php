@@ -98,25 +98,21 @@
 
                 @foreach($alerts as $alert)
                 
+
                 @if(isset($alert->archived))
                 <tr class="unread archived">
-
-                    <td class="check-mail">
-                        <i class="fa fa-archive"></i>
-                    </td>
-                    
                 @else
-                 <tr class="unread">
-
+                <tr class="unread">
+                @endif    
                     <td class="check-mail">
                         <i class="fa fa-bell-o"></i>
                     </td>
-                @endif    
+                
                     <td><span class="label label pull-left">{{ $alert->alertTypeName }}</span></td>
                     <td class="mail-subject">{!! $alert->link_with_icon !!}</td>
                     <!-- <td class="mail-preview">{{ $alert->description }}</td> -->
                     
-                    <td class="mail-date">{{ $alert->prettyDate }} <small style="font-weight: normal;padding-left: 10px;">({{ $alert->since }} ago)</small></td>
+                    <td class="mail-date">{{ $alert->prettyDate }}<!--  <small style="font-weight: normal;padding-left: 10px;">({{ $alert->since }} ago)</small> --></td>
                 </tr>                
 
                 @endforeach

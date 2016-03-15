@@ -41,7 +41,7 @@
                             @endif
                         </h2>
                     </div>
-                    
+
             <div class="col-lg-4 col-lg-offset-2" id="archive-switch">
                 <form class="form-inline" >
                     <div class="pull-right">
@@ -86,9 +86,7 @@
 
                 <?php $icon_class="fa fa-envelope-o" ?>
                 @if($communication->archived)
-                    <?php $tr_class .= " archived";
-                          $icon_class ="fa fa-archive";
-                    ?>
+                    <?php $tr_class .= " archived"; ?>
                 @endif
 
 
@@ -115,7 +113,7 @@
                     
                     <td class="mail-preview"><a href="communication/show/{{ $communication->id }}">{!! $communication->trunc !!}</a></td>
                     <td class=""><!-- <i class="fa fa-paperclip"></i> --></td>
-                    <td class="text-right mail-date">{{ $communication->prettyDate }} <small style="font-weight: normal;padding-left: 10px;">({{ $communication->since }} ago)</small></td>
+                    <td class="text-right mail-date">{{ $communication->prettyDate }}<!--  <small style="font-weight: normal;padding-left: 10px;">({{ $communication->since }} ago)</small> --></td>
                 </tr>                
 
                 @endforeach
