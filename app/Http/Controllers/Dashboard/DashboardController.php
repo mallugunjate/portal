@@ -23,6 +23,7 @@ use App\Models\Dashboard\Quicklinks;
 use App\Models\Dashboard\DashboardBranding;
 use App\Models\Notification\Notification;
 use App\Models\UrgentNotice\UrgentNotice;
+use App\Models\Alert\Alert;
 use App\Skin;
 use App\Models\StoreInfo;
 
@@ -51,13 +52,16 @@ class DashboardController extends Controller
 
         $communicationCount = Communication::getActiveCommunicationCount($storeNumber);
 
-        $communications = Communication::getActiveCommunicationsByStoreNumber($storeNumber, 3);
+        $alertCount = Alert::getActiveAlertCountByStore($storeNumber);
 
+        $communications = Communication::getActiveCommunicationsByStoreNumber($storeNumber, 3);
+    
         return view('site.dashboard.index')
             ->with('banner', $banner)
             ->with('skin', $skin)
             ->with('quicklinks', $quicklinks)
         	->with('communicationCount', $communicationCount)
+            ->with('alertCount', $alertCount)
             ->with('communications', $communications)
             ->with('features', $features)
             ->with('notifications', $notifications)

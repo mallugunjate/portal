@@ -51,7 +51,11 @@
                 @else
                 <li>
                 @endif 
-                    <a href="/{{ Request::segment(1) }}/alerts"><i class="fa fa-bell"></i> <span class="nav-label">Alerts</span></a>
+                    <a href="/{{ Request::segment(1) }}/alerts"><i class="fa fa-bell"></i> <span class="nav-label">Alerts</span>
+                    @if( isset($alertCount) ) 
+                    <span class="label label-inverse pull-right">{{ $alertCount }}</span>
+                    @endif
+                    </a>
                 </li>   
                     
 

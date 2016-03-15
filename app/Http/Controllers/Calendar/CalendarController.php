@@ -18,6 +18,7 @@ use App\Models\Communication\CommunicationDocument;
 use App\Models\Communication\CommunicationPackage;
 use App\Models\Communication\CommunicationTarget;
 use App\Models\UrgentNotice\UrgentNotice;
+use App\Models\Alert\Alert;
 use App\Skin;
 use App\Models\StoreInfo;
 use App\Models\Utility\Utility;
@@ -41,12 +42,11 @@ class CalendarController extends Controller
         $skin = Skin::getSkin($storeBanner);
 
 
-        $communicationCount = DB::table('communications_target')
-            ->where('store_id', $storeNumber)
-            ->whereNull('is_read')
-            ->count();
+        $communicationCount = Communication::getActiveCommunicationCount($storeNumber);
 
         $urgentNoticeCount = UrgentNotice::getUrgentNoticeCount($storeNumber);
+
+        $alertCount = Alert::getActiveAlertCountByStore($storeNumber);
 
         $events = Event::where('banner_id', $storeBanner)->get(); 
 
@@ -59,6 +59,7 @@ class CalendarController extends Controller
 
         return view('site.calendar.index')
                 ->with('skin', $skin)
+                ->with('alertCount', $alertCount)
                 ->with('communicationCount', $communicationCount)
                 ->with('events', $events)
                 ->with('urgentNoticeCount', $urgentNoticeCount);
