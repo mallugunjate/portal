@@ -73,13 +73,17 @@
                 <tbody>
 
                 @foreach($communications as $communication)
-                
+                <?php $tr_class="" ?>
                 @if( $communication->is_read == 1)
-                <tr class="read">
+                    <?php $tr_class = "read";?>
                 @else
-                <tr class="unread">
+                    <?php $tr_class = "unread"; ?>
                 @endif
 
+                @if($communication->archived)
+                    <?php $tr_class .= " archived";?>
+                @endif
+                <tr class= "{{ $tr_class }}" >
                     <td class="check-mail">
                         <i class="fa fa-envelope-o"></i>
                     </td>
