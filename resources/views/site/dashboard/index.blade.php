@@ -166,12 +166,13 @@
     
                                                 <div class="feed-element">
                                                     
-                                                    <span class="pull-left">
-                                                        <h1>{!! $n->icon !!}</h1>
-                                                    </span>
+ 
                                                     <div class="media-body">
-                                                        <small class="pull-right">{{ $n->since }} ago</small>
-                                                        <strong>{!! $n->link !!}</strong> was {{ $n->verb }} <strong><a href="/{{ Request::segment(1) }}/document#!/{{ $n->global_folder_id }}">{{ $n->folder_name}}</a></strong>. <br>
+                                                        <span class="pull-left" style="padding: 0px 10px 0px 0px;">
+                                                            <h2 style="padding: 0; margin: 0;">{!! $n->linkedIcon !!}</h2>
+                                                        </span>                                                    
+                                                        <small class="pull-right" style="padding-left: 10px;">{{ $n->since }} ago</small>
+                                                            <strong>{!! $n->link !!}</strong> was {{ $n->verb }} <strong><a href="/{{ Request::segment(1) }}/document#!/{{ $n->global_folder_id }}">{{ $n->folder_name}}</a></strong>
                                                     </div>
                                                     
 

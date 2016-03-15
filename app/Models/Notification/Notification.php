@@ -75,7 +75,8 @@ class Notification extends Model
             $n->icon = $icon;
             $n->link = $link;
             $n->link_with_icon = $link_with_icon;
-
+            $n->linkedIcon = Utility::getModalLink($n->filename, $n->icon, $n->original_extension, 0);
+            
             $i++;
         }
 
@@ -126,6 +127,8 @@ class Notification extends Model
             $n->link = Utility::getModalLink($n->filename, $n->title, $n->original_extension, 0);
             $n->link_with_icon = Utility::getModalLink($n->filename, $n->title, $n->original_extension, 1);
             $n->icon = Utility::getIcon($n->original_extension);
+            //public static function getModalLink($file, $anchortext, $extension, $withIcon=null, $justAnchor=null)
+            $n->linkedIcon = Utility::getModalLink($n->filename, $n->icon, $n->original_extension, 0);
 
         }
 
