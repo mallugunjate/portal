@@ -150,6 +150,7 @@ class Document extends Model
         $originalName = $file->getClientOriginalName();
         $modifiedName = str_replace(" ", "_", $originalName);
         $modifiedName = str_replace(".", "_", $modifiedName);
+        $modifiedName = str_replace("%", "pct", $modifiedName);
 
         $response = [];
         $response["originalName"] = $originalName;
