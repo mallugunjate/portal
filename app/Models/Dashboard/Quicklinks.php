@@ -34,12 +34,12 @@ class Quicklinks extends Model
 	                    case "gif":
 	                    case "bmp":
 	                        $icon = "fa-file-image-o";              
-	                        $linkUrl = '<a href="#" class="client-link">';
+	                        $linkUrl = '<a href="#">';
 	                        break;
 
 	                    case "pdf":
 	                        $icon = "fa-file-pdf-o";
-	                        $linkUrl = '<a href="#" class="launchPDFViewer client-link" data-toggle="modal" data-file="/viewer/?file=/files/'.$doc->filename.'" data-target="#fileviewmodal" class="client-link"> ';
+	                        $linkUrl = '<a href="#" class="launchPDFViewer" data-toggle="modal" data-file="/viewer/?file=/files/'.$doc->filename.'" data-target="#fileviewmodal" class="client-link"> ';
 	                        break;
 
 	                    case "xls":
@@ -52,42 +52,42 @@ class Quicklinks extends Model
 	                    case "avi":
 	                    case "mov":
 	                        $icon = "fa-film";
-	                        $linkUrl = '<a href="#" class="launchVideoViewer client-link" data-file="'.$doc->filename.'" data-target="#videomodal"> ';
+	                        $linkUrl = '<a href="#" class="launchVideoViewer" data-file="'.$doc->filename.'" data-target="#videomodal"> ';
 	                        break;
 
 	                    case "doc":
 	                    case "docx":
 	                        $icon = "fa-file-word-o";
-	                        $linkUrl = '<a href="#" class="client-link">';
+	                        $linkUrl = '<a href="#">';
 	                        break;
 
 	                    case "mp3":
 	                    case "wav":
 	                        $icon = "fa-file-audio-o";
-	                        $linkUrl = '<a href="#" class="client-link">';
+	                        $linkUrl = '<a href="#">';
 	                        break;
 
 	                    case "ppt":
 	                    case "pptx":
 	                        $icon = "fa-file-powerpoint-o";
-	                        $linkUrl = '<a href="#" class="client-link">';
+	                        $linkUrl = '<a href="#">';
 	                        break;
 
 	                    case "zip":
 	                        $icon = "fa-file-archive-o";
-	                        $linkUrl = '<a href="#" class="client-link">';
+	                        $linkUrl = '<a href="#">';
 	                        break;
 
 	                    case "html":
 	                    case "css":
 	                    case "js":
 	                        $icon = "fa-file-code-o";
-	                        $linkUrl = '<a href="#" class="client-link">';
+	                        $linkUrl = '<a href="#">';
 	                        break;
 	                        
 	                    default: 
 	                        $icon = "fa-file-o";
-	                        $linkUrl = '<a href="#" class="client-link">';
+	                        $linkUrl = '<a href="#">';
 	                        break;  
  					}
 
@@ -96,7 +96,7 @@ class Quicklinks extends Model
  					break; 					
 
  				case 3: //url
- 					array_push($linkarray, '<a target="_blank" href="'.$link->url.'" class="client-link"><i class="fa fa-external-link"></i>&nbsp;'.$link->link_name.'</a>');
+ 					array_push($linkarray, '<a target="_blank" href="'.$link->url.'"><i class="fa fa-external-link"></i>&nbsp;'.$link->link_name.'</a>');
  					break;
 
  				default:
