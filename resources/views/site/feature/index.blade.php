@@ -102,18 +102,37 @@
                                                     
                                                         <div class="package-document-listing" data-packageid= {{$package->id}} >
                                                             <div class="package-name" data-packageid= {{$package->id}}><h3> <i class="fa fa-folder-open-o"></i> {{$package->package_screen_name}} </h3></div>
+                                                            <div class="col-md-12">
+                                                            <table class="table tablesorter tablesorter-default">
+                                                                <tr>
+                                                                    <th>Title</th>
+                                                                    <th>Added</th>
+                                                                </tr>
                                                             @foreach ($package_document_listing as $document)
                                                             
-                                                            <div class="package-doc">
-                                                                {!! $document->link_with_icon !!}
-                                                            </div>
+                                                            
+                                                                <tr>
+                                                                    <td><div class="package-doc">{!! $document->link_with_icon !!}</div></td>
+                                                                    <td>{!! $document->prettyDate !!} </td>
+                                                                </tr>
+                                                            
                                                                
                                                             @endforeach
+                                                            </table>
+                                                            </div>
                                                         </div>
 
                                                         <div class="package-folder-document-listing" data-packageid = {{$package->id}}>
                                                             <div class="folder-name" data-packageid= {{$package->id}}><h3></h3></div>
-                                                            <div class="package-folder-documents" data-packageid= {{$package->id}}></div>
+                                                            <div class="package-folder-documents col-md-12" data-packageid= {{$package->id}}>
+                                                                <table class="table tablesorter tablesorter-default">
+                                                                    <tr>
+                                                                        <th>Title</th>
+                                                                        <th>Added</th>
+                                                                    </tr>
+                                                                </table>
+
+                                                            </div>
                                                         </div>
                                                     </div>
 

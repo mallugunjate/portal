@@ -106,6 +106,8 @@ class Package extends Model
             $document->link = Utility::getModalLink($document->filename, $document->title, $document->original_extension, 0);
             $document->link_with_icon = Utility::getModalLink($document->filename, $document->title, $document->original_extension, 1);
             $document->icon = Utility::getIcon($document->original_extension);
+            $document->prettyDate = Utility::prettifyDate($document->start);
+            $document->since = Utility::getTimePastSinceDate($document->start);
     		array_push($documents, $document);
     	}
     	return ( $documents );

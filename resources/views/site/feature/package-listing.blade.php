@@ -1,5 +1,5 @@
 <div class="feature_package" id="feature-package-{{$package->id}}" data-packageId = {{$package->id}}>
-    <h4 class="package-name"><i class="fa fa-folder"></i> {{$package->package_screen_name}} </h4>
+    <div class="package-name" data-package-open=false><h4><i class="fa fa-folder"></i> {{$package->package_screen_name}} </h4></div>
     <?php  $package_folder_listing = $package['details']['package_folders']; ?>
     <?php  $package_folder_tree = $package['details']['package_folder_tree']; ?>
     <div class="package-folder-listing hidden" data-packageid= {{$package->id}}>
