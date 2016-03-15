@@ -17,6 +17,7 @@ use App\Models\Communication\CommunicationPackage;
 use App\Models\Communication\CommunicationTarget;
 use App\Models\Communication\CommunicationType;
 use App\Models\UrgentNotice\UrgentNotice;
+use App\Models\Alert\Alert;
 use App\Models\Tag\Tag;
 use App\Models\Tag\ContentTag;
 use App\Skin;
@@ -47,6 +48,8 @@ class CommunicationController extends Controller
         
         $communicationTypes = CommunicationType::getCommunicationTypeCount($storeNumber);
         $urgentNoticeCount = UrgentNotice::getUrgentNoticeCount($storeNumber);
+
+        $alertCount = Alert::getActiveAlertCountByStore($storeNumber);
 
         if (isset($request['type'])) {
             $targetedCommunications = CommunicationTarget::getTargetedCommunicationsByCategory($storeNumber, $request['type']);
@@ -81,6 +84,7 @@ class CommunicationController extends Controller
             ->with('communicationTypes', $communicationTypes)
             ->with('communications', $targetedCommunications)
             ->with('communicationCount', $communicationCount)
+            ->with('alertCount', $alertCount)
             ->with('urgentNoticeCount', $urgentNoticeCount)
             ->with('title', $title)
             ->with('archives', $request['archives']);

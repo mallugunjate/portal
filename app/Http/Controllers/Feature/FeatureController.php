@@ -12,10 +12,12 @@ use App\Models\Notification\Notification;
 use App\Skin;
 use App\Models\Feature\FeatureDocument;
 use App\Models\Feature\FeaturePackage;
+use App\Models\Communication\Communication;
 use App\Models\Document\Document;
 use App\Models\Document\Package;
 use App\Models\StoreInfo;
 use App\Models\UrgentNotice\UrgentNotice;
+use App\Models\Alert\Alert;
 use App\Models\Utility\Utility;
 
 class FeatureController extends Controller
@@ -65,6 +67,10 @@ class FeatureController extends Controller
 
         $urgentNoticeCount = UrgentNotice::getUrgentNoticeCount($storeNumber);
 
+        $alertCount = Alert::getActiveAlertCountByStore($storeNumber);
+
+        $communicationCount = Communication::getActiveCommunicationCount($storeNumber);     
+
         $storeBanner = $storeInfo->banner_id;
 
         $skin = Skin::getSkin($storeBanner);
@@ -104,6 +110,8 @@ class FeatureController extends Controller
             ->with('skin', $skin)
             ->with('urgentNoticeCount', $urgentNoticeCount)
 			->with('notifications', $notifications)
+            ->with('communicationCount', $communicationCount)
+            ->with('alertCount', $alertCount)            
             ->with('feature', $feature)
             ->with('feature_documents', $selected_documents)
             ->with('feature_packages', $selected_packages)

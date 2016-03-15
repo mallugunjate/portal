@@ -13,6 +13,8 @@ use App\Skin;
 use App\Models\UrgentNotice\UrgentNotice;
 use App\Models\Utility\Utility;
 use App\Models\Search\Search;
+use App\Models\Communication\Communication;
+use App\Models\Alert\Alert;
 
 class SearchController extends Controller
 {
@@ -27,6 +29,8 @@ class SearchController extends Controller
         $query = $request['q'];
         $store = RequestFacade::segment(1);
 
+        $alertCount = Alert::getActiveAlertCountByStore($store);
+        $communicationCount = Communication::getActiveCommunicationCount($store); 
         
         $docs = [];
         $folders = [];
@@ -64,6 +68,8 @@ class SearchController extends Controller
             ->with('folders', $folders)
             ->with('communications', $communications)
             ->with('alerts', $alerts)
+            ->with('communicationCount', $communicationCount)
+            ->with('alertCount', $alertCount)               
             ->with('query', $query)
             ->with('archives', $request['archives']);
     }

@@ -21,6 +21,7 @@ use App\Models\Communication\CommunicationDocument;
 use App\Models\Communication\CommunicationPackage;
 use App\Models\Communication\CommunicationTarget;
 use App\Models\UrgentNotice\UrgentNotice;
+use App\Models\Alert\Alert;
 use App\Models\StoreInfo;
 
 class DocumentController extends Controller
@@ -59,6 +60,8 @@ class DocumentController extends Controller
         }
 
         $urgentNoticeCount = UrgentNotice::getUrgentNoticeCount($storeNumber);
+
+        $alertCount = Alert::getActiveAlertCountByStore($storeNumber);        
         
         return view('site.documents.index')
             ->with('skin', $skin)
@@ -66,6 +69,7 @@ class DocumentController extends Controller
             ->with('folders', $folders)
             ->with('banner', $banner)
             ->with('communicationCount', $communicationCount)
+            ->with('alertCount', $alertCount)
             ->with('defaultFolder' , $defaultFolder)
             ->with('urgentNoticeCount', $urgentNoticeCount);
 
