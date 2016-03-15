@@ -8163,6 +8163,17 @@ body.md-skin {
   font-size: 14px;
 }
 
+#archive-switch{
+  position: relative;
+  /*top: 20px;*/
+}
+
+.document-archive{
+  position: relative;
+  top: 55px;
+  right: 40px;
+}
+
 .archived{
   background-color: #f1f6fa;
 }

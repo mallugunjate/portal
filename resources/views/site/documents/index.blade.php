@@ -30,7 +30,7 @@
 
 	   <div class="row wrapper border-bottom white-bg page-heading">
 
-            <div class="col-lg-8">
+            <div class="col-lg-8 col-md-8 col-sm-6">
                 <h2>Library</h2>
 
                 <ol class="breadcrumb">
@@ -39,12 +39,13 @@
                 </ol>
             </div>
 
-            <div class="col-lg-2 col-lg-offset-2 hidden" id="archive-switch" >
+            <div class="col-lg-2 col-md-4 col-sm-6 col-lg-offset-2 hidden document-archive" id="archive-switch">
                 <form class="form-inline" >
-                    <div tyle="float:right">
-                        <label>Archives</label>
+                    <div class="pull-right">
                         
-                            <div class="switch">
+                        <small style="font-weight: bold; padding-right: 5px;">Show Archive</small>
+                            
+                            <div class="switch pull-right">
                                 <div class="onoffswitch">
                                     
                                     <input type="checkbox" class="onoffswitch-checkbox" id="archives" name="archives">
@@ -59,6 +60,7 @@
                     </div>
                 </form>
             </div>
+
         </div>
 
         <div class="wrapper wrapper-content animated fadeInRight">
@@ -67,14 +69,7 @@
                     <div class="ibox float-e-margins">
                         <div class="ibox-content">
                             <div class="file-manager">
-{{--                                 <h5>Show:</h5>
-                                <a href="#" class="file-control active">Ale</a>
-                                <a href="#" class="file-control">Documents</a>
-                                <a href="#" class="file-control">Audio</a>
-                                <a href="#" class="file-control">Images</a> --}}
-{{--                                 <div class="hr-line-dashed"></div>
-                                <button class="btn btn-primary btn-block">Upload Files</button> --}}
-{{--                                 <div class="hr-line-dashed"></div> --}}
+
                                 <h5>Folders</h5>
 
                                 <ul class="tree" id="navigation-structure">
@@ -90,17 +85,6 @@
                                     @endforeach
                                 </ul>                             
 
-                               <!--  <h5 class="tag-title">Tags</h5>
-                                <ul class="tag-list" style="padding: 0">
-                                    <li><a href="">Family</a></li>
-                                    <li><a href="">Work</a></li>
-                                    <li><a href="">Home</a></li>
-                                    <li><a href="">Children</a></li>
-                                    <li><a href="">Holidays</a></li>
-                                    <li><a href="">Music</a></li>
-                                    <li><a href="">Photography</a></li>
-                                    <li><a href="">Film</a></li>
-                                </ul> -->
                                 <div class="clearfix"></div>
                             </div>
                         </div>
@@ -112,12 +96,6 @@
 
                         <div class="col-lg-12">
                         <div id="file-container" class="ibox hidden">
-{{--                             <div class="ibox-title">
-                                <div class="ibox-tools">
-                                    
-                                </div>
-                            </div> --}}
-
 
                             <div class="ibox-content">
                             
@@ -128,36 +106,9 @@
                         </div>
 
                         <div class="topLevelNavItems">
-<!--                         <h1>Folders</h1> -->
+
                         <div style="font-weight: bold; color: #ddd; text-align: center; font-size: 30px; padding-top: 30px;">Select folders on the left</div>
-                        @foreach ($navigation as $nav) 
 
-                            @if ( $nav["is_child"] == 0)
-
-{{--
-                                <div class="file-box">
-                                    <div class="file">
-                                        <a id="{{ $nav['id'] }}" class="parent-folder folder branch" href="/document#!/{{ $nav['id'] }}">
-                                            <span class="corner"></span>
-
-                                            <div class="icon">
-                                                <i class="fa fa-folder-open"></i>
-                                            </div> 
-
-                                        
-
-                                            <div class="file-name">
-                                                {{ $nav["label"] }}
-                                                <br>
-
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>                                
---}}                                
-                            @endif
-
-                        @endforeach
                         </div>
 
 
