@@ -32,7 +32,7 @@
             <div class="col-lg-10 animated fadeInRight">
             <div class="mail-box-header">
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-6">
                         <h2>
                             @if($title == "")
                                 All Messages <small>({{ $communicationCount }} unread)</small>
@@ -41,28 +41,32 @@
                             @endif
                         </h2>
                     </div>
-                    <div class="col-md-2 col-md-offset-2">
-                        <form class="form-inline" >
-                            <div tyle="float:right">
-                                <label>Archives</label>
-                                
-                                    <div class="switch">
-                                        <div class="onoffswitch">
-                                            @if($archives)
-                                            <input type="checkbox" checked="" class="onoffswitch-checkbox" id="archives" name="archives">
-                                            @else
-                                            <input type="checkbox" class="onoffswitch-checkbox" id="archives" name="archives">
-                                            @endif
-                                            <label class="onoffswitch-label" for="archives">
-                                                <span class="onoffswitch-inner"></span>
-                                                <span class="onoffswitch-switch"></span>
-                                            </label>
-                                        </div>
-                                    </div>
-                               
+                    
+            <div class="col-lg-4 col-lg-offset-2" id="archive-switch">
+                <form class="form-inline" >
+                    <div class="pull-right">
+                        
+                        <small style="font-weight: bold; padding-right: 5px;">Show Archive</small>
+                            
+                            <div class="switch pull-right">
+                                <div class="onoffswitch">
+                                    
+                                    @if($archives)
+                                        <input type="checkbox" checked="" class="onoffswitch-checkbox" id="archives" name="archives">
+                                    @else
+                                        <input type="checkbox" class="onoffswitch-checkbox" id="archives" name="archives">
+                                    @endif
+                                    
+                                    <label class="onoffswitch-label" for="archives">
+                                        <span class="onoffswitch-inner"></span>
+                                        <span class="onoffswitch-switch"></span>
+                                    </label>
+                                </div>
                             </div>
-                        </form>
+                       
                     </div>
+                </form>
+            </div>
                 </div>
 
             </div>

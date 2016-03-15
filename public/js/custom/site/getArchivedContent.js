@@ -4,8 +4,9 @@ $(document).ready(function(){
 	}
 })
 
-$("#archives").on('change', function(){
-	
+$(".onoffswitch-label").on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', function(){
+//$("#archives").on('change', function(){
+
 	if($("input[name='archives']:checked").val()) {
 
 		var query = window.location.search;

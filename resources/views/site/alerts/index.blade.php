@@ -37,7 +37,7 @@
             <div class="mail-box-header">
 
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-6">
                         <h2>
                         	@if($title == "")
                         		All Alerts 
@@ -49,7 +49,7 @@
                     </div>
 
 
-            <div class="col-lg-2 col-lg-offset-2" id="archive-switch">
+            <div class="col-lg-4 col-lg-offset-2" id="archive-switch">
                 <form class="form-inline" >
                     <div class="pull-right">
                         
