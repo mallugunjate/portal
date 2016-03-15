@@ -79,7 +79,7 @@
                             <div class="col-lg-12">
                                 <div class="ibox float-e-margins">
                                     <div class="ibox-title">
-                                        <h2>Packages</h2>
+                                        <h2>Additional Documents</h2>
                                     </div>
                               
                                     <div class="ibox-content clearfix">
@@ -92,23 +92,29 @@
                                             @endforeach
                                             </div>
 
-                                            <div class="col-lg-8 package-document-container">
+                                            <div class="col-lg-8 package-document-container ">
 
 
                                                 @foreach($feature_packages as $package)
-                                                    <?php $package_document_listing = $package['details']['package_documents']; ?>
-                                                    
-                                                    <div  class="package-document-listing hidden" data-packageid= {{$package->id}} >
-
-                                                        @foreach ($package_document_listing as $document)
+                                                    <div class="single-package-document-container hidden" data-packageid= {{$package->id}} > 
                                                         
-                                                            {!! $document->link_with_icon !!}
-                                                           
-                                                        @endforeach
-                                                    </div>
+                                                        <?php $package_document_listing = $package['details']['package_documents']; ?>
+                                                    
+                                                        <div class="package-document-listing" data-packageid= {{$package->id}} >
+                                                            <div class="package-name" data-packageid= {{$package->id}}><h3> <i class="fa fa-folder-open-o"></i> {{$package->package_screen_name}} </h3></div>
+                                                            @foreach ($package_document_listing as $document)
+                                                            
+                                                            <div class="package-doc">
+                                                                {!! $document->link_with_icon !!}
+                                                            </div>
+                                                               
+                                                            @endforeach
+                                                        </div>
 
-                                                    <div class="package-folder-document-listing hidden" data-packageid = {{$package->id}}>
-
+                                                        <div class="package-folder-document-listing" data-packageid = {{$package->id}}>
+                                                            <div class="folder-name" data-packageid= {{$package->id}}><h3></h3></div>
+                                                            <div class="package-folder-documents" data-packageid= {{$package->id}}></div>
+                                                        </div>
                                                     </div>
 
                                                 @endforeach

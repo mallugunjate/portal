@@ -1,14 +1,21 @@
 $(".feature_package").on('click', function(){
 
 	var packageId = $(this).attr('data-packageId');
+	
+	$(".package-name").find('i').removeClass('fa-folder-open').addClass('fa-folder');
+	$(this).find(".package-name").find('i').removeClass('fa-folder').addClass('fa-folder-open');
+
+	$(".package-folder-document-listing").find(".folder-name").find("h3").empty();
+	$(".package-folder-documents").empty();
 	showPackageDocuments(packageId);
-	showPackageFolders(packageId);
+	showPackageFolders(packageId);	
+	
 
 });
 
 var showPackageDocuments = function(packageId) {
-	$(".package-document-listing").addClass('hidden');
-	$(".package-document-listing[data-packageid = " + packageId+"]").removeClass('hidden').addClass('visible');
+	$(".single-package-document-container").addClass('hidden');
+	$(".single-package-document-container[data-packageid = " + packageId+"]").removeClass('hidden').addClass('visible');
 }
 
 var showPackageFolders = function(packageId) {
@@ -24,11 +31,12 @@ var getFolderDocuments = function(global_folder_id, packageId) {
 	)
 	.done(function(data){
 		console.log(data);
+		var package_folder_name = $(".package-folder-document-listing[data-packageid= " + packageId + "]").find(".folder-name").find("h3")
+		package_folder_name.empty().append("<i class='fa fa-folder-open-o'></i> " + data.folder.name)
+		$(".package-folder-documents[data-packageid= " + packageId + "]").empty();
 		_.each(data.files, function(i){
-			$(".package-folder-document-listing[data-packageid= " + packageId + "]").empty().append( i.link_with_icon );
+			$(".package-folder-documents[data-packageid= " + packageId + "]").append("<div>" + i.link_with_icon + "</div>" );
 		});
-		$(".package-folder-document-listing[data-packageid= " + packageId + "]").removeClass('hidden');
-		$(".package-document-listing[data-packageid= " + packageId + "]").addClass('hidden');
 	});
 }
 
