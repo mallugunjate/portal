@@ -61,6 +61,7 @@ class Document extends Model
                     $file->link_with_icon = Utility::getModalLink($file->filename, $file->title, $file->original_extension, 1);
                     $file->icon = Utility::getIcon($file->original_extension);
                     $file->prettyDateCreated = Utility::prettifyDate($file->created_at);
+                    $file->prettyDateUpdated = Utility::prettifyDate($file->updated_at);
                     $file->prettyDateStart = Utility::prettifyDate($file->start);
                     $file->prettyDateEnd = Utility::prettifyDate($file->end);
 
@@ -70,6 +71,7 @@ class Document extends Model
                     }
 
                 }
+
                 return $files;
             }
             else{
@@ -290,6 +292,7 @@ class Document extends Model
                 $file->link_with_icon = Utility::getModalLink($file->filename, $file->title, $file->original_extension, 1);
                 $file->icon = Utility::getIcon($file->original_extension);
                 $file->prettyDateCreated = Utility::prettifyDate($file->created_at);
+                $file->prettyDateUpdated = Utility::prettifyDate($file->updated_at);
                 $file->prettyDateStart = Utility::prettifyDate($file->start);
                 $file->prettyDateEnd = Utility::prettifyDate($file->end);
 
