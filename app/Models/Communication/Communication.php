@@ -53,6 +53,7 @@ class Communication extends Model
          $comm = Communication::join('communications_target', 'communications.id' , '=', 'communications_target.communication_id')
                               ->where('store_id', $storeNumber)
                               ->where('archive_at', '<=', $now)
+                              ->select('communications.*')
                               ->get();
          
          foreach($comm as $c){
@@ -73,6 +74,7 @@ class Communication extends Model
                               ->where('communications.communication_type_id' , $category)
                               ->where('store_id', $storeNumber)
                               ->where('archive_at', '<=', $now)
+                              ->select('communications.*')
                               ->get();
          
          foreach($comm as $c){

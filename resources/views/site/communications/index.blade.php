@@ -80,12 +80,18 @@
                     <?php $tr_class = "unread"; ?>
                 @endif
 
+                <?php $icon_class="fa fa-envelope-o" ?>
                 @if($communication->archived)
-                    <?php $tr_class .= " archived";?>
+                    <?php $tr_class .= " archived";
+                          $icon_class ="fa fa-archive";
+                    ?>
                 @endif
+
+
                 <tr class= "{{ $tr_class }}" >
                     <td class="check-mail">
-                        <i class="fa fa-envelope-o"></i>
+                        
+                        <i class="{{$icon_class}}"></i>
                     </td>
 
                     @if( $communication->communication_type_id == "1")
