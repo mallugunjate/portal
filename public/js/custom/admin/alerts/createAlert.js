@@ -68,7 +68,7 @@ $(document).on('click','.alert-create',function(){
 			$(window).scrollTop(0);
 			return false;
 		}
-		if(target_stores == null || typeof allStores === 'undefined' ) {
+		if(target_stores == null && typeof allStores === 'undefined' ) {
 			swal("Oops!", "Target stores missing", "error"); 
 			hasError = true;
 			$(window).scrollTop(0);
