@@ -155,7 +155,7 @@
                                         <h2>Latest Updates</h2>
                                     </div>
                                     
-                                    <div class="ibox-content" style="max-height: 550px; overflow-y: scroll;">
+                                    <div class="ibox-content" style="max-height: 550px; overflow: auto;">
 
                                         <div>
                                             <div class="feed-activity-list">
