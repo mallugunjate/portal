@@ -1,14 +1,29 @@
 $(".feature_package").on('click', function(){
 
 	var packageId = $(this).attr('data-packageId');
+
+	$(this).find('.package-name').attr('data-package-open','true');
+	
+	//close all other trees
+	$('.tree').find('li').find('i').removeClass('fa-folder-open').addClass('fa-folder')
+	
+
+	$(".package-name").find('i').removeClass('fa-folder-open').addClass('fa-folder');
+	$(this).find(".package-name").find('i').removeClass('fa-folder').addClass('fa-folder-open');
+
+	//empty folder-documents from earlier
+	$(".package-folder-document-listing").find(".folder-name").find("h3").empty();
+	$(".package-folder-documents").find('table').empty();
+
 	showPackageDocuments(packageId);
-	showPackageFolders(packageId);
+	showPackageFolders(packageId);	
+	
 
 });
 
 var showPackageDocuments = function(packageId) {
-	$(".package-document-listing").addClass('hidden');
-	$(".package-document-listing[data-packageid = " + packageId+"]").removeClass('hidden').addClass('visible');
+	$(".single-package-document-container").addClass('hidden');
+	$(".single-package-document-container[data-packageid = " + packageId+"]").removeClass('hidden').addClass('visible');
 }
 
 var showPackageFolders = function(packageId) {
@@ -23,12 +38,30 @@ var getFolderDocuments = function(global_folder_id, packageId) {
 		}
 	)
 	.done(function(data){
+
 		console.log(data);
-		_.each(data.files, function(i){
-			$(".package-folder-document-listing[data-packageid= " + packageId + "]").empty().append( i.link_with_icon );
-		});
-		$(".package-folder-document-listing[data-packageid= " + packageId + "]").removeClass('hidden');
-		$(".package-document-listing[data-packageid= " + packageId + "]").addClass('hidden');
+		
+		var package_folder_name = $(".package-folder-document-listing[data-packageid= " + packageId + "]").find(".folder-name").find("h3");
+		
+		package_folder_name.empty().append("<i class='fa fa-folder-open-o'></i> " + data.folder.name)
+		
+		$(".package-folder-documents[data-packageid= " + packageId + "]").find('table').empty();
+		
+		if(data.files.length > 0 ) {
+			$(".package-folder-documents[data-packageid= " + packageId + "]").find('table').append("<tr>"+
+																									"<th> Title </th>"+
+																									"<th> Added </th>"+
+																								"</tr>" );
+
+			_.each(data.files, function(i){
+				$(".package-folder-documents[data-packageid= " + packageId + "]").find('.table').append("<tr>"+
+																											"<td><div>" + i.link_with_icon + "</div></td>"+
+																											"<td>" + i.prettyDateStart + "</td>"+
+																										"</tr>" );
+			});
+		}
+
+		
 	});
 }
 
