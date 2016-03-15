@@ -110,7 +110,16 @@ var fileFill = function(data)
 							' <td><span class="pull-right">'+ i.created_at +'</span></td>'+
 							// ' <td>'+ i.start +'</td>' +
 							// ' <td>'+ i.end +'</td>' +
-							' <td></td> </tr>'		
+							' <td></td> </tr>'
+			if(i.archived) {
+				var row = '<tr class="archived archived-blue"> <td class="mail-subject"><i class="fa fa-archive"></i> '+ i.link + '</td>'+
+							// ' <td>'+ i.description + '</td>'+
+							' <td><span class="pull-right">'+ i.created_at +'</span></td>'+
+							// ' <td>'+ i.start +'</td>' +
+							// ' <td>'+ i.end +'</td>' +
+							' <td></td> </tr>'	
+			}
+					
 			$('#file-table').append(row);
 		});
 

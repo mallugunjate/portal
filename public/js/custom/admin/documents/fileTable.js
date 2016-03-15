@@ -76,7 +76,6 @@
 			console.log(files)
 			$('#file-table').append('<tbody>');
 			_.each(files, function(i){
-
 				$('#file-table').append('<tr>'+
 											'<td>'+ i.is_alert +'</td>'+
 											'<td>'+ i.link_with_icon +'</td>'+

@@ -8166,6 +8166,9 @@ body.md-skin {
 .archived{
   background-color: #f1f6fa;
 }
+.archived-blue i{
+  color: #337ab7;
+}
 
 .onoffswitch-switch, 
 .onoffswitch-label 
