@@ -69,6 +69,7 @@ class Alert extends Model
                         ->where('alerts_target.store_id', '=', $store_id)
                         ->where('alerts.alert_start' , '<=', Carbon::now()->toDatetimeString())
                         ->where('alerts.alert_end', '>=', Carbon::now()->toDatetimeString())
+                        ->select('alerts.*')
                         ->get();
 
         if (count($alerts) >0) {
@@ -90,6 +91,7 @@ class Alert extends Model
                         ->where('alerts.alert_start' , '<=', Carbon::now()->toDatetimeString())
                         ->where('alerts.alert_end', '>=', Carbon::now()->toDatetimeString())
                         ->where('alert_type_id' , $alert_type)
+                        ->select('alerts.*')
                         ->get();
         
         if (count($alerts) >0) {
@@ -108,6 +110,7 @@ class Alert extends Model
                         ->where('alerts_target.store_id', '=', $store_id)
                         ->where('alerts.alert_end', '<=', Carbon::now()->toDatetimeString())
                         ->where('alerts.alert_end', '!=', '0000-00-00 00:00:00')
+                        ->select('alerts.*')
                         ->get();
 
 
@@ -130,6 +133,7 @@ class Alert extends Model
                         ->where('alerts.alert_end', '<=', Carbon::now()->toDatetimeString())
                         ->where('alerts.alert_end', '!=', '0000-00-00 00:00:00')
                         ->where('alert_type_id' , $alert_type)
+                        ->select('alerts.*')
                         ->get();
 
         if (count($alerts) >0) {
