@@ -107,14 +107,14 @@ var fileFill = function(data)
 			var row ="";
 			var row = '<tr> <td class="mail-subject">'+ i.link_with_icon + '</td>'+
 							// ' <td>'+ i.description + '</td>'+
-							' <td><span class="pull-right">'+ i.created_at +'</span></td>'+
+							' <td><span class="pull-right">'+ i.prettyDateUpdated +'</span></td>'+
 							// ' <td>'+ i.start +'</td>' +
 							// ' <td>'+ i.end +'</td>' +
 							' <td></td> </tr>'
 			if(i.archived) {
-				var row = '<tr class="archived archived-blue"> <td class="mail-subject"><i class="fa fa-archive"></i> '+ i.link + '</td>'+
+				var row = '<tr class="archived archived-blue"> <td class="mail-subject">'+ i.link_with_icon + '</td>'+
 							// ' <td>'+ i.description + '</td>'+
-							' <td><span class="pull-right">'+ i.created_at +'</span></td>'+
+							' <td><span class="pull-right">'+ i.prettyDateUpdated +'</span></td>'+
 							// ' <td>'+ i.start +'</td>' +
 							// ' <td>'+ i.end +'</td>' +
 							' <td></td> </tr>'	
