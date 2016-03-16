@@ -41,7 +41,7 @@
                 @endif 
                     <a href="/{{ Request::segment(1) }}/communication"><i class="fa fa-bullhorn"></i> <span class="nav-label">Communications</span> 
                     @if( isset($communicationCount) ) 
-                    <span class="label label-inverse pull-right">{{ $communicationCount }}</span>
+                    <span class="label label-primary pull-right">{{ $communicationCount }}</span>
                     @endif
                     </a>
                 </li>            
@@ -57,7 +57,7 @@
                     <a href="/{{ Request::segment(1) }}/alerts"><i class="fa fa-bell"></i> <span class="nav-label">Alerts</span>
                     @if( isset($alertCount) ) 
                         @if( $alertCount > 0)
-                            <span class="label label-danger pull-right">{{ $alertCount }}</span>
+                            <span class="label label-primary pull-right">{{ $alertCount }}</span>
                         @else 
                             <span class="label label-inverse pull-right">{{ $alertCount }}</span>
                         @endif
