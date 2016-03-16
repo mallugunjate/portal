@@ -79,7 +79,7 @@
                 @foreach($communications as $communication)
                 <?php $tr_class="" ?>
                 @if( $communication->is_read == 1)
-                    <?php $tr_class = "read";?>
+                    <?php $tr_class = "unread";?>
                 @else
                     <?php $tr_class = "unread"; ?>
                 @endif

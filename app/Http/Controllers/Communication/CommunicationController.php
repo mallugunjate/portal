@@ -60,15 +60,19 @@ class CommunicationController extends Controller
         }
 
         $communicationCount = Communication::getActiveCommunicationCount($storeNumber);         
+
         if (isset($request['archives']) && $request['archives']) {
+
+            $communicationCount = Communication::getAllCommunicationCount($storeNumber); 
+            $communicationTypes = CommunicationType::getCommunicationTypeCountAllMessages($storeNumber);
 
             if(isset($request['type'])){
                 $archivedCommunication = Communication::getArchivedCommunicationsByCategory($request['type'], $storeNumber);
                 foreach ($archivedCommunication as $ac) {
                     $targetedCommunications->add($ac);
                 }
-
             }
+
             else{
 
                 $archivedCommunication = Communication::getArchivedCommunicationsByStore($storeNumber);
@@ -78,11 +82,6 @@ class CommunicationController extends Controller
             }
 
         }
-
-        
-        
-        
-        
 
         return view('site.communications.index')
             ->with('skin', $skin)
@@ -123,7 +122,7 @@ class CommunicationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($sn, $id)
+    public function show($sn, $id, Request $request)
     {
         $storeNumber = RequestFacade::segment(1);
         $storeInfo = StoreInfo::getStoreInfoByStoreId($storeNumber);
@@ -177,6 +176,11 @@ class CommunicationController extends Controller
             $package['details'] = $package_details;
             array_push($selected_packages, $package);
 
+        }
+
+        if (isset($request['archives']) && $request['archives']) {
+            $communicationCount = Communication::getAllCommunicationCount($storeNumber); 
+            $communicationTypes = CommunicationType::getCommunicationTypeCountAllMessages($storeNumber);
         }
 
         return view('site.communications.message')

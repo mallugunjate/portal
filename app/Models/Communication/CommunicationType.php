@@ -20,4 +20,13 @@ class CommunicationType extends Model
         }
         return $communicationTypes;	
     }
+
+    public static function getCommunicationTypeCountAllMessages($storeNumber)
+    {
+        $communicationTypes = CommunicationType::all();
+         foreach($communicationTypes as $ct){
+            $ct->count = Communication::getAllCommunicationCountByCategory($storeNumber, $ct->id);
+        }
+        return $communicationTypes; 
+    }    
 }

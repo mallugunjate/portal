@@ -289,6 +289,15 @@ class Communication extends Model
          return $communicationCount;
       }
 
+      public static function getAllCommunicationCount($storeNumber)
+      {
+         $communicationCount = DB::table('communications_target')
+            ->join('communications', 'communications_target.communication_id', '=', 'communications.id')
+            ->where('store_id', $storeNumber)
+            ->count();     
+         return $communicationCount;    
+      }
+
       public static function getActiveCommunicationCountByCategory($storeNumber, $categoryId)
       {
          $now = Carbon::now()->toDatetimeString();
@@ -302,6 +311,16 @@ class Communication extends Model
             ->count();
          return $count;
       } 
+
+      public static function getAllCommunicationCountByCategory($storeNumber, $categoryId)
+      {
+         $count = DB::table('communications_target')
+            ->where('store_id', $storeNumber)
+            ->join('communications', 'communications.id', '=', 'communications_target.communication_id')
+            ->where('communications.communication_type_id', $categoryId)
+            ->count();
+         return $count;
+      }       
 
       public static function getCommunicationCategoryName($id)
       {
