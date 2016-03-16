@@ -22,6 +22,10 @@ $(".feature_package").on('click', function(){
 });
 
 var showPackageDocuments = function(packageId) {
+
+	$(".package-document-listing .package-name").removeClass('hidden');
+	$(".package-document-listing table").removeClass('hidden');
+
 	$(".single-package-document-container").addClass('hidden');
 	$(".single-package-document-container[data-packageid = " + packageId+"]").removeClass('hidden').addClass('visible');
 }
@@ -38,6 +42,9 @@ var getFolderDocuments = function(global_folder_id, packageId) {
 		}
 	)
 	.done(function(data){
+
+		$(".package-document-listing .package-name").addClass('hidden');
+		$(".package-document-listing table").addClass('hidden');
 
 		console.log(data);
 		
