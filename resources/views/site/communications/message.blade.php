@@ -12,6 +12,7 @@
 
     <input type="hidden" id="communication_id" name="communication_id" value="{{ $communication->id }}">
     <input type="hidden" id="store_id" name="store_id" value="{{ Request::segment(1) }}">
+    <input type="hidden" id="archives" value="" />
 
     <div id="wrapper">
     <nav class="navbar-default navbar-static-side" role="navigation">
@@ -171,6 +172,40 @@
 
         $(".tree").treed({openedClass : 'fa-folder-open', closedClass : 'fa-folder'});
 
+
+         var getUrlParameter = function getUrlParameter(sParam) {
+            var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+                sURLVariables = sPageURL.split('&'),
+                sParameterName,
+                i;
+
+            for (i = 0; i < sURLVariables.length; i++) {
+                sParameterName = sURLVariables[i].split('=');
+
+                if (sParameterName[0] === sParam) {
+                    return sParameterName[1] === undefined ? true : sParameterName[1];
+                }
+            }
+        };
+    
+        $( document ).ready(function() {
+
+            var checked = getUrlParameter('archives');
+            
+            if( checked == 'true'){
+                $("a.comm_category_link").each(function() {
+                   var href = $(this).attr("href"); 
+                   $(this).attr("href", href + '&archives=true');
+                });                
+            } else {
+                $("a.comm_category_link").each(function() {
+                   var href = $(this).attr("href"); 
+                   $(this).attr('href', href.replace(/&?archives=\d+/, ''));
+                });                                 
+            }
+        });
+
+ 
     </script>
 
     @include('site.includes.modal')
