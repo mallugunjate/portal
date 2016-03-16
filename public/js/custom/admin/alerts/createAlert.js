@@ -55,6 +55,12 @@ $(document).on('click','.alert-create',function(){
 		$(window).scrollTop(0);
 		return false;
 	}
+	if(document_start == '') {
+			swal("Oops!", "Start date required for document", "error"); 
+			hasError = true;
+			$(window).scrollTop(0);
+			return false;
+		}
 	if(is_alert == 1){
 		if(alert_type_id == '' ) {
 			swal("Oops!", "Alert type missing", "error"); 
@@ -62,6 +68,7 @@ $(document).on('click','.alert-create',function(){
 			$(window).scrollTop(0);
 			return false;
 		}
+		
 		// if(start == '' || end == '' ) {
 		// 	swal("Oops!", "Start and End dates required for alert", "error"); 
 		// 	hasError = true;
