@@ -44,6 +44,15 @@ class Alert extends Model
         return $alert_count;
     }
 
+    public static function getAllAlertCountByStore($store_id)
+    {
+        $alert_count = Alert::join('alerts_target', 'alerts.id' , '=', 'alerts_target.alert_id')
+                            ->where('store_id', $store_id)
+                            ->count();
+
+        return $alert_count;
+    }    
+
     public static function getActiveAlertCountByCategory($storeNumber, $alertId)
     {
          $now = Carbon::now()->toDatetimeString();
@@ -59,6 +68,17 @@ class Alert extends Model
   
     }
 
+
+    public static function getAllAlertCountByCategory($storeNumber, $alertId)
+    {
+         $count = DB::table('alerts_target')
+           ->where('store_id', $storeNumber)
+           ->join('alerts', 'alerts.id', '=', 'alerts_target.alert_id')
+           ->where('alerts.alert_type_id', $alertId)
+           ->count();
+         return $count;
+    }
+    
     public static function getActiveAlertsByStore($store_id)
     {
 
