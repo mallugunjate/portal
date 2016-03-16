@@ -33,8 +33,8 @@ $(document).on('click','.alert-create',function(){
 	}
 	var alert_type_id = $("#alert_type").val();
 	
-	var start = $("#start").val();
-	var end = $("#end").val();
+	// var start = $("#start").val();
+	// var end = $("#end").val();
 	var banner_id = $("input[name='banner_id']").val();
 	var target_stores  = $("#storeSelect").val();
 	var allStores = $("#allStores:checked").val()
@@ -43,8 +43,8 @@ $(document).on('click','.alert-create',function(){
 	console.log('description : ' + description);
 	console.log('is_alert : ' + is_alert); 
 	console.log('alert_type : '+ alert_type_id);
-	console.log('start : ' + start);
-	console.log('end : ' + end);
+	// console.log('start : ' + start);
+	// console.log('end : ' + end);
 	console.log('target_stores : ' + target_stores);
 	console.log('banner_id : ' + banner_id);
 	console.log('all stores : ' + allStores);
@@ -55,6 +55,12 @@ $(document).on('click','.alert-create',function(){
 		$(window).scrollTop(0);
 		return false;
 	}
+	if(document_start == '') {
+			swal("Oops!", "Start date required for document", "error"); 
+			hasError = true;
+			$(window).scrollTop(0);
+			return false;
+		}
 	if(is_alert == 1){
 		if(alert_type_id == '' ) {
 			swal("Oops!", "Alert type missing", "error"); 
@@ -62,12 +68,13 @@ $(document).on('click','.alert-create',function(){
 			$(window).scrollTop(0);
 			return false;
 		}
-		if(start == '' || end == '' ) {
-			swal("Oops!", "Start and End dates required for alert", "error"); 
-			hasError = true;
-			$(window).scrollTop(0);
-			return false;
-		}
+		
+		// if(start == '' || end == '' ) {
+		// 	swal("Oops!", "Start and End dates required for alert", "error"); 
+		// 	hasError = true;
+		// 	$(window).scrollTop(0);
+		// 	return false;
+		// }
 		if(target_stores == null && typeof allStores === 'undefined' ) {
 			swal("Oops!", "Target stores missing", "error"); 
 			hasError = true;
@@ -85,8 +92,8 @@ $(document).on('click','.alert-create',function(){
 		  		description: description,
 		  		is_alert : is_alert,
 		  		alert_type_id : alert_type_id,
-		  		start : start,
-		  		end: end,
+		  		// start : start,
+		  		// end: end,
 		  		banner_id : banner_id,
 		  		target_stores : target_stores,
 		  		document_start : document_start,

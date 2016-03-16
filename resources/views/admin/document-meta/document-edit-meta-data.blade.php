@@ -148,10 +148,11 @@
 
                               </div>
 
+                              {{--
                               <div class="hr-line-dashed"></div>
 
-                              <div class="form-group">
-
+                               <div class="form-group">
+                                                            
                                       <label class="col-sm-2 control-label">Start &amp; End</label>
 
                                       <div class="col-sm-10">
@@ -167,7 +168,7 @@
                                               @endif
                                           </div>
                                       </div>
-                              </div>
+                              </div> --}}
                               <div class="form-group">
                                 <div class="col-sm-4 col-sm-offset-2">
                                     <a class="btn btn-white" href="/admin/urgentnotice"><i class="fa fa-close"></i> Cancel</a>
