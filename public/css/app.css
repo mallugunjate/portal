@@ -7,7 +7,7 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&lang=en");
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,300,500,700");
 
-@font-face { font-family: GalaxiePolarisCondensed-Book.; src: url('/fonts/GalaxiePolarisCondensed-Book.otf'); }
+@font-face { font-family: GalaxiePolarisCondensed-Book; src: url('/fonts/GalaxiePolarisCondensed-Book.otf'); }
 @font-face { font-family: GalaxiePolarisCondensed-Bold; font-weight: bold; src: url('/fonts/GalaxiePolarisCondensed-Bold.otf'); }
 @font-face { font-family: GalaxiePolarisCondensed-Light; font-weight: bold; src: url('/fonts/GalaxiePolarisCondensed-Light.otf'); }
 
@@ -3675,9 +3675,14 @@ code {
   border-width: 3px 0 0;
   color: inherit;
   margin-bottom: 0;
-  padding: 14px 15px 7px;
-  min-height: 48px;
+  /*padding: 14px 15px 7px;*/
+  /*padding: 4px 20px 1px;*/
+  padding: 5px 20px 3px;
+  min-height: 20px;
 }
+
+.ibox-title h2{ font-size: 18px; font-weight: 500; }
+
 .ibox-content {
 /*  background-color: #000000;*/
   background-color: #fff;
