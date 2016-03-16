@@ -283,7 +283,7 @@ class Communication extends Model
             ->where('store_id', $storeNumber)
             ->where('communications.send_at' , '<=', $now)
             ->where('communications.archive_at', '>=', $now)
-            ->whereNull('is_read')
+            // ->whereNull('is_read')
             ->count();
 
          return $communicationCount;

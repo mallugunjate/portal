@@ -44,12 +44,11 @@ class CommunicationController extends Controller
 
         $skin = Skin::getSkin($storeBanner);
 
-        $communicationCount = Communication::getActiveCommunicationCount($storeNumber); 
-        
-        $communicationTypes = CommunicationType::getCommunicationTypeCount($storeNumber);
         $urgentNoticeCount = UrgentNotice::getUrgentNoticeCount($storeNumber);
 
         $alertCount = Alert::getActiveAlertCountByStore($storeNumber);
+
+        $communicationTypes = CommunicationType::getCommunicationTypeCount($storeNumber);
 
         if (isset($request['type'])) {
             $targetedCommunications = CommunicationTarget::getTargetedCommunicationsByCategory($storeNumber, $request['type']);
@@ -60,6 +59,7 @@ class CommunicationController extends Controller
             $title = "";
         }
 
+        $communicationCount = Communication::getActiveCommunicationCount($storeNumber);         
         if (isset($request['archives']) && $request['archives']) {
 
             if(isset($request['type'])){
@@ -67,6 +67,7 @@ class CommunicationController extends Controller
                 foreach ($archivedCommunication as $ac) {
                     $targetedCommunications->add($ac);
                 }
+
             }
             else{
 
@@ -75,8 +76,12 @@ class CommunicationController extends Controller
                     $targetedCommunications->add($ac);
                 }
             }
+
         }
 
+        
+        
+        
         
 
         return view('site.communications.index')

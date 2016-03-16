@@ -8194,3 +8194,7 @@ body.md-skin {
 .onoffswitch-inner:before{
   background-color: #337ab7 
 }
+
+.communication-name{
+  color:#337ab7 !important;
+}
