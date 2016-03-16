@@ -148,12 +148,12 @@
             
             if( checked == true){
                 $("a.alert_category_link").each(function() {
-                   var _href = $(this).attr("href"); 
-                   $(this).attr("href", _href + '&archives=true');
+                   var href = $(this).attr("href"); 
+                   $(this).attr("href", href + '&archives=true');
                 });                
             } else {
                 $("a.alert_category_link").each(function() {
-                   var _href = $(this).attr("href"); 
+                   var href = $(this).attr("href"); 
                    $(this).attr('href', href.replace(/&?archives=\d+/, ''));
                 });                                 
             }
