@@ -6,7 +6,7 @@
                             {{-- <h5>Folders</h5> --}}
                             <ul class="folder-list m-b-md" style="padding: 0">
                                 <li>
-                                    <a href="/{{ Request::segment(1) }}/communication"> <i class="fa fa-inbox "></i> All Messages 
+                                    <a class="comm_category_link" href="/{{ Request::segment(1) }}/communication?"> <i class="fa fa-inbox "></i> All Messages 
                                     @if($communicationCount > 0)
                                     <span class="label label-inverse pull-right">{{ $communicationCount }}</span> 
                                     @endif
@@ -22,7 +22,7 @@
                             @foreach($communicationTypes as $c)
 
                                 @if( $c->id != "1")
-                                <li><a href="/{{ Request::segment(1) }}/communication?type={{ $c->id }}"> <span class="label label-{{ $c->colour }} pull-right">{{ $c->count }}</span> {{ $c->communication_type }}</a></li>
+                                <li><a class="comm_category_link" href="/{{ Request::segment(1) }}/communication?type={{ $c->id }}"> <span class="label label-{{ $c->colour }} pull-right">{{ $c->count }}</span> {{ $c->communication_type }}</a></li>
                                 @endif 
 
                             @endforeach

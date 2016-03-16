@@ -101,14 +101,14 @@
                             @if($communication->has_attachments == true)
                                 <i class="fa fa-paperclip"></i>
                             @endif
-                            <a href="communication/show/{{ $communication->id }}">{{ $communication->subject }}</a>
+                            <a class="comm_category_link" href="communication/show/{{ $communication->id }}?">{{ $communication->subject }}</a>
                         </td>
                     @else
                         <td class="mail-subject communication-name">
                             @if($communication->has_attachments == true)
                                 <i class="fa fa-paperclip"></i>
                             @endif
-                            <a href="communication/show/{{ $communication->id }}">{{ $communication->subject }}</a> <span class="label label-sm label-{!! $communication->label_colour !!}">{!! $communication->label_name !!}</span></td>
+                            <a class="comm_category_link" href="communication/show/{{ $communication->id }}?">{{ $communication->subject }}</a> <span class="label label-sm label-{!! $communication->label_colour !!}">{!! $communication->label_name !!}</span></td>
                     @endif
                     
                     <td class="mail-preview"><a href="communication/show/{{ $communication->id }}">{!! $communication->trunc !!}</a></td>
@@ -137,12 +137,24 @@
     <script src="/js/plugins/iCheck/icheck.min.js"></script>
  
 	<script>
-        $(document).ready(function(){
-            $('.i-checks').iCheck({
-                checkboxClass: 'icheckbox_square-green',
-                radioClass: 'iradio_square-green',
-            });
+    
+        $( document ).ready(function() {
+            var archiveCheckbox  = $('#archives');
+            var checked = archiveCheckbox.is(":checked");
+            
+            if( checked == true){
+                $("a.comm_category_link").each(function() {
+                   var href = $(this).attr("href"); 
+                   $(this).attr("href", href + '&archives=true');
+                });                
+            } else {
+                $("a.comm_category_link").each(function() {
+                   var href = $(this).attr("href"); 
+                   $(this).attr('href', href.replace(/&?archives=\d+/, ''));
+                });                                 
+            }
         });
+
     </script>
 
     @include('site.includes.modal')
