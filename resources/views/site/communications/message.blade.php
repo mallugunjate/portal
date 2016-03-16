@@ -53,53 +53,72 @@
 
                     <div class="mail-attachment">
                     <h3>
-                        <span><i class="fa fa-paperclip"></i> {{ count($communication_documents) }} Document</span>
+                        <span><i class="fa fa-paperclip"></i> {{ count($communication_documents) }} Attachments</span>
                     </h3>
-                    @foreach($communication_documents as $doc)
 
-                            <div class="file-box">
-                               <div class="file">
-                                    {!! $doc->anchor_only !!}
+                    @if(count($communication_documents) > 0)
+                        <table class="table tablesorter table-hover table-mail tablesorter-default" id="file-table" role="grid">
+                            <thead>
+                                <tr> 
+                                    <th> Title </th> 
+                                    <th> Last Updated </th> 
+                                </tr>
+                            </thead>
 
-                                        <div class="icon">
-                                            {!! $doc->icon !!}
-                                        </div>
+                            <tbody>
 
+                            @foreach($communication_documents as $doc)
+                                <tr>
+                                    <td> {!! $doc->link_with_icon !!} </td>
+                                    <td> {!! $doc->prettyDate !!} </td>
+                                </tr>
 
-                                        <div class="file-name">
-                                            <div style="font-size: 16px; padding-bottom: 10px;"> {{ $doc->title }}</div>
-                                            
-                                            <small class="clearfix"><span class="text-muted pull-left">{{ $doc->prettyDate }}</span> <span class="text-muted pull-right">{{ $doc->since }} ago</span></small>
+                            @endforeach
+                            </tbody>                                                                       
+                        </table>
+                    @endif
 
-                                        </div>
-                                    </a>
-                                
-                                </div>
-
-                            </div>                    
+                            {{--<div class="file-box">
+                                    <div class="file">
+                                        {!! $doc->anchor_only !!}
+    
+                                            <div class="icon">
+                                                {!! $doc->icon !!}
+                                            </div>
+    
+    
+                                            <div class="file-name">
+                                                <div style="font-size: 16px; padding-bottom: 10px;"> {{ $doc->title }}</div>
+                                                
+                                                <small class="clearfix"><span class="text-muted pull-left">{{ $doc->prettyDate }}</span> <span class="text-muted pull-right">{{ $doc->since }} ago</span></small>
+    
+                                            </div>
+                                        </a>
+                                    
+                                    </div>
+    
+                                </div>    --}}                
                     
-                    @endforeach
+                    
                     <div class="clearfix"></div>
                     </div>
 
-                    <div class="mail-attachment">
+                    <!-- <div class="mail-attachment">
                         <h3>
                             <span><i class="fa fa-paperclip"></i> {{ count($communication_packages) }} Packages</span>
                         </h3>
             
                         <div class="row">
                             <div class="col-lg-4 package-listing">
-                            @foreach($communication_packages as $package)
-
-                                @include('site.feature.package-listing', ['package'=>$package])
-                                
-                            @endforeach
+                            {{--@foreach($communication_packages as $package)                                                        
+                                    @include('site.feature.package-listing', ['package'=>$package])
+                                @endforeach--}}
                             </div>
 
                             <div class="col-lg-8 package-document-container">
 
 
-                                @foreach($communication_packages as $package)
+                                {{-- @foreach($communication_packages as $package)
                                     <?php $package_document_listing = $package['details']['package_documents']; ?>
                                     
                                     <div  class="package-document-listing hidden" data-packageid= {{$package->id}} >
@@ -115,12 +134,12 @@
 
                                     </div>
 
-                                @endforeach
+                                @endforeach--}}
                             </div>
                         </div>               
                     
                     <div class="clearfix"></div>
-                    </div>
+                    </div> -->
 
 
 

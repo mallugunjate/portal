@@ -35,7 +35,7 @@
                     <div class="col-md-6">
                         <h2>
                             @if($title == "")
-                                All Messages <small>({{ $communicationCount }} unread)</small>
+                                All Messages {{-- <small>({{ $communicationCount }} unread)</small> --}}
                             @else
                                 {{ $title }}
                             @endif
@@ -97,14 +97,14 @@
                     </td>
 
                     @if( $communication->communication_type_id == "1")
-                        <td class="mail-subject">
+                        <td class="mail-subject communication-name">
                             @if($communication->has_attachments == true)
                                 <i class="fa fa-paperclip"></i>
                             @endif
                             <a href="communication/show/{{ $communication->id }}">{{ $communication->subject }}</a>
                         </td>
                     @else
-                        <td class="mail-subject">
+                        <td class="mail-subject communication-name">
                             @if($communication->has_attachments == true)
                                 <i class="fa fa-paperclip"></i>
                             @endif
