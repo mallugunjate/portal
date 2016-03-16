@@ -36,9 +36,13 @@ class Alert extends Model
         $now = Carbon::now()->toDatetimeString();
 
         $alert_count = Alert::join('alerts_target', 'alerts.id' , '=', 'alerts_target.alert_id')
+                            ->join('documents', 'documents.id', '=', 'alerts.document_id')
                             ->where('store_id', $store_id)
-                            ->where('alerts.alert_start' , '<=', $now)
-                            ->where('alerts.alert_end', '>=', $now)
+                            ->where('documents.start', '<=', $now )
+                            ->where(function($query) use ($now) {
+                                $query->where('documents.end', '>=', $now)
+                                    ->orWhere('documents.end', '=', '0000-00-00 00:00:00' ); 
+                            })
                             ->count();
 
         return $alert_count;
@@ -48,13 +52,16 @@ class Alert extends Model
     {
          $now = Carbon::now()->toDatetimeString();
 
-         $count = DB::table('alerts_target')
-           ->where('store_id', $storeNumber)
-           ->join('alerts', 'alerts.id', '=', 'alerts_target.alert_id')
-           ->where('alerts.alert_type_id', $alertId)
-           ->where('alerts.alert_start' , '<=', $now)
-           ->where('alerts.alert_end', '>=', $now)
-           ->count();
+         $count = Alert::join('alerts_target', 'alerts.id' , '=', 'alerts_target.alert_id')
+                            ->join('documents', 'documents.id', '=', 'alerts.document_id')
+                            ->where('store_id', $storeNumber)
+                            ->where('alerts.alert_type_id', $alertId)
+                            ->where('documents.start', '<=', $now )
+                            ->where(function($query) use ($now) {
+                                $query->where('documents.end', '>=', $now)
+                                ->orWhere('documents.end', '=', '0000-00-00 00:00:00' ); 
+                                })
+                            ->count();
          return $count;
   
     }
@@ -67,8 +74,11 @@ class Alert extends Model
         $alerts = Alert::join('documents', 'alerts.document_id' , '=', 'documents.id')
                         ->join('alerts_target' , 'alerts_target.alert_id' , '=', 'alerts.id')
                         ->where('alerts_target.store_id', '=', $store_id)
-                        ->where('alerts.alert_start' , '<=', Carbon::now()->toDatetimeString())
-                        ->where('alerts.alert_end', '>=', Carbon::now()->toDatetimeString())
+                        ->where('documents.start', '<=', $now )
+                        ->where(function($query) use ($now) {
+                            $query->where('documents.end', '>=', $now)
+                                ->orWhere('documents.end', '=', '0000-00-00 00:00:00' ); 
+                            })
                         ->select('alerts.*')
                         ->get();
 
@@ -88,8 +98,11 @@ class Alert extends Model
                         ->join('alerts_target' , 'alerts_target.alert_id' , '=', 'alerts.id')
                         ->join('alert_types', 'alert_types.id', '=', 'alerts.alert_type_id')
                         ->where('alerts_target.store_id', '=', $store_id)
-                        ->where('alerts.alert_start' , '<=', Carbon::now()->toDatetimeString())
-                        ->where('alerts.alert_end', '>=', Carbon::now()->toDatetimeString())
+                        ->where('documents.start', '<=', $now )
+                        ->where(function($query) use ($now) {
+                            $query->where('documents.end', '>=', $now)
+                                ->orWhere('documents.end', '=', '0000-00-00 00:00:00' ); 
+                        })
                         ->where('alert_type_id' , $alert_type)
                         ->select('alerts.*')
                         ->get();
@@ -108,8 +121,8 @@ class Alert extends Model
         $alerts = Alert::join('documents', 'alerts.document_id', '=', 'documents.id')
                         ->join('alerts_target', 'alerts.id', '=', 'alerts_target.alert_id')
                         ->where('alerts_target.store_id', '=', $store_id)
-                        ->where('alerts.alert_end', '<=', Carbon::now()->toDatetimeString())
-                        ->where('alerts.alert_end', '!=', '0000-00-00 00:00:00')
+                        ->where('documents.end', '<=', $now)
+                        ->where('documents.end', '!=', '0000-00-00 00:00:00')
                         ->select('alerts.*')
                         ->get();
 
@@ -126,12 +139,13 @@ class Alert extends Model
 
     public static function  getArchivedAlertsByCategory($alert_type, $store_id) {
         
+        $now = Carbon::now()->toDatetimeString();
         $alerts = Alert::join('documents', 'alerts.document_id' , '=', 'documents.id')
                         ->join('alerts_target' , 'alerts_target.alert_id' , '=', 'alerts.id')
                         ->join('alert_types', 'alert_types.id', '=', 'alerts.alert_type_id')
                         ->where('alerts_target.store_id', '=', $store_id)
-                        ->where('alerts.alert_end', '<=', Carbon::now()->toDatetimeString())
-                        ->where('alerts.alert_end', '!=', '0000-00-00 00:00:00')
+                        ->where('documents.end', '<=', $now)
+                        ->where('documents.end', '!=', '0000-00-00 00:00:00')
                         ->where('alert_type_id' , $alert_type)
                         ->select('alerts.*')
                         ->get();
@@ -187,8 +201,8 @@ class Alert extends Model
             $alert = Alert::where('document_id', $id)->first();
 
             $alert['alert_type_id'] = $request['alert_type_id'];
-            $alert['alert_start']   = $request['start'];
-            $alert['alert_end']     = $request['end'];
+            // $alert['alert_start']   = $request['start'];
+            // $alert['alert_end']     = $request['end'];
 
             $alert->save();
 
@@ -212,8 +226,8 @@ class Alert extends Model
 
             'document_id'   => $id,
             'alert_type_id' => $request['alert_type_id'],
-            'alert_start'   => $request['start'],
-            'alert_end'     => $request['end'],
+            // 'alert_start'   => $request['start'],
+            // 'alert_end'     => $request['end'],
             'banner_id'     => $request['banner_id']
             ]);
 
