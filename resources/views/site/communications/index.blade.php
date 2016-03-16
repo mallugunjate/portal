@@ -137,12 +137,24 @@
     <script src="/js/plugins/iCheck/icheck.min.js"></script>
  
 	<script>
-        $(document).ready(function(){
-            $('.i-checks').iCheck({
-                checkboxClass: 'icheckbox_square-green',
-                radioClass: 'iradio_square-green',
-            });
+    
+        $( document ).ready(function() {
+            var archiveCheckbox  = $('#archives');
+            var checked = archiveCheckbox.is(":checked");
+            
+            if( checked == true){
+                $("a.comm_category_link").each(function() {
+                   var href = $(this).attr("href"); 
+                   $(this).attr("href", href + '&archives=true');
+                });                
+            } else {
+                $("a.comm_category_link").each(function() {
+                   var href = $(this).attr("href"); 
+                   $(this).attr('href', href.replace(/&?archives=\d+/, ''));
+                });                                 
+            }
         });
+
     </script>
 
     @include('site.includes.modal')
