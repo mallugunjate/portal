@@ -6,7 +6,7 @@
                             {{-- <h5>Folders</h5> --}}
                             <ul class="folder-list m-b-md" style="padding: 0">
                                 <li>
-                                    <a href="/{{ Request::segment(1) }}/alerts"> <i class="fa fa-bell "></i> All Alerts 
+                                    <a class="alert_category_link" href="/{{ Request::segment(1) }}/alerts?"> <i class="fa fa-bell "></i> All Alerts 
                                     @if($alertCount > 0)
                                     <span class="label label-inverse pull-right">{{ $alertCount }}</span> 
                                     @endif
@@ -18,7 +18,7 @@
                             <ul class="category-list" style="padding: 0">
                             @foreach($alertTypes as $at)
 
-                                <li><a href="/{{ Request::segment(1) }}/alerts?type={{ $at->id }}"> <span class="label label pull-right">{{ $at->count }}</span> {{ $at->name }}</a></li>
+                                <li><a class="alert_category_link" href="/{{ Request::segment(1) }}/alerts?type={{ $at->id }}"> <span class="label label pull-right">{{ $at->count }}</span> {{ $at->name }}</a></li>
                                
                             @endforeach
                             </ul>

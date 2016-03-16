@@ -140,6 +140,27 @@
         });
     </script>
 
+    <script type="text/javascript">
+        
+        $( document ).ready(function() {
+            var archiveCheckbox  = $('#archives');
+            var checked = archiveCheckbox.is(":checked");
+            
+            if( checked == true){
+                $("a.alert_category_link").each(function() {
+                   var _href = $(this).attr("href"); 
+                   $(this).attr("href", _href + '&archives=true');
+                });                
+            } else {
+                $("a.alert_category_link").each(function() {
+                   var _href = $(this).attr("href"); 
+                   $(this).attr('href', href.replace(/&?archives=\d+/, ''));
+                });                                 
+            }
+        });
+
+    </script>
+
     @include('site.includes.modal')
 
 </body>
