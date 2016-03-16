@@ -45,6 +45,11 @@ class AlertController extends Controller
 
         $alerts = Alert::getActiveAlertsByStore($storeNumber);
 
+
+        foreach($alertTypes as $at){
+            $at->count = Alert::getActiveAlertCountByCategory($storeNumber, $at->id);
+        }  
+
         $title ="";
         if(isset($request['type'])){
             $alerts = Alert::getActiveAlertsByCategory($request['type'], $storeNumber);
@@ -55,6 +60,13 @@ class AlertController extends Controller
         }
 
         if (isset($request['archives']) && $request['archives']) {
+
+            $alertCount = Alert::getAllAlertCountByStore($storeNumber);
+
+            foreach($alertTypes as $at){
+                $at->count = Alert::getAllAlertCountByCategory($storeNumber, $at->id);
+            }  
+            
             if(isset($request['type'])){
                 $archivedAlerts = Alert::getArchivedAlertsByCategory($request['type'], $storeNumber);
                 foreach ($archivedAlerts as $aa) {
@@ -71,9 +83,7 @@ class AlertController extends Controller
         }
 
         
-        foreach($alertTypes as $at){
-            $at->count = Alert::getActiveAlertCountByCategory($storeNumber, $at->id);
-        }   
+ 
 
         return view('site.alerts.index')
             ->with('skin', $skin)
