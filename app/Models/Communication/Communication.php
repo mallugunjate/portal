@@ -62,6 +62,9 @@ class Communication extends Model
             $c->prettyDate = Utility::prettifyDate($c->updated_at);
             $preview_string = strip_tags($c->body);
             $c->trunc = Communication::truncateHtml($preview_string);
+            $c->label_name = Communication::getCommunicationCategoryName($c->communication_type_id);
+            $c->label_colour = Communication::getCommunicationCategoryColour($c->communication_type_id);
+            $c->has_attachments = Communication::hasAttachments($c->id);
          }
          return $comm;               
       }
@@ -83,6 +86,9 @@ class Communication extends Model
             $c->prettyDate = Utility::prettifyDate($c->updated_at);
             $preview_string = strip_tags($c->body);
             $c->trunc = Communication::truncateHtml($preview_string);
+            $c->label_name = Communication::getCommunicationCategoryName($c->communication_type_id);
+            $c->label_colour = Communication::getCommunicationCategoryColour($c->communication_type_id);
+            $c->has_attachments = Communication::hasAttachments($c->id);
          }
          return $comm;               
       }
