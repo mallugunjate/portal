@@ -188,7 +188,7 @@ class CommunicationController extends Controller
             ->with('communicationTypes', $communicationTypes)
             ->with('communicationCount', $communicationCount)
             ->with('communication', $communication)
-             ->with('communication_documents', $selected_documents)
+            ->with('communication_documents', $selected_documents)
             ->with('communication_packages', $selected_packages)
             ->with('urgentNoticeCount', $urgentNoticeCount);
         
