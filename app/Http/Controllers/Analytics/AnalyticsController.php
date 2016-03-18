@@ -37,7 +37,7 @@ class AnalyticsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Analytics::store($request);
     }
 
     /**
