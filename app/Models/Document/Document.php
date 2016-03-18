@@ -13,6 +13,7 @@ use App\Models\UserSelectedBanner;
 use DB;
 use App\Models\Alert\Alert;
 use App\Models\Utility\Utility;
+use App\Models\Dashboard\Quicklinks;
 
 class Document extends Model
 {
@@ -178,6 +179,12 @@ class Document extends Model
         $document = Document::find($id);
         unlink(public_path('files/'.$document->filename));
         $document->delete();
+
+        $quicklink = Quicklinks::where('url', $id)->where('type', 2)->first();
+        if ($quicklink) {
+            $quicklink->delete();
+        }
+
         return;
     }
 

@@ -12,6 +12,7 @@ use App\Models\Tag\ContentTag;
 use Carbon\Carbon;
 use App\Models\UserSelectedBanner;
 use DB;
+use App\Models\Dashboard\Quicklinks;
 
 
 class Folder extends Model
@@ -100,6 +101,11 @@ class Folder extends Model
         $folder = Folder::find($folder_id)->delete();  
 
         \DB::table('folder_ids')->where('folder_id', $folder_id)->where('folder_type', 'folder')->delete();
+
+        $quicklink = Quicklinks::where('url', $id)->where('type', 1)->first();
+        if ($quicklink) {
+            $quicklink->delete();
+        }
 
         return;
         
