@@ -15,7 +15,7 @@
         <div class="form-group">                                
             <label>Subfolder name <span class="req">*</span></label>
             
-            <input type="text" name="name"  class="form-control">
+            <input type="text" name="name" id="foldername" class="form-control" autofocus>
         </div>
 
 
