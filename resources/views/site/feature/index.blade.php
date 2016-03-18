@@ -6,6 +6,7 @@
     <link href="/css/plugins/iCheck/custom.css" rel="stylesheet">
     
     @include('site.includes.head')
+    <link rel="stylesheet" type="text/css" href="/css/custom/tree.css">
     <link rel="stylesheet" type="text/css" href="/css/custom/site/feature.css">
     <style>
     #page-wrapper{

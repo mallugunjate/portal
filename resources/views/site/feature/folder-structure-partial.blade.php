@@ -1,6 +1,6 @@
 @if(count($folder["children"]) >0 )
 	
-	<li id={{$folder["global_folder_id"]}} class="parent-folder folder branch folder-item">
+	<li id={{$folder["global_folder_id"]}} class="parent-folder folder folder-item">
 		{{$folder["label"]}} 
 	<ul>
 	@foreach ($folder["children"] as $child)
@@ -12,11 +12,11 @@
 	</li>
 
 @elseif ( isset($folder["weeks"]) && count($folder["weeks"] > 0) )
-	<li id={{$folder["global_folder_id"]}} class="parent-folder folder branch folder-item">
+	<li id={{$folder["global_folder_id"]}} class="parent-folder folder folder-item">
 		{{$folder["label"]}} 
 		<ul>
 			@foreach ($folder["weeks"]  as $week )
-			<li class="folder parent-folder folder branch" id = {{$week["global_id"]}}  data-isWeek = true>
+			<li class="folder parent-folder folder" id = {{$week["global_id"]}}  data-isWeek = true>
 				{{ "Week " . $week["week"] }}
 			</li>
 			@endforeach
@@ -25,7 +25,7 @@
 	
 
 @else
-	<li class="parent-folder folder branch folder-item" id={{$folder["global_folder_id"]}} data-isWeek = false>
+	<li class="parent-folder folder folder-item" id={{$folder["global_folder_id"]}} data-isWeek = false>
 		{{ $folder["label"] }}
 		<ul>
 		</ul>
