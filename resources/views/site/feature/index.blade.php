@@ -108,6 +108,7 @@
                                                             <div class="package-name" data-packageid= {{$package->id}}><h3> <i class="fa fa-folder-open-o"></i> {{$package->package_screen_name}} </h3></div>
                                                             <div class="col-md-12">
                                                             <table class="table tablesorter tablesorter-default">
+                                                            @if(count($package_document_listing)>0)    
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Title</th>
@@ -115,6 +116,7 @@
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
+                                                            @endif
                                                             @foreach ($package_document_listing as $document)
                                                             
                                                             
