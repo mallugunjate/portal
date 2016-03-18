@@ -108,10 +108,13 @@
                                                             <div class="package-name" data-packageid= {{$package->id}}><h3> <i class="fa fa-folder-open-o"></i> {{$package->package_screen_name}} </h3></div>
                                                             <div class="col-md-12">
                                                             <table class="table tablesorter tablesorter-default">
-                                                                <tr>
-                                                                    <th>Title</th>
-                                                                    <th>Added</th>
-                                                                </tr>
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Title</th>
+                                                                        <th>Added</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
                                                             @foreach ($package_document_listing as $document)
                                                             
                                                             
@@ -122,6 +125,7 @@
                                                             
                                                                
                                                             @endforeach
+                                                            </tbody>
                                                             </table>
                                                             </div>
                                                         </div>

@@ -69,17 +69,18 @@ var getFolderDocuments = function(global_folder_id, packageId) {
 		$(".package-folder-documents[data-packageid= " + packageId + "]").find('table').empty();
 		
 		if(data.files.length > 0 ) {
-			$(".package-folder-documents[data-packageid= " + packageId + "]").find('table').append("<tr>"+
+			$(".package-folder-documents[data-packageid= " + packageId + "]").find('table').append("<thead><tr>"+
 																									"<th> Title </th>"+
 																									"<th> Added </th>"+
-																								"</tr>" );
-
+																								"</tr></thead>" );
+			$(".package-folder-documents[data-packageid= " + packageId + "]").find('table').append("<tbody>");
 			_.each(data.files, function(i){
 				$(".package-folder-documents[data-packageid= " + packageId + "]").find('.table').append("<tr>"+
 																											"<td><div>" + i.link_with_icon + "</div></td>"+
 																											"<td>" + i.prettyDateStart + "</td>"+
 																										"</tr>" );
 			});
+			$(".package-folder-documents[data-packageid= " + packageId + "]").find('table').append("</tbody>");
 		}
 
 		
