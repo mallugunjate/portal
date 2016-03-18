@@ -2,21 +2,35 @@ $(".feature_package").on('click', function(){
 
 	var packageId = $(this).attr('data-packageId');
 
-	$(this).find('.package-name').attr('data-package-open','true');
+	var packageOpen = $(this).find('.package-name').attr('data-package-open');
 	
-	//close all other trees
-	$('.tree').find('li').find('i').removeClass('fa-folder-open').addClass('fa-folder')
+	console.log(packageOpen);
+	if(packageOpen == 'false') {
 	
+		$(this).find('.package-name').attr('data-package-open', 'true');
+		//close all other trees
+		$('.tree').find('li').find('i').removeClass('fa-folder-open').addClass('fa-folder')
+		
 
-	$(".package-name").find('i').removeClass('fa-folder-open').addClass('fa-folder');
-	$(this).find(".package-name").find('i').removeClass('fa-folder').addClass('fa-folder-open');
+		$(".package-name").find('i').removeClass('fa-folder-open').addClass('fa-folder');
+		$(this).find(".package-name").find('i').removeClass('fa-folder').addClass('fa-folder-open');
 
-	//empty folder-documents from earlier
-	$(".package-folder-document-listing").find(".folder-name").find("h3").empty();
-	$(".package-folder-documents").find('table').empty();
+		//empty folder-documents from earlier
+		$(".package-folder-document-listing").find(".folder-name").find("h3").empty();
+		$(".package-folder-documents").find('table').empty();
 
-	showPackageDocuments(packageId);
-	showPackageFolders(packageId);	
+		showPackageDocuments(packageId);
+		showPackageFolders(packageId);	
+
+	}
+	else{
+		console.log('here');
+		$(this).find('.package-name').attr('data-package-open', 'false');
+		$(this).find(".package-name").find('i').removeClass('fa-folder-open').addClass('fa-folder');
+		$(".single-package-document-container[data-packageid = " + packageId+"]").removeClass('visible').addClass('hidden');
+		$(".package-folder-listing[data-packageid = " + packageId+ "]").removeClass('visible').addClass('hidden');
+
+	}	
 	
 
 });
@@ -55,17 +69,18 @@ var getFolderDocuments = function(global_folder_id, packageId) {
 		$(".package-folder-documents[data-packageid= " + packageId + "]").find('table').empty();
 		
 		if(data.files.length > 0 ) {
-			$(".package-folder-documents[data-packageid= " + packageId + "]").find('table').append("<tr>"+
+			$(".package-folder-documents[data-packageid= " + packageId + "]").find('table').append("<thead><tr>"+
 																									"<th> Title </th>"+
 																									"<th> Added </th>"+
-																								"</tr>" );
-
+																								"</tr></thead>" );
+			$(".package-folder-documents[data-packageid= " + packageId + "]").find('table').append("<tbody>");
 			_.each(data.files, function(i){
 				$(".package-folder-documents[data-packageid= " + packageId + "]").find('.table').append("<tr>"+
 																											"<td><div>" + i.link_with_icon + "</div></td>"+
 																											"<td>" + i.prettyDateStart + "</td>"+
 																										"</tr>" );
 			});
+			$(".package-folder-documents[data-packageid= " + packageId + "]").find('table').append("</tbody>");
 		}
 
 		
