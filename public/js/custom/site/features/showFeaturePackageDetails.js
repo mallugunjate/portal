@@ -7,6 +7,7 @@ $(".feature_package").on('click', function(){
 	console.log(packageOpen);
 	if(packageOpen == 'false') {
 	
+		$(".feature_package").find('.package-name').attr('data-package-open', 'false');
 		$(this).find('.package-name').attr('data-package-open', 'true');
 		//close all other trees
 		$('.tree').find('li').find('i').removeClass('fa-folder-open').addClass('fa-folder')
