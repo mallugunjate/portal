@@ -10,7 +10,7 @@
 
 </head>
 
-<body class="fixed-navigation">
+<body class="fixed-navigation adminview">
     <div id="wrapper">
 	    <nav class="navbar-default navbar-static-side" role="navigation">
 	        <div class="sidebar-collapse">

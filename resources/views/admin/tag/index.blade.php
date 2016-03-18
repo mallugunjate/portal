@@ -3,7 +3,7 @@
 	<title></title>
 	<link rel="stylesheet" href="/css/bootstrap.min.css">
 </head>
-<body class="container-fluid">
+<body class="container-fluid adminview">
 	<!-- navbar begins -->
 	<nav class="navbar navbar-default">
 		@include('admin.banner' , ['banner' =>$banner->id])    

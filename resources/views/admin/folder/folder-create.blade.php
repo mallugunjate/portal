@@ -8,7 +8,7 @@
         <script src="/js/bootstrap.min.js"></script>
 
    </head>
-   <body>
+   <body class="adminview">
         <!-- navbar begins -->
         <nav class="navbar navbar-default">
             <div class="container-fluid">

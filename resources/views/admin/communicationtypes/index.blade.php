@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     @section('title', 'Communication Types')
@@ -8,7 +8,7 @@
 	<meta name="csrf-token" content="{!! csrf_token() !!}"/>
 </head>
 
-<body class="fixed-navigation">
+<body class="fixed-navigation adminview">
     <div id="wrapper">
 	    <nav class="navbar-default navbar-static-side" role="navigation">
 	        <div class="sidebar-collapse">

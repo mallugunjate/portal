@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{!! csrf_token() !!}"/>
 </head>
 
-<body class="fixed-navigation" onload="checkDeepLink()">
+<body class="fixed-navigation adminview" onload="checkDeepLink()">
     <div id="wrapper">
     <nav class="navbar-default navbar-static-side" role="navigation">
         <div class="sidebar-collapse">

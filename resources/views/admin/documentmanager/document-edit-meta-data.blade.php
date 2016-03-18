@@ -6,7 +6,7 @@
   <link rel="stylesheet" type="text/css" href="/css/plugins/chosen/chosen.css">
 
 </head>
-<body>
+<body class="adminview">
     <!-- navbar begins -->
   <nav class="navbar navbar-default">
     @include('admin.banner', ['banners'=>$banners])

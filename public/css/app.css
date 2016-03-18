@@ -3683,6 +3683,17 @@ code {
 
 .ibox-title h2{ font-size: 18px; font-weight: 500; }
 
+body.adminview .ibox-title{
+    padding: 14px 15px 7px !important;
+      min-height: 60px;
+} 
+
+body.adminview .ibox-title h5{
+  padding: 4px 0px 0px 10px;
+  font-size: 24px;
+  font-weight: 100;
+}
+
 .ibox-content {
 /*  background-color: #000000;*/
   background-color: #fff;

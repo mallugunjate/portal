@@ -26,7 +26,7 @@
     </style>
 </head>
 
-<body>
+<body class="adminview">
      <!-- navbar begins -->
       <nav class="navbar navbar-default">
         @include('admin.banner', ['banners'=>$banners])

@@ -12,7 +12,7 @@
   <link rel="stylesheet" type="text/css" href="/css/custom/package.css">
 
 </head>
-<body class="container-fluid">
+<body class="container-fluid adminview">
   <!-- navbar begins -->
   <nav class="navbar navbar-default">
     @include('admin.banner', ['banners'=>$banners])
