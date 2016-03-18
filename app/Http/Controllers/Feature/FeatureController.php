@@ -94,7 +94,7 @@ class FeatureController extends Controller
             array_push($selected_documents, $doc );
         }
         
-        $feature_packages = FeaturePackage::where('feature_id', $id)->get()->pluck('package_id');
+        $feature_packages = FeaturePackage::where('feature_id', $id)->orderBy('order')->get()->pluck('package_id');
         $selected_packages = [];
         foreach ($feature_packages as $package_id) {
             $package = Package::find($package_id);
