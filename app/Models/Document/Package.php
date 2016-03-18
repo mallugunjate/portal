@@ -17,21 +17,16 @@ class Package extends Model
     protected $fillable = ['id', 'package_screen_name', 'package_name', 'is_hidden', 'start', 'end', 'banner_id'];
 
     public static function storePackage(Request $request)
-    {
+    {   
+        \Log::info( $request->all() );
         $documents = $request["package_files"];
     	$folders = $request["package_folders"];
-        $package_screen_name = $request["name"];
-    	$package_name = preg_replace('/\s+/', '_' , $package_screen_name);
-    	$timestamp = sha1(time()*time());
-    	$package_name .= "_".$timestamp ;
+        $package_screen_name = $request["title"];
+    	// $package_name = preg_replace('/\s+/', '_' , $package_screen_name);
+        $package_name = $request["name"];
+    	// $timestamp = sha1(time()*time());
+    	// $package_name .= "_".$timestamp ;
     	
-    	// $start = strtotime($request["start"]);
-        // $end = strtotime($request["end"]);
-
-        // $is_hidden = $request["is_hidden"];
-        // if (!isset($is_hidden)) {
-        //     $is_hidden = 0;
-        // }
         $banner = UserSelectedBanner::getBanner();
 
     	$package = Package::create([
@@ -117,18 +112,9 @@ class Package extends Model
     {
         // dd($request->all());
         $package = Package::find($id);
-        $package["package_screen_name"] = $request["name"];
-
-        // $package["start"] = strtotime($request["start"]);
-        // $package["end"] = strtotime($request["end"]);
+        $package["package_screen_name"] = $request["title"];
+        $package["package_name"] = $request["name"];
         
-        // $is_hidden = $request["is_hidden"];
-        // if (isset($is_hidden)) {
-        //     $package["is_hidden"] = $is_hidden;
-        // }
-        // else{
-        //     $package["is_hidden"] = 0;
-        // }
         $package->save();
 
         $remove_documents = $request["remove_document"];    

@@ -56,8 +56,9 @@ $('#attach-selected-folders').on('click', function(){
 $(document).on('click','.package-create',function(){
   	
   	var hasError = false;
- 
-	var packageTitle = $("#name").val();
+ 	
+ 	var packageName = $("#name").val();
+	var packageTitle = $("#label").val();
 	var package_files = [];
 	var package_folders = [];
 	$(".selected-files").each(function(){
@@ -76,13 +77,16 @@ $(document).on('click','.package-create',function(){
 	}
 	console.log(package_files);
 	console.log(package_folders);
+	console.log(packageTitle);
+	console.log(packageName);
     if(hasError == false) {
 
 		$.ajax({
 		    url: '/admin/package',
 		    type: 'POST',
 		    data: {
-		  		name: packageTitle,
+		  		name:packageName,
+		  		title: packageTitle,
 		  		package_files: package_files,
 		  		package_folders: package_folders
 		    },

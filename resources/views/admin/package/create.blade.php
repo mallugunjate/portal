@@ -67,8 +67,12 @@
                                     <form method="get" class="form-horizontal" id="createNewPackageForm">
                                         
                                         <input type="hidden" name="banner_id" value="{{$banner->id}}">
-                                        <div class="form-group"><label class="col-sm-2 control-label">Name</label>
+                                         <div class="form-group"><label class="col-sm-2 control-label">Name</label>
                                             <div class="col-sm-10"><input type="text" id="name" name="name" class="form-control" value=""></div>
+                                        </div>
+
+                                        <div class="form-group"><label class="col-sm-2 control-label">Label</label>
+                                            <div class="col-sm-10"><input type="text" id="label" name="label" class="form-control" value=""></div>
                                         </div>
 
                                         <div class="hr-line-dashed"></div>

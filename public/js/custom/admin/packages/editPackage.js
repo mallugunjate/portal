@@ -111,7 +111,8 @@ $(".package-update").on('click', function(){
 	console.log("update received");
 	var hasError = false;
  
-	var packageTitle = $("#name").val();
+	var packageName = $("#name").val();
+	var packageTitle = $("#label").val();
 	var packageID = $("#packageID").val();
 	var package_files = [];
 	var package_folders = [];
@@ -139,8 +140,8 @@ $(".package-update").on('click', function(){
 		return false;
 	}
 
-	// console.log('remove_folder');
-	// console.log(remove_folder);
+	console.log(packageTitle);
+	console.log(packageName);
 
     if(hasError == false) {
 
@@ -148,7 +149,8 @@ $(".package-update").on('click', function(){
 		    url: '/admin/package/' + packageID ,
 		    type: 'PATCH',
 		    data: {
-		  		name: packageTitle,
+		  		title: packageTitle,
+		  		name: packageName,
 		  		package_files: package_files,
 		  		package_folders: package_folders,
 		  		remove_document : remove_document,
@@ -158,7 +160,7 @@ $(".package-update").on('click', function(){
 		    success: function(result) {
 		        console.log(result);
 		        //$('#createNewPackageForm')[0].reset(); // empty the form
-				swal("Nice!", "'" + packageTitle +"' has been updated", "success");        
+				swal("Nice!", "'" + packageName +"' has been updated", "success");        
 		    }
 		}).done(function(response){
 			console.log(response);
