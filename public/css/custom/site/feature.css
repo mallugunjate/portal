@@ -13,4 +13,7 @@
 .feature_package li{
 	list-style:none;
 }
+.tree li {
 
+	color: #676a6c;
+}
