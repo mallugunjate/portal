@@ -16,6 +16,7 @@ return array(
     'CreateAlertTypesTable' => $baseDir . '/database/migrations/2016_02_11_205551_create_alert_types_table.php',
     'CreateAlertsTable' => $baseDir . '/database/migrations/2016_02_11_205607_create_alerts_table.php',
     'CreateAlertsTargetTable' => $baseDir . '/database/migrations/2016_02_11_205948_create_alerts_target_table.php',
+    'CreateAnalyticsTable' => $baseDir . '/database/migrations/2016_03_18_151227_create_analytics_table.php',
     'CreateBannerUserPivotTable' => $baseDir . '/database/migrations/2015_12_16_200336_create_banner_user_pivot_table.php',
     'CreateBannersTable' => $baseDir . '/database/migrations/2015_09_30_213442_create-banners-table.php',
     'CreateBugReportTable' => $baseDir . '/database/migrations/2016_03_09_212129_CreateBugReportTable.php',
