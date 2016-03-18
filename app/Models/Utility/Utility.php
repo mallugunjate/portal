@@ -140,7 +140,7 @@ class Utility extends Model
 		switch($class){
 
 			case "launchImageViewer":
-				$link = "<a href=''>".$icon.$anchortext."</a>";
+				$link = '<a href="" onClick="trackEvent();">'.$icon.$anchortext.'</a>';
 				$anchorOnly = "<a href=''>";	
 				break;
 
@@ -150,17 +150,17 @@ class Utility extends Model
 				break;
 
 			case "launchVideoViewer":
-				$link = '<a href="#" class="launchVideoViewer" data-file="'.$file.'" data-target="#videomodal">'.$icon.$anchortext.'</a>';
+				$link = '<a href="#" class="launchVideoViewer" data-resource-id="999" data-file="'.$file.'" data-target="#videomodal">'.$icon.$anchortext.'</a>';
 				$anchorOnly = '<a href="#" class="launchVideoViewer" data-file="'.$file.'" data-target="#videomodal">';
 				break;
 
 			case "download":
-				$link = '<a href="/files/'.$file.'" class="" data-file="'.$file.'" data-target="#">'.$icon.$anchortext.'</a>';
+				$link = '<a href="/files/'.$file.'" class="" data-file="'.$file.'" data-target="#" onClick="trackEvent();">'.$icon.$anchortext.'</a>';
 				$anchorOnly = '<a href="/files/'.$file.'" class="" data-file="'.$file.'" data-target="#">';
 				break;
 
 			case "newwindow":
-				$link = '<a href="/files/'.$file.'" target="_blank">'.$icon.$anchortext.'</a>';
+				$link = '<a href="/files/'.$file.'" target="_blank" onClick="trackEvent();>'.$icon.$anchortext.'</a>';
 				$anchorOnly = '<a href="/files/'.$file.'" target="_blank">';
 				break;	
 

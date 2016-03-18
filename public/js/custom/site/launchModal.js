@@ -1,6 +1,8 @@
 $("body").on("click", ".launchPDFViewer", function(e){
 	var filepath = $(this).attr("data-file");
 	$("#fileviewmodal").find('iframe').attr("src", filepath);
+
+	trackEvent();
 });
 
 $("body").on("click", ".launchVideoViewer", function(e){
@@ -9,6 +11,8 @@ $("body").on("click", ".launchVideoViewer", function(e){
 	$('#videomodal').modal('show');
 
 	$("#videomodal").find('iframe').css({backgroundColor: 'transparent'});
+
+	trackEvent( $(this) );
 });
 
 $('body').on('hidden.bs.modal', function () {
