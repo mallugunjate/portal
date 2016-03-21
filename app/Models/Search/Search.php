@@ -8,6 +8,7 @@ use App\Models\Document\Folder;
 use App\Models\Communication\Communication;
 use App\Models\Utility\Utility;
 use Carbon\Carbon;
+use Log;
 
 class Search extends Model
 {
@@ -17,7 +18,11 @@ class Search extends Model
     	
     	$query_terms = explode( ' ', $query);
     	
-    	$today = Carbon::now()->toDateString();
+    	//$today = Carbon::now()->toDateString();
+        $today = Carbon::now();
+        \Log::info( $today );
+        \Log::info( $query );
+
     	foreach ($query_terms as $term) {
     		$docs = $docs->merge(
     					//Document::where('original_filename', 'LIKE', '%'.$term.'%')
@@ -45,6 +50,7 @@ class Search extends Model
 
             $doc->folder_name = $folder_info->name;
             $doc->global_folder_id = $folder_info->global_folder_id;
+
             // $doc->folderPath = Document::getFolderPathForDocument($doc->id);
         }
 
@@ -57,7 +63,8 @@ class Search extends Model
         
         $query_terms = explode( ' ', $query);
         
-        $today = Carbon::now()->toDateString();
+        // $today = Carbon::now()->toDateString();
+        $today = Carbon::now();
         foreach ($query_terms as $term) {
             $docs = $docs->merge(
                         Document::where('original_filename', 'LIKE', '%'.$term.'%')
@@ -131,7 +138,8 @@ class Search extends Model
     	
     	$query_terms = explode( ' ', $query);
     	
-    	$today = Carbon::now()->toDateString();
+    	//$today = Carbon::now()->toDateString();
+        $today = Carbon::now();
     	foreach ($query_terms as $term) {
     		$communications = $communications->merge(
     							Communication::join('communications_target', 'communications_target.communication_id', '=', 'communications.id')
@@ -167,7 +175,8 @@ class Search extends Model
         
         $query_terms = explode( ' ', $query);
         
-        $today = Carbon::now()->toDateString();
+        //$today = Carbon::now()->toDateString();
+        $today = Carbon::now();
         foreach ($query_terms as $term) {
             $communications = $communications->merge(
                                 Communication::join('communications_target', 'communications_target.communication_id', '=', 'communications.id')
@@ -199,8 +208,8 @@ class Search extends Model
     	
     	$query_terms = explode( ' ', $query);
     	
-    	$today = Carbon::now()->toDateString();
-    	
+    	//$today = Carbon::now()->toDateString();
+    	$today = Carbon::now();
     	foreach ($query_terms as $term) {
     		$alerts = $alerts->merge(
     							Document::join('alerts', 'documents.id', '=', 'alerts.document_id')
@@ -237,8 +246,8 @@ class Search extends Model
         
         $query_terms = explode( ' ', $query);
         
-        $today = Carbon::now()->toDateString();
-        
+        //$today = Carbon::now()->toDateString();
+        $today = Carbon::now();
         foreach ($query_terms as $term) {
             $alerts = $alerts->merge(
                                 Document::join('alerts', 'documents.id', '=', 'alerts.document_id')
