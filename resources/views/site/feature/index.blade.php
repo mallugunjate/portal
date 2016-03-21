@@ -51,6 +51,7 @@
 
                 <div class="row">
                     <div class="col-lg-8">
+                    @if(count($feature_documents) > 0) 
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
                                 <h2>Featured Documents</h2>
@@ -78,7 +79,7 @@
                                 </table>
                             </div>
                         </div>
-                        
+                        @endif
 
                         <div class="row">
                             <div class="col-lg-12">
