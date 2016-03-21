@@ -1,4 +1,4 @@
-function trackEvent( t )
+function trackEvent( t, store)
 {
 
 	// $.ajax({
@@ -22,7 +22,7 @@ function trackEvent( t )
 	// }); 
 
 	//});	
-	console.log('%c tracked the click!' + t.attr('data-resource-id') + ' ', 'background: #222; color: #bada55');
+	console.log('%c tracked the click! ' + t.attr('data-resource-id') + ', ' + store +' ', 'background: #222; color: #bada55');
 	//console.log('%c tracked the click!', 'background: #222; color: #bada55');
 	console.log(t);
 }

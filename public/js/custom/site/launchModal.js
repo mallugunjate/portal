@@ -2,7 +2,7 @@ $("body").on("click", ".launchPDFViewer", function(e){
 	var filepath = $(this).attr("data-file");
 	$("#fileviewmodal").find('iframe').attr("src", filepath);
 
-	trackEvent();
+	//trackEvent();
 });
 
 $("body").on("click", ".launchVideoViewer", function(e){
@@ -12,7 +12,7 @@ $("body").on("click", ".launchVideoViewer", function(e){
 
 	$("#videomodal").find('iframe').css({backgroundColor: 'transparent'});
 
-	trackEvent( $(this) );
+	trackEvent( $(this), localStorage.getItem('userStoreNumber') );
 });
 
 $('body').on('hidden.bs.modal', function () {
