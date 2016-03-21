@@ -69,7 +69,7 @@
 
 
 											<td>{{ $package->id }}</td>
-											<td><a href="/admin/package/{{ $package->id }}/edit">{{ $package->package_screen_name }}</a></td>
+											<td><a href="/admin/package/{{ $package->id }}/edit">{{ $package->package_name }}</a></td>
 											
 											<td>
 

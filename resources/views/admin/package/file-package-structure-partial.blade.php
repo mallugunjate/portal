@@ -1,6 +1,6 @@
 @foreach($packages as $package)
 	<div>
-	<input type="checkbox" name="packages[]" value={{$package["id"]}} class="package" data-package-name ="{{$package["package_screen_name"]}} "> {{$package["package_screen_name"]}} 
+	<input type="checkbox" name="packages[]" value={{$package["id"]}} class="package" data-package-name ="{{$package['package_name']}} "> {{$package["package_name"]}} 
 	</div>
 	{{-- @foreach ($package["documents"] as $doc)
 	<ul>

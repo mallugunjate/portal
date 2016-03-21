@@ -49,7 +49,7 @@
 		                <div class="col-lg-12">
 		                    <div class="ibox">
 		                        <div class="ibox-title">
-		                            <h5>Edit Package: {{ $package->package_screen_name }}</h5>
+		                            <h5>Edit Package: {{ $package->package_name }}</h5>
 		                            <div class="ibox-tools">
 		                                <a href="/admin/package/create" class="btn btn-primary" role="button"><i class="fa fa-plus"></i> Add New Package</a>
                                         
@@ -62,7 +62,11 @@
                                         <input type="hidden" name="banner_id" value="{{$banner->id}}">
 
                                         <div class="form-group"><label class="col-sm-2 control-label"> Name</label>
-                                            <div class="col-sm-10"><input type="text" id="name" name="name" class="form-control" value="{{ $package->package_screen_name }}"></div>
+                                            <div class="col-sm-10"><input type="text" id="name" name="name" class="form-control" value="{{ $package->package_name }}"></div>
+                                        </div>
+
+                                        <div class="form-group"><label class="col-sm-2 control-label"> Label</label>
+                                            <div class="col-sm-10"><input type="text" id="label" name="label" class="form-control" value="{{ $package->package_screen_name }}"></div>
                                         </div>
                                         </form>
 

@@ -172,7 +172,7 @@
 											@foreach($communication_packages as $package)
 											<div class="row">
 												<div class="communication_packages col-md-8">
-													<div class="feature-packagename" data-folderid = {{$package->id}}> <i class="fa fa-folder-o"></i> {{$package->package_screen_name}} </div>
+													<div class="feature-packagename" data-folderid = {{$package->id}}> <i class="fa fa-folder-o"></i> {{$package->package_name}} </div>
 													
 													<div class="package-timestamp"> Updated At : {{$package->updated_at}}</div>
 												</div>
