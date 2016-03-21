@@ -15,8 +15,10 @@ $("#add-folder").on('click', function(e){
             console.log($(this).find("#parent-folder-id"));
             $(this).find("#parent-folder-id").val(parentFolder);
         })
-        .modal({show:true});
-
+        .modal({show:true})
+        .on('shown.bs.modal', function () {
+            $('#foldername').focus();
+        });
     
     e.preventDefault();
 });
