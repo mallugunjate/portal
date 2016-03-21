@@ -8214,3 +8214,7 @@ body.md-skin {
 .package-folder-document-listing .folder-name{
   border-bottom: 1px solid #DDDDDD;
 }
+
+.popover {
+  min-width:100%;
+}
