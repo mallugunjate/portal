@@ -91,46 +91,49 @@ var fileFill = function(data)
 {
 
 	if( !(data.files === null) ) {
-		$('#file-table').append('<thead>'+
-								'<tr> <th> Title </th>'+
-								// ' <th> Description </th>'+
-								' <th><span class="pull-right" style="padding-right: 50px;"> Added </span></th>'+
-								// ' <th> Start </th>' +
-								// ' <th> End </th>' +
-								' </tr></thead>');
-		var files = data.files
-		
-		$('#file-table').append('<tbody>');
-		_.each(files, function(i){
 
-			var icon ="";
-			var row ="";
-			var row = '<tr> <td class="mail-subject">'+ i.link_with_icon + '</td>'+
-							// ' <td>'+ i.description + '</td>'+
-							' <td><span class="pull-right">'+ i.prettyDateUpdated +'</span></td>'+
-							// ' <td>'+ i.start +'</td>' +
-							// ' <td>'+ i.end +'</td>' +
-							' <td></td> </tr>'
-			if(i.archived) {
-				var row = '<tr class="archived archived-blue"> <td class="mail-subject">'+ i.link_with_icon + '</td>'+
-							// ' <td>'+ i.description + '</td>'+
-							' <td><span class="pull-right">'+ i.prettyDateUpdated +'</span></td>'+
-							// ' <td>'+ i.start +'</td>' +
-							// ' <td>'+ i.end +'</td>' +
-							' <td></td> </tr>'	
-			}
-					
-			$('#file-table').append(row);
-		});
 
-		$('#file-table').append('</tbody>');
+		if(data.files.length > 0) {
+			$('#file-table').append('<thead>'+
+									'<tr> <th> Title </th>'+
+									// ' <th> Description </th>'+
+									' <th><span class="pull-right" style="padding-right: 50px;"> Added </span></th>'+
+									// ' <th> Start </th>' +
+									// ' <th> End </th>' +
+									' </tr></thead>');
+			var files = data.files
+			
+			$('#file-table').append('<tbody>');
+			_.each(files, function(i){
 
-		$("#file-table").tablesorter({
-			sortReset : true,
-			cssAsc: 'up',
-    		cssDesc: 'down'
-		});
+				var icon ="";
+				var row ="";
+				var row = '<tr> <td class="mail-subject">'+ i.link_with_icon + '</td>'+
+								// ' <td>'+ i.description + '</td>'+
+								' <td><span class="pull-right">'+ i.prettyDateUpdated +'</span></td>'+
+								// ' <td>'+ i.start +'</td>' +
+								// ' <td>'+ i.end +'</td>' +
+								' <td></td> </tr>'
+				if(i.archived) {
+					var row = '<tr class="archived archived-blue"> <td class="mail-subject">'+ i.link_with_icon + '</td>'+
+								// ' <td>'+ i.description + '</td>'+
+								' <td><span class="pull-right">'+ i.prettyDateUpdated +'</span></td>'+
+								// ' <td>'+ i.start +'</td>' +
+								// ' <td>'+ i.end +'</td>' +
+								' <td></td> </tr>'	
+				}
+						
+				$('#file-table').append(row);
+			});
 
+			$('#file-table').append('</tbody>');
+
+			$("#file-table").tablesorter({
+				sortReset : true,
+				cssAsc: 'up',
+	    		cssDesc: 'down'
+			});
+		}
 	}
 
 }	

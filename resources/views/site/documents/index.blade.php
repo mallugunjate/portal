@@ -96,7 +96,11 @@
 
                         <div class="col-lg-12">
                         <div id="file-container" class="ibox hidden">
-
+                            <div class="ibox-title">
+                                <div id="folder-title" data-folderId= "" data-isWeekFolder = "">
+                                    <h2></h2>
+                                </div>
+                            </div>
                             <div class="ibox-content">
                             
                                 <input type="hidden" name="default_folder" value={{ $defaultFolder }}>

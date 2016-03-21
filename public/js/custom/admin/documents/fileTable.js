@@ -63,37 +63,40 @@
 		$('#file-table').empty();
 		
 		if( !(data.files === null) ) {
-			$('#file-table').append('<thead>'+
-									'<tr>'+
-									'<th></th>'+
-									'<th> Title </th>'+
-									// ' <th> Description </th>'+
-									' <th> Uploaded </th>'+
-									' <th> Start </th>' +
-									' <th> End </th>' +
-									' <th> Action </th> </tr></thead>');
-			var files = data.files
-			console.log(files)
-			$('#file-table').append('<tbody>');
-			_.each(files, function(i){
-				$('#file-table').append('<tr>'+
-											'<td>'+ i.is_alert +'</td>'+
-											'<td>'+ i.link_with_icon +'</td>'+
-											// ' <td>'+ i.description +'</td>'+
-											' <td>'+ i.prettyDateCreated +'</td>'+
-											' <td>'+ i.prettyDateStart +'</td>' +
-											' <td>'+ i.prettyDateEnd +'</td>' +
-											' <td class="action"> '+
-												'<a class="btn btn-xs btn-primary" href="/admin/document/'+ i.id +'/edit"><i class="fa fa-pencil"></i></a> '+
-												'<a class="deleteFile btn btn-xs btn-danger" id="'+ i.id +'" ><i class="fa fa-trash"></i></a>'+
-											'</td> </tr>')
-			});
-			$('#file-table').append('</tbody>');
-			$("#file-table").tablesorter({
-				sortReset : true,
-    			cssAsc: 'up',
-        		cssDesc: 'down'
-			});
+
+			if(data.files.length>0) {
+				$('#file-table').append('<thead>'+
+										'<tr>'+
+										'<th></th>'+
+										'<th> Title </th>'+
+										// ' <th> Description </th>'+
+										' <th> Uploaded </th>'+
+										' <th> Start </th>' +
+										' <th> End </th>' +
+										' <th> Action </th> </tr></thead>');
+				var files = data.files
+				console.log(files)
+				$('#file-table').append('<tbody>');
+				_.each(files, function(i){
+					$('#file-table').append('<tr>'+
+												'<td>'+ i.is_alert +'</td>'+
+												'<td>'+ i.link_with_icon +'</td>'+
+												// ' <td>'+ i.description +'</td>'+
+												' <td>'+ i.prettyDateCreated +'</td>'+
+												' <td>'+ i.prettyDateStart +'</td>' +
+												' <td>'+ i.prettyDateEnd +'</td>' +
+												' <td class="action"> '+
+													'<a class="btn btn-xs btn-primary" href="/admin/document/'+ i.id +'/edit"><i class="fa fa-pencil"></i></a> '+
+													'<a class="deleteFile btn btn-xs btn-danger" id="'+ i.id +'" ><i class="fa fa-trash"></i></a>'+
+												'</td> </tr>')
+				});
+				$('#file-table').append('</tbody>');
+				$("#file-table").tablesorter({
+					sortReset : true,
+	    			cssAsc: 'up',
+	        		cssDesc: 'down'
+				});
+			}
 
 		}
 		
