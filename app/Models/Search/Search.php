@@ -69,6 +69,7 @@ class Search extends Model
             $docs = $docs->merge(
                         Document::where('original_filename', 'LIKE', '%'.$term.'%')
                                 ->where('end', '<=', $today )
+                                ->where('end', '!=', '0000-00-00 00:00:00')
                                 ->get()
                     );      
 
