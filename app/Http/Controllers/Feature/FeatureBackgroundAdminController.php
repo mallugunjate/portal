@@ -40,8 +40,7 @@ class FeatureBackgroundAdminController extends Controller
     {
         $background_image = $request->file('background');
         $feature_id = $request['featureID'];
-        Feature::updateFeatureBackground($background_image, $feature_id);
-        return Feature::find($feature_id)->pluck('background_image');
+        return Feature::updateFeatureBackground($background_image, $feature_id);
     }
 
     /**
