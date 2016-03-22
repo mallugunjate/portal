@@ -75,6 +75,11 @@ class Search extends Model
             $doc->archived = true;
             $doc->modalLink = Utility::getModalLink($doc->filename, $doc->title, $doc->original_extension, 1, 0);
             $doc->since = Utility::getTimePastSinceDate($doc->updated_at);
+
+            $folder_info = Document::getFolderInfoByDocumentId($doc->id);
+
+            $doc->folder_name = $folder_info->name;
+            $doc->global_folder_id = $folder_info->global_folder_id;
         }
 
         return $docs;   
