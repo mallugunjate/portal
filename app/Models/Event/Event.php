@@ -43,7 +43,6 @@ class Event extends Model
         $event->start = $request['start'];
         $event->end = $request['end'];
         
-        Event::updateTags($id, $request["tags"]);
         $event->save();
 
     }
