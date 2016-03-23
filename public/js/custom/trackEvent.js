@@ -44,7 +44,7 @@ $("body").on("click", ".trackclick", function(e){
 function trackEvent( type, store, resource, location, location_id)
 {
 
-	console.log('%c tracked the click! ' + type + ', ' + store + ', ' + resource +', ' + loc + ', ' + loc_id + ' ', 'background: #222; color: #bada55');
+	console.log('%c tracked the click! ' + type + ', ' + store + ', ' + resource +', ' + loc + ', ' + loc_id + ' ', 'background: #222; color: #bada55; padding: 5px;');
 
 	// $.ajax({
 	//     url: '/bugreport',
