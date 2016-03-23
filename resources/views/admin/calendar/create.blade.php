@@ -110,14 +110,18 @@
 
                                         <div class="hr-line-dashed"></div>
 
-                                       {{-- <div class="form-group"><label class="col-sm-2 control-label">Tags</label>
-                                                <div class="col-md  -10">
-                                                    {!! Form::select('tags[]', $tags, null, ['class'=>'chosen', 'multiple'=>'true', 'id'=>'tags']) !!}
+                                        <div class="form-group"><label class="col-sm-2 control-label">Stores</label>
+                                                <div class="col-md-10">
+                                                    
+                                                    {!! Form::select('stores', $stores, null, [ 'class'=>'chosen', 'id'=> 'storeSelect', 'multiple'=>'true']) !!}
+                                                    {!! Form::label('allStores', 'Or select all stores:') !!}
+                                                    {!! Form::checkbox('allStores', null, false ,['id'=> 'allStores'] ) !!}
+                                                    
                                                 </div>
                                         </div> 
 
                                         <div class="hr-line-dashed"></div>
-                                        --}}
+                                        
 
                                         <div class="form-group">
                                             <div class="col-sm-10 col-sm-offset-2">

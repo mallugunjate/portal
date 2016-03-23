@@ -99,18 +99,6 @@
                                         <div class="hr-line-dashed"></div>
 
 
-                                        <!-- <div class="form-group" id="data_5">
-                                            <label class="col-sm-2 control-label">Event Start &amp; End</label>
-
-                                            <div class="input-daterange input-group" id="datepicker">
-
-                                                <span class="input-group-addon">to</span>
-
-                                            </div>
-                                        </div> -->
-
-
-
                                         <div class="form-group">
 
                                                 <label class="col-sm-2 control-label">Start &amp; End</label>
@@ -123,7 +111,22 @@
                                                     </div>
                                                 </div>
                                         </div>
+                                        <div class="form-group">
+                                                                        
+                                            <label class="col-sm-2 control-label">Target Stores</label>
+                                            <div class="col-sm-10">
+                                                @if($all_stores)
+                                                    {!! Form::select('stores', $storeList, null, [ 'class'=>'chosen', 'id'=> 'storeSelect', 'multiple'=>'true']) !!}
+                                                    {!! Form::label('allStores', 'Or select all stores:') !!}
+                                                    {!! Form::checkbox('allStores', null, true ,['id'=> 'allStores'] ) !!}
+                                                @else
+                                                    {!! Form::select('stores', $storeList, $target_stores, [ 'class'=>'chosen', 'id'=> 'storeSelect', 'multiple'=>'true']) !!}
+                                                    {!! Form::label('allStores', 'Or select all stores:') !!}
+                                                    {!! Form::checkbox('allStores', null, false ,['id'=> 'allStores'] ) !!}
+                                                @endif
+                                            </div>
 
+                                        </div>
                                         
 
                                         <div class="hr-line-dashed"></div>
@@ -168,7 +171,9 @@
                         forceParse: false,
                         autoclose: true
                     });
-                    $(".chosen").chosen();
+                    $(".chosen").chosen({
+                        width:'75%'
+                    });
 
 				</script>
 
