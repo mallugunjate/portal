@@ -190,8 +190,8 @@ class Alert extends Model
                 $alertType = AlertType::find($a->alert_type_id);
 
                 $a->icon = Utility::getIcon($doc->original_extension);
-                $a->link_with_icon = Utility::getModalLink($doc->filename, $doc->title, $doc->original_extension, 1);
-                $a->link = Utility::getModalLink($doc->filename, $doc->title, $doc->original_extension, 0);
+                $a->link_with_icon = Utility::getModalLink($doc->filename, $doc->title, $doc->original_extension, $doc->id, 1);
+                $a->link = Utility::getModalLink($doc->filename, $doc->title, $doc->original_extension, $doc->id, 0);
                 $a->title = $doc->title;
                 $a->filename = $doc->filename;
                 $a->description = $doc->description;

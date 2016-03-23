@@ -1,5 +1,5 @@
 
-            <ul class="nav metismenu" id="side-menu" style="position: fixed;">
+            <ul class="nav metismenu" id="side-menu">
                 <li class="nav-header">
                     <div class="logo-element">
                         P

@@ -27,7 +27,7 @@ class Quicklinks extends Model
 
  				case 2: //file
  					$doc = Document::getDocumentById($link->url);
- 					$finallink = Utility::getModalLink($doc->filename, $doc->title, $doc->original_extension, 1);
+ 					$finallink = Utility::getModalLink($doc->filename, $doc->title, $doc->original_extension, $doc->id, 1);
  					array_push($linkarray, $finallink);
  					break; 					
 
