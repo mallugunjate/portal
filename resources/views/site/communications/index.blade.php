@@ -108,7 +108,7 @@
                             @if($communication->has_attachments == true)
                                 <i class="fa fa-paperclip"></i>
                             @endif
-                            <a class="comm_category_link" onClick="trackEvent();" href="communication/show/{{ $communication->id }}?">{{ $communication->subject }}</a> <span class="label label-sm label-{!! $communication->label_colour !!}">{!! $communication->label_name !!}</span></td>
+                            <a class="comm_category_link trackclick" data-comm-id="{{ $communication->id }}" href="communication/show/{{ $communication->id }}?">{{ $communication->subject }}</a> <span class="label label-sm label-{!! $communication->label_colour !!}">{!! $communication->label_name !!}</span></td>
                     @endif
                     
                     <td class="mail-preview"><a href="communication/show/{{ $communication->id }}">{!! $communication->trunc !!}</a></td>
