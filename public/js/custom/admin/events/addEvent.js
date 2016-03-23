@@ -24,7 +24,7 @@ $(document).on('click','.event-create',function(){
   	var eventBanner = $("#banner").val(); 
 	var eventTitle = $("#title").val(); 
     var eventType = $("#event_type").val();
-    var eventDescription = $("#description").val();
+    var eventDescription = CKEDITOR.instances['description'].getData();
     var eventStart = $("#start").val();
     var eventEnd = $("#end").val();
     var tags = $('#tags').val();
