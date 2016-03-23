@@ -59,7 +59,7 @@
                     @foreach($notices as $notice)
                     	<tr>
                     		<td class="check-mail"><i class="fa fa-bolt"></i></td>
-                    		<td><a href="/{{ Request::segment(1) }}/urgentnotice/show/{{ $notice->id }}">{{ $notice->title }}</td>
+                    		<td><a class="trackclick" data-urgentnotice-id="{{ $notice->id }}" href="/{{ Request::segment(1) }}/urgentnotice/show/{{ $notice->id }}">{{ $notice->title }}</td>
                     		<td>{{ $notice->trunc }}</td>
                     		<td class="mail-date">{{ $notice->prettyDate }} <small style="font-weight: normal;padding-left: 10px;">({{ $notice->since }} ago)</small></td>
                     	</tr>

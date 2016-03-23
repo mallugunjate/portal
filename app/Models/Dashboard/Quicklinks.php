@@ -32,7 +32,7 @@ class Quicklinks extends Model
  					break; 					
 
  				case 3: //url
- 					array_push($linkarray, '<a target="_blank" href="'.$link->url.'"><i class="fa fa-external-link"></i>&nbsp;'.$link->link_name.'</a>');
+ 					array_push($linkarray, '<a class="trackclick" data-ext-url="'.$link->id.'" target="_blank" href="'.$link->url.'"><i class="fa fa-external-link"></i>&nbsp;'.$link->link_name.'</a>');
  					break;
 
  				default:

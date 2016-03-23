@@ -101,7 +101,7 @@
                             @if($communication->has_attachments == true)
                                 <i class="fa fa-paperclip"></i>
                             @endif
-                            <a class="comm_category_link" href="communication/show/{{ $communication->id }}?">{{ $communication->subject }}</a>
+                            <a class="comm_category_link trackclick" data-comm-id="{{ $communication->id }}" href="communication/show/{{ $communication->id }}?">{{ $communication->subject }}</a>
                         </td>
                     @else
                         <td class="mail-subject communication-name">
