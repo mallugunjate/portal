@@ -9,7 +9,7 @@
 </head>
 
 <body class="fixed-navigation adminview">
-    <div id="wrapper">
+    <div id=" ">
 	    <nav class="navbar-default navbar-static-side" role="navigation">
 	        <div class="sidebar-collapse">
 	          @include('admin.includes.sidenav')
@@ -151,7 +151,10 @@
 
 				@include('site.includes.bugreport')
 
+
+                <script src="/js/custom/admin/events/addEvent.js"></script>
                 <script type="text/javascript" src="/js/plugins/chosen/chosen.jquery.js"></script>
+                <script type="text/javascript" src="/js/plugins/ckeditor-standard/ckeditor.js"></script>
 
                 <script type="text/javascript">
                     $.ajaxSetup({
@@ -168,19 +171,10 @@
                     });
 
                     $(".chosen").chosen({
-                        width:'50%'
+                        width:'75%'
                     });
 
-
-				</script>
-
-				<script src="/js/custom/admin/events/addEvent.js"></script>
-                <script type="text/javascript" src="/js/plugins/chosen/chosen.jquery.js"></script>
-
-
-
-
-                $(".chosen").chosen();
+                    CKEDITOR.replace('description');
 
 
                 </script>
