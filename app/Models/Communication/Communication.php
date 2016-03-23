@@ -27,7 +27,7 @@ class Communication extends Model
       public static function getActiveCommunicationsByStoreNumber($storeNumber, $maxToFetch)
       {
         
-         $now = Carbon::now()->toDatetimeString();
+         $now = Carbon::now();
          $comm = DB::table('communications_target')->where('store_id', $storeNumber)
                             ->join('communications', 'communications.id', '=', 'communications_target.communication_id')
                             ->where('communications.send_at', '<=', $now )
@@ -48,7 +48,7 @@ class Communication extends Model
 
       public static function getArchivedCommunicationsByStore($storeNumber)
       {
-         $now = Carbon::now()->toDatetimeString();
+         $now = Carbon::now();
 
          $comm = Communication::join('communications_target', 'communications.id' , '=', 'communications_target.communication_id')
                               ->where('store_id', $storeNumber)

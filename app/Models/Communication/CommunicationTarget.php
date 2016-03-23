@@ -16,7 +16,7 @@ class CommunicationTarget extends Model
 
 	public static function getTargetedCommunications($storeNumber)
 	{
-        $now = Carbon::now()->toDatetimeString();
+        $now = Carbon::now();
 
         $communications = CommunicationTarget::where('communications_target.store_id', '=', $storeNumber)
         				->join('communications', 'communications_target.communication_id', '=', 'communications.id')
@@ -38,7 +38,7 @@ class CommunicationTarget extends Model
 
     public static function getTargetedCommunicationsByCategory($storeNumber, $type_id)
     {
-        $now = Carbon::now()->toDatetimeString();
+        $now = Carbon::now();
 
         $communications = CommunicationTarget::where('communications_target.store_id', '=', $storeNumber)
                         ->join('communications', 'communications_target.communication_id', '=', 'communications.id')
