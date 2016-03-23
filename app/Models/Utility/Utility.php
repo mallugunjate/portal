@@ -150,18 +150,18 @@ class Utility extends Model
 				break;
 
 			case "launchVideoViewer":
-				$link = '<a href="#" class="launchVideoViewer" data-res-id="'.$id.'" data-file="'.$file.'" data-target="#videomodal">'.$icon.$anchortext.'</a>';
-				$anchorOnly = '<a href="#" class="launchVideoViewer" data-res-id="'.$id.'" data-file="'.$file.'" data-target="#videomodal">';
+				$link = '<a href="#" class="launchVideoViewer trackclick" data-res-id="'.$id.'" data-file="'.$file.'" data-target="#videomodal">'.$icon.$anchortext.'</a>';
+				$anchorOnly = '<a href="#" class="launchVideoViewer trackclick" data-res-id="'.$id.'" data-file="'.$file.'" data-target="#videomodal">';
 				break;
 
 			case "download":
-				$link = '<a href="/files/'.$file.'" class="" data-res-id="'.$id.'" data-file="'.$file.'" data-target="#">'.$icon.$anchortext.'</a>';
-				$anchorOnly = '<a href="/files/'.$file.'" class="" data-res-id="'.$id.'" data-file="'.$file.'" data-target="#">';
+				$link = '<a href="/files/'.$file.'" class="trackclick" data-res-id="'.$id.'" data-file="'.$file.'" data-target="#">'.$icon.$anchortext.'</a>';
+				$anchorOnly = '<a href="/files/'.$file.'" class="trackclick" data-res-id="'.$id.'" data-file="'.$file.'" data-target="#">';
 				break;
 
 			case "newwindow":
-				$link = '<a href="/files/'.$file.'" target="_blank">'.$icon.$anchortext.'</a>';
-				$anchorOnly = '<a href="/files/'.$file.'" target="_blank">';
+				$link = '<a href="/files/'.$file.'" class="trackclick" target="_blank">'.$icon.$anchortext.'</a>';
+				$anchorOnly = '<a href="/files/'.$file.'" class="trackclick" target="_blank">';
 				break;	
 
 			case "nolink":
