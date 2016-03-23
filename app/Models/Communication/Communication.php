@@ -37,8 +37,8 @@ class Communication extends Model
                             ->get();
          foreach($comm as $c){
 
-            $c->since = Utility::getTimePastSinceDate($c->updated_at);
-            $c->prettyDate = Utility::prettifyDate($c->updated_at);
+            $c->since = Utility::getTimePastSinceDate($c->send_at);
+            $c->prettyDate = Utility::prettifyDate($c->send_at);
             $preview_string = strip_tags($c->body);
             $c->trunc = Communication::truncateHtml($preview_string);
          }
@@ -58,8 +58,8 @@ class Communication extends Model
          
          foreach($comm as $c){
             $c->archived = true;
-            $c->since = Utility::getTimePastSinceDate($c->updated_at);
-            $c->prettyDate = Utility::prettifyDate($c->updated_at);
+            $c->since = Utility::getTimePastSinceDate($c->send_at);
+            $c->prettyDate = Utility::prettifyDate($c->send_at);
             $preview_string = strip_tags($c->body);
             $c->trunc = Communication::truncateHtml($preview_string);
             $c->label_name = Communication::getCommunicationCategoryName($c->communication_type_id);
@@ -82,8 +82,8 @@ class Communication extends Model
          
          foreach($comm as $c){
             $c->archived = true;
-            $c->since = Utility::getTimePastSinceDate($c->updated_at);
-            $c->prettyDate = Utility::prettifyDate($c->updated_at);
+            $c->since = Utility::getTimePastSinceDate($c->send_at);
+            $c->prettyDate = Utility::prettifyDate($c->send_at);
             $preview_string = strip_tags($c->body);
             $c->trunc = Communication::truncateHtml($preview_string);
             $c->label_name = Communication::getCommunicationCategoryName($c->communication_type_id);
