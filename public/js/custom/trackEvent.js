@@ -3,22 +3,22 @@ $("body").on("click", ".trackclick", function(e){
 	var pathArray = window.location.pathname.split( '/' );
 	console.log('clicked something...');
 
-	section = pathArray[2];
-	sectionId = pathArray[4];
+	loc = pathArray[2];
+	loc_id = pathArray[4];
 
 	if(typeof section == "undefined"){
-		section = "dashboard";
+		loc = "dashboard";
 	}
 
 	if(typeof sectionId == "undefined"){
-		sectionId = 0;
+		loc_id = 0;
 	}
 
-	trackEvent( $(this).attr("data-res-id"), localStorage.getItem('userStoreNumber'), section, sectionId );
+	trackEvent( $(this).attr("data-res-id"), localStorage.getItem('userStoreNumber'), loc, loc_id );
 
 });
 
-function trackEvent( t, store, p, i)
+function trackEvent( store, resource, location, location_id)
 {
 
 	// $.ajax({
@@ -42,7 +42,6 @@ function trackEvent( t, store, p, i)
 	// }); 
 
 	//});	
-	console.log('%c tracked the click! ' + t + ', ' + store +', ' + p + ', ' + i + ' ', 'background: #222; color: #bada55');
-	//console.log('%c tracked the click!', 'background: #222; color: #bada55');
-	console.log(t);
+	console.log('%c tracked the click! ' + store + ', ' + resource +', ' + loc + ', ' + loc_id + ' ', 'background: #222; color: #bada55');
+
 }
