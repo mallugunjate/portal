@@ -1,3 +1,22 @@
+$("#allStores").change(function(){
+
+	if ($("#allStores").is(":checked")) {
+
+		$("#storeSelect option").each(function(index){			
+			$(this).attr('selected', 'selected');
+		});
+		$("#storeSelect").chosen();
+		
+	}
+	else if ($("#allStores").not(":checked")) {
+		$("#storeSelect option").each(function(){
+			$(this).removeAttr('selected');
+		});
+		$("#storeSelect").chosen();
+		
+	}
+});
+
 $(document).on('click','.event-update',function(){
   	
   	var hasError = false;
@@ -6,9 +25,11 @@ $(document).on('click','.event-update',function(){
 	var eventBanner = $("#banner").val(); 
 	var eventTitle = $("#title").val(); 
     var eventType = $("#event_type").val();
-    var eventDescription = $("#description").val();
+    var eventDescription = CKEDITOR.instances['description'].getData();
     var eventStart = $("#start").val();
     var eventEnd = $("#end").val();
+    var target_stores  = $("#storeSelect").val();
+	var allStores  = $("#allStores:checked").val();
 
     if(eventTitle == '') {
 		swal("Oops!", "This event needs a title.", "error"); 
@@ -23,6 +44,12 @@ $(document).on('click','.event-update',function(){
 		$(window).scrollTop(0);
 		return false;
 	}	
+	if( target_stores == null && typeof allStores === 'undefined' ) {
+		swal("Oops!", "Target stores not selected.", "error"); 
+		hasError = true;
+		$(window).scrollTop(0);
+		return false;
+	}
 
     if(hasError == false) {
 
@@ -35,7 +62,9 @@ $(document).on('click','.event-update',function(){
 		  		description: eventDescription,
 		    	event_type: eventType,
 		    	start: eventStart,
-		    	end: eventEnd
+		    	end: eventEnd,
+		    	target_stores : target_stores,
+		  		allStores : allStores
 		    },
 		    success: function(result) {
 		      //  $('#createNewEventForm')[0].reset(); // empty the form

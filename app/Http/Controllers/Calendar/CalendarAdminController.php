@@ -13,6 +13,8 @@ use App\Models\Tag\Tag;
 use App\Models\Banner;
 use App\Models\UserBanner;
 use App\Models\UserSelectedBanner;
+use App\Models\StoreInfo;
+use App\Models\Event\EventTarget;
 
 
 class CalendarAdminController extends Controller
@@ -63,12 +65,12 @@ class CalendarAdminController extends Controller
 
         // $event_types_list = EventType::all();
         $event_types_list = EventType::where('banner_id', $banner_id)->get();
-        // $tags = Tag::where('banner_id', $banner_id)->lists('name', 'id');
+        $storeList = StoreInfo::getStoreListing($banner->id);
         return view('admin.calendar.create')
             ->with('event_types_list', $event_types_list)
-            // ->with('tags', $tags)
             ->with('banner', $banner)
-            ->with('banners', $banners);     
+            ->with('banners', $banners)
+            ->with('stores', $storeList);     
     }
 
     /**
@@ -112,18 +114,23 @@ class CalendarAdminController extends Controller
         $event_type = EventType::find($id);
         $event_types_list = EventType::all();
         $banner = UserSelectedBanner::getBanner();
-        // $tags = Tag::where('banner_id', $banner->id)->lists('name', 'id');
-        // $tag_ids = ContentTag::where('content_id', $id)->where('content_type', 'event')->get()->pluck('tag_id');
-        // $selected_tags = Tag::findMany($tag_ids)->pluck('id')->toArray();
+        
+        $event_target_stores = EventTarget::where('event_id', $id)->get()->pluck('store_id')->toArray();
+        $storeList = StoreInfo::getStoreListing($banner->id);
+        $all_stores = false;
+        if (count($storeList) == count($event_target_stores)) {
+            $all_stores = true;
+        }
 
         return view('admin.calendar.edit')
             ->with('event', $event)
             ->with('event_type', $event_type)
             ->with('event_types_list', $event_types_list)
-            // ->with('tags', $tags)
-            // ->with('selected_tags', $selected_tags)
             ->with('banner', $banner)
-            ->with('banners', $banners);
+            ->with('banners', $banners)
+            ->with('storeList', $storeList)
+            ->with('target_stores', $event_target_stores)
+            ->with('all_stores', $all_stores);
     }
 
     /**

@@ -30,6 +30,7 @@ return array(
     'CreateDashboardBrandingTable' => $baseDir . '/database/migrations/2016_01_27_220050_create_dashboard_branding_table.php',
     'CreateDocumentPackagePivotTable' => $baseDir . '/database/migrations/2015_11_27_175201_create_document_package_pivot_table.php',
     'CreateEducationLevelTable' => $baseDir . '/database/migrations/future/2015_08_21_151222_create_education_level_table.php',
+    'CreateEventTargetTable' => $baseDir . '/database/migrations/2016_03_23_134549_create_event_target_table.php',
     'CreateEventTypesTable' => $baseDir . '/database/migrations/2015_11_30_210139_create_event_types_table.php',
     'CreateEventsTable' => $baseDir . '/database/migrations/2015_11_30_222337_create_events_table.php',
     'CreateFeatureDocumentPivotTable' => $baseDir . '/database/migrations/2016_02_01_173157_create_feature_document_pivot_table.php',
