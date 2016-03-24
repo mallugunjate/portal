@@ -27,7 +27,7 @@ class Communication extends Model
       public static function getActiveCommunicationsByStoreNumber($storeNumber, $maxToFetch)
       {
         
-         $now = Carbon::now()->toDatetimeString();
+         $now = Carbon::now();
          $comm = DB::table('communications_target')->where('store_id', $storeNumber)
                             ->join('communications', 'communications.id', '=', 'communications_target.communication_id')
                             ->where('communications.send_at', '<=', $now )
@@ -37,8 +37,8 @@ class Communication extends Model
                             ->get();
          foreach($comm as $c){
 
-            $c->since = Utility::getTimePastSinceDate($c->updated_at);
-            $c->prettyDate = Utility::prettifyDate($c->updated_at);
+            $c->since = Utility::getTimePastSinceDate($c->send_at);
+            $c->prettyDate = Utility::prettifyDate($c->send_at);
             $preview_string = strip_tags($c->body);
             $c->trunc = Communication::truncateHtml($preview_string);
          }
@@ -48,7 +48,7 @@ class Communication extends Model
 
       public static function getArchivedCommunicationsByStore($storeNumber)
       {
-         $now = Carbon::now()->toDatetimeString();
+         $now = Carbon::now();
 
          $comm = Communication::join('communications_target', 'communications.id' , '=', 'communications_target.communication_id')
                               ->where('store_id', $storeNumber)
@@ -58,8 +58,8 @@ class Communication extends Model
          
          foreach($comm as $c){
             $c->archived = true;
-            $c->since = Utility::getTimePastSinceDate($c->updated_at);
-            $c->prettyDate = Utility::prettifyDate($c->updated_at);
+            $c->since = Utility::getTimePastSinceDate($c->send_at);
+            $c->prettyDate = Utility::prettifyDate($c->send_at);
             $preview_string = strip_tags($c->body);
             $c->trunc = Communication::truncateHtml($preview_string);
             $c->label_name = Communication::getCommunicationCategoryName($c->communication_type_id);
@@ -82,8 +82,8 @@ class Communication extends Model
          
          foreach($comm as $c){
             $c->archived = true;
-            $c->since = Utility::getTimePastSinceDate($c->updated_at);
-            $c->prettyDate = Utility::prettifyDate($c->updated_at);
+            $c->since = Utility::getTimePastSinceDate($c->send_at);
+            $c->prettyDate = Utility::prettifyDate($c->send_at);
             $preview_string = strip_tags($c->body);
             $c->trunc = Communication::truncateHtml($preview_string);
             $c->label_name = Communication::getCommunicationCategoryName($c->communication_type_id);

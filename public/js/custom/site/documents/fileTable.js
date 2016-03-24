@@ -62,14 +62,14 @@ var folderFill = function(data)
 
 				$('#folder-table').append('<tr>'+
 										' <td><i class="fa fa-folder"></i> <a class="folder" id="' + i.global_folder_id  +'" href="/document#!/' + i.global_folder_id + '"> Week ' +  i.week_number +'</a></td>'+
-										' <td>' + i.updated_at +'</td>'+
+										' <td>' + i.start +'</td>'+
 									'</tr>')
 			}
 			else{
 
 				$('#folder-table').append('<tr>'+
 										' <td><i class="fa fa-folder"></i> <a class="folder" id="' + i.global_folder_id  +'" href="/document#!/' + i.global_folder_id + '">' + i.name+'</a></td>'+
-										' <td>' + i.updated_at +'</td>'+
+										' <td>' + i.start +'</td>'+
 									'</tr>')
 
 			}
@@ -92,7 +92,6 @@ var fileFill = function(data)
 
 	if( !(data.files === null) ) {
 
-
 		if(data.files.length > 0) {
 			$('#file-table').append('<thead>'+
 									'<tr> <th> Title </th>'+
@@ -110,14 +109,14 @@ var fileFill = function(data)
 				var row ="";
 				var row = '<tr> <td class="mail-subject">'+ i.link_with_icon + '</td>'+
 								// ' <td>'+ i.description + '</td>'+
-								' <td><span class="pull-right">'+ i.prettyDateUpdated +'</span></td>'+
+								' <td><span class="pull-right">'+ i.prettyDateStart +'</span></td>'+
 								// ' <td>'+ i.start +'</td>' +
 								// ' <td>'+ i.end +'</td>' +
 								' <td></td> </tr>'
 				if(i.archived) {
 					var row = '<tr class="archived archived-blue"> <td class="mail-subject">'+ i.link_with_icon + '</td>'+
 								// ' <td>'+ i.description + '</td>'+
-								' <td><span class="pull-right">'+ i.prettyDateUpdated +'</span></td>'+
+								' <td><span class="pull-right">'+ i.prettyDateStart +'</span></td>'+
 								// ' <td>'+ i.start +'</td>' +
 								// ' <td>'+ i.end +'</td>' +
 								' <td></td> </tr>'	
