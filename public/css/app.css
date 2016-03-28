@@ -8219,3 +8219,5 @@ body.md-skin {
 
 .fc-time{ display: none; }
 .event-span{ display: none; }
+
+.alert-table a{ font-weight: normal !important; color: #337ab7 !important;}

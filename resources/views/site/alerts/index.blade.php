@@ -84,7 +84,7 @@
                 <div class="mail-box">
 
 
-                <table class="table table-hover table-mail">
+                <table class="table table-hover table-mail alert-table">
                 <tbody>
                     <thead>
                         <tr> 
