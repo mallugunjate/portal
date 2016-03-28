@@ -58,19 +58,20 @@
 										<table class="table table-hover issue-tracker">
 
 										<tr>
-											<td>id</td>
-											<td>Title</td>
 											
-											<td></td>
+											<td>Title</td>
+											<td>Label</td>
+											
+											<td>Actions</td>
 
 										</tr>
 										@foreach($packages as $package)
 										<tr>
 
 
-											<td>{{ $package->id }}</td>
-											<td><a href="/admin/package/{{ $package->id }}/edit">{{ $package->package_name }}</a></td>
 											
+											<td><a href="/admin/package/{{ $package->id }}/edit">{{ $package->package_name }}</a></td>
+											<td>{{$package->package_screen_name}}</td>
 											<td>
 
 												<a data-package="{{ $package->id }}" id="package{{$package->id}}" class="package-delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
