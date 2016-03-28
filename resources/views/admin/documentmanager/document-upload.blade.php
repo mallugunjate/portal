@@ -49,30 +49,25 @@
                     <span class="btn btn-success btn-lg btn-outline select-stores">Selected Stores</span>
                 </center>
 
-                <div class="select-stores-form upload-form">
+                <div id="select-stores-form" class="upload-form">
                     <div class="form-group">                                    
                     <label class="col-sm-2 control-label">Target Stores</label>
                     <div class="col-sm-10">
                         {!! Form::select('stores', $storeList, null, [ 'class'=>'chosen', 'id'=> 'storeSelect', 'multiple'=>'true']) !!}
-                        {!! Form::label('allStores', 'Or select all stores:') !!}
-                        {!! Form::checkbox('allStores', null, false ,['id'=> 'allStores'] ) !!}
+                        {!! Form::label('allStores', 'Or select all stores:', ['class'=>'hidden']) !!}
+                        {!! Form::checkbox('allStores', null, false ,['id'=> 'allStores', 'class'=>'hidden'] ) !!}
                     </div>
 
                     </div>
                 </div>
 
 
-                <div class="all-stores-form upload-form">
+                <div id="all-stores-form" class="upload-form">
                 this is teh form for all the stores
                 </div>
 
 
 
-
-
-
-
-{{-- 
                 	<div id="file-uploader" class="visible">
 
 					<div id="watermark">Drag and drop documents here</div>
@@ -158,8 +153,6 @@
 					</div>
 
 
---}}
-
 
 				</div>
 
@@ -208,38 +201,11 @@
 
 
 
-                    $( ".select-stores" ).click(function() {
-                        alert('choose some stores');
-                        $(this).toggleClass('btn-outline');
-                        $('.select-stores-form').toggle();
-                    });
+                    
 
-                    $( ".all-stores" ).click(function() {
-                        $(this).toggleClass('btn-outline');
-                        $('.all-stores-form').toggle();
-                    });
+                   
 
-
-                    $(".chosen").chosen({ width:'75%' });
-
-                    $("#allStores").change(function(){
-
-                        if ($("#allStores").is(":checked")) {
-
-                            $("#storeSelect option").each(function(index){            
-                                $(this).attr('selected', 'selected');
-                            });
-                            $("#storeSelect").chosen();
-                            
-                        }
-                        else if ($("#allStores").not(":checked")) {
-                            $("#storeSelect option").each(function(){
-                                $(this).removeAttr('selected');
-                            });
-                            $("#storeSelect").chosen();
-                            
-                        }
-                    }); 
+                    
                                        
                     $.ajaxSetup({
                         headers: {
@@ -249,6 +215,45 @@
 
                     $(document).ready(function() {
 
+                        $( ".select-stores" ).click(function() {
+                            console.log('select store clicked');
+                            $(this).removeClass('btn-outline');
+                            $(".all-stores").addClass('btn-outline');
+                            $('#select-stores-form').show();
+                            $(".chosen").chosen({ width:'75%' });
+                            $("#all-stores-form").hide();
+                            // $('.select-stores-form').toggleClass('visible');
+                        });
+
+                        $( ".all-stores" ).click(function() {
+                            $(this).removeClass('btn-outline');
+                            $(".select-stores").addClass('btn-outline');
+
+                            $('#all-stores-form').show();
+                            $('#select-stores-form').hide();
+                             $("#allStores").prop('checked', 'true');
+                        });
+
+                        $("#allStores").change(function(){
+
+                            if ($("#allStores").is(":checked")) {
+
+                                $("#storeSelect option").each(function(index){            
+                                    $(this).attr('selected', 'selected');
+                                });
+                                $("#storeSelect").chosen();
+                                
+                            }
+                            else if ($("#allStores").not(":checked")) {
+                                $("#storeSelect option").each(function(){
+                                    $(this).removeAttr('selected');
+                                });
+                                $("#storeSelect").chosen();
+                                
+                            }
+
+                            console.log($("#storeSelect").val());
+                        }); 
 
 
                         var form = $("#example-advanced-form").show();
@@ -313,25 +318,25 @@
 
 
                         
-                        $(".tree").treed({openedClass : 'fa-folder-open', closedClass : 'fa-folder'});
+                        // $(".tree").treed({openedClass : 'fa-folder-open', closedClass : 'fa-folder'});
 
-                        var defaultFolderId = $("input[name='default_folder']").val();
+                        // var defaultFolderId = $("input[name='default_folder']").val();
 
-                        if (defaultFolderId) {
-                            var folder = $("#"+defaultFolderId);
-                            $("#"+defaultFolderId).parent().click();
-                            $.ajax({
-                                url : '/admin/document',
-                                data : {
-                                    folder : defaultFolderId,
-                                    isWeekFolder : folder.attr("data-isweek")
-                                }
-                            })
-                            .done(function(data){
-                                console.log(data);
-                                fillTable(data);
-                            });
-                        }
+                        // if (defaultFolderId) {
+                        //     var folder = $("#"+defaultFolderId);
+                        //     $("#"+defaultFolderId).parent().click();
+                        //     $.ajax({
+                        //         url : '/admin/document',
+                        //         data : {
+                        //             folder : defaultFolderId,
+                        //             isWeekFolder : folder.attr("data-isweek")
+                        //         }
+                        //     })
+                        //     .done(function(data){
+                        //         console.log(data);
+                        //         fillTable(data);
+                        //     });
+                        // }
 
                     }); 
                 </script>
