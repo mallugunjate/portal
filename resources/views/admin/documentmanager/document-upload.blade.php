@@ -6,6 +6,9 @@
     @include('admin.includes.head')
     <link rel="stylesheet" type="text/css" href="/css/custom/tree.css">
     <meta name="csrf-token" content="{!! csrf_token() !!}"/>
+    <style type="text/css">
+    .upload-form{ display: none;  }
+    </style>
 </head>
 
 <body class="fixed-navigation adminview" onload="checkDeepLink()">
@@ -41,9 +44,35 @@
                 <div class="col-lg-12 animated fadeInRight">
 
 
+                <center>
+                    <span class="btn btn-success btn-lg btn-outline all-stores">All Stores</span>
+                    <span class="btn btn-success btn-lg btn-outline select-stores">Selected Stores</span>
+                </center>
+
+                <div class="select-stores-form upload-form">
+                    <div class="form-group">                                    
+                    <label class="col-sm-2 control-label">Target Stores</label>
+                    <div class="col-sm-10">
+                        {!! Form::select('stores', $storeList, null, [ 'class'=>'chosen', 'id'=> 'storeSelect', 'multiple'=>'true']) !!}
+                        {!! Form::label('allStores', 'Or select all stores:') !!}
+                        {!! Form::checkbox('allStores', null, false ,['id'=> 'allStores'] ) !!}
+                    </div>
+
+                    </div>
+                </div>
+
+
+                <div class="all-stores-form upload-form">
+                this is teh form for all the stores
+                </div>
 
 
 
+
+
+
+
+{{-- 
                 	<div id="file-uploader" class="visible">
 
 					<div id="watermark">Drag and drop documents here</div>
@@ -54,7 +83,11 @@
 					    <input type="hidden" name="upload_package_id"  id="upload_package_id" value="{{ $packageHash }}" />
 					    <input type="hidden" id="folder_id" name="folder_id" value="" />
 
+
+
 					      <div class="col-lg-7 file-actions">
+
+
 					        <!-- The fileinput-button span is used to style the file input field as button -->
 					        <span class="btn btn-success fileinput-button dz-clickable">
 					            <i class="glyphicon glyphicon-plus"></i>
@@ -91,8 +124,7 @@
 
 					            <div>
 					                <p class="name" data-dz-name></p>
-					{{--                 <input type="text" name="title[]" />
-					                <input type="text" name="description[]" /> --}}
+
 					                <strong class="error text-danger" data-dz-errormessage></strong>
 					            </div>
 
@@ -126,7 +158,7 @@
 					</div>
 
 
-
+--}}
 
 
 				</div>
@@ -169,11 +201,46 @@
             <script type="text/javascript" src="/js/custom/admin/documents/breadcrumb.js"></script>
             <script type="text/javascript" src="/js/custom/admin/documents/uploadDocument.js"></script>
             <script type="text/javascript" src="/js/custom/tree.js"></script>
+            <script type="text/javascript" src="/js/plugins/chosen/chosen.jquery.js"></script>
 
         
                 <script type="text/javascript">
 
 
+
+                    $( ".select-stores" ).click(function() {
+                        alert('choose some stores');
+                        $(this).toggleClass('btn-outline');
+                        $('.select-stores-form').toggle();
+                    });
+
+                    $( ".all-stores" ).click(function() {
+                        $(this).toggleClass('btn-outline');
+                        $('.all-stores-form').toggle();
+                    });
+
+
+                    $(".chosen").chosen({ width:'75%' });
+
+                    $("#allStores").change(function(){
+
+                        if ($("#allStores").is(":checked")) {
+
+                            $("#storeSelect option").each(function(index){            
+                                $(this).attr('selected', 'selected');
+                            });
+                            $("#storeSelect").chosen();
+                            
+                        }
+                        else if ($("#allStores").not(":checked")) {
+                            $("#storeSelect option").each(function(){
+                                $(this).removeAttr('selected');
+                            });
+                            $("#storeSelect").chosen();
+                            
+                        }
+                    }); 
+                                       
                     $.ajaxSetup({
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -242,7 +309,6 @@
                         //         }
                         //     }
                         });
-
 
 
 

@@ -51,7 +51,7 @@
     </div>
 
 
-<div class="wrapper wrapper-content  animated fadeInRight">
+<div class="wrapper wrapper-content animated fadeInRight">
 
 
                             <div class="row">
@@ -65,25 +65,12 @@
 
                                     <div class="container" id="container">
                                        <div id="actions" class="row">
+
                                         {!! csrf_field() !!}
                                         <input type="hidden" name="upload_package_id"  id="upload_package_id" value="{{ $packageHash }}" />
                                         <input type="hidden" name="folder_id" value="3" />
 
-                                          <div class="col-lg-7 file-actions">
-                                            <!-- The fileinput-button span is used to style the file input field as button -->
-                                            <span class="btn btn-success fileinput-button dz-clickable">
-                                                <i class="glyphicon glyphicon-plus"></i>
-                                                <span>Add files...</span>
-                                            </span>
-                                            <button type="submit" class="btn btn-primary start disabled">
-                                                <i class="glyphicon glyphicon-upload"></i>
-                                                <span>Start upload</span>
-                                            </button>
-                                            <button type="reset" class="btn btn-warning cancel disabled">
-                                                <i class="glyphicon glyphicon-ban-circle"></i>
-                                                <span>Cancel upload</span>
-                                            </button>
-                                          </div>
+
 
                                           <div class="col-lg-5">
                                             <!-- The global file processing state -->
@@ -151,7 +138,7 @@
       <script type="text/javascript" src="/js/custom/admin/documents/deletePackage.js"></script>
       <script type="text/javascript" src="/js/custom/admin/documents/showPackage.js"></script>
       <script type="text/javascript" src="/js/custom/admin/documents/breadcrumb.js"></script>
-      <script type="text/javascript" src="/js/vendor/dropzone.js"></script>
+<!--       <script type="text/javascript" src="/js/vendor/dropzone.js"></script> -->
       <script type="text/javascript" src="/js/custom/admin/documents/uploadDocument.js"></script>
       <script type="text/javascript" src="/js/vendor/tablesorter.min.js"></script>
       <script type="text/javascript" src="/js/vendor/lightbox.min.js"></script>        
