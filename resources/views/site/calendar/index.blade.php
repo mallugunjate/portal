@@ -66,6 +66,7 @@
         var today = y + "-" + m + "-" + d;
 
         $('#calendar').fullCalendar({
+            eventStartEditable: false,
             header: {
                 left: 'prev,next today',
                 center: 'title',
