@@ -50,6 +50,8 @@ Route::get('/{storeno}/search', array('uses' => 'Search\SearchController@index')
 //BUG REPORTER
 Route::resource('/bugreport', 'BugReport\BugReportController');
 
+//ANALYTICS
+Route::resource('/clicktrack', 'Analytics\AnalyticsController');
 
 //Authentication Routes
 Route::get('/admin/login', 'Auth\AuthController@getLogin');

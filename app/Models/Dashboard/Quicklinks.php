@@ -27,12 +27,12 @@ class Quicklinks extends Model
 
  				case 2: //file
  					$doc = Document::getDocumentById($link->url);
- 					$finallink = Utility::getModalLink($doc->filename, $doc->title, $doc->original_extension, 1);
+ 					$finallink = Utility::getModalLink($doc->filename, $doc->title, $doc->original_extension, $doc->id, 1);
  					array_push($linkarray, $finallink);
  					break; 					
 
  				case 3: //url
- 					array_push($linkarray, '<a target="_blank" href="'.$link->url.'"><i class="fa fa-external-link"></i>&nbsp;'.$link->link_name.'</a>');
+ 					array_push($linkarray, '<a class="trackclick" data-ext-url="'.$link->id.'" target="_blank" href="'.$link->url.'"><i class="fa fa-external-link"></i>&nbsp;'.$link->link_name.'</a>');
  					break;
 
  				default:
