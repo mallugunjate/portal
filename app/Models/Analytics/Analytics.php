@@ -7,18 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 class Analytics extends Model
 {
     protected $table = 'analytics';
-    protected $fillable = ['store_number', 'resource_type', 'resource_id', 'resource_trigger_type', 'resource_trigger_id'];
+    protected $fillable = ['type', 'resource_id', 'store_number', 'location', 'location_id'];
 
     public static function store($request)
     {
     	$event = Analytics::create([
+    		'type' => $request->type,
+ 			'resource_id' => $request->resource_id,    		
     		'store_number' => $request->store_number,	
- 			'resource_type' => $request->resource_type,
- 			'resource_id' => $request->resource_id,
- 			'resource_trigger_type' => $request->follow_up,
- 			'resource_trigger_id' => $request->store_number
- 			// 'current_url' => $request->current_url,
- 			// 'description' => $request->description
+ 			'location' => $request->location,
+ 			'location_id' => $request->location_id
  		]);
 
  		$event->save();
