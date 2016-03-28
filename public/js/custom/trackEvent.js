@@ -19,6 +19,10 @@ $("body").on("click", ".trackclick", function(e){
 		loc_id = 0;
 	}
 
+	if( loc == "document"){
+		loc = "library";
+	}
+
 	//communication 
 	if(typeof commId != "undefined" ){
 		trackEvent( "communication", commId, localStorage.getItem('userStoreNumber'), loc, loc_id );
@@ -46,27 +50,27 @@ function trackEvent( type, resource, store, location, location_id)
 
 	console.log('%c tracked the click! ' + type + ', ' + resource + ', ' +  store +', ' + loc + ', ' + loc_id + ' ', 'background: #222; color: #bada55; padding: 5px;');
 
-	// $.ajax({
-	//     url: '/bugreport',
-	//     type: 'POST',
-	//     data: {
-	//   		banner: banner,
-	//   		store_number: store_number,
-	//   		user: user,
-	//   		current_url: current_url,
-	//   		description: description,
-	//   		user_email: user_email,
-	//   		follow_up: follow_up 		
-	//     },
-	//     success: function(result) {
-	         
-	//     }
-	// }).done(function(response){
+	$.ajax({
+	    url: '/clicktrack',
+	    type: 'POST',
+	    data: {
+	  		type: type,
+	  		resource_id: resource,
+	  		store_number: store,
+	  		location: loc,
+	  		location_id: loc_id	
+	    },
+	    success: function(result) {
+	      console.log('click as been tracked');   
+	    }	
+
+	});
+	// .done(function(response){
 
 
 	// }); 
 
-	//});	
+		
 
 
 }
