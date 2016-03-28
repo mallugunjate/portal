@@ -69,13 +69,16 @@
     #previews .file-row.dz-success .delete {
       display: block;
     }
+     #previews{
+      width:90%;
+     }
 
     .next-action{
       float:right;
       margin-bottom: 10px;
     }
     #file-uploader {
-      min-height:350px;
+      min-height:250px;
       background-color: #eee;
       margin-top: 8em;
       margin-bottom: 2em;

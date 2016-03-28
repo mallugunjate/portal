@@ -104,7 +104,7 @@ class Document extends Model
                 'filename'          => $filename,
                 'original_extension'=> $metadata["originalExtension"],
                 'upload_package_id' => $request->get('upload_package_id'),
-                'title'             => "no title",
+                'title'             => preg_replace('/\.'.preg_quote($metadata["originalExtension"]).'/', '', $metadata["originalName"]),
                 'description'       => "no description",
                 'banner_id'         => $banner->id
             );
@@ -154,7 +154,12 @@ class Document extends Model
         $modifiedName = str_replace(" ", "_", $originalName);
         $modifiedName = str_replace(".", "_", $modifiedName);
         $modifiedName = str_replace("%", "pct", $modifiedName);
-
+        $modifiedName = str_replace("#", "", $modifiedName);
+        $modifiedName = str_replace("&", "_and_", $modifiedName);
+        $modifiedName = str_replace("'", "", $modifiedName);
+        $modifiedName = str_replace("\"", "", $modifiedName);
+        $modifiedName = str_replace("?", "", $modifiedName);
+        
         $response = [];
         $response["originalName"] = $originalName;
         $response["modifiedName"] = $modifiedName;

@@ -48,23 +48,23 @@
 
       <div class="row" id="document-record-container">
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <label>Filename</label><br>
             </div>
-            <div class="col-md-2 ">
+            <div class="col-md-3 ">
                 <label >Title</label>
             </div>
-            <div class="col-md-2">
+           {{-- <div class="col-md-3">
                 <label >Description</label>
             
-{{--             </div class="col-md-2">
+             </div class="col-md-3">
                 <label>Tags</label>
-            <div> --}}
-            </div>
-            <div class="col-md-2">
+            <div>
+            </div> --}}
+            <div class="col-md-3">
                 <label>Start Date</label>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <label>End Date</label>
             </div>
 
@@ -81,24 +81,24 @@
     				
             
             <div class="row" >
-              <div class="col-md-2">
+              <div class="col-md-3">
                 <label >{{ $doc->original_filename }}</label>
               </div>
               
-              <div class="col-md-2">
-                <?php  $title = preg_replace('/\.'.preg_quote($doc->original_extension).'/', '', $doc->original_filename); ?>
-                <input type="text" class="form-control" name="title{{ $doc->id }}" id="title{{ $doc->id }}" value="{{$title}}">
+              <div class="col-md-3">
+                
+                <input type="text" class="form-control" name="title{{ $doc->id }}" id="title{{ $doc->id }}" value="{{$doc->title}}">
   		        </div>
 
-              <div class="col-md-2">
-                <input class="form-control" type="text" name="description{{ $doc->id }}" id="description{{ $doc->id }}">
-  		        </div>
+              {{-- <div class="col-md-3">
+                  <input class="form-control" type="text" name="description{{ $doc->id }}" id="description{{ $doc->id }}">
+                </div> --}}
 
-{{--               <div class="col-md-2">
+{{--               <div class="col-md-3">
                  {!! Form::select('tags[]', $tags, null, ['class'=>'chosen' , 'multiple'=>'true', 'id'=>"select$doc->id"]) !!}
               </div> --}}
 
-              <div class="col-md-2">
+              <div class="col-md-3">
                 <div class="form-group">
                   <div class='input-group date startdate' id='datetimepicker1-{{$doc->id}}'>
                       <input type='text' class="form-control" name="start" id="start{{$doc->id}}"/>
@@ -109,7 +109,7 @@
                 </div>
               </div>
 
-              <div class="col-md-2">
+              <div class="col-md-3">
                 <div class="form-group">
                   <div class='input-group date enddate' id='datetimepicker2-{{$doc->id}}'>
                       <input type='text' class="form-control" name="end" id="end{{$doc->id}}"/>
@@ -119,11 +119,10 @@
                   </div>
                 </div>
               </div>
-              
-              <div class="col-md-2">
-                <button type="submit" class="meta-data-add btn btn-success" data-id="{{ $doc->id }}">Update</button>
-                <span class="glyphicon glyphicon-ok" id="checkmark{{ $doc->id }}" aria-hidden="true"></span>
-              </div>
+              {{--<div>
+                                            <button type="submit" class="meta-data-add btn btn-success" data-id="{{ $doc->id }}">Update</button>
+                                            <span class="glyphicon glyphicon-ok" id="checkmark{{ $doc->id }}" aria-hidden="true"></span>
+                                          </div> --}}
 
             </div>  
 
@@ -134,17 +133,17 @@
       
       </div> <!-- well ends -->
       <div class="row"  >
-          <div class="col-md-1 col-md-offset-10">
+          <div class="col-md-1 col-md-offset-11">
               <br>
               <button type="submit" class="meta-data-done btn btn-warning">Done</button>
               <span id="checkmark{{ $doc->id }}" aria-hidden="true"></span>
           </div>
           
-          <div class="col-md-1">
-            <br>
-            <button type="submit" class="meta-data-add-all btn btn-success">Update All</button>
-            <span class="glyphicon glyphicon-ok" id="checkmark{{ $doc->id }}" aria-hidden="true"></span>
-          </div>
+          {{-- <div class="col-md-1">
+                                <br>
+                                <button type="submit" class="meta-data-add-all btn btn-success">Update All</button>
+                                <span class="glyphicon glyphicon-ok" id="checkmark{{ $doc->id }}" aria-hidden="true"></span>
+                              </div> --}}
       </div>
     </div>
 

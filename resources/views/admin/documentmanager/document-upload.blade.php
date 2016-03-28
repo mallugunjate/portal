@@ -49,8 +49,8 @@
                     <span class="btn btn-success btn-lg btn-outline select-stores">Selected Stores</span>
                 </center>
 
-                <div id="select-stores-form" class="upload-form">
-                    <div class="form-group">                                    
+                <div >
+                    <div class="form-group upload-form select-stores-form">                                    
                     <label class="col-sm-2 control-label">Target Stores</label>
                     <div class="col-sm-10">
                         {!! Form::select('stores', $storeList, null, [ 'class'=>'chosen', 'id'=> 'storeSelect', 'multiple'=>'true']) !!}
@@ -61,8 +61,21 @@
                     </div>
                 </div>
 
+                <div class="form-group">
 
-                <div id="all-stores-form" class="upload-form">
+                        <label class="col-sm-2 control-label">Start &amp; End</label>
+
+                        <div class="col-sm-10">
+                            <div class="input-daterange input-group" id="datepicker">
+                                <input type="text" class="input-sm form-control" name="send_at" id="send_at" value="" />
+                                <span class="input-group-addon">to</span>
+                                <input type="text" class="input-sm form-control" name="archive_at" id="archive_at" value="" />
+                            </div>
+                        </div>
+                </div>
+
+
+                <div  class="all-stores-form upload-form">
                 this is teh form for all the stores
                 </div>
 
@@ -200,7 +213,12 @@
                 <script type="text/javascript">
 
 
-
+                    $('.input-daterange').datepicker({
+                         format: 'yyyy-mm-dd',
+                        keyboardNavigation: false,
+                        forceParse: false,
+                        autoclose: true
+                    });  
                     
 
                    
@@ -215,13 +233,15 @@
 
                     $(document).ready(function() {
 
+                        $(".chosen").chosen({ width:'75%' });
+
                         $( ".select-stores" ).click(function() {
                             console.log('select store clicked');
                             $(this).removeClass('btn-outline');
                             $(".all-stores").addClass('btn-outline');
-                            $('#select-stores-form').show();
-                            $(".chosen").chosen({ width:'75%' });
-                            $("#all-stores-form").hide();
+                            $('.select-stores-form').show();
+                            
+                            $(".all-stores-form").hide();
                             // $('.select-stores-form').toggleClass('visible');
                         });
 
@@ -229,9 +249,11 @@
                             $(this).removeClass('btn-outline');
                             $(".select-stores").addClass('btn-outline');
 
-                            $('#all-stores-form').show();
-                            $('#select-stores-form').hide();
+                            $('.all-stores-form').show();
+                            $('.select-stores-form').hide();
                              $("#allStores").prop('checked', 'true');
+                             $("#allStores").click();
+                             console.log($("#storeSelect").val());
                         });
 
                         $("#allStores").change(function(){
