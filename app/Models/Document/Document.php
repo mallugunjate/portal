@@ -151,14 +151,7 @@ class Document extends Model
         
         $extension = $file->getClientOriginalExtension();
         $originalName = $file->getClientOriginalName();
-        $modifiedName = str_replace(" ", "_", $originalName);
-        $modifiedName = str_replace(".", "_", $modifiedName);
-        $modifiedName = str_replace("%", "pct", $modifiedName);
-        $modifiedName = str_replace("#", "", $modifiedName);
-        $modifiedName = str_replace("&", "_and_", $modifiedName);
-        $modifiedName = str_replace("'", "", $modifiedName);
-        $modifiedName = str_replace("\"", "", $modifiedName);
-        $modifiedName = str_replace("?", "", $modifiedName);
+        $modifiedName = preg_replace('/[^A-Za-z0-9\-]/', '', $originalName);
         
         $response = [];
         $response["originalName"] = $originalName;
