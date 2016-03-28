@@ -594,6 +594,8 @@ return array(
     'UpdateDocumentsTableDropStartend' => $baseDir . '/database/migrations/2016_02_19_224325_update_documents_table_drop_startend.php',
     'UpdateEventsTableAddStartend' => $baseDir . '/database/migrations/2016_02_24_181942_update_events_table_add_startend.php',
     'UpdateEventsTableDropStartend' => $baseDir . '/database/migrations/2016_02_24_181909_update_events_table_drop_startend.php',
+    'UpdateFeatureDocumentTableAddSoftDeletes' => $baseDir . '/database/migrations/2016_03_28_111034_update_feature_document_table_addSoftDeletes.php',
+    'UpdateFeaturePackageTableAddSoftDeletes' => $baseDir . '/database/migrations/2016_03_28_111310_update_feature_package_table_addSoftDeletes.php',
     'UpdateFeaturesTable' => $baseDir . '/database/migrations/2016_01_29_201330_update_features_table.php',
     'UpdateFeaturesTableAddStartend' => $baseDir . '/database/migrations/2016_03_10_165126_update_features_table_add_startend.php',
     'UpdateFeaturesTableDropStartend' => $baseDir . '/database/migrations/2016_03_10_165116_update_features_table_drop_startend.php',
