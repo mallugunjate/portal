@@ -134,9 +134,9 @@ class Document extends Model
             Folder::updateTimestamp($global_folder_id, $document->created_at);
 
             //create thumbnail
-            if($metadata["originalExtension"] == "jpg" || $metadata["originalExtension"] == "png" || $metadata["originalExtension"] == "gif" || $metadata["originalExtension"] == "pdf"){
-                Document::createDocumentThumbnail($filename);    
-            }            
+            // if($metadata["originalExtension"] == "jpg" || $metadata["originalExtension"] == "png" || $metadata["originalExtension"] == "gif" || $metadata["originalExtension"] == "pdf"){
+            //     Document::createDocumentThumbnail($filename);    
+            // }            
 
 
             $documentfolder->save();
