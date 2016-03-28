@@ -57,18 +57,20 @@
 		                            <div class="table-responsive">
 		                            	<table class="table table-hover issue-tracker">
 			                            	<tr>
-												<td>id</td>
+												
 												<td>Title</td>
+												<td>Label</td>
 												<td>Thumb</td>
 												<td>Cover</td>
 												<td>Actions</td>
 											</tr>
 			                            	@foreach($features as $feature)
 			                            	<tr>
-			                            		<td>{{ $feature->id }}</td>
+			                            		
 			                            		<td><a href="/admin/feature/{{$feature->id}}/edit">{{ $feature->title }}</a></td>
+			                            		<td> {{$feature->tile_label}} </td>
 			                            		<td><img src="/images/featured-covers/{{ $feature->thumbnail }}" height="75" width="75" /></td>
-			                            		<td><img src="/images/featured-backgrounds/{{ $feature->background_image }}" width="150" /></td>
+			                            		<td><img src="/images/featured-backgrounds/{{ $feature->background_image }}" height="75" width="125" /></td>
 			                            		<td>
 			                            			<a data-feature="{{$feature->id}}" id="feature{{$feature->id}}" class="feature-delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
 
