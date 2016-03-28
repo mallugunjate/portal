@@ -151,8 +151,9 @@ class Document extends Model
         
         $extension = $file->getClientOriginalExtension();
         $originalName = $file->getClientOriginalName();
-        $modifiedName = preg_replace('/[^A-Za-z0-9\-\s+]/', '', $originalName);
+        $modifiedName = preg_replace('/[^A-Za-z0-9\-\s+\.]/', '', $originalName);
         $modifiedName = preg_replace('/\s+/', '_', $modifiedName);
+        $modifiedName = preg_replace('/(\.)+/', '_', $modifiedName);
         
         $response = [];
         $response["originalName"] = $originalName;
