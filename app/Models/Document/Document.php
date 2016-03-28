@@ -14,11 +14,15 @@ use DB;
 use App\Models\Alert\Alert;
 use App\Models\Utility\Utility;
 use App\Models\Dashboard\Quicklinks;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Document extends Model
 {
+    use SoftDeletes;
+
     protected $table = 'documents';
     protected $fillable = array('upload_package_id', 'original_filename','original_extension', 'filename', 'title', 'description', 'start', 'end', 'banner_id');
+    protected $dates = ['deleted_at'];
 
     public static function getDocuments($global_folder_id, $forStore=null)
     {

@@ -605,5 +605,5 @@ return array(
     'UpdateUrgentnoticesTableDropStartend' => $baseDir . '/database/migrations/2016_03_10_165708_update_urgentnotices_table_drop_startend.php',
     'UpdateUsersTable' => $baseDir . '/database/migrations/2015_12_15_182533_update_users_table.php',
     'UpdateWeeksTable' => $baseDir . '/database/migrations/2015_12_14_180605_update_weeks_table.php',
-    'UpdatedAlertTypesTableAddSoftDeletes' => $baseDir . '/database/migrations/2016_03_28_105534_updated_alert_types_table_addSoftDeletes.php',
+    'UpdatedDocumentsTableAddSoftDeletes' => $baseDir . '/database/migrations/2016_03_28_110214_updated_documents_table_addSoftDeletes.php',
 );
