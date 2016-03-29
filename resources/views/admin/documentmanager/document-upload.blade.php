@@ -8,6 +8,12 @@
     <meta name="csrf-token" content="{!! csrf_token() !!}"/>
     <style type="text/css">
     .upload-form{ display: none;  }
+    .select-stores-form {
+        padding : 30px 0px;
+    }
+    .datepicker-div{
+        padding: 30px 0px;
+    }
     </style>
 </head>
 
@@ -51,7 +57,7 @@
 
                 <div >
                     <div class="form-group upload-form select-stores-form">                                    
-                    <label class="col-sm-2 control-label">Target Stores</label>
+                    <label class="col-sm-2 control-label">Stores</label>
                     <div class="col-sm-10">
                         {!! Form::select('stores', $storeList, null, [ 'class'=>'chosen', 'id'=> 'storeSelect', 'multiple'=>'true']) !!}
                         {!! Form::label('allStores', 'Or select all stores:', ['class'=>'hidden']) !!}
@@ -61,24 +67,24 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group datepicker-div">
 
                         <label class="col-sm-2 control-label">Start &amp; End</label>
 
                         <div class="col-sm-10">
                             <div class="input-daterange input-group" id="datepicker">
-                                <input type="text" class="input-sm form-control" name="send_at" id="send_at" value="" />
+                                <input type="text" class="input-sm form-control" name="start" id="start" value="" />
                                 <span class="input-group-addon">to</span>
-                                <input type="text" class="input-sm form-control" name="archive_at" id="archive_at" value="" />
+                                <input type="text" class="input-sm form-control" name="end" id="end" value="" />
                             </div>
                         </div>
                 </div>
 
 
-                <div  class="all-stores-form upload-form">
+                <!-- <div  class="all-stores-form upload-form">
                 this is teh form for all the stores
                 </div>
-
+ -->
 
 
                 	<div id="file-uploader" class="visible">
@@ -90,6 +96,7 @@
 					    {!! csrf_field() !!}
 					    <input type="hidden" name="upload_package_id"  id="upload_package_id" value="{{ $packageHash }}" />
 					    <input type="hidden" id="folder_id" name="folder_id" value="" />
+                        <input type="hidden" id="banner_id" name="banner_id" value="{{$banner->id}}" />
 
 
 
@@ -236,43 +243,45 @@
                         $(".chosen").chosen({ width:'75%' });
 
                         $( ".select-stores" ).click(function() {
-                            console.log('select store clicked');
+                            
                             $(this).removeClass('btn-outline');
                             $(".all-stores").addClass('btn-outline');
-                            $('.select-stores-form').show();
                             
+                            $("#storeSelect option").each(function(){
+                                $(this).removeAttr('selected');
+                            });
+                            $("#storeSelect").chosen();
+                            $('.select-stores-form').show();
                             $(".all-stores-form").hide();
-                            // $('.select-stores-form').toggleClass('visible');
+                        
                         });
 
                         $( ".all-stores" ).click(function() {
                             $(this).removeClass('btn-outline');
                             $(".select-stores").addClass('btn-outline');
 
-                            $('.all-stores-form').show();
                             $('.select-stores-form').hide();
-                             $("#allStores").prop('checked', 'true');
                              $("#allStores").click();
                              console.log($("#storeSelect").val());
                         });
 
                         $("#allStores").change(function(){
 
-                            if ($("#allStores").is(":checked")) {
+                            // if ($("#allStores").is(":checked")) {
 
-                                $("#storeSelect option").each(function(index){            
-                                    $(this).attr('selected', 'selected');
-                                });
-                                $("#storeSelect").chosen();
+                            $("#storeSelect option").each(function(index){            
+                                $(this).attr('selected', 'selected');
+                            });
+                            $("#storeSelect").chosen();
                                 
-                            }
-                            else if ($("#allStores").not(":checked")) {
-                                $("#storeSelect option").each(function(){
-                                    $(this).removeAttr('selected');
-                                });
-                                $("#storeSelect").chosen();
+                            // }
+                            // else if ($("#allStores").not(":checked")) {
+                            //     $("#storeSelect option").each(function(){
+                            //         $(this).removeAttr('selected');
+                            //     });
+                            //     $("#storeSelect").chosen();
                                 
-                            }
+                            // }
 
                             console.log($("#storeSelect").val());
                         }); 

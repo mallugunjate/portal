@@ -14,6 +14,7 @@ use DB;
 use App\Models\Alert\Alert;
 use App\Models\Utility\Utility;
 use App\Models\Dashboard\Quicklinks;
+use App\Models\Document\DocumentTarget;
 
 class Document extends Model
 {
@@ -106,7 +107,9 @@ class Document extends Model
                 'upload_package_id' => $request->get('upload_package_id'),
                 'title'             => preg_replace('/\.'.preg_quote($metadata["originalExtension"]).'/', '', $metadata["originalName"]),
                 'description'       => "no description",
-                'banner_id'         => $banner->id
+                'banner_id'         => $banner->id,
+                'start'             => $request->start,
+                'end'               => $request->end
             );
 
             $document = Document::create($documentdetails);
@@ -133,17 +136,14 @@ class Document extends Model
             //update folder timestamp
             Folder::updateTimestamp($global_folder_id, $document->created_at);
 
-            //create thumbnail
-            // if($metadata["originalExtension"] == "jpg" || $metadata["originalExtension"] == "png" || $metadata["originalExtension"] == "gif" || $metadata["originalExtension"] == "pdf"){
-            //     Document::createDocumentThumbnail($filename);    
-            // }            
-
-
             $documentfolder->save();
 
-
+            //update document target
+            Document::updateDocumentTarget($request, $document);
 
         }
+
+        return ;
     }
 
     public static function getDocumentMetaData($file)
@@ -199,6 +199,8 @@ class Document extends Model
         if ($tags != null) {
             Document::updateTags($id, $tags);
         }
+        \Log::info("***** From Update Meta data *********");
+        \Log::info($request->all());
 
         $title          = $request->get('title');
         $description    = $request->get('description');
@@ -403,5 +405,22 @@ class Document extends Model
     
         return $folderInfo;
 
+    }
+
+    public static function updateDocumentTarget(Request $request, $document)
+    {
+         if ($request['stores'] != '') {
+                
+               \DB::table('document_target')->where('document_id', $document->id)->delete();
+                $target_stores = explode(',',  $request['stores'] );
+                
+                foreach ($target_stores as $key=>$store) {
+                    \DB::table('document_target')->insert([
+                        'document_id' => $document->id,
+                        'store_id' => $store
+                        ]);    
+                }
+            } 
+            return;  
     }
 }

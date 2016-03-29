@@ -94,7 +94,7 @@
                   <input class="form-control" type="text" name="description{{ $doc->id }}" id="description{{ $doc->id }}">
                 </div> --}}
 
-{{--               <div class="col-md-3">
+              {{-- <div class="col-md-3">
                  {!! Form::select('tags[]', $tags, null, ['class'=>'chosen' , 'multiple'=>'true', 'id'=>"select$doc->id"]) !!}
               </div> --}}
 
@@ -119,10 +119,10 @@
                   </div>
                 </div>
               </div>
-              {{--<div>
-                                            <button type="submit" class="meta-data-add btn btn-success" data-id="{{ $doc->id }}">Update</button>
-                                            <span class="glyphicon glyphicon-ok" id="checkmark{{ $doc->id }}" aria-hidden="true"></span>
-                                          </div> --}}
+              <div class="hidden">
+                <button type="submit" class="meta-data-add btn btn-success" data-id="{{ $doc->id }}">Update</button>
+                {{-- <span class="glyphicon glyphicon-ok" id="checkmark{{ $doc->id }}" aria-hidden="true"></span> --}}
+              </div>
 
             </div>  
 
@@ -258,28 +258,9 @@
                             });
                         });
 
-                        
-                        // $(".tree").treed({openedClass : 'fa-folder-open', closedClass : 'fa-folder'});
-
                         var defaultFolderId = getParameterByName('parent');
                         console.log("defautl folder id: " + defaultFolderId);
-                        // var defaultFolderId = $("input[name='default_folder']").val();
-
-                        // if (defaultFolderId) {
-                        //     var folder = $("#"+defaultFolderId);
-                        //     $("#"+defaultFolderId).parent().click();
-                        //     $.ajax({
-                        //         url : '/admin/document',
-                        //         data : {
-                        //             folder : defaultFolderId,
-                        //             isWeekFolder : folder.attr("data-isweek")
-                        //         }
-                        //     })
-                        //     .done(function(data){
-                        //         console.log(data);
-                        //         fillTable(data);
-                        //     });
-                        // }
+                        
 
                     }); 
 

@@ -28,7 +28,10 @@ var myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
         formData.append("folder_id", $('#folder_id').val());
         formData.append("upload_package_id", $('[name=upload_package_id').val());
         formData.append("banner_id", $('[name=banner_id]').val());
-        formData.append("isWeekFolder", $('#folder-title').attr('data-isweekfolder') )
+        formData.append("isWeekFolder", $('#folder-title').attr('data-isweekfolder') );
+        formData.append("start", $("#start").val());
+        formData.append("end", $("#end").val());
+        formData.append("stores", $("#storeSelect").val());
     },
     init: function () {
       this.on("success", function (file, response) {
