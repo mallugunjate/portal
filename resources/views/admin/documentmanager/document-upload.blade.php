@@ -136,28 +136,28 @@
 					            </div>
 
 					            <div>
-					                <p class="name" data-dz-name></p>
-
+					                <p style="display: inline;"class="name" data-dz-name></p> ( <p style="display: inline;" class="size" data-dz-size></p> )
+                                    
 					                <strong class="error text-danger" data-dz-errormessage></strong>
 					            </div>
 
 					            <div>
-					                <p class="size" data-dz-size></p>
-					                <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+					                  
+					                <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" style="width: 200px;">
 					                  <div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress></div>
 					                </div>
 					            </div>
 
 					            <div>
-					              <button class="btn btn-primary start">
+					              <button class="btn btn-xs btn-primary start">
 					                  <i class="glyphicon glyphicon-upload"></i>
 					                  <span>Start</span>
 					              </button>
-					              <button data-dz-remove class="btn btn-warning cancel">
+					              <button data-dz-remove class="btn btn-xs btn-warning cancel">
 					                  <i class="glyphicon glyphicon-ban-circle"></i>
 					                  <span>Cancel</span>
 					              </button>
-					              <button data-dz-remove class="btn btn-danger delete">
+					              <button data-dz-remove class="btn btn-xs btn-danger delete">
 					                <i class="glyphicon glyphicon-trash"></i>
 					                <span>Remove</span>
 					              </button>
@@ -178,7 +178,7 @@
                         <input type="hidden" id="banner_id" name="banner_id" value="{{$banner->id}}" />
 
 
-                          <div class="col-lg-6" style="border: thin solid red;">
+                          <div class="col-lg-6">
                             <!-- The global file processing state -->
                             <span class="fileupload-process">
                               <div id="total-progress" class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" style="opacity: 0;">
@@ -240,6 +240,8 @@
             <script type="text/javascript" src="/js/vendor/dropzone.js"></script>
             <script type="text/javascript" src="/js/vendor/tablesorter.min.js"></script>
             <script type="text/javascript" src="/js/vendor/lightbox.min.js"></script>
+            <script type="text/javascript" src="/js/plugins/chosen/chosen.jquery.js"></script>
+            <script type="text/javascript" src="/js/custom/tree.js"></script>
             <script type="text/javascript" src="/js/custom/admin/folders/documentUploadFolderStructure.js" ></script>
             <script type="text/javascript" src="/js/custom/admin/documents/fileTable.js"></script>
             <script type="text/javascript" src="/js/custom/admin/documents/deleteFile.js"></script>
@@ -248,9 +250,7 @@
             <script type="text/javascript" src="/js/custom/admin/documents/showPackage.js"></script>
             <script type="text/javascript" src="/js/custom/admin/documents/breadcrumb.js"></script>
             <script type="text/javascript" src="/js/custom/admin/documents/uploadDocument.js"></script>
-            <script type="text/javascript" src="/js/custom/tree.js"></script>
-            <script type="text/javascript" src="/js/plugins/chosen/chosen.jquery.js"></script>
-
+            
                 <script type="text/javascript">
                 
                     $('.input-daterange').datepicker({

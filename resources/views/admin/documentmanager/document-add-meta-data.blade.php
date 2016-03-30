@@ -131,7 +131,7 @@
       <div class="row"  >
           <div class="col-md-1 col-md-offset-10">
               <br>
-              <button type="submit" class="meta-data-done btn btn-warning">Done</button>
+              <button type="submit" class="meta-data-done btn btn-success">Done</button>
               <span id="checkmark{{ $doc->id }}" aria-hidden="true"></span>
           </div>
           

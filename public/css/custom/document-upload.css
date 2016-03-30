@@ -23,7 +23,8 @@
       display: table-cell;
       vertical-align: top;
       border-top: 1px solid #ddd;
-      padding: 8px;
+      padding: 5px;
+
     }
     div.table .file-row:nth-child(odd) {
       background: #f9f9f9;

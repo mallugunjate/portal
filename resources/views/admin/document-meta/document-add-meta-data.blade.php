@@ -23,11 +23,11 @@
 
        <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
-                <h2>Update Meta Data <span id="folder-name-for-upload"></span></h2>
-{{--                 <ol class="breadcrumb">
+                <h2>Upload documents to <span id="folder-name-for-upload">Folder Name</span></h2>
+                <ol class="breadcrumb">
                     <li><a href="/">Home</a></li>
                     <li><a href="/document">Documents</a></li>
-                </ol> --}}
+                </ol> 
             </div>
             <div class="col-lg-2">
 
@@ -40,110 +40,86 @@
 
                 <div class="col-lg-12 animated fadeInRight">
 
-          <h4>View or Edit files just uploaded</h4>
-
-    
-      <input type="hidden" name="banner_id" value="{{$banner->id}}">
-      <input type="hidden" name="fo_id" value="{{$banner->id}}">
-
-      <div class="row" id="document-record-container">
-        <div class="row">
-            <div class="col-md-3">
-                <label>Filename</label><br>
-            </div>
-            <div class="col-md-3 ">
-                <label >Title</label>
-            </div>
-           {{-- <div class="col-md-3">
-                <label >Description</label>
-            
-             </div class="col-md-3">
-                <label>Tags</label>
-            <div>
-            </div> --}}
-            <div class="col-md-3">
-                <label>Start Date</label>
-            </div>
-            <div class="col-md-3">
-                <label>End Date</label>
-            </div>
-
-        </div>
-        <br>
-        <input type="hidden" name="folder_id" value="{{ $_REQUEST['parent'] }}">
-    	@foreach($documents as $doc)
-    		
-    			
-    			<form id="metadataform{{ $doc->id }}">
-    				
-            <input type="hidden" name="file_id" value="{{ $doc->id }}">
-            
-    				
-            
-            <div class="row" >
-              <div class="col-md-3">
-                <label >{{ $doc->original_filename }}</label>
-              </div>
-              
-              <div class="col-md-3">
-                
-                <input type="text" class="form-control" name="title{{ $doc->id }}" id="title{{ $doc->id }}" value="{{$doc->title}}">
-  		        </div>
-
-              {{-- <div class="col-md-3">
-                  <input class="form-control" type="text" name="description{{ $doc->id }}" id="description{{ $doc->id }}">
-                </div> --}}
-
-              {{-- <div class="col-md-3">
-                 {!! Form::select('tags[]', $tags, null, ['class'=>'chosen' , 'multiple'=>'true', 'id'=>"select$doc->id"]) !!}
-              </div> --}}
-
-              <div class="col-md-3">
-                <div class="form-group">
-                  <div class='input-group date startdate' id='datetimepicker1-{{$doc->id}}'>
-                      <input type='text' class="form-control" name="start" id="start{{$doc->id}}"/>
-                      <span class="input-group-addon">
-                          <span class="glyphicon glyphicon-calendar"></span>
-                      </span>
+                <div class="ibox">
+                  <div class="ibox-title">
+                    <h5>Optionally edit document Title and/or Start/End</h5>
                   </div>
-                </div>
-              </div>
 
-              <div class="col-md-3">
-                <div class="form-group">
-                  <div class='input-group date enddate' id='datetimepicker2-{{$doc->id}}'>
-                      <input type='text' class="form-control" name="end" id="end{{$doc->id}}"/>
-                      <span class="input-group-addon">
-                          <span class="glyphicon glyphicon-calendar"></span>
-                      </span>
-                  </div>
-                </div>
-              </div>
-              <div class="hidden">
-                <button type="submit" class="meta-data-add btn btn-success" data-id="{{ $doc->id }}">Update</button>
-                {{-- <span class="glyphicon glyphicon-ok" id="checkmark{{ $doc->id }}" aria-hidden="true"></span> --}}
-              </div>
-
-            </div>  
-
-    			</form>
-
-        
-    	@endforeach
-      
-      </div> <!-- well ends -->
-      <div class="row"  >
-          <div class="col-md-1 col-md-offset-11">
-              <br>
-              <button type="submit" class="meta-data-done btn btn-warning">Done</button>
-              <span id="checkmark{{ $doc->id }}" aria-hidden="true"></span>
-          </div>
+                  <div class="ibox-content">
           
-          {{-- <div class="col-md-1">
-                                <br>
-                                <button type="submit" class="meta-data-add-all btn btn-success">Update All</button>
-                                <span class="glyphicon glyphicon-ok" id="checkmark{{ $doc->id }}" aria-hidden="true"></span>
-                              </div> --}}
+                    <input type="hidden" name="banner_id" value="{{$banner->id}}">
+                    <input type="hidden" name="fo_id" value="{{$banner->id}}">
+                    <input type="hidden" name="folder_id" value="{{ $_REQUEST['parent'] }}">
+
+                     <table class="table table-hover issue-tracker">
+
+                          <tbody>
+
+                          <tr>
+                            <td>File Name</td>
+                            <td>Title</td>
+                            <td>Start</td>
+                            <td>End</td>
+                          </tr>
+                      
+                  	@foreach($documents as $doc)
+                  		
+                  			<tr>
+                  			<form id="metadataform{{ $doc->id }}">
+                  				
+                          <input type="hidden" name="file_id" value="{{ $doc->id }}">
+
+                              <td>{{ $doc->original_filename }}</td>
+                              <td><input type="text" style="width: 500px;" class="form-control" name="title{{ $doc->id }}" id="title{{ $doc->id }}" value="{{$doc->title}}"></td>
+                		      
+                              <td>
+                              
+                                <div class='input-group date startdate' id='datetimepicker1-{{$doc->id}}'>
+                                    <input type='text' class="form-control" name="start" id="start{{$doc->id}}"/>
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                              
+                              </td>
+
+                              <td>
+                              
+                                <div class='input-group date enddate' id='datetimepicker2-{{$doc->id}}'>
+                                    <input type='text' class="form-control" name="end" id="end{{$doc->id}}"/>
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                              
+                              </td>
+
+                            
+          
+                  			</form>
+
+                        </tr>
+                  	@endforeach
+                        </tbody>
+                    </table>
+
+                  <div class="row">
+                      <div class="form-group">
+                          <div class="ibox-tools">
+                     
+                             <button type="submit" class="meta-data-done btn btn-success" style="margin-right: 24px;"><i class="fa fa-check"></i> Done</button>
+                        
+                          </div>
+                      </div>
+                      {{-- <div class="col-md-1">
+                                            <br>
+                                            <button type="submit" class="meta-data-add-all btn btn-success">Update All</button>
+                                            <span class="glyphicon glyphicon-ok" id="checkmark{{ $doc->id }}" aria-hidden="true"></span>
+                                          </div> --}}
+                  </div>
+
+                  </div>
+                  </div>
       </div>
     </div>
 
