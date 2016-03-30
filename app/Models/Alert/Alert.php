@@ -231,11 +231,16 @@ class Alert extends Model
 
             $alert->save();
 
+            \Log::info('mark document as alert');
+            $target_stores = $request['stores'];
             
-            if ($request['target_stores'] != '') {
+            if ($target_stores != '') {
                 
                 \DB::table('alerts_target')->where('alert_id', $alert->id)->delete();
-                $target_stores = $request['target_stores'];
+                
+                if(! is_array($target_stores) ) {
+                    $target_stores = explode(',',  $request['stores'] );    
+                }
                 
                 foreach ($target_stores as $store) {
                     \DB::table('alerts_target')->insert([
@@ -256,13 +261,17 @@ class Alert extends Model
             'banner_id'     => $request['banner_id']
             ]);
 
-            $target_stores = $request['target_stores'];
-
-            foreach ($target_stores as $store) {
-                \DB::table('alerts_target')->insert([
-                    'alert_id' => $alert->id,
-                    'store_id' => $store
-                    ]);    
+            $target_stores = $request['stores'];
+            if ($target_stores != '') {
+                if(! is_array($target_stores) ) {
+                    $target_stores = explode(',',  $request['stores'] );    
+                }
+                foreach ($target_stores as $store) {
+                    \DB::table('alerts_target')->insert([
+                        'alert_id' => $alert->id,
+                        'store_id' => $store
+                        ]);    
+                }
             }
         }
         
