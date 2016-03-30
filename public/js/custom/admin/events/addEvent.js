@@ -1,3 +1,7 @@
+$(document).ready(function(){
+	$("#allStores").click();	
+
+});
 $("#allStores").change(function(){
 
 	if ($("#allStores").is(":checked")) {
@@ -38,6 +42,13 @@ $(document).on('click','.event-create',function(){
 		$(window).scrollTop(0);
 		return false;
 	}	
+
+	if(eventType == ''){
+		swal("Oops!", "Event type missing", "error"); 
+		hasError = true;
+		$(window).scrollTop(0);
+		return false;
+	}
 
     if(eventStart == '' || eventEnd == '') {
 		swal("Oops!", "This event needs a start and end date.", "error"); 
