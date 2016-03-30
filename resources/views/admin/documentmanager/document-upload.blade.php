@@ -252,22 +252,15 @@
             <script type="text/javascript" src="/js/custom/tree.js"></script>
             <script type="text/javascript" src="/js/plugins/chosen/chosen.jquery.js"></script>
 
-        
                 <script type="text/javascript">
-
-
+                
                     $('.input-daterange').datepicker({
                          format: 'yyyy-mm-dd',
                         keyboardNavigation: false,
                         forceParse: false,
                         autoclose: true
                     });  
-                    
-
-                   
-
-                    
-                                       
+                                   
                     $.ajaxSetup({
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -327,89 +320,7 @@
 
                             console.log($("#storeSelect").val());
                         }); 
-
-
-                        var form = $("#example-advanced-form").show();
-                         
-                        form.steps({
-                            headerTag: "h3",
-                            bodyTag: "fieldset",
-                            transitionEffect: "slideLeft",
-                            onStepChanging: function (event, currentIndex, newIndex)
-                            {
-                                // Allways allow previous action even if the current form is not valid!
-                                if (currentIndex > newIndex)
-                                {
-                                    return true;
-                                }
-                                // Forbid next action on "Warning" step if the user is to young
-                                if (newIndex === 3 && Number($("#age-2").val()) < 18)
-                                {
-                                    return false;
-                                }
-                                // Needed in some cases if the user went back (clean up)
-                                if (currentIndex < newIndex)
-                                {
-                                    // To remove error styles
-                                    form.find(".body:eq(" + newIndex + ") label.error").remove();
-                                    form.find(".body:eq(" + newIndex + ") .error").removeClass("error");
-                                }
-                                form.validate().settings.ignore = ":disabled,:hidden";
-                                return form.valid();
-                            },
-                            onStepChanged: function (event, currentIndex, priorIndex)
-                            {
-                                // Used to skip the "Warning" step if the user is old enough.
-                                if (currentIndex === 2 && Number($("#age-2").val()) >= 18)
-                                {
-                                    form.steps("next");
-                                }
-                                // Used to skip the "Warning" step if the user is old enough and wants to the previous step.
-                                if (currentIndex === 2 && priorIndex === 3)
-                                {
-                                    form.steps("previous");
-                                }
-                            },
-                            onFinishing: function (event, currentIndex)
-                            {
-                                form.validate().settings.ignore = ":disabled";
-                                return form.valid();
-                            },
-                            onFinished: function (event, currentIndex)
-                            {
-                                alert("Submitted!");
-                            }
-                        // }).validate({
-                        //     errorPlacement: function errorPlacement(error, element) { element.before(error); },
-                        //     rules: {
-                        //         confirm: {
-                        //             equalTo: "#password-2"
-                        //         }
-                        //     }
-                        });
-
-
-
                         
-                        // $(".tree").treed({openedClass : 'fa-folder-open', closedClass : 'fa-folder'});
-
-                        // var defaultFolderId = $("input[name='default_folder']").val();
-
-                        // if (defaultFolderId) {
-                        //     var folder = $("#"+defaultFolderId);
-                        //     $("#"+defaultFolderId).parent().click();
-                        //     $.ajax({
-                        //         url : '/admin/document',
-                        //         data : {
-                        //             folder : defaultFolderId,
-                        //             isWeekFolder : folder.attr("data-isweek")
-                        //         }
-                        //     })
-                        //     .done(function(data){
-                        //         console.log(data);
-                        //         fillTable(data);
-                        //     });
-                        // }
 
                     }); 
                 </script>
