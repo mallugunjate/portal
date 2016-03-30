@@ -89,16 +89,6 @@
 
                                         {{-- <div class="summernote"></div> --}}
 
-                                        <div class="form-group"><label class="col-sm-2 control-label">Description</label>
-                                            <div class="col-sm-10">
-                                                <textarea class="form-control" rows="5" id="description" name="description">{{ $event->description }}</textarea>
-                                                
-                                            </div>
-                                        </div>
-
-                                        <div class="hr-line-dashed"></div>
-
-
                                         <div class="form-group">
 
                                                 <label class="col-sm-2 control-label">Start &amp; End</label>
@@ -111,6 +101,15 @@
                                                     </div>
                                                 </div>
                                         </div>
+
+                                        <div class="form-group"><label class="col-sm-2 control-label">Description</label>
+                                            <div class="col-sm-10">
+                                                <textarea class="form-control" rows="5" id="description" name="description">{{ $event->description }}</textarea>
+                                                
+                                            </div>
+                                        </div>
+
+                                        
                                         <div class="form-group">
                                                                         
                                             <label class="col-sm-2 control-label">Target Stores</label>
