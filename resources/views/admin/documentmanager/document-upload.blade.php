@@ -7,20 +7,22 @@
     <link rel="stylesheet" type="text/css" href="/css/custom/tree.css">
     <meta name="csrf-token" content="{!! csrf_token() !!}"/>
     <style type="text/css">
+    .form-container{ display: block; }
     .upload-form{ display: none;  }
     .select-stores-form {
-        padding : 30px 0px;
+        margin : 30px 0px;
     }
     .datepicker-div{
         padding: 30px 0px;
         display: none;
     }
+
     #file-uploader{ 
         display: none;
     }
 
     .file-actions{
-        border: thin solid lime;
+        text-align: right;
     }
     #actions{
         display: none;
@@ -34,10 +36,15 @@
         margin: 0px;
         top: 80px;
     }
+
+    .chosen-choices{
+        overflow: scroll;
+
+    }
     </style>
 </head>
 
-<body class="fixed-navigation adminview" onload="checkDeepLink()">
+<body class="fixed-navigation adminview">
     <div id="wrapper">
     <nav class="navbar-default navbar-static-side" role="navigation">
         <div class="sidebar-collapse">
@@ -80,43 +87,38 @@
                     </div>
                 </div> -->
 
-                <div class="ibox-content">
-                <center>
-                    <span class="btn btn-success btn-lg btn-outline all-stores">All Stores</span>
-                    <span class="btn btn-success btn-lg btn-outline select-stores">Selected Stores</span>
-                </center>
+                <div class="ibox-content form-group form-horizontal">
+                    <center>
+                        <span class="btn btn-success btn-lg btn-outline all-stores">All Stores</span>
+                        <span class="btn btn-success btn-lg btn-outline select-stores">Selected Stores</span>
+                    </center>
 
-                <div>
-                    <div class="form-group upload-form select-stores-form">                                    
-                    <label class="col-sm-2 control-label">Stores</label>
-                    <div class="col-sm-10">
-                        {!! Form::select('stores', $storeList, null, [ 'class'=>'chosen', 'id'=> 'storeSelect', 'multiple'=>'true']) !!}
-                        {!! Form::label('allStores', 'Or select all stores:', ['class'=>'hidden']) !!}
-                        {!! Form::checkbox('allStores', null, false ,['id'=> 'allStores', 'class'=>'hidden'] ) !!}
-                    </div>
+                    <div class="form-container">
 
-                    </div>
-                </div>
-
-                <div class="form-group datepicker-div">
-
-                        <label class="col-sm-2 control-label">Start &amp; End</label>
-
-                        <div class="col-sm-10">
-                            <div class="input-daterange input-group" id="datepicker">
-                                <input type="text" class="input-sm form-control" name="start" id="start" value="" />
-                                <span class="input-group-addon">to</span>
-                                <input type="text" class="input-sm form-control" name="end" id="end" value="" />
+                        <div class="upload-form select-stores-form" style="padding-bottom: 10px;">                                    
+                            <label class="col-sm-2 control-label">Target Stores</label>
+                            <div class="col-sm-10">
+                                {!! Form::select('stores', $storeList, null, [ 'class'=>'chosen', 'id'=> 'storeSelect', 'multiple'=>'true']) !!}
+                                {!! Form::label('allStores', 'Or select all stores:', ['class'=>'hidden']) !!}
+                                {!! Form::checkbox('allStores', null, false ,['id'=> 'allStores', 'class'=>'hidden'] ) !!}
                             </div>
                         </div>
-                </div>
 
+                        <div class="datepicker-div">
 
-                <!-- <div  class="all-stores-form upload-form">
-                this is teh form for all the stores
-                </div>
- -->
+                                <label class="col-sm-2 control-label">Start &amp; End</label>
 
+                                <div class="col-sm-10">
+                                    <div class="input-daterange input-group" id="datepicker">
+                                        <input type="text" class="input-sm form-control" name="start" id="start" value="" />
+                                        <span class="input-group-addon">to</span>
+                                        <input type="text" class="input-sm form-control" name="end" id="end" value="" />
+                                    </div>
+                                </div>
+                        </div>
+                        
+
+                    </div>
 
                 	<div id="file-uploader" class="visible">
 
@@ -176,7 +178,7 @@
                         <input type="hidden" id="banner_id" name="banner_id" value="{{$banner->id}}" />
 
 
-                          <div class="col-lg-8" style="border: thin solid red;">
+                          <div class="col-lg-6" style="border: thin solid red;">
                             <!-- The global file processing state -->
                             <span class="fileupload-process">
                               <div id="total-progress" class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" style="opacity: 0;">
@@ -185,7 +187,7 @@
                             </span>
                           </div>
 
-                          <div class="col-lg-4 file-actions">
+                          <div class="col-lg-6 file-actions">
 
 
                             <!-- The fileinput-button span is used to style the file input field as button -->
@@ -238,9 +240,6 @@
             <script type="text/javascript" src="/js/vendor/dropzone.js"></script>
             <script type="text/javascript" src="/js/vendor/tablesorter.min.js"></script>
             <script type="text/javascript" src="/js/vendor/lightbox.min.js"></script>
-
-            <script type="text/javascript" src="/js/plugins/steps/jquery.steps.min.js"></script>
-
             <script type="text/javascript" src="/js/custom/admin/folders/documentUploadFolderStructure.js" ></script>
             <script type="text/javascript" src="/js/custom/admin/documents/fileTable.js"></script>
             <script type="text/javascript" src="/js/custom/admin/documents/deleteFile.js"></script>
