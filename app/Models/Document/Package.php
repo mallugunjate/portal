@@ -9,13 +9,18 @@ use App\Models\Tag\Tag;
 use App\Models\Tag\ContentTag;
 use App\Models\UserSelectedBanner;
 use App\Models\Utility\Utility;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Package extends Model
 {
+    use SoftDeletes;
+ 
     protected $table = 'packages';
 
     protected $fillable = ['id', 'package_screen_name', 'package_name', 'is_hidden', 'start', 'end', 'banner_id'];
 
+    protected $dates = ['deleted_at'];
+    
     public static function storePackage(Request $request)
     {   
         \Log::info( $request->all() );

@@ -7,11 +7,16 @@ use Carbon\Carbon;
 use DB;
 use App\Models\Utility\Utility;
 use App\Models\Document\Document;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 class Alert extends Model
 {
+    use SoftDeletes;
     protected $table = 'alerts';
 
+
     protected $fillable = ['banner_id', 'document_id', 'alert_type_id', 'alert_start', 'alert_end'];
+    protected $dates = ['deleted_at'];
 
     public static function getAllAlerts($banner_id)
     {

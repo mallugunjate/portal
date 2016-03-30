@@ -7,11 +7,14 @@ use DB;
 use App\Models\Dashboard\QuicklinkTypes;
 use App\Models\Document\Document;
 use App\Models\Utility\Utility;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Quicklinks extends Model
 {
+    use SoftDeletes;
     protected $table = 'quicklinks';
     protected $fillable = ['banner_id', 'type', 'link_name', 'url'];
+    protected $dates = ['deleted_at'];
 
  	public static function getLinks($id, $storeNumber)
  	{

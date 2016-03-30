@@ -150,7 +150,7 @@ class FeatureAdminController extends Controller
      */
     public function destroy($id)
     {
-        Feature::find($id)->delete();
+        Feature::deleteFeature($id);
         return;
     }
 }

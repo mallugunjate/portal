@@ -13,12 +13,15 @@ use Carbon\Carbon;
 use App\Models\UserSelectedBanner;
 use DB;
 use App\Models\Dashboard\Quicklinks;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Document\GlobalFolder;
 
 class Folder extends Model
 {
+    use SoftDeletes;
     protected $table = 'folders';
     protected $fillable = array('name' , 'is_child', 'has_weeks', 'week_window_size', 'banner_id', 'has_child');
+    protected $dates = ['deleted_at'];
 
     public static function getFolders()
     {
@@ -77,7 +80,7 @@ class Folder extends Model
             FileFolder::where('folder_id', $id)->delete();
         }
 
-        $folder_id = \DB::table('folder_ids')->find($id)->folder_id;
+        $folder_id = GlobalFolder::find($id)->folder_id;
         $parentChildStructure = FolderStructure::where('child', $folder_id)->first();
         if (isset($parentChildStructure)) {
             
@@ -97,10 +100,19 @@ class Folder extends Model
 
         }
         
+        $childFolders = FolderStructure::where('parent', $folder_id)->get();
+        if(count($childFolders)>0)
+        {
+            foreach ($childFolders as $childFolder) {
+                $childFolderId = GlobalFolder::where('folder_id', $childFolder->child)->where('folder_type', 'folder')->first()->id;
+                Folder::deleteFolder($childFolderId, $request);
+            }
+            
+        }
         
         $folder = Folder::find($folder_id)->delete();  
 
-        \DB::table('folder_ids')->where('folder_id', $folder_id)->where('folder_type', 'folder')->delete();
+        GlobalFolder::where('folder_id', $folder_id)->where('folder_type', 'folder')->delete();
 
         $quicklink = Quicklinks::where('url', $id)->where('type', 1)->first();
         if ($quicklink) {

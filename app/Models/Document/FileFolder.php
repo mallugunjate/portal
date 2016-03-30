@@ -4,11 +4,14 @@ namespace App\Models\Document;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Document\FolderStructure;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class FileFolder extends Model
 {
+    use SoftDeletes;
     protected $table = 'file_folder';
     protected $fillable = array('document_id', 'folder_id');
+    protected $dates = ['deleted_at'];
 
     public static function getFileFolderStructure($banner_id)
     {	

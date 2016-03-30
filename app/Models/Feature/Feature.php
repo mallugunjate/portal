@@ -234,4 +234,12 @@ class Feature extends Model
               ->orderBy('order')->get();
 
     }
+
+    public static function deleteFeature($id)
+    {
+      Feature::find($id)->delete();
+      FeaturePackage::where('feature_id', $id)->delete();
+      FeatureDocument::where('feature_id', $id)->delete();
+      return;
+    }
 }
