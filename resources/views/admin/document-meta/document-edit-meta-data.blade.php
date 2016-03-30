@@ -23,13 +23,19 @@
 
     <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
-                    <h2>Documents</h2>
+                    <h2>Edit Document</h2>
                     <ol class="breadcrumb">
                         <li>
                             <a href="/admin">Home</a>
                         </li>
+                        <li>
+                            <a href="/admin/document/manager">Document Manager</a>
+                        </li>
+                        <li>
+                            Edit
+                        </li>
                         <li class="active">
-                            <strong>Document</strong>
+                            <strong>{{$document->title}}</strong>
                         </li>
                     </ol>
                 </div>
