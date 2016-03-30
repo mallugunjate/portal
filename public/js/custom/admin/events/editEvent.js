@@ -30,13 +30,19 @@ $(document).on('click','.event-update',function(){
     var eventEnd = $("#end").val();
     var target_stores  = $("#storeSelect").val();
 	var allStores  = $("#allStores:checked").val();
-
+	
     if(eventTitle == '') {
 		swal("Oops!", "This event needs a title.", "error"); 
 		hasError = true;
 		$(window).scrollTop(0);
 		return false;
 	}	
+	if(eventType == ''){
+		swal("Oops!", "Event type missing", "error"); 
+		hasError = true;
+		$(window).scrollTop(0);
+		return false;
+	}
 
     if(eventStart == '' || eventEnd == '') {
 		swal("Oops!", "This event needs a start and end date.", "error"); 

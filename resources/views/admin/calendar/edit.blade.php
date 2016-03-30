@@ -67,20 +67,20 @@
                                     <form method="get" class="form-horizontal">
                                         <input type="hidden" name="eventID" id="eventID" value="{{ $event->id }}">
                                         <input type="hidden" name="banner" id="banner" value="1">
-                                        <div class="form-group"><label class="col-sm-2 control-label">Title</label>
+                                        <div class="form-group"><label class="col-sm-2 control-label">Title <span class="req">*</span></label>
                                             <div class="col-sm-10"><input type="text" id="title" name="title" class="form-control" value="{{ $event->title }}"></div>
                                         </div>
 
-                                        <div class="form-group"><label class="col-sm-2 control-label">Event Type</label>
+                                        <div class="form-group"><label class="col-sm-2 control-label">Event Type <span class="req">*</span></label>
                                             <div class="col-sm-10">
                                                 {{-- <input type="text" class="form-control" value="{{ $event_type->event_type }}"> --}}
 
                                                 <select class="form-control" id="event_type" name="event_type">
-                                                    @foreach($event_types_list as $e)
-                                                        @if( $e->id == $event->event_type )
-                                                            <option value="{{ $e->id }}" selected>{{ $e->event_type}}</option>
+                                                    @foreach($event_types_list as $key=>$event_type)
+                                                        @if( $key == $event->event_type )
+                                                            <option value="{{ $key }}" selected>{{ $event_type}}</option>
                                                         @else
-                                                            <option value="{{ $e->id }}">{{ $e->event_type}}</option>
+                                                            <option value="{{ $key }}">{{ $event_type}}</option>
                                                         @endif
                                                     @endforeach
                                                 </select>
@@ -91,7 +91,7 @@
 
                                         <div class="form-group">
 
-                                                <label class="col-sm-2 control-label">Start &amp; End</label>
+                                                <label class="col-sm-2 control-label">Start &amp; End <span class="req">*</span></label>
 
                                                 <div class="col-sm-10">
                                                     <div class="input-daterange input-group" id="datepicker">
@@ -112,7 +112,7 @@
                                         
                                         <div class="form-group">
                                                                         
-                                            <label class="col-sm-2 control-label">Target Stores</label>
+                                            <label class="col-sm-2 control-label">Stores <span class="req">*</span></label>
                                             <div class="col-sm-10">
                                                 @if($all_stores)
                                                     {!! Form::select('stores', $storeList, null, [ 'class'=>'chosen', 'id'=> 'storeSelect', 'multiple'=>'true']) !!}
