@@ -1,5 +1,6 @@
 $(document).ready(function(){
 	$("#allStores").click();	
+	console.log("1");
 
 });
 $("#allStores").change(function(){
@@ -81,6 +82,9 @@ $(document).on('click','.event-create',function(){
 		    success: function(result) {
 		        console.log(result);
 		        $('#createNewEventForm')[0].reset(); // empty the form
+		        CKEDITOR.instances['description'].setData('');
+		        $('#datepicker').find('input').datepicker('setDate', null);
+		        $("#allStores").click();
 				swal("Nice!", "'" + eventTitle +"' has been created", "success");        
 		    }
 		});    	
