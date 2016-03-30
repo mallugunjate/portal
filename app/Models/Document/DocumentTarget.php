@@ -18,7 +18,7 @@ class DocumentTarget extends Model
      
     	if ($document) {
     		$document_id = $document->id;
-    		return DocumentTarget::where('document_id', $document_id)->lists('store_id', 'id');
+    		return DocumentTarget::where('document_id', $document_id)->get()->pluck('store_id')->toArray();
     	}
     	
     	return [];

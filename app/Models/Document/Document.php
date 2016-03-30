@@ -409,12 +409,14 @@ class Document extends Model
 
     public static function updateDocumentTarget(Request $request, $document)
     {
-         \Log::info('here');
-         \Log::info($request['stores']);
          if ($request['stores'] != '') {
                 
                DocumentTarget::where('document_id', $document->id)->delete();
-                $target_stores = explode(',',  $request['stores'] );
+                $target_stores = $request['stores'];
+                if(! is_array($target_stores) ) {
+                    $target_stores = explode(',',  $request['stores'] );    
+                }
+                
                 \Log::info($target_stores);
                 foreach ($target_stores as $key=>$store) {
                     DocumentTarget::insert([

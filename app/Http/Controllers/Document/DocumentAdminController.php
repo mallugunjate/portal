@@ -173,8 +173,6 @@ class DocumentAdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
-        \Log::info($request->all());
         return Document::updateDocument($request, $id);
     
     }
