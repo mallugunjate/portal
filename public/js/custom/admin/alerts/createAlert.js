@@ -50,7 +50,7 @@ $(document).on('click','.alert-create',function(){
 	console.log('all stores : ' + allStores);
 
     if(title == '') {
-		swal("Oops!", "This communication is missing something.", "error"); 
+		swal("Oops!", "Title required for this document.", "error"); 
 		hasError = true;
 		$(window).scrollTop(0);
 		return false;
@@ -61,6 +61,12 @@ $(document).on('click','.alert-create',function(){
 			$(window).scrollTop(0);
 			return false;
 		}
+	if(target_stores == null && typeof allStores === 'undefined' ) {
+		swal("Oops!", "Target stores missing", "error"); 
+		hasError = true;
+		$(window).scrollTop(0);
+		return false;
+	}
 	if(is_alert == 1){
 		if(alert_type_id == '' ) {
 			swal("Oops!", "Alert type missing", "error"); 
@@ -75,13 +81,10 @@ $(document).on('click','.alert-create',function(){
 		// 	$(window).scrollTop(0);
 		// 	return false;
 		// }
-		if(target_stores == null && typeof allStores === 'undefined' ) {
-			swal("Oops!", "Target stores missing", "error"); 
-			hasError = true;
-			$(window).scrollTop(0);
-			return false;
-		}
+		
 	} 
+
+	console.log(target_stores);
     if(hasError == false) {
 
 		$.ajax({
@@ -95,7 +98,7 @@ $(document).on('click','.alert-create',function(){
 		  		// start : start,
 		  		// end: end,
 		  		banner_id : banner_id,
-		  		target_stores : target_stores,
+		  		stores : target_stores,
 		  		document_start : document_start,
 		  		document_end : document_end,
 		  		

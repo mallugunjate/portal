@@ -235,6 +235,8 @@ class Document extends Model
 
         $document->save();
 
+        Document::updateDocumentTarget($request, $document);
+
         $is_alert = $request->get('is_alert');
         if( $is_alert == 1) {
             Alert::markDocumentAsAlert($request, $id);    
@@ -403,5 +405,24 @@ class Document extends Model
     
         return $folderInfo;
 
+    }
+
+    public static function updateDocumentTarget(Request $request, $document)
+    {
+         \Log::info('here');
+         \Log::info($request['stores']);
+         if ($request['stores'] != '') {
+                
+               DocumentTarget::where('document_id', $document->id)->delete();
+                $target_stores = explode(',',  $request['stores'] );
+                \Log::info($target_stores);
+                foreach ($target_stores as $key=>$store) {
+                    DocumentTarget::insert([
+                        'document_id' => $document->id,
+                        'store_id' => $store
+                        ]);    
+                }
+            } 
+            return;  
     }
 }
