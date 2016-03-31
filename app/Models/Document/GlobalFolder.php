@@ -5,10 +5,11 @@ namespace App\Models\Document;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class FolderPackage extends Model
+
+class GlobalFolder extends Model
 {
     use SoftDeletes;
-    protected $table = 'folder_package';
-    protected $fillable = ['folder_id', 'package_id'];
+    protected $table = 'folder_ids';
+    protected $fillable = array('folder_id' , 'folder_type');
     protected $dates = ['deleted_at'];
 }

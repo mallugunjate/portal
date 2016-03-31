@@ -8,11 +8,14 @@ use Illuminate\Http\Request;
 use App\Models\Communication\Communication;
 use DB;
 use App\Models\Utility\Utility;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class UrgentNotice extends Model
 {
+    use SoftDeletes;
     protected $table = 'urgent_notices';
     protected $fillable = ['banner_id', 'title', 'description', 'attachment_type_id', 'start', 'end'];
+    protected $dates = ['deleted_at'];
 
     public static function storeUrgentNotice(Request $request)
     {
@@ -123,6 +126,7 @@ class UrgentNotice extends Model
     public static function deleteUrgentNotice($id)
     {
         UrgentNotice::find($id)->delete();
+        UrgentNoticeTarget::where('urgent_notice_id', $id)->delete();
     }
 
     public static function getUrgentNoticeCount($storeNumber)

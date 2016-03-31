@@ -23,13 +23,19 @@
 
     <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
-                    <h2>Documents</h2>
+                    <h2>Edit Document</h2>
                     <ol class="breadcrumb">
                         <li>
                             <a href="/admin">Home</a>
                         </li>
+                        <li>
+                            <a href="/admin/document/manager">Document Manager</a>
+                        </li>
+                        <li>
+                            Edit
+                        </li>
                         <li class="active">
-                            <strong>Document</strong>
+                            <strong>{{$document->title}}</strong>
                         </li>
                     </ol>
                 </div>
@@ -43,7 +49,7 @@
           <div class="col-lg-12">
               <div class="ibox">
                   <div class="ibox-title">
-                      <h5>Edit Document</h5>
+                      <h5>Document details</h5>
 
                       <div class="ibox-tools">
 
@@ -55,18 +61,18 @@
                               <input type="hidden" name="documentID" id="documentID" value="{{ $document->id }}">
                               <input type="hidden" name="banner_id" value="{{$banner->id}}">
 
-                              <div class="form-group"><label class="col-sm-2 control-label"> Title</label>
+                              <div class="form-group"><label class="col-sm-2 control-label"> Title <span class="req">*</span></label>
                                   <div class="col-sm-10"><input type="text" id="title" name="title" class="form-control" value="{{ $document->title }}"></div>
                               </div>
 
                               
-
+                            {{--
                               <div class="form-group">
                                   {!! Form::label('description', 'Description' , ['class'=>'col-sm-2 control-label']) !!}
                                   <div class="col-sm-10">
                                       {!! Form::text('description',$document->description, ['class'=>'form-control']) !!}      
                                   </div>
-                              </div>
+                              </div> --}}
 
                               {{-- <div class="form-group">
                                 {!! Form::label('tags[]', 'Tags') !!}
@@ -75,7 +81,7 @@
                               
                                <div class="form-group">
 
-                                      <label class="col-sm-2 control-label">Start &amp; End</label>
+                                      <label class="col-sm-2 control-label">Start <span class="req">*</span> &amp; End</label>
 
                                       <div class="col-sm-10">
                                           <div class="input-daterange input-group" id="datepicker">
@@ -88,24 +94,23 @@
                                       </div>
                               </div>
 
-                      </form>
-                  </div>
+                              <div class="form-group">
+                                            
+                                  <label class="col-sm-2 control-label">Target Stores <span class="req">*</span></label>
+                                  <div class="col-sm-10">
+                                    @if($all_stores)
+                                        {!! Form::select('stores', $storeList, null, [ 'class'=>'chosen', 'id'=> 'storeSelect', 'multiple'=>'true']) !!}
+                                        {!! Form::label('allStores', 'Or select all stores:') !!}
+                                        {!! Form::checkbox('allStores', null, true ,['id'=> 'allStores'] ) !!}
+                                      @else
+                                        {!! Form::select('stores', $storeList, $target_stores, [ 'class'=>'chosen', 'id'=> 'storeSelect', 'multiple'=>'true']) !!}
+                                        {!! Form::label('allStores', 'Or select all stores:') !!}
+                                        {!! Form::checkbox('allStores', null, false ,['id'=> 'allStores'] ) !!}
+                                      @endif
+                                  </div>
 
-              </div>
-
-              <div class="ibox">
-                  <div class="ibox-title">
-                      <h5>Mark Document as Alert</h5>
-
-                      <div class="ibox-tools">
-
-                          
-                      </div>
-                  </div>
-                  <div class="ibox-content">
-                     <form method="get" class="form-horizontal" >
-                              <input type="hidden" name="documentID" id="documentID" value="{{ $document->id }}">
-                              <input type="hidden" name="banner_id" value="{{$banner->id}}">
+                              </div>
+     
                               
                               <div class="form-group">
                                 <label class="col-sm-2 control-label"> This document is an alert</label>
@@ -121,7 +126,7 @@
 
                               </div>
                                <div class="form-group">
-                                  <label class="control-label col-sm-2"> Alert Type </label>
+                                  <label class="control-label col-sm-2"> Alert Type <span class="req">*</span></label>
                                   <div class="col-sm-3">
                                       @if( isset($alert_details->id) )
                                         {!! Form::select('alert_type', $alert_types, $alert_details->alert_type_id ,['class'=> 'form-control', 'id'=>'alert_type']) !!}
@@ -130,23 +135,8 @@
                                       @endif
                                   </div>
                               </div>
-                              <div class="hr-line-dashed"></div>
-                              <div class="form-group">
-                                            
-                                  <label class="col-sm-2 control-label">Target Stores</label>
-                                  <div class="col-sm-10">
-                                    @if($all_stores)
-                                        {!! Form::select('stores', $storeList, null, [ 'class'=>'chosen', 'id'=> 'storeSelect', 'multiple'=>'true']) !!}
-                                        {!! Form::label('allStores', 'Or select all stores:') !!}
-                                        {!! Form::checkbox('allStores', null, true ,['id'=> 'allStores'] ) !!}
-                                      @else
-                                        {!! Form::select('stores', $storeList, $target_stores, [ 'class'=>'chosen', 'id'=> 'storeSelect', 'multiple'=>'true']) !!}
-                                        {!! Form::label('allStores', 'Or select all stores:') !!}
-                                        {!! Form::checkbox('allStores', null, false ,['id'=> 'allStores'] ) !!}
-                                      @endif
-                                  </div>
-
-                              </div>
+                              
+                              
 
                               {{--
                               <div class="hr-line-dashed"></div>

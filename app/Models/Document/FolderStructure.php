@@ -5,12 +5,14 @@ namespace App\Models\Document;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class FolderStructure extends Model
 {
+    use SoftDeletes;
     protected $table = 'folder_struct';
     protected $fillable = array('parent', 'child');
-
+    protected $dates = ['dates'];
     	
     public static function getNavigationStructure($banner_id = null)
     {

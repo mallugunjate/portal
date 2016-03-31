@@ -14,12 +14,19 @@ use DB;
 use App\Models\Alert\Alert;
 use App\Models\Utility\Utility;
 use App\Models\Dashboard\Quicklinks;
+<<<<<<< HEAD
 use App\Models\Document\DocumentTarget;
+=======
+use Illuminate\Database\Eloquent\SoftDeletes;
+>>>>>>> master
 
 class Document extends Model
 {
+    use SoftDeletes;
+
     protected $table = 'documents';
     protected $fillable = array('upload_package_id', 'original_filename','original_extension', 'filename', 'title', 'description', 'start', 'end', 'banner_id');
+    protected $dates = ['deleted_at'];
 
     public static function getDocuments($global_folder_id, $forStore=null)
     {
@@ -237,6 +244,8 @@ class Document extends Model
 
         $document->save();
 
+        Document::updateDocumentTarget($request, $document);
+
         $is_alert = $request->get('is_alert');
         if( $is_alert == 1) {
             Alert::markDocumentAsAlert($request, $id);    
@@ -411,11 +420,23 @@ class Document extends Model
     {
          if ($request['stores'] != '') {
                 
+<<<<<<< HEAD
                \DB::table('document_target')->where('document_id', $document->id)->delete();
                 $target_stores = explode(',',  $request['stores'] );
                 
                 foreach ($target_stores as $key=>$store) {
                     \DB::table('document_target')->insert([
+=======
+               DocumentTarget::where('document_id', $document->id)->delete();
+                $target_stores = $request['stores'];
+                if(! is_array($target_stores) ) {
+                    $target_stores = explode(',',  $request['stores'] );    
+                }
+                
+                \Log::info($target_stores);
+                foreach ($target_stores as $key=>$store) {
+                    DocumentTarget::insert([
+>>>>>>> master
                         'document_id' => $document->id,
                         'store_id' => $store
                         ]);    

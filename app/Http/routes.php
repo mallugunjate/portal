@@ -148,3 +148,7 @@ Route::get('/api/v1/folder/{id}/archived', 'Api\V1\ApiController@getArchivedDocu
 Route::get('/howyoulikemenow', function () {
     return view('site.howyoulikemenow');
 });
+
+Route::get('/doit', function () {
+    return view('site.doit');
+});
