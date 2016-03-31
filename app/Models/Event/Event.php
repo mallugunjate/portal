@@ -33,16 +33,9 @@ class Event extends Model
       }
       
       $v = new EventValidator();
-      $validationResult = $v->validate($validateThis);
-      if (!$validationResult) {       
-          $response =  ['validation_result' => 'false', 'errors' => $v->errors()];
-          return $response;
-      }
-      else {
-        $response = ['validation_result' => 'true'] ;
-        return $response;
-      }
       
+      return $v->validate($validateThis);
+       
     }
 
     public static function storeEvent($request)
@@ -75,7 +68,7 @@ class Event extends Model
     public static function updateEvent($id, $request)
     {
         $validate = Event::validateEvent($request);
-        
+        \Log::info($validate);
         if($validate['validation_result'] == 'false') {
           \Log::info($validate);
           return json_encode($validate);
