@@ -9,6 +9,7 @@ use App\Models\Banner;
 use App\Models\UserBanner;
 use App\Models\UserSelectedBanner;
 use Carbon\Carbon;
+use App\Models\Validation\EventValidator;
 
 class Event extends Model
 {
@@ -17,21 +18,56 @@ class Event extends Model
     protected $dates = ['deleted_at'];
     protected $fillable = ['banner_id', 'title', 'description', 'event_type', 'start', 'end'];
 
+    public static function validateEvent($request)
+    { 
+      $v = new EventValidator();
+      $validateThis = [ 
+                        'title'         => $request['title'],
+                        'event_type'    => $request['event_type'],
+                        'start'         => $request['start'],
+                        'end'           => $request['end'],
+                        'target_stores' => $request['target_stores']
+                      ];
+      \Log::info('validate this');
+      \Log::info($validateThis);
+      
+      $validationResult = $v->validate($validateThis);
+      if (!$validationResult) {       
+          $response =  ['validation_result' => 'false', 'errors' => $v->errors()];
+          return $response;
+      }
+      else {
+        $response = ['validation_result' => 'true'] ;
+        return $response;
+      }
+      
+    }
+
     public static function storeEvent($request)
     {
-    	\Log::info($request->all);
+        
+        $validate = Event::validateEvent($request);
+        
+        if($validate['validation_result'] == 'false') {
+          \Log::info($validate);
+          return json_encode($validate);
+        }
+
+        \Log::info($request->all);
         $banner = UserSelectedBanner::getBanner();
         $event = Event::create([
 
-    		'banner_id' => $banner->id,
-            'title' => $request['title'],
-            'event_type' => $request['event_type'],
-            'description' => $request['description'],
-            'start' => $request['start'],
-            'end' => $request['end']
-    	]);
-        Event::updateTargetStores($event->id, $request);
-    	return;
+          'banner_id' => $banner->id,
+              'title' => $request['title'],
+              'event_type' => $request['event_type'],
+              'description' => $request['description'],
+              'start' => $request['start'],
+              'end' => $request['end']
+        ]);
+        $event = Event::updateTargetStores($event->id, $request);
+        return json_encode($event);
+       
+      
     }
 
     public static function updateEvent($id, $request)

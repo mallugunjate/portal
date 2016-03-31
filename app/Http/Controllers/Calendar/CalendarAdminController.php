@@ -81,7 +81,7 @@ class CalendarAdminController extends Controller
      */
     public function store(Request $request)
     {
-        Event::storeEvent($request);   
+        return Event::storeEvent($request);   
     }
 
     /**
@@ -143,7 +143,9 @@ class CalendarAdminController extends Controller
     public function update(Request $request, $id)
     {
 
-        Event::updateEvent($id, $request);
+        $response = Event::updateEvent($id, $request);
+        \Log::info($response);
+        return $response;
     }
 
     /**
