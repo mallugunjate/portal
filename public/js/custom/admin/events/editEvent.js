@@ -94,6 +94,9 @@ $(document).on('click','.event-update',function(){
 			        if(errors.hasOwnProperty("target_stores")) {		        	
 		        		$("#storeSelect").parent().append('<div class="req">' + errors.target_stores[0]  + '</div>');
 		        	}
+		        	if(errors.hasOwnProperty("allStores")) {		        	
+		        		$("#storeSelect").parent().append('<div class="req">' + errors.allStores[0]  + '</div>');
+		        	}
 		        }
 		        else{
 		        	swal("Nice!", "'" + eventTitle +"' has been updated", "success");        	
