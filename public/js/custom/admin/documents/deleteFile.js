@@ -1,18 +1,27 @@
-	$("body").on("click", ".deleteFile", function(e) {
-		console.log("file delete requested");
-		e.preventDefault();
-		if (confirm('Are you sure you want to delete this file?')) {
-		    $(this).closest('tr').fadeOut(500);
-			$.ajax({
-			    url: '/admin/document/'+ this.id,
-			    type: 'DELETE',
-			    data : {	
-			    			_token : $('[name=_token').val()
-					   }
-
-			})
-			.done(function(data) {
-				console.log(data);
-			});
-		} 
-	});
+$(document).on("click", ".deleteFile", function() {
+	console.log("file delete requested");
+	var fileId = $(this).attr('data-fileid');
+	var selector = "#file"+fileId;
+	console.log("selector: " + selector);
+		// e.preventDefault();
+	swal({
+	    title: "Are you sure?",
+	    //text: "You will not be able to recover this imaginary file!",
+	    type: "warning",
+	    showCancelButton: true,
+	    confirmButtonColor: "#DD6B55",
+	    confirmButtonText: "Yes, delete it!",
+	    closeOnConfirm: false
+	}, function () {
+		$.ajax({
+		    url: '/admin/document/'+ fileId,
+		    type: 'DELETE',
+		    success: function(result) {
+		        $(selector).closest('tr').fadeOut(1000);
+		        swal("Deleted!", "This file has been deleted.", "success");
+		    }
+		});
+        
+    });
+	return false; 
+});
