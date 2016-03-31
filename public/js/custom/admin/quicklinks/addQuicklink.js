@@ -1,4 +1,4 @@
-$("#quicklink-file").click(function(){
+$("#quicklink-document").click(function(){
 	$("#document-listing").modal('show');
 });
 
@@ -66,7 +66,7 @@ $(document).on('click','.quicklink-create',function(){
  
 
     if(name == '') {
-		swal("Oops!", "This package needs a name.", "error"); 
+		swal("Oops!", "This quicklink needs a name.", "error"); 
 		hasError = true;
 		$(window).scrollTop(0);
 	}

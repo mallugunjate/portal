@@ -67,13 +67,13 @@
                                     <form method="get" class="form-horizontal" id="createNewQuicklinkForm">
                                         
                                         <input type="hidden" name="banner_id" value="{{$banner->id}}">
-                                        <div class="form-group"><label class="col-sm-2 control-label">Name</label>
+                                        <div class="form-group"><label class="col-sm-2 control-label">Name <span class="req">*</span></label>
                                             <div class="col-sm-10"><input type="text" id="name" name="name" class="form-control" value=""></div>
                                         </div>
 
-                                        <div class="hr-line-dashed"></div>
+                          
 
-                                        <div class="form-group"><label class="col-sm-2 control-label">Quicklink Type</label>
+                                        <div class="form-group"><label class="col-sm-2 control-label">Quicklink type <span class="req">*</span></label>
                                             <div class="col-md-10">
                                                @foreach($quicklink_types as $qtype)
                                                <?php $id = "quicklink-" . $qtype->name ?>
@@ -82,7 +82,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="hr-line-dashed"></div>
+                          
 
                                         <div class="form-group"><label class="col-sm-2 control-label">Quicklink URL</label>
                                             <div class="col-md-10" id="quicklink-url">
@@ -126,8 +126,8 @@
 											</ul>
 							            </div>
 							            <div class="modal-footer">
-							                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-							                <button type="button" class="btn btn-primary" id="attach-selected-files">Select Document</button>
+							                <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-ban"></i> Cancel</button>
+							                <button type="button" class="btn btn-primary" id="attach-selected-files"><i class="fa fa-check"></i> Select Document</button>
 							            </div>
 							        </div>
 							    </div>
@@ -155,8 +155,8 @@
 											</ul>
 							            </div>
 							            <div class="modal-footer">
-							                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-							                <button type="button" class="btn btn-primary" id="attach-selected-folders">Select Folder</button>
+							                <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-ban"></i> Cancel</button>
+							                <button type="button" class="btn btn-primary" id="attach-selected-folders"><i class="fa fa-check"></i> Select Folder</button>
 							            </div>
 							        </div>
 							    </div>
@@ -173,8 +173,8 @@
 							            	URL <input type="text" id="external-url" >
 							            </div>
 							            <div class="modal-footer">
-							                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-							                <button type="button" class="btn btn-primary" id="add-external-url">Done</button>
+							                <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-ban"></i> Cancel</button>
+							                <button type="button" class="btn btn-primary" id="add-external-url"><i class="fa fa-check"></i> Done</button>
 							            </div>
 							        </div>
 							    </div>

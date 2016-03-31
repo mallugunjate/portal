@@ -32,6 +32,7 @@ class DashboardController extends Controller
 
     public function index(Request $request)
     {
+        // dd($request->all());
     	$storeNumber = RequestFacade::segment(1);
 
         $storeInfo = StoreInfo::getStoreInfoByStoreId($storeNumber);

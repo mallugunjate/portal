@@ -3,12 +3,16 @@
 {{-- <div class="navbar-header" style="">
 
 </div> --}}
-    
+    <script>
+        var s = localStorage.getItem('userStoreName');
+        s = s.replace(/^A/, "");
+
+    </script>
     <div class="row">
 
         <div class="col-md-4 col-sm-4">
             <div class="pull-left" style="padding: 15px 10px 0px 20px;">
-                <script>document.write( localStorage.getItem('userStoreName') );</script> &nbsp;&nbsp;<a id="storeswitch" style="display: inline;"><i class="fa fa-sitemap "></i> Change Store</a>
+                <script>document.write( s );</script> &nbsp;&nbsp;<a id="storeswitch" style="display: inline;"><i class="fa fa-sitemap "></i> Change Store</a>
             </div>
         </div>
 
