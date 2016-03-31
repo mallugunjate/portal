@@ -31,25 +31,25 @@ $(document).on('click','.event-create',function(){
     var target_stores  = $("#storeSelect").val();
     var allStores  = $("allStores:checked").val();
 
- //    if(eventTitle == '') {
-	// 	swal("Oops!", "This event needs a title.", "error"); 
-	// 	hasError = true;
-	// 	$(window).scrollTop(0);
-	// 	return false;
-	// }	
+    if(eventTitle == '') {
+		swal("Oops!", "This event needs a title.", "error"); 
+		hasError = true;
+		$(window).scrollTop(0);
+		return false;
+	}	
 
- //    if(eventStart == '' || eventEnd == '') {
-	// 	swal("Oops!", "This event needs a start and end date.", "error"); 
-	// 	hasError = true;
-	// 	$(window).scrollTop(0);
-	// 	return false;
-	// }	
-	// if( target_stores == null && typeof allStores === 'undefined' ) {
-	// 	swal("Oops!", "Target stores not selected.", "error"); 
-	// 	hasError = true;
-	// 	$(window).scrollTop(0);
-	// 	return false;
-	// }
+    if(eventStart == '' || eventEnd == '') {
+		swal("Oops!", "This event needs a start and end date.", "error"); 
+		hasError = true;
+		$(window).scrollTop(0);
+		return false;
+	}	
+	if( target_stores == null && typeof allStores === 'undefined' ) {
+		swal("Oops!", "Target stores not selected.", "error"); 
+		hasError = true;
+		$(window).scrollTop(0);
+		return false;
+	}
 
 
     if(hasError == false) {
