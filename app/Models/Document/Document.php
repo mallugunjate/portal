@@ -14,11 +14,9 @@ use DB;
 use App\Models\Alert\Alert;
 use App\Models\Utility\Utility;
 use App\Models\Dashboard\Quicklinks;
-<<<<<<< HEAD
 use App\Models\Document\DocumentTarget;
-=======
 use Illuminate\Database\Eloquent\SoftDeletes;
->>>>>>> master
+
 
 class Document extends Model
 {
@@ -419,29 +417,20 @@ class Document extends Model
     public static function updateDocumentTarget(Request $request, $document)
     {
          if ($request['stores'] != '') {
-                
-<<<<<<< HEAD
-               \DB::table('document_target')->where('document_id', $document->id)->delete();
-                $target_stores = explode(',',  $request['stores'] );
-                
-                foreach ($target_stores as $key=>$store) {
-                    \DB::table('document_target')->insert([
-=======
-               DocumentTarget::where('document_id', $document->id)->delete();
-                $target_stores = $request['stores'];
-                if(! is_array($target_stores) ) {
-                    $target_stores = explode(',',  $request['stores'] );    
-                }
-                
-                \Log::info($target_stores);
-                foreach ($target_stores as $key=>$store) {
-                    DocumentTarget::insert([
->>>>>>> master
-                        'document_id' => $document->id,
-                        'store_id' => $store
-                        ]);    
-                }
-            } 
+            DocumentTarget::where('document_id', $document->id)->delete();
+            $target_stores = $request['stores'];
+            if(! is_array($target_stores) ) {
+                $target_stores = explode(',',  $request['stores'] );    
+            }
+
+            \Log::info($target_stores);
+            foreach ($target_stores as $key=>$store) {
+                DocumentTarget::insert([
+                    'document_id' => $document->id,
+                    'store_id' => $store
+                    ]);    
+            }
+        } 
             return;  
     }
 }
