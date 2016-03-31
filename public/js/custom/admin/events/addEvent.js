@@ -73,7 +73,7 @@ $(document).on('click','.event-create',function(){
 
 		    success: function(data) {
 		        console.log(data);
-		        if(data !=null && data.validation_result == 'false') {
+		        if(data != null && data.validation_result == 'false') {
 		        	var errors = data.errors;
 		        	if(errors.hasOwnProperty("title")) {
 		        		$.each(errors.title, function(index){

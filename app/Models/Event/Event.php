@@ -20,17 +20,19 @@ class Event extends Model
 
     public static function validateEvent($request)
     { 
-      $v = new EventValidator();
       $validateThis = [ 
                         'title'         => $request['title'],
                         'event_type'    => $request['event_type'],
                         'start'         => $request['start'],
                         'end'           => $request['end'],
-                        'target_stores' => $request['target_stores']
+                        'target_stores' => $request['target_stores'],
+                        
                       ];
-      \Log::info('validate this');
-      \Log::info($validateThis);
+      if ($request['allStores'] != NULL) {
+        $validateThis['allStores'] = $request['allStores'];
+      }
       
+      $v = new EventValidator();
       $validationResult = $v->validate($validateThis);
       if (!$validationResult) {       
           $response =  ['validation_result' => 'false', 'errors' => $v->errors()];
@@ -72,6 +74,13 @@ class Event extends Model
 
     public static function updateEvent($id, $request)
     {
+        $validate = Event::validateEvent($request);
+        
+        if($validate['validation_result'] == 'false') {
+          \Log::info($validate);
+          return json_encode($validate);
+        }
+
         $event = Event::find($id);
 
         $event->title = $request['title'];
@@ -83,7 +92,7 @@ class Event extends Model
         $event->save();
 
         Event::updateTargetStores($id, $request);
-        return;
+        return json_encode($event);
 
     }
 
