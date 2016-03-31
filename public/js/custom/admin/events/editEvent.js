@@ -74,7 +74,10 @@ $(document).on('click','.event-update',function(){
 		    },
 		    success: function(result) {
 		      //  $('#createNewEventForm')[0].reset(); // empty the form
-				swal("Nice!", "'" + eventTitle +"' has been updated", "success");        
+				swal({title:"Nice!", text: "'" + eventTitle +"' has been updated", type: 'success'}, function(){
+					window.location = '/admin/calendar';
+				});
+				
 		    }
 		});    	
     }

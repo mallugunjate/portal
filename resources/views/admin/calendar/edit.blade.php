@@ -58,7 +58,7 @@
 		                        <div class="ibox-title">
 		                            <h5>Edit Event: {{ $event->title }}</h5>
 		                            <div class="ibox-tools">
-		                                <a href="/admin/calendar/create" class="btn btn-primary" role="button"><i class="fa fa-plus"></i> Add New Event</a>
+		                                {{-- <a href="/admin/calendar/create" class="btn btn-primary" role="button"><i class="fa fa-plus"></i> Add New Event</a> --}}
                                         
 		                            </div>
 		                        </div>
