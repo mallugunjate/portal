@@ -35,20 +35,19 @@ $(document).ready(function() {
         return false;
     });
 
-    $(".meta-data-done").on("click", function(){
-        var banner_id = $("input[name='banner_id']").val();
-        var folder_id = $("input[name='folder_id']").val()
-        window.location ='/admin/document/manager#!/'+folder_id;
-    });
+    // $(".meta-data-done").on("click", function(){
+    //     var banner_id = $("input[name='banner_id']").val();
+    //     var folder_id = $("input[name='folder_id']").val()
+    //     window.location ='/admin/document/manager#!/'+folder_id;
+    // });
 
-    $(".meta-data-add-all").on("click", function(){
+    $(".meta-data-done").on("click", function(){
         var updateButtons = $(".meta-data-add");
         for (var i=0 ; i<updateButtons.length; i++) {
             updateButtons[i].click();
         }
+        var folder_id = $("input[name='folder_id']").val()
+        window.location ='/admin/document/manager#!/'+folder_id;
     });
 
-    // $('.chosen').chosen({
-    //     width:'100%'
-    // })
 });

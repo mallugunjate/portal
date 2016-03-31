@@ -28,7 +28,10 @@ var myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
         formData.append("folder_id", $('#folder_id').val());
         formData.append("upload_package_id", $('[name=upload_package_id').val());
         formData.append("banner_id", $('[name=banner_id]').val());
-        formData.append("isWeekFolder", $('#folder-title').attr('data-isweekfolder') )
+        formData.append("isWeekFolder", $('#folder-title').attr('data-isweekfolder') );
+        formData.append("start", $("#start").val());
+        formData.append("end", $("#end").val());
+        formData.append("stores", $("#storeSelect").val());
     },
     init: function () {
       this.on("success", function (file, response) {
@@ -74,8 +77,16 @@ myDropzone.on("queuecomplete", function (progress) {
     var folder_id = $('#folder_id').val();
     $(".file-row .delete").hide();
 //    window.location = '/admin/document/add-meta-data?package=' + upload_package_id + "&banner_id=" + banner_id + "&parent=" + folder_id;
-    var metadatalink = $("<a class='btn btn-default next-action' href='/admin/document/add-meta-data?package="+upload_package_id+"&banner_id="+ banner_id +"&parent="+ folder_id +"'> Next >> Review Documents</a>");
-    $(metadatalink).appendTo("#file-uploader #container");
+    var metadatalink = $("<a class='btn btn-primary next-action' href='/admin/document/add-meta-data?package="+upload_package_id+"&banner_id="+ banner_id +"&parent="+ folder_id +"'><i class='fa fa-check'></i> Review Documents</a>");
+    //$(metadatalink).appendTo("#file-uploader #container");
+    //
+    $( ".file-actions .btn" ).fadeOut( "slow", function() {
+      $( ".file-actions" ).empty();
+      $(metadatalink).appendTo(".file-actions");
+    });
+    
+    
+    
 });
 
 // Setup the buttons for all transfers
@@ -98,3 +109,70 @@ myDropzone.on('removedfile', function(file) {
     $('#actions .cancel').addClass('disabled');
   }
 });
+
+
+$('.input-daterange').datepicker({
+    format: 'yyyy-mm-dd',
+    keyboardNavigation: false,
+    forceParse: false,
+    autoclose: true
+});  
+               
+
+$(document).ready(function() {
+
+    $(".chosen").chosen({ width:'75%' });
+
+    $( ".select-stores" ).click(function() {
+        
+        $(this).removeClass('btn-outline');
+        $(".all-stores").addClass('btn-outline');
+        
+        $("#storeSelect option").each(function(){
+            $(this).removeAttr('selected');
+        });
+
+        $("#storeSelect").chosen();
+        $('.select-stores-form').show();
+        $('.datepicker-div').show();
+        $('#file-uploader').show();
+        $('#actions').show();
+        $(".all-stores-form").hide();
+    
+    });
+
+    $( ".all-stores" ).click(function() {
+        $(this).removeClass('btn-outline');
+        $(".select-stores").addClass('btn-outline');
+        $('.datepicker-div').show();
+        $('#file-uploader').show();
+        $('#actions').show();
+        $('.select-stores-form').hide();
+         $("#allStores").click();
+         console.log($("#storeSelect").val());
+    });
+
+    $("#allStores").change(function(){
+
+        // if ($("#allStores").is(":checked")) {
+
+        $("#storeSelect option").each(function(index){            
+            $(this).attr('selected', 'selected');
+        });
+        $("#storeSelect").chosen();
+            
+        // }
+        // else if ($("#allStores").not(":checked")) {
+        //     $("#storeSelect option").each(function(){
+        //         $(this).removeAttr('selected');
+        //     });
+        //     $("#storeSelect").chosen();
+            
+        // }
+
+        console.log($("#storeSelect").val());
+    }); 
+    
+    $( ".all-stores" ).trigger( "click" );
+
+}); 

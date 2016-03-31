@@ -14,7 +14,11 @@ use DB;
 use App\Models\Alert\Alert;
 use App\Models\Utility\Utility;
 use App\Models\Dashboard\Quicklinks;
+<<<<<<< HEAD
+use App\Models\Document\DocumentTarget;
+=======
 use Illuminate\Database\Eloquent\SoftDeletes;
+>>>>>>> master
 
 class Document extends Model
 {
@@ -108,9 +112,11 @@ class Document extends Model
                 'filename'          => $filename,
                 'original_extension'=> $metadata["originalExtension"],
                 'upload_package_id' => $request->get('upload_package_id'),
-                'title'             => "no title",
+                'title'             => preg_replace('/\.'.preg_quote($metadata["originalExtension"]).'/', '', $metadata["originalName"]),
                 'description'       => "no description",
-                'banner_id'         => $banner->id
+                'banner_id'         => $banner->id,
+                'start'             => $request->start,
+                'end'               => $request->end
             );
 
             $document = Document::create($documentdetails);
@@ -137,17 +143,14 @@ class Document extends Model
             //update folder timestamp
             Folder::updateTimestamp($global_folder_id, $document->created_at);
 
-            //create thumbnail
-            if($metadata["originalExtension"] == "jpg" || $metadata["originalExtension"] == "png" || $metadata["originalExtension"] == "gif" || $metadata["originalExtension"] == "pdf"){
-                Document::createDocumentThumbnail($filename);    
-            }            
-
-
             $documentfolder->save();
 
-
+            //update document target
+            Document::updateDocumentTarget($request, $document);
 
         }
+
+        return ;
     }
 
     public static function getDocumentMetaData($file)
@@ -155,10 +158,10 @@ class Document extends Model
         
         $extension = $file->getClientOriginalExtension();
         $originalName = $file->getClientOriginalName();
-        $modifiedName = str_replace(" ", "_", $originalName);
-        $modifiedName = str_replace(".", "_", $modifiedName);
-        $modifiedName = str_replace("%", "pct", $modifiedName);
-
+        $modifiedName = preg_replace('/[^A-Za-z0-9\-\s+\.]/', '', $originalName);
+        $modifiedName = preg_replace('/\s+/', '_', $modifiedName);
+        $modifiedName = preg_replace('/(\.)+/', '_', $modifiedName);
+        
         $response = [];
         $response["originalName"] = $originalName;
         $response["modifiedName"] = $modifiedName;
@@ -203,6 +206,8 @@ class Document extends Model
         if ($tags != null) {
             Document::updateTags($id, $tags);
         }
+        \Log::info("***** From Update Meta data *********");
+        \Log::info($request->all());
 
         $title          = $request->get('title');
         $description    = $request->get('description');
@@ -415,6 +420,13 @@ class Document extends Model
     {
          if ($request['stores'] != '') {
                 
+<<<<<<< HEAD
+               \DB::table('document_target')->where('document_id', $document->id)->delete();
+                $target_stores = explode(',',  $request['stores'] );
+                
+                foreach ($target_stores as $key=>$store) {
+                    \DB::table('document_target')->insert([
+=======
                DocumentTarget::where('document_id', $document->id)->delete();
                 $target_stores = $request['stores'];
                 if(! is_array($target_stores) ) {
@@ -424,6 +436,7 @@ class Document extends Model
                 \Log::info($target_stores);
                 foreach ($target_stores as $key=>$store) {
                     DocumentTarget::insert([
+>>>>>>> master
                         'document_id' => $document->id,
                         'store_id' => $store
                         ]);    

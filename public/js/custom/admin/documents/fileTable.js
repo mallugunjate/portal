@@ -87,7 +87,7 @@
 												' <td>'+ i.prettyDateEnd +'</td>' +
 												' <td class="action"> '+
 													'<a class="btn btn-xs btn-primary" href="/admin/document/'+ i.id +'/edit"><i class="fa fa-pencil"></i></a> '+
-													'<a class="deleteFile btn btn-xs btn-danger" id="'+ i.id +'" ><i class="fa fa-trash"></i></a>'+
+													'<a class="deleteFile btn btn-xs btn-danger" data-fileid="'+ i.id +'" id="file'+ i.id +'" ><i class="fa fa-trash"></i></a>'+
 												'</td> </tr>')
 				});
 				$('#file-table').append('</tbody>');
