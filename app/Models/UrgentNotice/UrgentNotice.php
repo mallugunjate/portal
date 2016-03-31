@@ -9,6 +9,7 @@ use App\Models\Communication\Communication;
 use DB;
 use App\Models\Utility\Utility;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Validation\UrgentNoticeValidator;
 
 class UrgentNotice extends Model
 {
@@ -17,10 +18,36 @@ class UrgentNotice extends Model
     protected $fillable = ['banner_id', 'title', 'description', 'attachment_type_id', 'start', 'end'];
     protected $dates = ['deleted_at'];
 
+    public static function validateUrgentNotice($request)
+    { 
+      $validateThis = [ 
+                        'title'         => $request['title'],
+                        'start'         => $request['start'],
+                        'end'           => $request['end'],
+                        'target_stores' => $request['target_stores'],
+                        
+                      ];
+      if ($request['allStores'] != NULL) {
+        $validateThis['allStores'] = $request['allStores'];
+      }
+      
+      $v = new UrgentNoticeValidator();
+      
+      return $v->validate($validateThis);
+       
+    }
+
+
     public static function storeUrgentNotice(Request $request)
     {
     	
-    	$banner_id = $request->banner_id;
+    	$validate = UrgentNotice::validateUrgentNotice($request);
+        if($validate['validation_result'] == 'false') {
+          \Log::info($validate);
+          return json_encode($validate);
+        }
+
+        $banner = UserSelectedBanner::getBanner();
     	$title = $request->title;
     	$description = $request->description;
     	$start = $request->start;
@@ -32,12 +59,12 @@ class UrgentNotice extends Model
     	\Log::info($request->all());
     	
     	$urgentNotice = UrgentNotice::create([
-    		'banner_id' => $banner_id,
+    		'banner_id' => $banner->id,
     		'title'		=> $title,
     		'description' => $description,
     		'start'		=> $start,
     		'end'		=> $end,
-    		'attachment_type_id'	=>$attachment_type_id
+    		'attachment_type_id'=>$attachment_type_id
     	]);
 
     	foreach ($attachments as $attachment) {
@@ -59,7 +86,14 @@ class UrgentNotice extends Model
 
     public static function updateUrgentNotice($request, $id)
     {
-    	$urgentNotice = UrgentNotice::find($id);
+    	
+        $validate = UrgentNotice::validateUrgentNotice($request);
+        if($validate['validation_result'] == 'false') {
+          \Log::info($validate);
+          return json_encode($validate);
+        }
+
+        $urgentNotice = UrgentNotice::find($id);
         $attachment_type_id = $urgentNotice->attachment_type_id;
 
 

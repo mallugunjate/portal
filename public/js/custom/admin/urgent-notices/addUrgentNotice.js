@@ -92,6 +92,7 @@ $(document).on('click','.urgentnotice-create',function(){
 	var attachment_type  = $("input[name='attachment_type']:checked").val();
 	var banner_id = $("input[name='banner_id']").val();
 	var target_stores  = $("#storeSelect").val();
+	var allStores  = $("allStores:checked").val();
 	var attachments = [];
 
 	console.log(target_stores);
@@ -102,8 +103,20 @@ $(document).on('click','.urgentnotice-create',function(){
 
  
 	console.log(description);
-    if(title == '' || description == '' || typeof attachment_type === 'undefined' || start == '' || end == '') {
-		swal("Oops!", "This notice is not complete.", "error"); 
+    if(title == '' ) {
+		swal("Oops!", "Title is required.", "error"); 
+		hasError = true;
+		$(window).scrollTop(0);
+		return false;
+	}
+	if(start == '' || end == '' ) {
+		swal("Oops!", "Start and End Dates required.", "error"); 
+		hasError = true;
+		$(window).scrollTop(0);
+		return false;
+	}
+	if( target_stores == null && typeof allStores === 'undefined' ) {
+		swal("Oops!", "Target stores not selected.", "error"); 
 		hasError = true;
 		$(window).scrollTop(0);
 		return false;
@@ -125,10 +138,38 @@ $(document).on('click','.urgentnotice-create',function(){
 		  		target_stores : target_stores
 		  		
 		    },
-		    success: function(result) {
-		        console.log(result);
-		        $('#createNewUrgentNoticeForm')[0].reset(); // empty the form
-				swal("Nice!", "'" + title +"' has been created", "success");        
+		    dataType : 'json',
+		    success: function(data) {
+		        console.log(data);
+		        if(data != null && data.validation_result == 'false') {
+		        	var errors = data.errors;
+		        	if(errors.hasOwnProperty("title")) {
+		        		$.each(errors.title, function(index){
+		        			$("#title").parent().append('<div class="req">' + errors.title[index]  + '</div>');	
+		        		}); 	
+		        	}
+		        	
+			        if(errors.hasOwnProperty("start")) {
+			        	$.each(errors.title, function(index){
+			        		$("#start").parent().parent().append('<div class="req">' + errors.start[0]  + '</div>');
+			        	});
+			        }
+			        if(errors.hasOwnProperty("end")) {
+			        	$.each(errors.title, function(index){
+			        		$("#end").parent().parent().append('<div class="req">' + errors.end[0]  + '</div>');	
+			        	});
+			        }
+			        if(errors.hasOwnProperty("target_stores")) {		        	
+		        		$("#storeSelect").parent().append('<div class="req">' + errors.target_stores[0]  + '</div>');
+		        	}
+		        	if(errors.hasOwnProperty("allStores")) {		        	
+		        		$("#storeSelect").parent().append('<div class="req">' + errors.allStores[0]  + '</div>');
+		        	}
+		        }
+		        else{
+		        	$('#createNewUrgentNoticeForm')[0].reset(); // empty the form
+					swal("Nice!", "'" + title +"' has been created", "success");        
+				}
 		    }
 		}).done(function(response){
 			console.log(response);
