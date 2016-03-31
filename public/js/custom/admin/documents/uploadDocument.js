@@ -109,3 +109,70 @@ myDropzone.on('removedfile', function(file) {
     $('#actions .cancel').addClass('disabled');
   }
 });
+
+
+$('.input-daterange').datepicker({
+    format: 'yyyy-mm-dd',
+    keyboardNavigation: false,
+    forceParse: false,
+    autoclose: true
+});  
+               
+
+$(document).ready(function() {
+
+    $(".chosen").chosen({ width:'75%' });
+
+    $( ".select-stores" ).click(function() {
+        
+        $(this).removeClass('btn-outline');
+        $(".all-stores").addClass('btn-outline');
+        
+        $("#storeSelect option").each(function(){
+            $(this).removeAttr('selected');
+        });
+
+        $("#storeSelect").chosen();
+        $('.select-stores-form').show();
+        $('.datepicker-div').show();
+        $('#file-uploader').show();
+        $('#actions').show();
+        $(".all-stores-form").hide();
+    
+    });
+
+    $( ".all-stores" ).click(function() {
+        $(this).removeClass('btn-outline');
+        $(".select-stores").addClass('btn-outline');
+        $('.datepicker-div').show();
+        $('#file-uploader').show();
+        $('#actions').show();
+        $('.select-stores-form').hide();
+         $("#allStores").click();
+         console.log($("#storeSelect").val());
+    });
+
+    $("#allStores").change(function(){
+
+        // if ($("#allStores").is(":checked")) {
+
+        $("#storeSelect option").each(function(index){            
+            $(this).attr('selected', 'selected');
+        });
+        $("#storeSelect").chosen();
+            
+        // }
+        // else if ($("#allStores").not(":checked")) {
+        //     $("#storeSelect option").each(function(){
+        //         $(this).removeAttr('selected');
+        //     });
+        //     $("#storeSelect").chosen();
+            
+        // }
+
+        console.log($("#storeSelect").val());
+    }); 
+    
+    $( ".all-stores" ).trigger( "click" );
+
+}); 

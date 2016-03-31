@@ -5,43 +5,8 @@
     @section('title', 'Upload New Documents')
     @include('admin.includes.head')
     <link rel="stylesheet" type="text/css" href="/css/custom/tree.css">
+    <link rel="stylesheet" type="text/css" href="/css/custom/admin/file-upload.css">
     <meta name="csrf-token" content="{!! csrf_token() !!}"/>
-    <style type="text/css">
-    .form-container{ display: block; }
-    .upload-form{ display: none;  }
-    .select-stores-form {
-        margin : 30px 0px;
-    }
-    .datepicker-div{
-        padding: 30px 0px;
-        display: none;
-    }
-
-    #file-uploader{ 
-        display: none;
-    }
-
-    .file-actions{
-        text-align: right;
-    }
-    #actions{
-        display: none;
-    }
-
-    #file-uploader{ background-color: #fff; border: 1px dashed #ccc; }
-
-    #watermark{
-        color: #ccc;
-        padding: 0px;
-        margin: 0px;
-        top: 80px;
-    }
-
-    .chosen-choices{
-        overflow: scroll;
-
-    }
-    </style>
 </head>
 
 <body class="fixed-navigation adminview">
@@ -89,7 +54,7 @@
 
                 <div class="ibox-content form-group form-horizontal">
                     <center>
-                        <span class="btn btn-success btn-lg btn-outline all-stores">All Stores</span>
+                        <span class="btn btn-success btn-lg all-stores">All Stores</span>
                         <span class="btn btn-success btn-lg btn-outline select-stores">Selected Stores</span>
                     </center>
 
@@ -110,7 +75,7 @@
 
                                 <div class="col-sm-10">
                                     <div class="input-daterange input-group" id="datepicker">
-                                        <input type="text" class="input-sm form-control" name="start" id="start" value="" />
+                                        <input type="text" class="input-sm form-control" name="start" id="start" value="<?php echo date('Y-m-d');?>" />
                                         <span class="input-group-addon">to</span>
                                         <input type="text" class="input-sm form-control" name="end" id="end" value="" />
                                     </div>
@@ -225,16 +190,12 @@
 	</div>
 </div>
 
-
-
 {{-- 
             @include('site.includes.modal') --}}
 
-                @include('site.includes.footer')
-                
-
-                @include('admin.includes.scripts')
-
+            @include('site.includes.footer')
+        
+            @include('admin.includes.scripts')
 
             <script type="text/javascript" src="/js/vendor/underscore-1.8.3.js"></script>
             <script type="text/javascript" src="/js/vendor/dropzone.js"></script>
@@ -251,78 +212,13 @@
             <script type="text/javascript" src="/js/custom/admin/documents/breadcrumb.js"></script>
             <script type="text/javascript" src="/js/custom/admin/documents/uploadDocument.js"></script>
             
-                <script type="text/javascript">
-                
-                    $('.input-daterange').datepicker({
-                         format: 'yyyy-mm-dd',
-                        keyboardNavigation: false,
-                        forceParse: false,
-                        autoclose: true
-                    });  
-                                   
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
-                    });
-
-                    $(document).ready(function() {
-
-                        $(".chosen").chosen({ width:'75%' });
-
-                        $( ".select-stores" ).click(function() {
-                            
-                            $(this).removeClass('btn-outline');
-                            $(".all-stores").addClass('btn-outline');
-                            
-                            $("#storeSelect option").each(function(){
-                                $(this).removeAttr('selected');
-                            });
-
-                            $("#storeSelect").chosen();
-                            $('.select-stores-form').show();
-                            $('.datepicker-div').show();
-                            $('#file-uploader').show();
-                            $('#actions').show();
-                            $(".all-stores-form").hide();
-                        
-                        });
-
-                        $( ".all-stores" ).click(function() {
-                            $(this).removeClass('btn-outline');
-                            $(".select-stores").addClass('btn-outline');
-                            $('.datepicker-div').show();
-                            $('#file-uploader').show();
-                            $('#actions').show();
-                            $('.select-stores-form').hide();
-                             $("#allStores").click();
-                             console.log($("#storeSelect").val());
-                        });
-
-                        $("#allStores").change(function(){
-
-                            // if ($("#allStores").is(":checked")) {
-
-                            $("#storeSelect option").each(function(index){            
-                                $(this).attr('selected', 'selected');
-                            });
-                            $("#storeSelect").chosen();
-                                
-                            // }
-                            // else if ($("#allStores").not(":checked")) {
-                            //     $("#storeSelect option").each(function(){
-                            //         $(this).removeAttr('selected');
-                            //     });
-                            //     $("#storeSelect").chosen();
-                                
-                            // }
-
-                            console.log($("#storeSelect").val());
-                        }); 
-                        
-
-                    }); 
-                </script>
+            <script type="text/javascript">
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            </script>
 
                 @include('site.includes.bugreport')
             </body>
