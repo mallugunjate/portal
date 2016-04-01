@@ -7,6 +7,33 @@
     <link rel="stylesheet" type="text/css" href="/css/plugins/chosen/chosen.css">
     <link rel="stylesheet" type="text/css" href="/css/custom/tree.css">
 	<meta name="csrf-token" content="{!! csrf_token() !!}"/>
+	<style>
+	body .modal-ql-file{
+    width: 100%; /* respsonsive width */
+    margin: 0 auto;
+/*    margin-left:-40%; */
+
+	}
+
+	body .modal-ql-file .modal-content{
+		width: 900px !important;
+		margin-left:-150px; 
+		/*margin: 0 auto;*/
+
+	}
+
+	body.adminview .ibox-title{
+		padding: 0px !important;
+		min-height: 0px !important;
+	}
+
+	.ql-filetable td, .ql-filetable thead{
+		font-size: 12px !important;
+	}
+
+	.modal-ql-file .ibox-title{ border: none; padding: 0px; }
+	.modal-ql-file .ibox-title h6{ font-size: 16px !important; font-weight: normal; }
+	</style>
 </head>
 
 <body class="fixed-navigation adminview">
@@ -105,25 +132,68 @@
 
                                 </div>
 		                    </div>
-		                    <div id="document-listing" class="modal fade">
+
+		                    <div id="document-listing" class="modal modal-ql-file fade">
 							    <div class="modal-dialog">
 							        <div class="modal-content">
 							            <div class="modal-header">
 							                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-							                <h4 class="modal-title">Select Document</h4>
+							                <h4 class="modal-title">Select a Document <span id="ql-doc-selected"><span></h4>
 							            </div>
 							            <div class="modal-body">
-							            	<ul class="tree">
-							            	@foreach ($navigation as $nav) 
-											
-												@if (isset($nav["is_child"]) && ($nav["is_child"] == 0) )
-													
-													@include('admin.package.file-folder-structure-partial', ['navigation' =>$navigation, 'currentnode' => $nav])
-													
-												@endif
 
-											@endforeach
-											</ul>
+
+								           <div class="row">
+
+									           <div class="col-md-3">
+
+
+
+
+
+						                            <div class="file-manager">
+
+						                                <span class="top-level-folder"> <h5><i class="fa fa-folder"></i> {{$banner->name}}</h5> </span>
+						                                    @include('admin.navigation-view', ['navigation'=>$navigation])
+						                                    <div id="file-container" class="hidden">
+						                                    <ol class="breadcrumbs"></ol>
+						                                    <input type="hidden" name="default_folder" value="">
+						                                    <input type="hidden" name="banner_id" value={{$banner->id}}>
+						                            {{--         @include('admin.documentmanager.document-table') --}}
+						                                    </div>
+						                                    <div id="package-viewer" class="hidden">
+						                                    @include('admin.package.view')
+						                                    </div>
+						                                    
+
+						                                <div class="clearfix"></div>
+						                            </div>
+										            {{--
+										            	<ul class="tree">
+										            	@foreach ($navigation as $nav) 
+														
+															@if (isset($nav["is_child"]) && ($nav["is_child"] == 0) )
+																
+																@include('admin.package.file-folder-structure-partial', ['navigation' =>$navigation, 'currentnode' => $nav])
+																
+															@endif
+
+														@endforeach
+														</ul>
+
+														--}}
+												</div>
+
+												<div class="col-md-9">
+													<div class="ibox-title">
+                                        				<h6 id="folder-title"></h6>
+                                       			 		<div class="ibox-tools"></div>
+                                    				</div> 
+												    <div class="ibox-content">    
+				                                        <table class="table tablesorter ql-filetable" id="file-table"></table>
+				                                    </div>
+												</div>
+											</div> <!-- end row -->										
 							            </div>
 							            <div class="modal-footer">
 							                <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-ban"></i> Cancel</button>
@@ -194,9 +264,9 @@
 
 @include('site.includes.bugreport')
 
-
-
-
+<script type="text/javascript" src="/js/vendor/underscore-1.8.3.js"></script>
+<script type="text/javascript" src="/js/custom/admin/folders/folderStructureQL.js" ></script>
+<script type="text/javascript" src="/js/custom/admin/documents/fileTableQL.js"></script>
 <script type="text/javascript" src="/js/custom/admin/quicklinks/addQuicklink.js"></script>			
 <script type="text/javascript" src="/js/custom/tree.js"></script>
 

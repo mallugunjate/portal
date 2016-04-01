@@ -11,7 +11,7 @@
 |
 */
 
-Route::pattern('storeno', '[A-Za-z0-9]+');
+Route::pattern('storeno', '[A-Z,0-9]+');
 Route::pattern('id', '[0-9]+');
 
 //STORE SELECTOR
