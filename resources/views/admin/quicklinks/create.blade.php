@@ -18,11 +18,17 @@
 	body .modal-ql-file .modal-content{
 		width: 900px !important;
 		margin-left:-150px; 
+		padding-left: 10px;
+		padding-right: 10px;
 		/*margin: 0 auto;*/
+	}
+
+	body .modal-ql-file .modal-body{
 
 	}
 
-	body.adminview .ibox-title{
+	.modal-ql-file .ibox-title{
+		border: thin solid lime;
 		padding: 0px !important;
 		min-height: 0px !important;
 	}
@@ -31,8 +37,8 @@
 		font-size: 12px !important;
 	}
 
-	.modal-ql-file .ibox-title{ border: none; padding: 0px; }
-	.modal-ql-file .ibox-title h6{ font-size: 16px !important; font-weight: normal; }
+	/*.modal-ql-file .ibox-title{ border: none; padding: 0px; }*/
+	.modal-ql-file h6{ font-size: 16px !important; font-weight: normal; }
 	</style>
 </head>
 
@@ -112,10 +118,8 @@
                           
 
                                         <div class="form-group"><label class="col-sm-2 control-label">Quicklink URL</label>
-                                            <div class="col-md-10" id="quicklink-url">
-                                            	
-                                            </div>
-
+                                            <div class="col-md-10" id="quicklink-url"></div>
+                                            <input type="hidden" id="url" name="url" value="" />
                                         </div>
                                         <div class="hr-line-dashed"></div>
 
@@ -138,20 +142,14 @@
 							        <div class="modal-content">
 							            <div class="modal-header">
 							                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-							                <h4 class="modal-title">Select a Document <span id="ql-doc-selected"><span></h4>
+							                <h4 class="modal-title">Select a Document</h4>
 							            </div>
 							            <div class="modal-body">
-
-
 								           <div class="row">
 
-									           <div class="col-md-3">
+									           <div class="col-md-3" style="direction:rtl;max-height:500px;overflow:auto;">
 
-
-
-
-
-						                            <div class="file-manager">
+						                            <div class="file-manager" style="direction:ltr;">
 
 						                                <span class="top-level-folder"> <h5><i class="fa fa-folder"></i> {{$banner->name}}</h5> </span>
 						                                    @include('admin.navigation-view', ['navigation'=>$navigation])
@@ -184,8 +182,8 @@
 														--}}
 												</div>
 
-												<div class="col-md-9">
-													<div class="ibox-title">
+												<div class="col-md-9" style="max-height:500px;overflow:auto;">
+													<div class="">
                                         				<h6 id="folder-title"></h6>
                                        			 		<div class="ibox-tools"></div>
                                     				</div> 
@@ -196,6 +194,8 @@
 											</div> <!-- end row -->										
 							            </div>
 							            <div class="modal-footer">
+							             	<input type="hidden" id="selected_file_id" name="selected_file_id" value="">
+							            	<h4 class="pull-left">Selected File:&nbsp;&nbsp;<span id="ql-doc-selected"><span></h4>
 							                <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-ban"></i> Cancel</button>
 							                <button type="button" class="btn btn-primary" id="attach-selected-files"><i class="fa fa-check"></i> Select Document</button>
 							            </div>

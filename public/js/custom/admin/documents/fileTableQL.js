@@ -91,14 +91,14 @@
 	   //      		cssDesc: 'down'
 				// });
 			}
-
 		}
-
 	}
 
 var selectDocument = function(id)
 {
 	var fileSelected = _.where(files, {id: id});
-	console.log(fileSelected);	
 	$("#ql-doc-selected").html(fileSelected[0].icon + " " + fileSelected[0].title);
+	id = id.toString();
+	console.log("mehahjhdasda: " + id );
+	$("input[id=selected_file_id]").val(id);
 }
