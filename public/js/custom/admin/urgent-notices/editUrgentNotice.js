@@ -198,24 +198,24 @@ $(document).on('click','.urgentnotice-update',function(){
 	
 	console.log(remove_attachments);
  
- //    if(title == '' ) {
-	// 	swal("Oops!", "Title is required.", "error"); 
-	// 	hasError = true;
-	// 	$(window).scrollTop(0);
-	// 	return false;
-	// }
-	// if(start == '' || end == '' ) {
-	// 	swal("Oops!", "Start and End Dates required.", "error"); 
-	// 	hasError = true;
-	// 	$(window).scrollTop(0);
-	// 	return false;
-	// }
-	// if( target_stores == null && typeof allStores === 'undefined' ) {
-	// 	swal("Oops!", "Target stores not selected.", "error"); 
-	// 	hasError = true;
-	// 	$(window).scrollTop(0);
-	// 	return false;
-	// }
+    if(title == '' ) {
+		swal("Oops!", "Title is required.", "error"); 
+		hasError = true;
+		$(window).scrollTop(0);
+		return false;
+	}
+	if(start == '' || end == '' ) {
+		swal("Oops!", "Start and End Dates required.", "error"); 
+		hasError = true;
+		$(window).scrollTop(0);
+		return false;
+	}
+	if( target_stores == null && typeof allStores === 'undefined' ) {
+		swal("Oops!", "Target stores not selected.", "error"); 
+		hasError = true;
+		$(window).scrollTop(0);
+		return false;
+	}
 
     if(hasError == false) {
 
@@ -231,8 +231,7 @@ $(document).on('click','.urgentnotice-update',function(){
 		  		new_attachments : new_attachments,
 		  		remove_attachments : remove_attachments,
 		  		banner_id : banner_id,
-		  		target_stores : target_stores,
-		  		allStores : 'uyyiuyk'
+		  		target_stores : target_stores
 		  		
 		    },
 		    dataType : 'json', 
@@ -243,6 +242,16 @@ $(document).on('click','.urgentnotice-update',function(){
 		        	if(errors.hasOwnProperty("title")) {
 		        		$.each(errors.title, function(index){
 		        			$("#title").parent().append('<div class="req">' + errors.title[index]  + '</div>');	
+		        		}); 	
+		        	}
+		        	if(errors.hasOwnProperty("attachment_type_id")) {
+		        		$.each(errors.attachment_type_id, function(index){
+		        			$("#attachment-Folder").parent().parent().append('<div class="req">' + errors.attachment_type_id[index]  + '</div>');	
+		        		}); 	
+		        	}
+		        	if(errors.hasOwnProperty("folder")) {
+		        		$.each(errors.folder, function(index){
+		        			$("#attachment-Folder").parent().parent().append('<div class="req">' + errors.folder[index]  + '</div>');	
 		        		}); 	
 		        	}
 		        	
@@ -262,6 +271,10 @@ $(document).on('click','.urgentnotice-update',function(){
 		        	if(errors.hasOwnProperty("allStores")) {		        	
 		        		$("#storeSelect").parent().append('<div class="req">' + errors.allStores[0]  + '</div>');
 		        	}
+		        	if(errors.hasOwnProperty("store")) {		        	
+		        		$("#storeSelect").parent().append('<div class="req">' + errors.store[0]  + '</div>');
+		        	}
+
 		        }
 		        else{
 		        	console.log(result);

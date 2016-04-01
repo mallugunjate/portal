@@ -148,6 +148,16 @@ $(document).on('click','.urgentnotice-create',function(){
 		        			$("#title").parent().append('<div class="req">' + errors.title[index]  + '</div>');	
 		        		}); 	
 		        	}
+		        	if(errors.hasOwnProperty("attachment_type_id")) {
+		        		$.each(errors.attachment_type_id, function(index){
+		        			$("#attachment-Folder").parent().parent().append('<div class="req">' + errors.attachment_type_id[index]  + '</div>');	
+		        		}); 	
+		        	}
+		        	if(errors.hasOwnProperty("folder")) {
+		        		$.each(errors.folder, function(index){
+		        			$("#attachment-Folder").parent().parent().append('<div class="req">' + errors.folder[index]  + '</div>');	
+		        		}); 	
+		        	}
 		        	
 			        if(errors.hasOwnProperty("start")) {
 			        	$.each(errors.title, function(index){
@@ -168,6 +178,7 @@ $(document).on('click','.urgentnotice-create',function(){
 		        	if(errors.hasOwnProperty("store")) {		        	
 		        		$("#storeSelect").parent().append('<div class="req">' + errors.store[0]  + '</div>');
 		        	}
+
 		        }
 		        else{
 		        	$('#createNewUrgentNoticeForm')[0].reset(); // empty the form

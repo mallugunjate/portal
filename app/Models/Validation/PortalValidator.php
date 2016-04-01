@@ -30,13 +30,11 @@ class PortalValidator extends Model
             
         }   
 
-
-        if (! array_key_exists("allStores", $data) || (array_key_exists("allStores", $data) && $data["allStores"] == NULL)) {
+       
+        if ((! array_key_exists("allStores", $data)) || (array_key_exists("allStores", $data) && $data["allStores"] == NULL)) {
+            
             if (array_key_exists('target_stores', $data)) {
                 $storeValidatorResult = $this->validateTargetStores($data['target_stores']);
-                \Log::info('^^^^^^^^');
-                \Log::info($storeValidatorResult);
-                \Log::info('^^^^^^^^');
                 if($storeValidatorResult['validation_result'] == 'false') {
                     return $storeValidatorResult;        
                 }
@@ -52,7 +50,7 @@ class PortalValidator extends Model
     private function validateTargetStores($target_stores)
     {
         $storeRule = [ 
-            'store' => 'regex: /\"(A-Z)\d{4}\"/' 
+            'store' => "regex:/(A-Z)?\d{4}/" 
         ];
 
         foreach ($target_stores as $store) {

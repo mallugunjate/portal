@@ -27,19 +27,29 @@ class UrgentNotice extends Model
                         'start'         => $request['start'],
                         'end'           => $request['end'],
                         'target_stores' => $request['target_stores'],
-                        'attachment_type_id' => $request['attachment_type']              
+                        'attachment_type_id' => $request['attachment_type'][0],
+                        'folder'        => '',
+                        'document'      => '',
+
                       ];
       if ($request['allStores'] != NULL) {
         $validateThis['allStores'] = $request['allStores'];
       }
-      if (isset($request['attachment_type'])) {
-        $attachment_type = \DB::table('urgent_notice_attachment_types')->find($request[]'attachment_type')->name;
-        $validateThis[$attachment_type] = $request['attachments'];
+      
+      if($request['attachment_type'][0] == 1){
+        $validateThis['folder'] = $request['attachments'][0];
+      }
+      if($request['attachment_type'][0] == 2){
+        $validateThis['document'] = $request['attachments'][0];
       }
       
+      \Log::info('*********');
+      \Log::info($validateThis);
+      \Log::info('*********');
       
       $v = new UrgentNoticeValidator();
       $validationResult =  $v->validate($validateThis);
+      \Log::info($validationResult);
       return $validationResult;
        
     }
@@ -48,51 +58,52 @@ class UrgentNotice extends Model
     public static function storeUrgentNotice(Request $request)
     {
     	\Log::info($request->all());
-    	// $validate = UrgentNotice::validateUrgentNotice($request);
-     //    if($validate['validation_result'] == 'false') {
-     //      return json_encode($validate);
-     //    }
+    	$validate = UrgentNotice::validateUrgentNotice($request);
+        if($validate['validation_result'] == 'false') {
+          return json_encode($validate);
+        }
 
-     //    $banner = UserSelectedBanner::getBanner();
-    	// $title = $request->title;
-    	// $description = $request->description;
-    	// $start = $request->start;
-    	// $end = $request->end;
-    	// $attachment_type_id = $request->attachment_type;
-    	// $attachments = $request->attachments;
-    	// $target_stores = $request->target_stores;
+        $banner = UserSelectedBanner::getBanner();
+    	$title = $request->title;
+    	$description = $request->description;
+    	$start = $request->start;
+    	$end = $request->end;
+    	$attachment_type_id = $request->attachment_type;
+    	$attachments = $request->attachments;
+    	$target_stores = $request->target_stores;
     	
-    	// \Log::info($request->all());
+    	\Log::info($request->all());
     	
-    	// $urgentNotice = UrgentNotice::create([
-    	// 	'banner_id' => $banner->id,
-    	// 	'title'		=> $title,
-    	// 	'description' => $description,
-    	// 	'start'		=> $start,
-    	// 	'end'		=> $end,
-    	// 	'attachment_type_id'=>$attachment_type_id
-    	// ]);
+    	$urgentNotice = UrgentNotice::create([
+    		'banner_id' => $banner->id,
+    		'title'		=> $title,
+    		'description' => $description,
+    		'start'		=> $start,
+    		'end'		=> $end,
+    		'attachment_type_id'=>$attachment_type_id
+    	]);
 
-    	// foreach ($attachments as $attachment) {
-    	// 	UrgentNoticeAttachment::create([
-    	// 		'urgent_notice_id' => $urgentNotice->id,
-    	// 		'attachment_id' => $attachment
-    	// 	]);
-    	// }
+    	foreach ($attachments as $attachment) {
+    		UrgentNoticeAttachment::create([
+    			'urgent_notice_id' => $urgentNotice->id,
+    			'attachment_id' => $attachment
+    		]);
+    	}
 
-    	// foreach ($target_stores as $store) {
-    	// 	UrgentNoticeTarget::create([
-    	// 		'urgent_notice_id' 	=> $urgentNotice->id,
-    	// 		'store_id'			=> $store
-    	// 	]);
-    	// }
-    	// return $urgentNotice;
+    	foreach ($target_stores as $store) {
+    		UrgentNoticeTarget::create([
+    			'urgent_notice_id' 	=> $urgentNotice->id,
+    			'store_id'			=> $store
+    		]);
+    	}
+    	return $urgentNotice;
     	
     }
 
     public static function updateUrgentNotice($request, $id)
     {
-    	
+    	\Log::info($request->all());
+        \Log::info(gettype($request['target_stores']));
         $validate = UrgentNotice::validateUrgentNotice($request);
         if($validate['validation_result'] == 'false') {
           \Log::info($validate);
