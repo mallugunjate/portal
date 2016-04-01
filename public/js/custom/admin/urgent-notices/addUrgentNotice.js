@@ -135,7 +135,7 @@ $(document).on('click','.urgentnotice-create',function(){
 		  		attachment_type : attachment_type,
 		  		attachments : attachments,
 		  		banner_id : banner_id,
-		  		target_stores : target_stores
+		  		target_stores : target_stores,
 		  		
 		    },
 		    dataType : 'json',
@@ -164,6 +164,9 @@ $(document).on('click','.urgentnotice-create',function(){
 		        	}
 		        	if(errors.hasOwnProperty("allStores")) {		        	
 		        		$("#storeSelect").parent().append('<div class="req">' + errors.allStores[0]  + '</div>');
+		        	}
+		        	if(errors.hasOwnProperty("store")) {		        	
+		        		$("#storeSelect").parent().append('<div class="req">' + errors.store[0]  + '</div>');
 		        	}
 		        }
 		        else{

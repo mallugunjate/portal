@@ -198,24 +198,24 @@ $(document).on('click','.urgentnotice-update',function(){
 	
 	console.log(remove_attachments);
  
-    if(title == '' ) {
-		swal("Oops!", "Title is required.", "error"); 
-		hasError = true;
-		$(window).scrollTop(0);
-		return false;
-	}
-	if(start == '' || end == '' ) {
-		swal("Oops!", "Start and End Dates required.", "error"); 
-		hasError = true;
-		$(window).scrollTop(0);
-		return false;
-	}
-	if( target_stores == null && typeof allStores === 'undefined' ) {
-		swal("Oops!", "Target stores not selected.", "error"); 
-		hasError = true;
-		$(window).scrollTop(0);
-		return false;
-	}
+ //    if(title == '' ) {
+	// 	swal("Oops!", "Title is required.", "error"); 
+	// 	hasError = true;
+	// 	$(window).scrollTop(0);
+	// 	return false;
+	// }
+	// if(start == '' || end == '' ) {
+	// 	swal("Oops!", "Start and End Dates required.", "error"); 
+	// 	hasError = true;
+	// 	$(window).scrollTop(0);
+	// 	return false;
+	// }
+	// if( target_stores == null && typeof allStores === 'undefined' ) {
+	// 	swal("Oops!", "Target stores not selected.", "error"); 
+	// 	hasError = true;
+	// 	$(window).scrollTop(0);
+	// 	return false;
+	// }
 
     if(hasError == false) {
 

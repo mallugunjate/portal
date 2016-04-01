@@ -12,13 +12,17 @@ class UrgentNoticeValidator extends PortalValidator
         'title' 		=> 'required',
     	'start'			=> 'required|date',
     	'end'			=> 'required|date',
-    	'target_stores'	=> "required_without:allStores",
+    	'target_stores'	=> "required_without:allStores|array",
     	'allStores'     => 'in:on'
             
     ];
 
     protected $messages = [
         'target_stores.required_without' => 'Target Store missing',
+        'target_stores.array' => 'Invalid Target Stores',
         'allStores.in' => 'Invalid value in Target Stores'
     ];
-}
+
+
+}   
+

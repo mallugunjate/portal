@@ -10,6 +10,8 @@ use DB;
 use App\Models\Utility\Utility;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Validation\UrgentNoticeValidator;
+use App\Models\UserSelectedBanner;
+
 
 class UrgentNotice extends Model
 {
@@ -25,62 +27,66 @@ class UrgentNotice extends Model
                         'start'         => $request['start'],
                         'end'           => $request['end'],
                         'target_stores' => $request['target_stores'],
-                        
+                        'attachment_type_id' => $request['attachment_type']              
                       ];
       if ($request['allStores'] != NULL) {
         $validateThis['allStores'] = $request['allStores'];
       }
+      if (isset($request['attachment_type'])) {
+        $attachment_type = \DB::table('urgent_notice_attachment_types')->find($request[]'attachment_type')->name;
+        $validateThis[$attachment_type] = $request['attachments'];
+      }
+      
       
       $v = new UrgentNoticeValidator();
-      
-      return $v->validate($validateThis);
+      $validationResult =  $v->validate($validateThis);
+      return $validationResult;
        
     }
 
 
     public static function storeUrgentNotice(Request $request)
     {
-    	
-    	$validate = UrgentNotice::validateUrgentNotice($request);
-        if($validate['validation_result'] == 'false') {
-          \Log::info($validate);
-          return json_encode($validate);
-        }
-
-        $banner = UserSelectedBanner::getBanner();
-    	$title = $request->title;
-    	$description = $request->description;
-    	$start = $request->start;
-    	$end = $request->end;
-    	$attachment_type_id = $request->attachment_type;
-    	$attachments = $request->attachments;
-    	$target_stores = $request->target_stores;
-    	
     	\Log::info($request->all());
+    	// $validate = UrgentNotice::validateUrgentNotice($request);
+     //    if($validate['validation_result'] == 'false') {
+     //      return json_encode($validate);
+     //    }
+
+     //    $banner = UserSelectedBanner::getBanner();
+    	// $title = $request->title;
+    	// $description = $request->description;
+    	// $start = $request->start;
+    	// $end = $request->end;
+    	// $attachment_type_id = $request->attachment_type;
+    	// $attachments = $request->attachments;
+    	// $target_stores = $request->target_stores;
     	
-    	$urgentNotice = UrgentNotice::create([
-    		'banner_id' => $banner->id,
-    		'title'		=> $title,
-    		'description' => $description,
-    		'start'		=> $start,
-    		'end'		=> $end,
-    		'attachment_type_id'=>$attachment_type_id
-    	]);
+    	// \Log::info($request->all());
+    	
+    	// $urgentNotice = UrgentNotice::create([
+    	// 	'banner_id' => $banner->id,
+    	// 	'title'		=> $title,
+    	// 	'description' => $description,
+    	// 	'start'		=> $start,
+    	// 	'end'		=> $end,
+    	// 	'attachment_type_id'=>$attachment_type_id
+    	// ]);
 
-    	foreach ($attachments as $attachment) {
-    		UrgentNoticeAttachment::create([
-    			'urgent_notice_id' => $urgentNotice->id,
-    			'attachment_id' => $attachment
-    		]);
-    	}
+    	// foreach ($attachments as $attachment) {
+    	// 	UrgentNoticeAttachment::create([
+    	// 		'urgent_notice_id' => $urgentNotice->id,
+    	// 		'attachment_id' => $attachment
+    	// 	]);
+    	// }
 
-    	foreach ($target_stores as $store) {
-    		UrgentNoticeTarget::create([
-    			'urgent_notice_id' 	=> $urgentNotice->id,
-    			'store_id'			=> $store
-    		]);
-    	}
-    	return $urgentNotice;
+    	// foreach ($target_stores as $store) {
+    	// 	UrgentNoticeTarget::create([
+    	// 		'urgent_notice_id' 	=> $urgentNotice->id,
+    	// 		'store_id'			=> $store
+    	// 	]);
+    	// }
+    	// return $urgentNotice;
     	
     }
 
