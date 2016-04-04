@@ -43,11 +43,11 @@
 		                <div class="col-lg-12">
 		                    <div class="ibox">
 		                        <div class="ibox-title">
-		                            <h5>Communications List</h5>
+		                            <h5>All Communications</h5>
 
 		                            <div class="ibox-tools">
 
-		                                <a href="/admin/communication/create" class="btn btn-primary btn"><i class="fa fa-plus"></i> Create New Communication</a>
+		                                <a href="/admin/communication/create" class="btn btn-primary btn"><i class="fa fa-plus"></i> New Communication</a>
 		                            </div>
 		                        </div>
 		                        <div class="ibox-content">
@@ -60,16 +60,16 @@
 
 										<tr>
 											<td>Subject</td>
-											<td>Sender</td>
+											
 											<td>Date</td>
-											<td></td>
+											<td>Action</td>
 										</tr>
 
 										@foreach($communications as $communication)
 										<tr>
 
 											<td><a href="/admin/communication/{{ $communication->id }}/edit">{{ $communication->subject }}</a></td>
-											<td>{{ $communication->sender }}</td>
+											
 											<td>{{ $communication->send_at }}</td>
 											
 											<td>
