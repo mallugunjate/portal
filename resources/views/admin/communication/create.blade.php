@@ -67,6 +67,18 @@
 											<label class="col-sm-2 control-label">Title</label>
 								            <div class="col-sm-10"><input type="text" id="subject" name="subject" class="form-control" value=""></div>
 										</div>
+										<div class="form-group">
+
+								                <label class="col-sm-2 control-label">Start &amp; End</label>
+
+								                <div class="col-sm-10">
+								                    <div class="input-daterange input-group" id="datepicker">
+								                        <input type="text" class="input-sm form-control" name="send_at" id="send_at" value="" />
+								                        <span class="input-group-addon">to</span>
+								                        <input type="text" class="input-sm form-control" name="archive_at" id="archive_at" value="" />
+								                    </div>
+								                </div>
+								        </div>
 										
 										<div class="form-group">
 											<label class="col-sm-2 control-label">Type</label>
@@ -94,6 +106,18 @@
 												</div>
 										</div>
 
+										
+
+										<div class="form-group">
+											<div class="col-sm-10 col-sm-offset-2">
+												<div id="add-documents" class="btn btn-primary btn-outline"><i class="fa fa-plus"></i> Add documents</div>
+												<div id="add-packages" class="btn btn-primary btn-outline"><i class="fa fa-plus"></i> Add packages</div>		
+											</div>
+										</div>
+										<div class="form-group">
+											<div id="files-selected"></div>
+											<div id="packages-selected"></div>
+										</div>
 										<div class="form-group">
 								                                            
 								                <label class="col-sm-2 control-label">Target Stores</label>
@@ -104,35 +128,6 @@
 								                </div>
 
 								        </div>
-
-								        <div class="form-group">
-
-								                <label class="col-sm-2 control-label">Start &amp; End</label>
-
-								                <div class="col-sm-10">
-								                    <div class="input-daterange input-group" id="datepicker">
-								                        <input type="text" class="input-sm form-control" name="send_at" id="send_at" value="" />
-								                        <span class="input-group-addon">to</span>
-								                        <input type="text" class="input-sm form-control" name="archive_at" id="archive_at" value="" />
-								                    </div>
-								                </div>
-								        </div>
-										
-
-										<div class="hr-line-dashed"></div>
-
-										<div class="form-group">
-											<div class="col-sm-10 col-sm-offset-2">
-												<div id="add-documents" class="btn btn-primary btn-outline"><i class="fa fa-plus"></i> Add Documents</div>
-												<div id="add-packages" class="btn btn-primary btn-outline"><i class="fa fa-plus"></i> Add Packages</div>		
-											</div>
-										</div>
-										<div class="form-group">
-											<div id="files-selected"></div>
-											<div id="packages-selected"></div>
-										</div>
-
-
 										
 
 										<div class="hr-line-dashed"></div>
