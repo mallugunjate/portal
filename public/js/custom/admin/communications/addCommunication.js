@@ -27,7 +27,7 @@ $("#add-packages").click(function(){
 
 $('body').on('click', '#attach-selected-files', function(){
 	$("#files-selected").empty();
-	$("#files-selected").append('<label class= "control-label col-sm-2 "> Files attached</label>');
+	$("#files-selected").append('<label class= "control-label col-sm-2 "> Documents attached</label>');
 	$('input[name^="package_files"]').each(function(){
 		if($(this).is(":checked")){
 			$("#files-selected").append('<div class="selected-files col-sm-10" data-fileid='+ $(this).val() +'>'+$(this).attr("data-filename")+'</div>')

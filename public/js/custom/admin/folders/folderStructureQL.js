@@ -29,8 +29,8 @@ var getFolderDocuments = function(id){
 	.done(function(data){
 		console.log(data);
 		fillTable(data);
-		setDeepLink(data);
-		fillBreadCrumbs(data);
+		// setDeepLink(data);
+		// fillBreadCrumbs(data);
 	});
 }
 
