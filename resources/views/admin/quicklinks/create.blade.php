@@ -259,7 +259,7 @@
 							            </div>
 							            <div class="modal-footer">
 							                <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-ban"></i> Cancel</button>
-							                <button type="button" class="btn btn-primary" id="add-external-url"><i class="fa fa-check"></i> Done</button>
+							                <button type="button" class="btn btn-primary" id="add-external-url" disabled><i class="fa fa-check"></i> Done</button>
 							            </div>
 							        </div>
 							    </div>
@@ -312,6 +312,7 @@
 	         $("#valid-url .fa").addClass("green");
 	         $(".link-test").show();
 	         $("#test-link").html("<a href='"+urlString+"' target='_blank'>"+urlString+"</a>");
+	         $("#add-external-url").attr("disabled", false);
 	    } else {
 	    	$("#valid-url .fa").removeClass("fa-check");
 	    	$("#valid-url .fa").removeClass("green");
@@ -319,6 +320,7 @@
 	    	$("#valid-url .fa").addClass("red");
 	    	$(".link-test").hide();
 	    	$("#test-link").empty();
+	    	$("#add-external-url").attr("disabled", true);
 	    }
 	});
  //    $("#external-url").on("change keyup", function() {

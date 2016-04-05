@@ -45,6 +45,7 @@ $('#attach-selected-files').on('click', function(){
 $("#add-external-url").on('click', function(){
 	$("#quicklink-url").empty();
 	$("#quicklink-url").append('<div id="url" data-url="'+ $("#external-url").val() +'"> '+$("#external-url").val()+' </div>')
+	$('#external').modal('toggle');
 });
 
 $('#attach-selected-folders').on('click', function(){
@@ -67,8 +68,8 @@ $(document).on('click','.quicklink-create',function(){
  
  	var banner_id = $("input[name='banner_id']").val();
 	var name = $("#name").val();
-	var type = $('input[name="type"]:checked').val();
-	var url = $("#url").val();
+	var type = $('input[name="link-type"]:checked').val();
+	var url = $("#url").data( "url" );
 	console.log("name : " + name);
 	console.log("url : " + url);
 	console.log("type : " + type);
