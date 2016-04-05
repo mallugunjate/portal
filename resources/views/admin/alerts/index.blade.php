@@ -59,23 +59,26 @@
 
 		                            <div class="table-responsive">
 
-										<table class="table table-hover issue-tracker">
-
-										<tr>
-											<td>Document</td>
-											<td>Start</td>
-											<td>End</td>
-											<td>Stores</td>
-											<td>Type</td>
-											<td></td>
-										</tr>
-
+										<table class="table table-hover issue-tracker tablesorter">
+											<thead>
+												<tr>
+													<td>Type</td>
+													<td>Title</td>
+													<td>Stores</td>
+													<td>Start</td>
+													<td>End</td>
+													<td>Visible</td>
+													<td class="actions">Action</td>
+												</tr>
+											</thead>
+											<tbody>
 										@foreach($alerts as $alert)
+										
 										<tr>
 
-											<td><a href="/admin/document/{{ $alert->document_id }}/edit">{{ $alert->document_name }}</a></td>
-											<td>{{ $alert->alert_start }}</td>
-											<td>{{ $alert->alert_end }}</td>
+											<td> {{$alert->alert_type}}</td>
+											<td><a href="/admin/document/{{ $alert->document_id }}/edit"> {!!$alert->icon!!} {{ $alert->document_name }}</a></td>
+										
 											<td>
 												@if($alert->count_target_stores > 0)
 													<button type="button" class="btn btn-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="{{$alert->target_stores}}" data-original-title="" title="" aria-describedby="popover199167">
@@ -86,7 +89,15 @@
 													&mdash;
 												@endif
 											</td>
-											<td> {{$alert->alert_type}}</td>
+											
+
+											<td data-start-date ="{{$alert->start}}" >{{ $alert->prettyStart }}</td>
+											<td data-end-date ="{{$alert->end}}">{{ $alert->prettyEnd }}</td>
+											<td >
+												{{$alert->active}}
+
+											</td>
+
 											<td>
 												
 												<a data-alert="{{ $alert->id }}" id="alert{{ $alert->id }}" class="delete-alert btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
@@ -94,10 +105,8 @@
 											</td>
 										</tr>
 										@endforeach
-
+										</tbody>
 										</table>
-
-{{-- 										{!! $events->render() !!} --}}
 
 		                            </div>
 		                        </div>
@@ -113,16 +122,54 @@
 
 			    @include('admin.includes.scripts')
 
+				
+
+				<script type="text/javascript" src="/js/custom/admin/alerts/deleteAlert.js"></script>
+				<script type="text/javascript" src="/js/vendor/tablesorter.min.js"></script>
 				<script type="text/javascript">
+					
+					$.tablesorter.addParser({
+						// set a unique id
+						id: 'portalDates',
+						is: function(s) {
+							// return false so this parser is not auto detected
+							return false;
+						},
+						format: function(s,table, cell, cellIndex) {
+							// format your data for normalization
+							
+							if (cellIndex === 3) {
+								return $(cell).attr("data-start-date");
+							}
+							else if (cellIndex === 4) {
+								return $(cell).attr("data-end-date");
+							}
+						},
+						// set type, either numeric or text
+						type: 'text'
+					});
+
+
 					$.ajaxSetup({
 				        headers: {
 				            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 				        }
 					});
 
-				</script>
+					
+					
+					$(function() {
+						$("table").tablesorter({
+							sortList: [[3,1]],
+							headers: {
+								3:{ sorter:'portalDates'},
+								4:{ sorter:'portalDates'},
+								'.actions' : { sorter:false},
+							}
+						});
+					}); 
 
-				<script type="text/javascript" src="/js/custom/admin/alerts/deleteAlert.js"></script>
+				</script>
 				@include('site.includes.bugreport')
 
 
