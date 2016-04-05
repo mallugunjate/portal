@@ -1,4 +1,4 @@
-$("#quicklink-file").click(function(){
+$("#quicklink-document").click(function(){
 	$("#document-listing").modal('show');
 });
 
@@ -24,11 +24,22 @@ $("#quicklink-external").click(function(){
 
 $('#attach-selected-files').on('click', function(){
 	$("#quicklink-url").empty();
-	$('.document-checkbox').each(function(){
-		if($(this).is(":checked")){
-			$("#quicklink-url").append('<div class="selected-files" id="url" data-url='+ $(this).val() +'>'+$(this).attr("data-filename")+'</div>')
-		}
-	});
+
+	var selectedFile = $("#ql-doc-selected").html();
+	var selectedFileId = $("input[id=selected_file_id]").val();
+
+	console.log("selected file: " + selectedFile + ", file id: " + selectedFileId );
+
+	$('#document-listing').modal('toggle');
+
+	$("#quicklink-url").html(selectedFile);
+	$("input[id=url]").val(selectedFileId);
+
+	// $('.document-checkbox').each(function(){
+	// 	if($(this).is(":checked")){
+	// 		//$("#quicklink-url").append('<div class="selected-files" id="url" data-url='+ $(this).val() +'>'+$(this).attr("data-filename")+'</div>')
+	// 	}
+	// });
 });
 
 $("#add-external-url").on('click', function(){
@@ -57,16 +68,15 @@ $(document).on('click','.quicklink-create',function(){
  	var banner_id = $("input[name='banner_id']").val();
 	var name = $("#name").val();
 	var type = $('input[name="type"]:checked').val();
-	var url = $("#url").attr('data-url');
+	var url = $("#url").val();
 	console.log("name : " + name);
 	console.log("url : " + url);
 	console.log("type : " + type);
 	console.log('banner_id : ' + banner_id);
 
- 
 
     if(name == '') {
-		swal("Oops!", "This package needs a name.", "error"); 
+		swal("Oops!", "This quicklink needs a name.", "error"); 
 		hasError = true;
 		$(window).scrollTop(0);
 	}

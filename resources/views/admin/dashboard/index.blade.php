@@ -149,7 +149,7 @@
 			                            </div>
 			                        </div>
 			                        <div class="ibox-content">
-
+			                        <small>Drag Features to reorder</small>
 										<div class="dd" id="featuredcontentlist">
 			                                <ol class="dd-list">
 			                                	{{-- <div class="dd-placeholder" style="height: 42px;"></div> --}}
@@ -173,9 +173,6 @@
 			                            <h5>QuickLinks Management</h5>
 
 			                            <div class="ibox-tools">
-
-
-
 			                                <a href="/admin/quicklink/create" class="btn btn-primary btn"><i class="fa fa-plus"></i> Create new Quicklink</a>
 			                            </div>
 			                        </div>
@@ -186,12 +183,12 @@
 			                                	{{-- <div class="dd-placeholder" style="height: 42px;"></div> --}}
 			                                    @foreach($quicklinks as $ql)
 			                                 	<?php switch($ql->type) {
-			                                    		case 1:
+			                                    		case 2:
 			                                    			$icon = '<i class="fa fa-folder"></i>';
 			                                    			$type = "Folder";
 			                                    			$link = '<a href="/admin/document/manager#!/'.$ql->url.'">'.$ql->link_name.'</a>';		
 			                                    			break;
-			                                    		case 2: 
+			                                    		case 1: 
 			                                    			$icon = '<i class="fa fa-file-o"></i>';		
 			                                    			$type = "File";
 			                                    			$link = '<a class="launchPDFViewer" data-toggle="modal" data-file="/viewer/?file=/files/" data-target="#fileviewmodal" > '. $ql->link_name.'</a>';
