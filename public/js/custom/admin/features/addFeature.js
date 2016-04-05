@@ -20,13 +20,15 @@ $('body').on('click', '#attach-selected-files', function(){
 	if($('.feature-documents-table').hasClass('hidden')){
 		$(".feature-documents-table").removeClass('hidden').addClass('visible');
 	}
-
+	$(".feature-documents-table").find("tbody").empty();
 	$('input[name^="package_files"]').each(function(){
+		
 		if($(this).is(":checked")){
+			
 			$(".feature-documents-table").find("tbody").append('<tr class="feature-documents"> '+
 													'<td data-fileid='+ $(this).val() +'>'+$(this).attr("data-filename")+'</td>'+
 													'<td></td>'+
-													'<td> <a data-file-id="'+ $(this).val()+'" id="package'+ $(this).val()+'" class="remove-staged-package btn btn-danger btn-sm"><i class="fa fa-trash"></i></a></td>'+
+													'<td> <a data-file-id="'+ $(this).val()+'" id="file'+ $(this).val()+'" class="remove-staged-file btn btn-danger btn-sm"><i class="fa fa-trash"></i></a></td>'+
 												'</tr>');
 		}
 	});
@@ -37,10 +39,11 @@ $('body').on('click', '#attach-selected-packages', function(){
 	if($('.feature-packages-table').hasClass('hidden')){
 		$(".feature-packages-table").removeClass('hidden').addClass('visible');
 	}
-	console.log('attach selected-packages');
-	$(".feature-packages").find("tbody").empty();
+	
+	$(".feature-packages-table").find("tbody").empty();
 	$('input[name^="feature_packages"]').each(function(){
 		if($(this).is(":checked")){
+			
 			$(".feature-packages-table").find("tbody").append('<tr class="feature-packages"> '+
 													'<td data-packageid='+ $(this).attr('data-packageid') +'>'+ $(this).attr("data-packagename")+'</td>'+
 													'<td></td>'+
@@ -53,9 +56,9 @@ $('body').on('click', '#attach-selected-packages', function(){
 
 $("body").on('click', ".remove-staged-file", function(){
 	
-	var document_id = $(this).attr('data-document-id');
-	$(".feature-files[data-fileid = '" + document_id + "']").remove();
-	$(this).closest('.feature-files').fadeOut(200);
+	var document_id = $(this).attr('data-file-id');
+	$(this).closest('.feature-documents').fadeOut(200);
+	$(this).closest('.feature-documents').remove();
 
 });
 

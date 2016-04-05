@@ -9,8 +9,8 @@ $("#add-more-packages").click(function(){
 
 
 $('body').on('click', '#attach-selected-files', function(){
-	$("#files-selected").empty();
-	// $("#files-selected").append('<label class="control-label col-sm-2">Files attached</label>');
+	
+	$(".selected-files").remove();
 	$('input[name^="package_files"]').each(function(){
 		if($(this).is(":checked")){
 			$(".feature-documents-table tbody").append('<tr class="selected-files"> '+
@@ -24,8 +24,7 @@ $('body').on('click', '#attach-selected-files', function(){
 
 $('body').on('click', '#attach-selected-packages', function(){
 
-	console.log('attach selected-packages');
-	$("#packages-selected").empty();
+	$(".selected-packages").remove();
 	// $("#packages-selected").append('<label class="control-label col-sm-2">Packages Attached</label>');
 	$('input[name^="feature_packages"]').each(function(){
 		if($(this).is(":checked")){
@@ -58,17 +57,22 @@ $(".remove-package").on('click', function(){
 
 $("body").on('click', ".remove-staged-file", function(){
 	
+	
 	var document_id = $(this).attr('data-document-id');
-	$(".feature-files[data-fileid = '" + document_id + "']").remove();
-	$(this).closest('.feature-files').fadeOut(200);
+	console.log('remove staged file' + document_id);
+	$(this).closest('.selected-files').remove();
+	console.log($(this).closest('.selected-files'));
+	$(this).closest('.selected-files').fadeOut(200);
 
 });
 
 $("body").on('click', ".remove-staged-package", function(){
 	
-	var package_id = $(this).attr('data-packageid');
-	$(".feature-packages[data-packageid = '" + package_id + "']").remove();
-	$(this).closest('feature-packages').fadeOut(200);
+	
+	var package_id = $(this).attr('data-package-id');
+	console.log('remove stages package' + package_id);
+	$(this).closest('.selected-packages').remove();
+	$(this).closest('.selected-packages').fadeOut(200);
 
 });
 

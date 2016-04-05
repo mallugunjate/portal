@@ -103,7 +103,7 @@
 		                        <div class="ibox-content">
 		                        	
                                     <div id="files-selected">
-                                    	<table class="table table-hover feature-documents-table ">
+                                    	<table class="table table-hover feature-documents-table hidden ">
                                     		<thead>
                                     			<tr>
                                     				<td>Title</td>
@@ -129,7 +129,7 @@
 		                        <div class="ibox-content">
 		                        	
                                     <div id="packages-selected">
-                                    	<table class="table table-hover feature-packages-table ">
+                                    	<table class="table table-hover feature-packages-table hidden">
                                     		<thead>
                                     			<tr>
                                     				<td>Package Name</td>
@@ -155,19 +155,20 @@
 		                        <div class="ibox-content">
 		                        	
                                     <div class="form-group">
+                                    	<div class="row">
                                     	<label class="col-sm-2 control-label">Latest Updates</label>
 										
-											<div class="latest-updates-container row">
-												<div class="latest-update-option col-md-8">
-													{!! Form::radio('latest_updates_option', '1') !!} By Days
-													{!! Form::input('text', 'update_frequency', null, [ 'class' => 'update_frequency', 'disabled'=> 'disabled', 'placeholder'=>'Number of Days']) !!}
-												</div>
-												<div class="latest-update-option col-md-8">
-													{!! Form::radio('latest_updates_option', '2') !!} By Documents
-													{!! Form::input('text', 'update_frequency', null, [ 'class' => 'update_frequency','disabled'=> 'disabled', 'placeholder'=>'Number of Documents']) !!}
-												</div>
-												
+										<div class="latest-updates-container col-sm-10">
+											<div class="latest-update-option ">
+												{!! Form::radio('latest_updates_option', '1') !!} By Days
+												{!! Form::input('text', 'update_frequency', null, [ 'class' => 'update_frequency', 'disabled'=> 'disabled', 'placeholder'=>'Number of Days']) !!}
 											</div>
+											<div class="latest-update-option ">
+												{!! Form::radio('latest_updates_option', '2') !!} By Documents
+												{!! Form::input('text', 'update_frequency', null, [ 'class' => 'update_frequency','disabled'=> 'disabled', 'placeholder'=>'Number of Documents']) !!}
+											</div>
+											
+										</div>
 										
 									</div>
 		                        </div>
