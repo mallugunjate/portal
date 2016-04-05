@@ -225,7 +225,7 @@
 				            </div>
 				            <div class="modal-footer">
 				                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				                <button type="button" class="btn btn-primary" id="attach-selected-files">Select Documents</button>
+				                <button type="button" class="btn btn-primary" data-dismiss="modal" id="attach-selected-files">Select Documents</button>
 				            </div>
 				        </div>
 				    </div>
@@ -245,7 +245,7 @@
 				            </div>
 				            <div class="modal-footer">
 				                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				                <button type="button" class="btn btn-primary attach-selected-packages" id="attach-selected-packages">Select Packages</button>
+				                <button type="button" data-dismiss="modal" class="btn btn-primary attach-selected-packages" id="attach-selected-packages">Select Packages</button>
 				            </div>
 				        </div>
 				    </div>
