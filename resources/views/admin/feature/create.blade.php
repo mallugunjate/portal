@@ -96,7 +96,19 @@
                                                <a class="btn btn-primary btn-outline" type="button" id="add-documents" > <i class="fa fa-plus"></i> Add Documents </a>
                                             </div>
                                         </div>
-                                        <div id="files-selected" class="col-sm-offset-2"></div>
+                                        <div id="files-selected">
+                                        	<table class="table table-hover feature-packages-table hidden">
+                                        		<thead>
+                                        			<tr>
+                                        				<td>Package Name</td>
+                                        				<td></td>
+                                        				<td>Action</td>
+                                        			</tr>
+                                        		</thead>
+                                        		<tbody>
+                                        		</tbody>
+                                        	</table>
+                                        </div>
 
                                         <div class="hr-line-dashed"></div>
                                         <div class="form-group"><label class="col-sm-2 control-label">Packages</label>
@@ -104,7 +116,21 @@
                                             	<a class="btn btn-primary btn-outline" type="button" id="add-packages"><i class="fa fa-plus"></i> Add Packages </a>
                                             </div>
                                         </div>
-                                        <div id="packages-selected" class="col-sm-offset-2"></div>
+                                        <div id="packages-selected">
+                                        	<table class="table table-hover feature-documents-table hidden">
+                                        		<thead>
+                                        			<tr>
+                                        				<td>Package Name</td>
+                                        				<td></td>
+                                        				<td>Action</td>
+                                        			</tr>
+                                        		</thead>
+                                        		<tbody>
+                                        		</tbody>
+
+                                        	</table>
+
+                                        </div>
 		
 										 <div class="hr-line-dashed"></div>
 

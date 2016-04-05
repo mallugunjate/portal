@@ -16,26 +16,57 @@ $('input[name="latest_updates_option"]').change( function(){
 });
 
 $('body').on('click', '#attach-selected-files', function(){
-	$("#files-selected").empty();
-	$("#files-selected").append('<p>Files Attached :</p>');
+	
+	if($('.feature-documents-table').hasClass('hidden')){
+		$(".feature-documents-table").removeClass('hidden').addClass('visible');
+	}
+
 	$('input[name^="package_files"]').each(function(){
 		if($(this).is(":checked")){
-			$("#files-selected").append('<ul class="selected-files" data-fileid='+ $(this).val() +'>'+$(this).attr("data-filename")+'</ul>')
+			$(".feature-document-table").find("tbody").append('<tr class="feature-documents"> '+
+													'<td data-fileid='+ $(this).val() +'>'+$(this).attr("data-filename")+'</td>'+
+													'<td></td>'+
+													'<td> <a data-file-id="'+ $(this).val()+'" id="package'+ $(this).val()+'" class="remove-staged-package btn btn-danger btn-sm"><i class="fa fa-trash"></i></a></td>'+
+												'</tr>');
 		}
 	});
 });
 
 $('body').on('click', '#attach-selected-packages', function(){
 
+	if($('.feature-packages-table').hasClass('hidden')){
+		$(".feature-packages-table").removeClass('hidden').addClass('visible');
+	}
 	console.log('attach selected-packages');
-	$("#packages-selected").empty();
-	$("#packages-selected").append('<p>Packages Attached :</p>');
+	$(".feature-packages").find("tbody").empty();
 	$('input[name^="feature_packages"]').each(function(){
 		if($(this).is(":checked")){
-			$("#packages-selected").append('<ul class="selected-packages" data-packageid='+ $(this).attr('data-packageid') +'>'+ $(this).attr("data-packagename")+'</ul>')		
+			$(".feature-packages-table").find("tbody").append('<tr class="feature-packages"> '+
+													'<td data-packageid='+ $(this).attr('data-packageid') +'>'+ $(this).attr("data-packagename")+'</td>'+
+													'<td></td>'+
+													'<td> <a data-package-id="'+ $(this).val()+'" id="package'+ $(this).val()+'" class="remove-staged-package btn btn-danger btn-sm"><i class="fa fa-trash"></i></a></td>'+
+												'</tr>');
 		}
 		
 	});
+});
+
+$("body").on('click', ".remove-staged-file", function(){
+	
+	var document_id = $(this).attr('data-document-id');
+	$(".feature-files[data-fileid = '" + document_id + "']").remove();
+	$(this).closest('.feature-files').fadeOut(200);
+
+});
+
+$("body").on('click', ".remove-staged-package", function(){
+	
+
+	var package_id = $(this).attr('data-package-id');
+	console.log('remove this package' + package_id);
+	$(".feature-packages[data-packageid = '" + package_id + "']").remove();
+	$(this).closest('.feature-packages').fadeOut(200);
+
 });
 
 $(document).on('click','.feature-create',function(){
