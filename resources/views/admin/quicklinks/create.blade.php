@@ -39,6 +39,11 @@
 
 	/*.modal-ql-file .ibox-title{ border: none; padding: 0px; }*/
 	.modal-ql-file h6{ font-size: 16px !important; font-weight: normal; }
+
+	#valid-url{ font-size: 20px; }
+	.red{ color: #c00; }
+	.green{ color: #0c0; }
+	.link-test{ display: none; }
 	</style>
 </head>
 
@@ -243,7 +248,14 @@
 							                <h4 class="modal-title">Add External URL</h4>
 							            </div>
 							            <div class="modal-body">
-							            	URL <input type="text" id="external-url" >
+							            	<div class="row">
+							            		<label class="col-sm-2 control-label">URL</label>
+							            		<div class="col-sm-8"><input type="text" id="external-url" class="form-control"></div>
+							            		<div class="col-sm-2" id="valid-url"><i class="fa"></i></div>
+							            	</div>
+							            	<div class="row" style="padding: 10px 0px;">
+							            		<label class="col-sm-2 control-label link-test">Test</label>
+							            		<div class="col-sm-8 link-test" id="test-link"></div>
 							            </div>
 							            <div class="modal-footer">
 							                <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-ban"></i> Cancel</button>
@@ -289,39 +301,37 @@
 
     $(".tree").treed({openedClass : 'fa fa-folder-open', closedClass : 'fa fa-folder'});            
 
-
-	$('#external-url').bind('keyup change click’, function() {
-	    if (isValidUrl($(this))==1){
-	        alert(“got a valid url!”);   
+ 	$("#external-url").on("change keyup", function() {
+ 		var urlString = $(this).val();
+ 		var isValid = learnRegExp(urlString);
+ 		console.log(isValid);
+	    if (isValid){
+	    	 $("#valid-url .fa").removeClass("fa-times");
+	    	 $("#valid-url .fa").removeClass("red");
+	         $("#valid-url .fa").addClass("fa-check");
+	         $("#valid-url .fa").addClass("green");
+	         $(".link-test").show();
+	         $("#test-link").html("<a href='"+urlString+"' target='_blank'>"+urlString+"</a>");
+	    } else {
+	    	$("#valid-url .fa").removeClass("fa-check");
+	    	$("#valid-url .fa").removeClass("green");
+	    	$("#valid-url .fa").addClass("fa-times");
+	    	$("#valid-url .fa").addClass("red");
+	    	$(".link-test").hide();
+	    	$("#test-link").empty();
 	    }
 	});
  //    $("#external-url").on("change keyup", function() {
  //    	$('#validate').toggleClass('validate', ValidURL(this.value));
 	// });
 
-	function ValidURL(str) {
-	  var pattern = new RegExp('^(https?:\/\/)?'+ // protocol
-	    '((([a-z\d]([a-z\d-]*[a-z\d])*)\.)+[a-z]{2,}|'+ // domain name
-	    '((\d{1,3}\.){3}\d{1,3}))'+ // OR ip (v4) address
-	    '(\:\d+)?(\/[-a-z\d%_.~+]*)*'+ // port and path
-	    '(\?[;&a-z\d%_.~+=-]*)?'+ // query string
-	    '(\#[-a-z\d_]*)?$','i'); // fragment locater
-	  if(!pattern.test(str)) {
-	    alert("Please enter a valid URL.");
-	    return false;
-	  } else {
-	    return true;
-	  }
-	}	
 
+ function learnRegExp(s) {    
+ 		console.log(s);
+      var regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+      return regexp.test(s);    
+ }
 
-function isValidUrl(url){
-    if(/^(http|https|ftp):\/\/[a-z0-9]+([-.]{1}[a-z0-9]+)*.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/i.test(url)) {
-      return 1;
-    } else {
-      return -1;
-    }   
-}	
 </script>
 
 
