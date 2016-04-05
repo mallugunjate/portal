@@ -58,7 +58,7 @@ $('#attach-selected-folders').on('click', function(){
 		}
 	});
 	console.log( $("#url").val());
-	
+	$("#folder-listing").modal('toggle');
 		
 });
 
