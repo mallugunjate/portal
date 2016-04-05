@@ -8286,11 +8286,15 @@ body.md-skin {
   border-bottom: 1px solid #DDDDDD;
 }
 
+
+.popover {
+  min-width:40%;
+}
+
 #file-container a, #file-container .pull-right{ font-size: 12px;}
 
 .fc-time{ display: none; }
 .event-span{ display: none; }
 
 .alert-table a{ font-weight: normal !important; color: #337ab7 !important;}
-
 

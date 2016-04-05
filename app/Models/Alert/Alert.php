@@ -23,14 +23,33 @@ class Alert extends Model
     	$alerts = Alert::join('documents', 'alerts.document_id' , '=', 'documents.id')
     			->join('alert_types', 'alert_types.id', '=', 'alerts.alert_type_id')
     			->where('alerts.banner_id', $banner_id)
-    			->select('alerts.*', 'alert_types.name as alert_type', 'documents.id as document_id', 'documents.original_filename as document_name')
+    			->select('alerts.*', 'alert_types.name as alert_type',
+                         'documents.id as document_id',
+                         'documents.original_filename as document_name',
+                         'documents.start as start',
+                         'documents.end as end',
+                         'documents.title as document_title',
+                         'documents.original_extension as document_extension')
     			->get();
 
     	foreach ($alerts as $alert) {
+
     		$target_stores = \DB::table('alerts_target')->where('alert_id', $alert->id)->lists('store_id');
     		$alert->count_target_stores = count($target_stores);
     		$alert->target_stores = implode( ", ", $target_stores );
     		unset($target_stores);
+            
+            $now = Carbon::now()->toDatetimeString();
+            $alert->now = $now;
+            $alert->active = "No";
+            if ($alert->start <= $now && ($alert->end >= $now || $alert->end == '0000-00-00 00:00:00')) {
+                $alert->active = "Yes";
+            }
+
+            $alert->prettyStart = Utility::prettifyDate($alert->start);
+            $alert->prettyEnd = Utility::prettifyDate($alert->end);
+
+            $alert->icon = Utility::getIcon($alert->document_extension);
     	}
 
     	return $alerts;
