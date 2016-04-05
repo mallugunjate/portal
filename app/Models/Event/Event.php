@@ -19,17 +19,19 @@ class Event extends Model
 
     public static function storeEvent($request)
     {
-    	$banner = UserSelectedBanner::getBanner();
+    	\Log::info($request->all);
+        $banner = UserSelectedBanner::getBanner();
+        $desc = preg_replace('/\n+/', '', $request['description']);
         $event = Event::create([
 
-    		'banner_id' => $banner->id,
+    		    'banner_id' => $banner->id,
             'title' => $request['title'],
             'event_type' => $request['event_type'],
-            'description' => $request['description'],
+            'description' => $desc,
             'start' => $request['start'],
             'end' => $request['end']
     	]);
-
+        Event::updateTargetStores($event->id, $request);
     	return;
     }
 
@@ -39,14 +41,37 @@ class Event extends Model
 
         $event->title = $request['title'];
         $event->event_type = $request['event_type'];
-        $event->description = $request['description'];
+        $event->description = preg_replace('/\n+/', '', $request['description']);
         $event->start = $request['start'];
         $event->end = $request['end'];
         
-        Event::updateTags($id, $request["tags"]);
         $event->save();
 
+        Event::updateTargetStores($id, $request);
+        return;
+
     }
+
+    public static function updateTargetStores($id, $request)
+      {
+         $target_stores = $request['target_stores'];
+         $allStores = $request['allStores'];
+         
+         if (!( $target_stores == '' && $allStores == 'on' )) {
+             EventTarget::where('event_id', $id)->delete();
+             if (count($target_stores) > 0) {
+                 foreach ($target_stores as $store) {
+                     EventTarget::create([
+                        'event_id'   => $id,
+                        'store_id'   => $store
+                     ]);
+               
+                  } 
+             }            
+         }
+         
+         return;
+      }
 
     public static function updateTags($id, $tags)
     {
@@ -59,6 +84,14 @@ class Event extends Model
             ]);
         }
         return;
+    }
+
+    public static function getActiveEventsByStore($store_id)
+    {
+      $events = Event::join('events_target', 'events.id', '=', 'events_target.event_id')
+                        ->where('store_id', $store_id)
+                        ->get();
+      return $events;
     }
 
 }

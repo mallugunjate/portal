@@ -18,6 +18,7 @@
 
     <script src="/js/custom/site/storeselector/storeSelector.js"></script>
     <script src="/js/custom/site/launchModal.js"></script>
+    <script src="/js/custom/trackEvent.js"></script>
     <script src="/js/custom/sendBugReport.js"></script>
 
     <script type="text/javascript">

@@ -118,7 +118,7 @@
                                                 <div class="feed-element">
                                                     <div>
                                                         <small class="pull-right">{{ $c->since }} ago</small>
-                                                        <strong><a href="/{{ Request::segment(1) }}/communication/show/{{ $c->id }}">{{ $c->subject }}</strong></a><br />
+                                                        <strong><a class="trackclick" data-comm-id="{{ $c->id }}" href="/{{ Request::segment(1) }}/communication/show/{{ $c->id }}">{{ $c->subject }}</strong></a><br />
                                                         <small>{{ $c->prettyDate }}</small>
                                                         <div>{!! $c->trunc !!}</div>
                                                         <small class="text-muted"></small>
@@ -152,7 +152,7 @@
                             <div class="col-lg-12">
                                 <div class="ibox float-e-margins">
                                     <div class="ibox-title">
-                                        <h2>Latest Updates</h2>
+                                        <h2>Notifications</h2>
                                     </div>
                                     
                                     <div class="ibox-content" style="max-height: 550px; overflow: auto;">

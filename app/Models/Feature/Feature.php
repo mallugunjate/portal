@@ -146,7 +146,7 @@ class Feature extends Model
 
         $feature = Feature::where('id', $feature_id)->update(['background_image' => $filename]);
   
-        return;
+        return $filename;
     }
 
     public static function updateFeatureThumbnail($file, $feature_id)
@@ -160,8 +160,8 @@ class Feature extends Model
         $upload_success = $file->move($directory, $filename); //move and rename file  
         
         $feature = Feature::where('id', $feature_id)->update(['thumbnail' => $filename]);
-        
-        return ;
+
+        return $filename ;
     }
 
     public static function getFileMetaData($file)
@@ -233,5 +233,13 @@ class Feature extends Model
                 })
               ->orderBy('order')->get();
 
+    }
+
+    public static function deleteFeature($id)
+    {
+      Feature::find($id)->delete();
+      FeaturePackage::where('feature_id', $id)->delete();
+      FeatureDocument::where('feature_id', $id)->delete();
+      return;
     }
 }

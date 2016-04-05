@@ -9,7 +9,7 @@
 </head>
 
 <body class="fixed-navigation adminview">
-    <div id="wrapper">
+    <div id=" ">
 	    <nav class="navbar-default navbar-static-side" role="navigation">
 	        <div class="sidebar-collapse">
 	          @include('admin.includes.sidenav')
@@ -65,18 +65,18 @@
                                     
                                     <form method="get" class="form-horizontal" id="createNewEventForm">
                                         <input type="hidden" name="banner" id="banner" value="1">
-                                        <div class="form-group"><label class="col-sm-2 control-label">Title</label>
+                                        <div class="form-group"><label class="col-sm-2 control-label">Title <span class="req">*</span></label>
                                             <div class="col-sm-10"><input type="text" id="title" name="title" class="form-control" value=""></div>
                                         </div>
 
-                                        <div class="form-group"><label class="col-sm-2 control-label">Event Type</label>
+                                        <div class="form-group"><label class="col-sm-2 control-label">Event Type <span class="req">*</span></label>
                                             <div class="col-sm-10">
                                                 {{-- <input type="text" class="form-control" value="{{ $event_type->event_type }}"> --}}
 
                                                 <select class="form-control" id="event_type" name="event_type">
-                                                    @foreach($event_types_list as $e)
+                                                    @foreach($event_types_list as $key=>$event_type)
                                                        
-                                                            <option value="{{ $e->id }}">{{ $e->event_type}}</option>
+                                                            <option value="{{ $key }}">{{ $event_type}}</option>
                                                        
                                                     @endforeach
                                                 </select>
@@ -84,20 +84,9 @@
                                         </div>                                        
 
                                         {{-- <div class="summernote"></div> --}}
-
-                                        <div class="form-group"><label class="col-sm-2 control-label">Description</label>
-                                            <div class="col-sm-10">
-                                                <textarea class="form-control" rows="5" id="description" name="description"></textarea>
-                                                
-                                            </div>
-                                        </div>
-
-                                        <div class="hr-line-dashed"></div>
-
-
                                         <div class="form-group">
 
-                                                <label class="col-sm-2 control-label">Start &amp; End</label>
+                                                <label class="col-sm-2 control-label">Start &amp; End <span class="req">*</span></label>
 
                                                 <div class="col-sm-10">
                                                     <div class="input-daterange input-group" id="datepicker">
@@ -108,16 +97,27 @@
                                                 </div>
                                         </div>
 
-                                        <div class="hr-line-dashed"></div>
+                                        <div class="form-group"><label class="col-sm-2 control-label">Description</label>
+                                            <div class="col-sm-10">
+                                                <textarea class="form-control" rows="5" id="description" name="description"></textarea>
+                                                
+                                            </div>
+                                        </div>
 
-                                       {{-- <div class="form-group"><label class="col-sm-2 control-label">Tags</label>
-                                                <div class="col-md  -10">
-                                                    {!! Form::select('tags[]', $tags, null, ['class'=>'chosen', 'multiple'=>'true', 'id'=>'tags']) !!}
+                                       
+
+                                        <div class="form-group"><label class="col-sm-2 control-label">Stores <span class="req">*</span></label>
+                                                <div class="col-md-10">
+                                                    
+                                                    {!! Form::select('stores', $stores, null, [ 'class'=>'chosen', 'id'=> 'storeSelect', 'multiple'=>'true']) !!}
+                                                    {!! Form::label('allStores', 'Or select all stores:') !!}
+                                                    {!! Form::checkbox('allStores', null, false ,['id'=> 'allStores'] ) !!}
+                                                    
                                                 </div>
                                         </div> 
 
                                         <div class="hr-line-dashed"></div>
-                                        --}}
+                                        
 
                                         <div class="form-group">
                                             <div class="col-sm-10 col-sm-offset-2">
@@ -147,7 +147,10 @@
 
 				@include('site.includes.bugreport')
 
+
+                <script src="/js/custom/admin/events/addEvent.js"></script>
                 <script type="text/javascript" src="/js/plugins/chosen/chosen.jquery.js"></script>
+                <script type="text/javascript" src="/js/plugins/ckeditor-standard/ckeditor.js"></script>
 
                 <script type="text/javascript">
                     $.ajaxSetup({
@@ -164,19 +167,10 @@
                     });
 
                     $(".chosen").chosen({
-                        width:'50%'
+                        width:'75%'
                     });
 
-
-				</script>
-
-				<script src="/js/custom/admin/events/addEvent.js"></script>
-                <script type="text/javascript" src="/js/plugins/chosen/chosen.jquery.js"></script>
-
-
-
-
-                $(".chosen").chosen();
+                    CKEDITOR.replace('description');
 
 
                 </script>

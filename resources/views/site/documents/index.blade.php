@@ -65,7 +65,7 @@
 
         <div class="wrapper wrapper-content animated fadeInRight">
             <div class="row">
-                <div class="col-lg-3">
+                <div class="col-lg-4">
                     <div class="ibox float-e-margins">
                         <div class="ibox-content">
                             <div class="file-manager">
@@ -90,7 +90,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-9 animated fadeInRight">
+                <div class="col-lg-8 animated fadeInRight">
                     
                     <div class="row">
 

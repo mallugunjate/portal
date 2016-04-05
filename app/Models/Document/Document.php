@@ -14,11 +14,17 @@ use DB;
 use App\Models\Alert\Alert;
 use App\Models\Utility\Utility;
 use App\Models\Dashboard\Quicklinks;
+use App\Models\Document\DocumentTarget;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class Document extends Model
 {
+    use SoftDeletes;
+
     protected $table = 'documents';
     protected $fillable = array('upload_package_id', 'original_filename','original_extension', 'filename', 'title', 'description', 'start', 'end', 'banner_id');
+    protected $dates = ['deleted_at'];
 
     public static function getDocuments($global_folder_id, $forStore=null)
     {
@@ -58,8 +64,8 @@ class Document extends Model
             
             if (count($files) > 0) {
                 foreach ($files as $file) {
-                    $file->link = Utility::getModalLink($file->filename, $file->title, $file->original_extension, 0);
-                    $file->link_with_icon = Utility::getModalLink($file->filename, $file->title, $file->original_extension, 1);
+                    $file->link = Utility::getModalLink($file->filename, $file->title, $file->original_extension, $file->id, 0);
+                    $file->link_with_icon = Utility::getModalLink($file->filename, $file->title, $file->original_extension, $file->id, 1);
                     $file->icon = Utility::getIcon($file->original_extension);
                     $file->prettyDateCreated = Utility::prettifyDate($file->created_at);
                     $file->prettyDateUpdated = Utility::prettifyDate($file->updated_at);
@@ -104,9 +110,11 @@ class Document extends Model
                 'filename'          => $filename,
                 'original_extension'=> $metadata["originalExtension"],
                 'upload_package_id' => $request->get('upload_package_id'),
-                'title'             => "no title",
+                'title'             => preg_replace('/\.'.preg_quote($metadata["originalExtension"]).'/', '', $metadata["originalName"]),
                 'description'       => "no description",
-                'banner_id'         => $banner->id
+                'banner_id'         => $banner->id,
+                'start'             => $request->start,
+                'end'               => $request->end
             );
 
             $document = Document::create($documentdetails);
@@ -133,17 +141,14 @@ class Document extends Model
             //update folder timestamp
             Folder::updateTimestamp($global_folder_id, $document->created_at);
 
-            //create thumbnail
-            if($metadata["originalExtension"] == "jpg" || $metadata["originalExtension"] == "png" || $metadata["originalExtension"] == "gif" || $metadata["originalExtension"] == "pdf"){
-                Document::createDocumentThumbnail($filename);    
-            }            
-
-
             $documentfolder->save();
 
-
+            //update document target
+            Document::updateDocumentTarget($request, $document);
 
         }
+
+        return ;
     }
 
     public static function getDocumentMetaData($file)
@@ -151,10 +156,10 @@ class Document extends Model
         
         $extension = $file->getClientOriginalExtension();
         $originalName = $file->getClientOriginalName();
-        $modifiedName = str_replace(" ", "_", $originalName);
-        $modifiedName = str_replace(".", "_", $modifiedName);
-        $modifiedName = str_replace("%", "pct", $modifiedName);
-
+        $modifiedName = preg_replace('/[^A-Za-z0-9\-\s+\.]/', '', $originalName);
+        $modifiedName = preg_replace('/\s+/', '_', $modifiedName);
+        $modifiedName = preg_replace('/(\.)+/', '_', $modifiedName);
+        
         $response = [];
         $response["originalName"] = $originalName;
         $response["modifiedName"] = $modifiedName;
@@ -199,6 +204,8 @@ class Document extends Model
         if ($tags != null) {
             Document::updateTags($id, $tags);
         }
+        \Log::info("***** From Update Meta data *********");
+        \Log::info($request->all());
 
         $title          = $request->get('title');
         $description    = $request->get('description');
@@ -234,6 +241,8 @@ class Document extends Model
         $document['end']  = $doc_end; 
 
         $document->save();
+
+        Document::updateDocumentTarget($request, $document);
 
         $is_alert = $request->get('is_alert');
         if( $is_alert == 1) {
@@ -295,8 +304,8 @@ class Document extends Model
         if (count($files) > 0) {
             foreach ($files as $file) {
                 $file->archived = true;
-                $file->link = Utility::getModalLink($file->filename, $file->title, $file->original_extension, 0);
-                $file->link_with_icon = Utility::getModalLink($file->filename, $file->title, $file->original_extension, 1);
+                $file->link = Utility::getModalLink($file->filename, $file->title, $file->original_extension, $file->id, 0);
+                $file->link_with_icon = Utility::getModalLink($file->filename, $file->title, $file->original_extension, $file->id, 1);
                 $file->icon = Utility::getIcon($file->original_extension);
                 $file->prettyDateCreated = Utility::prettifyDate($file->created_at);
                 $file->prettyDateUpdated = Utility::prettifyDate($file->updated_at);
@@ -403,5 +412,25 @@ class Document extends Model
     
         return $folderInfo;
 
+    }
+
+    public static function updateDocumentTarget(Request $request, $document)
+    {
+         if ($request['stores'] != '') {
+            DocumentTarget::where('document_id', $document->id)->delete();
+            $target_stores = $request['stores'];
+            if(! is_array($target_stores) ) {
+                $target_stores = explode(',',  $request['stores'] );    
+            }
+
+            \Log::info($target_stores);
+            foreach ($target_stores as $key=>$store) {
+                DocumentTarget::insert([
+                    'document_id' => $document->id,
+                    'store_id' => $store
+                    ]);    
+            }
+        } 
+            return;  
     }
 }

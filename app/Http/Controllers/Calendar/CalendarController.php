@@ -48,7 +48,7 @@ class CalendarController extends Controller
 
         $alertCount = Alert::getActiveAlertCountByStore($storeNumber);
 
-        $events = Event::where('banner_id', $storeBanner)->get(); 
+        $events = Event::getActiveEventsByStore($storeNumber); 
 
         foreach ($events as $event) {
             $event->prettyDateStart = Utility::prettifyDate($event->start);

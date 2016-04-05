@@ -16,7 +16,7 @@ use App\Models\Tag\ContentTag;
 use App\Models\UserSelectedBanner;
 use App\Models\StoreInfo;
 use App\Models\Alert\Alert;
-
+use App\Models\Document\DocumentTarget;
 class DocumentAdminController extends Controller
 {
     /**
@@ -55,13 +55,14 @@ class DocumentAdminController extends Controller
 
         $banner = UserSelectedBanner::getBanner();
         $banners = Banner::all();     
-
+        $storeList = StoreInfo::getStoreListing($banner->id);
         $packageHash = sha1(time() . time());
         $folders = Folder::all();
         return view('admin.documentmanager.document-upload')
             ->with('folders', $folders)
             ->with('packageHash', $packageHash)
             ->with('banner', $banner)
+            ->with('storeList', $storeList)
             ->with('banners', $banners);  
     }
 
@@ -73,6 +74,7 @@ class DocumentAdminController extends Controller
      */
     public function store(Request $request)
     {
+        \Log::info($request->all());
         Document::storeDocument($request);    
     }
 
@@ -140,7 +142,7 @@ class DocumentAdminController extends Controller
         // $tag_ids = ContentTag::where('content_id', $id)->where('content_type', 'document')->get()->pluck('tag_id');
         // $selected_tags = Tag::findMany($tag_ids)->pluck('id')->toArray();
         $storeList = StoreInfo::getStoreListing($banner->id);
-        $target_stores = Alert::getTargetStoresForDocument($id);
+        $target_stores = DocumentTarget::getTargetStoresForDocument($id);
         $all_stores = false;
         if (count($storeList) == count($target_stores)) {
             $all_stores = true;
@@ -173,7 +175,6 @@ class DocumentAdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
         return Document::updateDocument($request, $id);
     
     }

@@ -7,11 +7,16 @@ use Carbon\Carbon;
 use DB;
 use App\Models\Utility\Utility;
 use App\Models\Document\Document;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 class Alert extends Model
 {
+    use SoftDeletes;
     protected $table = 'alerts';
 
+
     protected $fillable = ['banner_id', 'document_id', 'alert_type_id', 'alert_start', 'alert_end'];
+    protected $dates = ['deleted_at'];
 
     public static function getAllAlerts($banner_id)
     {
@@ -209,8 +214,8 @@ class Alert extends Model
                 $alertType = AlertType::find($a->alert_type_id);
 
                 $a->icon = Utility::getIcon($doc->original_extension);
-                $a->link_with_icon = Utility::getModalLink($doc->filename, $doc->title, $doc->original_extension, 1);
-                $a->link = Utility::getModalLink($doc->filename, $doc->title, $doc->original_extension, 0);
+                $a->link_with_icon = Utility::getModalLink($doc->filename, $doc->title, $doc->original_extension, $doc->id, 1);
+                $a->link = Utility::getModalLink($doc->filename, $doc->title, $doc->original_extension, $doc->id, 0);
                 $a->title = $doc->title;
                 $a->filename = $doc->filename;
                 $a->description = $doc->description;
@@ -245,11 +250,16 @@ class Alert extends Model
 
             $alert->save();
 
+            \Log::info('mark document as alert');
+            $target_stores = $request['stores'];
             
-            if ($request['target_stores'] != '') {
+            if ($target_stores != '') {
                 
                 \DB::table('alerts_target')->where('alert_id', $alert->id)->delete();
-                $target_stores = $request['target_stores'];
+                
+                if(! is_array($target_stores) ) {
+                    $target_stores = explode(',',  $request['stores'] );    
+                }
                 
                 foreach ($target_stores as $store) {
                     \DB::table('alerts_target')->insert([
@@ -270,13 +280,17 @@ class Alert extends Model
             'banner_id'     => $request['banner_id']
             ]);
 
-            $target_stores = $request['target_stores'];
-
-            foreach ($target_stores as $store) {
-                \DB::table('alerts_target')->insert([
-                    'alert_id' => $alert->id,
-                    'store_id' => $store
-                    ]);    
+            $target_stores = $request['stores'];
+            if ($target_stores != '') {
+                if(! is_array($target_stores) ) {
+                    $target_stores = explode(',',  $request['stores'] );    
+                }
+                foreach ($target_stores as $store) {
+                    \DB::table('alerts_target')->insert([
+                        'alert_id' => $alert->id,
+                        'store_id' => $store
+                        ]);    
+                }
             }
         }
         

@@ -66,6 +66,7 @@
         var today = y + "-" + m + "-" + d;
 
         $('#calendar').fullCalendar({
+            eventStartEditable: false,
             header: {
                 left: 'prev,next today',
                 center: 'title',
@@ -87,7 +88,7 @@
                 title: "{{ $event->title }}",
                 start: "{{ $event->start }}",
                 end: "{{ $event->end }}",
-                description : "{{ $event->description }}",
+                description : '{!! $event->description !!}',
                 prettyStart : "{{$event->prettyDateStart}}",
                 prettyEnd : "{{$event->prettyDateEnd}}",
                 },

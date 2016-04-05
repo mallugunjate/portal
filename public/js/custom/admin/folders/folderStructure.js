@@ -37,6 +37,7 @@ var getFolderDocuments = function(id){
 var checkDeepLink = function(){
 	if(window.location.hash){
 		folderId = window.location.hash.substr(3);
+		$("li#"+folderId).parents('.parent-folder').click();
 		$("li#" + folderId).click();
 		//getFolderDocuments(folderId);
 	}

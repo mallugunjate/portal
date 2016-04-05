@@ -50,6 +50,8 @@ Route::get('/{storeno}/search', array('uses' => 'Search\SearchController@index')
 //BUG REPORTER
 Route::resource('/bugreport', 'BugReport\BugReportController');
 
+//ANALYTICS
+Route::resource('/clicktrack', 'Analytics\AnalyticsController');
 
 //Authentication Routes
 Route::get('/admin/login', 'Auth\AuthController@getLogin');
@@ -145,4 +147,8 @@ Route::get('/api/v1/folder/{id}/archived', 'Api\V1\ApiController@getArchivedDocu
 
 Route::get('/howyoulikemenow', function () {
     return view('site.howyoulikemenow');
+});
+
+Route::get('/doit', function () {
+    return view('site.doit');
 });

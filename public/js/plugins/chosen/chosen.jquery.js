@@ -704,6 +704,18 @@
         };
 
         Chosen.prototype.container_mousedown = function(evt) {
+
+            var h = $('.chosen-choices').height();
+            var m = $('.chosen-choices').css('margin-bottom');
+            var new_m = 10;
+            var new_p = parseInt(h) - 27;
+            if(h > 54){
+                $(".chosen-choices").css({ "margin-bottom": new_m + "px" });
+                $(".form-container").css({ "padding-bottom": new_p + "px" });
+            }
+
+            console.log("current margin: " + m + ", new margin: " + new_m + ", height: " + h);
+
             if (!this.is_disabled) {
                 if (evt && evt.type === "mousedown" && !this.results_showing) {
                     evt.preventDefault();

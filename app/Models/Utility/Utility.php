@@ -66,7 +66,7 @@ class Utility extends Model
 		return $icon;
 	}
 
-	public static function getModalLink($file, $anchortext, $extension, $withIcon=null, $justAnchor=null)
+	public static function getModalLink($file, $anchortext, $extension, $id, $withIcon=null, $justAnchor=null)
 	{
 		if($withIcon){
 			$icon = Utility::getIcon($extension). " ";	
@@ -140,28 +140,28 @@ class Utility extends Model
 		switch($class){
 
 			case "launchImageViewer":
-				$link = "<a href=''>".$icon.$anchortext."</a>";
+				$link = '<a href="#">'.$icon.$anchortext.'</a>';
 				$anchorOnly = "<a href=''>";	
 				break;
 
 			case  "launchPDFViewer":
-				$link = '<a href="#" class="launchPDFViewer" data-toggle="modal" data-file="/viewer/?file=/files/'.$file.'" data-target="#fileviewmodal">'.$icon.$anchortext.'</a>';
-				$anchorOnly = '<a href="#" class="launchPDFViewer" data-toggle="modal" data-file="/viewer/?file=/files/'.$file.'" data-target="#fileviewmodal">';	
+				$link = '<a href="#" class="launchPDFViewer trackclick" data-res-id="'.$id.'" data-toggle="modal" data-file="/viewer/?file=/files/'.$file.'" data-target="#fileviewmodal">'.$icon.$anchortext.'</a>';
+				$anchorOnly = '<a href="#" class="launchPDFViewer trackclick" data-res-id="'.$id.'" data-toggle="modal" data-file="/viewer/?file=/files/'.$file.'" data-target="#fileviewmodal">';	
 				break;
 
 			case "launchVideoViewer":
-				$link = '<a href="#" class="launchVideoViewer" data-file="'.$file.'" data-target="#videomodal">'.$icon.$anchortext.'</a>';
-				$anchorOnly = '<a href="#" class="launchVideoViewer" data-file="'.$file.'" data-target="#videomodal">';
+				$link = '<a href="#" class="launchVideoViewer trackclick" data-res-id="'.$id.'" data-file="'.$file.'" data-target="#videomodal">'.$icon.$anchortext.'</a>';
+				$anchorOnly = '<a href="#" class="launchVideoViewer trackclick" data-res-id="'.$id.'" data-file="'.$file.'" data-target="#videomodal">';
 				break;
 
 			case "download":
-				$link = '<a href="/files/'.$file.'" class="" data-file="'.$file.'" data-target="#">'.$icon.$anchortext.'</a>';
-				$anchorOnly = '<a href="/files/'.$file.'" class="" data-file="'.$file.'" data-target="#">';
+				$link = '<a href="/files/'.$file.'" class="trackclick" data-res-id="'.$id.'" data-file="'.$file.'" data-target="#">'.$icon.$anchortext.'</a>';
+				$anchorOnly = '<a href="/files/'.$file.'" class="trackclick" data-res-id="'.$id.'" data-file="'.$file.'" data-target="#">';
 				break;
 
 			case "newwindow":
-				$link = '<a href="/files/'.$file.'" target="_blank">'.$icon.$anchortext.'</a>';
-				$anchorOnly = '<a href="/files/'.$file.'" target="_blank">';
+				$link = '<a href="/files/'.$file.'" class="trackclick" target="_blank">'.$icon.$anchortext.'</a>';
+				$anchorOnly = '<a href="/files/'.$file.'" class="trackclick" target="_blank">';
 				break;	
 
 			case "nolink":
@@ -191,7 +191,8 @@ class Utility extends Model
 		if($date == '0000-00-00 00:00:00') {
 			return "";
 		}
-		$prettyDate = Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('D, M d, Y h:i a');
+		//$prettyDate = Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('D, M d, Y h:i a');
+		$prettyDate = Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('D, M d, Y');
 		return $prettyDate;
 	}
 
