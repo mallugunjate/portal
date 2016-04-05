@@ -111,10 +111,10 @@
 
                             <div class="ibox">
                             	<div class="ibox-title">
-                            		<h5> Files </h5>
+                            		<h5> Documents </h5>
                             		<div class="ibox-tools">
                             			
-                            			<div id="add-more-files" class="btn btn-primary btn-outline col-md-offset-8" role="button" ><i class="fa fa-plus"></i> Add More Files</div>
+                            			<div id="add-more-files" class="btn btn-primary btn-outline col-md-offset-8" role="button" ><i class="fa fa-plus"></i> Add More Documents</div>
                             		</div>
 
                             	</div>

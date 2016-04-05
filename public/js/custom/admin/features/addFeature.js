@@ -23,7 +23,7 @@ $('body').on('click', '#attach-selected-files', function(){
 
 	$('input[name^="package_files"]').each(function(){
 		if($(this).is(":checked")){
-			$(".feature-document-table").find("tbody").append('<tr class="feature-documents"> '+
+			$(".feature-documents-table").find("tbody").append('<tr class="feature-documents"> '+
 													'<td data-fileid='+ $(this).val() +'>'+$(this).attr("data-filename")+'</td>'+
 													'<td></td>'+
 													'<td> <a data-file-id="'+ $(this).val()+'" id="package'+ $(this).val()+'" class="remove-staged-package btn btn-danger btn-sm"><i class="fa fa-trash"></i></a></td>'+
@@ -89,13 +89,15 @@ $(document).on('click','.feature-create',function(){
 	console.log(update_frequency);
 	var feature_files = [];
 	var feature_packages = [];
-	$(".selected-files").each(function(){
-		feature_files.push($(this).attr('data-fileid'));
+	$(".feature-documents").each(function(){
+		feature_files.push($(this).find('td:first').attr('data-fileid'));
 	});
-	$(".selected-packages").each(function(){
-		feature_packages.push($(this).attr('data-packageid'));
+	$(".feature-packages").each(function(){
+		feature_packages.push($(this).find('td:first').attr('data-packageid'));
 	});
- 
+ 	
+ 	console.log(feature_files);
+ 	console.log(feature_packages);
 
     if(featureTitle == '') {
 		swal("Oops!", "This feature needs a name.", "error"); 

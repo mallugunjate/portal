@@ -88,91 +88,104 @@
                                         	<div class="col-md-10"><input type="file" name="background" id="background" class="form-control "></div>
                                             <div class="col-sm-10"></div>
                                         </div>
-                                        
-                                        <div class="hr-line-dashed"></div>
-                                        
-                                        <div class="form-group"><label class="col-sm-2 control-label">Files</label>
-                                            <div class="col-md-10">
-                                               <a class="btn btn-primary btn-outline" type="button" id="add-documents" > <i class="fa fa-plus"></i> Add Documents </a>
-                                            </div>
-                                        </div>
-                                        <div id="files-selected">
-                                        	<table class="table table-hover feature-packages-table hidden">
-                                        		<thead>
-                                        			<tr>
-                                        				<td>Package Name</td>
-                                        				<td></td>
-                                        				<td>Action</td>
-                                        			</tr>
-                                        		</thead>
-                                        		<tbody>
-                                        		</tbody>
-                                        	</table>
-                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                             <div class="ibox">
+		                        <div class="ibox-title">
+		                            <h5>Documents</h5>
 
-                                        <div class="hr-line-dashed"></div>
-                                        <div class="form-group"><label class="col-sm-2 control-label">Packages</label>
-                                            <div class="col-md-10">
-                                            	<a class="btn btn-primary btn-outline" type="button" id="add-packages"><i class="fa fa-plus"></i> Add Packages </a>
-                                            </div>
-                                        </div>
-                                        <div id="packages-selected">
-                                        	<table class="table table-hover feature-documents-table hidden">
-                                        		<thead>
-                                        			<tr>
-                                        				<td>Package Name</td>
-                                        				<td></td>
-                                        				<td>Action</td>
-                                        			</tr>
-                                        		</thead>
-                                        		<tbody>
-                                        		</tbody>
+		                            <div class="ibox-tools">
+		                            	<div class="btn btn-primary btn-outline" type="button" role="button" id="add-documents" > <i class="fa fa-plus"></i> Add Documents </div>
+		                                
+		                            </div>
+		                        </div>
+		                        <div class="ibox-content">
+		                        	
+                                    <div id="files-selected">
+                                    	<table class="table table-hover feature-documents-table ">
+                                    		<thead>
+                                    			<tr>
+                                    				<td>Title</td>
+                                    				<td></td>
+                                    				<td>Action</td>
+                                    			</tr>
+                                    		</thead>
+                                    		<tbody>
+                                    		</tbody>
+                                    	</table>
+                                    </div>
+		                        </div>
+		                    </div>
 
-                                        	</table>
+		                     <div class="ibox">
+		                        <div class="ibox-title">
+		                            <h5>Packages</h5>
 
-                                        </div>
-		
-										 <div class="hr-line-dashed"></div>
+		                            <div class="ibox-tools">
+		                            	<div class="btn btn-primary btn-outline" type="button" id="add-packages" role="button"><i class="fa fa-plus"></i> Add Packages </div>
+		                            </div>
+		                        </div>
+		                        <div class="ibox-content">
+		                        	
+                                    <div id="packages-selected">
+                                    	<table class="table table-hover feature-packages-table ">
+                                    		<thead>
+                                    			<tr>
+                                    				<td>Package Name</td>
+                                    				<td></td>
+                                    				<td>Action</td>
+                                    			</tr>
+                                    		</thead>
+                                    		<tbody>
+                                    		</tbody>
 
+                                    	</table>
+
+                                    </div>
+		                        </div>
+		                    </div>
+
+
+		                     <div class="ibox">
+		                        <div class="ibox-title">
+		                            <h5>Notifications</h5>
+
+		                        </div>
+		                        <div class="ibox-content">
+		                        	
+                                    <div class="form-group">
+                                    	<label class="col-sm-2 control-label">Latest Updates</label>
 										
-										<div class="form-group"><label class="col-sm-2 control-label">Latest Updates</label>
-											<div class="latest-updates-container col-md-10" >
-												
-												
-												<div class="row">
-													<div class="latest-update-option col-md-8">
-														{!! Form::radio('latest_updates_option', '1') !!} By Days
-														{!! Form::input('text', 'update_frequency', null, [ 'class' => 'update_frequency', 'disabled'=> 'disabled', 'placeholder'=>'Number of Days']) !!}
-													</div>
-													<div class="latest-update-option col-md-8">
-														{!! Form::radio('latest_updates_option', '2') !!} By Documents
-														{!! Form::input('text', 'update_frequency', null, [ 'class' => 'update_frequency','disabled'=> 'disabled', 'placeholder'=>'Number of Documents']) !!}
-													</div>
-													
+											<div class="latest-updates-container row">
+												<div class="latest-update-option col-md-8">
+													{!! Form::radio('latest_updates_option', '1') !!} By Days
+													{!! Form::input('text', 'update_frequency', null, [ 'class' => 'update_frequency', 'disabled'=> 'disabled', 'placeholder'=>'Number of Days']) !!}
+												</div>
+												<div class="latest-update-option col-md-8">
+													{!! Form::radio('latest_updates_option', '2') !!} By Documents
+													{!! Form::input('text', 'update_frequency', null, [ 'class' => 'update_frequency','disabled'=> 'disabled', 'placeholder'=>'Number of Documents']) !!}
 												</div>
 												
-												
-												
 											</div>
-										</div>
-											
-		
-
-                                        <div class="form-group">
-                                            <div class="col-sm-10 col-sm-offset-2">
-                                                <a class="btn btn-white" href="/admin/feature"><i class="fa fa-close"></i> Cancel</a>
-                                                <button class="feature-create btn btn-primary" type="submit"><i class="fa fa-check"></i> Create New Feature</button>
-
-                                            </div>
-                                        </div>
-                                        
-                                    </form>
-
-
-		                            
+										
+									</div>
 		                        </div>
-
 		                    </div>
+
+										
+							
+								
+
+
+                            <div class="form-group">
+                                <div class="col-sm-10 col-sm-offset-2">
+                                    <a class="btn btn-white" href="/admin/feature"><i class="fa fa-close"></i> Cancel</a>
+                                    <button class="feature-create btn btn-primary" type="submit"><i class="fa fa-check"></i> Create New Feature</button>
+
+                                </div>
+                            </div>
+
 		                </div>
 		            </div>
 
