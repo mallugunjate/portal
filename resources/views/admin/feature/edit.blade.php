@@ -111,34 +111,48 @@
 
                             <div class="ibox">
                             	<div class="ibox-title">
-                            		<h5> Files </h5>
+                            		<h5> Documents </h5>
                             		<div class="ibox-tools">
                             			
-                            			<div id="add-more-files" class="btn btn-primary btn-outline col-md-offset-8" role="button" ><i class="fa fa-plus"></i> Add More Files</div>
+                            			<div id="add-more-files" class="btn btn-primary btn-outline col-md-offset-8" role="button" ><i class="fa fa-plus"></i> Add More Documents</div>
                             		</div>
 
                             	</div>
                             	<div class="ibox-content">
                                 <div class="existing-files row" >
                                 	
-									<div class="form-group"><label class="col-sm-2 control-label">Files Attached</label>
-										<div class="existing-files-container col-md-10">
-											@foreach($feature_documents as $doc)
-											<div class="row">
-												<div class="feature-files col-md-8">
-													<div class="feature-filename" data-fileid = "{{$doc->id}}"> <i class="fa fa-file-o"></i> {{$doc->original_filename}} </div>
-													<div class="feature-filepath"> File Location : {{$doc->folder_path}}</div>
-													<div class="feature-timestamp"> Uploaded At : {{$doc->created_at}}</div>
-												</div>
+									<!-- <div class="form-group"><label class="col-sm-2 control-label">Files Attached</label> -->
+										<div class="existing-files-container">
+											<table class="table table-hover feature-documents-table">
+												<thead>
+													<tr>
+														<td>Title</td>
+														<td>Updated</td>
+														<td></td>
+													</tr>
+												</thead>
+												<tbody>
 
-												<!-- <div class="col-md-1 remove-file btn btn-default" data-document-id="{{$doc->id}}">Remove</div> -->
-												<a data-document-id="{{ $doc->id }}" id="document{{$doc->id}}" class="remove-file btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
-											</div>
-											@endforeach
+													@foreach($feature_documents as $doc)
+													<tr class="feature-files">
+														<td class="feature-filename" data-fileid = "{{$doc->id}}"> <i class="fa fa-file-o"></i> {{$doc->original_filename}}</td>
+														{{-- <td class="feature-filepath"> File Location : {{$doc->folder_path}}</td> --}}
+														<td class="feature-timestamp"> {{$doc->created_at}}</td>
+														<td>
+															<a data-document-id="{{ $doc->id }}" id="document{{$doc->id}}" class="remove-file btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+														</td>
+														
+
+														<!-- <div class="col-md-1 remove-file btn btn-default" data-document-id="{{$doc->id}}">Remove</div> -->
+														
+													</tr>
+													@endforeach
+												</tbody>
+											</table>
 											
 											
 										</div>
-									</div>
+									<!-- </div> -->
 									<div id="files-staged-to-remove"></div>
 									
 								</div>
@@ -158,30 +172,42 @@
                             	<div class="ibox-content">
 
                                      <div class="existing-folders row" >
-										<div class="form-group"><label class="col-sm-2 control-label">Packages Attached</label>
-											<div class="existing-folders-container col-md-10" >
-												
-												@foreach($feature_packages as $package)
-												<div class="row">
-													<div class="feature_packages col-md-8">
-														<div class="feature-packagename" data-folderid = {{$package->id}}> <i class="fa fa-folder-o"></i> {{$package->package_name}} </div>
-														
-														<div class="package-timestamp"> Updated At : {{$package->updated_at}}</div>
-													</div>
-
+										
+										<div class="existing-folders-container " >
+											
+											<table class="table table-hover feature-packages-table">
+												<thead>
+													<tr>
+														<td>Package Name</td>
+														<td>Updated</td>
+														<td></td>
+													</tr>
+												</thead>
+												<tbody>
+													@foreach($feature_packages as $package)
 													
-													<a data-package-id="{{ $package->id }}" id="package{{$package->id}}" class="remove-package btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
-												</div>
-												@endforeach
-												
-												
-											</div>
-										</div>
+													<tr class="feature-packages">
+														<td class="feature-packagename" data-folderid = {{$package->id}}><i class="fa fa-folder-o"></i> {{$package->package_name}} </td>
+														<td class="package-updated"> {{$package->updated_at}} </td>
+														<td><a data-package-id="{{ $package->id }}" id="package{{$package->id}}" class="remove-package btn btn-danger btn-sm"><i class="fa fa-trash"></i></a></td>
+													</tr>
+													
+													@endforeach
+
+												</tbody>
+											</table>
+										</div> <!-- existing-folders-container closes -->
+													
+										
+									</div><!-- existing-folders closes -->
+									<div id="packages-selected" class="row">
+
 									</div>
-									<div id="packages-selected" class="row"></div>
-									<div id="packages-staged-to-remove"></div>
+									<div id="packages-staged-to-remove">
+
+									</div>
 									
-								</div>
+								</div> <!-- ibox content closes -->
 							</div>
 
 							<div class="ibox">
@@ -283,7 +309,7 @@
 	            </div>
 	            <div class="modal-footer">
 	                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	                <button type="button" class="btn btn-primary" id="attach-selected-files">Select Documents</button>
+	                <button type="button" data-dismiss="modal" class="btn btn-primary" id="attach-selected-files">Select Documents</button>
 	            </div>
 	        </div>
 	    </div>
@@ -303,7 +329,7 @@
 	            </div>
 	            <div class="modal-footer">
 	                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	                <button type="button" class="btn btn-primary" id="attach-selected-packages">Select Packages</button>
+	                <button type="button" data-dismiss="modal" class="btn btn-primary" id="attach-selected-packages">Select Packages</button>
 	            </div>
 	        </div>
 	    </div>
