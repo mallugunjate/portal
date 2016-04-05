@@ -149,7 +149,7 @@
 			                            </div>
 			                        </div>
 			                        <div class="ibox-content">
-
+			                        <small>Drag Features to reorder</small>
 										<div class="dd" id="featuredcontentlist">
 			                                <ol class="dd-list">
 			                                	{{-- <div class="dd-placeholder" style="height: 42px;"></div> --}}

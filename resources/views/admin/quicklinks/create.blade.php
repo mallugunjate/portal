@@ -108,10 +108,13 @@
 
                                         <div class="form-group"><label class="col-sm-2 control-label">Quicklink type <span class="req">*</span></label>
                                             <div class="col-md-10">
-                                               @foreach($quicklink_types as $qtype)
-                                               <?php $id = "quicklink-" . $qtype->name ?>
-                                               	<div>{!! Form::input('radio', 'type', $qtype->id , ['id'=> $id ]) !!} {{$qtype->name}}</div>
-                                               @endforeach
+                                        		<div class="btn-group" role="group" data-toggle="buttons">										
+													@foreach($quicklink_types as $qtype)
+		                                            	<label class="btn btn-outline btn-default" id="quicklink-{{$qtype->name}}">
+		                                               		<input type="radio" name="link-type" value="{{ $qtype->id }}">{{$qtype->name}}
+		                                               	</label>	
+													@endforeach
+                                            	</div>
                                             </div>
                                         </div>
 
