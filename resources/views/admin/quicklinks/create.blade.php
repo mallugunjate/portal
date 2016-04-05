@@ -289,6 +289,39 @@
 
     $(".tree").treed({openedClass : 'fa fa-folder-open', closedClass : 'fa fa-folder'});            
 
+
+	$('#external-url').bind('keyup change click’, function() {
+	    if (isValidUrl($(this))==1){
+	        alert(“got a valid url!”);   
+	    }
+	});
+ //    $("#external-url").on("change keyup", function() {
+ //    	$('#validate').toggleClass('validate', ValidURL(this.value));
+	// });
+
+	function ValidURL(str) {
+	  var pattern = new RegExp('^(https?:\/\/)?'+ // protocol
+	    '((([a-z\d]([a-z\d-]*[a-z\d])*)\.)+[a-z]{2,}|'+ // domain name
+	    '((\d{1,3}\.){3}\d{1,3}))'+ // OR ip (v4) address
+	    '(\:\d+)?(\/[-a-z\d%_.~+]*)*'+ // port and path
+	    '(\?[;&a-z\d%_.~+=-]*)?'+ // query string
+	    '(\#[-a-z\d_]*)?$','i'); // fragment locater
+	  if(!pattern.test(str)) {
+	    alert("Please enter a valid URL.");
+	    return false;
+	  } else {
+	    return true;
+	  }
+	}	
+
+
+function isValidUrl(url){
+    if(/^(http|https|ftp):\/\/[a-z0-9]+([-.]{1}[a-z0-9]+)*.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/i.test(url)) {
+      return 1;
+    } else {
+      return -1;
+    }   
+}	
 </script>
 
 
