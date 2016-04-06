@@ -66,42 +66,43 @@ $(document).on('click','.feature-create',function(){
 	});
  
 
-    if(featureTitle == '') {
-		swal("Oops!", "This feature needs a name.", "error"); 
-		hasError = true;
-		$(window).scrollTop(0);
-		return false;
-	}
-	if(featureStart == '' || featureEnd == '') {
-		swal("Oops!", "This feature needs start and end dates.", "error"); 
-		hasError = true;
-		return false;
-	}
+ //    if(featureTitle == '') {
+	// 	swal("Oops!", "This feature needs a name.", "error"); 
+	// 	hasError = true;
+	// 	$(window).scrollTop(0);
+	// 	return false;
+	// }
+	// if(featureStart == '' || featureEnd == '') {
+	// 	swal("Oops!", "This feature needs start and end dates.", "error"); 
+	// 	hasError = true;
+	// 	return false;
+	// }
 
-	if (typeof update_type === 'undefined' || update_frequency == '') {
-		swal("Oops!", "Update type and update window size needs to be filled", "error"); 
-		hasError = true;
-		return false;
-	};
+	// if (typeof update_type === 'undefined' || update_frequency == '') {
+	// 	swal("Oops!", "Update type and update window size needs to be filled", "error"); 
+	// 	hasError = true;
+	// 	return false;
+	// };
 
 	
      if(hasError == false) {
      	var data = new FormData();
-     	data.append('name', featureTitle);
-     	data.append('tileLabel', featureTileLabel);
-     	data.append('start', featureStart);
-     	data.append('end', featureEnd);
-     	data.append('thumbnail', thumbnail);
-     	data.append('background', background );
+     	data.append('name', 'featureTitle');
+     	data.append('tileLabel', 'featureTileLabel');
+     	data.append('start', 'featureStart');
+     	data.append('end', 'featureEnd');
+     	data.append('thumbnail', 'thumbnail');
+     	data.append('background', 'background' );
      	data.append('feature_files',  JSON.stringify(feature_files));
      	data.append('feature_packages',  JSON.stringify(feature_packages));
-    	data.append('update_type', update_type);
-    	data.append('update_frequency', update_frequency);
+    	data.append('update_type', 'update_type');
+    	data.append('update_frequency', 'update_frequency');
 
 		$.ajax({
 		    url: '/admin/feature',
 		    type: 'POST',
 		    data: data, 
+		    dataType: 'json',
             processData: false,  // tell jQuery not to process the data
             contentType: false,   // tell jQuery not to set contentType
 		    success: function(result) {

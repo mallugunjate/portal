@@ -85,6 +85,7 @@ $('input[id="thumbnail"]').on('change', function(){
 		    url: '/admin/feature/thumbnail',
 		    type: 'POST',
 		    data: data, 
+		    dataType: 'json',
             processData: false,  // tell jQuery not to process the data
             contentType: false,   // tell jQuery not to set contentType
 		    success: function(result) {
@@ -111,6 +112,7 @@ $('input[id="background"]').on('change', function(){
 		    url: '/admin/feature/background',
 		    type: 'POST',
 		    data: data, 
+		    dataType: 'json',
             processData: false,  // tell jQuery not to process the data
             contentType: false,   // tell jQuery not to set contentType
 		    success: function(result) {
@@ -212,6 +214,7 @@ $(document).on('click','.feature-update',function(){
 		    type: 'PATCH',
 		    data: data,
 		    contentType: 'application/json',
+		    dataType: 'json',
 		    processData : false,
 		    success: function(data) {
 		        
