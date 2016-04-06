@@ -83,9 +83,8 @@ class PackageAdminController extends Controller
     public function store(Request $request)
     {
         
-        Package::storePackage($request);
+        return Package::storePackage($request);
         
-        return;
     }
 
     /**

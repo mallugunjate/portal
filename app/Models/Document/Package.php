@@ -10,6 +10,7 @@ use App\Models\Tag\ContentTag;
 use App\Models\UserSelectedBanner;
 use App\Models\Utility\Utility;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Validation\PackageValidator;
 
 class Package extends Model
 {
@@ -21,26 +22,44 @@ class Package extends Model
 
     protected $dates = ['deleted_at'];
     
+    public static function validateCreatePackage($request)
+    {
+        $validateThis = [ 
+                        'package_screen_name'   => $request['title'],
+                        'package_name'          => $request['name'],
+                        'documents'             => $request['package_files'],
+                        'folders'               => $request['package_folders']
+                      ];
+        \Log::info('validateThis');
+        \Log::info($validateThis);
+        $v = new PackageValidator();
+          
+        return $v->validate($validateThis);
+    }
+
     public static function storePackage(Request $request)
     {   
+        
+        $validate = Package::validateCreatePackage($request);
+        
+        if($validate['validation_result'] == 'false') {
+          \Log::info($validate);
+          return json_encode($validate);
+        }
+
         \Log::info( $request->all() );
         $documents = $request["package_files"];
     	$folders = $request["package_folders"];
         $package_screen_name = $request["title"];
     	// $package_name = preg_replace('/\s+/', '_' , $package_screen_name);
         $package_name = $request["name"];
-    	// $timestamp = sha1(time()*time());
-    	// $package_name .= "_".$timestamp ;
     	
         $banner = UserSelectedBanner::getBanner();
 
     	$package = Package::create([
     			'package_screen_name' 	=> $package_screen_name,
     			'package_name'			=> $package_name,
-    			'banner_id'				=> $banner->id,
-                // 'start'                 => $start,
-                // 'end'                   => $end,
-                // 'is_hidden'             => $is_hidden
+    			'banner_id'				=> $banner->id
     		]);
 
     	$package_id = $package->id;
@@ -65,7 +84,7 @@ class Package extends Model
         
     	
         // Package::updateTags($package_id, $request['tags']);
-    	return;
+    	return $package;
     }
 
     public static function getAllPackages($banner_id)
