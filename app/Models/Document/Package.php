@@ -30,8 +30,23 @@ class Package extends Model
                         'documents'             => $request['package_files'],
                         'folders'               => $request['package_folders']
                       ];
-        \Log::info('validateThis');
-        \Log::info($validateThis);
+        
+        $v = new PackageValidator();
+          
+        return $v->validate($validateThis);
+    }
+
+    public static function validateEditPackage($id, $request)
+    {
+        $validateThis = [ 
+                        'package_screen_name'   => $request['title'],
+                        'package_name'          => $request['name'],
+                        'documents'             => $request['package_files'],
+                        'folders'               => $request['package_folders'],
+                        'remove_documents'      => $request['remove_document'],
+                        'remove_folders'        => $request['remove_folder']
+                      ];
+        
         $v = new PackageValidator();
           
         return $v->validate($validateThis);
@@ -98,15 +113,13 @@ class Package extends Model
         $package = Package::find($id);
         $package["package_documents"] = Package::getPackageDocumentDetails($id);
         $package["package_folders"] = Package::getPackageFolderDetails($id);
-        // $package['package_folder_tree']= [];
+        
         
         $tree = Array();
 
         foreach ($package['package_folders'] as $folderRoot) {
             $root_id = $folderRoot['global_folder_id'];
             $tree[$root_id] = Folder::getFolderChildrenTree($folderRoot['global_folder_id']);
-            // array_merge_recursive( $package['package_folder_tree'], [$root_id => $tree]);
-
             
         }
         $package['package_folder_tree'] = $tree;
@@ -134,7 +147,12 @@ class Package extends Model
 
     public static function updatepackage(Request $request, $id)
     {
-        // dd($request->all());
+        $validate = Package::validateEditPackage($id,$request); 
+        if($validate['validation_result'] == 'false') {
+          \Log::info($validate);
+          return json_encode($validate);
+        }
+
         $package = Package::find($id);
         $package["package_screen_name"] = $request["title"];
         $package["package_name"] = $request["name"];
@@ -178,7 +196,7 @@ class Package extends Model
             }
         }
         // Package::updateTags($id, $request['tags']);
-        return;
+        return $package;
     }
 
 

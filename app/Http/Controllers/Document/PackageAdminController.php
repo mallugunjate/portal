@@ -163,7 +163,7 @@ class PackageAdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Package::updatePackage($request, $id);
+        return Package::updatePackage($request, $id);
         
     }
 
