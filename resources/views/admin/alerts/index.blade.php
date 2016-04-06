@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    @section('title', 'Alerts')
+    @section('title', 'Manage Alerts')
     @include('admin.includes.head')
 
 	<meta name="csrf-token" content="{!! csrf_token() !!}"/>
@@ -23,7 +23,7 @@
 
 		<div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
-                    <h2>Alerts</h2>
+                    <h2>Manage Alerts</h2>
                     <ol class="breadcrumb">
                         <li>
                             <a href="/admin">Home</a>
@@ -46,7 +46,7 @@
 		                <div class="col-lg-12">
 		                    <div class="ibox">
 		                        <div class="ibox-title">
-		                            <h5>Alerts List</h5>
+		                            <h5>Alerts</h5>
 
 		                            <div class="ibox-tools">
 
@@ -73,11 +73,15 @@
 											</thead>
 											<tbody>
 										@foreach($alerts as $alert)
-										
+
 										<tr>
 
 											<td> {{$alert->alert_type}}</td>
-											<td><a href="/admin/document/{{ $alert->document_id }}/edit"> {!!$alert->icon!!} {{ $alert->document_name }}</a></td>
+											<td>
+												{{-- <a href="#" class="launchPDFViewer" data-toggle="modal" data-file="/viewer/?file=/files/{{ $alert->filename }}" data-target="#fileviewmodal">{!!$alert->icon!!} {{ $alert->document_name }}</a> --}}
+
+												{!! $alert->modalLink !!}
+												
 										
 											<td>
 												@if($alert->count_target_stores > 0)
@@ -99,8 +103,9 @@
 											</td>
 
 											<td>
-												
-												<a data-alert="{{ $alert->id }}" id="alert{{ $alert->id }}" class="delete-alert btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+												<a href="/admin/document/{{ $alert->document_id }}/edit" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i></a>
+
+												<a data-alert="{{ $alert->id }}" id="alert{{ $alert->id }}" class="delete-alert btn btn-danger btn-sm"><i class="fa fa-ban"></i></a>
 
 											</td>
 										</tr>
@@ -126,6 +131,7 @@
 
 				<script type="text/javascript" src="/js/custom/admin/alerts/deleteAlert.js"></script>
 				<script type="text/javascript" src="/js/vendor/tablesorter.min.js"></script>
+				<script type="text/javascript" src="/js/custom/site/launchModal.js" ></script>
 				<script type="text/javascript">
 					
 					$.tablesorter.addParser({
@@ -170,6 +176,7 @@
 					}); 
 
 				</script>
+				@include('site.includes.modal')
 				@include('site.includes.bugreport')
 
 

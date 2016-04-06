@@ -27,6 +27,7 @@ class Alert extends Model
                          'documents.id as document_id',
                          'documents.original_filename as document_name',
                          'documents.start as start',
+                         'documents.filename as filename',
                          'documents.end as end',
                          'documents.title as document_title',
                          'documents.original_extension as document_extension')
@@ -48,7 +49,7 @@ class Alert extends Model
 
             $alert->prettyStart = Utility::prettifyDate($alert->start);
             $alert->prettyEnd = Utility::prettifyDate($alert->end);
-
+            $alert->modalLink = Utility::getModalLink($alert->filename, $alert->document_name, $alert->document_extension, $alert->document_id, 1, 0);
             $alert->icon = Utility::getIcon($alert->document_extension);
     	}
 
