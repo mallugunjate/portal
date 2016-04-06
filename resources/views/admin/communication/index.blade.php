@@ -61,7 +61,7 @@
 										<tr>
 											<td>Subject</td>
 											
-											<td>Date</td>
+											<td>Send At</td>
 											<td>Action</td>
 										</tr>
 
@@ -70,7 +70,7 @@
 
 											<td><a href="/admin/communication/{{ $communication->id }}/edit">{{ $communication->subject }}</a></td>
 											
-											<td>{{ $communication->send_at }}</td>
+											<td>{{ $communication->prettySentAtDate }}</td>
 											
 											<td>
 												

@@ -21,7 +21,11 @@ class Communication extends Model
 
    	public static function getAllCommunication($banner_id)
       {
-         return $communicatons = Communication::where('banner_id', $banner_id)->get();
+         $communicatons = Communication::where('banner_id', $banner_id)->get();
+         foreach($communicatons as $c){
+            $c->prettySentAtDate = Utility::prettifyDate( $c->send_at );
+         }
+         return $communicatons;
       }
 
       public static function getActiveCommunicationsByStoreNumber($storeNumber, $maxToFetch)
