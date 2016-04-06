@@ -8298,3 +8298,10 @@ body.md-skin {
 
 .alert-table a{ font-weight: normal !important; color: #337ab7 !important;}
 
+#loading{
+  display: inline;
+  height: 32px;
+  width: 32px;
+}
+#loading img{ height: 32px; width: 32px;}
+

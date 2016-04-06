@@ -22,6 +22,43 @@ $("#allStores").change(function(){
 	}
 });
 
+$( "#title" ).focus(function() {
+	$('.event-create i').removeClass("fa-spinner faa-spin animated");
+	$('.event-create i').addClass("fa-check");		        
+    $('.event-create span').text(' Create New Event');
+});
+
+$( "#event_type" ).focus(function() {
+	$('.event-create i').removeClass("fa-spinner faa-spin animated");
+	$('.event-create i').addClass("fa-check");		        
+    $('.event-create span').text(' Create New Event');
+});
+
+$( "#start" ).focus(function() {
+	$('.event-create i').removeClass("fa-spinner faa-spin animated");
+	$('.event-create i').addClass("fa-check");		        
+    $('.event-create span').text(' Create New Event');
+});
+
+$( "#end" ).focus(function() {
+	$('.event-create i').removeClass("fa-spinner faa-spin animated");
+	$('.event-create i').addClass("fa-check");		        
+    $('.event-create span').text(' Create New Event');
+});
+
+$( "#description" ).focus(function() {
+	$('.event-create i').removeClass("fa-spinner faa-spin animated");
+	$('.event-create i').addClass("fa-check");		        
+    $('.event-create span').text(' Create New Event');
+});
+
+$( "#storeSelect" ).focus(function() {
+	$('.event-create i').removeClass("fa-spinner faa-spin animated");
+	$('.event-create i').addClass("fa-check");		        
+    $('.event-create span').text(' Create New Event');
+});
+
+
 $(document).on('click','.event-create',function(){
   	
   	var hasError = false;
@@ -67,6 +104,10 @@ $(document).on('click','.event-create',function(){
 
     if(hasError == false) {
 
+    	$('.event-create i').removeClass("fa-check");
+    	$('.event-create i').addClass("fa-spinner faa-spin animated");
+    	$('.event-create span').text(' Saving');    	
+
 		$.ajax({
 		    url: '/admin/calendar',
 		    type: 'POST',
@@ -85,7 +126,12 @@ $(document).on('click','.event-create',function(){
 		        CKEDITOR.instances['description'].setData('');
 		        $('#datepicker').find('input').datepicker('setDate', null);
 		        $("#allStores").click();
-				swal("Nice!", "'" + eventTitle +"' has been created", "success");        
+
+				$('.event-create i').removeClass("fa-spinner faa-spin animated");
+    			$('.event-create i').addClass("fa-check");		        
+		        $('.event-create span').text(' Event Created!');
+
+				//swal("Nice!", "'" + eventTitle +"' has been created", "success");        
 		    }
 		});    	
     }

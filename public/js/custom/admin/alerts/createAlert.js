@@ -87,6 +87,10 @@ $(document).on('click','.alert-create',function(){
 	console.log(target_stores);
     if(hasError == false) {
 
+    	$('.alert-create i').removeClass("fa-check");
+    	$('.alert-create i').addClass("fa-spinner faa-spin animated");
+    	$('.alert-create span').text(' Saving');
+
 		$.ajax({
 		    url: '/admin/document/' + document_id ,
 		    type: 'PATCH',
@@ -104,9 +108,13 @@ $(document).on('click','.alert-create',function(){
 		  		
 		    },
 		    success: function(result) {
-		        console.log(result);
+//		        console.log(result);
+				$('.alert-create i').removeClass("fa-spinner faa-spin animated");
+    			$('.alert-create i').addClass("fa-check");		        
+		        $('.alert-create span').text(' Saved!');
+
 		        // $('#createNewCommunicationForm')[0].reset(); // empty the form
-				swal("Nice!", "'" + title +"' has been updated", "success");        
+			//	swal("Nice!", "'" + title +"' has been updated", "success");        
 		    }
 		}).done(function(response){
 			//console.log(response);
