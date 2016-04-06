@@ -56,7 +56,8 @@
                                     <ol class="breadcrumbs"></ol>
                                     <input type="hidden" name="default_folder" value={{$defaultFolder}}>
                                     <input type="hidden" name="banner_id" value={{$banner->id}}>
-                            {{--         @include('admin.documentmanager.document-table') --}}
+                                    <input type="hidden" name="allChildFolderCount" id="allChildFolderCount" >
+                                    <input type="hidden" name="allDocumentsInFolderCount" id="allDocumentsInFolderCount">
                                     </div>
                                     <div id="package-viewer" class="hidden">
                                     @include('admin.package.view')
