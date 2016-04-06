@@ -27,8 +27,8 @@ class Feature extends Model
         $validateThis = [ 
                         'name'      => $request['name'],
                         'title'     => $request['tileLabel'],
-                        'documents' => $request['feature_files'],
-                        'packages'  => $request['feature_packages'],
+                        'documents' => json_decode($request['feature_files']),
+                        'packages'  => json_decode($request['feature_packages']),
                         'thumbnail' => $request['thumbnail'],
                         'background'=> $request['background'],
                         'start'     => $request['start'],
@@ -37,6 +37,7 @@ class Feature extends Model
                         'update_frequency'  => $request['update_frequency']
                       ];
         
+        \Log::info($validateThis);
         $v = new FeatureValidator();
           
         return $v->validate($validateThis);
@@ -47,16 +48,16 @@ class Feature extends Model
         $validateThis = [ 
                         'name'      => $request['name'],
                         'title'     => $request['tileLabel'],
-                        'documents' => $request['feature_files'],
-                        'packages'  => $request['feature_packages'],
+                        'documents' => json_decode($request['feature_files']),
+                        'packages'  => json_decode($request['feature_packages']),
                         'thumbnail' => $request['thumbnail'],
                         'background'=> $request['background'],
                         'start'     => $request['start'],
                         'end'       => $request['end'],
                         'update_type_id'    => $request['update_type'],
                         'update_frequency'  => $request['update_frequency'],
-                        'remove_documents'  => $request['remove_document'],
-                        'remove_packages'   => $request['remove_package']
+                        'remove_documents'  => json_decode($request['remove_document']),
+                        'remove_packages'   => json_decode($request['remove_package'])
                       ];
         
         $v = new FeatureValidator();

@@ -87,16 +87,16 @@ $(document).on('click','.feature-create',function(){
 	
      if(hasError == false) {
      	var data = new FormData();
-     	data.append('name', 'featureTitle');
-     	data.append('tileLabel', 'featureTileLabel');
-     	data.append('start', 'featureStart');
-     	data.append('end', 'featureEnd');
-     	data.append('thumbnail', 'thumbnail');
-     	data.append('background', 'background' );
+     	data.append('name', featureTitle);
+     	data.append('tileLabel', featureTileLabel);
+     	data.append('start', featureStart);
+     	data.append('end', featureEnd);
+     	data.append('thumbnail', thumbnail);
+     	data.append('background', background );
      	data.append('feature_files',  JSON.stringify(feature_files));
      	data.append('feature_packages',  JSON.stringify(feature_packages));
-    	data.append('update_type', 'update_type');
-    	data.append('update_frequency', 'update_frequency');
+    	data.append('update_type', update_type);
+    	data.append('update_frequency', update_frequency);
 
 		$.ajax({
 		    url: '/admin/feature',
