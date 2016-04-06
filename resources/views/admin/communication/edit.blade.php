@@ -118,7 +118,7 @@
 								<!-- <div class="existing-files row"> -->
 									<div class="form-group">
 
-										<label class="col-sm-2 control-label">Files Attached</label>
+										<label class="col-sm-2 control-label">Attachments</label>
 										<div class="existing-files-container col-md-10">
 											@foreach($communication_documents as $doc)
 											<div class="row">
@@ -175,7 +175,7 @@
 								<div class="form-group">
 									<div class="col-sm-10 col-sm-offset-2">
 										<div id="add-documents" class="btn btn-primary btn-outline"><i class="fa fa-plus"></i> Add Documents</div>
-										<div id="add-packages" class="btn btn-primary btn-outline"><i class="fa fa-plus"></i> Add Packages</div>		
+									{{-- <div id="add-packages" class="btn btn-primary btn-outline"><i class="fa fa-plus"></i> Add Packages</div>	--}}
 									</div>
 								</div>
 

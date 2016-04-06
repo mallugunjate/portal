@@ -111,7 +111,7 @@
 										<div class="form-group">
 											<div class="col-sm-10 col-sm-offset-2">
 												<div id="add-documents" class="btn btn-primary btn-outline"><i class="fa fa-plus"></i> Add documents</div>
-												<div id="add-packages" class="btn btn-primary btn-outline"><i class="fa fa-plus"></i> Add packages</div>		
+											{{-- <div id="add-packages" class="btn btn-primary btn-outline"><i class="fa fa-plus"></i> Add packages</div>	--}}
 											</div>
 										</div>
 										<div class="form-group">
