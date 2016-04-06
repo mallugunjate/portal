@@ -26,7 +26,7 @@ class Document extends Model
     protected $fillable = array('upload_package_id', 'original_filename','original_extension', 'filename', 'title', 'description', 'start', 'end', 'banner_id');
     protected $dates = ['deleted_at'];
 
-    public static function getDocuments($global_folder_id, $forStore=null)
+    public static function getDocuments($global_folder_id, $forStore=null, $storeNumber=null)
     {
 
         if (isset($global_folder_id)) {
@@ -41,12 +41,14 @@ class Document extends Model
             if ($forStore) {
                 $files = \DB::table('file_folder')
                             ->join('documents', 'file_folder.document_id', '=', 'documents.id')
+                            ->join('document_target', 'document_target.document_id' , '=', 'documents.id')
                             ->where('file_folder.folder_id', '=', $global_folder_id)
                             ->where('documents.start', '<=', $now )
                             ->where(function($query) use ($now) {
                                 $query->where('documents.end', '>=', $now)
                                     ->orWhere('documents.end', '=', '0000-00-00 00:00:00' ); 
                             })
+                            ->where('document_target.store_id', strval($storeNumber))
                             ->select('documents.*')
                             ->get();
                 
@@ -295,10 +297,13 @@ class Document extends Model
     
         $files = \DB::table('file_folder')
                     ->join('documents', 'file_folder.document_id', '=', 'documents.id')
+                    ->join('document_target', 'document_target.document_id' , '=', 'documents.id')
                     ->where('file_folder.folder_id', '=', $global_folder_id)
                     ->where('documents.end', '<=', $now)
                     ->where('documents.end', '!=', '0000-00-00 00:00:00')
+                    ->where('document_target.store_id', strval($storeNumber))
                     ->select('documents.*')
+
                     ->get();
         
         if (count($files) > 0) {

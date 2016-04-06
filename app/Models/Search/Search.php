@@ -12,26 +12,28 @@ use Log;
 
 class Search extends Model
 {
-    public static function searchDocuments($query)
+    public static function searchDocuments($query, $store)
     {
     	$docs = collect();
     	
     	$query_terms = explode( ' ', $query);
     	
-    	//$today = Carbon::now()->toDateString();
+    	// $today = Carbon::now()->toDateString();
         $today = Carbon::now();
         \Log::info( $today );
         \Log::info( $query );
 
     	foreach ($query_terms as $term) {
     		$docs = $docs->merge(
-    					//Document::where('original_filename', 'LIKE', '%'.$term.'%')
-                        Document::where('title', 'LIKE', '%'.$term.'%')                        
+                        Document::join('document_target', 'document_target.document_id' , '=', 'documents.id' )
+                                ->where('title', 'LIKE', '%'.$term.'%')                        
     							->where('start', '<=', $today )
     							->where(function($q) use($today) {
     								$q->where('end', '>=', $today)
     								->orWhere('end', '=', '0000-00-00 00:00:00');
     							})
+                                ->where('document_target.store_id', $store)
+                                ->select('documents.*')
     							->get()
     				);		
 
@@ -57,7 +59,7 @@ class Search extends Model
     	return $docs;	
     }
 
-    public static function searchArchivedDocuments($query)
+    public static function searchArchivedDocuments($query, $store)
     {
         $docs = collect();
         
@@ -67,9 +69,12 @@ class Search extends Model
         $today = Carbon::now();
         foreach ($query_terms as $term) {
             $docs = $docs->merge(
-                        Document::where('original_filename', 'LIKE', '%'.$term.'%')
+                        Document::join('document_target', 'document_target.document_id', '=', 'documents.id' )
+                                ->where('original_filename', 'LIKE', '%'.$term.'%')
                                 ->where('end', '<=', $today )
                                 ->where('end', '!=', '0000-00-00 00:00:00')
+                                ->where('document_target.store_id', $store)
+                                ->select('documents.*')
                                 ->get()
                     );      
 
