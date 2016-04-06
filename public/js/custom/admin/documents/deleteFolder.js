@@ -2,9 +2,20 @@ $("#delete-folder").on('click', function(e){
 	
 	e.preventDefault();
 		var folderid = $(this).attr('data-folderId');
+		var allDocumentsInFolderCount = $("#allDocumentsInFolderCount").val();
+		var allChildFolders = $("#allChildFolderCount").val();
+		var text = 'This folder has : \n';
+		if (allDocumentsInFolderCount>0) {
+			text += allDocumentsInFolderCount + ' Documents \n';
+		} 
+		if (allChildFolders>0) {
+			text +=  ' ' + allChildFolders + ' Folders';
+		}
+
+
 		swal({
 	        title: "Are you sure you want to delete this folder?",
-	        //text: "You will not be able to recover this imaginary file!",
+	        text: text,
 	        type: "warning",
 	        showCancelButton: true,
 	        confirmButtonColor: "#DD6B55",

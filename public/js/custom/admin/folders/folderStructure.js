@@ -15,7 +15,7 @@ $("body").on("click", ".folder", function(e){
 });
 
 var getFolderDocuments = function(id){
-	console.log("whats up");
+	
 	var folder_id = id;
 	$.ajax(
 		{
@@ -31,6 +31,12 @@ var getFolderDocuments = function(id){
 		fillTable(data);
 		setDeepLink(data);
 		fillBreadCrumbs(data);
+		$("#allChildFolderCount").val(data.folder.allChildFolderCount);
+		$("#allDocumentsInFolderCount").val(data.folder.allDocumentsInFolderCount);
+		console.log("**************");
+		console.log($("#allChildFolderCount"));
+		console.log($("#allDocumentsInFolderCount"));
+		console.log("**************");
 	});
 }
 

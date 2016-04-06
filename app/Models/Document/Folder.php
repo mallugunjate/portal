@@ -166,7 +166,11 @@ class Folder extends Model
         $global_folder_details = \DB::table('folder_ids')->where('id', $global_folder_id )->first();                                                            
         $folder_type = $global_folder_details->folder_type;
         $folder_id = $global_folder_details->folder_id;
-        
+        $folderTree = Folder::getFolderChildrenTree($global_folder_id);
+        $allDocumentsInFolder = Folder::getAllDocumentsInFolderTree($folderTree);
+        $allDocumentsInFolderCount = count($allDocumentsInFolder);
+        unset($folderTree[$global_folder_id]); //removing the root folder to get accurate count of child folders 
+        $allChildFoldersCount = count($folderTree);
 
         if ($folder_type == "week") {
             
@@ -184,8 +188,11 @@ class Folder extends Model
             $folder->folder_path = Folder::getFolderPath($global_folder_id);
             $folder->folder_children = Folder::getFolderChildren($global_folder_id);
             $folder->type = "folder";
+            $folder->allChildFolderCount = $allChildFoldersCount;
+            $folder->allDocumentsInFolderCount = $allDocumentsInFolderCount;
             return $folder;
         }
+
     }
 
     public static function editFolderDetails($params)
@@ -509,6 +516,16 @@ class Folder extends Model
     public static function getGlobalFolderId($folderId)
     {
          return DB::table('folder_ids')->where('folder_id', $folderId)->first()->id;
+    }
+
+    public static function getAllDocumentsInFolderTree($folderTree)
+    {
+        $document_ids = [];
+        foreach ($folderTree as $key=>$folder) {
+            $current_folder_document_ids = FileFolder::where('folder_id', $key)->get()->pluck('document_id')->toArray(); 
+            $document_ids = array_merge_recursive($document_ids, $current_folder_document_ids);
+        }
+        return $document_ids;
     }
 
 }
