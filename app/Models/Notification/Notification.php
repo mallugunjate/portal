@@ -12,7 +12,7 @@ use App\Models\Utility\Utility;
 
 class Notification extends Model
 {
-    public static function getAllNotifications($bannerId, $windowType, $windowSize)
+    public static function getAllNotifications($bannerId, $storeNumber, $windowType, $windowSize)
     {
 
         $now = Carbon::now()->toDatetimeString();
@@ -21,40 +21,33 @@ class Notification extends Model
     			$dateSince = Carbon::now()->subDays($windowSize)->toDateTimeString();
 
     			$notifications = Document::where('banner_id', $bannerId)
-    							->where('updated_at', '>=', $dateSince)
+                                ->join('document_target', 'document_target.document_id', '=', 'documents.id')
+    							->where('documents.updated_at', '>=', $dateSince)
                                 ->where('start', '<=', $now)
-    							->orderBy('updated_at', 'desc')
-    							->get();
-
-                $counter = 0;
-                foreach ($notifications as $notification) {
-                    
-                    if (!( $notification->end >= $now || $notification->end == '0000-00-00 00:00:00' ) ) {
-
-                        $notifications->forget($counter);
-                    }
-                    $counter++;
-                }  
+                                ->where(function($query) use ($now) {
+                                    $query->where('documents.end', '>=', $now)
+                                        ->orWhere('documents.end', '=', '0000-00-00 00:00:00' ); 
+                                })
+                                ->where('document_target.store_id', '=', $storeNumber)
+    							->orderBy('documents.updated_at', 'desc')
+                                ->select('documents.*')
+    							->get(); 
 
 
     			break;
     		case 2:  //by number of documents
     			$notifications = Document::where('banner_id', $bannerId)
-    							->orderBy('updated_at', 'desc')
+                                ->join('document_target', 'document_target.document_id', '=', 'documents.id')
                                 ->where('start', '<=', $now)
+                                ->where(function($query) use ($now) {
+                                    $query->where('documents.end', '>=', $now)
+                                        ->orWhere('documents.end', '=', '0000-00-00 00:00:00' ); 
+                                })
+                                ->where('document_target.store_id', '=', $storeNumber)
+                                ->orderBy('documents.updated_at', 'desc')
+                                ->select('documents.*')
     							->get();
-
-                $counter = 0;
-                foreach ($notifications as $notification) {
-                    
-                    if (!( $notification->end >= $now || $notification->end == '0000-00-00 00:00:00' ) ) {
-
-                        $notifications->forget($counter);
-                    }
-                    $counter++;
-                }
-                // return $notifications;   
-                $waste_chunk = $notifications->splice($windowSize);
+                
                 
     			break;
 
@@ -62,22 +55,15 @@ class Notification extends Model
     			$notifications ="not a valid parameter in getAllNotifications()";
     			break;
     	}
-
         Notification::prettifyNotifications($notifications);
 
-        $i=0;
         foreach($notifications as $n){
 
-            $link = Utility::getModalLink($n->filename, $n->title, $n->original_extension, $n->id, 0);
-            $link_with_icon = Utility::getModalLink($n->filename, $n->title, $n->original_extension, $n->id, 1);
-            $icon = Utility::getIcon($n->original_extension);
-
-            $n->icon = $icon;
-            $n->link = $link;
-            $n->link_with_icon = $link_with_icon;
+            $n->icon = Utility::getIcon($n->original_extension);
+            $n->link = Utility::getModalLink($n->filename, $n->title, $n->original_extension, $n->id, 0);
+            $n->link_with_icon = Utility::getModalLink($n->filename, $n->title, $n->original_extension, $n->id, 1);
             $n->linkedIcon = Utility::getModalLink($n->filename, $n->icon, $n->original_extension, $n->id, 0);
             
-            $i++;
         }
 
     	return $notifications;
@@ -127,7 +113,6 @@ class Notification extends Model
             $n->link = Utility::getModalLink($n->filename, $n->title, $n->original_extension, $n->id, 0);
             $n->link_with_icon = Utility::getModalLink($n->filename, $n->title, $n->original_extension, $n->id, 1);
             $n->icon = Utility::getIcon($n->original_extension);
-            //public static function getModalLink($file, $anchortext, $extension, $withIcon=null, $justAnchor=null)
             $n->linkedIcon = Utility::getModalLink($n->filename, $n->icon, $n->original_extension, $n->id, 0);
 
         }
