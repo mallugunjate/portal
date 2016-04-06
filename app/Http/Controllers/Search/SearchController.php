@@ -38,14 +38,14 @@ class SearchController extends Controller
         $alerts = [];
 
         if ( isset($query) && ($query != '')){
-            $docs = Search::searchDocuments($query);
+            $docs = Search::searchDocuments($query, $store);
             $folders = Search::searchFolders($query);
             $communications = Search::searchCommunications($query, $store);
             $alerts = Search::searchAlerts($query, $store);
 
             if( isset($request['archives']) && $request['archives'])
             {
-                $docs = $docs->merge(Search::searchArchivedDocuments($query));
+                $docs = $docs->merge(Search::searchArchivedDocuments($query, $store));
                 $communications = $communications->merge(Search::searchArchivedCommunications($query, $store));
                 $alerts = $alerts->merge(Search::searchArchivedAlerts($query, $store));
             }
