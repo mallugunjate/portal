@@ -113,6 +113,17 @@ $(document).on('click','.alert-create',function(){
     			$('.alert-create i').addClass("fa-check");		        
 		        $('.alert-create span').text(' Saved!');
 
+		        $(function(){
+				   function revertButton(){
+				   	$('.alert-create span').fadeOut( "fast", function() {
+	    				$('.alert-create span').text(' Save changes');
+	  				});
+				   	 
+				      $('.alert-create span').fadeIn();
+				   };
+				   window.setTimeout( revertButton, 2000 ); // 2 seconds
+				});
+
 		        // $('#createNewCommunicationForm')[0].reset(); // empty the form
 			//	swal("Nice!", "'" + title +"' has been updated", "success");        
 		    }

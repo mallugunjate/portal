@@ -22,41 +22,41 @@ $("#allStores").change(function(){
 	}
 });
 
-$( "#title" ).focus(function() {
-	$('.event-create i').removeClass("fa-spinner faa-spin animated");
-	$('.event-create i').addClass("fa-check");		        
-    $('.event-create span').text(' Create New Event');
-});
+// $( "#title" ).focus(function() {
+// 	$('.event-create i').removeClass("fa-spinner faa-spin animated");
+// 	$('.event-create i').addClass("fa-check");		        
+//     $('.event-create span').text(' Create New Event');
+// });
 
-$( "#event_type" ).focus(function() {
-	$('.event-create i').removeClass("fa-spinner faa-spin animated");
-	$('.event-create i').addClass("fa-check");		        
-    $('.event-create span').text(' Create New Event');
-});
+// $( "#event_type" ).focus(function() {
+// 	$('.event-create i').removeClass("fa-spinner faa-spin animated");
+// 	$('.event-create i').addClass("fa-check");		        
+//     $('.event-create span').text(' Create New Event');
+// });
 
-$( "#start" ).focus(function() {
-	$('.event-create i').removeClass("fa-spinner faa-spin animated");
-	$('.event-create i').addClass("fa-check");		        
-    $('.event-create span').text(' Create New Event');
-});
+// $( "#start" ).focus(function() {
+// 	$('.event-create i').removeClass("fa-spinner faa-spin animated");
+// 	$('.event-create i').addClass("fa-check");		        
+//     $('.event-create span').text(' Create New Event');
+// });
 
-$( "#end" ).focus(function() {
-	$('.event-create i').removeClass("fa-spinner faa-spin animated");
-	$('.event-create i').addClass("fa-check");		        
-    $('.event-create span').text(' Create New Event');
-});
+// $( "#end" ).focus(function() {
+// 	$('.event-create i').removeClass("fa-spinner faa-spin animated");
+// 	$('.event-create i').addClass("fa-check");		        
+//     $('.event-create span').text(' Create New Event');
+// });
 
-$( "#description" ).focus(function() {
-	$('.event-create i').removeClass("fa-spinner faa-spin animated");
-	$('.event-create i').addClass("fa-check");		        
-    $('.event-create span').text(' Create New Event');
-});
+// $( "#description" ).focus(function() {
+// 	$('.event-create i').removeClass("fa-spinner faa-spin animated");
+// 	$('.event-create i').addClass("fa-check");		        
+//     $('.event-create span').text(' Create New Event');
+// });
 
-$( "#storeSelect" ).focus(function() {
-	$('.event-create i').removeClass("fa-spinner faa-spin animated");
-	$('.event-create i').addClass("fa-check");		        
-    $('.event-create span').text(' Create New Event');
-});
+// $( "#storeSelect" ).focus(function() {
+// 	$('.event-create i').removeClass("fa-spinner faa-spin animated");
+// 	$('.event-create i').addClass("fa-check");		        
+//     $('.event-create span').text(' Create New Event');
+// });
 
 
 $(document).on('click','.event-create',function(){
@@ -129,7 +129,22 @@ $(document).on('click','.event-create',function(){
 
 				$('.event-create i').removeClass("fa-spinner faa-spin animated");
     			$('.event-create i').addClass("fa-check");		        
-		        $('.event-create span').text(' Event Created!');
+		        $('.event-create span').text(' Event Created!');		        
+
+		        $(function(){
+				   function revertButton(){
+					   	$( ".event-create span" ).fadeOut( "fast", function() {
+	    					$('.event-create span').text(' Create New Event');
+	  					});
+	  					$('.event-create span').fadeIn();
+						//$('.event-create span').fadeOut(100);
+						
+						
+				   };
+				   window.setTimeout( revertButton, 2000 ); // 2 seconds
+				});
+
+	
 
 				//swal("Nice!", "'" + eventTitle +"' has been created", "success");        
 		    }
