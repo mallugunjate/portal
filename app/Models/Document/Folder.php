@@ -15,6 +15,7 @@ use DB;
 use App\Models\Dashboard\Quicklinks;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Document\GlobalFolder;
+use App\Models\Validation\FolderValidation;
 
 class Folder extends Model
 {
@@ -22,6 +23,24 @@ class Folder extends Model
     protected $table = 'folders';
     protected $fillable = array('name' , 'is_child', 'has_weeks', 'week_window_size', 'banner_id', 'has_child');
     protected $dates = ['deleted_at'];
+
+    public static function validateAddFolder($request)
+    {
+        $validateThis = [
+
+            'parent' => $request['parent'],
+            'name'  => $request['name']
+        ];
+
+        $v = new FolderValidator();
+        return $v->validate($validateThis);
+    }
+
+    public static function validateEditFolder($request)
+    {
+
+    }
+
 
     public static function getFolders()
     {
@@ -37,6 +56,7 @@ class Folder extends Model
 
     public static function storeFolder(Request $request)
     {
+        \Log::info($request->all());
         $parent = $request['parent'];
         $is_child = 0;
 
