@@ -33,11 +33,21 @@ $("#delete-folder").on('click', function(e){
 					"banner_id" : $('[name="banner_id"]').val(),
 				},
 				success: function(result) {
-		        swal("Deleted!", "This folder has been deleted.", "success");
+		        //swal("Deleted!", "This folder has been deleted.", "success");
 		    }
 			}).done(function( data ){
 				console.log(data);
-				//window.location = '/admin/document/manager';
+				
+				swal({   
+					title: "Deleted!",   
+					text: "This folder has been deleted",   
+					type: "success"
+				}, function(isConfirm){   
+					if (isConfirm) {     
+						window.location = '/admin/document/manager';
+					}  
+				});				
+
 			});
 		});
 });
