@@ -89,10 +89,21 @@ $('input[id="thumbnail"]').on('change', function(){
             processData: false,  // tell jQuery not to process the data
             contentType: false,   // tell jQuery not to set contentType
 		    success: function(result) {
-		        console.log(result);
-		        $(".thumbnail-preview img").attr('src', "/images/featured-covers/"+result);
-		        // $('#createNewFeatureForm')[0].reset(); // empty the form
-				// swal("Nice!", "'" + featureTitle +"' has been created", "success");        
+		    	
+		    	console.log(result);
+		    	var errors = result.errors;
+		        if( errors ) {
+		        	if(errors.hasOwnProperty("thumbnail")) {
+		        		$.each(errors.thumbnail, function(index){
+		        			$("#thumbnail").parent().append('<div class="req">' + errors.thumbnail[index]  + '</div>');	
+		        		}); 	
+		        	}
+		        }
+		        
+	        	else{
+	        		$(".thumbnail-preview img").attr('src', "/images/featured-covers/"+result);
+	        	}
+		        
 		    }
 		}).done(function(response){
 			console.log(response);
@@ -117,9 +128,18 @@ $('input[id="background"]').on('change', function(){
             contentType: false,   // tell jQuery not to set contentType
 		    success: function(result) {
 		        console.log(result);
-		        $(".background-preview img").attr('src', "/images/featured-backgrounds/"+result);
-		        // $('#createNewFeatureForm')[0].reset(); // empty the form
-				// swal("Nice!", "'" + featureTitle +"' has been created", "success");        
+		        var errors = result.errors;
+		        if(  errors ) {
+			        if(errors.hasOwnProperty("background")) {
+		        		$.each(errors.background, function(index){
+		        			$("#background").parent().append('<div class="req">' + errors.background[index]  + '</div>');	
+		        		}); 	
+		        	}
+		        }
+	        	else{
+	        		$(".background-preview img").attr('src', "/images/featured-backgrounds/"+result);
+	        	}
+		        
 		    }
 		}).done(function(response){
 			console.log(response);

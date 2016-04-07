@@ -13,6 +13,8 @@ use App\Models\Document\Folder;
 use App\Models\Document\FolderPackage;
 use App\Models\Document\FileFolder;
 use App\Models\Validation\FeatureValidator;
+use App\Models\Validation\FeatureThumbnailValidator;
+use App\Models\Validation\FeatureBackgroundValidator;
 
 class Feature extends Model
 {
@@ -37,7 +39,6 @@ class Feature extends Model
                         'update_frequency'  => $request['update_frequency']
                       ];
         
-        \Log::info($validateThis);
         $v = new FeatureValidator();
           
         return $v->validate($validateThis);
@@ -60,26 +61,46 @@ class Feature extends Model
                         'remove_packages'   => $request['remove_package']
                       ];
 
-        \Log::info(json_last_error());
-        
-        \Log::info('**************');
-        \Log::info($validateThis);
-        \Log::info('**************');
         $v = new FeatureValidator();
           
         return $v->validate($validateThis);
     }
   	
+    public static function validateThumbnailEdit($request)
+    {
+         $validateThis = [ 
+                        
+                        'thumbnail' => $request['thumbnail'],
+                        'featureID' => $request['featureID']
+                      ];
+        
+        $v = new FeatureThumbnailValidator();
+          
+        return $v->validate($validateThis);
+    }
+
+    public static function validateBackgroundEdit($request)
+    {
+         $validateThis = [ 
+                        
+                        'background'=> $request['background'],
+                        'featureID' => $request['featureID']
+
+                      ];
+        
+        $v = new FeatureBackgroundValidator();
+          
+        return   $v->validate($validateThis);
+        
+    }
+
   	public static function storeFeature(Request $request)
   	{
-  	  \Log::info('I am here');
-      \Log::info($request->all());
+  	  
       $validate = Feature::validateCreateFeature($request);
         
       if($validate['validation_result'] == 'false') {
-        \Log::info('######## feature validator #########');
         \Log::info($validate);
-        \Log::info('######## feature validator #########');
         return json_encode($validate);
       }	
       $title = $request["name"];
@@ -216,6 +237,8 @@ class Feature extends Model
 
     public static function updateFeatureThumbnail($file, $feature_id)
     {
+        
+
         $metadata = Feature::getFileMetaData($file);
 
         $directory = public_path() . '/images/featured-covers/';

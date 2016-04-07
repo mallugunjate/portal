@@ -107,7 +107,7 @@ $(document).on('click','.feature-create',function(){
             contentType: false,   // tell jQuery not to set contentType
 		    success: function(result) {
 		        console.log(result);
-		    	if(result != null && result.validation_result == 'false') {
+		    	if(result.validation_result == 'false') {
 		        	var errors = result.errors;
 		        	if(errors.hasOwnProperty("name")) {
 		        		$.each(errors.name, function(index){
@@ -147,13 +147,15 @@ $(document).on('click','.feature-create',function(){
 			        	});
 			        }
 			        if(errors.hasOwnProperty("thumbnail")) {
+			        	console.log(1);
 			        	$.each(errors.thumbnail, function(index){
-			        		$("#thumbnail").append('<div class="req">' + errors.thumbnail[index]  + '</div>');	
+			        		$("#thumbnail").parent().append('<div class="req">' + errors.thumbnail[index]  + '</div>');	
 			        	});
 			        }
 			        if(errors.hasOwnProperty("background")) {
+			        	console.log(2);
 			        	$.each(errors.background, function(index){
-			        		$("#background").append('<div class="req">' + errors.background[index]  + '</div>');	
+			        		$("#background").parent().append('<div class="req">' + errors.background[index]  + '</div>');	
 			        	});
 			        }
 		        }
