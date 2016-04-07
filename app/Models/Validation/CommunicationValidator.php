@@ -14,7 +14,8 @@ class CommunicationValidator extends PortalValidator
 			    	'end'			=> 'required|date',
 			    	'target_stores'	=> "required_without:allStores",
 			        'allStores'     => 'in:on',
-			        'documents'		=> 'sometimes|exists:documents,id'
+			        'documents'		=> 'sometimes|exists:documents,id',
+			        'remove_document'=> 'sometimes|exists:documents,id',
 
     		];
 

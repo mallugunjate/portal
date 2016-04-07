@@ -42,7 +42,22 @@ class Communication extends Model
 
       public static function validateEditCommunication($request)
       {
+         $validateThis =  [
 
+            'subject'   => $request['subject'],
+            'start'     => $request['send_at'],
+            'end'       => $request['archive_at'],
+            'communication_type_id' => $request['communication_type_id'],
+            'target_stores'    => $request['target_stores'],
+            'documents' => $request['communication_documents'],
+            'allStores' => $request['allStores'],
+            'remove_document' =>$request['remove_document']
+
+         ];
+       
+         \Log::info($validateThis);
+         $v = new CommunicationValidator();
+         return $v->validate($validateThis);  
       }
 
       public static function getAllCommunication($banner_id)
@@ -165,7 +180,7 @@ class Communication extends Model
          
 
          \Log::info($request->all());
-         $validate = Communication::validateCreateCommunication($request);
+         $validate = Communication::validateEditCommunication($request);
         
          if($validate['validation_result'] == 'false') {
            \Log::info($validate);

@@ -315,7 +315,7 @@
 		        autoclose: true
 		    });      				
 
-		 //   CKEDITOR.replace('body');
+		   CKEDITOR.replace('body');
 
 		    $(".tree").treed({openedClass : 'fa fa-folder-open', closedClass : 'fa fa-folder'});
 

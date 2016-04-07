@@ -92,6 +92,7 @@ $(document).on('click','.communication-update',function(){
 		$.ajax({
 		    url: '/admin/communication/' + communicationId,
 		    type: 'PATCH',
+		    dataType : 'json',
 		    data: {
 
 		    	subject : subject,
@@ -111,7 +112,7 @@ $(document).on('click','.communication-update',function(){
 
 		    },
 		    
-		    success: function(data) {
+		    success: function(result) {
 		       
 		        console.log(result);
 		        if(result.validation_result == 'false') {
@@ -145,14 +146,18 @@ $(document).on('click','.communication-update',function(){
 			        	});
 			        }
 			        if(errors.hasOwnProperty("target_stores")) {
-			        	console.log(1);
 			        	$.each(errors.target_stores, function(index){
 			        		$("#storeSelect").parent().append('<div class="req">' + errors.target_stores[index]  + '</div>');	
 			        	});
 			        }
+			        if(errors.hasOwnProperty("allStores")) {
+			        	$.each(errors.allStores, function(index){
+			        		$("#storeSelect").parent().append('<div class="req">' + errors.allStores[index]  + '</div>');	
+			        	});
+			        }
 		        }
 		        else{
-		        	console.log(data); 
+		        	console.log(result); 
 					swal("Nice!", "'" + subject +"' has been updated", "success");
 		        } 
 		        
