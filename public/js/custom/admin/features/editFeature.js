@@ -216,11 +216,59 @@ $(document).on('click','.feature-update',function(){
 		    contentType: 'application/json',
 		    dataType: 'json',
 		    processData : false,
-		    success: function(data) {
-		        
-		        console.log(data); 
-				swal("Nice!", "'" + featureTitle +"' has been updated", "success");
+		    success: function(result) {
 
+	        	var errors = result.errors;
+	        	if(errors.hasOwnProperty("name")) {
+	        		$.each(errors.name, function(index){
+	        			$("#feature_title").parent().append('<div class="req">' + errors.name[index]  + '</div>');	
+	        		}); 	
+	        	}
+		        if(errors.hasOwnProperty("documents")) {
+		        	$.each(errors.documents, function(index){
+		        		$("#files-selected").append('<div class="req">' + errors.documents[index]  + '</div>');
+		        	});
+		        }
+		        if(errors.hasOwnProperty("packages")) {
+		        	$.each(errors.packages, function(index){
+		        		$("#packages-selected").append('<div class="req">' + errors.packages[index]  + '</div>');	
+		        	});
+		        }
+		        if(errors.hasOwnProperty("update_type_id")) {
+		        	$.each(errors.update_type_id, function(index){
+		        		$(".latest-updates-container").append('<div class="req">' + errors.update_type_id[index]  + '</div>');	
+		        	});
+		        }
+		        if(errors.hasOwnProperty("update_frequency")) {
+		        	$.each(errors.update_frequency, function(index){
+		        		$(".latest-updates-container").append('<div class="req">' + errors.update_frequency[index]  + '</div>');	
+		        	});
+		        }
+		        
+		        if(errors.hasOwnProperty("start")) {
+		        	$.each(errors.start, function(index){
+		        		$(".input-daterange").parent().append('<div class="req">' + errors.start[index]  + '</div>');	
+		        	});
+		        }
+		        if(errors.hasOwnProperty("end")) {
+		        	$.each(errors.end, function(index){
+		        		$(".input-daterange").append('<div class="req">' + errors.end[index]  + '</div>');	
+		        	});
+		        }
+		        if(errors.hasOwnProperty("thumbnail")) {
+		        	$.each(errors.thumbnail, function(index){
+		        		$("#thumbnail").append('<div class="req">' + errors.thumbnail[index]  + '</div>');	
+		        	});
+		        }
+		        if(errors.hasOwnProperty("background")) {
+		        	$.each(errors.background, function(index){
+		        		$("#background").append('<div class="req">' + errors.background[index]  + '</div>');	
+		        	});
+		        }
+	        
+		        else{
+		        	swal("Nice!", "'" + featureTitle +"' has been updated", "success");
+			    }
 		    }
 		}).done(function(response){
 			console.log(response);

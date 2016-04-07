@@ -46,20 +46,25 @@ class Feature extends Model
     public static function validateEditFeature($id, $request)
     {
         $validateThis = [ 
-                        'name'      => $request['name'],
+                        'name'      => $request['title'],
                         'title'     => $request['tileLabel'],
-                        'documents' => json_decode($request['feature_files']),
-                        'packages'  => json_decode($request['feature_packages']),
+                        'documents' => $request['feature_files'],
+                        'packages'  => $request['feature_packages'],
                         'thumbnail' => $request['thumbnail'],
                         'background'=> $request['background'],
                         'start'     => $request['start'],
                         'end'       => $request['end'],
                         'update_type_id'    => $request['update_type'],
                         'update_frequency'  => $request['update_frequency'],
-                        'remove_documents'  => json_decode($request['remove_document']),
-                        'remove_packages'   => json_decode($request['remove_package'])
+                        'remove_documents'  => $request['remove_document'],
+                        'remove_packages'   => $request['remove_package']
                       ];
+
+        \Log::info(json_last_error());
         
+        \Log::info('**************');
+        \Log::info($validateThis);
+        \Log::info('**************');
         $v = new FeatureValidator();
           
         return $v->validate($validateThis);
@@ -67,11 +72,14 @@ class Feature extends Model
   	
   	public static function storeFeature(Request $request)
   	{
-  	  \Log::info($request->all());
+  	  \Log::info('I am here');
+      \Log::info($request->all());
       $validate = Feature::validateCreateFeature($request);
         
       if($validate['validation_result'] == 'false') {
+        \Log::info('######## feature validator #########');
         \Log::info($validate);
+        \Log::info('######## feature validator #########');
         return json_encode($validate);
       }	
       $title = $request["name"];
@@ -114,7 +122,7 @@ class Feature extends Model
     public static function updateFeature(Request $request, $id)
     {
         \Log::info($request->all());        
-        $validate = Feature::validateEditFeature($request);
+        $validate = Feature::validateEditFeature($id, $request);
         
         if($validate['validation_result'] == 'false') {
           \Log::info($validate);

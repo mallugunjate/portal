@@ -14,7 +14,7 @@ class FeatureValidator extends PortalValidator
     	'packages'			=> 'sometimes|exists:packages,id',
     	'remove_documents'	=> 'sometimes|exists:documents,id',
     	'remove_packages'	=> 'sometimes|exists:packages,id',
-    	'update_type'		=> 'required|exists:feature_latest_update_types,id',
+    	'update_type_id'	=> 'required|exists:feature_latest_update_types,id',
     	'update_frequency'	=> 'required|integer|min:1',
     	'start'				=> 'required|date',
     	'end'				=> 'sometimes|date',
@@ -28,6 +28,7 @@ class FeatureValidator extends PortalValidator
     	'documents.exists'	  		=> 'Invalid documents attached',
     	'packages.exists'			=> 'Invalid packages attached',
     	'remove_documents.exists'	=> 'Invalid value in documents',
-    	'remove_packages.exists'	=> 'Invalid value in packages'
+    	'remove_packages.exists'	=> 'Invalid value in packages',
+        'update_type_id.exists'        => 'Invalid value in Latest Updates'
     ];
 }

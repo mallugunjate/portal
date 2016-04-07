@@ -66,23 +66,23 @@ $(document).on('click','.feature-create',function(){
 	});
  
 
- //    if(featureTitle == '') {
-	// 	swal("Oops!", "This feature needs a name.", "error"); 
-	// 	hasError = true;
-	// 	$(window).scrollTop(0);
-	// 	return false;
-	// }
-	// if(featureStart == '' || featureEnd == '') {
-	// 	swal("Oops!", "This feature needs start and end dates.", "error"); 
-	// 	hasError = true;
-	// 	return false;
-	// }
+    if(featureTitle == '') {
+		swal("Oops!", "This feature needs a name.", "error"); 
+		hasError = true;
+		$(window).scrollTop(0);
+		return false;
+	}
+	if(featureStart == '' || featureEnd == '') {
+		swal("Oops!", "This feature needs start and end dates.", "error"); 
+		hasError = true;
+		return false;
+	}
 
-	// if (typeof update_type === 'undefined' || update_frequency == '') {
-	// 	swal("Oops!", "Update type and update window size needs to be filled", "error"); 
-	// 	hasError = true;
-	// 	return false;
-	// };
+	if (typeof update_type === 'undefined' || update_frequency == '') {
+		swal("Oops!", "Update type and update window size needs to be filled", "error"); 
+		hasError = true;
+		return false;
+	};
 
 	
      if(hasError == false) {
@@ -107,8 +107,62 @@ $(document).on('click','.feature-create',function(){
             contentType: false,   // tell jQuery not to set contentType
 		    success: function(result) {
 		        console.log(result);
-		        $('#createNewFeatureForm')[0].reset(); // empty the form
-				swal("Nice!", "'" + featureTitle +"' has been created", "success");        
+		    	if(result != null && result.validation_result == 'false') {
+		        	var errors = result.errors;
+		        	if(errors.hasOwnProperty("name")) {
+		        		$.each(errors.name, function(index){
+		        			$("#feature_title").parent().append('<div class="req">' + errors.name[index]  + '</div>');	
+		        		}); 	
+		        	}
+		        	
+			        if(errors.hasOwnProperty("documents")) {
+			        	$.each(errors.documents, function(index){
+			        		$("#files-selected").append('<div class="req">' + errors.documents[index]  + '</div>');
+			        	});
+			        }
+			        if(errors.hasOwnProperty("packages")) {
+			        	$.each(errors.packages, function(index){
+			        		$("#packages-selected").append('<div class="req">' + errors.packages[index]  + '</div>');	
+			        	});
+			        }
+			        if(errors.hasOwnProperty("update_type_id")) {
+			        	$.each(errors.update_type_id, function(index){
+			        		$(".latest-updates-container").append('<div class="req">' + errors.update_type_id[index]  + '</div>');	
+			        	});
+			        }
+			        if(errors.hasOwnProperty("update_frequency")) {
+			        	$.each(errors.update_frequency, function(index){
+			        		$(".latest-updates-container").append('<div class="req">' + errors.update_frequency[index]  + '</div>');	
+			        	});
+			        }
+			        
+			        if(errors.hasOwnProperty("start")) {
+			        	$.each(errors.start, function(index){
+			        		$(".input-daterange").parent().append('<div class="req">' + errors.start[index]  + '</div>');	
+			        	});
+			        }
+			        if(errors.hasOwnProperty("end")) {
+			        	$.each(errors.end, function(index){
+			        		$(".input-daterange").append('<div class="req">' + errors.end[index]  + '</div>');	
+			        	});
+			        }
+			        if(errors.hasOwnProperty("thumbnail")) {
+			        	$.each(errors.thumbnail, function(index){
+			        		$("#thumbnail").append('<div class="req">' + errors.thumbnail[index]  + '</div>');	
+			        	});
+			        }
+			        if(errors.hasOwnProperty("background")) {
+			        	$.each(errors.background, function(index){
+			        		$("#background").append('<div class="req">' + errors.background[index]  + '</div>');	
+			        	});
+			        }
+		        }
+		        else{
+		        	$('#createNewFeatureForm')[0].reset(); // empty the form
+					swal("Nice!", "'" + featureTitle +"' has been created", "success");
+		        }
+
+		        
 		    }
 		}).done(function(response){
 			console.log(response);
