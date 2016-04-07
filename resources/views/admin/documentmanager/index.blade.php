@@ -58,6 +58,7 @@
                                     <input type="hidden" name="banner_id" value={{$banner->id}}>
                                     <input type="hidden" name="allChildFolderCount" id="allChildFolderCount" >
                                     <input type="hidden" name="allDocumentsInFolderCount" id="allDocumentsInFolderCount">
+                                    <input type="hidden" name="folderNameForDeleteModal" id="folderNameForDeleteModal">
                                     </div>
                                     <div id="package-viewer" class="hidden">
                                     @include('admin.package.view')

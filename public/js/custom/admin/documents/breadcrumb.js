@@ -10,7 +10,7 @@ var fillBreadCrumbs = function(data)
 		var folders = data.folder.folder_path;
 
 		$('.breadcrumb').append('<li><a href="/admin/home">Home</a></li>');
-		$('.breadcrumb').append('<li><a href="/admin/home">Documents</a></li>');
+		$('.breadcrumb').append('<li><a href="/admin/document/manager">Library</a></li>');
 
 		_.each(folders, function(i){
 			
