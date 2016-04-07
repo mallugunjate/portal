@@ -68,12 +68,13 @@
 										@foreach($communications as $communication)
 										<tr>
 
-											<td><a href="/admin/communication/{{ $communication->id }}/edit">{{ $communication->subject }}</a></td>
+											<!-- <td><a href="/admin/communication/{{ $communication->id }}/edit">{{ $communication->subject }}</a></td> -->
+											<td>{{ $communication->subject }}</td>
 											
 											<td>{{ $communication->prettySentAtDate }}</td>
 											
 											<td>
-												
+												<a href="/admin/communication/{{ $communication->id }}/edit" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i></a>
 												<a data-communication="{{ $communication->id }}" id="communication{{ $communication->id }}" class="delete-communication btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
 
 											</td>
