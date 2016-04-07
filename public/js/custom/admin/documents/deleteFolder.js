@@ -37,7 +37,7 @@ $("#delete-folder").on('click', function(e){
 		    }
 			}).done(function( data ){
 				console.log(data);
-				window.location = '/admin/document/manager';
+				//window.location = '/admin/document/manager';
 			});
 		});
 });
