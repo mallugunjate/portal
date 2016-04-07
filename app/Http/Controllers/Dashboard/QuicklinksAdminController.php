@@ -42,7 +42,7 @@ class QuicklinksAdminController extends Controller
         $folderStructure = FolderStructure::getNavigationStructure($banner->id);
 
         $quicklink_types = QuicklinkTypes::all();
-            
+        
         return view('admin.quicklinks.create')
                     ->with('banner', $banner)
                     ->with('banners',$banners)
