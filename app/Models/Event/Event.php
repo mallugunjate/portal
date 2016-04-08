@@ -50,19 +50,21 @@ class Event extends Model
 
         \Log::info($request->all);
         $banner = UserSelectedBanner::getBanner();
+        $desc = preg_replace('/\n+/', '', $request['description']);
         $event = Event::create([
 
-          'banner_id' => $banner->id,
-              'title' => $request['title'],
-              'event_type' => $request['event_type'],
-              'description' => $request['description'],
-              'start' => $request['start'],
-              'end' => $request['end']
-        ]);
+
+    		    'banner_id' => $banner->id,
+            'title' => $request['title'],
+            'event_type' => $request['event_type'],
+            'description' => $desc,
+            'start' => $request['start'],
+            'end' => $request['end']
+    	   ]);
+        
         $event = Event::updateTargetStores($event->id, $request);
         return json_encode($event);
        
-      
     }
 
     public static function updateEvent($id, $request)
@@ -78,7 +80,7 @@ class Event extends Model
 
         $event->title = $request['title'];
         $event->event_type = $request['event_type'];
-        $event->description = $request['description'];
+        $event->description = preg_replace('/\n+/', '', $request['description']);
         $event->start = $request['start'];
         $event->end = $request['end'];
         
@@ -100,7 +102,7 @@ class Event extends Model
                  foreach ($target_stores as $store) {
                      EventTarget::create([
                         'event_id'   => $id,
-                        'store_id'           => $store
+                        'store_id'   => $store
                      ]);
                
                   } 

@@ -31,6 +31,13 @@ var getFolderDocuments = function(id){
 		fillTable(data);
 		setDeepLink(data);
 		fillBreadCrumbs(data);
+		$("#allChildFolderCount").val(data.folder.allChildFolderCount);
+		$("#allDocumentsInFolderCount").val(data.folder.allDocumentsInFolderCount);
+		$("#folderNameForDeleteModal").val(data.folder.name);
+		console.log("**************");
+		console.log($("#allChildFolderCount"));
+		console.log($("#allDocumentsInFolderCount"));
+		console.log("**************");
 	});
 }
 

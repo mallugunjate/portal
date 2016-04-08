@@ -6,6 +6,7 @@
 
 	<link href="/css/bootstrap.css" rel="stylesheet">
 	<link href="/fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
+	<link href="/css/font-awesome-animation.min.css" rel="stylesheet">
 
 	{{-- <!-- Morris -->
 	<link href="/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet"> --}}

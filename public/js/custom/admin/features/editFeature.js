@@ -9,31 +9,30 @@ $("#add-more-packages").click(function(){
 
 
 $('body').on('click', '#attach-selected-files', function(){
-	$("#files-selected").empty();
-	// $("#files-selected").append('<label class="control-label col-sm-2">Files attached</label>');
+	
+	$(".selected-files").remove();
 	$('input[name^="package_files"]').each(function(){
 		if($(this).is(":checked")){
-			$("#files-selected").append('<div class="col-sm-10 col-sm-offset-2"><div class="row">'+
-											'<div class="feature-files col-md-8 " data-fileid='+ $(this).val() +'> '+
-												'<div class="feature-filename selected-files" data-fileid='+ $(this).val() +'><i class="fa fa-file-o"></i> '+  $(this).attr("data-filename")+
-											'</div></div>'+
-											'<a data-document-id="'+ $(this).val()+'" id="file'+ $(this).val()+'" class="remove-staged-file btn btn-danger btn-sm"><i class="fa fa-trash"></i></a></div></div>')
+			$(".feature-documents-table tbody").append('<tr class="selected-files"> '+
+													'<td data-fileid='+ $(this).val() +'><i class="fa fa-file-o"></i> '+ $(this).attr("data-filename") +'</td>'+
+													'<td></td>'+
+													'<td> <a data-document-id="'+ $(this).val()+'" id="file'+ $(this).val()+'" class="remove-staged-file btn btn-danger btn-sm"><i class="fa fa-trash"></i></a></td>'+
+												 '</tr>');
 		}
 	});
 });
 
 $('body').on('click', '#attach-selected-packages', function(){
 
-	console.log('attach selected-packages');
-	$("#packages-selected").empty();
+	$(".selected-packages").remove();
 	// $("#packages-selected").append('<label class="control-label col-sm-2">Packages Attached</label>');
 	$('input[name^="feature_packages"]').each(function(){
 		if($(this).is(":checked")){
-			$("#packages-selected").append('<div class="col-sm-10 col-sm-offset-2"><div class="row">'+
-											'<div class="feature-packages col-sm-8 " data-packageid='+ $(this).val() +'> '+
-												'<div class="feature-packagename selected-packages" data-packageid='+ $(this).val() +'><i class="fa fa-folder-o"></i> '+  $(this).attr("data-packagename")+
-											'</div></div>'+
-											'<a data-package-id="'+ $(this).val()+'" id="package'+ $(this).val()+'" class="remove-staged-package btn btn-danger btn-sm"><i class="fa fa-trash"></i></a></div></div>');		
+			$(".feature-packages-table tbody").append( '<tr class="selected-packages"> '+
+													'<td data-packageid='+ $(this).val() +'><i class="fa fa-folder-o"></i> '+ $(this).attr("data-packagename") +'</td>'+
+													'<td></td>'+
+													'<td> <a data-package-id="'+ $(this).val()+'" id="package'+ $(this).val()+'" class="remove-staged-package btn btn-danger btn-sm"><i class="fa fa-trash"></i></a></td>'+
+												 '</tr>');		
 		}
 		
 	});
@@ -44,31 +43,36 @@ $('body').on('click', '#attach-selected-packages', function(){
 
 $(".remove-file").on('click', function(){
 	var document_id = $(this).attr('data-document-id');
-	$(this).parent().fadeOut(200);
+	$(this).closest('.feature-files').fadeOut(200);
 	$("#files-staged-to-remove").append('<div class="remove_document"  data-documentid='+ document_id +'>')
 });
 
 $(".remove-package").on('click', function(){
 	var package_id = $(this).attr('data-package-id');
 	console.log(package_id);
-	$(this).parent().fadeOut(200);
+	$(this).closest('.feature-packages').fadeOut(200);
 	
 	$("#packages-staged-to-remove").append('<div class="remove_package" data-packageid='+ package_id +'>')
 });
 
 $("body").on('click', ".remove-staged-file", function(){
 	
+	
 	var document_id = $(this).attr('data-document-id');
-	$(".feature-files[data-fileid = '" + document_id + "']").remove();
-	$(this).parent().fadeOut(200);
+	console.log('remove staged file' + document_id);
+	$(this).closest('.selected-files').remove();
+	console.log($(this).closest('.selected-files'));
+	$(this).closest('.selected-files').fadeOut(200);
 
 });
 
 $("body").on('click', ".remove-staged-package", function(){
 	
-	var package_id = $(this).attr('data-packageid');
-	$(".feature-packages[data-packageid = '" + package_id + "']").remove();
-	$(this).parent().fadeOut(200);
+	
+	var package_id = $(this).attr('data-package-id');
+	console.log('remove stages package' + package_id);
+	$(this).closest('.selected-packages').remove();
+	$(this).closest('.selected-packages').fadeOut(200);
 
 });
 
@@ -184,10 +188,10 @@ $(document).on('click','.feature-update',function(){
 	});
 	
 	$(".selected-files").each(function(){
-		feature_files.push($(this).attr('data-fileid'));
+		feature_files.push($(this).find('td:first').attr('data-fileid'));
 	});
 	$(".selected-packages").each(function(){
-		feature_packages.push($(this).attr('data-packageid'));
+		feature_packages.push($(this).find('td:first').attr('data-packageid'));
 	});
  
 

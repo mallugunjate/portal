@@ -32,6 +32,7 @@ class DashboardController extends Controller
 
     public function index(Request $request)
     {
+        // dd($request->all());
     	$storeNumber = RequestFacade::segment(1);
 
         $storeInfo = StoreInfo::getStoreInfoByStoreId($storeNumber);
@@ -46,7 +47,7 @@ class DashboardController extends Controller
 
         $quicklinks = Quicklinks::getLinks($storeBanner, $storeNumber);
 
-        $notifications = Notification::getAllNotifications($storeInfo->banner_id, $banner->update_type_id, $banner->update_window_size);
+        $notifications = Notification::getAllNotifications($storeInfo->banner_id, $storeNumber, $banner->update_type_id, $banner->update_window_size);
 
         $urgentNoticeCount = UrgentNotice::getUrgentNoticeCount($storeNumber);
 

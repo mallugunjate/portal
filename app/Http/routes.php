@@ -11,7 +11,7 @@
 |
 */
 
-Route::pattern('storeno', '[0-9]+');
+Route::pattern('storeno', '[A-Z,0-9]+');
 Route::pattern('id', '[0-9]+');
 
 //STORE SELECTOR
@@ -24,7 +24,7 @@ Route::get('/{storeno}', array('uses' => 'Dashboard\DashboardController@index'))
 Route::get('/{storeno}/document', array('uses' => 'Document\DocumentController@index'));
 
 //FOLDER - SHOW CONTENT
-Route::get('/folder/{id}', ['uses' => 'Document\FolderController@show']);
+Route::get('/{storeno}/folder/{id}', ['uses' => 'Document\FolderController@show']);
 
 //CALENDAR
 Route::get('/{storeno}/calendar', array('uses' => 'Calendar\CalendarController@index'));

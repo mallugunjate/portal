@@ -191,7 +191,8 @@ class Utility extends Model
 		if($date == '0000-00-00 00:00:00') {
 			return "";
 		}
-		$prettyDate = Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('D, M d, Y h:i a');
+		//$prettyDate = Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('D, M d, Y h:i a');
+		$prettyDate = Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('D, M d, Y');
 		return $prettyDate;
 	}
 

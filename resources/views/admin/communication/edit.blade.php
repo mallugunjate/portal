@@ -68,8 +68,21 @@
 									<label class="col-sm-2 control-label">Title</label>
 						            <div class="col-sm-10"><input type="text" id="subject" name="subject" class="form-control" value="{{ $communication->subject }}"></div>
 								</div>
-								
-								<div class="form-group" >
+
+								<div class="form-group">
+
+						                <label class="col-sm-2 control-label">Start &amp; End</label>
+
+						                <div class="col-sm-10">
+						                    <div class="input-daterange input-group" id="datepicker">
+						                        <input type="text" class="input-sm form-control" name="send_at" id="send_at" value="{{$communication->send_at}}" />
+						                        <span class="input-group-addon">to</span>
+						                        <input type="text" class="input-sm form-control" name="archive_at" id="archive_at" value="{{$communication->archive_at}}" />
+						                    </div>
+						                </div>
+						        </div>
+								<div class="form-group">
+
 									<label class="col-sm-2 control-label">Type</label>
 										<div class="col-sm-10" id="communication-type-selector">
 											<div class="btn-group" role="group" data-toggle="buttons">
@@ -104,50 +117,17 @@
 										</div>
 								</div>
 
-								<div class="form-group">
-						                                            
-						                <label class="col-sm-2 control-label">Target Stores</label>
-						                <div class="col-sm-10">
-						                	@if($all_stores)
-		                                        {!! Form::select('stores', $storeList, null, [ 'class'=>'chosen', 'id'=> 'storeSelect', 'multiple'=>'true']) !!}
-		                                        {!! Form::label('allStores', 'Or select all stores:') !!}
-		                                        {!! Form::checkbox('allStores', null, true ,['id'=> 'allStores'] ) !!}
-		                                    @else
-		                                        {!! Form::select('stores', $storeList, $target_stores, [ 'class'=>'chosen', 'id'=> 'storeSelect', 'multiple'=>'true']) !!}
-		                                        {!! Form::label('allStores', 'Or select all stores:') !!}
-		                                        {!! Form::checkbox('allStores', null, false ,['id'=> 'allStores'] ) !!}
-		                                    @endif
-						                </div>
-
-						        </div>
-
-						        <div class="form-group">
-
-						                <label class="col-sm-2 control-label">Start &amp; End</label>
-
-						                <div class="col-sm-10">
-						                    <div class="input-daterange input-group" id="datepicker">
-						                        <input type="text" class="input-sm form-control" name="send_at" id="send_at" value="{{$communication->send_at}}" />
-						                        <span class="input-group-addon">to</span>
-						                        <input type="text" class="input-sm form-control" name="archive_at" id="archive_at" value="{{$communication->archive_at}}" />
-						                    </div>
-						                </div>
-						        </div>
-
-
-								<div class="hr-line-dashed"></div>
-
 								<!-- <div class="existing-files row"> -->
 									<div class="form-group">
 
-										<label class="col-sm-2 control-label">Files Attached</label>
+										<label class="col-sm-2 control-label">Attachments</label>
 										<div class="existing-files-container col-md-10">
 											@foreach($communication_documents as $doc)
 											<div class="row">
 												<div class="feature-files col-md-8">
-													<div class="feature-filename" data-fileid = "{{$doc->id}}"> <i class="fa fa-file-o"></i> {{$doc->original_filename}} </div>
-													<div class="feature-filepath"> File Location : {{$doc->folder_path}}</div>
-													<div class="feature-timestamp"> Uploaded At : {{$doc->created_at}}</div>
+													<div class="feature-filename" data-fileid = "{{$doc->id}}"> {!! $doc->link_with_icon !!} </div>
+													{{-- <div class="feature-filepath"> File Location : {{$doc->folder_path}}</div>
+														<div class="feature-timestamp"> Uploaded At : {{$doc->created_at}}</div>--}}
 												</div>
 
 												<!-- <div class="col-md-1 remove-file btn btn-default" data-document-id="{{$doc->id}}">Remove</div> -->
@@ -197,11 +177,26 @@
 								<div class="form-group">
 									<div class="col-sm-10 col-sm-offset-2">
 										<div id="add-documents" class="btn btn-primary btn-outline"><i class="fa fa-plus"></i> Add Documents</div>
-										<div id="add-packages" class="btn btn-primary btn-outline"><i class="fa fa-plus"></i> Add Packages</div>		
+									{{-- <div id="add-packages" class="btn btn-primary btn-outline"><i class="fa fa-plus"></i> Add Packages</div>	--}}
 									</div>
 								</div>
 
+								<div class="form-group">
+						                                            
+						                <label class="col-sm-2 control-label">Target Stores</label>
+						                <div class="col-sm-10">
+						                	@if($all_stores)
+		                                        {!! Form::select('stores', $storeList, null, [ 'class'=>'chosen', 'id'=> 'storeSelect', 'multiple'=>'true']) !!}
+		                                        {!! Form::label('allStores', 'Or select all stores:') !!}
+		                                        {!! Form::checkbox('allStores', null, true ,['id'=> 'allStores'] ) !!}
+		                                    @else
+		                                        {!! Form::select('stores', $storeList, $target_stores, [ 'class'=>'chosen', 'id'=> 'storeSelect', 'multiple'=>'true']) !!}
+		                                        {!! Form::label('allStores', 'Or select all stores:') !!}
+		                                        {!! Form::checkbox('allStores', null, false ,['id'=> 'allStores'] ) !!}
+		                                    @endif
+						                </div>
 
+						        </div>
 
 								<div class="hr-line-dashed"></div>
 								<div class="form-group">

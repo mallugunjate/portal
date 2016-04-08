@@ -30,13 +30,19 @@ $(document).on('click','.event-update',function(){
     var eventEnd = $("#end").val();
     var target_stores  = $("#storeSelect").val();
 	var allStores  = $("#allStores:checked").val();
-
+	
     if(eventTitle == '') {
 		swal("Oops!", "This event needs a title.", "error"); 
 		hasError = true;
 		$(window).scrollTop(0);
 		return false;
 	}	
+	if(eventType == ''){
+		swal("Oops!", "Event type missing", "error"); 
+		hasError = true;
+		$(window).scrollTop(0);
+		return false;
+	}
 
     if(eventStart == '' || eventEnd == '') {
 		swal("Oops!", "This event needs a start and end date.", "error"); 
@@ -67,6 +73,7 @@ $(document).on('click','.event-update',function(){
 		    	target_stores : target_stores,
 		  		allStores : allStores
 		    },
+
 		    success: function(data) {
 		      console.log(data);
 		        if(data != null && data.validation_result == 'false') {
@@ -99,8 +106,11 @@ $(document).on('click','.event-update',function(){
 		        	}
 		        }
 		        else{
-		        	swal("Nice!", "'" + eventTitle +"' has been updated", "success");        	
+		        	swal({title:"Nice!", text: "'" + eventTitle +"' has been updated", type: 'success'}, function(){
+						window.location = '/admin/calendar';
+					});      	
 		        }
+
 				
 		    }
 		});    	

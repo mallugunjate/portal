@@ -50,16 +50,18 @@ class FolderController extends Controller
      */
     public function show($id, Request $request)
     {
-        $folder_id = $id;
-        $documents = Document::getDocuments($folder_id, true);
-        $storeNumber = RequestFacade::segment(1);
+        $folder_id = RequestFacade::segment(3);
+        
+        $storeNumber = strval(RequestFacade::segment(1));
+
+        $documents = Document::getDocuments($folder_id, true, $storeNumber);
 
         $folder = Folder::getFolderDescription($folder_id);
         $response = [];
         $response["files"] = $documents;
 
         if (isset($request['archives']) && $request['archives'] == true) {
-            $archivedDocuments = Document::getArchivedDocumentsByStoreNumber($id, $storeNumber);
+            $archivedDocuments = Document::getArchivedDocumentsByStoreNumber($folder_id, $storeNumber);
             foreach ($archivedDocuments as $archivedDocument) {
                 array_push($response["files"], $archivedDocument);
             }

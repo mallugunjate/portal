@@ -24,11 +24,11 @@ class Quicklinks extends Model
  		foreach($links as $link){
 
  			switch($link->type){
- 				case 1: //folder
+ 				case 2: //folder
  					array_push($linkarray, '<a href="/'.$storeNumber.'/document#!/'.$link->url.'"><i class="fa fa-folder"></i> '.$link->link_name.'</a>');
  					break;
 
- 				case 2: //file
+ 				case 1: //file
  					$doc = Document::getDocumentById($link->url);
  					$finallink = Utility::getModalLink($doc->filename, $doc->title, $doc->original_extension, $doc->id, 1);
  					array_push($linkarray, $finallink);

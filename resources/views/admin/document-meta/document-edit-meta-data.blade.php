@@ -162,7 +162,7 @@
                               <div class="form-group">
                                 <div class="col-sm-4 col-sm-offset-2">
                                     <a class="btn btn-white" href="/admin/urgentnotice"><i class="fa fa-close"></i> Cancel</a>
-                                    <button class="alert-create btn btn-primary" type="submit"><i class="fa fa-check"></i> Save changes</button>
+                                    <button class="alert-create btn btn-primary" type="submit"><i class="fa fa-check"></i><span> Save changes</span></button>
 
                                 </div>
                               </div>

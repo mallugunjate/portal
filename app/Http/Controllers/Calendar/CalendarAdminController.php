@@ -63,9 +63,10 @@ class CalendarAdminController extends Controller
         $banner_id = UserSelectedBanner::where('user_id', \Auth::user()->id)->first()->selected_banner_id;
         $banner  = Banner::find($banner_id);
 
-        // $event_types_list = EventType::all();
-        $event_types_list = EventType::where('banner_id', $banner_id)->get();
+        $event_types_list = ["" =>'Select one'];
+        $event_types_list += EventType::where('banner_id', $banner_id)->lists('event_type', 'id')->toArray();
         $storeList = StoreInfo::getStoreListing($banner->id);
+
         return view('admin.calendar.create')
             ->with('event_types_list', $event_types_list)
             ->with('banner', $banner)
@@ -112,7 +113,8 @@ class CalendarAdminController extends Controller
 
         $event = Event::find($id);
         $event_type = EventType::find($id);
-        $event_types_list = EventType::all();
+        $event_types_list = ["" =>'Select one'];
+        $event_types_list += EventType::where('banner_id', $banner_id)->lists('event_type', 'id')->toArray();
         $banner = UserSelectedBanner::getBanner();
         
         $event_target_stores = EventTarget::where('event_id', $id)->get()->pluck('store_id')->toArray();

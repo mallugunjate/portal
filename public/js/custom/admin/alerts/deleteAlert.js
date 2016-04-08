@@ -4,12 +4,13 @@ $(document).on('click','.delete-alert',function(){
     var selector = "#alert"+alertId;
 
     swal({
-        title: "Are you sure?",
-        //text: "You will not be able to recover this imaginary file!",
+        title: "Really cancel this alert?",
+        text: "The file will not be deleted",
         type: "warning",
         showCancelButton: true,
+        cancelButtonText: "No, thanks",
         confirmButtonColor: "#DD6B55",
-        confirmButtonText: "Yes, delete it!",
+        confirmButtonText: "Yes, cancel the alert",
         closeOnConfirm: false
     }, function () {
     	$.ajax({

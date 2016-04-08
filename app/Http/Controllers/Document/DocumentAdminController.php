@@ -55,13 +55,14 @@ class DocumentAdminController extends Controller
 
         $banner = UserSelectedBanner::getBanner();
         $banners = Banner::all();     
-
+        $storeList = StoreInfo::getStoreListing($banner->id);
         $packageHash = sha1(time() . time());
         $folders = Folder::all();
         return view('admin.documentmanager.document-upload')
             ->with('folders', $folders)
             ->with('packageHash', $packageHash)
             ->with('banner', $banner)
+            ->with('storeList', $storeList)
             ->with('banners', $banners);  
     }
 
@@ -73,6 +74,7 @@ class DocumentAdminController extends Controller
      */
     public function store(Request $request)
     {
+        \Log::info($request->all());
         Document::storeDocument($request);    
     }
 

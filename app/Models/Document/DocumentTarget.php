@@ -23,4 +23,5 @@ class DocumentTarget extends Model
     	
     	return [];
     }
+
 }

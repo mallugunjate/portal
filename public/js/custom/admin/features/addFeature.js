@@ -16,26 +16,60 @@ $('input[name="latest_updates_option"]').change( function(){
 });
 
 $('body').on('click', '#attach-selected-files', function(){
-	$("#files-selected").empty();
-	$("#files-selected").append('<p>Files Attached :</p>');
+	
+	if($('.feature-documents-table').hasClass('hidden')){
+		$(".feature-documents-table").removeClass('hidden').addClass('visible');
+	}
+	$(".feature-documents-table").find("tbody").empty();
 	$('input[name^="package_files"]').each(function(){
+		
 		if($(this).is(":checked")){
-			$("#files-selected").append('<ul class="selected-files" data-fileid='+ $(this).val() +'>'+$(this).attr("data-filename")+'</ul>')
+			
+			$(".feature-documents-table").find("tbody").append('<tr class="feature-documents"> '+
+													'<td data-fileid='+ $(this).val() +'>'+$(this).attr("data-filename")+'</td>'+
+													'<td></td>'+
+													'<td> <a data-file-id="'+ $(this).val()+'" id="file'+ $(this).val()+'" class="remove-staged-file btn btn-danger btn-sm"><i class="fa fa-trash"></i></a></td>'+
+												'</tr>');
 		}
 	});
 });
 
 $('body').on('click', '#attach-selected-packages', function(){
 
-	console.log('attach selected-packages');
-	$("#packages-selected").empty();
-	$("#packages-selected").append('<p>Packages Attached :</p>');
+	if($('.feature-packages-table').hasClass('hidden')){
+		$(".feature-packages-table").removeClass('hidden').addClass('visible');
+	}
+	
+	$(".feature-packages-table").find("tbody").empty();
 	$('input[name^="feature_packages"]').each(function(){
 		if($(this).is(":checked")){
-			$("#packages-selected").append('<ul class="selected-packages" data-packageid='+ $(this).attr('data-packageid') +'>'+ $(this).attr("data-packagename")+'</ul>')		
+			
+			$(".feature-packages-table").find("tbody").append('<tr class="feature-packages"> '+
+													'<td data-packageid='+ $(this).attr('data-packageid') +'>'+ $(this).attr("data-packagename")+'</td>'+
+													'<td></td>'+
+													'<td> <a data-package-id="'+ $(this).val()+'" id="package'+ $(this).val()+'" class="remove-staged-package btn btn-danger btn-sm"><i class="fa fa-trash"></i></a></td>'+
+												'</tr>');
 		}
 		
 	});
+});
+
+$("body").on('click', ".remove-staged-file", function(){
+	
+	var document_id = $(this).attr('data-file-id');
+	$(this).closest('.feature-documents').fadeOut(200);
+	$(this).closest('.feature-documents').remove();
+
+});
+
+$("body").on('click', ".remove-staged-package", function(){
+	
+
+	var package_id = $(this).attr('data-package-id');
+	console.log('remove this package' + package_id);
+	$(".feature-packages[data-packageid = '" + package_id + "']").remove();
+	$(this).closest('.feature-packages').fadeOut(200);
+
 });
 
 $(document).on('click','.feature-create',function(){
@@ -58,13 +92,15 @@ $(document).on('click','.feature-create',function(){
 	console.log(update_frequency);
 	var feature_files = [];
 	var feature_packages = [];
-	$(".selected-files").each(function(){
-		feature_files.push($(this).attr('data-fileid'));
+	$(".feature-documents").each(function(){
+		feature_files.push($(this).find('td:first').attr('data-fileid'));
 	});
-	$(".selected-packages").each(function(){
-		feature_packages.push($(this).attr('data-packageid'));
+	$(".feature-packages").each(function(){
+		feature_packages.push($(this).find('td:first').attr('data-packageid'));
 	});
- 
+ 	
+ 	console.log(feature_files);
+ 	console.log(feature_packages);
 
     if(featureTitle == '') {
 		swal("Oops!", "This feature needs a name.", "error"); 
