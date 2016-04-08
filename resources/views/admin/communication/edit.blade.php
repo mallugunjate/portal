@@ -280,7 +280,7 @@
 
 	    @include('site.includes.bugreport')
 
-		<script type="text/javascript" src="/js/custom/admin/features/editFeature.js"></script>
+		<!-- // <script type="text/javascript" src="/js/custom/admin/features/editFeature.js"></script> -->
 		<script type="text/javascript" src="/js/custom/admin/communications/editCommunication.js"></script>
 		<script type="text/javascript" src="/js/vendor/moment.js"></script>
 		<script type="text/javascript" src="/js/vendor/bootstrap-datetimepicker.min.js"></script>
