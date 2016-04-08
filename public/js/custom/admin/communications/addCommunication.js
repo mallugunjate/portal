@@ -30,7 +30,7 @@ $('body').on('click', '#attach-selected-files', function(){
 	$("#files-selected").append('<label class= "control-label col-sm-2 "> Documents attached</label>');
 	$('input[name^="package_files"]').each(function(){
 		if($(this).is(":checked")){
-			$("#files-selected").append('<div class="selected-files col-sm-10" data-fileid='+ $(this).val() +'>'+$(this).attr("data-filename")+'</div>')
+			$("#files-selected").append('<div class="selected-files col-sm-10 col-sm-offset-2" data-fileid='+ $(this).val() +'>'+$(this).attr("data-filename")+'</div>')
 		}
 	});
 });
@@ -42,7 +42,7 @@ $('body').on('click', '#attach-selected-packages', function(){
 	$("#packages-selected").append('<label class= "control-label col-sm-2 ">Packages Attached</label>');
 	$('input[name^="packages"]:checked').each(function(){
 		
-			$("#packages-selected").append('<div class="selected-packages col-sm-10" data-packageid='+ $(this).val() +'>'+ $(this).attr("data-package-name")+'</div>')		
+			$("#packages-selected").append('<div class="selected-packages col-sm-10 col-sm-offset-2" data-packageid='+ $(this).val() +'>'+ $(this).attr("data-package-name")+'</div>')		
 		
 		
 	});
