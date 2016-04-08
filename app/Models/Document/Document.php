@@ -26,7 +26,19 @@ class Document extends Model
     protected $fillable = array('upload_package_id', 'original_filename','original_extension', 'filename', 'title', 'description', 'start', 'end', 'banner_id');
     protected $dates = ['deleted_at'];
 
+    public static function validateCreateDocument($request)
+    {
+
+    }
+
+    public static function validateEditDocument($request)
+    {
+
+    }
+
+
     public static function getDocuments($global_folder_id, $forStore=null, $storeNumber=null)
+
     {
 
         if (isset($global_folder_id)) {
@@ -96,6 +108,13 @@ class Document extends Model
     public static function storeDocument($request)
     {
         
+        $validate = Document::validateCreateDocument($request);
+        
+        if($validate['validation_result'] == 'false') {
+            \Log::info($validate);
+            return json_encode($validate);
+        } 
+
         $metadata = Document::getDocumentMetaData($request->file('document'));       
 
         $directory = public_path() . '/files';
