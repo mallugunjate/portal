@@ -61,7 +61,7 @@
 										<tr>
 											<td>Subject</td>
 											
-											<td>Send At</td>
+											<td>Start</td>
 											<td>Action</td>
 										</tr>
 
