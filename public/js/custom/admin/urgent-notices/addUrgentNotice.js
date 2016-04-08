@@ -51,6 +51,7 @@ $('#attach-selected-folders').on('click', function(){
 
 $('#attach-selected-files').on('click', function(){
 	var  attachment_type = $("input[name='attachment_type']").val();
+	$("#attachment-selected").empty();
 	$("#attachment-selected").append('<p>Files attached :</p>');
 	$('input[name^="package_files"]').each(function(){
 		console.log('hello');
