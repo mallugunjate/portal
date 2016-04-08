@@ -68,6 +68,7 @@
 									<label class="col-sm-2 control-label">Title</label>
 						            <div class="col-sm-10"><input type="text" id="subject" name="subject" class="form-control" value="{{ $communication->subject }}"></div>
 								</div>
+
 								<div class="form-group">
 
 						                <label class="col-sm-2 control-label">Start &amp; End</label>
@@ -81,8 +82,9 @@
 						                </div>
 						        </div>
 								<div class="form-group">
+
 									<label class="col-sm-2 control-label">Type</label>
-										<div class="col-sm-10">
+										<div class="col-sm-10" id="communication-type-selector">
 											<div class="btn-group" role="group" data-toggle="buttons">
 											@foreach($communicationTypes as $ct)
 
@@ -143,27 +145,27 @@
 								<div id="files-selected" class="row"></div>		
 
 								<!-- <div class="existing-folders row"> -->
-									<div class="form-group">
-										<label class="col-sm-2 control-label">Packages Attached</label>
-										<div class="existing-folders-container col-md-10" >
-											
-											@foreach($communication_packages as $package)
-											<div class="row">
-												<div class="communication_packages col-md-8">
-													<div class="feature-packagename" data-folderid = {{$package->id}}> <i class="fa fa-folder-o"></i> {{$package->package_name}} </div>
-													
-													<div class="package-timestamp"> Updated At : {{$package->updated_at}}</div>
-												</div>
-
+									{{-- <div class="form-group">
+											<label class="col-sm-2 control-label">Packages Attached</label>
+											<div class="existing-folders-container col-md-10" >
 												
-												<a data-package-id="{{ $package->id }}" id="package{{$package->id}}" class="remove-package btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+												@foreach($communication_packages as $package)
+												<div class="row">
+													<div class="communication_packages col-md-8">
+														<div class="feature-packagename" data-folderid = {{$package->id}}> <i class="fa fa-folder-o"></i> {{$package->package_name}} </div>
+														
+														<div class="package-timestamp"> Updated At : {{$package->updated_at}}</div>
+													</div>
+	
+													
+													<a data-package-id="{{ $package->id }}" id="package{{$package->id}}" class="remove-package btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+												</div>
+												@endforeach
+												
+												
 											</div>
-											@endforeach
 											
-											
-										</div>
-										
-									</div>
+										</div> --}}
 								<!-- </div>	 -->
 								<div id="packages-selected" class="row"></div>
 								<div id="packages-staged-to-remove"></div>
