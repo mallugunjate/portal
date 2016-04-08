@@ -15,7 +15,7 @@ use DB;
 use App\Models\Dashboard\Quicklinks;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Document\GlobalFolder;
-use App\Models\Validation\FolderValidation;
+use App\Models\Validation\FolderValidator;
 
 class Folder extends Model
 {
@@ -24,7 +24,7 @@ class Folder extends Model
     protected $fillable = array('name' , 'is_child', 'has_weeks', 'week_window_size', 'banner_id', 'has_child');
     protected $dates = ['deleted_at'];
 
-    public static function validateAddFolder($request)
+    public static function validateCreateFolder($request)
     {
         $validateThis = [
 
@@ -36,9 +36,14 @@ class Folder extends Model
         return $v->validate($validateThis);
     }
 
-    public static function validateEditFolder($request)
+    public static function validateEditFolder($folderName)
     {
+         $validateThis = [
+            'name'  => $folderName
+        ];
 
+        $v = new FolderValidator();
+        return $v->validate($validateThis);
     }
 
 
@@ -57,6 +62,14 @@ class Folder extends Model
     public static function storeFolder(Request $request)
     {
         \Log::info($request->all());
+         $validate = Folder::validateCreateFolder($request);
+        
+        if($validate['validation_result'] == 'false') {
+            \Log::info($validate);
+            return json_encode($validate);
+        }
+
+
         $parent = $request['parent'];
         $is_child = 0;
 
@@ -82,7 +95,7 @@ class Folder extends Model
             ]);
         }
             
-        return;
+        return $folder;
     }
 
     public static function deleteFolder($id, Request $request)
@@ -210,7 +223,12 @@ class Folder extends Model
 
     public static function editFolderDetails($params)
     {
+        $validate = Folder::validateEditFolder($params['name']);
         
+        if($validate['validation_result'] == 'false') {
+            \Log::info($validate);
+            return json_encode($validate);
+        }
         $folder = Folder::find($params["id"]);
 
         $update = [];
@@ -248,7 +266,7 @@ class Folder extends Model
         Folder::updateTimestamp($global_folder_id, Carbon::now());
         
         $banner_id = $folder->banner_id;
-        return $banner_id;
+        return $folder;
     }
 
 
