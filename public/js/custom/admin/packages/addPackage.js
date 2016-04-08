@@ -26,6 +26,8 @@ $(".folder-checkbox").on('click', function(){
 
 
 $('#attach-selected-files').on('click', function(){
+	
+	$("#files-selected").empty();
 	$("#files-selected").append('<p>Files attached :</p>');
 	$('input[name^="package_files"]').each(function(){
 		if($(this).is(":checked")){
