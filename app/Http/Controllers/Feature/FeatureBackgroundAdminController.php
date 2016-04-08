@@ -38,9 +38,21 @@ class FeatureBackgroundAdminController extends Controller
      */
     public function store(Request $request)
     {
+        $validate = Feature::validateBackgroundEdit($request);
+        
+        if($validate['validation_result'] == 'false') {
+            \Log::info($validate);
+            return json_encode($validate);
+        
+        } 
+
         $background_image = $request->file('background');
         $feature_id = $request['featureID'];
-        return Feature::updateFeatureBackground($background_image, $feature_id);
+        $background =  Feature::updateFeatureBackground($background_image, $feature_id);
+        \Log::info("*******");
+        \Log::info($background);
+        \Log::info("*******");
+        return json_encode($background);
     }
 
     /**

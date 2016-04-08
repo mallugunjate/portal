@@ -84,16 +84,44 @@ $(document).on('click','.package-create',function(){
 		$.ajax({
 		    url: '/admin/package',
 		    type: 'POST',
+		    dataType: 'json',
 		    data: {
 		  		name:packageName,
 		  		title: packageTitle,
 		  		package_files: package_files,
 		  		package_folders: package_folders
-		    },
+		    },             
 		    success: function(result) {
 		        console.log(result);
-		        $('#createNewPackageForm')[0].reset(); // empty the form
-				swal("Nice!", "'" + packageTitle +"' has been created", "success");        
+		    	if(result != null && result.validation_result == 'false') {
+		        	var errors = result.errors;
+		        	if(errors.hasOwnProperty("package_screen_name")) {
+		        		$.each(errors.package_screen_name, function(index){
+		        			$("#name").parent().append('<div class="req">' + errors.package_screen_name[index]  + '</div>');	
+		        		}); 	
+		        	}
+		        	if(errors.hasOwnProperty("package_name")) {
+			        	$.each(errors.package_name, function(index){
+			        		$("#label").parent().append('<div class="req">' + errors.package_name[index]  + '</div>');
+			        	});
+			        }
+			        if(errors.hasOwnProperty("documents")) {
+			        	$.each(errors.documents, function(index){
+			        		$("#files-selected").append('<div class="req">' + errors.documents[index]  + '</div>');
+			        	});
+			        }
+			        if(errors.hasOwnProperty("folders")) {
+			        	$.each(errors.folders, function(index){
+			        		$("#folders-selected").append('<div class="req">' + errors.folders[index]  + '</div>');	
+			        	});
+			        }
+		        }
+		        else{
+		        	$('#createNewPackageForm')[0].reset(); // empty the form
+					swal("Nice!", "'" + packageTitle +"' has been created", "success");        
+		        }
+		        
+	
 		    }
 		}).done(function(response){
 			console.log(response);

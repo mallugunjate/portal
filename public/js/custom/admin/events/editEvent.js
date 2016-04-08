@@ -62,6 +62,7 @@ $(document).on('click','.event-update',function(){
 		$.ajax({
 		    url: '/admin/calendar/' + eventID ,
 		    type: 'PATCH',
+		    dataType: 'json',
 		    data: {
 		    	id: eventID,
 		  		title: eventTitle,
@@ -72,11 +73,44 @@ $(document).on('click','.event-update',function(){
 		    	target_stores : target_stores,
 		  		allStores : allStores
 		    },
-		    success: function(result) {
-		      //  $('#createNewEventForm')[0].reset(); // empty the form
-				swal({title:"Nice!", text: "'" + eventTitle +"' has been updated", type: 'success'}, function(){
-					window.location = '/admin/calendar';
-				});
+
+		    success: function(data) {
+		      console.log(data);
+		        if(data != null && data.validation_result == 'false') {
+		        	var errors = data.errors;
+		        	if(errors.hasOwnProperty("title")) {
+		        		$.each(errors.title, function(index){
+		        			$("#title").parent().append('<div class="req">' + errors.title[index]  + '</div>');	
+		        		}); 	
+		        	}
+		        	if(errors.hasOwnProperty("event_type")) {
+			        	$.each(errors.title, function(index){
+			        		$("#event_type").parent().append('<div class="req">' + errors.event_type[0]  + '</div>');
+			        	});
+			        }
+			        if(errors.hasOwnProperty("start")) {
+			        	$.each(errors.title, function(index){
+			        		$("#start").parent().parent().append('<div class="req">' + errors.start[0]  + '</div>');
+			        	});
+			        }
+			        if(errors.hasOwnProperty("end")) {
+			        	$.each(errors.title, function(index){
+			        		$("#end").parent().parent().append('<div class="req">' + errors.end[0]  + '</div>');	
+			        	});
+			        }
+			        if(errors.hasOwnProperty("target_stores")) {		        	
+		        		$("#storeSelect").parent().append('<div class="req">' + errors.target_stores[0]  + '</div>');
+		        	}
+		        	if(errors.hasOwnProperty("allStores")) {		        	
+		        		$("#storeSelect").parent().append('<div class="req">' + errors.allStores[0]  + '</div>');
+		        	}
+		        }
+		        else{
+		        	swal({title:"Nice!", text: "'" + eventTitle +"' has been updated", type: 'success'}, function(){
+						window.location = '/admin/calendar';
+					});      	
+		        }
+
 				
 		    }
 		});    	

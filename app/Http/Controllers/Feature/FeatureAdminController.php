@@ -68,8 +68,7 @@ class FeatureAdminController extends Controller
      */
     public function store(Request $request)
     {
-        Feature::storeFeature($request);
-        return;
+        return Feature::storeFeature($request);
     }
 
     /**
@@ -137,9 +136,7 @@ class FeatureAdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Feature::updateFeature($request, $id);
-        return ;
-
+        return Feature::updateFeature($request, $id);
     }
 
     /**

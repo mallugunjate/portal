@@ -68,6 +68,7 @@
 									<label class="col-sm-2 control-label">Title</label>
 						            <div class="col-sm-10"><input type="text" id="subject" name="subject" class="form-control" value="{{ $communication->subject }}"></div>
 								</div>
+
 								<div class="form-group">
 
 						                <label class="col-sm-2 control-label">Start &amp; End</label>
@@ -81,8 +82,9 @@
 						                </div>
 						        </div>
 								<div class="form-group">
+
 									<label class="col-sm-2 control-label">Type</label>
-										<div class="col-sm-10">
+										<div class="col-sm-10" id="communication-type-selector">
 											<div class="btn-group" role="group" data-toggle="buttons">
 											@foreach($communicationTypes as $ct)
 
