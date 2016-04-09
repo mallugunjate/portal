@@ -26,6 +26,36 @@ $("#add-packages").click(function(){
 });
 
 
+$('body').on('click', '#attach-selected-files', function(){
+	console.log('i am here');
+	$(".selected-files").remove();
+	$('input[name^="package_files"]').each(function(){
+		if($(this).is(":checked")){
+			$("#files-selected").append('<div class="col-sm-10 col-sm-offset-2"><div class="row">'+
+											'<div class="feature-files col-md-8 " data-fileid='+ $(this).val() +'> '+
+												'<div class="feature-filename selected-files" data-fileid='+ $(this).val() +'><i class="fa fa-file-o"></i> '+  $(this).attr("data-filename")+
+											'</div></div>'+
+											'<a data-document-id="'+ $(this).val()+'" id="file'+ $(this).val()+'" class="remove-staged-file btn btn-danger btn-sm"><i class="fa fa-trash"></i></a></div></div>')
+		}
+	});
+});
+
+
+$(".remove-file").on('click', function(){
+	var document_id = $(this).attr('data-document-id');
+	$(this).parent().fadeOut(200);
+	$("#files-staged-to-remove").append('<div class="remove_document"  data-documentid='+ document_id +'>')
+});
+
+$("body").on('click', ".remove-staged-file", function(){
+	
+	var document_id = $(this).attr('data-document-id');
+	$(".feature-files[data-fileid = '" + document_id + "']").remove();
+	$(this).parent().fadeOut(200);
+
+});
+
+
 $(document).on('click','.communication-update',function(){
   	
  
