@@ -69,7 +69,7 @@ $(document).on('click','.quicklink-create',function(){
  	var banner_id = $("input[name='banner_id']").val();
 	var name = $("#name").val();
 	var type = $('input[name="link-type"]:checked').val();
-	var url = $("#url").data( "url" );
+	var url = $("#url").val();
 	console.log("name : " + name);
 	console.log("url : " + url);
 	console.log("type : " + type);
