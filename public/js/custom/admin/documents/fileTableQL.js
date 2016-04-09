@@ -96,7 +96,9 @@
 
 var selectDocument = function(id)
 {
+	console.log("----id----");
 	console.log(id);
+	console.log("----files----");
 	console.log(files);
 	var fileSelected = _.where(files, {id: id});
 	console.log(fileSelected);
