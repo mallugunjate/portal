@@ -17,6 +17,7 @@ use App\Models\Tag\ContentTag;
 use App\Models\UserSelectedBanner;
 use App\Models\Document\Folder;
 use App\Models\Document\FolderPackage;
+use App\Models\Feature\FeaturePackage;
 use App\Models\UserBanner;
 
 class PackageAdminController extends Controller
@@ -178,6 +179,7 @@ class PackageAdminController extends Controller
     {
         DocumentPackage::where('package_id', $id)->delete();
         FolderPackage::where('package_id', $id)->delete();
+        FeaturePackage::where('package_id', $id)->delete();
         Package::find($id)->delete();
         return;
     }
