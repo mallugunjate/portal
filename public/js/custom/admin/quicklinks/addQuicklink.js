@@ -34,7 +34,7 @@ $('#attach-selected-files').on('click', function(){
 
 	$("#quicklink-url").html(selectedFile);
 	$("input[id=url]").val(selectedFileId);
-
+	$("#url").data('url', selectedFileId);
 	// $('.document-checkbox').each(function(){
 	// 	if($(this).is(":checked")){
 	// 		//$("#quicklink-url").append('<div class="selected-files" id="url" data-url='+ $(this).val() +'>'+$(this).attr("data-filename")+'</div>')
@@ -44,7 +44,7 @@ $('#attach-selected-files').on('click', function(){
 
 $("#add-external-url").on('click', function(){
 	$("#quicklink-url").empty();
-	$("#quicklink-url").append('<div id="url" data-url="'+ $("#external-url").val() +'"> '+$("#external-url").val()+' </div>')
+	$("#quicklink-url").append('<div id="url" value="'+ $("#external-url").val() +'" data-url="'+ $("#external-url").val() +'"> '+$("#external-url").val()+' </div>')
 	$('#external').modal('toggle');
 });
 
@@ -54,7 +54,7 @@ $('#attach-selected-folders').on('click', function(){
 	
 	$('.folder-checkbox').each(function(){
 		if($(this).is(":checked")){
-			$("#quicklink-url").append('<div class="selected-folders" id="url" data-url='+ $(this).attr('data-folderid') +'>'+$(this).attr("data-foldername")+'</div>')
+			$("#quicklink-url").append('<div class="selected-folders" id="url" value="'+ $(this).attr('data-folderid') +'" data-url='+ $(this).attr('data-folderid') +'>'+$(this).attr("data-foldername")+'</div>')
 		}
 	});
 	console.log( $("#url").val());
