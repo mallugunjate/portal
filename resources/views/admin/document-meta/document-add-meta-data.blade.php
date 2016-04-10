@@ -75,7 +75,7 @@
                               <td>
                               
                                 <div class='input-group date startdate' id='datetimepicker1-{{$doc->id}}'>
-                                    <input type='text' class="form-control" name="start" id="start{{$doc->id}}"/>
+                                    <input type='text' class="form-control" name="start" id="start{{$doc->id}}" value={{$doc->start}}/>
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
@@ -86,13 +86,14 @@
                               <td>
                               
                                 <div class='input-group date enddate' id='datetimepicker2-{{$doc->id}}'>
-                                    <input type='text' class="form-control" name="end" id="end{{$doc->id}}"/>
+                                    <input type='text' class="form-control" name="end" id="end{{$doc->id}}" value={{$doc->end}}/>
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
                                 </div>
                               
                               </td>
+                              <button type="submit" class="meta-data-add btn btn-success hidden" data-id="{{ $doc->id }}">Update</button>
 
                             
           
@@ -230,7 +231,8 @@
                             });
                               
                             $(".enddate").datetimepicker({
-                              format: "YYYY-MM-DD HH:mm:ss"
+                              format: "YYYY-MM-DD HH:mm:ss",
+                              defaultDate : new Date()
                             });
                         });
 
