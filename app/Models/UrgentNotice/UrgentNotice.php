@@ -155,12 +155,13 @@ class UrgentNotice extends Model
         
         $now = Carbon::now()->toDatetimeString();
 
-        $notices = DB::table('urgent_notice_target')->where('store_id', $storeNumber)
-                            ->join('urgent_notices', 'urgent_notices.id', '=', 'urgent_notice_target.urgent_notice_id')
-                            ->where('urgent_notices.start' , '<=', $now)
-                            ->where('urgent_notices.end', '>=', $now)
-                            ->get();
-
+        $notices = UrgentNoticeTarget::join('urgent_notices', 'urgent_notices.id' , '=', 'urgent_notice_target.urgent_notice_id')
+                                ->where('urgent_notice_target.store_id', $storeNumber)
+                                ->where('urgent_notices.start' , '<=', $now)
+                                ->where('urgent_notices.end', '>=', $now)
+                                ->select('urgent_notices.*')
+                                ->get();
+                        
         foreach($notices as $n){
             
             $n->since =  Utility::getTimePastSinceDate($n->updated_at);
@@ -168,6 +169,7 @@ class UrgentNotice extends Model
             $preview_string = strip_tags($n->description);
             $n->trunc = Communication::truncateHtml($preview_string);
         }
+
         return $notices;        
 
     }   
