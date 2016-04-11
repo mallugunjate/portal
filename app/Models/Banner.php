@@ -7,14 +7,59 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Log;
 use Storage;
+use App\Models\Validation\DashboardBrandingValidator;
 
 class Banner extends Model
 {
     protected $table = 'banners';
     protected $fillable = ['name', 'background'];
 
+
+    public static function validateBannerBackground($request)
+    {
+        $validateThis = [
+            'background' => $request->file('background')
+        ];
+        \Log::info($validateThis);
+        $v = new DashboardBrandingValidator();
+        $validationResult = $v->validate($validateThis);
+        return $validationResult;
+    }
+
+    public static function validateNotifications($request)
+    {
+        $validateThis = [
+            
+            'update_type_id' => $request->update_type,
+            'update_window_size' => $request->update_frequency,
+        ];
+        \Log::info($validateThis);
+        $v = new DashboardBrandingValidator();
+        $validationResult = $v->validate($validateThis);
+        return $validationResult;
+    }
+
+    public static function validateBranding($request)
+    {
+        $validateThis = [
+            'title' => $request->title
+        ];
+        \Log::info($validateThis);
+        $v = new DashboardBrandingValidator();
+        $validationResult = $v->validate($validateThis);
+        return $validationResult;
+    }
+
     public static function updateBannerBackground($id, $request)
     {
+        
+         $validate = Banner::validateBannerBackground($request);
+        
+        if($validate['validation_result'] == 'false') {
+            \Log::info($validate);
+            return json_encode($validate);
+        } 
+
         $file = $request->file('background');
         $banner_id = $request->banner_id;
         $directory = public_path() . '/images/dashboard-banners';
@@ -65,6 +110,14 @@ class Banner extends Model
 
     public static function updateNotificationPreference($id, Request $request)
     {
+        
+        $validate = Banner::validateNotifications($request);
+        
+        if($validate['validation_result'] == 'false') {
+            \Log::info($validate);
+            return json_encode($validate);
+        } 
+
         $update_type_id = $request->update_type;
         $update_window_size = $request->update_frequency;
 
@@ -79,6 +132,14 @@ class Banner extends Model
 
     public static function updateTitle($id,Request $request)
     {
+        $validate = Banner::validateBranding($request);
+        
+        if($validate['validation_result'] == 'false') {
+            \Log::info($validate);
+            return json_encode($validate);
+        } 
+
+
         $title = $request->title;
         $subtitle = $request->subtitle;
 
