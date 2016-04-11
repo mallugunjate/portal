@@ -16,6 +16,7 @@ use App\Models\Utility\Utility;
 use App\Models\Dashboard\Quicklinks;
 use App\Models\Document\DocumentTarget;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Validation\DocumentValidator;
 
 
 class Document extends Model
@@ -28,6 +29,20 @@ class Document extends Model
 
     public static function validateCreateDocument($request)
     {
+        \Log::info($request->all());
+        $validateThis = [
+            'folder_id' => intval($request['folder_id']),
+            'filename'  => $request->file('document'),
+            'start'     => $request['start'],
+            'target_stores' => explode(',', $request['stores'])
+        ];
+
+        
+        \Log::info($validateThis);
+        
+        $v = new DocumentValidator();
+        $validationResult = $v->validate($validateThis);
+        return $validationResult;
 
     }
 
