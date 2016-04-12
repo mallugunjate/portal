@@ -19,18 +19,31 @@ $("body").on("click", ".fileinput-upload-button", function(e) {
             type: 'POST',
             data: data, 
             dataType : 'json',
-			processData: false,  
-			contentType: false,
+      			processData: false,  
+      			contentType: false,
             success: function(result) {
-                console.log(result);
-                swal("Nice!", "'" + file.name +"' has been uploaded", "success");   
-                $('.fileinput-remove').trigger( "click" ); //reset the form 
+                console.log(result); 
+                if(result.validation_result == 'false') {
+                  var errors = result.errors;
+                  if(errors.hasOwnProperty("background")) {
+                    $.each(errors.background, function(index){
+                      $(".file-preview").parent().parent().append('<div class="req">' + errors.background[index]  + '</div>'); 
+                    });   
+                  }
+                }
+
+                else{
+                  console.log(result);
+                  swal("Nice!", "'" + file.name +"' has been uploaded", "success");   
+                  $('.fileinput-remove').trigger( "click" ); //reset the form 
+                  
+                  $.get( "/admin/dashboardbackground/"+banner_id, { },
+                    function(data) {
+                      $("#background-preview").attr("src", "/images/dashboard-banners/"+data);
+                    }
+                );   
+                }
                 
-				        $.get( "/admin/dashboardbackground/"+banner_id, { },
-              		function(data) {
-                 		$("#background-preview").attr("src", "/images/dashboard-banners/"+data);
-              		}
-           		);   
             }
             
         });        

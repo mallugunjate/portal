@@ -47,12 +47,28 @@ $(".update-notification-preferences").on('click', function(){
 		   	dataType: 'json',
 		    data: { update_type: update_type, update_frequency: update_frequency , request_type : request_type},
 
-		    success: function(data) {
+		    success: function(result) {
 		        
-		        console.log(data); 
-		        $('#update_type_id').val(data.update_type_id);
-		        $("#update_window_size").val(data.update_window_size);
-				swal("Nice!", "Preferences have been updated", "success");
+		        console.log(result); 
+		        if(result.validation_result == 'false') {
+                  var errors = result.errors;
+                  if(errors.hasOwnProperty("update_type_id")) {
+                    $.each(errors.update_type_id, function(index){
+                      $(".latest-updates-container").parent().parent().append('<div class="req">' + errors.update_type_id[index]  + '</div>'); 
+                    });   
+                  }
+                  if(errors.hasOwnProperty("update_window_size")) {
+                    $.each(errors.update_window_size, function(index){
+                      $(".latest-updates-container").parent().parent().append('<div class="req">' + errors.update_window_size[index]  + '</div>'); 
+                    });   
+                  }
+                }
+		        else{
+		        	$('#update_type_id').val(result.update_type_id);
+		        	$("#update_window_size").val(result.update_window_size);
+					swal("Nice!", "Preferences have been updated", "success");
+		        }
+		        
 
 
 		    }
