@@ -44,7 +44,9 @@ $(".update-notification-preferences").on('click', function(){
 		$.ajax({
 		    url: '/admin/dashboard/' + banner_id,
 		    type: 'PATCH',
+		   	dataType: 'json',
 		    data: { update_type: update_type, update_frequency: update_frequency , request_type : request_type},
+
 		    success: function(data) {
 		        
 		        console.log(data); 

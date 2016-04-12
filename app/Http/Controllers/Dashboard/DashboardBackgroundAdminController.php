@@ -40,7 +40,7 @@ class DashboardBackgroundAdminController extends Controller
      */
     public function store(Request $request)
     {   
-        Banner::updateBannerBackground($request->banner_id, $request);
+        return Banner::updateBannerBackground($request->banner_id, $request);
     }
 
     /**

@@ -33,9 +33,13 @@ class Banner extends Model
             'update_type_id' => $request->update_type,
             'update_window_size' => $request->update_frequency,
         ];
+        
+        \Log::info('&&&&');
         \Log::info($validateThis);
         $v = new DashboardBrandingValidator();
         $validationResult = $v->validate($validateThis);
+        \Log::info('******');
+        \Log::info($validationResult);
         return $validationResult;
     }
 
@@ -53,10 +57,11 @@ class Banner extends Model
     public static function updateBannerBackground($id, $request)
     {
         
-         $validate = Banner::validateBannerBackground($request);
+        $validate = Banner::validateBannerBackground($request);
         
         if($validate['validation_result'] == 'false') {
             \Log::info($validate);
+            \Log::info('8');
             return json_encode($validate);
         } 
 
@@ -75,6 +80,7 @@ class Banner extends Model
         $banner = Banner::find($id);
         $banner->background =$filename;
         $banner->save();
+        return json_encode($filename);
     }
 
     public static function getOldBannerBackgrounds($bannerId)
@@ -110,7 +116,6 @@ class Banner extends Model
 
     public static function updateNotificationPreference($id, Request $request)
     {
-        
         $validate = Banner::validateNotifications($request);
         
         if($validate['validation_result'] == 'false') {

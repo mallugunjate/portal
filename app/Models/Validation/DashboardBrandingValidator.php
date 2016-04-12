@@ -3,8 +3,9 @@
 namespace App\Models\Validation;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Validation\PortalValidator;
 
-class DashboardBrandingValidator extends Model
+class DashboardBrandingValidator extends PortalValidator
 {
     protected $rules = [
     	'title' => 'sometimes|required',
