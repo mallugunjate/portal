@@ -115,6 +115,29 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public static function updateAdminUser($id, $request)
     {
+        $validateThis = [
+            'firstname' => $request['firstname'],
+            'lastname'  => $request['lastname'],
+            'group'     => $request['group'],
+            'banners'   => $request['banners']
+
+        ];
+
+        if (isset($request['password']) && ($request['password']) != '') {
+            $validateThis['password']  = $request['password'];
+            $validateThis['password_confirmation'] = $request['password_confirmation'];
+        }
+        
+        
+        $v = new UserValidator;
+
+        $validate = $v->validate($validateThis);
+        if($validate['validation_result'] == 'false') {
+            \Log::info($validate);
+            return json_encode($validate);
+        }
+
+
         $user = User::find($id);
 
         $user['firstname'] = $request['firstname'];
@@ -125,17 +148,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         if(isset($request['password']) && $request['password'] != ''){
             $user['password'] = Hash::make($request['password']);
         }
+        
         $user->save();
 
-        UserBanner::where('user_id', $id)->delete();
-        $banners = $request['banners'];
-        foreach ($banners as $banner) {
-            UserBanner::create([
-                'user_id' => $id,
-                'banner_id' => $banner
-            ]);
-        }
-        return;
+        UserBanner::updateAdminBanner($id, $request['banners']);
+        return $user;
 
     }
 }

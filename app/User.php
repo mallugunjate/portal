@@ -41,18 +41,6 @@ class User extends Model implements AuthenticatableContract,
 
     public static function updateAdminUser($id, $request)
     {
-        
-        $validateThis = $request->all();
-        $v = new UserValidator;
-
-        $validate = $v->validateThis();
-        if($validate['validation_result'] == 'false') {
-            \Log::info($validate);
-            return json_encode($validate);
-        }
-        $user = User::find($id);
-
-
         $user['firstname'] = $request['firstname'];
         $user['lastname']  = $request['lastname'];
         $user['email']     = $request['email'];
@@ -61,7 +49,7 @@ class User extends Model implements AuthenticatableContract,
 
         UserBanner::updateAdminBanners($id, $request['banners']);
 
-        return $user;
+        return;
 
     }
 
