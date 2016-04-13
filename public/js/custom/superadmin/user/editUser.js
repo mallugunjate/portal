@@ -65,7 +65,8 @@ $(document).ready(function(){
 			    	email : email,
 			    	group : group,
 			    	banners : banners,
-			    	password : newPassword
+			    	password : newPassword,
+			    	password_confirmation : newPasswordConfirm
 			    },
 			    success: function(data) {
 			        

@@ -10,6 +10,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use App\Models\UserBanner;
+use App\Models\Validation\UserValidator;
 
 class User extends Model implements AuthenticatableContract,
                                     AuthorizableContract,
@@ -40,7 +41,17 @@ class User extends Model implements AuthenticatableContract,
 
     public static function updateAdminUser($id, $request)
     {
+        
+        $validateThis = $request->all();
+        $v = new UserValidator;
+
+        $validate = $v->validateThis();
+        if($validate['validation_result'] == 'false') {
+            \Log::info($validate);
+            return json_encode($validate);
+        }
         $user = User::find($id);
+
 
         $user['firstname'] = $request['firstname'];
         $user['lastname']  = $request['lastname'];
@@ -49,6 +60,8 @@ class User extends Model implements AuthenticatableContract,
         $user->save();
 
         UserBanner::updateAdminBanners($id, $request['banners']);
+
+        return $user;
 
     }
 

@@ -10,6 +10,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use App\Models\Profile\Profile;
 use App\Models\UserBanner;
+use App\Models\Validation\UserValidator;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
@@ -74,6 +75,24 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     
     public static function createAdminUser($request)
     {
+        $validateThis = [
+            'firstname' => $request['firstname'],
+            'lastname'  => $request['lastname'],
+            'email'     => $request['email'],
+            'group'     => $request['group'],
+            'banners'   => $request['banners'],
+            'password'  => $request['password'],
+            'password_confirmation' => $request['confirm_password']
+
+        ];      
+
+        $v = new UserValidator();
+        $validate = $v->validate($validateThis);
+        if($validate['validation_result'] == 'false') {
+            \Log::info($validate);
+            return json_encode($validate);
+        }
+
         $user = User::create([
             'firstname' => $request['firstname'],
             'lastname'  => $request['lastname'],
@@ -90,7 +109,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             ]);
         }
         \Log::info($user);
-        return;
+        return $user;
 
     }
 
