@@ -66,7 +66,7 @@ $(document).ready(function(){
 			    	firstname : firstname,
 			    	lastname : lastname,
 			    	email : email,
-			    	group : 'group',
+			    	group : group,
 			    	banners : banners,
 			    	password : password,
 			    	confirm_password : confirm_password

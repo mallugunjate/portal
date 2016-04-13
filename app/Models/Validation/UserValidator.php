@@ -10,7 +10,7 @@ class UserValidator extends PortalValidator
     protected $rules = [
     	'firstname' => 'required',
     	'lastname'	=> 'required',
-    	'email'		=> 'required|email|unique:users,email,id,$id',
+    	'email'		=> 'required|email|unique:users,email',
     	'group'		=> 'required|exists:user_groups,id',
     	'banners'	=> 'required|exists:banners,id',
     	'password'	=> 'required|min:8|regex:/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{8,}$/|confirmed',
