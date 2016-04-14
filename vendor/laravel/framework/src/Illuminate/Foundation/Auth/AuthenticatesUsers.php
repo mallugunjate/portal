@@ -48,6 +48,11 @@ trait AuthenticatesUsers
         $credentials = $this->getCredentials($request);
 
         if (Auth::attempt($credentials, $request->has('remember'))) {
+            \Log::info('******************');
+            \Log::info('Login successful');
+            \Log::info(Auth::user());
+            \Log::info($request->server('HTTP_USER_AGENT'));
+            \Log::info(\Request::getClientIp());
             return $this->handleUserWasAuthenticated($request, $throttles);
         }
 
@@ -58,6 +63,11 @@ trait AuthenticatesUsers
             $this->incrementLoginAttempts($request);
         }
 
+        \Log::info('******************');
+        \Log::info('Login unsuccessful');
+        \Log::info( 'Email: ' . $request['email']);
+        \Log::info('IP address : ' . $request->server('HTTP_USER_AGENT'));
+        \Log::info(\Request::getClientIp());
         return redirect($this->loginPath())
             ->withInput($request->only($this->loginUsername(), 'remember'))
             ->withErrors([

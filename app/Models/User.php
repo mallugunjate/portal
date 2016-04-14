@@ -95,6 +95,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public static function updateAdminUser($id, $request)
     {
+        
+        \Log::info('******************');
+        \Log::info('User profile update requested');
+        \Log::info( $request->all() );
+        \Log::info('IP address : ' . $request->server('HTTP_USER_AGENT'));
+        \Log::info(\Request::getClientIp());
+
+
         $user = User::find($id);
 
         $user['firstname'] = $request['firstname'];
