@@ -3,24 +3,9 @@
 namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Routing\Router;
 
 class Kernel extends HttpKernel
-{   
-
-    public function __construct(Application $app, Router $router)
-    {
-        parent::__construct($app, $router);
-
-        array_walk($this->bootstrappers, function(&$bootstrapper)
-        {
-            if($bootstrapper === 'Illuminate\Foundation\Bootstrap\ConfigureLogging')
-            {
-                $bootstrapper = 'Bootstrap\ConfigureLogging';
-            }
-        });
-    }
+{
     /**
      * The application's global HTTP middleware stack.
      *
@@ -48,5 +33,21 @@ class Kernel extends HttpKernel
         'admin.auth' => \App\Http\Middleware\AdminAuthenticate::class,
         'superadmin.auth'   => \App\Http\Middleware\SuperadminAuthenticate::class
 
+    ];
+    /**
+     * OVERRIDING PARENT CLASS
+     * The bootstrap classes for the application.
+     *
+     * @var array
+     */
+    protected $bootstrappers = [
+        'Illuminate\Foundation\Bootstrap\DetectEnvironment',
+        'Illuminate\Foundation\Bootstrap\LoadConfiguration',
+        'Illuminate\Foundation\Bootstrap\HandleExceptions',
+        'Illuminate\Foundation\Bootstrap\RegisterFacades',
+        'Illuminate\Foundation\Bootstrap\SetRequestForConsole',
+        'Illuminate\Foundation\Bootstrap\RegisterProviders',
+        'Illuminate\Foundation\Bootstrap\BootProviders',
+        'Bootstrap\ConfigureLogging' // custom logger bootstrapper
     ];
 }
