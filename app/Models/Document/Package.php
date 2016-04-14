@@ -23,7 +23,6 @@ class Package extends Model
     
     public static function storePackage(Request $request)
     {   
-        \Log::info( $request->all() );
         $documents = $request["package_files"];
     	$folders = $request["package_folders"];
         $package_screen_name = $request["title"];
@@ -143,7 +142,6 @@ class Package extends Model
         $remove_folders = $request["remove_folder"];    
         if (isset($remove_folders)) {
             foreach ($remove_folders as $remove_folder) {
-                \Log::info($remove_folder);
                FolderPackage::where('package_id', $id)->where('folder_id', intval($remove_folder))->delete();
             }
         }

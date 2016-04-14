@@ -106,7 +106,6 @@ class AuthController extends Controller
     {
         
         $user_id = \Auth::user()->id;
-        \Log::info($user_id);
 
         UserSelectedBanner::where('user_id', $user_id)->delete();
 

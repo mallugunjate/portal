@@ -93,7 +93,6 @@ class Feature extends Model
     					'feature_id' => $feature_id,
     					'document_id'	 => intval($file)
     					]);
-            \Log::info('document_id :' . $file);
     			}
     		}
         return;

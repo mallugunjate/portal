@@ -29,7 +29,6 @@ class UrgentNotice extends Model
     	$attachments = $request->attachments;
     	$target_stores = $request->target_stores;
     	
-    	\Log::info($request->all());
     	
     	$urgentNotice = UrgentNotice::create([
     		'banner_id' => $banner_id,

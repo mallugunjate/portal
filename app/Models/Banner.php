@@ -53,7 +53,6 @@ class Banner extends Model
 
     public static function updateBannerInfo($id,Request $request)
     {
-        \Log::info($request->all());
         $requestType = $request->request_type;
         if ($requestType == 'updateNotificationPreference') {
             return Banner::updateNotificationPreference($id, $request);

@@ -89,7 +89,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
                 'banner_id' => $banner
             ]);
         }
-        \Log::info($user);
         return;
 
     }

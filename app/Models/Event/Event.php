@@ -19,7 +19,6 @@ class Event extends Model
 
     public static function storeEvent($request)
     {
-    	\Log::info($request->all);
         $banner = UserSelectedBanner::getBanner();
         $desc = preg_replace('/\n+/', '', $request['description']);
         $event = Event::create([
