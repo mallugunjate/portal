@@ -184,7 +184,7 @@ class Document extends Model
         
         FileFolder::where('document_id', $id)->delete();
         $document = Document::find($id);
-        unlink(public_path('files/'.$document->filename));
+        // unlink(public_path('files/'.$document->filename));
         $document->delete();
 
         $quicklink = Quicklinks::where('url', $id)->where('type', 2)->first();
