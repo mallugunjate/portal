@@ -53,6 +53,7 @@ trait AuthenticatesUsers
             \Log::info(Auth::user());
             \Log::info($request->server('HTTP_USER_AGENT'));
             \Log::info(\Request::getClientIp());
+            \Log::info($request->session()->all());
             return $this->handleUserWasAuthenticated($request, $throttles);
         }
 
@@ -68,6 +69,7 @@ trait AuthenticatesUsers
         \Log::info( 'Email: ' . $request['email']);
         \Log::info('IP address : ' . $request->server('HTTP_USER_AGENT'));
         \Log::info(\Request::getClientIp());
+
         return redirect($this->loginPath())
             ->withInput($request->only($this->loginUsername(), 'remember'))
             ->withErrors([
