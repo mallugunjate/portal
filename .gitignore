@@ -9,3 +9,4 @@ Homestead.json
 .env
 .floo
 .flooignore
+env.js
