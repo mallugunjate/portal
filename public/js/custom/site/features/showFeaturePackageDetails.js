@@ -51,9 +51,10 @@ var showPackageFolders = function(packageId) {
 }
 
 var getFolderDocuments = function(global_folder_id, packageId) {
+	var storeNumber = localStorage.getItem('userStoreNumber');
 	$.ajax(
 		{
-			url : '/folder/' + global_folder_id
+			url : '/'+ storeNumber +'/folder/' + global_folder_id
 		}
 	)
 	.done(function(data){
