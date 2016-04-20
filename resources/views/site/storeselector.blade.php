@@ -25,14 +25,10 @@
         <div>
             <div>
 
-                <h1 class="logo-name">P</h1>
+                <h1 class="logo-name">MW</h1>
 
             </div>
             <h3>Welcome!</h3>
-            <p>We hope you have an enjoyable time!
-                <!--Continually expanded and constantly improved Inspinia Admin Them (IN+)-->
-            </p>
-            <p>Login in. To see it in action.</p>
             <form class="m-t" role="form" action="index.html">
                 <div class="form-group">
                 	<labeL>Select Your Banner</labeL>
