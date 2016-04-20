@@ -214,4 +214,29 @@ BEGIN;
 INSERT INTO `user_groups` VALUES ('1', 'admin', '0000-00-00 00:00:00', '0000-00-00 00:00:00'), ('2', 'users', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 COMMIT;
 
+-- ----------------------------
+--  Table structure for `banner_user`
+-- ----------------------------
+DROP TABLE IF EXISTS `banner_user`;
+CREATE TABLE `banner_user` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `banner_id` int(10) unsigned NOT NULL,
+  `user_id` int(10) unsigned NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `banner_user_banner_id_foreign` (`banner_id`),
+  KEY `banner_user_user_id_foreign` (`user_id`),
+  CONSTRAINT `banner_user_banner_id_foreign` FOREIGN KEY (`banner_id`) REFERENCES `banners` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `banner_user_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=COMPACT;
+
+-- ----------------------------
+--  Records of `banner_user`
+-- ----------------------------
+BEGIN;
+INSERT INTO `banner_user` VALUES ('1', '1', '3', '0000-00-00 00:00:00', '0000-00-00 00:00:00', null), ('2', '2', '3', '0000-00-00 00:00:00', '0000-00-00 00:00:00', null);
+COMMIT;
+
 SET FOREIGN_KEY_CHECKS = 1;
