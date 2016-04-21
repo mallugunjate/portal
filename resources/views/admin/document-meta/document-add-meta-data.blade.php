@@ -58,8 +58,7 @@
                           <tr>
                             <td>File Name</td>
                             <td>Title</td>
-                            <td>Start</td>
-                            <td>End</td>
+                            <td>Start &amp; End</td>
                           </tr>
                       
                   	@foreach($documents as $doc)
@@ -73,23 +72,11 @@
                               <td><input type="text" style="width: 500px;" class="form-control" name="title{{ $doc->id }}" id="title{{ $doc->id }}" value="{{$doc->title}}"></td>
                 		      
                               <td>
-                              
-                                <div class='input-group date startdate' id='datetimepicker1-{{$doc->id}}'>
-                                    <input type='text' class="form-control" name="start" id="start{{$doc->id}}" value={{$doc->start}}/>
-                                    <span class="input-group-addon">
-                                        <span class="glyphicon glyphicon-calendar"></span>
-                                    </span>
-                                </div>
-                              
-                              </td>
 
-                              <td>
-                              
-                                <div class='input-group date enddate' id='datetimepicker2-{{$doc->id}}'>
-                                    <input type='text' class="form-control" name="end" id="end{{$doc->id}}" value={{$doc->end}}/>
-                                    <span class="input-group-addon">
-                                        <span class="glyphicon glyphicon-calendar"></span>
-                                    </span>
+                                <div class="input-daterange input-group" id="datepicker">
+                                    <input type="text" class="input-sm form-control" name="start" id="start{{$doc->id}}" value={{$doc->start}} />
+                                    <span class="input-group-addon">to</span>
+                                    <input type="text" class="input-sm form-control" name="end" id="end{{$doc->id}}" value={{$doc->end}} />
                                 </div>
                               
                               </td>
@@ -225,15 +212,12 @@
 
 
                          $(function () {
-                            $(".startdate").datetimepicker({
-                              format: "YYYY-MM-DD HH:mm:ss",
-                              defaultDate : new Date()
-                            });
-                              
-                            $(".enddate").datetimepicker({
-                              format: "YYYY-MM-DD HH:mm:ss",
-                              defaultDate : new Date()
-                            });
+                            $('.input-daterange').datepicker({
+                               format: 'yyyy-mm-dd',
+                              keyboardNavigation: false,
+                              forceParse: false,
+                              autoclose: true
+                          }); 
                         });
 
                         var defaultFolderId = getParameterByName('parent');
