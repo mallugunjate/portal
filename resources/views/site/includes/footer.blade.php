@@ -6,3 +6,5 @@
             	<a href="#" data-toggle="modal" data-target="#bugreportmodal"><i class="fa fa-bug"></i> Report a Bug</a>
             </div>
         </div>
+
+        
