@@ -125,14 +125,15 @@ $(document).ready(function() {
 
     $( ".select-stores" ).click(function() {
         
+
         $(this).removeClass('btn-outline');
         $(".all-stores").addClass('btn-outline');
-        
         $("#storeSelect option").each(function(){
-            $(this).removeAttr('selected');
+            $(this).removeAttr("selected");
         });
+        $('.chosen').trigger('chosen:updated');
 
-        $("#storeSelect").chosen();
+        console.log($("#storeSelect").val());
         $('.select-stores-form').show();
         $('.datepicker-div').show();
         $('#file-uploader').show();
@@ -142,36 +143,20 @@ $(document).ready(function() {
     });
 
     $( ".all-stores" ).click(function() {
+
         $(this).removeClass('btn-outline');
         $(".select-stores").addClass('btn-outline');
         $('.datepicker-div').show();
         $('#file-uploader').show();
         $('#actions').show();
         $('.select-stores-form').hide();
-         $("#allStores").click();
-         console.log($("#storeSelect").val());
+        $("#storeSelect option").each(function(index){
+            $(this).prop('selected', true);
+        });
+        
+        console.log($("#storeSelect").val());
     });
 
-    $("#allStores").change(function(){
-
-        // if ($("#allStores").is(":checked")) {
-
-        $("#storeSelect option").each(function(index){            
-            $(this).attr('selected', 'selected');
-        });
-        $("#storeSelect").chosen();
-            
-        // }
-        // else if ($("#allStores").not(":checked")) {
-        //     $("#storeSelect option").each(function(){
-        //         $(this).removeAttr('selected');
-        //     });
-        //     $("#storeSelect").chosen();
-            
-        // }
-
-        console.log($("#storeSelect").val());
-    }); 
     
     $( ".all-stores" ).trigger( "click" );
 
