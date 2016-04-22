@@ -108,6 +108,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
                 'banner_id' => $banner
             ]);
         }
+
         \Log::info($user);
         return $user;
 
@@ -115,6 +116,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public static function updateAdminUser($id, $request)
     {
+
+        
+        \Log::info('******************');
+        \Log::info('User profile update requested');
+        \Log::info( $request->all() );
+        \Log::info('IP address : ' . $request->server('HTTP_USER_AGENT'));
+        \Log::info(\Request::getClientIp());
+
         $validateThis = [
             'firstname' => $request['firstname'],
             'lastname'  => $request['lastname'],
@@ -137,13 +146,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             return json_encode($validate);
         }
 
-
         $user = User::find($id);
 
         $user['firstname'] = $request['firstname'];
         $user['lastname']  = $request['lastname'];
         $user['email']     = $request['email'];
-        $user['group_id']     = intval($request['group']);
+        $user['group_id']  = intval($request['group']);
 
         if(isset($request['password']) && $request['password'] != ''){
             $user['password'] = Hash::make($request['password']);

@@ -20,8 +20,6 @@ class Search extends Model
     	
     	// $today = Carbon::now()->toDateString();
         $today = Carbon::now();
-        \Log::info( $today );
-        \Log::info( $query );
 
     	foreach ($query_terms as $term) {
     		$docs = $docs->merge(

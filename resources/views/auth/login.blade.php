@@ -20,7 +20,14 @@
             </p>
             <p>Admin Login</p>
             <form class="m-t" role="form" method="POST" action="{{ url('/admin/login') }}">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                @if (count($errors))
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <div>{{ $error }}</div>
+                        @endforeach
+                    </ul>
+                @endif
                 <div class="form-group">
                     <input type="email" class="form-control" name="email" placeholder="Email" value="{{ old('email') }}" required="">
                 </div>

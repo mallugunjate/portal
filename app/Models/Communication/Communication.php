@@ -210,13 +210,7 @@ class Communication extends Model
             $communication["is_draft"] = 0;
          }
          
-         $communication->save();   
-
-         \Log::info('**********************************');
-         \Log::info('Type : Communication updated');
-         \Log::info($request->all());
-         \Log::info('**********************************');
-         
+         $communication->save();
 
          Communication::updateTargetStores($communication->id, $request);
          Communication::updateCommunicationDocuments($communication->id, $request);

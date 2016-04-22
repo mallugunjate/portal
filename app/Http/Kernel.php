@@ -34,4 +34,20 @@ class Kernel extends HttpKernel
         'superadmin.auth'   => \App\Http\Middleware\SuperadminAuthenticate::class
 
     ];
+    /**
+     * OVERRIDING PARENT CLASS
+     * The bootstrap classes for the application.
+     *
+     * @var array
+     */
+    protected $bootstrappers = [
+        'Illuminate\Foundation\Bootstrap\DetectEnvironment',
+        'Illuminate\Foundation\Bootstrap\LoadConfiguration',
+        'Illuminate\Foundation\Bootstrap\HandleExceptions',
+        'Illuminate\Foundation\Bootstrap\RegisterFacades',
+        'Illuminate\Foundation\Bootstrap\SetRequestForConsole',
+        'Illuminate\Foundation\Bootstrap\RegisterProviders',
+        'Illuminate\Foundation\Bootstrap\BootProviders',
+        'Bootstrap\ConfigureLogging' // custom logger bootstrapper
+    ];
 }

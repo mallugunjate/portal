@@ -240,8 +240,6 @@ class Document extends Model
         if ($tags != null) {
             Document::updateTags($id, $tags);
         }
-        \Log::info("***** From Update Meta data *********");
-        \Log::info($request->all());
 
         $title          = $request->get('title');
         $description    = $request->get('description');
@@ -462,7 +460,6 @@ class Document extends Model
                 $target_stores = explode(',',  $request['stores'] );    
             }
 
-            \Log::info($target_stores);
             foreach ($target_stores as $key=>$store) {
                 DocumentTarget::insert([
                     'document_id' => $document->id,

@@ -445,7 +445,6 @@ class Folder extends Model
     public static function updateTimestamp($global_folder_id, $timestamp)
     {
         $folderPath = Folder::getFolderPath($global_folder_id);
-        \Log::info($folderPath);
         foreach ($folderPath as $path) {
             
             $global_folder = \DB::table('folder_ids')->where('id', $path["global_folder_id"])->first();

@@ -40,15 +40,13 @@ class Event extends Model
 
     public static function storeEvent($request)
     {
-        
+
         $validate = Event::validateEvent($request);
         
         if($validate['validation_result'] == 'false') {
-          \Log::info($validate);
           return json_encode($validate);
         }
-
-        \Log::info($request->all);
+        
         $banner = UserSelectedBanner::getBanner();
         $desc = preg_replace('/\n+/', '', $request['description']);
         $event = Event::create([
@@ -70,9 +68,7 @@ class Event extends Model
     public static function updateEvent($id, $request)
     {
         $validate = Event::validateEvent($request);
-        \Log::info($validate);
         if($validate['validation_result'] == 'false') {
-          \Log::info($validate);
           return json_encode($validate);
         }
 
