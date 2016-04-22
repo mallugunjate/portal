@@ -32,6 +32,6 @@ class CreateBugReportTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('bug_reports');
     }
 }
