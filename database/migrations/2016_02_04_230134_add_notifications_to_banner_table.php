@@ -27,6 +27,7 @@ class AddNotificationsToBannerTable extends Migration
     public function down()
     {
         Schema::table('banners', function (Blueprint $table) {
+            $table->dropForeign('banners_update_type_id_foreign');
             $table->dropColumn('update_type_id');
             $table->dropColumn('update_window_size');
         });

@@ -26,6 +26,7 @@ class AddTypesToCommunicationTable extends Migration
     public function down()
     {
         Schema::table('communications', function (Blueprint $table) {
+            $table->dropForeign('communications_communication_type_id_foreign');
             $table->dropColumn('communication_type_id');
         });
     }
