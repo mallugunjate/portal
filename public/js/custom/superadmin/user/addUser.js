@@ -11,14 +11,6 @@ $(document).ready(function(){
 		var banners = [];
 		$('#select-banner option:selected').each(function(){ banners.push($(this).val()); });
 
-		console.log('firstname: '+ firstname );
-		console.log('lastname: '+ lastname );
-		console.log('email: '+ email );
-		console.log('group: '+ group );
-		console.log('banner: '+ banners);
-		console.log('password: '+ password);
-		console.log('confirm_password: '+ confirm_password);
-
 		var hasError = false;
 		if(firstname == '') {
 			swal("Oops!", "Need a first name.", "error"); 
@@ -69,18 +61,65 @@ $(document).ready(function(){
 			$.ajax({
 			    url: '/admin/user/',
 			    type: 'POST',
+			    dataType: 'json',
 			    data: {
 			    	firstname : firstname,
 			    	lastname : lastname,
 			    	email : email,
 			    	group : group,
 			    	banners : banners,
-			    	password : password
+			    	password : password,
+			    	confirm_password : confirm_password
 			    },
 			    success: function(result) {
-			        console.log(result);
-			        $('form')[0].reset(); // empty the form
-					swal("Nice!", groupname+ " '" + firstname + " " + lastname +"' has been created", "success");        
+			        
+			    	if(result.validation_result == 'false') {
+			        	var errors = result.errors;
+			        	if(errors.hasOwnProperty("firstname")) {
+			        		$.each(errors.firstname, function(index){
+			        			$('input[name="firstname"]').parent().append('<div class="req">' + errors.firstname[index]  + '</div>');	
+			        		}); 	
+			        	}
+			        	
+				        if(errors.hasOwnProperty("lastname")) {
+				        	$.each(errors.lastname, function(index){
+				        		$('input[name="lastname"]').parent().append('<div class="req">' + errors.lastname[index]  + '</div>');
+				        	});
+				        }
+				        if(errors.hasOwnProperty("email")) {
+				        	$.each(errors.email, function(index){
+				        		$('input[name="email"]').parent().append('<div class="req">' + errors.email[index]  + '</div>');	
+				        	});
+				        }
+				        if(errors.hasOwnProperty("group")) {
+				        	$.each(errors.group, function(index){
+				        		$('#select-group').parent().append('<div class="req">' + errors.group[index]  + '</div>');	
+				        	});
+				        }
+				        if(errors.hasOwnProperty("banners")) {
+				        	$.each(errors.banners, function(index){
+				        		$('#select-banner').parent().append('<div class="req">' + errors.banners[index]  + '</div>');	
+				        	});
+				        }
+				        
+				        if(errors.hasOwnProperty("password")) {
+				        	$.each(errors.password, function(index){
+				        		$('input[name="password"]').parent().append('<div class="req">' + errors.password[index]  + '</div>');	
+				        	});
+				        }
+				        if(errors.hasOwnProperty("password_confirmation")) {
+				        	$.each(errors.password_confirmation, function(index){
+				        		$('input[name="confirm_password"]').parent().append('<div class="req">' + errors.password_confirmation[index]  + '</div>');	
+				        	});
+				        }
+				        
+			        }
+			        else{
+			        	console.log(result);
+				        $('form')[0].reset(); // empty the form
+						swal("Nice!", groupname+ " '" + firstname + " " + lastname +"' has been created", "success");        
+			        }
+			        
 			    }
 			}).done(function(data){
 				console.log(data);

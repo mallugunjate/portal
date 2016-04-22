@@ -129,8 +129,7 @@ class UserAdminController extends Controller
      */
     public function update(Request $request, $id)
     {  
-        User::updateAdminUser($id, $request);    
-        return ($request->all());
+        return User::updateAdminUser($id, $request);    
     }
 
     /**

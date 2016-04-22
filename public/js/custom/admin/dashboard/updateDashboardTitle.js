@@ -29,12 +29,25 @@ $(".update-dashboard").on('click', function(){
 		    url: '/admin/dashboard/' + banner_id,
 		    type: 'PATCH',
 		    data: { title : dashboard_title, subtitle: dashboard_subtitle, request_type : request_type},
-		    success: function(data) {
+		    dataType: 'json',
+		    success: function(result) {
 		        
-		        console.log(data); 
-		        $("#dashboard_title").val(data.title);
-		        $("#dashboard_subtitle").val(data.subtitle);
-				swal("Nice!", "Dashboard updated", "success");
+		        console.log(result); 
+		        if(result.validation_result == 'false') {
+		        	var errors = result.errors;
+		        	if(errors.hasOwnProperty("title")) {
+		        		$.each(errors.title, function(index){
+		        			$("input[name='dashboard_title']").parent().parent().append('<div class="req">' + errors.title[index]  + '</div>');	
+		        		}); 	
+		        	}
+		        }
+		        else{
+		        	$("#dashboard_title").val(result.title);
+		        	$("#dashboard_subtitle").val(result.subtitle);
+					swal("Nice!", "Dashboard updated", "success");	
+		        }
+
+		        
 
 		    }
 		}).done(function(response){

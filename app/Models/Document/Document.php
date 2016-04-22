@@ -16,6 +16,7 @@ use App\Models\Utility\Utility;
 use App\Models\Dashboard\Quicklinks;
 use App\Models\Document\DocumentTarget;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Validation\DocumentValidator;
 
 
 class Document extends Model
@@ -26,7 +27,33 @@ class Document extends Model
     protected $fillable = array('upload_package_id', 'original_filename','original_extension', 'filename', 'title', 'description', 'start', 'end', 'banner_id');
     protected $dates = ['deleted_at'];
 
+    public static function validateCreateDocument($request)
+    {
+        \Log::info($request->all());
+        $validateThis = [
+            'folder_id' => intval($request['folder_id']),
+            'filename'  => $request->file('document'),
+            'start'     => $request['start'],
+            'target_stores' => explode(',', $request['stores'])
+        ];
+
+        
+        \Log::info($validateThis);
+        
+        $v = new DocumentValidator();
+        $validationResult = $v->validate($validateThis);
+        return $validationResult;
+
+    }
+
+    public static function validateEditDocument($request)
+    {
+
+    }
+
+
     public static function getDocuments($global_folder_id, $forStore=null, $storeNumber=null)
+
     {
 
         if (isset($global_folder_id)) {
@@ -96,6 +123,13 @@ class Document extends Model
     public static function storeDocument($request)
     {
         
+        $validate = Document::validateCreateDocument($request);
+        
+        if($validate['validation_result'] == 'false') {
+            \Log::info($validate);
+            return json_encode($validate);
+        } 
+
         $metadata = Document::getDocumentMetaData($request->file('document'));       
 
         $directory = public_path() . '/files';

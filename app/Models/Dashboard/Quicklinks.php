@@ -8,6 +8,7 @@ use App\Models\Dashboard\QuicklinkTypes;
 use App\Models\Document\Document;
 use App\Models\Utility\Utility;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Validation\QuicklinkValidator;
 
 class Quicklinks extends Model
 {
@@ -15,6 +16,37 @@ class Quicklinks extends Model
     protected $table = 'quicklinks';
     protected $fillable = ['banner_id', 'type', 'link_name', 'url'];
     protected $dates = ['deleted_at'];
+
+ 	
+    public static function validateCreateQuicklink($request)
+    {
+    	$validateThis = [
+
+    		'banner_id' => $request['banner_id'],
+    		'link_name'	=> $request['name'],
+    		'type'		=> $request['type']
+
+    	];
+
+    	switch($request['type']) {
+    		case 1 : 
+    			$validateThis['folder_url'] = $request['url'];
+    			break;
+    		case 2 :
+    			$validateThis['document_url'] = $request['url'];
+    			break;
+    		case 3:
+    			$validateThis['external_url'] = $request['url'];
+    			break;
+    		default:
+    			break;
+    	}
+
+    	\Log::info($validateThis);
+    	$v = new QuicklinkValidator();
+    	$validationResult = $v->validate($validateThis);
+    	return $validationResult;
+    }
 
  	public static function getLinks($id, $storeNumber)
  	{
@@ -49,6 +81,13 @@ class Quicklinks extends Model
 
  	public static function storeQuicklink($request)
  	{
+ 		$validate = Quicklinks::validateCreateQuicklink($request);
+        
+        if($validate['validation_result'] == 'false') {
+            \Log::info($validate);
+            return json_encode($validate);
+        } 
+
  		$ql = Quicklinks::create([
  			'banner_id' => $request->banner_id,
  			'link_name' => $request->name,
