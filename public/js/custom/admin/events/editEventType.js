@@ -21,9 +21,21 @@ $(document).on('click','.eventtype-edit',function(){
 		    data: {
 		  		event_type: eventType
 		    },
-		    success: function(result) {
-		      //  $('#createNewEventForm')[0].reset(); // empty the form
-				swal("Nice!", "'" + eventType +"' has been updated", "success");        
+		    dataType : 'json',
+		    success: function(data) {
+		    	console.log(data);
+		    	if(data != null && data.validation_result == 'false') {
+		        	var errors = data.errors;
+		        	console.log(errors);
+		        	if(errors.hasOwnProperty("event_type")) {
+		        		$.each(errors.event_type, function(index){
+		        			$("#event_type").parent().append('<div class="req">' + errors.event_type[index]  + '</div>');	
+		        		}); 	
+		        	}
+		        }
+		        else{
+		      		swal("Nice!", "'" + eventType +"' has been updated", "success");        
+				}
 		    }
 		});    	
     }

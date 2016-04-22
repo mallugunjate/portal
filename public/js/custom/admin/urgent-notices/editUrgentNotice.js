@@ -198,8 +198,20 @@ $(document).on('click','.urgentnotice-update',function(){
 	
 	console.log(remove_attachments);
  
-    if(title == '' || description == '' || start == '' || end == '' ) {
-		swal("Oops!", "This notice is not complete.", "error"); 
+    if(title == '' ) {
+		swal("Oops!", "Title is required.", "error"); 
+		hasError = true;
+		$(window).scrollTop(0);
+		return false;
+	}
+	if(start == '' || end == '' ) {
+		swal("Oops!", "Start and End Dates required.", "error"); 
+		hasError = true;
+		$(window).scrollTop(0);
+		return false;
+	}
+	if( target_stores == null && typeof allStores === 'undefined' ) {
+		swal("Oops!", "Target stores not selected.", "error"); 
 		hasError = true;
 		$(window).scrollTop(0);
 		return false;
@@ -222,10 +234,53 @@ $(document).on('click','.urgentnotice-update',function(){
 		  		target_stores : target_stores
 		  		
 		    },
-		    success: function(result) {
-		        console.log(result);
-		        // $('#createNewUrgentNoticeForm')[0].reset(); // empty the form
-				swal("Nice!", "'" + title +"' has been updated", "success");        
+		    dataType : 'json', 
+		    success: function(data) {
+		        console.log(data);
+		        if(data != null && data.validation_result == 'false') {
+		        	var errors = data.errors;
+		        	if(errors.hasOwnProperty("title")) {
+		        		$.each(errors.title, function(index){
+		        			$("#title").parent().append('<div class="req">' + errors.title[index]  + '</div>');	
+		        		}); 	
+		        	}
+		        	if(errors.hasOwnProperty("attachment_type_id")) {
+		        		$.each(errors.attachment_type_id, function(index){
+		        			$("#attachment-Folder").parent().parent().append('<div class="req">' + errors.attachment_type_id[index]  + '</div>');	
+		        		}); 	
+		        	}
+		        	if(errors.hasOwnProperty("folder")) {
+		        		$.each(errors.folder, function(index){
+		        			$("#attachment-Folder").parent().parent().append('<div class="req">' + errors.folder[index]  + '</div>');	
+		        		}); 	
+		        	}
+		        	
+			        if(errors.hasOwnProperty("start")) {
+			        	$.each(errors.title, function(index){
+			        		$("#start").parent().parent().append('<div class="req">' + errors.start[0]  + '</div>');
+			        	});
+			        }
+			        if(errors.hasOwnProperty("end")) {
+			        	$.each(errors.title, function(index){
+			        		$("#end").parent().parent().append('<div class="req">' + errors.end[0]  + '</div>');	
+			        	});
+			        }
+			        if(errors.hasOwnProperty("target_stores")) {		        	
+		        		$("#storeSelect").parent().append('<div class="req">' + errors.target_stores[0]  + '</div>');
+		        	}
+		        	if(errors.hasOwnProperty("allStores")) {		        	
+		        		$("#storeSelect").parent().append('<div class="req">' + errors.allStores[0]  + '</div>');
+		        	}
+		        	if(errors.hasOwnProperty("store")) {		        	
+		        		$("#storeSelect").parent().append('<div class="req">' + errors.store[0]  + '</div>');
+		        	}
+
+		        }
+		        else{
+		        	console.log(result);
+		        	// $('#createNewUrgentNoticeForm')[0].reset(); // empty the form
+					swal("Nice!", "'" + title +"' has been updated", "success");        
+				}
 		    }
 		}).done(function(response){
 			console.log(response);

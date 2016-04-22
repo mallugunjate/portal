@@ -32,7 +32,7 @@
                             <a href="/admin/calendar">Calendar</a>
                         </li>
                         <li class="active">
-                            <strong>Create an Event Type</strong>
+                            <strong>Edit Event Type</strong>
                         </li>
                     </ol>
                 </div>
@@ -46,7 +46,7 @@
 		                <div class="col-lg-12">
 		                    <div class="ibox">
 		                        <div class="ibox-title">
-		                            <h5>New Event Type</h5>
+		                            <h5>Edit Event Type</h5>
 		                            <div class="ibox-tools">
 		                               {{--  <a href="/admin/calendar/create" class="btn btn-primary" role="button"><i class="fa fa-plus"></i> Add New Event</a> --}}
                                         
@@ -98,7 +98,7 @@
 				</script>
 
 				<script src="/js/custom/admin/events/editEventType.js"></script>
-				<script type="text/javascript" src="/js/custom/admin/global/bannerSelector.js"></script>
+				
 
 				@include('site.includes.bugreport')
 

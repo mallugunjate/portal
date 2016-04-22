@@ -89,13 +89,25 @@ $('input[id="thumbnail"]').on('change', function(){
 		    url: '/admin/feature/thumbnail',
 		    type: 'POST',
 		    data: data, 
+		    dataType: 'json',
             processData: false,  // tell jQuery not to process the data
             contentType: false,   // tell jQuery not to set contentType
 		    success: function(result) {
-		        console.log(result);
-		        $(".thumbnail-preview img").attr('src', "/images/featured-covers/"+result);
-		        // $('#createNewFeatureForm')[0].reset(); // empty the form
-				// swal("Nice!", "'" + featureTitle +"' has been created", "success");        
+		    	
+		    	console.log(result);
+		    	var errors = result.errors;
+		        if( errors ) {
+		        	if(errors.hasOwnProperty("thumbnail")) {
+		        		$.each(errors.thumbnail, function(index){
+		        			$("#thumbnail").parent().append('<div class="req">' + errors.thumbnail[index]  + '</div>');	
+		        		}); 	
+		        	}
+		        }
+		        
+	        	else{
+	        		$(".thumbnail-preview img").attr('src', "/images/featured-covers/"+result);
+	        	}
+		        
 		    }
 		}).done(function(response){
 			console.log(response);
@@ -115,13 +127,23 @@ $('input[id="background"]').on('change', function(){
 		    url: '/admin/feature/background',
 		    type: 'POST',
 		    data: data, 
+		    dataType: 'json',
             processData: false,  // tell jQuery not to process the data
             contentType: false,   // tell jQuery not to set contentType
 		    success: function(result) {
 		        console.log(result);
-		        $(".background-preview img").attr('src', "/images/featured-backgrounds/"+result);
-		        // $('#createNewFeatureForm')[0].reset(); // empty the form
-				// swal("Nice!", "'" + featureTitle +"' has been created", "success");        
+		        var errors = result.errors;
+		        if(  errors ) {
+			        if(errors.hasOwnProperty("background")) {
+		        		$.each(errors.background, function(index){
+		        			$("#background").parent().append('<div class="req">' + errors.background[index]  + '</div>');	
+		        		}); 	
+		        	}
+		        }
+	        	else{
+	        		$(".background-preview img").attr('src', "/images/featured-backgrounds/"+result);
+	        	}
+		        
 		    }
 		}).done(function(response){
 			console.log(response);
@@ -216,12 +238,61 @@ $(document).on('click','.feature-update',function(){
 		    type: 'PATCH',
 		    data: data,
 		    contentType: 'application/json',
+		    dataType: 'json',
 		    processData : false,
-		    success: function(data) {
-		        
-		        console.log(data); 
-				swal("Nice!", "'" + featureTitle +"' has been updated", "success");
+		    success: function(result) {
 
+	        	var errors = result.errors;
+	        	if(errors.hasOwnProperty("name")) {
+	        		$.each(errors.name, function(index){
+	        			$("#feature_title").parent().append('<div class="req">' + errors.name[index]  + '</div>');	
+	        		}); 	
+	        	}
+		        if(errors.hasOwnProperty("documents")) {
+		        	$.each(errors.documents, function(index){
+		        		$("#files-selected").append('<div class="req">' + errors.documents[index]  + '</div>');
+		        	});
+		        }
+		        if(errors.hasOwnProperty("packages")) {
+		        	$.each(errors.packages, function(index){
+		        		$("#packages-selected").append('<div class="req">' + errors.packages[index]  + '</div>');	
+		        	});
+		        }
+		        if(errors.hasOwnProperty("update_type_id")) {
+		        	$.each(errors.update_type_id, function(index){
+		        		$(".latest-updates-container").append('<div class="req">' + errors.update_type_id[index]  + '</div>');	
+		        	});
+		        }
+		        if(errors.hasOwnProperty("update_frequency")) {
+		        	$.each(errors.update_frequency, function(index){
+		        		$(".latest-updates-container").append('<div class="req">' + errors.update_frequency[index]  + '</div>');	
+		        	});
+		        }
+		        
+		        if(errors.hasOwnProperty("start")) {
+		        	$.each(errors.start, function(index){
+		        		$(".input-daterange").parent().append('<div class="req">' + errors.start[index]  + '</div>');	
+		        	});
+		        }
+		        if(errors.hasOwnProperty("end")) {
+		        	$.each(errors.end, function(index){
+		        		$(".input-daterange").append('<div class="req">' + errors.end[index]  + '</div>');	
+		        	});
+		        }
+		        if(errors.hasOwnProperty("thumbnail")) {
+		        	$.each(errors.thumbnail, function(index){
+		        		$("#thumbnail").append('<div class="req">' + errors.thumbnail[index]  + '</div>');	
+		        	});
+		        }
+		        if(errors.hasOwnProperty("background")) {
+		        	$.each(errors.background, function(index){
+		        		$("#background").append('<div class="req">' + errors.background[index]  + '</div>');	
+		        	});
+		        }
+	        
+		        else{
+		        	swal("Nice!", "'" + featureTitle +"' has been updated", "success");
+			    }
 		    }
 		}).done(function(response){
 			console.log(response);
