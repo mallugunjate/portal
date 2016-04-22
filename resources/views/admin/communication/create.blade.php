@@ -80,9 +80,9 @@
 								                </div>
 								        </div>
 										
-										<div class="form-group">
+										<div class="form-group" >
 											<label class="col-sm-2 control-label">Type</label>
-												<div class="col-sm-10">
+												<div class="col-sm-10" id="communication-type-selector">
 													<div class="btn-group" role="group" data-toggle="buttons">
 													@foreach($communicationTypes as $ct)
 

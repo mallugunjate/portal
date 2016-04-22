@@ -103,6 +103,13 @@
                                             <table class="table tablesorter" id="file-table"> 
                                             </table>
                                     </div>
+                                    <div>
+                                    @if(isset($errors))
+                                        @foreach($errors as $e)
+                                        <div class="folder-create-errors" data-error="{{$e}}"> </div>
+                                        @endforeach
+                                    @endif
+                                    </div>
 
 
 

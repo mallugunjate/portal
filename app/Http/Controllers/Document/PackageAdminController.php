@@ -84,9 +84,8 @@ class PackageAdminController extends Controller
     public function store(Request $request)
     {
         
-        Package::storePackage($request);
+        return Package::storePackage($request);
         
-        return;
     }
 
     /**
@@ -165,7 +164,7 @@ class PackageAdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Package::updatePackage($request, $id);
+        return Package::updatePackage($request, $id);
         
     }
 

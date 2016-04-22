@@ -9,3 +9,7 @@ Homestead.json
 .env
 .floo
 .flooignore
+env.js
+deploy.php
+deploy.sh
+/deploy

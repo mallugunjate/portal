@@ -64,11 +64,11 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group"><label class="col-sm-2 control-label">Email</label>
-                                            <div class="col-sm-10">
+                                        {{-- <div class="form-group"><label class="col-sm-2 control-label">Email</label>
+                                                <div class="col-sm-10">
                                                 <input name="email" value="{{$user->email}}" class="form-control">
                                             </div>
-                                        </div>                                        
+                                        </div> --}}                                        
 
                                         
 

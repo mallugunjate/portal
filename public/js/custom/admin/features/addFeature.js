@@ -138,12 +138,69 @@ $(document).on('click','.feature-create',function(){
 		    url: '/admin/feature',
 		    type: 'POST',
 		    data: data, 
+		    dataType: 'json',
             processData: false,  // tell jQuery not to process the data
             contentType: false,   // tell jQuery not to set contentType
 		    success: function(result) {
 		        console.log(result);
-		        $('#createNewFeatureForm')[0].reset(); // empty the form
-				swal("Nice!", "'" + featureTitle +"' has been created", "success");        
+		    	if(result.validation_result == 'false') {
+		        	var errors = result.errors;
+		        	if(errors.hasOwnProperty("name")) {
+		        		$.each(errors.name, function(index){
+		        			$("#feature_title").parent().append('<div class="req">' + errors.name[index]  + '</div>');	
+		        		}); 	
+		        	}
+		        	
+			        if(errors.hasOwnProperty("documents")) {
+			        	$.each(errors.documents, function(index){
+			        		$("#files-selected").append('<div class="req">' + errors.documents[index]  + '</div>');
+			        	});
+			        }
+			        if(errors.hasOwnProperty("packages")) {
+			        	$.each(errors.packages, function(index){
+			        		$("#packages-selected").append('<div class="req">' + errors.packages[index]  + '</div>');	
+			        	});
+			        }
+			        if(errors.hasOwnProperty("update_type_id")) {
+			        	$.each(errors.update_type_id, function(index){
+			        		$(".latest-updates-container").append('<div class="req">' + errors.update_type_id[index]  + '</div>');	
+			        	});
+			        }
+			        if(errors.hasOwnProperty("update_frequency")) {
+			        	$.each(errors.update_frequency, function(index){
+			        		$(".latest-updates-container").append('<div class="req">' + errors.update_frequency[index]  + '</div>');	
+			        	});
+			        }
+			        
+			        if(errors.hasOwnProperty("start")) {
+			        	$.each(errors.start, function(index){
+			        		$(".input-daterange").parent().append('<div class="req">' + errors.start[index]  + '</div>');	
+			        	});
+			        }
+			        if(errors.hasOwnProperty("end")) {
+			        	$.each(errors.end, function(index){
+			        		$(".input-daterange").append('<div class="req">' + errors.end[index]  + '</div>');	
+			        	});
+			        }
+			        if(errors.hasOwnProperty("thumbnail")) {
+			        	console.log(1);
+			        	$.each(errors.thumbnail, function(index){
+			        		$("#thumbnail").parent().append('<div class="req">' + errors.thumbnail[index]  + '</div>');	
+			        	});
+			        }
+			        if(errors.hasOwnProperty("background")) {
+			        	console.log(2);
+			        	$.each(errors.background, function(index){
+			        		$("#background").parent().append('<div class="req">' + errors.background[index]  + '</div>');	
+			        	});
+			        }
+		        }
+		        else{
+		        	$('#createNewFeatureForm')[0].reset(); // empty the form
+					swal("Nice!", "'" + featureTitle +"' has been created", "success");
+		        }
+
+		        
 		    }
 		}).done(function(response){
 			console.log(response);

@@ -12,7 +12,9 @@ use App\Models\Document\DocumentPackage;
 use App\Models\Document\Folder;
 use App\Models\Document\FolderPackage;
 use App\Models\Document\FileFolder;
-
+use App\Models\Validation\FeatureValidator;
+use App\Models\Validation\FeatureThumbnailValidator;
+use App\Models\Validation\FeatureBackgroundValidator;
 
 class Feature extends Model
 {
@@ -21,10 +23,86 @@ class Feature extends Model
     protected $dates = ['deleted_at'];
     protected $fillable = ['banner_id', 'title', 'tile_label', 'description', 'start', 'end', 'background_image', 'thumbnail', 'update_type_id', 'update_frequency'];
 
+
+    public static function validateCreateFeature($request)
+    {
+        $validateThis = [ 
+                        'name'      => $request['name'],
+                        'title'     => $request['tileLabel'],
+                        'documents' => json_decode($request['feature_files']),
+                        'packages'  => json_decode($request['feature_packages']),
+                        'thumbnail' => $request['thumbnail'],
+                        'background'=> $request['background'],
+                        'start'     => $request['start'],
+                        'end'       => $request['end'],
+                        'update_type_id'    => $request['update_type'],
+                        'update_frequency'  => $request['update_frequency']
+                      ];
+        
+        $v = new FeatureValidator();
+          
+        return $v->validate($validateThis);
+    }
+
+    public static function validateEditFeature($id, $request)
+    {
+        $validateThis = [ 
+                        'name'      => $request['title'],
+                        'title'     => $request['tileLabel'],
+                        'documents' => $request['feature_files'],
+                        'packages'  => $request['feature_packages'],
+                        'thumbnail' => $request['thumbnail'],
+                        'background'=> $request['background'],
+                        'start'     => $request['start'],
+                        'end'       => $request['end'],
+                        'update_type_id'    => $request['update_type'],
+                        'update_frequency'  => $request['update_frequency'],
+                        'remove_documents'  => $request['remove_document'],
+                        'remove_packages'   => $request['remove_package']
+                      ];
+
+        $v = new FeatureValidator();
+          
+        return $v->validate($validateThis);
+    }
   	
+    public static function validateThumbnailEdit($request)
+    {
+         $validateThis = [ 
+                        
+                        'thumbnail' => $request['thumbnail'],
+                        'featureID' => $request['featureID']
+                      ];
+        
+        $v = new FeatureThumbnailValidator();
+          
+        return $v->validate($validateThis);
+    }
+
+    public static function validateBackgroundEdit($request)
+    {
+         $validateThis = [ 
+                        
+                        'background'=> $request['background'],
+                        'featureID' => $request['featureID']
+
+                      ];
+        
+        $v = new FeatureBackgroundValidator();
+          
+        return   $v->validate($validateThis);
+        
+    }
+
   	public static function storeFeature(Request $request)
   	{
-  		
+  	  
+      $validate = Feature::validateCreateFeature($request);
+        
+      if($validate['validation_result'] == 'false') {
+        \Log::info($validate);
+        return json_encode($validate);
+      }	
       $title = $request["name"];
   		$tile_label = $request["tileLabel"];
   		$start = $request["start"];
@@ -58,14 +136,22 @@ class Feature extends Model
   		Feature::addFiles(json_decode($request["feature_files"]), $feature->id);
   		Feature::addPackages(json_decode($request['feature_packages']), $feature->id);
 
-  		return;
+  		return $feature;
 
   	}  
 
     public static function updateFeature(Request $request, $id)
     {
+        \Log::info($request->all());        
+        $validate = Feature::validateEditFeature($id, $request);
         
-        $feature = Feature::find($id);
+        if($validate['validation_result'] == 'false') {
+          \Log::info($validate);
+          return json_encode($validate);
+        }
+
+
+        $feature = Feature::find($id);  
 
         $feature['title'] = $request->title;
         $feature['tile_label'] = $request->tileLabel;
@@ -80,7 +166,7 @@ class Feature extends Model
         Feature::removeFiles($request->remove_document, $id);
         Feature::addPackages($request->feature_packages, $id);
         Feature::removePackages($request->remove_package, $id);
-        return;
+        return $feature;
 
     }
 
@@ -150,6 +236,8 @@ class Feature extends Model
 
     public static function updateFeatureThumbnail($file, $feature_id)
     {
+        
+
         $metadata = Feature::getFileMetaData($file);
 
         $directory = public_path() . '/images/featured-covers/';

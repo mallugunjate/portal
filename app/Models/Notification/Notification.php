@@ -52,20 +52,24 @@ class Notification extends Model
     			break;
 
     		default:
-    			$notifications ="not a valid parameter in getAllNotifications()";
+    			// $notifications ="not a valid parameter in getAllNotifications()";
+                $notifications = [];
     			break;
     	}
-        Notification::prettifyNotifications($notifications);
 
-        foreach($notifications as $n){
+        if( count($notifications) > 0){
+            Notification::prettifyNotifications($notifications);
 
-            $n->icon = Utility::getIcon($n->original_extension);
-            $n->link = Utility::getModalLink($n->filename, $n->title, $n->original_extension, $n->id, 0);
-            $n->link_with_icon = Utility::getModalLink($n->filename, $n->title, $n->original_extension, $n->id, 1);
-            $n->linkedIcon = Utility::getModalLink($n->filename, $n->icon, $n->original_extension, $n->id, 0);
-            
+            foreach($notifications as $n){
+
+                $n->icon = Utility::getIcon($n->original_extension);
+                $n->link = Utility::getModalLink($n->filename, $n->title, $n->original_extension, $n->id, 0);
+                $n->link_with_icon = Utility::getModalLink($n->filename, $n->title, $n->original_extension, $n->id, 1);
+                $n->linkedIcon = Utility::getModalLink($n->filename, $n->icon, $n->original_extension, $n->id, 0);
+                
+            }    
         }
-
+    
     	return $notifications;
     }
 

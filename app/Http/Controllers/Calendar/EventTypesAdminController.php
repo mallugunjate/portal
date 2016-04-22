@@ -75,6 +75,13 @@ class EventTypesAdminController extends Controller
      */
     public function store(Request $request)
     {
+        $validate = EventType::validateEventType($request);
+        
+        if($validate['validation_result'] == 'false') {
+          \Log::info($validate);
+          return json_encode($validate);
+        }
+
         $eventTypeDetails = array(
             'event_type' => $request['event_type'],
             'banner_id' => $request['banner_id']
@@ -82,6 +89,7 @@ class EventTypesAdminController extends Controller
 
         $eventType = EventType::create($eventTypeDetails);
         $eventType->save();
+        return $eventType;
     }
 
     /**
@@ -127,11 +135,20 @@ class EventTypesAdminController extends Controller
     public function update(Request $request, $id)
     {
 
-        $eventType = EventType::find($id);
+        $validate = EventType::validateEventType($request);
+        
+        if($validate['validation_result'] == 'false') {
+          \Log::info($validate);
+          return json_encode($validate);
+        }
+
+        $eventType =  EventType::find($id);
 
         $eventType->event_type = $request['event_type'];
     
         $eventType->save();
+
+        return $eventType;
     }
 
     /**

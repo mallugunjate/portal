@@ -38,9 +38,18 @@ class FeatureThumbnailAdminController extends Controller
      */
     public function store(Request $request)
     {
+        
+        $validate = Feature::validateThumbnailEdit($request);
+        
+        if($validate['validation_result'] == 'false') {
+            \Log::info($validate);
+            return json_encode($validate);
+        
+        } 
         $thumbnail = $request->file('thumbnail');
         $feature_id = $request['featureID'];
-        return Feature::updateFeatureThumbnail($thumbnail, $feature_id);
+        $thumbnail = Feature::updateFeatureThumbnail($thumbnail, $feature_id);
+        return json_encode($thumbnail);
     }
 
     /**
