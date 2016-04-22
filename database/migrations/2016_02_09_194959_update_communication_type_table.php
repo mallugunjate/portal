@@ -26,6 +26,8 @@ class UpdateCommunicationTypeTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('communication_types', function (Blueprint $table) {
+            $table->dropColumn('colour');
+        });
     }
 }

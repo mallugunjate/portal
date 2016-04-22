@@ -35,6 +35,7 @@ class UpdateFoldersTable extends Migration
             $table->dropColumn('is_child');
             $table->dropColumn('has_weeks');
             $table->dropColumn('week_window_size');
+            $table->dropForeign('folders_banner_id_foreign');
             $table->dropColumn('banner_id');
             $table->dropColumn('last_activity_at');
         });

@@ -29,8 +29,8 @@ class CreateCommunicationTypesTable extends Migration
      */
     public function down()
     {
-        Schema::table('communication_types', function (Blueprint $table) {
-            Schema::dropIfExists('communication_types');
-        });
+        
+        Schema::drop('communication_types');
+        
     }
 }

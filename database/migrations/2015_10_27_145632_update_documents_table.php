@@ -33,6 +33,7 @@ class UpdateDocumentsTable extends Migration
             $table->dropColumn('original_extension');
             $table->dropColumn('start');
             $table->dropColumn('end');
+            $table->dropForeign('documents_banner_id_foreign');
             $table->dropColumn('banner_id');
         });
     }

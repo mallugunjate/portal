@@ -29,6 +29,7 @@ class UpdatePackagesTable extends Migration
     public function down()
     {
         Schema::table('packages', function (Blueprint $table) {
+            $table->dropForeign('packages_banner_id_foreign');
             $table->dropColumn('banner_id');
             $table->dropColumn('start');
             $table->dropColumn('end');
