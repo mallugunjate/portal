@@ -25,7 +25,7 @@ class UpdateFolderIdsTableAddSoftDeletes extends Migration
     public function down()
     {
         Schema::table('folder_ids', function (Blueprint $table) {
-            $table->dropColumn['deleted_at'];
+            $table->dropColumn('deleted_at');
         });
     }
 }
