@@ -17,4 +17,10 @@ class UserValidator extends PortalValidator
     	'password_confirmation' => 'required_with:password'
 
     ];
+
+    protected $messages = [
+
+    	'password.regex' => 'Password must contain all characteristics, namely, UPPER case(A-Z), lower case (a-z), Numbers (0-9) or symbols (!@#$%^&* etc)'
+
+    ];
 }
