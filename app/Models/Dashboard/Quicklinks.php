@@ -30,10 +30,10 @@ class Quicklinks extends Model
 
     	switch($request['type']) {
     		case 1 : 
-    			$validateThis['document_url'] = $request['url'];
+    			$validateThis['folder_url'] = $request['url'];
     			break;
     		case 2 :
-    			$validateThis['folder_url'] = $request['url'];
+    			$validateThis['document_url'] = $request['url'];
     			break;
     		case 3:
     			$validateThis['external_url'] = $request['url'];
