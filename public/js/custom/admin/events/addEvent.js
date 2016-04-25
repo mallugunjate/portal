@@ -170,19 +170,16 @@ $(document).on('click','.event-create',function(){
 		    					$('.event-create span').text(' Create New Event');
 		  					});
 		  					$('.event-create span').fadeIn();
-							//$('.event-create span').fadeOut(100);
-							
 							
 					   };
 					   window.setTimeout( revertButton, 2000 ); // 2 seconds     	
-		        }
+		        	});
 		        
-		    }
-		}).done(function( result ) {
-    		console.log(result);
-  		});    	
-    }
+		    	}
+			}   	
+    	});
 
 
     return false;
+	}
 });
