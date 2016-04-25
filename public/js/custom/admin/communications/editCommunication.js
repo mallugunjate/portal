@@ -2,8 +2,13 @@ $("#allStores").change(function(){
 
 	if ($("#allStores").is(":checked")) {
 
+		$("#storeSelect option").each(function(){
+			$(this).removeAttr('selected');
+		});
+		$("#storeSelect").chosen('chosen:updated');
+
 		$("#storeSelect option").each(function(index){			
-			$(this).attr('selected', 'selected');
+			$(this).prop('selected', 'selected');
 		});
 		$("#storeSelect").chosen();
 		
