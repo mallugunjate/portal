@@ -61,8 +61,7 @@ class Folder extends Model
 
     public static function storeFolder(Request $request)
     {
-        \Log::info($request->all());
-         $validate = Folder::validateCreateFolder($request);
+        $validate = Folder::validateCreateFolder($request);
         
         if($validate['validation_result'] == 'false') {
             \Log::info($validate);

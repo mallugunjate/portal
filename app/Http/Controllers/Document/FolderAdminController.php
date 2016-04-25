@@ -74,7 +74,7 @@ class FolderAdminController extends Controller
         $result = Folder::storeFolder($request);
 
         $result = json_decode($result);
-        if($result->validation_result == 'false')
+        if(isset($result->validation_result) && $result->validation_result == 'false')
         {
             return redirect('/admin/document/manager#!/'.$request['parent'])->with('errors', $result->errors->name);
         }
