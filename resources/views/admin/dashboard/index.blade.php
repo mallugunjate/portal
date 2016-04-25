@@ -183,12 +183,12 @@
 			                                	{{-- <div class="dd-placeholder" style="height: 42px;"></div> --}}
 			                                    @foreach($quicklinks as $ql)
 			                                 	<?php switch($ql->type) {
-			                                    		case 2:
+			                                    		case 1:
 			                                    			$icon = '<i class="fa fa-folder"></i>';
 			                                    			$type = "Folder";
 			                                    			$link = '<a href="/admin/document/manager#!/'.$ql->url.'">'.$ql->link_name.'</a>';		
 			                                    			break;
-			                                    		case 1: 
+			                                    		case 2: 
 			                                    			$icon = '<i class="fa fa-file-o"></i>';		
 			                                    			$type = "File";
 			                                    			$link = '<a class="launchPDFViewer" data-toggle="modal" data-file="/viewer/?file=/files/" data-target="#fileviewmodal" > '. $ql->link_name.'</a>';
