@@ -239,4 +239,46 @@ BEGIN;
 INSERT INTO `banner_user` VALUES ('1', '1', '3', '0000-00-00 00:00:00', '0000-00-00 00:00:00', null), ('2', '2', '3', '0000-00-00 00:00:00', '0000-00-00 00:00:00', null);
 COMMIT;
 
+-- ----------------------------
+--  Table structure for `communication_importance_levels`
+-- ----------------------------
+DROP TABLE IF EXISTS `communication_importance_levels`;
+CREATE TABLE `communication_importance_levels` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=COMPACT;
+
+-- ----------------------------
+--  Records of `communication_importance_levels`
+-- ----------------------------
+BEGIN;
+INSERT INTO `communication_importance_levels` VALUES ('1', 'High', '0000-00-00 00:00:00', '0000-00-00 00:00:00'), ('2', 'Normal', '0000-00-00 00:00:00', '0000-00-00 00:00:00'), ('3', 'Low', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+COMMIT;
+
+-- ----------------------------
+--  Table structure for `quicklinks_types`
+-- ----------------------------
+DROP TABLE IF EXISTS `quicklinks_types`;
+CREATE TABLE `quicklinks_types` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=COMPACT;
+
+-- ----------------------------
+--  Records of `quicklinks_types`
+-- ----------------------------
+BEGIN;
+INSERT INTO `quicklinks_types` VALUES ('1', 'folder', '0000-00-00 00:00:00', '0000-00-00 00:00:00', null), ('2', 'document', '0000-00-00 00:00:00', '0000-00-00 00:00:00', null), ('3', 'external', '0000-00-00 00:00:00', '0000-00-00 00:00:00', null);
+COMMIT;
+
+
+
+
 SET FOREIGN_KEY_CHECKS = 1;
