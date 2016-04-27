@@ -141,7 +141,7 @@ CREATE TABLE `quicklinks_types` (
 --  Records of `quicklinks_types`
 -- ----------------------------
 BEGIN;
-INSERT INTO `quicklinks_types` VALUES ('1', 'document', '0000-00-00 00:00:00', '0000-00-00 00:00:00', null), ('2', 'folder', '0000-00-00 00:00:00', '0000-00-00 00:00:00', null), ('3', 'external', '0000-00-00 00:00:00', '0000-00-00 00:00:00', null);
+INSERT INTO `quicklinks_types` VALUES ('1', 'folder', '0000-00-00 00:00:00', '0000-00-00 00:00:00', null), ('2', 'document', '0000-00-00 00:00:00', '0000-00-00 00:00:00', null), ('3', 'external', '0000-00-00 00:00:00', '0000-00-00 00:00:00', null);
 COMMIT;
 
 -- ----------------------------

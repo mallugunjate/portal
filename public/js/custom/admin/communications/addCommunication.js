@@ -2,8 +2,13 @@ $("#allStores").change(function(){
 
 	if ($("#allStores").is(":checked")) {
 
+		$("#storeSelect option").each(function(){
+			$(this).removeAttr('selected');
+		});
+		$("#storeSelect").chosen('chosen:updated');
+
 		$("#storeSelect option").each(function(index){			
-			$(this).attr('selected', 'selected');
+			$(this).prop('selected', 'selected');
 		});
 		$("#storeSelect").chosen();
 		
@@ -105,6 +110,7 @@ $(document).on('click','.communication-create',function(){
 		$.ajax({
 		    url: '/admin/communication',
 		    type: 'POST',
+		    dataType: 'json',
 		    data: {
 		  		subject : subject,
 		  		communication_type_id: communication_type_id,
@@ -121,8 +127,48 @@ $(document).on('click','.communication-create',function(){
 		    },
 		    success: function(result) {
 		        console.log(result);
-		        $('#createNewCommunicationForm')[0].reset(); // empty the form
-				swal("Nice!", "'" + subject +"' has been created", "success");        
+		        if(result.validation_result == 'false') {
+		        	var errors = result.errors;
+		        	if(errors.hasOwnProperty("subject")) {
+		        		$.each(errors.subject, function(index){
+		        			$("#subject").parent().append('<div class="req">' + errors.subject[index]  + '</div>');	
+		        		}); 	
+		        	}
+		        	
+			        if(errors.hasOwnProperty("documents")) {
+			        	$.each(errors.documents, function(index){
+			        		$("#add-documents").parent().append('<div class="req">' + errors.documents[index]  + '</div>');
+			        	});
+			        }
+			        
+			        if(errors.hasOwnProperty("communication_type_id")) {
+			        	$.each(errors.communication_type_id, function(index){
+			        		$("#communication-type-selector").append('<div class="req">' + errors.communication_type_id[index]  + '</div>');	
+			        	});
+			        }
+			        if(errors.hasOwnProperty("start")) {
+			        	$.each(errors.start, function(index){
+			        		$(".input-daterange").parent().append('<div class="req">' + errors.start[index]  + '</div>');	
+			        	});
+			        }
+			        
+			        if(errors.hasOwnProperty("end")) {
+			        	$.each(errors.end, function(index){
+			        		$(".input-daterange").parent().append('<div class="req">' + errors.end[index]  + '</div>');	
+			        	});
+			        }
+			        if(errors.hasOwnProperty("target_stores")) {
+			        	console.log(1);
+			        	$.each(errors.target_stores, function(index){
+			        		$("#storeSelect").parent().append('<div class="req">' + errors.target_stores[index]  + '</div>');	
+			        	});
+			        }
+		        }
+		        else{
+		        	$('#createNewCommunicationForm')[0].reset(); // empty the form
+					swal("Nice!", "'" + subject +"' has been created", "success");        
+		        }
+		        
 		    }
 		}).done(function(response){
 			//console.log(response);

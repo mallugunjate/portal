@@ -12,9 +12,9 @@ class UserBanner extends Model
 
     public static function updateAdminBanner($user_id, $banners)
     {
-    	UserBanner::where('user_id', $id)->delete();
+    	UserBanner::where('user_id', $user_id)->delete();
     	foreach ($banners as $banner) {
-    		UserBannser::create([
+    		UserBanner::create([
     			'user_id' => $user_id,
     			'banner_id'	=> $banner
     		]);

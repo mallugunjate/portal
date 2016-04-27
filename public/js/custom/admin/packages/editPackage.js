@@ -133,8 +133,14 @@ $(".package-update").on('click', function(){
 	});
  	
 
-    if(packageTitle == '') {
+    if(packageName == '') {
 		swal("Oops!", "This package needs a name.", "error"); 
+		hasError = true;
+		$(window).scrollTop(0);
+		return false;
+	}
+	if(packageTitle == '') {
+		swal("Oops!", "This package needs a label.", "error"); 
 		hasError = true;
 		$(window).scrollTop(0);
 		return false;
@@ -148,6 +154,7 @@ $(".package-update").on('click', function(){
 		$.ajax({
 		    url: '/admin/package/' + packageID ,
 		    type: 'PATCH',
+		    dataType: 'json',
 		    data: {
 		  		title: packageTitle,
 		  		name: packageName,
@@ -159,8 +166,43 @@ $(".package-update").on('click', function(){
 		    },
 		    success: function(result) {
 		        console.log(result);
-		        //$('#createNewPackageForm')[0].reset(); // empty the form
-				swal("Nice!", "'" + packageName +"' has been updated", "success");        
+		    	if(result != null && result.validation_result == 'false') {
+		        	var errors = result.errors;
+		        	if(errors.hasOwnProperty("package_screen_name")) {
+		        		$.each(errors.package_screen_name, function(index){
+		        			$("#name").parent().append('<div class="req">' + errors.package_screen_name[index]  + '</div>');	
+		        		}); 	
+		        	}
+		        	if(errors.hasOwnProperty("package_name")) {
+			        	$.each(errors.package_name, function(index){
+			        		$("#label").parent().append('<div class="req">' + errors.package_name[index]  + '</div>');
+			        	});
+			        }
+			        if(errors.hasOwnProperty("documents")) {
+			        	$.each(errors.documents, function(index){
+			        		$("#files-selected").append('<div class="req">' + errors.documents[index]  + '</div>');
+			        	});
+			        }
+			        if(errors.hasOwnProperty("remove_documents")) {
+			        	$.each(errors.documents, function(index){
+			        		$("#files-selected").append('<div class="req">' + errors.documents[index]  + '</div>');
+			        	});
+			        }
+			        if(errors.hasOwnProperty("folders")) {
+			        	$.each(errors.folders, function(index){
+			        		$("#folders-selected").append('<div class="req">' + errors.folders[index]  + '</div>');	
+			        	});
+			        }
+			        if(errors.hasOwnProperty("remove_folders")) {
+			        	$.each(errors.folders, function(index){
+			        		$("#folders-selected").append('<div class="req">' + errors.folders[index]  + '</div>');	
+			        	});
+			        }
+		        }
+		        else{
+		        	swal("Nice!", "'" + packageName +"' has been updated", "success");        
+		        }
+
 		    }
 		}).done(function(response){
 			console.log(response);

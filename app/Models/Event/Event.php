@@ -9,6 +9,7 @@ use App\Models\Banner;
 use App\Models\UserBanner;
 use App\Models\UserSelectedBanner;
 use Carbon\Carbon;
+use App\Models\Validation\EventValidator;
 
 class Event extends Model
 {
@@ -17,12 +18,39 @@ class Event extends Model
     protected $dates = ['deleted_at'];
     protected $fillable = ['banner_id', 'title', 'description', 'event_type', 'start', 'end'];
 
+    public static function validateEvent($request)
+    { 
+      $validateThis = [ 
+                        'title'         => $request['title'],
+                        'event_type'    => $request['event_type'],
+                        'start'         => $request['start'],
+                        'end'           => $request['end'],
+                        'target_stores' => $request['target_stores'],
+                        
+                      ];
+      if ($request['allStores'] != NULL) {
+        $validateThis['allStores'] = $request['allStores'];
+      }
+      
+      $v = new EventValidator();
+      
+      return $v->validate($validateThis);
+       
+    }
+
     public static function storeEvent($request)
     {
-    	\Log::info($request->all);
+
+        $validate = Event::validateEvent($request);
+        
+        if($validate['validation_result'] == 'false') {
+          return json_encode($validate);
+        }
+        
         $banner = UserSelectedBanner::getBanner();
         $desc = preg_replace('/\n+/', '', $request['description']);
         $event = Event::create([
+
 
     		    'banner_id' => $banner->id,
             'title' => $request['title'],
@@ -30,13 +58,20 @@ class Event extends Model
             'description' => $desc,
             'start' => $request['start'],
             'end' => $request['end']
-    	]);
-        Event::updateTargetStores($event->id, $request);
-    	return;
+    	   ]);
+        
+        $event = Event::updateTargetStores($event->id, $request);
+        return json_encode($event);
+       
     }
 
     public static function updateEvent($id, $request)
     {
+        $validate = Event::validateEvent($request);
+        if($validate['validation_result'] == 'false') {
+          return json_encode($validate);
+        }
+
         $event = Event::find($id);
 
         $event->title = $request['title'];
@@ -48,7 +83,7 @@ class Event extends Model
         $event->save();
 
         Event::updateTargetStores($id, $request);
-        return;
+        return json_encode($event);
 
     }
 

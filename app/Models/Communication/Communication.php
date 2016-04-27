@@ -13,13 +13,54 @@ use App\Models\Communication\CommunicationTarget;
 use App\Models\Communication\CommunicationType;
 use DB;
 use App\Models\Utility\Utility;
+use App\Models\Validation\CommunicationValidator;
 
 class Communication extends Model
 {
     protected $table = 'communications';
     protected $fillable = ['subject', 'body', 'sender', 'importance', 'communication_type_id', 'send_at', 'archive_at', 'is_draft', 'banner_id'];
 
-   	public static function getAllCommunication($banner_id)
+   	
+      public static function validateCreateCommunication($request)
+      {
+         $validateThis =  [
+
+            'subject'   => $request['subject'],
+            'start'     => $request['send_at'],
+            'end'       => $request['archive_at'],
+            'communication_type_id' => $request['communication_type_id'],
+            'target_stores'    => $request['target_stores'],
+            'documents' => $request['communication_documents']
+
+         ];
+
+         \Log::info($validateThis);
+         $v = new CommunicationValidator();
+         return $v->validate($validateThis);
+
+      }
+
+      public static function validateEditCommunication($request)
+      {
+         $validateThis =  [
+
+            'subject'   => $request['subject'],
+            'start'     => $request['send_at'],
+            'end'       => $request['archive_at'],
+            'communication_type_id' => $request['communication_type_id'],
+            'target_stores'    => $request['target_stores'],
+            'documents' => $request['communication_documents'],
+            'allStores' => $request['allStores'],
+            'remove_document' =>$request['remove_document']
+
+         ];
+       
+         \Log::info($validateThis);
+         $v = new CommunicationValidator();
+         return $v->validate($validateThis);  
+      }
+
+      public static function getAllCommunication($banner_id)
       {
          $communicatons = Communication::where('banner_id', $banner_id)->get();
          foreach($communicatons as $c){
@@ -109,6 +150,13 @@ class Communication extends Model
 
       public static function storeCommunication($request)
    	{
+         \Log::info($request->all());
+         $validate = Communication::validateCreateCommunication($request);
+         \Log::info($validate);
+         if($validate['validation_result'] == 'false') {
+           \Log::info($validate);
+           return json_encode($validate);
+         }  
          $is_draft = 0;
    		if ($request["send_at"]>Carbon::now()) {
    			$is_draft = 1;
@@ -133,10 +181,18 @@ class Communication extends Model
 
       public static function updateCommunication($id, $request)
       {
-         $communication = Communication::find($id);
-
          
-            
+
+         \Log::info($request->all());
+         $validate = Communication::validateEditCommunication($request);
+        
+         if($validate['validation_result'] == 'false') {
+           \Log::info($validate);
+           return json_encode($validate);
+         } 
+
+
+         $communication = Communication::find($id);
          
          $communication["subject"] = $request["subject"];
          $communication["body"] = $request["body"];
@@ -154,13 +210,7 @@ class Communication extends Model
             $communication["is_draft"] = 0;
          }
          
-         $communication->save();   
-
-         \Log::info('**********************************');
-         \Log::info('Type : Communication updated');
-         \Log::info($request->all());
-         \Log::info('**********************************');
-         
+         $communication->save();
 
          Communication::updateTargetStores($communication->id, $request);
          Communication::updateCommunicationDocuments($communication->id, $request);

@@ -10,6 +10,7 @@ use App\Models\Tag\ContentTag;
 use App\Models\UserSelectedBanner;
 use App\Models\Utility\Utility;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Validation\PackageValidator;
 
 class Package extends Model
 {
@@ -21,26 +22,59 @@ class Package extends Model
 
     protected $dates = ['deleted_at'];
     
+    public static function validateCreatePackage($request)
+    {
+        $validateThis = [ 
+                        'package_screen_name'   => $request['title'],
+                        'package_name'          => $request['name'],
+                        'documents'             => $request['package_files'],
+                        'folders'               => $request['package_folders']
+                      ];
+        
+        $v = new PackageValidator();
+          
+        return $v->validate($validateThis);
+    }
+
+    public static function validateEditPackage($id, $request)
+    {
+        $validateThis = [ 
+                        'package_screen_name'   => $request['title'],
+                        'package_name'          => $request['name'],
+                        'documents'             => $request['package_files'],
+                        'folders'               => $request['package_folders'],
+                        'remove_documents'      => $request['remove_document'],
+                        'remove_folders'        => $request['remove_folder']
+                      ];
+        
+        $v = new PackageValidator();
+          
+        return $v->validate($validateThis);
+    }
+
     public static function storePackage(Request $request)
     {   
-        \Log::info( $request->all() );
+
+        
+        $validate = Package::validateCreatePackage($request);
+        
+        if($validate['validation_result'] == 'false') {
+          return json_encode($validate);
+        }
+
+        
         $documents = $request["package_files"];
     	$folders = $request["package_folders"];
         $package_screen_name = $request["title"];
     	// $package_name = preg_replace('/\s+/', '_' , $package_screen_name);
         $package_name = $request["name"];
-    	// $timestamp = sha1(time()*time());
-    	// $package_name .= "_".$timestamp ;
     	
         $banner = UserSelectedBanner::getBanner();
 
     	$package = Package::create([
     			'package_screen_name' 	=> $package_screen_name,
     			'package_name'			=> $package_name,
-    			'banner_id'				=> $banner->id,
-                // 'start'                 => $start,
-                // 'end'                   => $end,
-                // 'is_hidden'             => $is_hidden
+    			'banner_id'				=> $banner->id
     		]);
 
     	$package_id = $package->id;
@@ -65,7 +99,7 @@ class Package extends Model
         
     	
         // Package::updateTags($package_id, $request['tags']);
-    	return;
+    	return $package;
     }
 
     public static function getAllPackages($banner_id)
@@ -79,15 +113,13 @@ class Package extends Model
         $package = Package::find($id);
         $package["package_documents"] = Package::getPackageDocumentDetails($id);
         $package["package_folders"] = Package::getPackageFolderDetails($id);
-        // $package['package_folder_tree']= [];
+        
         
         $tree = Array();
 
         foreach ($package['package_folders'] as $folderRoot) {
             $root_id = $folderRoot['global_folder_id'];
             $tree[$root_id] = Folder::getFolderChildrenTree($folderRoot['global_folder_id']);
-            // array_merge_recursive( $package['package_folder_tree'], [$root_id => $tree]);
-
             
         }
         $package['package_folder_tree'] = $tree;
@@ -115,7 +147,12 @@ class Package extends Model
 
     public static function updatepackage(Request $request, $id)
     {
-        // dd($request->all());
+        $validate = Package::validateEditPackage($id,$request); 
+        if($validate['validation_result'] == 'false') {
+          \Log::info($validate);
+          return json_encode($validate);
+        }
+
         $package = Package::find($id);
         $package["package_screen_name"] = $request["title"];
         $package["package_name"] = $request["name"];
@@ -143,7 +180,6 @@ class Package extends Model
         $remove_folders = $request["remove_folder"];    
         if (isset($remove_folders)) {
             foreach ($remove_folders as $remove_folder) {
-                \Log::info($remove_folder);
                FolderPackage::where('package_id', $id)->where('folder_id', intval($remove_folder))->delete();
             }
         }
@@ -159,7 +195,7 @@ class Package extends Model
             }
         }
         // Package::updateTags($id, $request['tags']);
-        return;
+        return $package;
     }
 
 

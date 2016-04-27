@@ -106,7 +106,11 @@ class AuthController extends Controller
     {
         
         $user_id = \Auth::user()->id;
-        \Log::info($user_id);
+
+        \Log::info('******************');
+        \Log::info('Logout requested');
+        \Log::info(Auth::user());
+        \Log::info(\Request::getClientIp());
 
         UserSelectedBanner::where('user_id', $user_id)->delete();
 

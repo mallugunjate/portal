@@ -1,3 +1,12 @@
+$(document).ready(function(){
+	if($("#allStores").prop('checked')) {
+		$("#storeSelect option").each(function(index){			
+			$(this).attr('selected', 'selected');
+		});
+		$("#storeSelect").chosen();
+	}
+});
+
 $("#allStores").change(function(){
 
 	if ($("#allStores").is(":checked")) {
@@ -105,6 +114,8 @@ $(document).on('click','.alert-create',function(){
 		  		stores : target_stores,
 		  		document_start : document_start,
 		  		document_end : document_end,
+		  		allStores : allStores
+
 		  		
 		    },
 		    success: function(result) {

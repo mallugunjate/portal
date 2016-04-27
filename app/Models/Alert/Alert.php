@@ -251,7 +251,6 @@ class Alert extends Model
 
             $alert->save();
 
-            \Log::info('mark document as alert');
             $target_stores = $request['stores'];
             
             if ($target_stores != '') {

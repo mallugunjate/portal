@@ -18,9 +18,23 @@ $(document).on('click','.eventtype-create',function(){
 		    url: '/admin/eventtypes',
 		    type: 'POST',
 		    data: { event_type: eventTypeName, banner_id: bannerId },
-		    success: function(result) {
-		        $("#event_type").val(""); // empty the form
-				swal("Nice!", "'" + eventTypeName +"' has been created", "success");        
+		    dataType : 'json',
+		    success: function(data) {
+		    	console.log(data);
+		    	if(data != null && data.validation_result == 'false') {
+		        	var errors = data.errors;
+		        	console.log(errors);
+		        	if(errors.hasOwnProperty("event_type")) {
+		        		$.each(errors.event_type, function(index){
+		        			$("#event_type").parent().append('<div class="req">' + errors.event_type[index]  + '</div>');	
+		        		}); 	
+		        	}
+		        }
+		        else{
+		        	$("#event_type").val(""); // empty the form
+					swal("Nice!", "'" + eventTypeName +"' has been created", "success");        	
+		        }
+		        
 		    }
 		});
 	}

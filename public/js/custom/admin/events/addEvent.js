@@ -22,41 +22,41 @@ $("#allStores").change(function(){
 	}
 });
 
-// $( "#title" ).focus(function() {
-// 	$('.event-create i').removeClass("fa-spinner faa-spin animated");
-// 	$('.event-create i').addClass("fa-check");		        
-//     $('.event-create span').text(' Create New Event');
-// });
+$( "#title" ).focus(function() {
+	$('.event-create i').removeClass("fa-spinner faa-spin animated");
+	$('.event-create i').addClass("fa-check");		        
+    $('.event-create span').text(' Create New Event');
+});
 
-// $( "#event_type" ).focus(function() {
-// 	$('.event-create i').removeClass("fa-spinner faa-spin animated");
-// 	$('.event-create i').addClass("fa-check");		        
-//     $('.event-create span').text(' Create New Event');
-// });
+$( "#event_type" ).focus(function() {
+	$('.event-create i').removeClass("fa-spinner faa-spin animated");
+	$('.event-create i').addClass("fa-check");		        
+    $('.event-create span').text(' Create New Event');
+});
 
-// $( "#start" ).focus(function() {
-// 	$('.event-create i').removeClass("fa-spinner faa-spin animated");
-// 	$('.event-create i').addClass("fa-check");		        
-//     $('.event-create span').text(' Create New Event');
-// });
+$( "#start" ).focus(function() {
+	$('.event-create i').removeClass("fa-spinner faa-spin animated");
+	$('.event-create i').addClass("fa-check");		        
+    $('.event-create span').text(' Create New Event');
+});
 
-// $( "#end" ).focus(function() {
-// 	$('.event-create i').removeClass("fa-spinner faa-spin animated");
-// 	$('.event-create i').addClass("fa-check");		        
-//     $('.event-create span').text(' Create New Event');
-// });
+$( "#end" ).focus(function() {
+	$('.event-create i').removeClass("fa-spinner faa-spin animated");
+	$('.event-create i').addClass("fa-check");		        
+    $('.event-create span').text(' Create New Event');
+});
 
-// $( "#description" ).focus(function() {
-// 	$('.event-create i').removeClass("fa-spinner faa-spin animated");
-// 	$('.event-create i').addClass("fa-check");		        
-//     $('.event-create span').text(' Create New Event');
-// });
+$( "#description" ).focus(function() {
+	$('.event-create i').removeClass("fa-spinner faa-spin animated");
+	$('.event-create i').addClass("fa-check");		        
+    $('.event-create span').text(' Create New Event');
+});
 
-// $( "#storeSelect" ).focus(function() {
-// 	$('.event-create i').removeClass("fa-spinner faa-spin animated");
-// 	$('.event-create i').addClass("fa-check");		        
-//     $('.event-create span').text(' Create New Event');
-// });
+$( "#storeSelect" ).focus(function() {
+	$('.event-create i').removeClass("fa-spinner faa-spin animated");
+	$('.event-create i').addClass("fa-check");		        
+    $('.event-create span').text(' Create New Event');
+});
 
 
 $(document).on('click','.event-create',function(){
@@ -73,7 +73,6 @@ $(document).on('click','.event-create',function(){
     var target_stores  = $("#storeSelect").val();
     var allStores  = $("allStores:checked").val();
 
-    console.log("tags" + tags);
     if(eventTitle == '') {
 		swal("Oops!", "This event needs a title.", "error"); 
 		hasError = true;
@@ -115,42 +114,72 @@ $(document).on('click','.event-create',function(){
 		    	banner: eventBanner,
 		  		title: eventTitle,
 		  		description: eventDescription,
-		    	event_type: eventType,
-		    	start: eventStart,
-		    	end: eventEnd,
-		    	target_stores : target_stores,
+			    event_type: eventType,
+			    start: eventStart,
+			    end: eventEnd,
+			    target_stores : target_stores,
 		    },
-		    success: function(result) {
-		        console.log(result);
-		        $('#createNewEventForm')[0].reset(); // empty the form
-		        CKEDITOR.instances['description'].setData('');
-		        $('#datepicker').find('input').datepicker('setDate', null);
-		        $("#allStores").click();
 
-				$('.event-create i').removeClass("fa-spinner faa-spin animated");
-    			$('.event-create i').addClass("fa-check");		        
-		        $('.event-create span').text(' Event Created!');		        
+		    dataType: 'json',
+		    error: function(data) {
+			    console.log(data.responseText);
+			 },
 
-		        $(function(){
-				   function revertButton(){
-					   	$( ".event-create span" ).fadeOut( "fast", function() {
-	    					$('.event-create span').text(' Create New Event');
-	  					});
-	  					$('.event-create span').fadeIn();
-						//$('.event-create span').fadeOut(100);
-						
-						
-				   };
-				   window.setTimeout( revertButton, 2000 ); // 2 seconds
-				});
+		    success: function(data) {
+		        console.log(data);
+		        if(data != null && data.validation_result == 'false') {
+		        	var errors = data.errors;
+		        	if(errors.hasOwnProperty("title")) {
+		        		$.each(errors.title, function(index){
+		        			$("#title").parent().append('<div class="req">' + errors.title[index]  + '</div>');	
+		        		}); 	
+		        	}
+		        	if(errors.hasOwnProperty("event_type")) {
+			        	$.each(errors.title, function(index){
+			        		$("#event_type").parent().append('<div class="req">' + errors.event_type[0]  + '</div>');
+			        	});
+			        }
+			        if(errors.hasOwnProperty("start")) {
+			        	$.each(errors.title, function(index){
+			        		$("#start").parent().parent().append('<div class="req">' + errors.start[0]  + '</div>');
+			        	});
+			        }
+			        if(errors.hasOwnProperty("end")) {
+			        	$.each(errors.title, function(index){
+			        		$("#end").parent().parent().append('<div class="req">' + errors.end[0]  + '</div>');	
+			        	});
+			        }
+			        if(errors.hasOwnProperty("target_stores")) {		        	
+		        		$("#storeSelect").parent().append('<div class="req">' + errors.target_stores[0]  + '</div>');
+		        	}
+		        }
+		        else{
+			        
+			        $('#createNewEventForm')[0].reset(); // empty the form
+			        CKEDITOR.instances['description'].setData('');
+			        $('#datepicker').find('input').datepicker('setDate', null);
+			        $("#allStores").click();
 
-	
+					$('.event-create i').removeClass("fa-spinner faa-spin animated");
+	    			$('.event-create i').addClass("fa-check");		        
+			        $('.event-create span').text(' Event Created!');		        
 
-				//swal("Nice!", "'" + eventTitle +"' has been created", "success");        
-		    }
-		});    	
-    }
+			        $(function(){
+					   function revertButton(){
+						   	$( ".event-create span" ).fadeOut( "fast", function() {
+		    					$('.event-create span').text(' Create New Event');
+		  					});
+		  					$('.event-create span').fadeIn();
+							
+					   };
+					   window.setTimeout( revertButton, 2000 ); // 2 seconds     	
+		        	});
+		        
+		    	}
+			}   	
+    	});
 
 
     return false;
+	}
 });
