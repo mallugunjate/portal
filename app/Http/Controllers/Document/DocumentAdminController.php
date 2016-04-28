@@ -154,7 +154,22 @@ class DocumentAdminController extends Controller
         if( Alert::where('document_id', $id)->first()) {
             $alert_details = Alert::where('document_id', $id)->first();
         }
-        
+        \Log::info('redirecting to document edit view');
+        \Log::info('documents: ');
+        \Log::info($document);
+        \Log::info('banner');
+        \Log::info($banner);
+        \Log::info($banners);
+        \Log::info('storelist');
+        \Log::info($storeList);
+        \Log::info('all_stores');
+        \Log::info($all_stores);
+        \Log::info('target_stores');
+        \Log::info($target_stores);
+        \Log::info('alert_types');
+        \Log::info($alert_types);
+        \Log::info('alert_details');
+        \Log::info($alert_details);
         return view('admin.document-meta.document-edit-meta-data')->with('document', $document)
                                                     ->with('banner', $banner)
                                                     ->with('banners', $banners)
