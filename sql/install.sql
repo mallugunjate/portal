@@ -192,7 +192,7 @@ CREATE TABLE `users` (
 --  Records of `users`
 -- ----------------------------
 BEGIN;
-INSERT INTO `users` VALUES ('3', 'Brent', 'Garner', 'brent.garner@fglsports.com', '$2y$10$BGSXvZRXl9LCtcscaK288u9WpzzFv3O79lttw6/hDAf3n.y4l3B/m', '2', '', '1', '1', '1', '0000-00-00 00:00:00', 'Q5xHJOhMtJuyp6466sE08gVm29ijKXZabZdlO9ONW7iRyfv0E9NVEYHpAYSm', '0000-00-00 00:00:00', '2016-04-07 15:42:48');
+INSERT INTO `users` VALUES ('3', 'Brent', 'Garner', 'brent.garner@fglsports.com', '$2y$10$BGSXvZRXl9LCtcscaK288u9WpzzFv3O79lttw6/hDAf3n.y4l3B/m', '1', '', '1', '1', '1', '0000-00-00 00:00:00', 'Q5xHJOhMtJuyp6466sE08gVm29ijKXZabZdlO9ONW7iRyfv0E9NVEYHpAYSm', '0000-00-00 00:00:00', '2016-04-07 15:42:48');
 COMMIT;
 
 -- ----------------------------
