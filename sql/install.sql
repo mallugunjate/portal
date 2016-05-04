@@ -278,6 +278,21 @@ BEGIN;
 INSERT INTO `quicklinks_types` VALUES ('1', 'folder', '0000-00-00 00:00:00', '0000-00-00 00:00:00', null), ('2', 'document', '0000-00-00 00:00:00', '0000-00-00 00:00:00', null), ('3', 'external', '0000-00-00 00:00:00', '0000-00-00 00:00:00', null);
 COMMIT;
 
+-- ----------------------------
+--  Table structure for `document_target`
+-- ----------------------------
+DROP TABLE IF EXISTS `document_target`;
+CREATE TABLE `document_target` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `document_id` int(10) unsigned NOT NULL,
+  `store_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `document_target_document_id_foreign` (`document_id`),
+  CONSTRAINT `document_target_document_id_foreign` FOREIGN KEY (`document_id`) REFERENCES `documents` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=18039 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 
