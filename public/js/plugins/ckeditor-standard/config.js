@@ -34,7 +34,7 @@ CKEDITOR.editorConfig = function( config ) {
 	config.format_tags = 'p;h1;h2;h3;pre';
 
 	// Simplify the dialog windows.
-	// config.removeDialogTabs = 'image:advanced;link:advanced';
+	config.removeDialogTabs = 'image:advanced;link:advanced';
 
 	config.allowedContent = true;
 	// config.filebrowserUploadUrl = '{{URL::action("CommunicationImageController@store")}}?csrf_token='+{{csrf_token()}};
