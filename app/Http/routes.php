@@ -109,6 +109,7 @@ Route::resource('/admin/dashboardbackground', 'Dashboard\DashboardBackgroundAdmi
 //Communications
 Route::resource('/admin/communication', 'Communication\CommunicationAdminController');
 Route::resource('/admin/communicationtypes', 'Communication\CommunicationTypesAdminController');
+Route::resource('/admin/communicationimages', 'Communication\CommunicationImageController');
 
 //CALENDAR ADMIN
 Route::resource('/admin/calendar', 'Calendar\CalendarAdminController');

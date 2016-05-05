@@ -243,7 +243,12 @@
 		        autoclose: true
 		    });      				
 
-		    CKEDITOR.replace('body');
+		    var csrf = '{{csrf_token()}}' ;
+		    console.log(csrf);
+		    CKEDITOR.replace('body', {
+    		    filebrowserUploadUrl: "{{route('admin.communicationimages.store',['_token' => csrf_token() ])}}",
+    		    imageBrowser_listUrl : "/js/custom/ckeditor-imagebrowser/images_list.json"
+    		});
 
 		    $(".tree").treed({openedClass : 'fa fa-folder-open', closedClass : 'fa fa-folder'});
 
