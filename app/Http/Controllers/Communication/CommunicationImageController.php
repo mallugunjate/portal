@@ -60,20 +60,18 @@ class CommunicationImageController extends Controller
             file_put_contents($imagefile, json_encode($imagefileContent));
 
             $response = [
-                            ["uploaded" => 1],
-                            ["fileName" => $filename],
-                            ["url"=> public_path()."/images/communication-images/".$filename]
+                            "uploaded" => 1,
+                            "fileName" => $filename,
+                            "url"=> "/images/communication-images/".$filename,
                         ];
 
             return json_encode($response);
         }
 
         $response =  [
-                        ["uploaded"=> 0],
-                        ["error" => [
-                                        "message"=> "File is too big."
-                                    ]
-                        ]
+                        "uploaded"=> 0,
+                        "error" => [ "message"=> "File is too big."]
+                        
                     ];
         return json_encode($response);
     }

@@ -274,7 +274,7 @@ Notification.prototype = {
 
 		if ( options.message !== undefined ) {
 			this.message = options.message;
-			// messageElement.setHtml( this.message );
+			messageElement.setHtml( this.message );
 		}
 
 		if ( options.progress !== undefined ) {
