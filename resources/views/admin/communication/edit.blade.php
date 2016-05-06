@@ -312,7 +312,17 @@
 
 		   CKEDITOR.replace('body', {
     		    filebrowserUploadUrl: "{{route('admin.communicationimages.store',['_token' => csrf_token() ])}}",
-    		    imageBrowser_listUrl : "/js/custom/ckeditor-imagebrowser/images_list.json"
+    		    imageBrowser_listUrl : "/js/custom/ckeditor-imagebrowser/images_list.json",
+    		   
+				// droplerConfig : {
+				// 	backend : 'basic',
+		  //     		settings : {
+		  //     			uploadUrl : '/admin/communicationimages?_token={{csrf_token()}}'
+
+		  //     		}
+				// }
+				
+
     		});
 
 		    $(".tree").treed({openedClass : 'fa fa-folder-open', closedClass : 'fa fa-folder'});

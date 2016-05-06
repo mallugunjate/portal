@@ -37,6 +37,7 @@ class CommunicationImageController extends Controller
      */
     public function store(Request $request)
     {
+        \Log::info($request->all());
         $file = $request->file('upload');
         $banner_id = $request->banner_id;
         $directory = public_path() . '/images/communication-images';
@@ -44,12 +45,37 @@ class CommunicationImageController extends Controller
         $originalName = $file->getClientOriginalName();
         $modifiedName = str_replace(" ", "_", $originalName);
         $modifiedName = str_replace(".", "_", $modifiedName);
-        $modifiedName = "Banner" . $banner_id . "~" .  $modifiedName;
+        // $modifiedName = "Banner" . $banner_id . "~" .  $modifiedName;
         $uniqueHash = sha1(time() . time());
         $filename  = $modifiedName . "_" . $uniqueHash . "." . $extension;
         $upload_success = $file->move($directory, $filename); //move and rename file
 
-        return json_encode($filename);
+        if($upload_success) {
+            
+            $imagesrc = $filename;
+            $imagefile = public_path() . '/js/custom/ckeditor-imagebrowser/images_list.json';
+            $imagefileContent = json_decode(file_get_contents($imagefile));
+            
+            array_push($imagefileContent , ['image' => '/images/communication-images/' . $filename ]);
+            file_put_contents($imagefile, json_encode($imagefileContent));
+
+            $response = [
+                            ["uploaded" => 1],
+                            ["fileName" => $filename],
+                            ["url"=> public_path()."/images/communication-images/".$filename]
+                        ];
+
+            return json_encode($response);
+        }
+
+        $response =  [
+                        ["uploaded"=> 0],
+                        ["error" => [
+                                        "message"=> "File is too big."
+                                    ]
+                        ]
+                    ];
+        return json_encode($response);
     }
 
     /**
