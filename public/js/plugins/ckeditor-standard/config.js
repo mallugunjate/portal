@@ -29,7 +29,7 @@ CKEDITOR.editorConfig = function( config ) {
 		'floatingspace,' +
 		'font,' +
 		'format,' +
-		'forms,' +
+		// 'forms,' +
 		'horizontalrule,' +
 		'htmlwriter,' +
 		'image,' +
@@ -69,13 +69,6 @@ CKEDITOR.editorConfig = function( config ) {
 
 
 	config.allowedContent = true;
-	// config.filebrowserUploadUrl = '{{URL::action("CommunicationImageController@store")}}?csrf_token='+{{csrf_token()}};
-	// config.extraPlugins = 'lineutils';
-	// config.extraPlugins = 'notification';
-	// config.extraPlugins = 'widget';
-	// config.extraPlugins = 'filetools';
-	// config.extraPlugins = 'notificationaggregator';
-	// config.extraPlugins = 'uploadwidget';
 	config.extraPlugins = 'uploadimage,imagebrowser';
 	// %REMOVE_END%
 };
