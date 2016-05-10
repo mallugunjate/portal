@@ -69,7 +69,7 @@ CKEDITOR.editorConfig = function( config ) {
 
 
 	config.allowedContent = true;
-	config.extraPlugins = 'uploadimage,imagebrowser';
+	config.extraPlugins = 'uploadimage,imagebrowser,folderlink,documentlink';
 	// %REMOVE_END%
 };
 
