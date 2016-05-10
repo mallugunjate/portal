@@ -3,7 +3,10 @@
 /public/images/featured-backgrounds
 /public/images/featured-covers
 /public/images/dashboard-banners
+/public/images/communication-images
+/public/js/custom/ckeditor-imagebrowser/images_list.json
 /node_modules
+/storage/logs
 Homestead.yaml
 Homestead.json
 .env

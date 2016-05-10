@@ -19,7 +19,7 @@
                 <!--Continually expanded and constantly improved Inspinia Admin Them (IN+)-->
             </p>
             <p>Admin Login</p>
-            <form class="m-t" role="form" method="POST" action="{{ url('/admin/login') }}">
+            <form class="m-t" role="form" method="POST" action="{{ url('/admin/login') }}" autocomplete="off">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 @if (count($errors))
                     <ul>
@@ -29,10 +29,10 @@
                     </ul>
                 @endif
                 <div class="form-group">
-                    <input type="email" class="form-control" name="email" placeholder="Email" value="{{ old('email') }}" required="">
+                    <input type="email" class="form-control" name="email" placeholder="Email" value="{{ old('email') }}" required="" autocomplete="off">
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Password" name="password" required="">
+                    <input type="password" class="form-control" placeholder="Password" name="password" required="" autocomplete="off">
                 </div>
                 <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
 

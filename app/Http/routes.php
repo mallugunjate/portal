@@ -59,8 +59,8 @@ Route::post('/admin/login', 'Auth\AuthController@postLogin');
 Route::get('/admin/logout', 'Auth\AuthController@getLogout');
 
 //Registration Routes
-Route::get('/admin/register', 'Auth\AuthController@getRegister');
-Route::post('/admin/register', 'Auth\AuthController@postRegister');
+// Route::get('/admin/register', 'Auth\AuthController@getRegister');
+// Route::post('/admin/register', 'Auth\AuthController@postRegister');
 // Route::get('/activate/{activation_code}', 'Auth\AuthController@activateAccount');
 // Route::get('/approve/{activation_code}', 'Auth\AuthController@approveAccount');
 
@@ -109,6 +109,7 @@ Route::resource('/admin/dashboardbackground', 'Dashboard\DashboardBackgroundAdmi
 //Communications
 Route::resource('/admin/communication', 'Communication\CommunicationAdminController');
 Route::resource('/admin/communicationtypes', 'Communication\CommunicationTypesAdminController');
+Route::resource('/admin/communicationimages', 'Communication\CommunicationImageController');
 
 //CALENDAR ADMIN
 Route::resource('/admin/calendar', 'Calendar\CalendarAdminController');
