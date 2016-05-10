@@ -12,5 +12,5 @@ Homestead.json
 .env
 .floo
 .flooignore
-env.js
+/public/js/env.js
 .catapult
