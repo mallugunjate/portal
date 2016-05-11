@@ -23,7 +23,7 @@
                 @else
                 <li>
                 @endif 
-                    <a href="/{{ Request::segment(1) }}"><i class="fa fa-home"></i> <span class="nav-label">Dashboard</span></a>
+                    <a href="/{{ Request::segment(1) }}"><i class="fa fa-home"></i> <span class="nav-label">Micahsoft</span></a>
                 </li>
 
 
