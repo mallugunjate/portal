@@ -51,6 +51,11 @@
 
 				$("#delete-folder").removeClass('hidden').addClass('visible');
 				$("#delete-folder").attr('data-folderId', data.folder.global_folder_id );
+
+				$("#copy-folder").removeClass('hidden').addClass('visible');
+				$("#copy-folder").attr('data-folderId', data.folder.global_folder_id );				
+				$("#copy-folder").attr('data-folderName', data.folder.name)
+				
 				$("#folder-title").attr('data-isWeekFolder', false);
 			} else{
 
