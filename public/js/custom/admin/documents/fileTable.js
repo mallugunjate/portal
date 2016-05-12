@@ -28,6 +28,7 @@
 
 				$("#delete-folder").removeClass('hidden').addClass('visible');
 				$("#delete-folder").attr('data-folderId', data.folder.global_folder_id );
+
 				$("#folder-title").attr('data-isWeekFolder', true);
 			}	
 		}
@@ -55,7 +56,12 @@
 				$("#copy-folder").removeClass('hidden').addClass('visible');
 				$("#copy-folder").attr('data-folderId', data.folder.global_folder_id );				
 				$("#copy-folder").attr('data-folderName', data.folder.name)
-				
+				var folderPath = '';
+				$.each( data.folder.folder_path, function( index, value ){
+				    console.log(value);
+				    folderPath += value.name + "/";
+				});
+ 				$("#copy-folder").attr('data-folderPath', folderPath);
 				$("#folder-title").attr('data-isWeekFolder', false);
 			} else{
 

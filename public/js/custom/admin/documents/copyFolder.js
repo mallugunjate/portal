@@ -1,18 +1,17 @@
-
-
 	$("#copy-folder").click(function(){
 
-		console.log(localStorage.getItem('folderId'));
-		var folderId = $(this).data('folderid');
-		var folderName = $(this).data('foldername');
-
-		// if (localStorage.getItem('folderId') != folderId) {
+		var folderId = $(this).attr('data-folderid');
+		var folderName = $(this).attr('data-foldername');
+		var folderPath = $(this).attr('data-folderpath');
+		if (localStorage.getItem('folderId') != folderId) {
+			
 			localStorage.removeItem('folderId');
 			localStorage.removeItem('folderName');
+			localStorage.removeItem('folderPath');
     		localStorage.setItem('folderId', folderId );
 			localStorage.setItem('folderName', folderName );
-		// }
-		console.log(localStorage.getItem('folderId'));
+			localStorage.setItem('folderPath', folderPath);
+		}
 		
 	});
 
