@@ -1,4 +1,4 @@
-	$("#copy-folder").click(function(){
+	$( "#copy-folder").click(function(){
 
 		var folderId = $(this).attr('data-folderid');
 		var folderName = $(this).attr('data-foldername');

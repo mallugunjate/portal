@@ -163,6 +163,7 @@
     <script type="text/javascript" src="/js/custom/admin/documents/addFolder.js"></script>
     <script type="text/javascript" src="/js/custom/admin/documents/deleteFolder.js"></script>
     <script type="text/javascript" src="/js/custom/admin/documents/copyFolder.js"></script>
+    <script type="text/javascript" src="/js/custom/admin/documents/copyDocument.js"></script>
     <script type="text/javascript" src="/js/custom/site/launchModal.js" ></script>
 
 

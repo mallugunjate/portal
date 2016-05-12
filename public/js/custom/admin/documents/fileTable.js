@@ -98,7 +98,9 @@
 												' <td>'+ i.prettyDateEnd +'</td>' +
 												' <td class="action"> '+
 													'<a class="btn btn-xs btn-primary" href="/admin/document/'+ i.id +'/edit"><i class="fa fa-pencil"></i></a> '+
+													'<button type="button" class="btn btn-xs btn-primary" id="copy-document" data-documentName= "'+ i.filename +'" data-fileid="'+ i.id + '"><i class="fa fa-clipboard"></i></button> '+
 													'<a class="deleteFile btn btn-xs btn-danger" data-fileid="'+ i.id +'" id="file'+ i.id +'" ><i class="fa fa-trash"></i></a>'+
+
 												'</td> </tr>')
 				});
 				$('#file-table').append('</tbody>');
