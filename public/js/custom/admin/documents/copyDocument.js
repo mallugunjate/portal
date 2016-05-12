@@ -2,7 +2,8 @@ $(document).on("click", "#copy-document", function() {
 		console.log('are we here?');
 		var documentId = $(this).attr('data-fileid');
 		var documentName = $(this).attr('data-documentName');
-		// var documentFolderPath = $(this).attr('data-documentFolderpath');
+		var documentTitle = $(this).attr('data-documenttitle');
+		var documentFolderPath = $("#copy-folder").attr('data-folderpath');
 		if (localStorage.getItem('documentId') != documentId) {
 			
 			localStorage.removeItem('documentId');
@@ -10,7 +11,8 @@ $(document).on("click", "#copy-document", function() {
 			localStorage.removeItem('documentFolderPath');
     		localStorage.setItem('documentId', documentId );
 			localStorage.setItem('documentName', documentName );
-			// localStorage.setItem('documentFolderPath', documentFolderPath);
+			localStorage.setItem('documentTitle', documentTitle);
+			localStorage.setItem('documentFolderPath', documentFolderPath);
 		}
 		
 	});
