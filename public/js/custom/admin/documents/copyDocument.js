@@ -14,6 +14,7 @@ $(document).on("click", "#copy-document", function() {
 			localStorage.setItem('documentTitle', documentTitle);
 			localStorage.setItem('documentFolderPath', documentFolderPath);
 		}
-		
+
+		swal("Nice!", "'" + documentTitle +"' has been copied to clipboard", "success");        
 	});
 

@@ -12,6 +12,6 @@
 			localStorage.setItem('folderName', folderName );
 			localStorage.setItem('folderPath', folderPath);
 		}
-		
+		swal("Nice!", "'" + folderName +"' has been copied to clipboard", "success");        
 	});
 
