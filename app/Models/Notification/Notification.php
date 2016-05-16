@@ -46,6 +46,7 @@ class Notification extends Model
                                 ->where('document_target.store_id', '=', $storeNumber)
                                 ->orderBy('documents.updated_at', 'desc')
                                 ->select('documents.*')
+                                ->take($windowSize)
     							->get();
                 
                 
