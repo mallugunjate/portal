@@ -244,8 +244,8 @@ class Search extends Model
     							->where('store_id', '=', $store)
     							->where('alerts.alert_start', '<=', $today )
     							->where(function($q) use($today) {
-    								$q->where('alerts.alert_end', '>=', $today)
-    								->orWhere('alerts.alert_end', '=', '0000-00-00 00:00:00');
+                                    $q->where('end', '>=', $today)
+                                    ->orWhere('end', '=', '0000-00-00 00:00:00');
     							})
 
     							->get()
@@ -276,14 +276,17 @@ class Search extends Model
         //$today = Carbon::now()->toDateString();
         $today = Carbon::now();
         foreach ($query_terms as $term) {
+
             $alerts = $alerts->merge(
                                 Document::join('alerts', 'documents.id', '=', 'alerts.document_id')
                                 ->join('alerts_target', 'alerts.id', '=', 'alerts_target.alert_id')
-                                ->where('original_filename', 'LIKE', '%'.$term.'%')
+                                // ->where('original_filename', 'LIKE', '%'.$term.'%')
+                                ->where('title', 'LIKE', '%'.$term.'%')      
                                 ->where('store_id', '=', $store)
-                                ->where('alerts.alert_end', '<=', $today )
+                                ->where('end', '<=', $today )
                                 ->get()
                     );
+            var_dump(count($alerts));
         }
         
         foreach ($alerts as $alert) {
