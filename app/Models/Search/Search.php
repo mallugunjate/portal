@@ -286,7 +286,6 @@ class Search extends Model
                                 ->where('end', '<=', $today )
                                 ->get()
                     );
-            var_dump(count($alerts));
         }
         
         foreach ($alerts as $alert) {
