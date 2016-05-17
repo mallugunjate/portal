@@ -337,6 +337,8 @@ class Document extends Model
                     ->where('documents.end', '<=', $now)
                     ->where('documents.end', '!=', '0000-00-00 00:00:00')
                     ->where('document_target.store_id', strval($storeNumber))
+                    ->where('documents.deleted_at', '=', null)
+                    ->where('document_target.deleted_at', '=', null)
                     ->select('documents.*')
 
                     ->get();
