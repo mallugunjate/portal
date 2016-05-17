@@ -76,10 +76,11 @@ class Document extends Model
                                     ->orWhere('documents.end', '=', '0000-00-00 00:00:00' ); 
                             })
                             ->where('documents.deleted_at', '=', null)
+                            ->where('document_target.deleted_at', '=', null)
                             ->where('document_target.store_id', strval($storeNumber))
                             ->select('documents.*')
                             ->get();
-                
+
             }
             else{
                 $files = \DB::table('file_folder')
