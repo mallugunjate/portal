@@ -346,8 +346,14 @@
 	        }
 		});
 
-        
-    	$(".tree").treed({openedClass : 'fa fa-folder-open', closedClass : 'fa fa-folder'});    
+    	$(".tree").treed({openedClass : 'fa fa-folder-open', closedClass : 'fa fa-folder'});
+
+    	$('.input-daterange').datepicker({
+	        format: 'yyyy-mm-dd',
+	        keyboardNavigation: false,
+	        forceParse: false,
+	        autoclose: true
+	    });     
 
 	</script>
 
