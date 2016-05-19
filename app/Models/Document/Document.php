@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Document\Week;
 use App\Models\Document\Folder;
 use App\Models\Document\FileFolder;
+use App\Models\Document\DocumentPackage;
 use Carbon\Carbon;
 use App\Models\Tag\Tag;
 use App\Models\Tag\ContentTag;
@@ -17,7 +18,9 @@ use App\Models\Dashboard\Quicklinks;
 use App\Models\Document\DocumentTarget;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Validation\DocumentValidator;
-
+use App\Models\Feature\FeatureDocument;
+use App\Models\Communication\CommunicationDocument;
+use App\Models\UrgentNotice\UrgentNoticeAttachment;
 
 class Document extends Model
 {
@@ -219,15 +222,32 @@ class Document extends Model
     public static function deleteDocument($id)
     {
         
+        //delete from folder
         FileFolder::where('document_id', $id)->delete();
-        $document = Document::find($id);
-        // unlink(public_path('files/'.$document->filename));
-        $document->delete();
 
+        //delete from package
+        DocumentPackage::where('document_id', $id)->delete();
+
+        //delete from feature
+        FeatureDocument::where('document_id', $id)->delete();
+
+        //delete from communication
+        CommunicationDocument::where('document_id', $id)->delete();  
+
+        //delete from Urgent Notice
+        UrgentNoticeAttachment::deleteAttachment($id, 'Document');
+
+        //delete from quicklink
         $quicklink = Quicklinks::where('url', $id)->where('type', 2)->first();
         if ($quicklink) {
             $quicklink->delete();
         }
+
+        //delete alert
+        Alert::deleteAlert($id);
+
+        $document = Document::find($id);
+        $document->delete();
 
         return;
     }

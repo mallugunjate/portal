@@ -8,6 +8,7 @@ use DB;
 use App\Models\Utility\Utility;
 use App\Models\Document\Document;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Alert\AlertTarget;
 
 class Alert extends Model
 {
@@ -303,6 +304,7 @@ class Alert extends Model
         $alert = Alert::where('document_id', $document_id)->first();
         if ($alert) {
             $alert->delete();
+            \DB::table('alerts_target')->where('alert_id', $alert->id)->delete();
         }
         return;
     }
