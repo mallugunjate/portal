@@ -72,3 +72,5 @@ body{
 	background: transparent url('/images/2B2B2B-0.6.png') top left repeat;
 
 }
+
+.product-box{ padding: 1px !important; margin: 10px !important; height: 168px; width: 168px; float: left;}
