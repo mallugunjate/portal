@@ -31,6 +31,7 @@ class Search extends Model
     								->orWhere('end', '=', '0000-00-00 00:00:00');
     							})
                                 ->where('document_target.store_id', $store)
+                                ->where('document_target.deleted_at', '=', null)
                                 ->select('documents.*')
     							->get()
     				);		
@@ -72,6 +73,7 @@ class Search extends Model
                                 ->where('end', '<=', $today )
                                 ->where('end', '!=', '0000-00-00 00:00:00')
                                 ->where('document_target.store_id', $store)
+                                ->where('document_target.deleted_at', '=', null)
                                 ->select('documents.*')
                                 ->get()
                     );      
