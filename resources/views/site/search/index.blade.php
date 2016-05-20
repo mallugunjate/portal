@@ -261,6 +261,7 @@
     @include('site.includes.bugreport')
     @include('site.includes.modal')
     <script type="text/javascript" src="/js/custom/site/getArchivedContent.js"></script>
+    <script type="text/javascript" src="/js/custom/site/highlightSearch.js"></script>
 
 
 </body>
