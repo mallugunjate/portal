@@ -70,10 +70,11 @@
             header: {
                 left: 'prev,next today',
                 center: 'title',
-                right: 'month,basicWeek,basicDay'
+                right: 'month,agendaWeek,agendaDay'
             },
             defaultDate: today,
             editable: true,
+            eventDurationEditable: false,
             eventLimit: true, // allow "more" link when too many events
             eventClick:  function(event, jsEvent, view) {
                 console.log(event.start);
