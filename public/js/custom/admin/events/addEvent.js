@@ -10,14 +10,14 @@ $("#allStores").change(function(){
 		$("#storeSelect option").each(function(index){			
 			$(this).attr('selected', 'selected');
 		});
-		$("#storeSelect").chosen();
+		$("#storeSelect").chosen({width:'75%'});
 		
 	}
 	else if ($("#allStores").not(":checked")) {
 		$("#storeSelect option").each(function(){
 			$(this).removeAttr('selected');
 		});
-		$("#storeSelect").chosen();
+		$("#storeSelect").chosen({width:'75%'});
 		
 	}
 });
@@ -158,6 +158,7 @@ $(document).on('click','.event-create',function(){
 			        $('#createNewEventForm')[0].reset(); // empty the form
 			        CKEDITOR.instances['description'].setData('');
 			        $('#datepicker').find('input').datepicker('setDate', null);
+			        $("#storeSelect").chosen("destroy");
 			        $("#allStores").click();
 
 					$('.event-create i').removeClass("fa-spinner faa-spin animated");
