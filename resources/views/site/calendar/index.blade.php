@@ -70,7 +70,7 @@
             header: {
                 left: 'prev,next today',
                 center: 'title',
-                right: 'month,agendaWeek,agendaDay'
+                right: 'month,basicWeek,basicDay'
             },
             defaultDate: today,
             editable: true,
