@@ -48,7 +48,7 @@ class CommunicationController extends Controller
 
         $alertCount = Alert::getActiveAlertCountByStore($storeNumber);
 
-        $communicationTypes = CommunicationType::getCommunicationTypeCount($storeNumber);
+        $communicationTypes = CommunicationType::getCommunicationTypeCount($storeNumber, $storeBanner);
 
         if (isset($request['type'])) {
             $targetedCommunications = CommunicationTarget::getTargetedCommunicationsByCategory($storeNumber, $request['type']);
@@ -64,7 +64,7 @@ class CommunicationController extends Controller
         if (isset($request['archives']) && $request['archives']) {
 
             $communicationCount = Communication::getAllCommunicationCount($storeNumber); 
-            $communicationTypes = CommunicationType::getCommunicationTypeCountAllMessages($storeNumber);
+            $communicationTypes = CommunicationType::getCommunicationTypeCountAllMessages($storeNumber, $storeBanner);
 
             if(isset($request['type'])){
                 $archivedCommunication = Communication::getArchivedCommunicationsByCategory($request['type'], $storeNumber);
@@ -131,7 +131,7 @@ class CommunicationController extends Controller
         $skin = Skin::getSkin($storeBanner);
 
         $communicationCount = Communication::getActiveCommunicationCount($storeNumber); 
-        $communicationTypes = CommunicationType::all();
+        $communicationTypes = CommunicationType::where('banner_id', $storeBanner)->get();
 
         $urgentNoticeCount = UrgentNotice::getUrgentNoticeCount($storeNumber);
 
@@ -180,7 +180,7 @@ class CommunicationController extends Controller
 
         if (isset($request['archives']) && $request['archives']) {
             $communicationCount = Communication::getAllCommunicationCount($storeNumber); 
-            $communicationTypes = CommunicationType::getCommunicationTypeCountAllMessages($storeNumber);
+            $communicationTypes = CommunicationType::getCommunicationTypeCountAllMessages($storeNumber , $storeBanner);
         }
 
         $alertCount = Alert::getActiveAlertCountByStore($storeNumber);

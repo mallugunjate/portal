@@ -74,7 +74,8 @@ $(document).on('click','.communication-create',function(){
 	console.log(allStores);
 	console.log(communication_type_id);
 	if(!communication_type_id){
-		communication_type_id = 1; // no category
+		communication_type_id = $("#default_communication_type").val(); // no category
+
 	}
 	console.log(communication_type_id);
 

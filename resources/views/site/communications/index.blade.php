@@ -96,7 +96,7 @@
                         <i class="{{$icon_class}}"></i>
                     </td>
 
-                    @if( $communication->communication_type_id == "1")
+                    @if( $communication->communication_type_id == "1" ||  $communication->communication_type_id == "2" )
                         <td class="mail-subject communication-name">
                             @if($communication->has_attachments == true)
                                 <i class="fa fa-paperclip"></i>

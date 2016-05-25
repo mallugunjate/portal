@@ -87,8 +87,8 @@
 													@foreach($communicationTypes as $ct)
 
 													<label class="btn btn-outline btn-default">
-														@if( $ct->id == 1)
-														<input type="radio" id="" name="communication_type" value="{{ $ct->id }}"><i class="fa fa-times"></i> {{ $ct->communication_type }}
+														@if( ( $banner->id==1 && $ct->id == 1 ) || ($banner->id==2 && $ct->id == 2) )
+														<input type="radio" id="default_communication_type" name="communication_type" value="{{ $ct->id }}"><i class="fa fa-times"></i> {{ $ct->communication_type }}
 														@else 
 														<input type="radio" id="" name="communication_type" value="{{ $ct->id }}"><i class="fa fa-circle text-{{ $ct->colour }}"></i> {{ $ct->communication_type }}
 														@endif
