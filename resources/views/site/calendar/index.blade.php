@@ -86,12 +86,12 @@
             events: [
                 @foreach($events as $event)
                 {
-                title: "{{ $event->title }}",
-                start: "{{ $event->start }}",
-                end: "{{ $event->end }}",
+                title: "{!! $event->title !!}",
+                start: "{!! $event->start !!}",
+                end: "{!! $event->end !!}",
                 description : '{!! $event->description !!}',
-                prettyStart : "{{$event->prettyDateStart}}",
-                prettyEnd : "{{$event->prettyDateEnd}}",
+                prettyStart : "{!! $event->prettyDateStart !!}",
+                prettyEnd : "{!! $event->prettyDateEnd !!}",
                 },
                 @endforeach
             ]
