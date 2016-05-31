@@ -6,11 +6,13 @@ $("body").on("click", ".folder", function(e){
 	e.stopPropagation();
 	var id = e.target.id;
 
-	if(id){
-		getFolderDocuments(e.target.id);
-	} else {
-		getFolderDocuments(this.id);
-	}
+	if($(this).find('.indicator').hasClass('fa-folder-open')) {
+		if(id){
+			getFolderDocuments(e.target.id);
+		} else {
+			getFolderDocuments(this.id);
+		}	
+	}	
 
 });
 
