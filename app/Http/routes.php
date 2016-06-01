@@ -110,6 +110,7 @@ Route::resource('/admin/dashboardbackground', 'Dashboard\DashboardBackgroundAdmi
 Route::resource('/admin/communication', 'Communication\CommunicationAdminController');
 Route::resource('/admin/communicationtypes', 'Communication\CommunicationTypesAdminController');
 Route::resource('/admin/communicationimages', 'Communication\CommunicationImageController');
+Route::get('/admin/communicationdocuments/{communication_id}', 'Communication\CommunicationPartialController@getCommunicationDocumentPartial');
 
 //CALENDAR ADMIN
 Route::resource('/admin/calendar', 'Calendar\CalendarAdminController');
