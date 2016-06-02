@@ -85,6 +85,7 @@ class Utility extends Model
 				break;
 
 			case "pdf":
+			case "PDF":
 				$class = 'launchPDFViewer';
 				$modalTarget = '#fileviewmodal';
 				break;
