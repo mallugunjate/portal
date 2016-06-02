@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	$("#allStores").click();
-	$(".search-field").find('input').focusout(function() {
+	$(".search-field").find('input').on ('change', function() {
 		processStorePaste();
 	});
 });
@@ -26,20 +26,19 @@ $("#allStores").change(function(){
 var processStorePaste = function(){
 
     	var storesString = $(".search-field").find('input').val();
-    	console.log(storesString);
     	var stores = storesString.split(',');
-    	console.log(stores);
     	$(stores).each(function(i){
     		stores[i]= stores[i].replace(/\s/g, '');
     		if(stores[i].length == 3) {
     			stores[i] = "0"+stores[i];
     		}
-
+			$("#storeSelect option[value='"+  stores[i] +"']").attr('selected', 'selected');    		
     	});
-    	console.log(stores);
-    	console.log($(".search-field").find('input').val());
+    	
     	$("#storeSelect").val(stores).trigger("chosen:updated");
-    	$("storeSelect").append($('#storeSelect option:selected').length + " stores selected" );
+    	var selectedStoresCount = $('#storeSelect option:selected').length;
+    	console.log(selectedStoresCount);
+    	// $("#selectedStoresCount").append( selectedStoresCount + " stores selected" );
 };
 
 $( "#title" ).focus(function() {
