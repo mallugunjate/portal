@@ -20,6 +20,7 @@ class Utility extends Model
 				break;
 
 			case "pdf":
+			case "PDF":
 				$icon = "<i class='fa fa-file-pdf-o'></i>";
 				break;
 
