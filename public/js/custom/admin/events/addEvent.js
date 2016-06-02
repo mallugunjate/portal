@@ -1,7 +1,8 @@
 $(document).ready(function(){
-	$("#allStores").click();	
-	console.log("1");
-
+	$("#allStores").click();
+	$(".search-field").find('input').focusout(function() {
+		processStorePaste();
+	});
 });
 $("#allStores").change(function(){
 
@@ -21,6 +22,25 @@ $("#allStores").change(function(){
 		
 	}
 });
+
+var processStorePaste = function(){
+
+    	var storesString = $(".search-field").find('input').val();
+    	console.log(storesString);
+    	var stores = storesString.split(',');
+    	console.log(stores);
+    	$(stores).each(function(i){
+    		stores[i]= stores[i].replace(/\s/g, '');
+    		if(stores[i].length == 3) {
+    			stores[i] = "0"+stores[i];
+    		}
+
+    	});
+    	console.log(stores);
+    	console.log($(".search-field").find('input').val());
+    	$("#storeSelect").val(stores).trigger("chosen:updated");
+    	$("storeSelect").append($('#storeSelect option:selected').length + " stores selected" );
+};
 
 $( "#title" ).focus(function() {
 	$('.event-create i').removeClass("fa-spinner faa-spin animated");
@@ -58,7 +78,6 @@ $( "#storeSelect" ).focus(function() {
     $('.event-create span').text(' Create New Event');
 });
 
-
 $(document).on('click','.event-create',function(){
   	
   	var hasError = false;
@@ -71,6 +90,7 @@ $(document).on('click','.event-create',function(){
     var eventEnd = $("#end").val();
     var tags = $('#tags').val();
     var target_stores  = $("#storeSelect").val();
+    console.log(target_stores);
     var allStores  = $("allStores:checked").val();
 
     if(eventTitle == '') {
