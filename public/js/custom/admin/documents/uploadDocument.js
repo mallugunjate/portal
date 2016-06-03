@@ -162,9 +162,10 @@ $(document).ready(function() {
 
 }); 
 
-$("body").on ('change', '.search-field input', function() {
+$("body").on ('paste, keyup', '.search-field input', function() {
     processStorePaste();
 });
+// .on('paste, keydown',
 
 var processStorePaste = function(){
 

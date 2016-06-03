@@ -8,7 +8,7 @@ $("#attachment-Folder").click(function(){
 	$("#folder-listing").modal('show');
 });
 
-$("body").on ('change', '.search-field input', function() {
+$("body").on ('paste, keyup', '.search-field input', function() {
 	processStorePaste();
 });
 
