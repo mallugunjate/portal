@@ -8,6 +8,28 @@ $("#attachment-Folder").click(function(){
 	$("#folder-listing").modal('show');
 });
 
+$("body").on ('change', '.search-field input', function() {
+	processStorePaste();
+});
+
+var processStorePaste = function(){
+
+    	var storesString = $(".search-field").find('input').val();
+    	var stores = storesString.split(',');
+    	$(stores).each(function(i){
+    		stores[i]= stores[i].replace(/\s/g, '');
+    		if(stores[i].length == 3) {
+    			stores[i] = "0"+stores[i];
+    		}
+			$("#storeSelect option[value='"+  stores[i] +"']").attr('selected', 'selected');    		
+    	});
+    	
+    	$("#storeSelect").val(stores).trigger("chosen:updated");
+    	var selectedStoresCount = $('#storeSelect option:selected').length;
+    	console.log(selectedStoresCount);
+    	// $("#selectedStoresCount").append( selectedStoresCount + " stores selected" );
+};
+
 
 $(".folder-checkbox").on('click', function(){
 	if($(this).is(":checked")){
@@ -182,7 +204,11 @@ $(document).on('click','.urgentnotice-create',function(){
 
 		        }
 		        else{
+		        	
 		        	$('#createNewUrgentNoticeForm')[0].reset(); // empty the form
+		        	CKEDITOR.instances['description'].setData('');
+		        	$(".search-field").find('input').val('');
+			        processStorePaste();
 					swal("Nice!", "'" + title +"' has been created", "success");        
 				}
 		    }

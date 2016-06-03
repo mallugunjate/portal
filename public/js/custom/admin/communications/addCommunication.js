@@ -22,6 +22,28 @@ $("#allStores").change(function(){
 	}
 });
 
+$("body").on ('change', '.search-field input', function() {
+	processStorePaste();
+});
+
+var processStorePaste = function(){
+
+    	var storesString = $(".search-field").find('input').val();
+    	var stores = storesString.split(',');
+    	$(stores).each(function(i){
+    		stores[i]= stores[i].replace(/\s/g, '');
+    		if(stores[i].length == 3) {
+    			stores[i] = "0"+stores[i];
+    		}
+			$("#storeSelect option[value='"+  stores[i] +"']").attr('selected', 'selected');    		
+    	});
+    	
+    	$("#storeSelect").val(stores).trigger("chosen:updated");
+    	var selectedStoresCount = $('#storeSelect option:selected').length;
+    	console.log(selectedStoresCount);
+    	// $("#selectedStoresCount").append( selectedStoresCount + " stores selected" );
+};
+
 $("#add-documents").click(function(){
 	$("#document-listing").modal('show');
 });
@@ -172,7 +194,8 @@ $(document).on('click','.communication-create',function(){
 		        
 		    }
 		}).done(function(response){
-			//console.log(response);
+			$(".search-field").find('input').val('');
+			processStorePaste();
 		});    	
     }
 

@@ -1,8 +1,6 @@
 $(document).ready(function(){
 	$("#allStores").click();
-	$(".search-field").find('input').on ('change', function() {
-		processStorePaste();
-	});
+
 });
 $("#allStores").change(function(){
 
@@ -21,6 +19,10 @@ $("#allStores").change(function(){
 		$("#storeSelect").chosen({width:'75%'});
 		
 	}
+});
+
+$("body").on ('change', '.search-field input', function() {
+	processStorePaste();
 });
 
 var processStorePaste = function(){
@@ -177,7 +179,10 @@ $(document).on('click','.event-create',function(){
 			        $('#createNewEventForm')[0].reset(); // empty the form
 			        CKEDITOR.instances['description'].setData('');
 			        $('#datepicker').find('input').datepicker('setDate', null);
-			        $("#storeSelect").chosen("destroy");
+			        
+			        $(".search-field").find('input').val('');
+			        processStorePaste();
+					// $("#storeSelect").chosen("destroy");
 			        $("#allStores").click();
 
 					$('.event-create i').removeClass("fa-spinner faa-spin animated");
