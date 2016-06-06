@@ -106,7 +106,8 @@
 
                                        
 
-                                        <div class="form-group"><label class="col-sm-2 control-label">Stores <span class="req">*</span></label>
+                                        <div class="form-group">
+                                                <label class="col-sm-2 control-label">Stores <span class="req">*</span></label>
                                                 <div class="col-md-10">
                                                     
                                                     {!! Form::select('stores', $stores, null, [ 'class'=>'chosen', 'id'=> 'storeSelect', 'multiple'=>'true']) !!}
@@ -114,6 +115,7 @@
                                                     {!! Form::checkbox('allStores', null, false ,['id'=> 'allStores'] ) !!}
                                                     
                                                 </div>
+                                                <div class="col-md-10 col-md-offset-2" id="selectedStoresCount"></div>
                                         </div> 
 
                                         <div class="hr-line-dashed"></div>

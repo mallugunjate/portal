@@ -1,6 +1,5 @@
 $(document).ready(function(){
-	$("#allStores").click();	
-	console.log("1");
+	$("#allStores").click();
 
 });
 $("#allStores").change(function(){
@@ -21,6 +20,28 @@ $("#allStores").change(function(){
 		
 	}
 });
+
+$("body").on ('paste, keyup', '.search-field input', function() {
+	processStorePaste();
+});
+
+var processStorePaste = function(){
+
+    	var storesString = $(".search-field").find('input').val();
+    	var stores = storesString.split(',');
+    	$(stores).each(function(i){
+    		stores[i]= stores[i].replace(/\s/g, '');
+    		if(stores[i].length == 3) {
+    			stores[i] = "0"+stores[i];
+    		}
+			$("#storeSelect option[value='"+  stores[i] +"']").attr('selected', 'selected');    		
+    	});
+    	
+    	$("#storeSelect").val(stores).trigger("chosen:updated");
+    	var selectedStoresCount = $('#storeSelect option:selected').length;
+    	console.log(selectedStoresCount);
+    	// $("#selectedStoresCount").append( selectedStoresCount + " stores selected" );
+};
 
 $( "#title" ).focus(function() {
 	$('.event-create i').removeClass("fa-spinner faa-spin animated");
@@ -58,7 +79,6 @@ $( "#storeSelect" ).focus(function() {
     $('.event-create span').text(' Create New Event');
 });
 
-
 $(document).on('click','.event-create',function(){
   	
   	var hasError = false;
@@ -71,6 +91,7 @@ $(document).on('click','.event-create',function(){
     var eventEnd = $("#end").val();
     var tags = $('#tags').val();
     var target_stores  = $("#storeSelect").val();
+    console.log(target_stores);
     var allStores  = $("allStores:checked").val();
 
     if(eventTitle == '') {
@@ -158,7 +179,10 @@ $(document).on('click','.event-create',function(){
 			        $('#createNewEventForm')[0].reset(); // empty the form
 			        CKEDITOR.instances['description'].setData('');
 			        $('#datepicker').find('input').datepicker('setDate', null);
-			        $("#storeSelect").chosen("destroy");
+			        
+			        $(".search-field").find('input').val('');
+			        processStorePaste();
+					// $("#storeSelect").chosen("destroy");
 			        $("#allStores").click();
 
 					$('.event-create i').removeClass("fa-spinner faa-spin animated");
