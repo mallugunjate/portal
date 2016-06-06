@@ -46,7 +46,7 @@ $('body').on('click', '#attach-selected-files', function(){
 });
 
 
-$(".remove-file").on('click', function(){
+$('body').on('click', ".remove-file", function(){
 	var document_id = $(this).attr('data-document-id');
 	$(this).parent().fadeOut(200);
 	$("#files-staged-to-remove").append('<div class="remove_document"  data-documentid='+ document_id +'>')
@@ -200,6 +200,10 @@ $(document).on('click','.communication-update',function(){
 		    }
 		}).done(function(response){
 			console.log(response);
+			$(".existing-files-container").load("/admin/communicationdocuments/"+communicationId);
+			$("#files-staged-to-remove").empty();
+			$("#files-selected").empty();
+			$("#document-listing").find(".document-checkbox").prop('checked', false);
 		});    	
     }
 
