@@ -9,7 +9,7 @@ $(document).ready(function(){
 		var term = query_terms[index];
 		console.log(term);
 		console.log(typeof(term));
-		$( '.mail-subject:contains("'+ term +'")' ).css( "background", "yellow" );
+		// $( '.mail-subject:contains("'+ term +'")' ).css( "background", "yellow" );
 
 	})
 
