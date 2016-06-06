@@ -95,6 +95,8 @@ Route::resource('/admin/folder', 'Document\FolderAdminController');
 
 //PACKAGES
 Route::resource('/admin/package', 'Document\PackageAdminController');
+Route::get('/admin/packagedocuments/{package_id}', 'Document\PackagePartialController@getPackageDocumentPartial');
+Route::get('/admin/packagefolders/{package_id}', 'Document\PackagePartialController@getPackageFolderPartial');
 
 //FEATURES 
 Route::resource('/admin/feature', 'Feature\FeatureAdminController');
