@@ -173,6 +173,9 @@
                                                         </span>                                                    
                                                         <small class="pull-right" style="padding-left: 10px;">{{ $n->since }} ago</small>
                                                             <strong>{!! $n->link !!}</strong> was {{ $n->verb }} <strong><a href="/{{ Request::segment(1) }}/document#!/{{ $n->global_folder_id }}">{{ $n->folder_name}}</a></strong>
+                                                            @if($n->count > 1)
+                                                            with <strong>{!! $n->count -1 !!}</strong> other documents
+                                                            @endif
                                                     </div>
                                                     
 
