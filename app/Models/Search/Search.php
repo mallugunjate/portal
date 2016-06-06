@@ -9,7 +9,7 @@ use App\Models\Communication\Communication;
 use App\Models\Utility\Utility;
 use Carbon\Carbon;
 use Log;
-
+use Illuminate\Database\Eloquent\Collection as Collection;
 class Search extends Model
 {
     public static function searchDocuments($query, $store)
@@ -39,10 +39,6 @@ class Search extends Model
     	}
     	
 
-    	$docs = $docs->sortBy(function($sort){
-    		return $sort->updated_at;
-		})->reverse();
-
         foreach($docs as $doc){
             $doc->modalLink = Utility::getModalLink($doc->filename, $doc->title, $doc->original_extension, 1, 0);
             $doc->since = Utility::getTimePastSinceDate($doc->updated_at);
@@ -51,11 +47,16 @@ class Search extends Model
 
             $doc->folder_name = $folder_info->name;
             $doc->global_folder_id = $folder_info->global_folder_id;
-
+            $doc->rank = 1;
             // $doc->folderPath = Document::getFolderPathForDocument($doc->id);
-        }
+        }   
 
-    	return $docs;	
+        $ranked_results = Search::rankSearchResults($docs);
+
+        $ranked_results = $ranked_results->sortBy(function($sort){
+                    return $sort->rank;
+                })->reverse();
+    	return $ranked_results;
     }
 
     public static function searchArchivedDocuments($query, $store)
@@ -64,7 +65,6 @@ class Search extends Model
         
         $query_terms = explode( ' ', $query);
         
-        // $today = Carbon::now()->toDateString();
         $today = Carbon::now();
         foreach ($query_terms as $term) {
             $docs = $docs->merge(
@@ -80,9 +80,9 @@ class Search extends Model
 
         }
 
-        $docs = $docs->sortBy(function($sort){
-            return $sort->updated_at;
-        })->reverse();
+        // $docs = $docs->sortBy(function($sort){
+        //     return $sort->updated_at;
+        // })->reverse();
 
         foreach($docs as $doc){
             $doc->archived = true;
@@ -93,9 +93,16 @@ class Search extends Model
 
             $doc->folder_name = $folder_info->name;
             $doc->global_folder_id = $folder_info->global_folder_id;
+            $doc->rank = 1;
         }
 
-        return $docs;   
+        $ranked_results = Search::rankSearchResults($docs);
+
+        $ranked_results = $ranked_results->sortBy(function($sort){
+                    return $sort->rank;
+                })->reverse();
+        return $ranked_results;
+
     }
 
     public static function searchFolders($query)
@@ -138,9 +145,16 @@ class Search extends Model
             }
 
             $folder->path = $pathString;
+            $folder->rank = 1;
         }
 
-    	return $folders;	
+    	
+        $ranked_results = Search::rankSearchResults($folders);
+
+        $ranked_results = $ranked_results->sortBy(function($sort){
+                    return $sort->rank;
+                })->reverse();
+        return $ranked_results;
     }
 
     public static function searchCommunications($query, $store)
@@ -149,8 +163,8 @@ class Search extends Model
     	
     	$query_terms = explode( ' ', $query);
     	
-    	//$today = Carbon::now()->toDateString();
         $today = Carbon::now();
+
     	foreach ($query_terms as $term) {
     		$communications = $communications->merge(
     							Communication::join('communications_target', 'communications_target.communication_id', '=', 'communications.id')
@@ -167,17 +181,19 @@ class Search extends Model
     	}
     	
 
-    	$communications = $communications->sortBy(function($sort){
-    		return $sort->updated_at;
-		})->reverse();
-
         foreach($communications as $comm){
             $comm->since = Utility::getTimePastSinceDate($comm->updated_at);
             $preview_string = strip_tags($comm->body);         
             $comm->trunc = Communication::truncateHtml($preview_string, 150);
+            $comm->rank = 1;
         }
 
-    	return $communications;
+        $ranked_results = Search::rankSearchResults($communications);
+
+        $ranked_results = $ranked_results->sortBy(function($sort){
+                    return $sort->rank;
+                })->reverse();
+        return $ranked_results;
     }
 
     public static function searchArchivedCommunications($query, $store)
@@ -198,19 +214,20 @@ class Search extends Model
                     );
         }
         
-
-        $communications = $communications->sortBy(function($sort){
-            return $sort->updated_at;
-        })->reverse();
-
         foreach($communications as $comm){
             $comm->archived = true;
             $comm->since = Utility::getTimePastSinceDate($comm->updated_at);
             $preview_string = strip_tags($comm->body);         
             $comm->trunc = Communication::truncateHtml($preview_string, 150);
+            $comm->rank = 1;
         }
 
-        return $communications;
+        $ranked_results = Search::rankSearchResults($communications);
+
+        $ranked_results = $ranked_results->sortBy(function($sort){
+                    return $sort->rank;
+                })->reverse();
+        return $ranked_results;
     }
 
     public static function searchAlerts($query, $store)
@@ -219,7 +236,6 @@ class Search extends Model
     	
     	$query_terms = explode( ' ', $query);
     	
-    	//$today = Carbon::now()->toDateString();
     	$today = Carbon::now();
     	foreach ($query_terms as $term) {
     		$alerts = $alerts->merge(
@@ -230,8 +246,8 @@ class Search extends Model
     							->where('store_id', '=', $store)
     							->where('alerts.alert_start', '<=', $today )
     							->where(function($q) use($today) {
-    								$q->where('alerts.alert_end', '>=', $today)
-    								->orWhere('alerts.alert_end', '=', '0000-00-00 00:00:00');
+                                    $q->where('end', '>=', $today)
+                                    ->orWhere('end', '=', '0000-00-00 00:00:00');
     							})
 
     							->get()
@@ -239,16 +255,18 @@ class Search extends Model
     	}
     	
 
-    	$alerts = $alerts->sortBy(function($sort){
-    		return $sort->updated_at;
-		})->reverse();
-
         foreach ($alerts as $alert) {
             $alert->modalLink = Utility::getModalLink($alert->filename, $alert->title, $alert->original_extension, 1, 0);
             $alert->since = Utility::getTimePastSinceDate($alert->start);
+            $alert->rank = 1;
         }
 
-    	return $alerts;
+        $ranked_results = Search::rankSearchResults($alerts);
+
+        $ranked_results = $ranked_results->sortBy(function($sort){
+                    return $sort->rank;
+                })->reverse();
+        return $ranked_results;
     }
 
     public static function searchArchivedAlerts($query, $store)
@@ -260,27 +278,49 @@ class Search extends Model
         //$today = Carbon::now()->toDateString();
         $today = Carbon::now();
         foreach ($query_terms as $term) {
+
             $alerts = $alerts->merge(
                                 Document::join('alerts', 'documents.id', '=', 'alerts.document_id')
                                 ->join('alerts_target', 'alerts.id', '=', 'alerts_target.alert_id')
-                                ->where('original_filename', 'LIKE', '%'.$term.'%')
+                                // ->where('original_filename', 'LIKE', '%'.$term.'%')
+                                ->where('title', 'LIKE', '%'.$term.'%')      
                                 ->where('store_id', '=', $store)
-                                ->where('alerts.alert_end', '<=', $today )
+                                ->where('end', '<=', $today )
                                 ->get()
                     );
         }
         
-
-        $alerts = $alerts->sortBy(function($sort){
-            return $sort->updated_at;
-        })->reverse();
-
         foreach ($alerts as $alert) {
             $alert->archived = true;
             $alert->modalLink = Utility::getModalLink($alert->filename, $alert->title, $alert->original_extension, 1, 0);
             $alert->since = Utility::getTimePastSinceDate($alert->start);
+            $alert->rank = 1;
         }
 
-        return $alerts;
+        $ranked_results = Search::rankSearchResults($alerts);
+
+        $ranked_results = $ranked_results->sortBy(function($sort){
+                    return $sort->rank;
+                })->reverse();
+        return $ranked_results;
+    }
+
+    public static function rankSearchResults($results)
+    {
+        
+        $ranked_results = new Collection;
+        $ranked_ids = [];
+        foreach ($results as $result) {
+            
+            if ( in_array($result['id'], $ranked_ids)) {                 
+                $index = (array_search($result['id'], $ranked_ids));
+                $ranked_results[$index]['rank'] = $ranked_results[$index]['rank']+1;
+            }
+            else{
+                array_push($ranked_ids, $result['id']);
+                $ranked_results->add($result);
+            }
+        }
+        return ( $ranked_results );
     }
 }
