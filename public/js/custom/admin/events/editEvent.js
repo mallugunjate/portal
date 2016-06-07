@@ -16,8 +16,14 @@ $("#allStores").change(function(){
 		
 	}
 });
-$("body").on ('paste, keyup', '.search-field input', function() {
-	processStorePaste();
+$("body").on('paste', '.search-field input', function(e) {
+	
+	setTimeout(function(e) {
+	    processStorePaste();
+	  }, 5);
+	
+        
+
 });
 
 var processStorePaste = function(){

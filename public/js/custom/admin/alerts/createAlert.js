@@ -26,9 +26,13 @@ $("#allStores").change(function(){
 	}
 });
 
+$("body").on('paste', '.search-field input', function(e) {
+	
+	setTimeout(function(e) {
+	    processStorePaste();
+	  }, 5);
+  
 
-$("body").on ('paste, keyup', '.search-field input', function() {
-	processStorePaste();
 });
 
 var processStorePaste = function(){
