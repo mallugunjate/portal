@@ -9,13 +9,13 @@ $("body").on("click", ".folder", function(e){
 	var id = e.target.id;
 
 
-	if($(this).find('.indicator').hasClass('fa-folder-open')) {
+	// if($(this).find('.indicator').hasClass('fa-folder-open')) {
 		if(id){
 			getFolderDocuments(e.target.id);
 		} else {
 			getFolderDocuments(this.id);
 		}	
-	}	
+	// }	
 	
 });
 
@@ -43,6 +43,7 @@ var getFolderDocuments = function(id){
 }
 
 var checkDeepLink = function(){
+	console.log('it all starts here;');
 	if(window.location.hash){
 		folderId = window.location.hash.substr(3);
 		$("li#"+folderId).parents('.parent-folder').click();
