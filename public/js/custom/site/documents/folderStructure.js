@@ -1,21 +1,21 @@
 
 $("body").on("click", ".folder", function(e){
 	
-	console.log('when is this firing');
-	$("#archive-switch").removeClass('hidden').addClass('visible');
-	console.log(e);
-	console.log(this.id);
 	e.stopPropagation();
-	var id = e.target.id;
+	console.log( "Mouse event : " +e.hasOwnProperty('originalEvent'));
+	console.log(this.id);
+	
+	if (e.hasOwnProperty('originalEvent')) {
+		$("#archive-switch").removeClass('hidden').addClass('visible');
+		
+		var id = e.target.id;
 
-
-	// if($(this).find('.indicator').hasClass('fa-folder-open')) {
 		if(id){
 			getFolderDocuments(e.target.id);
 		} else {
 			getFolderDocuments(this.id);
 		}	
-	// }	
+	}
 	
 });
 
@@ -48,6 +48,7 @@ var checkDeepLink = function(){
 		folderId = window.location.hash.substr(3);
 		$("li#"+folderId).parents('.parent-folder').click();
 		$("li#" + folderId).click();
+		getFolderDocuments(folderId);
 
 	}
 }
