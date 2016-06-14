@@ -300,8 +300,7 @@
 		    });      				
 
 		   CKEDITOR.replace('body', {
-    		    filebrowserUploadUrl: "{{route('admin.communicationimages.store',['_token' => csrf_token() ])}}",
-    		    imageBrowser_listUrl : "/js/custom/ckeditor-imagebrowser/images_list.json"
+    		    filebrowserUploadUrl: "{{route('utilities.ckeditorimages.store',['_token' => csrf_token() ])}}"
 
     		});
 

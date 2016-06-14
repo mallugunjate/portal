@@ -224,7 +224,10 @@
         forceParse: false,
         autoclose: true
     });            
-    CKEDITOR.replace('description');  
+    CKEDITOR.replace('description', {
+        filebrowserUploadUrl: "{{route('utilities.ckeditorimages.store',['_token' => csrf_token() ])}}"
+    }); 
+
     $(".tree").treed({openedClass : 'fa fa-folder-open', closedClass : 'fa fa-folder'});              
 
 </script>
