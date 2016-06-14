@@ -125,7 +125,12 @@ class Event extends Model
     {
       $events = Event::join('events_target', 'events.id', '=', 'events_target.event_id')
                         ->where('store_id', $store_id)
+                        ->orderBy('start')
+                        // ->get();
                         ->get();
+                        // ->groupBy(function($date) {
+                        //     return Carbon::parse($date->created_at)->format('M');
+                        // });
       return $events;
     }
 

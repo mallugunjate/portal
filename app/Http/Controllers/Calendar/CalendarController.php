@@ -10,7 +10,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Models\Event\Event;
-use App\Models\Event\EventTypes;
+use App\Models\Event\EventType;
 use App\Models\Banner;
 
 use App\Models\Communication\Communication;
@@ -50,11 +50,13 @@ class CalendarController extends Controller
 
         $events = Event::getActiveEventsByStore($storeNumber); 
 
+        // dd($events);
+        
         foreach ($events as $event) {
             $event->prettyDateStart = Utility::prettifyDate($event->start);
             $event->prettyDateEnd = Utility::prettifyDate($event->end);
             $event->since = Utility::getTimePastSinceDate($event->start);
-
+            $event->event_type_name = EventType::getName($event->event_type);
         }
 
         return view('site.calendar.index')

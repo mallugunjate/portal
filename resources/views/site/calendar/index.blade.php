@@ -61,9 +61,17 @@
                                                     <i class="fa fa-calendar"></i>
                                                     {!! $event->prettyDateStart !!} 
                                                     <br>
-                                                    <small class="text-navy">2 hour ago</small>
+                                                    <small class="text-navy">
+                                                    @if( strtotime($event->start) < strtotime(date("y-m-d H:i:s")) )
+                                                        {!! $event->since !!} ago
+                                                    @else 
+                                                        in {!! $event->since !!} 
+                                                    @endif
+                                                    
+                                                    </small>
                                                 </div>
                                                 <div class="col-xs-8 content">
+                                                    <span class="label label-primary">{!! $event->event_type_name !!}</span>
                                                     <p class="m-b-xs"><strong>{!! $event->title !!}</strong></p>
                                                     <p>{!! $event->description !!}</p>
                                                 </div>
