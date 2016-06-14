@@ -49,7 +49,7 @@
                                         @else
                                         <input type="checkbox" class="onoffswitch-checkbox" id="archives" name="archives">
                                         @endif
-                                        <label class="onoffswitch-label" for="archives">
+                                        <label class="archive-onoffswitch onoffswitch-label" for="archives">
                                             <span class="onoffswitch-inner"></span>
                                             <span class="onoffswitch-switch"></span>
                                         </label>

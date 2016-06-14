@@ -37,6 +37,8 @@ class DashboardController extends Controller
 
         $storeInfo = StoreInfo::getStoreInfoByStoreId($storeNumber);
 
+        $isComboStore = $storeInfo->is_combo_store;
+        
         $storeBanner = $storeInfo->banner_id;
 
         $banner = Banner::find($storeBanner);
@@ -66,7 +68,8 @@ class DashboardController extends Controller
             ->with('communications', $communications)
             ->with('features', $features)
             ->with('notifications', $notifications)
-            ->with('urgentNoticeCount', $urgentNoticeCount);
+            ->with('urgentNoticeCount', $urgentNoticeCount)
+            ->with('isComboStore', $isComboStore);
     }
 
 
