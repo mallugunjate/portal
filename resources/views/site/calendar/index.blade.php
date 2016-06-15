@@ -37,7 +37,7 @@
                     <div class="tabs-container wrapper wrapper-content animated fadeInRight">
                         <ul class="nav nav-tabs">
                             <li class="active"><a data-toggle="tab" href="#tab-1" aria-expanded="true">Calendar View</a></li>
-                            <li class=""><a data-toggle="tab" href="#tab-2" aria-expanded="false">Event List</a></li>
+                            <li class=""><a data-toggle="tab" href="#tab-2" aria-expanded="false">List View</a></li>
                         </ul>
                         <div class="tab-content">
                             <div id="tab-1" class="tab-pane active">
@@ -53,27 +53,27 @@
                                 <div class="panel-body">
                                   
                                   <div class="ibox-content inspinia-timeline" style="display: block;">
-
-                                        @foreach($events as $event)
+                                        
+                                        @foreach($eventsList[$today] as $e)
                                         <div class="timeline-item">
                                             <div class="row">
                                                 <div class="col-xs-4 date">
                                                     <i class="fa fa-calendar"></i>
-                                                    {!! $event->prettyDateStart !!} 
+                                                    {!! $e->prettyDateStart !!} 
                                                     <br>
                                                     <small class="text-navy">
-                                                    @if( strtotime($event->start) < strtotime(date("y-m-d H:i:s")) )
-                                                        {!! $event->since !!} ago
+                                                    @if( strtotime($e->start) < strtotime(date("y-m-d H:i:s")) )
+                                                        {!! $e->since !!} ago
                                                     @else 
-                                                        in {!! $event->since !!} 
+                                                        in {!! $e->since !!} 
                                                     @endif
                                                     
                                                     </small>
                                                 </div>
                                                 <div class="col-xs-8 content">
-                                                    <span class="label label-primary">{!! $event->event_type_name !!}</span>
-                                                    <p class="m-b-xs"><strong>{!! $event->title !!}</strong></p>
-                                                    <p>{!! $event->description !!}</p>
+                                                    <span class="label label-primary">{!! $e->event_type_name !!}</span>
+                                                    <p class="m-b-xs"><strong>{!! $e->title !!}</strong></p>
+                                                    <p>{!! $e->description !!}</p>
                                                 </div>
                                             </div>
                                         </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Calendar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Request as RequestFacade; 
 use DB;
+use Carbon\Carbon;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -41,7 +42,6 @@ class CalendarController extends Controller
 
         $skin = Skin::getSkin($storeBanner);
 
-
         $communicationCount = Communication::getActiveCommunicationCount($storeNumber);
 
         $urgentNoticeCount = UrgentNotice::getUrgentNoticeCount($storeNumber);
@@ -50,8 +50,12 @@ class CalendarController extends Controller
 
         $events = Event::getActiveEventsByStore($storeNumber); 
 
-        // dd($events);
-        
+        $eventsList = Event::getActiveEventsByStoreInMonthChunks($storeNumber);
+
+        $now = Carbon::now();
+        $today = $now->year . "-" . $now->month;
+
+        // dd($events); 
         foreach ($events as $event) {
             $event->prettyDateStart = Utility::prettifyDate($event->start);
             $event->prettyDateEnd = Utility::prettifyDate($event->end);
@@ -64,8 +68,9 @@ class CalendarController extends Controller
                 ->with('alertCount', $alertCount)
                 ->with('communicationCount', $communicationCount)
                 ->with('events', $events)
+                ->with('eventsList', $eventsList)
+                ->with('today', $today)
                 ->with('urgentNoticeCount', $urgentNoticeCount);
-
     }
 
     /**
