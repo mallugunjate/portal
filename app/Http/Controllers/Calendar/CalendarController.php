@@ -35,6 +35,7 @@ class CalendarController extends Controller
     {
 
         $today = date("Y") . "-" . date("m");
+        $today = (string) $today; 
 
         $storeNumber = RequestFacade::segment(1);
 

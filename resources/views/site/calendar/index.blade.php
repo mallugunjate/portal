@@ -68,7 +68,7 @@
                                             </button>
                                         </div>
                                     </div>
-                                    <div class="fc-center"><h2>June 2016</h2></div>
+                                    <div class="fc-center"><h2><span class="month-name"></span> <span class="year"></span></h2></div>
                                     <div class="fc-clear"></div>
                                 </div>
 
@@ -135,6 +135,17 @@
     
     <script type="text/javascript">
     $(function() { // document ready
+
+        var today = String("{!! $today !!}");
+        setMonthDigits( today );
+        setMonthName( today );
+        setYear( today );
+
+        $('.month-name').html( the_month_name);
+        $('.year').html(the_year);
+        
+        console.log(the_year, the_month, the_month_name);
+
 
         var date = new Date();
         var d = date.getDate();

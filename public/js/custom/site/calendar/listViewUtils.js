@@ -35,7 +35,7 @@ function getMonthName( yearMonth )
 // year
 function getYear( yearMonth )
 {
-	var year = yearMonth.slice(4);
+	var year = yearMonth.slice(0,4);
 	return year;	
 }
 
