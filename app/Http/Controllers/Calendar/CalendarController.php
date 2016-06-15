@@ -34,6 +34,8 @@ class CalendarController extends Controller
     public function index(Request $request)
     {
 
+        $today = date("Y") . "-" . date("m");
+
         $storeNumber = RequestFacade::segment(1);
 
         $storeInfo = StoreInfo::getStoreInfoByStoreId($storeNumber);
@@ -48,12 +50,11 @@ class CalendarController extends Controller
 
         $alertCount = Alert::getActiveAlertCountByStore($storeNumber);
 
+        //for the calendar view
         $events = Event::getActiveEventsByStore($storeNumber); 
 
-        $eventsList = Event::getActiveEventsByStoreInMonthChunks($storeNumber);
-
-        $now = Carbon::now();
-        $today = $now->year . "-" . $now->month;
+        //for then list of events
+        $eventsList = Event::getActiveEventsByStoreAndMonth($storeNumber, $today);
 
         // dd($events); 
         foreach ($events as $event) {
@@ -137,5 +138,11 @@ class CalendarController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getListofEventsByStoreAndMonth($storeNumber, $yearMonth)
+    {
+        $eventsList = Event::getActiveEventsByStoreAndMonth($storeNumber, $yearMonth);
+        return $eventsList;
     }
 }

@@ -51,11 +51,31 @@
                             </div>
                             <div id="tab-2" class="tab-pane">
                                 <div class="panel-body">
-                                  
-                                  <div class="ibox-content inspinia-timeline" style="display: block;">
-                                        
-                                        @foreach($eventsList[$today] as $e)
+
+
+
+
+                                  <div class="ibox-content inspinia-timeline" style="display: block;">       
+
+                                <div class="fc-toolbar">
+                                    <div class="fc-left">
+                                        <div class="fc-button-group">
+                                            <button type="button" class="fc-prev-button fc-button fc-state-default fc-corner-left">
+                                                <span class="fc-icon fc-icon-left-single-arrow"></span>
+                                            </button>
+                                            <button type="button" class="fc-next-button fc-button fc-state-default fc-corner-right">
+                                                <span class="fc-icon fc-icon-right-single-arrow"></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="fc-center"><h2>June 2016</h2></div>
+                                    <div class="fc-clear"></div>
+                                </div>
+
+
+                                        @foreach($eventsList as $e)
                                         <div class="timeline-item">
+
                                             <div class="row">
                                                 <div class="col-xs-4 date">
                                                     <i class="fa fa-calendar"></i>
@@ -109,6 +129,7 @@
     @include('site.includes.footer')       
     @include('site.includes.scripts')
 
+    <script type="text/javascript" src="/js/custom/site/calendar/listViewUtils.js"></script>
     <script type="text/javascript" src="/js/plugins/fullcalendar/moment.min.js"></script>
     <script type="text/javascript" src="/js/plugins/fullcalendar/fullcalendar.min.js"></script>
     

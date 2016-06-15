@@ -136,10 +136,11 @@ class Event extends Model
       return $events;
     }
 
-    public static function getActiveEventsByStoreInMonthChunks($store_id)
+    public static function getActiveEventsByStoreAndMonth($store_id, $yearMonth)
     {
         $events = Event::join('events_target', 'events.id', '=', 'events_target.event_id')
                     ->where('store_id', $store_id)
+                    ->where('start', 'LIKE', $yearMonth.'%')
                     ->orderBy('start')
                     ->get()
                     ->each(function ($item) {
@@ -147,20 +148,10 @@ class Event extends Model
                         $item->prettyDateEnd = Utility::prettifyDate($item->end);
                         $item->since = Utility::getTimePastSinceDate($item->start);
                         $item->event_type_name = EventType::getName($item->event_type);                        
-                    })
-                    ->groupBy(function($date) {
-                        return Carbon::parse($date->start)->format('Y-n');
                     });
-
-        // dd($events);
-
-        // foreach ($events as $el) {
-        //     $el->prettyDateStart = Utility::prettifyDate($el->start);
-        //     $el->prettyDateEnd = Utility::prettifyDate($el->end);
-        //     $el->since = Utility::getTimePastSinceDate($el->start);
-        //     $el->event_type_name = EventType::getName($el->event_type);
-        // }
-                     
+                    // ->groupBy(function($date) {
+                    //     return Carbon::parse($date->start)->format('Y-n');
+                    // });       
         return $events;
     }
 
