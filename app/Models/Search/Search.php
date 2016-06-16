@@ -10,6 +10,8 @@ use App\Models\Utility\Utility;
 use Carbon\Carbon;
 use Log;
 use Illuminate\Database\Eloquent\Collection as Collection;
+use App\Models\Event\Event;
+
 class Search extends Model
 {
     public static function searchDocuments($query, $store)
@@ -298,6 +300,70 @@ class Search extends Model
         }
 
         $ranked_results = Search::rankSearchResults($alerts);
+
+        $ranked_results = $ranked_results->sortBy(function($sort){
+                    return $sort->rank;
+                })->reverse();
+        return $ranked_results;
+    }
+
+    public static function searchEvents($query, $store)
+    {
+        $events = collect();
+        
+        $query_terms = explode( ' ', $query);
+        
+        $today = Date('Y')."-".Date('m');
+
+        foreach ($query_terms as $term) {
+            $events = $events->merge(
+                                Event::join('events_target', 'events.id', '=', 'events_target.event_id')
+                                ->where('title', 'LIKE', '%'.$term.'%')
+                                ->where('events_target.store_id', '=', $store)
+                                // ->where('events.start', '<=', $today )
+                                ->where('events.end', '>=', $today)
+                                // ->where(function($q) use($today) {
+                                //     $q->where('events.end', '>=', $today)
+                                //     ->orWhere('events.end', '=', '0000-00-00 00:00:00');
+                                // })
+                                ->select('events.*')
+                                ->get()
+                    );
+        }
+        
+        return $events;
+
+        $ranked_results = Search::rankSearchResults($events);
+
+        $ranked_results = $ranked_results->sortBy(function($sort){
+                    return $sort->rank;
+                })->reverse();
+        return $ranked_results;
+    }
+
+
+    public static function searchArchivedEvents($query, $store)
+    {
+        $events = collect();
+        
+        $query_terms = explode( ' ', $query);
+        
+        $today = Date('Y')."-".Date('m');
+        
+        foreach ($query_terms as $term) {
+            $events = $events->merge(
+                                Event::join('events_target', 'events.id', '=', 'events_target.event_id')
+                                ->where('title', 'LIKE', '%'.$term.'%')
+                                ->where('events_target.store_id', '=', $store)
+                                ->where('end', '<=', $today )
+                                ->select('events.*')
+                                ->get()
+                    );
+        }
+        
+        return $events;
+
+        $ranked_results = Search::rankSearchResults($events);
 
         $ranked_results = $ranked_results->sortBy(function($sort){
                     return $sort->rank;
