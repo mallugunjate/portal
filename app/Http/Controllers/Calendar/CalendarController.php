@@ -77,7 +77,7 @@ class CalendarController extends Controller
                 ->with('events', $events)
                 ->with('urgentNoticeCount', $urgentNoticeCount)
                 ->with('isComboStore', $isComboStore)
-                ->with('banner', $banner);
+                ->with('banner', $banner)
                 ->with('eventsList', $eventsList)
                 ->with('today', $today)
                 ->with('urgentNoticeCount', $urgentNoticeCount);
