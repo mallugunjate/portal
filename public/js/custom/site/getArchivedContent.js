@@ -4,7 +4,7 @@ $(document).ready(function(){
 	}
 })
 
-$(".onoffswitch-label").on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', function(){
+$(".archive-onoffswitch").on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', function(){
 //$("#archives").on('change', function(){
 
 	if($("input[name='archives']:checked").val()) {

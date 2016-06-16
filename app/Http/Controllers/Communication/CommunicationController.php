@@ -42,6 +42,10 @@ class CommunicationController extends Controller
 
         $storeBanner = $storeInfo->banner_id;
 
+        $banner = Banner::find($storeBanner);
+
+        $isComboStore = $storeInfo->is_combo_store;
+
         $skin = Skin::getSkin($storeBanner);
 
         $urgentNoticeCount = UrgentNotice::getUrgentNoticeCount($storeNumber);
@@ -91,7 +95,9 @@ class CommunicationController extends Controller
             ->with('alertCount', $alertCount)
             ->with('urgentNoticeCount', $urgentNoticeCount)
             ->with('title', $title)
-            ->with('archives', $request['archives']);
+            ->with('archives', $request['archives'])
+            ->with('banner', $banner)
+            ->with('isComboStore', $isComboStore);
 
     }
 
@@ -127,6 +133,8 @@ class CommunicationController extends Controller
         $storeNumber = RequestFacade::segment(1);
         $storeInfo = StoreInfo::getStoreInfoByStoreId($storeNumber);
         $storeBanner = $storeInfo->banner_id;
+        $banner = Banner::find($storeBanner);
+        $isComboStore = $storeInfo->is_combo_store;
 
         $skin = Skin::getSkin($storeBanner);
 
@@ -193,7 +201,9 @@ class CommunicationController extends Controller
             ->with('communication_documents', $selected_documents)
             ->with('communication_packages', $selected_packages)
             ->with('urgentNoticeCount', $urgentNoticeCount)
-            ->with('alertCount', $alertCount);
+            ->with('alertCount', $alertCount)
+            ->with('banner', $banner)
+            ->with('isComboStore', $isComboStore);
         
     }
 
