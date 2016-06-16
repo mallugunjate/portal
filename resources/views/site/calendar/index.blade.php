@@ -60,10 +60,10 @@
                                 <div class="fc-toolbar">
                                     <div class="fc-left">
                                         <div class="fc-button-group">
-                                            <button type="button" class="fc-prev-button fc-button fc-state-default fc-corner-left">
+                                            <button type="button" class="fc-prev-button fc-button fc-state-default fc-corner-left prev-month">
                                                 <span class="fc-icon fc-icon-left-single-arrow"></span>
                                             </button>
-                                            <button type="button" class="fc-next-button fc-button fc-state-default fc-corner-right">
+                                            <button type="button" class="fc-next-button fc-button fc-state-default fc-corner-right next-month">
                                                 <span class="fc-icon fc-icon-right-single-arrow"></span>
                                             </button>
                                         </div>
@@ -141,11 +141,33 @@
         setMonthName( today );
         setYear( today );
 
-        $('.month-name').html( the_month_name);
-        $('.year').html(the_year);
-        
+        var init_m = pad(the_month, 2);
+        var init_yearMonth = the_year + '-' + init_m; 
+        getCurrentMonth( init_yearMonth );
+
+        // $('.month-name').html( the_month_name);
+        // $('.year').html(the_year);
+
         console.log(the_year, the_month, the_month_name);
 
+        $( ".prev-month" ).click(function() {    
+            var m = parseInt(the_month, 10);
+            m = m - 1;
+            m = pad(m, 2);
+            var yearMonth = the_year + '-' + m;            
+            console.log('loading PREV month with: ' + yearMonth);
+            getListData( getPrevMonth(yearMonth) );
+
+        });
+
+        $( ".next-month" ).click(function() {
+            var m = parseInt(the_month, 10);
+            m = m + 1;
+            m = pad(m, 2);
+            var yearMonth = the_year + '-' + m;
+            //getNextMonth(yearMonth);
+            getListData( getNextMonth(yearMonth) );
+        });
 
         var date = new Date();
         var d = date.getDate();

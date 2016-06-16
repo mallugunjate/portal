@@ -12,6 +12,12 @@ function getMonthDigits( yearMonth )
 	return month;
 }
 
+function getMonthDigitsWithZero( yearMonth )
+{
+	var month = yearMonth.slice(-2);
+	return month;
+}
+
 function setMonthDigits( yearMonth )
 {
 	the_month = getMonthDigits(yearMonth);
@@ -44,20 +50,35 @@ function setYear( yearMonth )
 	the_year = getYear(yearMonth);
 }
 
+function getCurrentMonth(yearMonth)
+{
+	the_month_name = months[the_month-1];
+	getListData(yearMonth);
+	renderList();
+}
 
 function getPrevMonth( yearMonth )
 {
 	var month_digits = getMonthDigits(yearMonth);
 	var year = getYear(yearMonth);
+	year =  parseInt(year);
 
-	if(month_digits == 1){
+	if(month_digits < 1){
 		the_year = year-1;
 		the_month = 12;
+
+		console.log( "getPrevMonth: " + the_year +", " + the_month)
 	} else {
 		the_month = the_month-1;
 	}
 
 	the_month_name = months[the_month-1];
+
+	var m = parseInt(the_month);
+	m = pad(m, 2);
+	yearMonthReturn = the_year + "-" + m;
+
+	return yearMonthReturn;	
 } 
 
 
@@ -65,18 +86,52 @@ function getNextMonth( yearMonth )
 {
 	var month_digits = getMonthDigits(yearMonth);
 	var year = getYear(yearMonth);
+	year =  parseInt(year);
 
-	if(month_digits == 12){
+	if(month_digits > 12){
 		the_year = year+1;
 		the_month = 1;
+
+		console.log( "getNextMonth: " + the_year +", " + the_month)
 	} else {
 		the_month = the_month+1;
 	}
 
 	the_month_name = months[the_month-1];
+
+	var m = parseInt(the_month);
+	m = pad(m, 2);
+	yearMonthReturn = the_year + "-" + m;
+
+	return yearMonthReturn;
+}
+
+function getListData(yearMonth)
+{
+	var storeno = localStorage.getItem('userStoreNumber');
+
+	$.ajax({
+		url : "/" + storeno + "/calendar/listevents/" + yearMonth,
+	    type: 'GET'
+	}).done(function( data ){
+		console.log(data);
+		renderList();
+	});
+}
+
+function renderList()
+{
+	//set the title of the list
+	$('.month-name').html( the_month_name);
+	$('.year').html(the_year);
+
 }
 
 
-
+function pad(num, size) {
+    var s = num+"";
+    while (s.length < size) s = "0" + s;
+    return s;
+}
 
 
