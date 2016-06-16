@@ -14,6 +14,9 @@
     <link rel="stylesheet" type="text/css" href="/css/animate.css">
     <link rel="stylesheet" type="text/css" href="/css/app.css">
 
+    <link rel="stylesheet" type="text/css" href="/css/print.css">
+
+
     @unless ( Request::is('admin') || Request::is('admin/*') )
     {!! $skin !!}
     @endunless

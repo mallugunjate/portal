@@ -36,7 +36,7 @@
 
             </div>
 
-<div class="col-lg-10 animated fadeInRight">
+<div class="col-lg-10 animated fadeInRight printable">
             <div class="mail-box-header">
 
                 <h2>
