@@ -30,13 +30,15 @@
 
 <div class="wrapper wrapper-content">
         <div class="row">
-            <div class="col-lg-2">
+            <div class="col-sm-2">
 
             @include('site.communications.commsidebar')
 
             </div>
 
-<div class="col-lg-10 animated fadeInRight printable">
+            
+<div class="col-sm-10 animated fadeInRight printable">
+
             <div class="mail-box-header">
 
                 <h2>
