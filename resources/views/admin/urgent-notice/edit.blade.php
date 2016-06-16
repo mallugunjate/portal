@@ -76,9 +76,9 @@
 
                                                 <div class="col-sm-10">
                                                     <div class="input-daterange input-group" id="datepicker">
-                                                        <input type="text" class="input-sm form-control" name="start" id="start" value="{{$urgent_notice->start}}" />
+                                                        <input type="text" class="input-sm form-control datetimepicker-start" name="start" id="start" value="{{$urgent_notice->start}}" />
                                                         <span class="input-group-addon">to</span>
-                                                        <input type="text" class="input-sm form-control" name="end" id="end" value="{{$urgent_notice->end}}" />
+                                                        <input type="text" class="input-sm form-control datetimepicker-end" name="end" id="end" value="{{$urgent_notice->end}}" />
                                                     </div>
                                                 </div>
                                         </div>
@@ -285,13 +285,7 @@
 	<script type="text/javascript">
 		$(".chosen").chosen({
 	        width:'75%'
-	    })
-	    $('.input-daterange').datepicker({
-	         format: 'yyyy-mm-dd',
-	        keyboardNavigation: false,
-	        forceParse: false,
-	        autoclose: true
-	    });            
+	    });          
 
 	    CKEDITOR.replace('description');
 	    
