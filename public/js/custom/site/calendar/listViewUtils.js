@@ -66,8 +66,6 @@ function getPrevMonth( yearMonth )
 	if(month_digits < 1){
 		the_year = year-1;
 		the_month = 12;
-
-		console.log( "getPrevMonth: " + the_year +", " + the_month)
 	} else {
 		the_month = the_month-1;
 	}
@@ -91,8 +89,6 @@ function getNextMonth( yearMonth )
 	if(month_digits > 12){
 		the_year = year+1;
 		the_month = 1;
-
-		console.log( "getNextMonth: " + the_year +", " + the_month)
 	} else {
 		the_month = the_month+1;
 	}
@@ -129,11 +125,8 @@ function renderList(yearMonth)
 
 }
 
-
 function pad(num, size) {
     var s = num+"";
     while (s.length < size) s = "0" + s;
     return s;
 }
-
-

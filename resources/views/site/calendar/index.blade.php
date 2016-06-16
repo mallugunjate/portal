@@ -150,14 +150,11 @@
         // $('.month-name').html( the_month_name);
         // $('.year').html(the_year);
 
-        console.log(the_year, the_month, the_month_name);
-
         $( ".prev-month" ).click(function() {    
             var m = parseInt(the_month, 10);
             m = m - 1;
             m = pad(m, 2);
             var yearMonth = the_year + '-' + m;            
-            console.log('loading PREV month with: ' + yearMonth);
             renderList( getPrevMonth(yearMonth) );
 
         });
@@ -167,7 +164,6 @@
             m = m + 1;
             m = pad(m, 2);
             var yearMonth = the_year + '-' + m;
-            //getNextMonth(yearMonth);
             renderList( getNextMonth(yearMonth) );
         });
 
