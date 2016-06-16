@@ -67,7 +67,12 @@
                                                 <span class="fc-icon fc-icon-right-single-arrow"></span>
                                             </button>
                                         </div>
+
+                                        <button type="button" class="fc-today-button fc-button fc-state-default fc-corner-left fc-corner-right go-to-today">today</button>
                                     </div>
+
+                                    
+
                                     <div class="fc-center"><h2><span class="month-name"></span> <span class="year"></span></h2></div>
                                     <div class="fc-clear"></div>
                                 </div>
@@ -165,6 +170,10 @@
             m = pad(m, 2);
             var yearMonth = the_year + '-' + m;
             renderList( getNextMonth(yearMonth) );
+        });
+
+        $('.go-to-today').click(function() {
+            getCurrentMonth(init_yearMonth);
         });
 
         var date = new Date();

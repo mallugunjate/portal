@@ -52,9 +52,14 @@ function setYear( yearMonth )
 
 function getCurrentMonth(yearMonth)
 {
-	the_month_name = months[the_month-1];
+	setMonthName(yearMonth);
+	setYear(yearMonth);
+	setMonthDigits(yearMonth);
 	getListData(yearMonth);
-	renderList();
+	renderList(yearMonth);
+	console.log(the_month_name, the_year);
+
+
 }
 
 function getPrevMonth( yearMonth )
