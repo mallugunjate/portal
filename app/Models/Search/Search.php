@@ -328,10 +328,14 @@ class Search extends Model
                                 // })
                                 ->select('events.*')
                                 ->get()
+                                ->each(function($item){
+                                    $item->since = Utility::getTimePastSinceDate($item->start);
+                                    $item->rank = 1;
+                                    $item->prettyDateStart = Utility::prettifyDate($item->start);
+                                    $item->prettyDateEnd = Utility::prettifyDate($item->end);
+                                })
                     );
-        }
-        
-        return $events;
+        }    
 
         $ranked_results = Search::rankSearchResults($events);
 
@@ -358,10 +362,16 @@ class Search extends Model
                                 ->where('end', '<=', $today )
                                 ->select('events.*')
                                 ->get()
+                                ->each(function($item){
+                                    $item->since = Utility::getTimePastSinceDate($item->start);
+                                    $item->rank = 1;
+                                    $item->archived = true;
+                                    $item->prettyDateStart = Utility::prettifyDate($item->start);
+                                    $item->prettyDateEnd = Utility::prettifyDate($item->end);
+
+                                })
                     );
         }
-        
-        return $events;
 
         $ranked_results = Search::rankSearchResults($events);
 

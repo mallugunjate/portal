@@ -71,6 +71,7 @@ class SearchController extends Controller
             ->with('folders', $folders)
             ->with('communications', $communications)
             ->with('alerts', $alerts)
+            ->with('events', $events)
             ->with('communicationCount', $communicationCount)
             ->with('alertCount', $alertCount)               
             ->with('query', $query)
