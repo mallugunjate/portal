@@ -15,6 +15,7 @@ use App\Models\Utility\Utility;
 use App\Models\Search\Search;
 use App\Models\Communication\Communication;
 use App\Models\Alert\Alert;
+use App\Models\Banner;
 
 class SearchController extends Controller
 {
@@ -60,6 +61,10 @@ class SearchController extends Controller
 
         $storeBanner = $storeInfo->banner_id;
 
+        $banner = Banner::find($storeBanner);
+
+        $isComboStore = $storeInfo->is_combo_store;
+
         $skin = Skin::getSkin($storeBanner);
 
         $urgentNoticeCount = UrgentNotice::getUrgentNoticeCount($storeNumber);
@@ -73,6 +78,8 @@ class SearchController extends Controller
             ->with('alerts', $alerts)
             ->with('events', $events)
             ->with('communicationCount', $communicationCount)
+            ->with('isComboStore', $isComboStore)
+            ->with('banner', $banner)
             ->with('alertCount', $alertCount)               
             ->with('query', $query)
             ->with('archives', $request['archives']);
