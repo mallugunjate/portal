@@ -39,6 +39,10 @@ class CalendarController extends Controller
 
         $storeBanner = $storeInfo->banner_id;
 
+        $banner = Banner::find($storeBanner);
+
+        $isComboStore = $storeInfo->is_combo_store;
+
         $skin = Skin::getSkin($storeBanner);
 
 
@@ -57,12 +61,15 @@ class CalendarController extends Controller
 
         }
 
+
         return view('site.calendar.index')
                 ->with('skin', $skin)
                 ->with('alertCount', $alertCount)
                 ->with('communicationCount', $communicationCount)
                 ->with('events', $events)
-                ->with('urgentNoticeCount', $urgentNoticeCount);
+                ->with('urgentNoticeCount', $urgentNoticeCount)
+                ->with('isComboStore', $isComboStore)
+                ->with('banner', $banner);
 
     }
 
