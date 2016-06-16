@@ -217,9 +217,17 @@
     });
     $(".chosen").chosen({
         width:'75%'
-    });
-            
-    CKEDITOR.replace('description');  
+    })
+    $('.input-daterange').datepicker({
+         format: 'yyyy-mm-dd',
+        keyboardNavigation: false,
+        forceParse: false,
+        autoclose: true
+    });            
+    CKEDITOR.replace('description', {
+        filebrowserUploadUrl: "{{route('utilities.ckeditorimages.store',['_token' => csrf_token() ])}}"
+    }); 
+
     $(".tree").treed({openedClass : 'fa fa-folder-open', closedClass : 'fa fa-folder'});              
 
 </script>

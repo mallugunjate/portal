@@ -169,7 +169,10 @@
                     $(".chosen").chosen({
                         width:'75%'
                     });
-                    CKEDITOR.replace('description');
+                    
+                    CKEDITOR.replace('description', {
+                        filebrowserUploadUrl: "{{route('utilities.ckeditorimages.store',['_token' => csrf_token() ])}}"
+                    });
 
 				</script>
 
