@@ -71,9 +71,11 @@
                                     <div class="fc-center"><h2><span class="month-name"></span> <span class="year"></span></h2></div>
                                     <div class="fc-clear"></div>
                                 </div>
+                                <div class="event-list-partial">
+                                    @include('site.calendar.event-list-partial', ['eventList'=> $eventsList])
+                                </div>
 
-
-                                        @foreach($eventsList as $e)
+                                        {{--@foreach($eventsList as $e)
                                         <div class="timeline-item">
 
                                             <div class="row">
@@ -97,7 +99,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        @endforeach
+                                        @endforeach --}}
 
                                     </div> 
 
@@ -156,7 +158,7 @@
             m = pad(m, 2);
             var yearMonth = the_year + '-' + m;            
             console.log('loading PREV month with: ' + yearMonth);
-            getListData( getPrevMonth(yearMonth) );
+            renderList( getPrevMonth(yearMonth) );
 
         });
 
@@ -166,7 +168,7 @@
             m = pad(m, 2);
             var yearMonth = the_year + '-' + m;
             //getNextMonth(yearMonth);
-            getListData( getNextMonth(yearMonth) );
+            renderList( getNextMonth(yearMonth) );
         });
 
         var date = new Date();

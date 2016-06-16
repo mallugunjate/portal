@@ -146,4 +146,9 @@ class CalendarController extends Controller
         $eventsList = Event::getActiveEventsByStoreAndMonth($storeNumber, $yearMonth);
         return $eventsList;
     }
+    public function getEventListPartial($storeNumber, $yearMonth)
+    {
+        $events = Event::getActiveEventsByStoreAndMonth($storeNumber, $yearMonth);
+        return view('site.calendar.event-list-partial')->with('eventsList', $events);
+    }
 }

@@ -115,15 +115,17 @@ function getListData(yearMonth)
 	    type: 'GET'
 	}).done(function( data ){
 		console.log(data);
-		renderList();
+		renderList(yearMonth);
 	});
 }
 
-function renderList()
+function renderList(yearMonth)
 {
 	//set the title of the list
 	$('.month-name').html( the_month_name);
 	$('.year').html(the_year);
+	var storeno = localStorage.getItem('userStoreNumber');
+	$(".event-list-partial").load("/" + storeno + "/calendar/eventlistpartial/" + yearMonth);
 
 }
 
