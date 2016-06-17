@@ -18,9 +18,20 @@
         </div>
         <div class="col-md-8 content">
             @foreach($events as $e)
-            <span class="label label-primary">{!! $e->event_type_name !!}</span>
-            <span class="m-b-xs"><strong>{!! $e->title !!}</strong></span>
-            <p>{!! $e->description !!}</p>
+            <div class="event row">
+                <div class="event-type col-md-2">
+                    <span class="label label-primary">{!! $e->event_type_name !!}</span>
+                </div>
+                <div class="col-md-10">
+                    <div class="event-title">
+                        
+                        <span class="m-b-xs"><strong>{!! $e->title !!}</strong></span>
+                    </div>
+                    <div class="event-desc">
+                        <p>{!! $e->description !!}</p>
+                    </div>
+                </div>
+            </div>    
             @endforeach
         </div>
     </div>

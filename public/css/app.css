@@ -8305,3 +8305,6 @@ body.md-skin {
 }
 #loading img{ height: 32px; width: 32px;}
 
+.timeline-item .event{
+  margin-bottom: 15px; 
+}
