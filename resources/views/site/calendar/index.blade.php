@@ -67,7 +67,12 @@
                                                 <span class="fc-icon fc-icon-right-single-arrow"></span>
                                             </button>
                                         </div>
+
+                                        <button type="button" class="fc-today-button fc-button fc-state-default fc-corner-left fc-corner-right go-to-today">today</button>
                                     </div>
+
+                                    
+
                                     <div class="fc-center"><h2><span class="month-name"></span> <span class="year"></span></h2></div>
                                     <div class="fc-clear"></div>
                                 </div>
@@ -150,14 +155,11 @@
         // $('.month-name').html( the_month_name);
         // $('.year').html(the_year);
 
-        console.log(the_year, the_month, the_month_name);
-
         $( ".prev-month" ).click(function() {    
             var m = parseInt(the_month, 10);
             m = m - 1;
             m = pad(m, 2);
             var yearMonth = the_year + '-' + m;            
-            console.log('loading PREV month with: ' + yearMonth);
             renderList( getPrevMonth(yearMonth) );
 
         });
@@ -167,8 +169,11 @@
             m = m + 1;
             m = pad(m, 2);
             var yearMonth = the_year + '-' + m;
-            //getNextMonth(yearMonth);
             renderList( getNextMonth(yearMonth) );
+        });
+
+        $('.go-to-today').click(function() {
+            getCurrentMonth(init_yearMonth);
         });
 
         var date = new Date();
