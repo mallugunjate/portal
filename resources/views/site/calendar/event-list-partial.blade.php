@@ -1,24 +1,27 @@
-@foreach($eventsList as $e)
+@foreach($eventsList as $day=>$events)
 <div class="timeline-item">
 
     <div class="row">
-        <div class="col-xs-4 date">
+        <div class="col-md-4 date">
             <i class="fa fa-calendar"></i>
-            {!! $e->prettyDateStart !!} 
+            
+            {{$events[0]->prettyDateStart}}
             <br>
             <small class="text-navy">
-            @if( strtotime($e->start) < strtotime(date("y-m-d H:i:s")) )
-                {!! $e->since !!} ago
+            @if( strtotime($events[0]->start) < strtotime(date("y-m-d H:i:s")) )
+                {!! $events[0]->since !!} ago
             @else 
-                in {!! $e->since !!} 
+                in {!! $events[0]->since !!} 
             @endif
             
             </small>
         </div>
-        <div class="col-xs-8 content">
+        <div class="col-md-8 content">
+            @foreach($events as $e)
             <span class="label label-primary">{!! $e->event_type_name !!}</span>
-            <p class="m-b-xs"><strong>{!! $e->title !!}</strong></p>
+            <span class="m-b-xs"><strong>{!! $e->title !!}</strong></span>
             <p>{!! $e->description !!}</p>
+            @endforeach
         </div>
     </div>
 </div>

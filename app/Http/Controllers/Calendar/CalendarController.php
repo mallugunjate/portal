@@ -57,7 +57,6 @@ class CalendarController extends Controller
         //for then list of events
         $eventsList = Event::getActiveEventsByStoreAndMonth($storeNumber, $today);
 
-        // dd($events); 
         foreach ($events as $event) {
             $event->prettyDateStart = Utility::prettifyDate($event->start);
             $event->prettyDateEnd = Utility::prettifyDate($event->end);

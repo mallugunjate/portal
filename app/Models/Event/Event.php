@@ -128,11 +128,7 @@ class Event extends Model
       $events = Event::join('events_target', 'events.id', '=', 'events_target.event_id')
                         ->where('store_id', $store_id)
                         ->orderBy('start')
-                        // ->get();
                         ->get();
-                        // ->groupBy(function($date) {
-                        //     return Carbon::parse($date->created_at)->format('M');
-                        // });
       return $events;
     }
 
@@ -141,6 +137,7 @@ class Event extends Model
         $events = Event::join('events_target', 'events.id', '=', 'events_target.event_id')
                     ->where('store_id', $store_id)
                     ->where('start', 'LIKE', $yearMonth.'%')
+                    
                     ->orderBy('start')
                     ->get()
                     ->each(function ($item) {
@@ -148,10 +145,11 @@ class Event extends Model
                         $item->prettyDateEnd = Utility::prettifyDate($item->end);
                         $item->since = Utility::getTimePastSinceDate($item->start);
                         $item->event_type_name = EventType::getName($item->event_type);                        
+                    })
+                    ->groupBy(function($event) {
+                            return Carbon::parse($event->start)->format('Y-m-d');
                     });
-                    // ->groupBy(function($date) {
-                    //     return Carbon::parse($date->start)->format('Y-n');
-                    // });       
+                    
         return $events;
     }
 
