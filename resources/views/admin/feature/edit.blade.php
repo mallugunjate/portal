@@ -123,33 +123,7 @@
                                 	
 									<!-- <div class="form-group"><label class="col-sm-2 control-label">Files Attached</label> -->
 										<div class="existing-files-container">
-											<table class="table table-hover feature-documents-table">
-												<thead>
-													<tr>
-														<td>Title</td>
-														<td>Updated</td>
-														<td></td>
-													</tr>
-												</thead>
-												<tbody>
-
-													@foreach($feature_documents as $doc)
-													<tr class="feature-files">
-														<td class="feature-filename" data-fileid = "{{$doc->id}}"> <i class="fa fa-file-o"></i> {{$doc->original_filename}}</td>
-														{{-- <td class="feature-filepath"> File Location : {{$doc->folder_path}}</td> --}}
-														<td class="feature-timestamp"> {{$doc->created_at}}</td>
-														<td>
-															<a data-document-id="{{ $doc->id }}" id="document{{$doc->id}}" class="remove-file btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
-														</td>
-														
-
-														<!-- <div class="col-md-1 remove-file btn btn-default" data-document-id="{{$doc->id}}">Remove</div> -->
-														
-													</tr>
-													@endforeach
-												</tbody>
-											</table>
-											
+											@include('admin.feature.feature-documents-partial', ['documents'=>$feature_documents])
 											
 										</div>
 									<!-- </div> -->
@@ -175,27 +149,8 @@
 										
 										<div class="existing-folders-container " >
 											
-											<table class="table table-hover feature-packages-table">
-												<thead>
-													<tr>
-														<td>Package Name</td>
-														<td>Updated</td>
-														<td></td>
-													</tr>
-												</thead>
-												<tbody>
-													@foreach($feature_packages as $package)
-													
-													<tr class="feature-packages">
-														<td class="feature-packagename" data-folderid = {{$package->id}}><i class="fa fa-folder-o"></i> {{$package->package_name}} </td>
-														<td class="package-updated"> {{$package->updated_at}} </td>
-														<td><a data-package-id="{{ $package->id }}" id="package{{$package->id}}" class="remove-package btn btn-danger btn-sm"><i class="fa fa-trash"></i></a></td>
-													</tr>
-													
-													@endforeach
+											@include('admin.feature.feature-packages-partial', ['packages'=>$feature_packages])
 
-												</tbody>
-											</table>
 										</div> <!-- existing-folders-container closes -->
 													
 										

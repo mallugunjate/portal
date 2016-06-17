@@ -150,4 +150,17 @@ class FeatureAdminController extends Controller
         Feature::deleteFeature($id);
         return;
     }
+
+    public function getFeatureDocumentPartial($feature_id)
+    {
+        $documents = Feature::getTopListedDocumentsByFeatureId($feature_id);
+        return view('admin.feature.feature-documents-partial')->with('documents', $documents);
+    }
+
+    public function getFeaturePackagePartial($feature_id)
+    {
+        $packages = Feature::getPackageDetailsByFeatureId($feature_id);
+
+        return view('admin.feature.feature-packages-partial')->with('packages', $packages);
+    }
 }

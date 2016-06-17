@@ -41,13 +41,13 @@ $('body').on('click', '#attach-selected-packages', function(){
 
 
 
-$(".remove-file").on('click', function(){
+$('body').on('click', ".remove-file", function(){
 	var document_id = $(this).attr('data-document-id');
 	$(this).closest('.feature-files').fadeOut(200);
 	$("#files-staged-to-remove").append('<div class="remove_document"  data-documentid='+ document_id +'>')
 });
 
-$(".remove-package").on('click', function(){
+$('body').on('click', ".remove-package", function(){
 	var package_id = $(this).attr('data-package-id');
 	console.log(package_id);
 	$(this).closest('.feature-packages').fadeOut(200);
@@ -301,6 +301,16 @@ $(document).on('click','.feature-update',function(){
 		    }
 		}).done(function(response){
 			console.log(response);
+			console.log("********");
+			$(".existing-files-container").load("/admin/featuredocuments/"+featureID);
+			$("#files-staged-to-remove").empty();
+			$("#files-selected").empty();
+			$("#document-listing").find(".document-checkbox").prop('checked', false);
+
+			$(".existing-folders-container").load("/admin/featurepackages/"+featureID);
+			$("#packages-staged-to-remove").empty();
+			$("#packages-selected").empty();
+			$("#package-listing").find(".package-checkbox").prop('checked', false);
 		});    	
     }
 
