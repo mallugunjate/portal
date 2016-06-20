@@ -14,10 +14,15 @@ $('body').on('click', '#attach-selected-files', function(){
 	$('input[name^="package_files"]').each(function(){
 		if($(this).is(":checked")){
 			$(".feature-documents-table tbody").append('<tr class="selected-files"> '+
-													'<td data-fileid='+ $(this).val() +'><i class="fa fa-file-o"></i> '+ $(this).attr("data-filename") +'</td>'+
+													'<td data-document-id='+ $(this).val() +'><i class="fa fa-file-o"></i> '+ $(this).attr("data-filename") +'</td>'+
 													'<td></td>'+
 													'<td> <a data-document-id="'+ $(this).val()+'" id="file'+ $(this).val()+'" class="remove-staged-file btn btn-danger btn-sm"><i class="fa fa-trash"></i></a></td>'+
 												 '</tr>');
+		}
+
+		if($(".feature-documents-table").hasClass('hidden') )	{
+			console.log($(".feature-documents-table tbody .feature-documents").length);
+			$(".feature-documents-table").removeClass('hidden');
 		}
 	});
 });
@@ -29,12 +34,15 @@ $('body').on('click', '#attach-selected-packages', function(){
 	$('input[name^="feature_packages"]').each(function(){
 		if($(this).is(":checked")){
 			$(".feature-packages-table tbody").append( '<tr class="selected-packages"> '+
-													'<td data-packageid='+ $(this).val() +'><i class="fa fa-folder-o"></i> '+ $(this).attr("data-packagename") +'</td>'+
+													'<td data-package-id='+ $(this).val() +'><i class="fa fa-folder-o"></i> '+ $(this).attr("data-packagename") +'</td>'+
 													'<td></td>'+
 													'<td> <a data-package-id="'+ $(this).val()+'" id="package'+ $(this).val()+'" class="remove-staged-package btn btn-danger btn-sm"><i class="fa fa-trash"></i></a></td>'+
 												 '</tr>');		
 		}
-		
+		if($(".feature-packages-table").hasClass('hidden') )	{
+			console.log($(".feature-packages-table tbody .feature-packages").length);
+			$(".feature-packages-table").removeClass('hidden');
+		}
 	});
 });
 
@@ -42,17 +50,20 @@ $('body').on('click', '#attach-selected-packages', function(){
 
 
 $('body').on('click', ".remove-file", function(){
+	console.log('remove file');
 	var document_id = $(this).attr('data-document-id');
-	$(this).closest('.feature-files').fadeOut(200);
-	$("#files-staged-to-remove").append('<div class="remove_document"  data-documentid='+ document_id +'>')
+	console.log(document_id);
+	$(this).closest('.feature-documents').fadeOut(200);
+	$("#files-staged-to-remove").append('<div class="remove_document"  data-document-id='+ document_id +'>')
 });
 
 $('body').on('click', ".remove-package", function(){
+	console.log('remove package');
 	var package_id = $(this).attr('data-package-id');
 	console.log(package_id);
 	$(this).closest('.feature-packages').fadeOut(200);
 	
-	$("#packages-staged-to-remove").append('<div class="remove_package" data-packageid='+ package_id +'>')
+	$("#packages-staged-to-remove").append('<div class="remove_package" data-package-id='+ package_id +'>')
 });
 
 $("body").on('click', ".remove-staged-file", function(){
@@ -185,17 +196,17 @@ $(document).on('click','.feature-update',function(){
 
 
 	$(".remove_document").each(function(){
-		remove_document.push($(this).attr('data-documentid'));
+		remove_document.push($(this).attr('data-document-id'));
 	});
 	$(".remove_package").each(function(){
-		remove_package.push($(this).attr('data-packageid'));
+		remove_package.push($(this).attr('data-package-id'));
 	});
-	
+	console.log(remove_package);
 	$(".selected-files").each(function(){
-		feature_files.push($(this).find('td:first').attr('data-fileid'));
+		feature_files.push($(this).find('td:first').attr('data-document-id'));
 	});
 	$(".selected-packages").each(function(){
-		feature_packages.push($(this).find('td:first').attr('data-packageid'));
+		feature_packages.push($(this).find('td:first').attr('data-package-id'));
 	});
  
 
