@@ -49,7 +49,7 @@
                         <small style="font-weight: bold; padding-right: 5px;">Show Archive</small>
                             
                             <div class="switch pull-right">
-                                <div class="onoffswitch">
+                                <div class="archive-onoffswitch onoffswitch">
                                     
                                     @if($archives)
                                         <input type="checkbox" checked="" class="onoffswitch-checkbox" id="archives" name="archives">

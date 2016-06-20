@@ -56,5 +56,37 @@
         }
     }
 
+    $(".combostore-onoffswitch").on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', function(e){
+        
+        var userStoreNumber =  localStorage.getItem('userStoreNumber');
+        var userStoreName =  localStorage.getItem('userStoreName');
+        var initialStoreNumber = userStoreNumber;
+        
+        if($("input[name='comboStore']:checked").val()) {
+            
+            localStorage.setItem("userBanner", 1 );
+            if(userStoreNumber.match(/^A/) ){
+                userStoreNumber = userStoreNumber.replace("A","");
+                userStoreName = userStoreName.replace("A", "");
+            }
+            
+        }
+        else{
+            
+            localStorage.setItem("userBanner", 2 );    
+            if(! userStoreNumber.match(/^A/) ){
+                userStoreNumber = "A"+userStoreNumber;
+                userStoreName = "A"+userStoreName;
+            }
+        
+        }
+        localStorage.setItem("userStoreNumber", userStoreNumber );
+        localStorage.setItem("userStoreName", userStoreName);
+        if(initialStoreNumber != userStoreNumber) {
+            window.location = "/"+userStoreNumber;
+        }
+        
+    });
+
     </script>
 

@@ -90,9 +90,9 @@
 
                                                 <div class="col-sm-10">
                                                     <div class="input-daterange input-group" id="datepicker">
-                                                        <input type="text" class="input-sm form-control" name="start" id="start" value="" />
+                                                        <input type="text" class="input-sm form-control datetimepicker-start" name="start" id="start" value="" />
                                                         <span class="input-group-addon">to</span>
-                                                        <input type="text" class="input-sm form-control" name="end" id="end" value="" />
+                                                        <input type="text" class="input-sm form-control datetimepicker-end" name="end" id="end" value="" />
                                                     </div>
                                                 </div>
                                         </div>
@@ -161,18 +161,15 @@
                         }
                     });
 
-                    $('.input-daterange').datepicker({
-                         format: 'yyyy-mm-dd',
-                        keyboardNavigation: false,
-                        forceParse: false,
-                        autoclose: true
-                    });
-
                     $(".chosen").chosen({
                         width:'75%'
                     });
 
-                    CKEDITOR.replace('description');
+                    
+                    CKEDITOR.replace('description', {
+                        filebrowserUploadUrl: "{{route('utilities.ckeditorimages.store',['_token' => csrf_token() ])}}"
+
+                    });
 
 
                 </script>

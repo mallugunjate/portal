@@ -10,13 +10,35 @@
     </script>
     <div class="row">
 
-        <div class="col-md-4 col-sm-4">
-            <div class="pull-left" style="padding: 15px 10px 0px 20px;">
-                <script>document.write( s );</script> &nbsp;&nbsp;<a id="storeswitch" style="display: inline;"><i class="fa fa-sitemap "></i> Change Store</a>
+        <div class="col-md-6 col-sm-6">
+            <div class="" style="padding: 15px 10px 0px 20px;">
+                <script>document.write( s );</script> 
+                @if($isComboStore == 1) 
+                &nbsp;&nbsp;
+                <span class="comboStoreSwitch">
+                    <div class="switch">
+                        <div class="combostore-onoffswitch onoffswitch">
+                            
+                            @if($banner->id == 1)
+                            <input type="checkbox" checked class="onoffswitch-checkbox" id="comboStore" name="comboStore">
+                            @else
+                            <input type="checkbox" class="onoffswitch-checkbox" id="comboStore" name="comboStore">
+                            @endif
+                            
+                            <label class="onoffswitch-label" for="comboStore">
+                                <span class="onoffswitch-inner"></span>
+                                <span class="onoffswitch-switch"></span>
+                            </label>
+                        </div>
+                    </div>
+                </span>
+                @endif
+
+                &nbsp;&nbsp;<a id="storeswitch" style="display: inline;"><i class="fa fa-sitemap "></i> Change Store</a>
             </div>
         </div>
 
-        <div class="col-md-8 col-sm-8">
+        <div class="col-md-6 col-sm-6">
             <div class="pull-right" style="padding-right: 20px;">
                 <form role="form" class="form-inline" style="width: 100%; padding-left: 10px; padding-top: 5px;" method="get" action="/{{ Request::segment(1) }}/search">
                     <i class="fa fa-search" style="display: inline !important; font-size: 24px; color: #ccc; line-height: 10px; position:relative; top: 12px; width: 10%;"></i>

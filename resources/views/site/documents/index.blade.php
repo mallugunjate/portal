@@ -46,7 +46,7 @@
                         <small style="font-weight: bold; padding-right: 5px;">Show Archive</small>
                             
                             <div class="switch pull-right">
-                                <div class="onoffswitch">
+                                <div class="archive-onoffswitch onoffswitch">
                                     
                                     <input type="checkbox" class="onoffswitch-checkbox" id="archives" name="archives">
                                     

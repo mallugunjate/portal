@@ -75,9 +75,9 @@
 
                                                 <div class="col-sm-10">
                                                     <div class="input-daterange input-group" id="datepicker">
-                                                        <input type="text" class="input-sm form-control" name="start" id="start" value="{{ $feature->start }}" />
+                                                        <input type="text" class="input-sm form-control datetimepicker-start" name="start" id="start" value="{{ $feature->start }}" />
                                                         <span class="input-group-addon">to</span>
-                                                        <input type="text" class="input-sm form-control" name="end" id="end" value="{{ $feature->end }}" />
+                                                        <input type="text" class="input-sm form-control datetimepicker-end" name="end" id="end" value="{{ $feature->end }}" />
                                                     </div>
                                                 </div>
                                         </div>
@@ -346,14 +346,7 @@
 	        }
 		});
 
-    	$(".tree").treed({openedClass : 'fa fa-folder-open', closedClass : 'fa fa-folder'});
-
-    	$('.input-daterange').datepicker({
-	        format: 'yyyy-mm-dd',
-	        keyboardNavigation: false,
-	        forceParse: false,
-	        autoclose: true
-	    });     
+    	$(".tree").treed({openedClass : 'fa fa-folder-open', closedClass : 'fa fa-folder'});    
 
 	</script>
 
