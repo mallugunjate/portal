@@ -73,9 +73,9 @@
 
 								                <div class="col-sm-10">
 								                    <div class="input-daterange input-group" id="datepicker">
-								                        <input type="text" class="input-sm form-control" name="send_at" id="send_at" value="" />
+								                        <input type="text" class="input-sm form-control datetimepicker-start" name="send_at" id="send_at" value="" />
 								                        <span class="input-group-addon">to</span>
-								                        <input type="text" class="input-sm form-control" name="archive_at" id="archive_at" value="" />
+								                        <input type="text" class="input-sm form-control datetimepicker-end" name="archive_at" id="archive_at" value="" />
 								                    </div>
 								                </div>
 								        </div>
@@ -234,20 +234,11 @@
 
 		    $(".chosen").chosen({
 				  width:'75%'
-			});
-
-		    $('.input-daterange').datepicker({
-		         format: 'yyyy-mm-dd',
-		        keyboardNavigation: false,
-		        forceParse: false,
-		        autoclose: true
-		    });      				
-
-		    
+			});		    
 		    
 		   	CKEDITOR.replace('body', {
-    		    filebrowserUploadUrl: "{{route('admin.communicationimages.store',['_token' => csrf_token() ])}}",
-    		    imageBrowser_listUrl : "/js/custom/ckeditor-imagebrowser/images_list.json"
+
+    		    filebrowserUploadUrl: "{{route('utilities.ckeditorimages.store',['_token' => csrf_token() ])}}"
 
     		});
 

@@ -22,7 +22,7 @@ class StoreInfo extends Model
     {
     	$storelist = [];
     	foreach ($storeInfo as $store) {
-    			$storelist[$store->store_number] = $store->id . " " . $store->name;
+    			$storelist[$store->store_number] = $store->store_id . " " . $store->name;
     	}
     	return $storelist;	
     }
