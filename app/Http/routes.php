@@ -28,6 +28,8 @@ Route::get('/{storeno}/folder/{id}', ['uses' => 'Document\FolderController@show'
 
 //CALENDAR
 Route::get('/{storeno}/calendar', array('uses' => 'Calendar\CalendarController@index'));
+Route::get('/{storeno}/calendar/listevents/{yearMonth}', array('uses' => 'Calendar\CalendarController@getListofEventsByStoreAndMonth'));
+Route::get('/{storeno}/calendar/eventlistpartial/{yearMonth}', 'Calendar\CalendarController@getEventListPartial');
 
 //COMMUNICATIONS
 Route::get('/{storeno}/communication', array('uses' => 'Communication\CommunicationController@index'));

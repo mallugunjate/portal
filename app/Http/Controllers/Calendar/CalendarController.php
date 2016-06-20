@@ -5,12 +5,13 @@ namespace App\Http\Controllers\Calendar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Request as RequestFacade; 
 use DB;
+use Carbon\Carbon;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Models\Event\Event;
-use App\Models\Event\EventTypes;
+use App\Models\Event\EventType;
 use App\Models\Banner;
 
 use App\Models\Communication\Communication;
@@ -33,6 +34,9 @@ class CalendarController extends Controller
     public function index(Request $request)
     {
 
+        $today = date("Y") . "-" . date("m");
+        $today = (string) $today; 
+
         $storeNumber = RequestFacade::segment(1);
 
         $storeInfo = StoreInfo::getStoreInfoByStoreId($storeNumber);
@@ -41,20 +45,23 @@ class CalendarController extends Controller
 
         $skin = Skin::getSkin($storeBanner);
 
-
         $communicationCount = Communication::getActiveCommunicationCount($storeNumber);
 
         $urgentNoticeCount = UrgentNotice::getUrgentNoticeCount($storeNumber);
 
         $alertCount = Alert::getActiveAlertCountByStore($storeNumber);
 
+        //for the calendar view
         $events = Event::getActiveEventsByStore($storeNumber); 
+
+        //for then list of events
+        $eventsList = Event::getActiveEventsByStoreAndMonth($storeNumber, $today);
 
         foreach ($events as $event) {
             $event->prettyDateStart = Utility::prettifyDate($event->start);
             $event->prettyDateEnd = Utility::prettifyDate($event->end);
             $event->since = Utility::getTimePastSinceDate($event->start);
-
+            $event->event_type_name = EventType::getName($event->event_type);
         }
 
         return view('site.calendar.index')
@@ -62,8 +69,9 @@ class CalendarController extends Controller
                 ->with('alertCount', $alertCount)
                 ->with('communicationCount', $communicationCount)
                 ->with('events', $events)
+                ->with('eventsList', $eventsList)
+                ->with('today', $today)
                 ->with('urgentNoticeCount', $urgentNoticeCount);
-
     }
 
     /**
@@ -130,5 +138,16 @@ class CalendarController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getListofEventsByStoreAndMonth($storeNumber, $yearMonth)
+    {
+        $eventsList = Event::getActiveEventsByStoreAndMonth($storeNumber, $yearMonth);
+        return $eventsList;
+    }
+    public function getEventListPartial($storeNumber, $yearMonth)
+    {
+        $events = Event::getActiveEventsByStoreAndMonth($storeNumber, $yearMonth);
+        return view('site.calendar.event-list-partial')->with('eventsList', $events);
     }
 }
