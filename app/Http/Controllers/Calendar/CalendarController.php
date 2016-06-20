@@ -43,6 +43,10 @@ class CalendarController extends Controller
 
         $storeBanner = $storeInfo->banner_id;
 
+        $banner = Banner::find($storeBanner);
+
+        $isComboStore = $storeInfo->is_combo_store;
+
         $skin = Skin::getSkin($storeBanner);
 
         $communicationCount = Communication::getActiveCommunicationCount($storeNumber);
@@ -64,11 +68,15 @@ class CalendarController extends Controller
             $event->event_type_name = EventType::getName($event->event_type);
         }
 
+
         return view('site.calendar.index')
                 ->with('skin', $skin)
                 ->with('alertCount', $alertCount)
                 ->with('communicationCount', $communicationCount)
                 ->with('events', $events)
+                ->with('urgentNoticeCount', $urgentNoticeCount)
+                ->with('isComboStore', $isComboStore)
+                ->with('banner', $banner)
                 ->with('eventsList', $eventsList)
                 ->with('today', $today)
                 ->with('urgentNoticeCount', $urgentNoticeCount);

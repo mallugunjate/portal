@@ -138,6 +138,8 @@ Route::resource('/admin/user', 'User\UserAdminController');
 //Banner selector
 Route::resource('/admin/banner' , 'AdminSelectedBannerController');
 
+//Ckeditor Images
+Route::resource('/utilities/ckeditorimages', 'Utilities\CkeditorImageController');
 /* API Routes */
 //get navigation
 Route::get('/api/v1/banner/{id}/navigation', 'Api\V1\ApiController@getNavigation');

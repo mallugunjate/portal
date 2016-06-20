@@ -8305,6 +8305,43 @@ body.md-skin {
 }
 #loading img{ height: 32px; width: 32px;}
 
+
 .timeline-item .event{
   margin-bottom: 15px; 
 }
+
+.comboStoreSwitch{
+  display: inline-block;
+  position:relative;
+  top:10px;
+}
+  .comboStoreSwitch .onoffswitch-label,.comboStoreSwitch .onoffswitch-switch {
+    border:1px solid #676a6c;
+  }
+  .comboStoreSwitch .onoffswitch-switch {
+    width: 15px;
+    right: 40px;
+  }
+  .comboStoreSwitch .onoffswitch-inner:before {
+    content: "SC";
+    background-color: #FFFFFF;
+    color: #676a6c;
+    text-align: left;
+    font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;    
+    font-size: 10px;
+    font-weight: normal;
+    padding-left: 10px;
+
+  }
+  .comboStoreSwitch .onoffswitch-inner:after {
+    content: "ATMO";
+    background-color: #FFFFFF;
+    color: #676a6c;
+    text-align: right;
+    font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 10px;
+    font-weight: normal;
+    padding-left: 15px;
+  }
+  
+

@@ -19,6 +19,7 @@ use App\Models\StoreInfo;
 use App\Models\UrgentNotice\UrgentNotice;
 use App\Models\Alert\Alert;
 use App\Models\Utility\Utility;
+use App\Models\Banner;
 
 class FeatureController extends Controller
 {
@@ -73,6 +74,10 @@ class FeatureController extends Controller
 
         $storeBanner = $storeInfo->banner_id;
 
+        $banner = Banner::find($storeBanner);
+
+        $isComboStore = $storeInfo->is_combo_store;
+
         $skin = Skin::getSkin($storeBanner);
 
         $id = $request->id;		
@@ -115,7 +120,9 @@ class FeatureController extends Controller
             ->with('feature', $feature)
             ->with('feature_documents', $selected_documents)
             ->with('feature_packages', $selected_packages)
-            ->with('urgentNoticeCount', $urgentNoticeCount);
+            ->with('urgentNoticeCount', $urgentNoticeCount)
+            ->with('banner', $banner)
+            ->with('isComboStore', $isComboStore);
     }
 
     /**

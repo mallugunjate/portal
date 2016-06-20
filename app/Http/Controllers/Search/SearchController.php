@@ -15,6 +15,7 @@ use App\Models\Utility\Utility;
 use App\Models\Search\Search;
 use App\Models\Communication\Communication;
 use App\Models\Alert\Alert;
+use App\Models\Banner;
 
 class SearchController extends Controller
 {
@@ -36,18 +37,21 @@ class SearchController extends Controller
         $folders = [];
         $communications = [];
         $alerts = [];
+        $events = [];
 
         if ( isset($query) && ($query != '')){
             $docs = Search::searchDocuments($query, $store);
             $folders = Search::searchFolders($query);
             $communications = Search::searchCommunications($query, $store);
             $alerts = Search::searchAlerts($query, $store);
+            $events = Search::searchEvents($query, $store);
 
             if( isset($request['archives']) && $request['archives'])
             {
                 $docs = $docs->merge(Search::searchArchivedDocuments($query, $store));
                 $communications = $communications->merge(Search::searchArchivedCommunications($query, $store));
                 $alerts = $alerts->merge(Search::searchArchivedAlerts($query, $store));
+                $events = $events->merge(Search::searchArchivedEvents($query, $store));
             }
         }
 
@@ -56,6 +60,10 @@ class SearchController extends Controller
         $storeInfo = StoreInfo::getStoreInfoByStoreId($storeNumber);
 
         $storeBanner = $storeInfo->banner_id;
+
+        $banner = Banner::find($storeBanner);
+
+        $isComboStore = $storeInfo->is_combo_store;
 
         $skin = Skin::getSkin($storeBanner);
 
@@ -68,7 +76,10 @@ class SearchController extends Controller
             ->with('folders', $folders)
             ->with('communications', $communications)
             ->with('alerts', $alerts)
+            ->with('events', $events)
             ->with('communicationCount', $communicationCount)
+            ->with('isComboStore', $isComboStore)
+            ->with('banner', $banner)
             ->with('alertCount', $alertCount)               
             ->with('query', $query)
             ->with('archives', $request['archives']);

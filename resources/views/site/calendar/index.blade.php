@@ -55,7 +55,7 @@
 
 
 
-                                  <div class="ibox-content inspinia-timeline" style="display: block;">       
+                                  <div class="ibox-content inspinia-timeline printable" style="display: block;">       
 
                                 <div class="fc-toolbar">
                                     <div class="fc-left">
