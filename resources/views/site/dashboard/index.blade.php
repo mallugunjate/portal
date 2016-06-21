@@ -211,6 +211,9 @@
     @include('site.includes.scripts')
     @include('site.includes.modal')
 
+    <script>
+        console.frog("Ribbit");
+    </script>
 </body>
 </html> 
 
