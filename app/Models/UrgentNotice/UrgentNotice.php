@@ -201,8 +201,8 @@ class UrgentNotice extends Model
     public static function getUrgentNotice($id)
     {    
          $notice = UrgentNotice::find($id);
-         $notice->prettyDate = Utility::prettifyDate($notice->updated_at);
-         $notice->since = Utility::getTimePastSinceDate($notice->updated_at);
+         $notice->prettyDate = Utility::prettifyDate($notice->start);
+         $notice->since = Utility::getTimePastSinceDate($notice->start);
          return $notice;
     }
 
@@ -221,8 +221,8 @@ class UrgentNotice extends Model
                         
         foreach($notices as $n){
             
-            $n->since =  Utility::getTimePastSinceDate($n->updated_at);
-            $n->prettyDate =  Utility::prettifyDate($n->updated_at);
+            $n->since =  Utility::getTimePastSinceDate($n->start);
+            $n->prettyDate =  Utility::prettifyDate($n->start);
             $preview_string = strip_tags($n->description);
             $n->trunc = Communication::truncateHtml($preview_string);
         }
@@ -242,8 +242,8 @@ class UrgentNotice extends Model
 
         foreach($notices as $n){
             $n->archived= true;
-            $n->since =  Utility::getTimePastSinceDate($n->updated_at);
-            $n->prettyDate =  Utility::prettifyDate($n->updated_at);
+            $n->since =  Utility::getTimePastSinceDate($n->start);
+            $n->prettyDate =  Utility::prettifyDate($n->start);
             $preview_string = strip_tags($n->description);
             $n->trunc = Communication::truncateHtml($preview_string);
         }
