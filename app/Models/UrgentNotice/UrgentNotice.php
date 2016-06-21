@@ -82,7 +82,7 @@ class UrgentNotice extends Model
     		'attachment_type_id'=>$attachment_type_id
     	]);
 
-    	if($attachment_type_id != 0){
+    	if($attachment_type_id != 3){
             foreach ($attachments as $attachment) {
                 UrgentNoticeAttachment::create([
                     'urgent_notice_id' => $urgentNotice->id,
@@ -128,7 +128,7 @@ class UrgentNotice extends Model
         
         $new_attachment_type_id = intval($request->new_attachment_type);
         
-        if($new_attachment_type_id != 0) {
+        if($new_attachment_type_id != 3) {
             if ($new_attachment_type_id != $attachment_type_id) {
                 $attachment_type_id = $new_attachment_type_id;
                 UrgentNoticeAttachment::where('urgent_notice_id', $id)->delete();
