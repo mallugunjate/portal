@@ -15,7 +15,7 @@ class FeatureCommunication extends Model
     public static function getCommunicationTypeId( $featureId )
     {
     	$feature = FeatureCommunication::where('feature_id', $featureId)->get()->pluck('communication_type_id');
-    	// dd($feature);
+    	
         if(count($feature) > 0){
             return $feature[0];    
         } else {

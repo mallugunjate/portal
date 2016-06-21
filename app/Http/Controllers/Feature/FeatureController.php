@@ -108,16 +108,10 @@ class FeatureController extends Controller
             $package_details = Package::getPackageDetails($package_id);
             $package['details'] = $package_details;
             array_push($selected_packages, $package);
-
         }
         
         $feature_communcation_type_id = FeatureCommunication::getCommunicationTypeId($id);
         $feature_communcations = CommunicationTarget::getTargetedCommunicationsByCategory($storeNumber, $feature_communcation_type_id);
-        // if($feature_communcation_type_id != 0){
-            
-        // } else {
-        //     $feature_communcations = 
-        // }
 
 		$notifications = Notification::getNotificationsByFeature($storeInfo->banner_id, $feature->update_type_id, $feature->update_frequency, $feature->id);
         $urgentNoticeCount = UrgentNotice::getUrgentNoticeCount($storeNumber);
