@@ -324,9 +324,23 @@ class Feature extends Model
 
     public static function deleteFeature($id)
     {
-      Feature::find($id)->delete();
-      FeaturePackage::where('feature_id', $id)->delete();
-      FeatureDocument::where('feature_id', $id)->delete();
-      return;
+        Feature::find($id)->delete();
+        FeaturePackage::where('feature_id', $id)->delete();
+        FeatureDocument::where('feature_id', $id)->delete();
+        return;
+    }
+
+    public static function getTopListedDocumentsByFeatureId($feature_id)
+    {
+        $documents =  FeatureDocument::join('documents', 'feature_document.document_id', '=', 'documents.id')
+                                    ->where('feature_id', $feature_id)->get();
+        return $documents; 
+    }
+
+    public static function getPackageDetailsByFeatureId($feature_id)
+    {
+        $packages = FeaturePackage::join('packages', 'feature_package.package_id', '=', 'packages.id')
+                                ->where('feature_package.feature_id', '=', $feature_id)->get();
+        return $packages;
     }
 }

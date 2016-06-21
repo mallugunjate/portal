@@ -105,6 +105,8 @@ Route::resource('/admin/feature', 'Feature\FeatureAdminController');
 Route::resource('/admin/feature/thumbnail', 'Feature\FeatureThumbnailAdminController');
 Route::resource('/admin/feature/background', 'Feature\FeatureBackgroundAdminController'); 
 Route::resource('/admin/featureOrder', 'Feature\FeatureOrderAdminController');
+Route::get('/admin/featuredocuments/{feature_id}', 'Feature\FeatureAdminController@getFeatureDocumentPartial');
+Route::get('/admin/featurepackages/{feature_id}', 'Feature\FeatureAdminController@getFeaturePackagePartial');
 
 //Dasboard ADMIN
 Route::resource('/admin/dashboard', 'Dashboard\DashboardAdminController');
