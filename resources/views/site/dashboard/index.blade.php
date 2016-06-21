@@ -106,7 +106,7 @@
                             <div class="col-lg-6">
                                 <div class="ibox float-e-margins">
                                     <div class="ibox-title">
-                                        <h2>Latest Communication</h2>
+                                        <h2>Latest Communications</h2>
                                     </div>
                               
                                     <div class="ibox-content">

@@ -12,7 +12,9 @@ use App\Models\Notification\Notification;
 use App\Skin;
 use App\Models\Feature\FeatureDocument;
 use App\Models\Feature\FeaturePackage;
+use App\Models\Feature\FeatureCommunication;
 use App\Models\Communication\Communication;
+use App\Models\Communication\CommunicationTarget;
 use App\Models\Document\Document;
 use App\Models\Document\Package;
 use App\Models\StoreInfo;
@@ -108,6 +110,14 @@ class FeatureController extends Controller
             array_push($selected_packages, $package);
 
         }
+        
+        $feature_communcation_type_id = FeatureCommunication::getCommunicationTypeId($id);
+        $feature_communcations = CommunicationTarget::getTargetedCommunicationsByCategory($storeNumber, $feature_communcation_type_id);
+        // if($feature_communcation_type_id != 0){
+            
+        // } else {
+        //     $feature_communcations = 
+        // }
 
 		$notifications = Notification::getNotificationsByFeature($storeInfo->banner_id, $feature->update_type_id, $feature->update_frequency, $feature->id);
         $urgentNoticeCount = UrgentNotice::getUrgentNoticeCount($storeNumber);
@@ -120,6 +130,7 @@ class FeatureController extends Controller
             ->with('feature', $feature)
             ->with('feature_documents', $selected_documents)
             ->with('feature_packages', $selected_packages)
+            ->with('feature_communcations', $feature_communcations)
             ->with('urgentNoticeCount', $urgentNoticeCount)
             ->with('banner', $banner)
             ->with('isComboStore', $isComboStore);
