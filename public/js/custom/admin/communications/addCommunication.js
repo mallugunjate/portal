@@ -22,6 +22,34 @@ $("#allStores").change(function(){
 	}
 });
 
+$("body").on('paste', '.search-field input', function(e) {
+	
+	setTimeout(function(e) {
+	    processStorePaste();
+	  }, 5);
+	
+        
+
+});
+
+var processStorePaste = function(){
+
+    	var storesString = $(".search-field").find('input').val();
+    	var stores = storesString.split(',');
+    	$(stores).each(function(i){
+    		stores[i]= stores[i].replace(/\s/g, '');
+    		if(stores[i].length == 3) {
+    			stores[i] = "0"+stores[i];
+    		}
+			$("#storeSelect option[value='"+  stores[i] +"']").attr('selected', 'selected');    		
+    	});
+    	
+    	$("#storeSelect").val(stores).trigger("chosen:updated");
+    	var selectedStoresCount = $('#storeSelect option:selected').length;
+    	console.log(selectedStoresCount);
+    	// $("#selectedStoresCount").append( selectedStoresCount + " stores selected" );
+};
+
 $("#add-documents").click(function(){
 	$("#document-listing").modal('show');
 });
@@ -74,7 +102,8 @@ $(document).on('click','.communication-create',function(){
 	console.log(allStores);
 	console.log(communication_type_id);
 	if(!communication_type_id){
-		communication_type_id = 1; // no category
+		communication_type_id = $("#default_communication_type").val(); // no category
+
 	}
 	console.log(communication_type_id);
 
@@ -171,7 +200,8 @@ $(document).on('click','.communication-create',function(){
 		        
 		    }
 		}).done(function(response){
-			//console.log(response);
+			$(".search-field").find('input').val('');
+			processStorePaste();
 		});    	
     }
 

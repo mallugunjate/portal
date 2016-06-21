@@ -28,6 +28,8 @@ Route::get('/{storeno}/folder/{id}', ['uses' => 'Document\FolderController@show'
 
 //CALENDAR
 Route::get('/{storeno}/calendar', array('uses' => 'Calendar\CalendarController@index'));
+Route::get('/{storeno}/calendar/listevents/{yearMonth}', array('uses' => 'Calendar\CalendarController@getListofEventsByStoreAndMonth'));
+Route::get('/{storeno}/calendar/eventlistpartial/{yearMonth}', 'Calendar\CalendarController@getEventListPartial');
 
 //COMMUNICATIONS
 Route::get('/{storeno}/communication', array('uses' => 'Communication\CommunicationController@index'));
@@ -95,12 +97,16 @@ Route::resource('/admin/folder', 'Document\FolderAdminController');
 
 //PACKAGES
 Route::resource('/admin/package', 'Document\PackageAdminController');
+Route::get('/admin/packagedocuments/{package_id}', 'Document\PackagePartialController@getPackageDocumentPartial');
+Route::get('/admin/packagefolders/{package_id}', 'Document\PackagePartialController@getPackageFolderPartial');
 
 //FEATURES 
 Route::resource('/admin/feature', 'Feature\FeatureAdminController');
 Route::resource('/admin/feature/thumbnail', 'Feature\FeatureThumbnailAdminController');
 Route::resource('/admin/feature/background', 'Feature\FeatureBackgroundAdminController'); 
 Route::resource('/admin/featureOrder', 'Feature\FeatureOrderAdminController');
+Route::get('/admin/featuredocuments/{feature_id}', 'Feature\FeatureAdminController@getFeatureDocumentPartial');
+Route::get('/admin/featurepackages/{feature_id}', 'Feature\FeatureAdminController@getFeaturePackagePartial');
 
 //Dasboard ADMIN
 Route::resource('/admin/dashboard', 'Dashboard\DashboardAdminController');
@@ -110,6 +116,7 @@ Route::resource('/admin/dashboardbackground', 'Dashboard\DashboardBackgroundAdmi
 Route::resource('/admin/communication', 'Communication\CommunicationAdminController');
 Route::resource('/admin/communicationtypes', 'Communication\CommunicationTypesAdminController');
 Route::resource('/admin/communicationimages', 'Communication\CommunicationImageController');
+Route::get('/admin/communicationdocuments/{communication_id}', 'Communication\CommunicationPartialController@getCommunicationDocumentPartial');
 
 //CALENDAR ADMIN
 Route::resource('/admin/calendar', 'Calendar\CalendarAdminController');
@@ -133,6 +140,8 @@ Route::resource('/admin/user', 'User\UserAdminController');
 //Banner selector
 Route::resource('/admin/banner' , 'AdminSelectedBannerController');
 
+//Ckeditor Images
+Route::resource('/utilities/ckeditorimages', 'Utilities\CkeditorImageController');
 /* API Routes */
 //get navigation
 Route::get('/api/v1/banner/{id}/navigation', 'Api\V1\ApiController@getNavigation');

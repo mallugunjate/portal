@@ -70,6 +70,7 @@ CKEDITOR.editorConfig = function( config ) {
 
 	config.allowedContent = true;
 	config.extraPlugins = 'uploadimage,imagebrowser,folderlink,documentlink';
+	config.imageBrowser_listUrl = "/js/custom/ckeditor-imagebrowser/images_list.json";
 	// %REMOVE_END%
 };
 

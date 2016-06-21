@@ -22,6 +22,34 @@ $("#allStores").change(function(){
 	}
 });
 
+$("body").on('paste', '.search-field input', function(e) {
+	
+	setTimeout(function(e) {
+	    processStorePaste();
+	  }, 5);
+	
+        
+
+});
+
+var processStorePaste = function(){
+
+    	var storesString = $(".search-field").find('input').val();
+    	var stores = storesString.split(',');
+    	$(stores).each(function(i){
+    		stores[i]= stores[i].replace(/\s/g, '');
+    		if(stores[i].length == 3) {
+    			stores[i] = "0"+stores[i];
+    		}
+			$("#storeSelect option[value='"+  stores[i] +"']").attr('selected', 'selected');    		
+    	});
+    	
+    	$("#storeSelect").val(stores).trigger("chosen:updated");
+    	var selectedStoresCount = $('#storeSelect option:selected').length;
+    	console.log(selectedStoresCount);
+    	// $("#selectedStoresCount").append( selectedStoresCount + " stores selected" );
+};
+
 $("#add-documents").click(function(){
 	$("#document-listing").modal('show');
 });
@@ -46,7 +74,7 @@ $('body').on('click', '#attach-selected-files', function(){
 });
 
 
-$(".remove-file").on('click', function(){
+$('body').on('click', ".remove-file", function(){
 	var document_id = $(this).attr('data-document-id');
 	$(this).parent().fadeOut(200);
 	$("#files-staged-to-remove").append('<div class="remove_document"  data-documentid='+ document_id +'>')
@@ -200,6 +228,10 @@ $(document).on('click','.communication-update',function(){
 		    }
 		}).done(function(response){
 			console.log(response);
+			$(".existing-files-container").load("/admin/communicationdocuments/"+communicationId);
+			$("#files-staged-to-remove").empty();
+			$("#files-selected").empty();
+			$("#document-listing").find(".document-checkbox").prop('checked', false);
 		});    	
     }
 

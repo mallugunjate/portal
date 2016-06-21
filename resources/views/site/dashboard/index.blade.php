@@ -106,7 +106,7 @@
                             <div class="col-lg-6">
                                 <div class="ibox float-e-margins">
                                     <div class="ibox-title">
-                                        <h2>Latest Communication</h2>
+                                        <h2>Latest Communications</h2>
                                     </div>
                               
                                     <div class="ibox-content">
@@ -152,7 +152,7 @@
                             <div class="col-lg-12">
                                 <div class="ibox float-e-margins">
                                     <div class="ibox-title">
-                                        <h2>Notifications</h2>
+                                        <h2>Recent Uploads</h2>
                                     </div>
                                     
                                     <div class="ibox-content" style="max-height: 550px; overflow: auto;">
@@ -173,6 +173,9 @@
                                                         </span>                                                    
                                                         <small class="pull-right" style="padding-left: 10px;">{{ $n->since }} ago</small>
                                                             <strong>{!! $n->link !!}</strong> was {{ $n->verb }} <strong><a href="/{{ Request::segment(1) }}/document#!/{{ $n->global_folder_id }}">{{ $n->folder_name}}</a></strong>
+                                                            @if($n->count > 1)
+                                                            with <strong>{!! $n->count -1 !!}</strong> other documents
+                                                            @endif
                                                     </div>
                                                     
 
@@ -208,6 +211,9 @@
     @include('site.includes.scripts')
     @include('site.includes.modal')
 
+    <script>
+        console.frog("Ribbit");
+    </script>
 </body>
 </html> 
 

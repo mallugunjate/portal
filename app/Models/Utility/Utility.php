@@ -20,6 +20,7 @@ class Utility extends Model
 				break;
 
 			case "pdf":
+			case "PDF":
 				$icon = "<i class='fa fa-file-pdf-o'></i>";
 				break;
 
@@ -84,6 +85,7 @@ class Utility extends Model
 				break;
 
 			case "pdf":
+			case "PDF":
 				$class = 'launchPDFViewer';
 				$modalTarget = '#fileviewmodal';
 				break;

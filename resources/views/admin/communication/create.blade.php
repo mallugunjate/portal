@@ -73,9 +73,9 @@
 
 								                <div class="col-sm-10">
 								                    <div class="input-daterange input-group" id="datepicker">
-								                        <input type="text" class="input-sm form-control" name="send_at" id="send_at" value="" />
+								                        <input type="text" class="input-sm form-control datetimepicker-start" name="send_at" id="send_at" value="" />
 								                        <span class="input-group-addon">to</span>
-								                        <input type="text" class="input-sm form-control" name="archive_at" id="archive_at" value="" />
+								                        <input type="text" class="input-sm form-control datetimepicker-end" name="archive_at" id="archive_at" value="" />
 								                    </div>
 								                </div>
 								        </div>
@@ -87,8 +87,8 @@
 													@foreach($communicationTypes as $ct)
 
 													<label class="btn btn-outline btn-default">
-														@if( $ct->id == 1)
-														<input type="radio" id="" name="communication_type" value="{{ $ct->id }}"><i class="fa fa-times"></i> {{ $ct->communication_type }}
+														@if( ( $banner->id==1 && $ct->id == 1 ) || ($banner->id==2 && $ct->id == 2) )
+														<input type="radio" id="default_communication_type" name="communication_type" value="{{ $ct->id }}"><i class="fa fa-times"></i> {{ $ct->communication_type }}
 														@else 
 														<input type="radio" id="" name="communication_type" value="{{ $ct->id }}"><i class="fa fa-circle text-{{ $ct->colour }}"></i> {{ $ct->communication_type }}
 														@endif
@@ -234,20 +234,11 @@
 
 		    $(".chosen").chosen({
 				  width:'75%'
-			});
-
-		    $('.input-daterange').datepicker({
-		         format: 'yyyy-mm-dd',
-		        keyboardNavigation: false,
-		        forceParse: false,
-		        autoclose: true
-		    });      				
-
-		    
+			});		    
 		    
 		   	CKEDITOR.replace('body', {
-    		    filebrowserUploadUrl: "{{route('admin.communicationimages.store',['_token' => csrf_token() ])}}",
-    		    imageBrowser_listUrl : "/js/custom/ckeditor-imagebrowser/images_list.json"
+
+    		    filebrowserUploadUrl: "{{route('utilities.ckeditorimages.store',['_token' => csrf_token() ])}}"
 
     		});
 

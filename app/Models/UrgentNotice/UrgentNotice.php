@@ -177,6 +177,7 @@ class UrgentNotice extends Model
     {
         UrgentNotice::find($id)->delete();
         UrgentNoticeTarget::where('urgent_notice_id', $id)->delete();
+        UrgentNoticeAttachment::where('urgent_notice_id', $id)->delete();
     }
 
     public static function getUrgentNoticeCount($storeNumber)

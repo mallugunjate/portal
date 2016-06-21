@@ -75,9 +75,9 @@
 
 						                <div class="col-sm-10">
 						                    <div class="input-daterange input-group" id="datepicker">
-						                        <input type="text" class="input-sm form-control" name="send_at" id="send_at" value="{{$communication->send_at}}" />
+						                        <input type="text" class="input-sm form-control datetimepicker-start" name="send_at" id="send_at" value="{{$communication->send_at}}" />
 						                        <span class="input-group-addon">to</span>
-						                        <input type="text" class="input-sm form-control" name="archive_at" id="archive_at" value="{{$communication->archive_at}}" />
+						                        <input type="text" class="input-sm form-control datetimepicker-end" name="archive_at" id="archive_at" value="{{$communication->archive_at}}" />
 						                    </div>
 						                </div>
 						        </div>
@@ -122,18 +122,7 @@
 
 										<label class="col-sm-2 control-label">Attachments</label>
 										<div class="existing-files-container col-md-10">
-											@foreach($communication_documents as $doc)
-											<div class="row">
-												<div class="feature-files col-md-8">
-													<div class="feature-filename" data-fileid = "{{$doc->id}}"> {!! $doc->link_with_icon !!} </div>
-													{{-- <div class="feature-filepath"> File Location : {{$doc->folder_path}}</div>
-														<div class="feature-timestamp"> Uploaded At : {{$doc->created_at}}</div>--}}
-												</div>
-
-												<!-- <div class="col-md-1 remove-file btn btn-default" data-document-id="{{$doc->id}}">Remove</div> -->
-												<a data-document-id="{{ $doc->id }}" id="document{{$doc->id}}" class="remove-file btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
-											</div>
-											@endforeach
+											@include('admin.communication.document-partial', ['communication_documents'=>$communication_documents])
 											
 												
 										</div>
@@ -295,24 +284,12 @@
 		        }
 			});
 
-			$(".date").datetimepicker({
-		          format: 'YYYY-MM-DD HH:mm:ss'
-		    });
-
 		    $(".chosen").chosen({
 				  width:'75%'
 			});
 
-		    $('.input-daterange').datepicker({
-		         format: 'yyyy-mm-dd',
-		        keyboardNavigation: false,
-		        forceParse: false,
-		        autoclose: true
-		    });      				
-
 		   CKEDITOR.replace('body', {
-    		    filebrowserUploadUrl: "{{route('admin.communicationimages.store',['_token' => csrf_token() ])}}",
-    		    imageBrowser_listUrl : "/js/custom/ckeditor-imagebrowser/images_list.json"
+    		    filebrowserUploadUrl: "{{route('utilities.ckeditorimages.store',['_token' => csrf_token() ])}}"
 
     		});
 

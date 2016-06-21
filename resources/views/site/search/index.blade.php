@@ -49,7 +49,7 @@
                                         @else
                                         <input type="checkbox" class="onoffswitch-checkbox" id="archives" name="archives">
                                         @endif
-                                        <label class="onoffswitch-label" for="archives">
+                                        <label class="archive-onoffswitch onoffswitch-label" for="archives">
                                             <span class="onoffswitch-inner"></span>
                                             <span class="onoffswitch-switch"></span>
                                         </label>
@@ -246,6 +246,53 @@
 
                 </div> 
 
+                <div class="row">
+
+                    <div class="col-lg-12 animated fadeInRight">
+                        <div class="search-box-header">
+                            <h2>Events <small>{{ count($events) }} results</small></h2>
+                        </div>
+                        @if( count($events) > 0)
+                        <div class="mail-box">
+
+
+                            <table class="table table-hover table-mail">
+
+                                <thead>
+                                    <tr> 
+                                        <th></th>
+                                        <th> Title </th> 
+                                        
+                                        <th> Start </th> 
+                                        <th> End </th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                    @foreach($events as $e)
+                                    @if($e->archived)
+                                        <tr class="archived">
+                                    @else    
+                                        <tr>
+                                    @endif
+                                        <td class="check-mail"><i class="fa fa-calendar"></i></td>
+                                        
+                                        <td>{{ $e->title }}</td>
+                                        <td>{{ $e->prettyDateStart }} </td>
+                                        <td>{{ $e->prettyDateEnd }} </td>
+                                    </tr>                
+                                    @endforeach
+                                                 
+                                </tbody>
+                            </table>
+
+                        </div>
+                        @endif
+                    </div>
+
+                </div> 
+
    
 
                             
@@ -261,6 +308,7 @@
     @include('site.includes.bugreport')
     @include('site.includes.modal')
     <script type="text/javascript" src="/js/custom/site/getArchivedContent.js"></script>
+    <script type="text/javascript" src="/js/custom/site/highlightSearch.js"></script>
 
 
 </body>

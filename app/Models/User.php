@@ -151,7 +151,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
         $user['firstname'] = $request['firstname'];
         $user['lastname']  = $request['lastname'];
-        $user['email']     = $request['email'];
         $user['group_id']  = intval($request['group']);
 
         if(isset($request['password']) && $request['password'] != ''){

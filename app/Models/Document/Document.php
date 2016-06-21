@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Document\Week;
 use App\Models\Document\Folder;
 use App\Models\Document\FileFolder;
+use App\Models\Document\DocumentPackage;
 use Carbon\Carbon;
 use App\Models\Tag\Tag;
 use App\Models\Tag\ContentTag;
@@ -17,7 +18,9 @@ use App\Models\Dashboard\Quicklinks;
 use App\Models\Document\DocumentTarget;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Validation\DocumentValidator;
-
+use App\Models\Feature\FeatureDocument;
+use App\Models\Communication\CommunicationDocument;
+use App\Models\UrgentNotice\UrgentNoticeAttachment;
 
 class Document extends Model
 {
@@ -75,15 +78,18 @@ class Document extends Model
                                 $query->where('documents.end', '>=', $now)
                                     ->orWhere('documents.end', '=', '0000-00-00 00:00:00' ); 
                             })
+                            ->where('documents.deleted_at', '=', null)
+                            ->where('document_target.deleted_at', '=', null)
                             ->where('document_target.store_id', strval($storeNumber))
                             ->select('documents.*')
                             ->get();
-                
+
             }
             else{
                 $files = \DB::table('file_folder')
                             ->join('documents', 'file_folder.document_id', '=', 'documents.id')
                             ->where('file_folder.folder_id', '=', $global_folder_id)
+                            ->where('documents.deleted_at', '=', null)
                             ->select('documents.*')
                             ->get();            
             }
@@ -216,15 +222,32 @@ class Document extends Model
     public static function deleteDocument($id)
     {
         
+        //delete from folder
         FileFolder::where('document_id', $id)->delete();
-        $document = Document::find($id);
-        // unlink(public_path('files/'.$document->filename));
-        $document->delete();
 
+        //delete from package
+        DocumentPackage::where('document_id', $id)->delete();
+
+        //delete from feature
+        FeatureDocument::where('document_id', $id)->delete();
+
+        //delete from communication
+        CommunicationDocument::where('document_id', $id)->delete();  
+
+        //delete from Urgent Notice
+        UrgentNoticeAttachment::deleteAttachment($id, 'Document');
+
+        //delete from quicklink
         $quicklink = Quicklinks::where('url', $id)->where('type', 2)->first();
         if ($quicklink) {
             $quicklink->delete();
         }
+
+        //delete alert
+        Alert::deleteAlert($id);
+
+        $document = Document::find($id);
+        $document->delete();
 
         return;
     }
@@ -334,6 +357,8 @@ class Document extends Model
                     ->where('documents.end', '<=', $now)
                     ->where('documents.end', '!=', '0000-00-00 00:00:00')
                     ->where('document_target.store_id', strval($storeNumber))
+                    ->where('documents.deleted_at', '=', null)
+                    ->where('document_target.deleted_at', '=', null)
                     ->select('documents.*')
 
                     ->get();

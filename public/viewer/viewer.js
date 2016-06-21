@@ -333,6 +333,9 @@ var PDFViewerApplication = {
     var canvas = document.createElement('canvas');
     var value = 'mozPrintCallback' in canvas;
 
+    //going to put a hack here to always send true: we need to always show the print button
+    value = true;
+    
     return PDFJS.shadow(this, 'supportsPrinting', value);
   },
 

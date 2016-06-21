@@ -49,7 +49,7 @@
                         <small style="font-weight: bold; padding-right: 5px;">Show Archive</small>
                             
                             <div class="switch pull-right">
-                                <div class="onoffswitch">
+                                <div class="archive-onoffswitch onoffswitch">
                                     
                                     @if($archives)
                                         <input type="checkbox" checked="" class="onoffswitch-checkbox" id="archives" name="archives">
@@ -96,7 +96,7 @@
                         <i class="{{$icon_class}}"></i>
                     </td>
 
-                    @if( $communication->communication_type_id == "1")
+                    @if( $communication->communication_type_id == "1" ||  $communication->communication_type_id == "2" )
                         <td class="mail-subject communication-name">
                             @if($communication->has_attachments == true)
                                 <i class="fa fa-paperclip"></i>
