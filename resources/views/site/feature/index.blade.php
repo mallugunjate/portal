@@ -162,7 +162,7 @@
                             <div class="col-lg-12">
                                 <div class="ibox float-e-margins">
                                     <div class="ibox-title">
-                                        <h2>Notifications</h2>
+                                        <h2>Recent Uploads</h2>
                                     </div>
                                     <div class="ibox-content" style="max-height: 550px; overflow: auto;">
 
