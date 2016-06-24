@@ -195,7 +195,16 @@ $(document).on('click','.communication-create',function(){
 		        }
 		        else{
 		        	$('#createNewCommunicationForm')[0].reset(); // empty the form
-					swal("Nice!", "'" + subject +"' has been created", "success");        
+		        	swal({
+		        		title : 'Nice!',
+		        		text : subject + " has been created",
+		        		type : 'success',
+
+		        	},
+		        	function(){
+		        		window.location.reload();
+		        	})
+					// swal("Nice!", "'" + subject +"' has been created", "success");        
 		        }
 		        
 		    }
