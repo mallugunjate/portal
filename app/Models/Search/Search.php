@@ -19,8 +19,7 @@ class Search extends Model
     	$docs = collect();
     	
     	$query_terms = explode( ' ', $query);
-    	
-    	// $today = Carbon::now()->toDateString();
+
         $today = Carbon::now();
 
     	foreach ($query_terms as $term) {
