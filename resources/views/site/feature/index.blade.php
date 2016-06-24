@@ -236,12 +236,25 @@
                                                     @foreach($notifications as $n)
                                                         
                                                         <div class="feed-element">                                           
+                                                            {{-- <div class="media-body">
+                                                                    <span class="pull-left" style="padding: 0px 10px 0px 0px;">
+                                                                        <h2 style="padding: 0; margin: 0;">{!! $n->linkedIcon !!}</h2>
+                                                                    </span>
+                                                                    <small class="pull-right" style="padding-left: 10px;">{{ $n->since }} ago</small>
+                                                                    <strong>{!! $n->link !!}</strong> 
+                                                                </div>
+                                                            --}}
+
+
                                                             <div class="media-body">
                                                                 <span class="pull-left" style="padding: 0px 10px 0px 0px;">
                                                                     <h2 style="padding: 0; margin: 0;">{!! $n->linkedIcon !!}</h2>
-                                                                </span>
+                                                                </span>                                                    
                                                                 <small class="pull-right" style="padding-left: 10px;">{{ $n->since }} ago</small>
-                                                                <strong>{!! $n->link !!}</strong> 
+                                                                     <strong>{!! $n->link !!}</strong> 
+                                                                    @if($n->count > 1)
+                                                                    with <strong>{!! $n->count -1 !!}</strong> other documents
+                                                                    @endif
                                                             </div>
                                                         </div>
                                                     @endforeach

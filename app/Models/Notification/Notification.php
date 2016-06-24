@@ -88,8 +88,13 @@ class Notification extends Model
                 $dateSince = Carbon::now()->subDays($windowSize)->toDateTimeString();
                 $notifications = Document::whereIn('id', $documentIdArray)
                                             ->orderBy('updated_at', 'desc')
-                                            // ->where('start', '<=', $today)
-                                            // ->where('end', '>=', $today)
+                                            ->where('start', '<=', $now)
+                                            ->where(function($query) use ($now) {
+                                                $query->where('documents.end', '>=', $now)
+                                                    ->orWhere('documents.end', '=', '0000-00-00 00:00:00' ); 
+                                            })
+                                            ->groupBy('documents.upload_package_id')
+                                            ->select('documents.*', DB::raw('count(*) as count'))
                                             ->get();
 
                 $i=0;
@@ -104,8 +109,13 @@ class Notification extends Model
             case 2:  //by number of documents
                 $notifications = Document::whereIn('id', $documentIdArray)
                                         ->orderBy('updated_at', 'desc')
-                                        // ->where('start', '<=', $today)
-                                        // ->where('end', '>=', $today)
+                                        ->where('start', '<=', $now)
+                                        ->where(function($query) use ($now) {
+                                            $query->where('documents.end', '>=', $now)
+                                                ->orWhere('documents.end', '=', '0000-00-00 00:00:00' ); 
+                                        })
+                                        ->groupBy('documents.upload_package_id')
+                                        ->select('documents.*', DB::raw('count(*) as count'))
                                         ->take($windowSize)
                                         ->get();
                 break;
