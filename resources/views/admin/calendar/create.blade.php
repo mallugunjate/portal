@@ -153,6 +153,7 @@
                 <script src="/js/custom/admin/events/addEvent.js"></script>
                 <script type="text/javascript" src="/js/plugins/chosen/chosen.jquery.js"></script>
                 <script type="text/javascript" src="/js/plugins/ckeditor-standard/ckeditor.js"></script>
+                <script type="text/javascript" src="/js/custom/admin/global/storeSelector.js"></script>
 
                 <script type="text/javascript">
                     $.ajaxSetup({
