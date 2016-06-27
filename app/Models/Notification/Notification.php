@@ -30,7 +30,7 @@ class Notification extends Model
                                 })
                                 ->where('document_target.store_id', '=', $storeNumber)
                                 ->where('document_target.deleted_at', '=', null)
-    							->orderBy('documents.updated_at', 'desc')
+    							->orderBy('documents.start', 'desc')
                                 ->select('documents.*', DB::raw('count(*) as count'))
                                 ->groupBy('documents.upload_package_id')
     							->get(); 
@@ -47,7 +47,7 @@ class Notification extends Model
                                 })
                                 ->where('document_target.store_id', '=', $storeNumber)
                                 ->where('document_target.deleted_at', '=', null)
-                                ->orderBy('documents.updated_at', 'desc')
+                                ->orderBy('documents.start', 'desc')
                                 ->select('documents.*', DB::raw('count(*) as count'))
                                 ->groupBy('documents.upload_package_id')
                                 ->take($windowSize)
@@ -87,16 +87,15 @@ class Notification extends Model
             case 1:  //by number of days
                 $dateSince = Carbon::now()->subDays($windowSize)->toDateTimeString();
                 $notifications = Document::whereIn('id', $documentIdArray)
-                                            ->orderBy('updated_at', 'desc')
-                                            ->where('start', '<=', $now)
-                                            ->where(function($query) use ($now) {
-                                                $query->where('documents.end', '>=', $now)
-                                                    ->orWhere('documents.end', '=', '0000-00-00 00:00:00' ); 
-                                            })
-                                            ->groupBy('documents.upload_package_id')
-                                            ->select('documents.*', DB::raw('count(*) as count'))
-                                            ->get();
-
+	                    ->orderBy('updated_at', 'desc')
+	                    ->where('start', '<=', $now)
+	                    ->where(function($query) use ($now) {
+	                        $query->where('documents.end', '>=', $now)
+	                            ->orWhere('documents.end', '=', '0000-00-00 00:00:00' ); 
+	                    })
+	                    ->groupBy('documents.upload_package_id')
+	                    ->select('documents.*', DB::raw('count(*) as count'))
+	                    ->get();
                 $i=0;
                 foreach($notifications as $n){
                     if($n->updated_at < $dateSince){
@@ -108,16 +107,16 @@ class Notification extends Model
                 break;
             case 2:  //by number of documents
                 $notifications = Document::whereIn('id', $documentIdArray)
-                                        ->orderBy('updated_at', 'desc')
-                                        ->where('start', '<=', $now)
-                                        ->where(function($query) use ($now) {
-                                            $query->where('documents.end', '>=', $now)
-                                                ->orWhere('documents.end', '=', '0000-00-00 00:00:00' ); 
-                                        })
-                                        ->groupBy('documents.upload_package_id')
-                                        ->select('documents.*', DB::raw('count(*) as count'))
-                                        ->take($windowSize)
-                                        ->get();
+	                    ->orderBy('updated_at', 'desc')
+	                    ->where('start', '<=', $now)
+	                    ->where(function($query) use ($now) {
+	                        $query->where('documents.end', '>=', $now)
+	                            ->orWhere('documents.end', '=', '0000-00-00 00:00:00' ); 
+	                    })
+	                    ->groupBy('documents.upload_package_id')
+	                    ->select('documents.*', DB::raw('count(*) as count'))
+	                    ->take($windowSize)
+	                    ->get();
                 break;
 
             default:
@@ -147,7 +146,7 @@ class Notification extends Model
             $n->global_folder_id = $folder_info->global_folder_id;
 
             // get the human readable days since 
-            $n->since =  Utility::getTimePastSinceDate($n->updated_at);
+            $n->since =  Utility::getTimePastSinceDate($n->start);
 
             //adjust the verbage
             if( $n->created_at == $n->updated_at ){
@@ -157,7 +156,7 @@ class Notification extends Model
             }            
             
             //make the timestamp on the file a little nicer
-            $n->prettyDate =  Utility::prettifyDate($n->updated_at);
+            $n->prettyDate =  Utility::prettifyDate($n->start);
         }
         return $notifications;
     }

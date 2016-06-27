@@ -219,12 +219,12 @@
     $(".chosen").chosen({
         width:'75%'
     })
-    $('.input-daterange').datepicker({
-         format: 'yyyy-mm-dd',
-        keyboardNavigation: false,
-        forceParse: false,
-        autoclose: true
-    });            
+    // $('.input-daterange').datepicker({
+    //      format: 'yyyy-mm-dd',
+    //     keyboardNavigation: false,
+    //     forceParse: false,
+    //     autoclose: true
+    // });            
     CKEDITOR.replace('description', {
         filebrowserUploadUrl: "{{route('utilities.ckeditorimages.store',['_token' => csrf_token() ])}}"
     }); 
