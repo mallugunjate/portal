@@ -6,15 +6,19 @@
             </span> --}}
             <a data-toggle="dropdown" class="" href="#">
                 <span class="clear">
-                    <span class="block m-t-xs"> <strong class="font-bold">Admin</strong>
-                 </span>
-{{--                  <span class="text-muted text-xs block">Sr. Web Developer</span><br />
-                 <a href="profile"><span class="text-muted text-xs"> <i class="fa fa-user"></i> My Profile</span></a>   |
-                 <a href="/wireframe/login"><span class="text-muted text-xs"> <i class="fa fa-sign-out"></i> Log out</span></a> --}}
+                    <span class="block m-t-xs">
+                    <center>
+                    <img src="/images/fgl.png" />
+                    </center>
+                    </span>
+
+                  <span class="text-muted text-xs block"></span><br />
+                 <a href="profile"><span class="text-muted text-xs"></span></a>  
+                 <!-- <a href="/admin/logout"><span class="text-muted text-xs pull-right"> <i class="fa fa-sign-out"></i> Log out</span></a>  -->
         </div>
 
         <div class="logo-element">
-            A
+            F
         </div>
     </li>
 
