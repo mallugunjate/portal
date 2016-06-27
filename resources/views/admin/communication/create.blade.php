@@ -219,6 +219,7 @@
 		<script type="text/javascript" src="/js/custom/admin/communications/addCommunication.js"></script>
 		<script type="text/javascript" src="/js/custom/createpackage.js"></script>
 		<script type="text/javascript" src="/js/custom/tree.js"></script>
+		<script type="text/javascript" src="/js/custom/admin/global/storeSelector.js"></script>
 
 		<script type="text/javascript">
 			
