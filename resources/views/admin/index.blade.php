@@ -95,27 +95,34 @@
 
 		                            <div class="row">
 		                            	<div class="col-md-12">
-		                            	<h2>Communications <small>(Last 14 Days)</small></h2>
+		                            	<h2>Communications <small>(Last 7 Days)</small></h2>
 		                            	<!-- 	<canvas id="doughnutChart" width="35" height="35" style="width: 35px; height: 35px;"></canvas> -->
 		                            	
 		                         <!--    	<canvas id="doughnutChart" width="35" height="35" style="width: 35px; height: 35px;"></canvas> -->
-		      							<table>
+		      							<table class="footable table table-stripped toggle-arrow-tiny default breakpoint footable-loaded">
 		      								<th>
 		      									<td>Subject</td>
-		      									<td>Sent At:</td>
+		      									<td>Sent At</td>
+                                                <td>Read</td>
 		      								</th>
 		      								@foreach($commStats as $comm)
 		      								<tr>
 		      									<td>
 		      										@if($comm->banner_id == 1)
-		      											<small class="label label-sm label-inverse">SC</small>
+		      											<small class="label label-sm label-inverse">SC</small>&nbsp;&nbsp;
 		      										@else 
-		      											<small class="label label-sm label-warning">A</small>
+		      											<small class="label label-sm label-warning">Atmo</small>&nbsp;&nbsp;
 		      										@endif
 		      									</td>
-		      									<td><a href="/admin/communication/{{ $comm->id }}/edit">{{ $comm->subject }}</a></td>
+		      									<td><a href="/admin/communication/{{ $comm->id }}/edit">{{ $comm->subject }}</a> 
+                                                <span class="label label-sm label-{{ $comm->colour }}">{{ $comm->communication_type }}</span></td>
 		      									<td>{{ $comm->send_at }}</td>
-		      									<td><canvas id="doughnutChart" width="35" height="35" style="width: 35px; height: 35px;"></canvas></td>
+		      									<td>
+                       {{--                          <small>
+                                                    {{ $comm->openCount }} of {{ $comm->storeCount }} ( {{ $comm->readPerc }}% )
+                                                </small> --}}
+                                                    <canvas id="commChart_{{ $comm->id }}" width="45" height="45" style="width: 45px; height: 45px;"></canvas>
+                                                </td>
 		      								</tr>
 		      								@endforeach
 
@@ -297,57 +304,127 @@
                         },
                         tooltip: false
                     }
-            );            
+            );   
 
-            var doughnutData = [
-                {
-                    value: 200,
-                    color: "#a3e1d4",
-                    highlight: "#1ab394",
-                    label: "App"
-                },
-                {
-                    value: 22,
-                    color: "#dedede",
-                    highlight: "#1ab394",
-                    label: "Software"
-                },
+
+            function addText(id,text) {
+
+              var canvas = document.getElementById(id);
+              var ctx = document.getElementById(id).getContext("2d");
+
+              var cx = canvas.width / 2;
+              var cy = canvas.height / 2;
+
+              console.log(cx, cy); 
+
+              ctx.textAlign = 'center';
+              ctx.textBaseline = 'middle';
+              ctx.font = '14px verdana';
+              ctx.fillStyle = 'black';
+              ctx.fillText(text, cx, cy);
+
+            }
+
+            // var doughnutOptions = {
+            //     segmentShowStroke: true,
+            //     segmentStrokeColor: "#fff",
+            //     segmentStrokeWidth: 2,
+            //     percentageInnerCutout: 50, // This is 0 for Pie charts
+            //     animationSteps: 100,
+            //     animationEasing: "easeOutBounce",
+            //     animateRotate: true,
+            //     animateScale: false,
+            //     showTooltips: false,
+            //     onAnimationComplete: addText
+            // };            
+
+            @foreach($commStats as $c)
+                var commData_{{$c->id}} = [
+                    {
+                        value: {{ $c->openCount }},
+                        color: "#ee0000",
+                        //color: "#a3e1d4",
+                        highlight: "#1ab394"
+               
+                    },
+                    {
+                        value: {{ $c->unreadCount }},
+                        color: "#dedede",
+                        highlight: "#1ab394",
+                    }
+                ];
+
+               var ctx = document.getElementById("commChart_{{ $c->id }}").getContext("2d");
+               var commChart_{{ $c->id }} = new Chart(ctx).Doughnut(commData_{{ $c->id }}, { 
+                    segmentShowStroke: true,
+                    segmentStrokeColor: "#fff",
+                    segmentStrokeWidth: 2,
+                    percentageInnerCutout: 70, // This is 0 for Pie charts
+                    animationSteps: 100,
+                    animationEasing: "easeOutBounce",
+                    animateRotate: true,
+                    animateScale: false,
+                    showTooltips: false,
+                    onAnimationComplete: function(){
+
+                          var canvas = document.getElementById("commChart_{{ $c->id }}");
+                          var ctx = document.getElementById("commChart_{{ $c->id }}").getContext("2d");
+
+                          var cx = canvas.width / 2;
+                          var cy = canvas.height / 2;
+
+                          ctx.textAlign = 'center';
+                          ctx.textBaseline = 'middle';
+                          ctx.font = '10px arial';
+                          ctx.fillStyle = '#333333';
+                          ctx.fillText("{{ $c->readPerc }}%", cx, cy);
+
+                      }
+                      
+      
+                 });
+            @endforeach         
+
+            // var doughnutData = [
+            //     {
+            //         value: 200,
+            //         color: "#a3e1d4",
+            //         highlight: "#1ab394",
+            //         label: "App"
+            //     },
+            //     {
+            //         value: 22,
+            //         color: "#dedede",
+            //         highlight: "#1ab394",
+            //         label: "Software"
+            //     },
         
-            ];
+            // ];
 
 
-            var doughnutData2 = [
-                {
-                    value: 100,
-                    color: "#a3e1d4",
-                    highlight: "#1ab394",
-                    label: "App"
-                },
-                {
-                    value: 122,
-                    color: "#dedede",
-                    highlight: "#1ab394",
-                    label: "Software"
-                },
+            // var doughnutData2 = [
+            //     {
+            //         value: 100,
+            //         color: "#a3e1d4",
+            //         highlight: "#1ab394",
+            //         label: "App"
+            //     },
+            //     {
+            //         value: 122,
+            //         color: "#dedede",
+            //         highlight: "#1ab394",
+            //         label: "Software"
+            //     },
         
-            ];            
+            // ];            
 
-            var doughnutOptions = {
-                segmentShowStroke: true,
-                segmentStrokeColor: "#fff",
-                segmentStrokeWidth: 2,
-                percentageInnerCutout: 60, // This is 0 for Pie charts
-                animationSteps: 100,
-                animationEasing: "easeOutBounce",
-                animateRotate: true,
-                animateScale: false
-            };
 
-            var ctx = document.getElementById("doughnutChart").getContext("2d");
-            var DoughnutChart = new Chart(ctx).Doughnut(doughnutData, doughnutOptions);
 
-            var ctx = document.getElementById("doughnutChart2").getContext("2d");
-            var DoughnutChart2 = new Chart(ctx).Doughnut(doughnutData2, doughnutOptions);
+            // var ctx = document.getElementById("doughnutChart").getContext("2d");
+            // var DoughnutChart = new Chart(ctx).Doughnut(doughnutData, doughnutOptions);
+
+            // var ctx = document.getElementById("doughnutChart2").getContext("2d");
+            // var DoughnutChart2 = new Chart(ctx).Doughnut(doughnutData2, doughnutOptions);
 
 
 

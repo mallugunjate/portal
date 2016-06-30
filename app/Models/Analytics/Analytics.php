@@ -70,24 +70,38 @@ class Analytics extends Model
     public static function getCommunicationStats()
     {
     	//get all communciations for the last 30 days
-    	$comms = Communication::select('id', 'subject', 'communication_type_id', 'send_at', 'archive_at', 'banner_id')
-    		->where('archive_at', '>=', Carbon::now()->subDays(14))
+    	$comms = Communication::join('communication_types', 'communications.communication_type_id', '=', 'communication_types.id')
+            ->select('communications.id', 'communications.subject', 'communications.communication_type_id', 'communication_types.communication_type', 'communication_types.colour', 'communications.send_at', 'communications.archive_at', 'communications.banner_id')
+    		->where('send_at', '>=', Carbon::now()->subDays(7))
     		->orderBy('send_at', 'DESC')
     		->get();
     		// ->groupBy(function($date) {
 		    //     return Carbon::parse($date->created_at)->format('D M d'); 
 		    // });  
-
-    	return $comms;
-    	//get type of each comm
-    	
+	
     	//figure out target stores for each 
-    	
+        foreach($comms as $c){
+            $targetCount = DB::table('communications_target')->where('communication_id', '=', $c->id)->count();
+
+            $openCount = DB::table('analytics')->select('type', 'resource_id', 'store_number')
+                            ->where('type', '=', 'communication')
+                            ->where('resource_id', '=', $c->id)
+                            ->groupBy('store_number')
+                            ->distinct()
+                            ->get();
+                            //dd($openCount);
+            $c->storeCount = $targetCount;
+            $c->openCount = count($openCount);
+            $c->unreadCount = $targetCount - count($openCount);
+            $c->readPerc = round(( count($openCount) / $targetCount ) * 100);
+        }    	
     	//figure out what stores opened it
     	
     	//calculate a percentage
 
     	//format a list of stores +/-
+       //dd($comms);
+       return $comms;
     }
 
     public static function getUrgentNoticeStats()
