@@ -36,6 +36,9 @@ Route::get('/{storeno}/communication', array('uses' => 'Communication\Communicat
 Route::get('/{storeno}/communication/show/{id}', 'Communication\CommunicationController@show');
 Route::resource('/communication', 'Communication\CommunicationTargetController');
 
+//VIDEO
+Route::get('/{storeno}/video', array('uses' => 'Video\VideoController@index'));
+
 //FEATURES
 Route::get('/{storeno}/feature/show/{id}', 'Feature\FeatureController@show');
 
@@ -100,10 +103,10 @@ Route::resource('/admin/package', 'Document\PackageAdminController');
 Route::get('/admin/packagedocuments/{package_id}', 'Document\PackagePartialController@getPackageDocumentPartial');
 Route::get('/admin/packagefolders/{package_id}', 'Document\PackagePartialController@getPackageFolderPartial');
 
-//FEATURES 
+//FEATURES
 Route::resource('/admin/feature', 'Feature\FeatureAdminController');
 Route::resource('/admin/feature/thumbnail', 'Feature\FeatureThumbnailAdminController');
-Route::resource('/admin/feature/background', 'Feature\FeatureBackgroundAdminController'); 
+Route::resource('/admin/feature/background', 'Feature\FeatureBackgroundAdminController');
 Route::resource('/admin/featureOrder', 'Feature\FeatureOrderAdminController');
 Route::get('/admin/featuredocuments/{feature_id}', 'Feature\FeatureAdminController@getFeatureDocumentPartial');
 Route::get('/admin/featurepackages/{feature_id}', 'Feature\FeatureAdminController@getFeaturePackagePartial');
@@ -145,13 +148,13 @@ Route::resource('/utilities/ckeditorimages', 'Utilities\CkeditorImageController'
 /* API Routes */
 //get navigation
 Route::get('/api/v1/banner/{id}/navigation', 'Api\V1\ApiController@getNavigation');
-//get files in folder : query parameter (boolean)isWeek e.g. ?isWeek=false 
+//get files in folder : query parameter (boolean)isWeek e.g. ?isWeek=false
 Route::get('/api/v1/folder/{id}', 'Api\V1\ApiController@getDocumentsInFolder');
 //get document by id
 Route::get('/api/v1/document/{id}', 'Api\V1\ApiController@getDocumentById');
 //get recent documents
 Route::get('/api/v1/banner/{id}/document/recent/{days}', 'Api\V1\ApiController@getRecentDocuments');
-//get all douments in a folder 
+//get all douments in a folder
 Route::get('/api/v1/folder/{id}/archived', 'Api\V1\ApiController@getArchivedDocuments');
 
 
