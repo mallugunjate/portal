@@ -44,71 +44,67 @@
                 @include('site.includes.topbar')
             </div>
 
-            <div class="wrapper wrapper-content">
+            <div class="row wrapper border-bottom white-bg page-heading">
 
-            <h1 style="color: #fff; font-size: 65px; text-transform: uppercase; font-family: GalaxiePolarisCondensed-Bold;text-shadow: 3px 3px 23px rgba(0, 0, 0, 1);padding-bottom: 10px;">Video</h1>
+                {{-- <h1 style="color: #333; font-size: 65px; text-transform: uppercase; font-family: GalaxiePolarisCondensed-Bold;padding-bottom: 0px; line-height: 50px;">Video Library</h1> --}}
+                {{-- <div class="col-lg-10">
+                    <h2>Video</h2>
+                </div> --}}
 
-                <div class="row">
-                    <div class="col-lg-8">
+                {{-- <div class="col-lg-2">
 
+                </div> --}}
+
+                <h2>Video Library</h2>
+
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>This is the video title</h1>
+                </div>
+            </div>
+
+            <div class="row">
+                    <div class="col-lg-12">
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
-                                <h2>Featured Documents</h2>
+                                <h2>Most Viewed</h2>
                             </div>
-
-
-                        </div>
-
-
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="ibox float-e-margins">
-                                    <div class="ibox-title">
-                                        <h2>Additional Documents</h2>
-                                    </div>
-
-                                    <div class="ibox-content clearfix">
-                                        <div class="row">
-                                            <div class="col-lg-4 package-listing">
-
-                                            </div>
-
-                                            <div class="col-lg-8 package-document-container ">
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        
-                    </div>
-
-                    <div class="col-lg-4">
-
-                        <div class="row">
-
-                            <div class="col-lg-12">
-                                <div class="ibox float-e-margins">
-                                    <div class="ibox-title">
-                                        <h2>Recent Uploads</h2>
-                                    </div>
-                                    <div class="ibox-content" style="max-height: 550px; overflow: auto;">
-
-
-                                            <div class="feed-activity-list">
-
-
-                                            </div>
-
-                                    </div>
-                                </div>
+                            <div class="ibox-content clearfix">
+                                This is where some videos will go
                             </div>
                         </div>
                     </div>
-                </div>
+            </div>
+
+            <div class="row">
+                    <div class="col-lg-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h2>Most Liked</h2>
+                            </div>
+                            <div class="ibox-content clearfix">
+                                This is where some videos will go
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
+
+            <div class="row">
+                    <div class="col-lg-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h2>Most Recent</h2>
+                            </div>
+                            <div class="ibox-content clearfix">
+                                This is where some videos will go
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
 
 
                 <br class="clearfix" />

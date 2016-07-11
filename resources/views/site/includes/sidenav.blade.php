@@ -77,12 +77,13 @@
                     <a href="/{{ Request::segment(1) }}/document"><i class="fa fa-book"></i> <span class="nav-label">Library</span></a>
                 </li>
 
+
                 @if (Request::segment(2) == 'video')
                 <li class="active">
                 @else
                 <li>
                 @endif
-                    <a href="/{{ Request::segment(1) }}/video"><i class="fa fa-video-camera"></i> <span class="nav-label">Video</span></a>
+                    <a href="/{{ Request::segment(1) }}/video"><i class="fa fa-video-camera"></i> <span class="nav-label">Video Library</span></a>
                 </li>
 
             </ul>
