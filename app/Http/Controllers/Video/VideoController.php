@@ -51,7 +51,6 @@ class VideoController extends Controller
             ->with('communicationCount', $communicationCount)
             ->with('urgentNoticeCount', $urgentNoticeCount)
             ->with('isComboStore', $isComboStore);
-
     }
 
     /**
