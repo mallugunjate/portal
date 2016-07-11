@@ -8,7 +8,7 @@
 
     <style>
     #page-wrapper{
-        background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 65%, rgba(0, 0, 0, 1) 100%), url('/images/dashboard-banners/{{ $banner->background }}') no-repeat 0px 50px; 
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 65%, rgba(0, 0, 0, 1) 100%), url('/images/dashboard-banners/{{ $banner->background }}') no-repeat 0px 50px;
         background-size: cover !important;
         overflow: hidden;
     }
@@ -18,9 +18,9 @@
         bottom: 0px;
     }
 
-    </style>    
-    
-</head> 
+    </style>
+
+</head>
 
 <body class="fixed-navigation">
     <div id="wrapper">
@@ -47,33 +47,33 @@
                     <div class="col-lg-8">
                         @if (count($features) > 0)
                         <div class="ibox float-e-margins">
-                            
+
                             <div class="ibox-title">
                                 <h2>Featured Content</h2>
                             </div>
-                      
+
                             <div class="ibox-content clearfix">
 
                                 @foreach($features as $feature)
-                                   
+
                                         <div class="product-box">
                                             <a href="/{{ Request::segment(1) }}/feature/show/{{ $feature->id }}">
                                                 <div class="image" style="background-image:url('/images/featured-covers/{{ $feature->thumbnail }}'); background-size: cover; background-position: 50%">
-                                                    
+
                                                 </div>
                                                 <div class="product-desc">
                                                     <span class="product-price">
                                                     {{ $feature->title }}
                                                     </span>
-                                                   
+
                                                 </div>
                                             </a>
                                         </div>
-                                
+
                                 @endforeach
 
                             </div>
-                       
+
                         </div>
                         @endif
 
@@ -83,7 +83,7 @@
                                     <div class="ibox-title">
                                         <h2>Quick Links</h2>
                                     </div>
-                              
+
                                     <div class="ibox-content">
                                         <div class="table-responsive">
                                             <table class="table table-striped table-hover">
@@ -93,14 +93,14 @@
                                                     <tr>
                                                         <td>{!! $ql !!}</td>
                                                     </tr>
-          
+
                                                     @endforeach
                                                 @endif
                                                 </tbody>
                                             </table>
                                         </div>
                                     </div>
-                                </div>                              
+                                </div>
                             </div>
 
                             <div class="col-lg-6">
@@ -108,7 +108,7 @@
                                     <div class="ibox-title">
                                         <h2>Latest Communications</h2>
                                     </div>
-                              
+
                                     <div class="ibox-content">
                                         <div class="feed-activity-list">
 
@@ -137,12 +137,12 @@
 
                                         </div>
                                     </div>
-                                </div>                              
-                            </div>                            
+                                </div>
+                            </div>
                         </div>
 
 
-                      
+
                     </div>
 
                     <div class="col-lg-4">
@@ -154,7 +154,7 @@
                                     <div class="ibox-title">
                                         <h2>Recent Uploads</h2>
                                     </div>
-                                    
+
                                     <div class="ibox-content" style="max-height: 550px; overflow: auto;">
 
                                         <div>
@@ -163,26 +163,26 @@
                                             @if(count($notifications)>0)
 
                                                 @foreach($notifications as $n)
-    
+
                                                 <div class="feed-element">
-                                                    
- 
+
+
                                                     <div class="media-body">
                                                         <span class="pull-left" style="padding: 0px 10px 0px 0px;">
                                                             <h2 style="padding: 0; margin: 0;">{!! $n->linkedIcon !!}</h2>
-                                                        </span>                                                    
+                                                        </span>
                                                         <small class="pull-right" style="padding-left: 10px;">{{ $n->since }} ago</small>
                                                             <strong>{!! $n->link !!}</strong> was {{ $n->verb }} <strong><a href="/{{ Request::segment(1) }}/document#!/{{ $n->global_folder_id }}">{{ $n->folder_name}}</a></strong>
                                                             @if($n->count > 1)
                                                             with <strong>{!! $n->count -1 !!}</strong> other documents
                                                             @endif
                                                     </div>
-                                                    
+
 
                                                 </div>
 
                                                 @endforeach
-                                                
+
                                             @endif
 
                                            {{--  <button class="btn btn-primary btn-block m-t"><i class="fa fa-arrow-down"></i> Show More</button> --}}
@@ -199,7 +199,7 @@
 
 
                 </div>
-           
+
 
                 <br class="clearfix" />
             </div>
@@ -207,13 +207,12 @@
         </div>
     </div>
 
-    @include('site.includes.footer')       
+    @include('site.includes.footer')
     @include('site.includes.scripts')
     @include('site.includes.modal')
 
     <script>
-        console.frog("Ribbit");
+        console.frog("Let's do this!");
     </script>
 </body>
-</html> 
-
+</html>
