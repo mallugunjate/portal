@@ -14,6 +14,10 @@ class CreateVideoTable extends Migration
     {
         Schema::create('videos', function (Blueprint $table) {
             $table->increments('id')->unsigned();
+            $table->string('upload_package_id');
+            $table->string('original_filename');
+            $table->string('filename');
+            $table->string('original_extension');
             $table->string('title');
             $table->string('description');
             $table->integer('uploader')->unsigned();

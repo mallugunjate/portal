@@ -138,6 +138,8 @@ Route::resource('/admin/alert', 'Alert\AlertAdminController' );
 Route::resource('/admin/user', 'User\UserAdminController');
 
 //Videos
+Route::get('/admin/video/add-meta-data', 'Video\VideoAdminController@showMetaDataForm');
+Route::post('/admin/video/add-meta-data', 'Video\VideoAdminController@updateMetaData');
 Route::resource('/admin/video', 'Video\VideoAdminController');
 Route::resource('/admin/playlist', 'Video\PlaylistAdminController');
 Route::resource('/admin/tag', 'Video\TagAdminController');
