@@ -153,8 +153,13 @@
                 <script src="/js/custom/admin/events/addEvent.js"></script>
                 <script type="text/javascript" src="/js/plugins/chosen/chosen.jquery.js"></script>
                 <script type="text/javascript" src="/js/plugins/ckeditor-standard/ckeditor.js"></script>
+<<<<<<< HEAD
                 <script src="/js/custom/datetimepicker.js"></script>
                 
+=======
+                <script type="text/javascript" src="/js/custom/admin/global/storeSelector.js"></script>
+
+>>>>>>> dev
                 <script type="text/javascript">
                     $.ajaxSetup({
                         headers: {

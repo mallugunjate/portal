@@ -208,6 +208,7 @@
 
         </script>
         <script type="text/javascript" src="/js/custom/admin/alerts/createAlert.js"></script>
+        <script type="text/javascript" src="/js/custom/admin/global/storeSelector.js"></script>
         @include('site.includes.bugreport')
 
 

@@ -86,35 +86,19 @@ class FeatureController extends Controller
 
         $feature = Feature::where('id', $id)->first();
 
-        $feature_documents = FeatureDocument::where('feature_id', $id)->get()->pluck('document_id');
-        $selected_documents = array();
-        foreach ($feature_documents as $doc_id) {
-            
-            $doc                = Document::find($doc_id);
-            $doc->folder_path   = Document::getFolderPathForDocument($doc_id);
-            $doc->link          = Utility::getModalLink($doc->filename, $doc->title, $doc->original_extension, 0);
-            $doc->link_with_icon= Utility::getModalLink($doc->filename, $doc->title, $doc->original_extension, 1);
-            $doc->icon          = Utility::getIcon($doc->original_extension);
 
-            $doc->prettyDate = Utility::prettifyDate($doc->updated_at);
-            $doc->since = Utility::getTimePastSinceDate($doc->updated_at);
-            array_push($selected_documents, $doc );
-        }
-        
-        $feature_packages = FeaturePackage::where('feature_id', $id)->orderBy('order')->get()->pluck('package_id');
-        $selected_packages = [];
-        foreach ($feature_packages as $package_id) {
-            $package = Package::find($package_id);
-            $package_details = Package::getPackageDetails($package_id);
-            $package['details'] = $package_details;
-            array_push($selected_packages, $package);
-        }
+        $selected_documents = FeatureDocument::getFeaturedDocuments($feature->id);
+
+        $selected_packages = FeaturePackage::getFeaturePackages($feature->id);
         
         $feature_communcation_type_id = FeatureCommunication::getCommunicationTypeId($id);
+
         $feature_communcations = CommunicationTarget::getTargetedCommunicationsByCategory($storeNumber, $feature_communcation_type_id);
 
 		$notifications = Notification::getNotificationsByFeature($storeInfo->banner_id, $feature->update_type_id, $feature->update_frequency, $feature->id);
+
         $urgentNoticeCount = UrgentNotice::getUrgentNoticeCount($storeNumber);
+
         return view('site.feature.index')
             ->with('skin', $skin)
             ->with('urgentNoticeCount', $urgentNoticeCount)

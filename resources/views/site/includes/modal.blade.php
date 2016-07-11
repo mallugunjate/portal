@@ -77,8 +77,8 @@
 
             <div class="modal-header clearfix">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                <i class="fa fa-bug modal-icon"></i>
-                <h4 class="modal-title">Report a Bug</h4>
+                <i class="fa fa-comment-o modal-icon"></i>
+                <h4 class="modal-title">Feedback</h4>
   <!--               <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small> -->
             </div>
 

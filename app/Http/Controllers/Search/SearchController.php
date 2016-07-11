@@ -39,6 +39,7 @@ class SearchController extends Controller
         $alerts = [];
         $events = [];
 
+        $query = ltrim(rtrim($query));
         if ( isset($query) && ($query != '')){
             $docs = Search::searchDocuments($query, $store);
             $folders = Search::searchFolders($query);
