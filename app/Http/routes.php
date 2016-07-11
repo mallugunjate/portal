@@ -137,6 +137,11 @@ Route::resource('/admin/alert', 'Alert\AlertAdminController' );
 //Users
 Route::resource('/admin/user', 'User\UserAdminController');
 
+//Videos
+Route::resource('/admin/video', 'Video\VideoAdminController');
+Route::resource('/admin/playlist', 'Video\PlaylistAdminController');
+Route::resource('/admin/tag', 'Video\TagAdminController');
+
 //Banner selector
 Route::resource('/admin/banner' , 'AdminSelectedBannerController');
 
