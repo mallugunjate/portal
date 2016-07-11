@@ -134,7 +134,7 @@
 		                            </div>
 
 
-
+{{-- 
 		                            <div class="row">
 		                            	<div class="col-md-6">
 		                            	<h2>Most Popular Files</h2>
@@ -146,7 +146,7 @@
 		                            	<h2>Most Active Stores</h2>
 
 		                            	</div>
-		                            </div>		                            
+		                            </div>	 --}}	                            
 
 		                        </div>
 
