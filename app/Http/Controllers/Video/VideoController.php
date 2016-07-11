@@ -25,7 +25,7 @@ class VideoController extends Controller
     public function index(Request $request)
     {
 
-        return view('site.documents.index');
+        return view('site.video.index');
 
     }
 
