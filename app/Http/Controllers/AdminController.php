@@ -14,6 +14,7 @@ use App\Models\Communication\Communication;
 use App\User;
 use App\Models\UserBanner;
 use App\Models\UserSelectedBanner;
+use App\Models\Analytics\Analytics;
 
 class AdminController extends Controller
 {
@@ -40,14 +41,25 @@ class AdminController extends Controller
      */
     public function index(Request $request)
     {
-
         $banner_id = UserSelectedBanner::where('user_id', \Auth::user()->id)->first()->selected_banner_id;
 
         $banner  = Banner::find($banner_id);
 
         $banners = Banner::all();
 
+        $trafficDaily = Analytics::getTrafficLast24hrs();
+
+        $traffic = Analytics::getTrafficLast30Days();
+
+        $commStats = Analytics::getCommunicationStats();
+        
+        $urgentNoticeStats = Analytics::getUrgentNoticeStats();
+
         return view('admin.index')->with('banner', $banner)
+                    ->with('traffic', $traffic)
+                    ->with('trafficDaily', $trafficDaily)
+                    ->with('commStats', $commStats)
+                    ->with('urgentNoticeStats', $urgentNoticeStats)
                     ->with('banners', $banners);
         
     }
