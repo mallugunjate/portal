@@ -24,8 +24,33 @@ class VideoController extends Controller
      */
     public function index(Request $request)
     {
+        $storeNumber = RequestFacade::segment(1);
 
-        return view('site.video.index');
+        $storeInfo = StoreInfo::getStoreInfoByStoreId($storeNumber);
+
+        $storeBanner = $storeInfo->banner_id;
+
+        $banner = Banner::find($storeBanner);
+
+        $isComboStore = $storeInfo->is_combo_store;
+
+        $skin = Skin::getSkin($storeBanner);
+
+        $communicationCount = DB::table('communications_target')
+            ->where('store_id', $storeNumber)
+            ->whereNull('is_read')
+            ->count();
+
+        $urgentNoticeCount = UrgentNotice::getUrgentNoticeCount($storeNumber);
+
+        $alertCount = Alert::getActiveAlertCountByStore($storeNumber);
+
+        return view('site.video.index')
+            ->with('skin', $skin)
+            ->with('banner', $banner)
+            ->with('communicationCount', $communicationCount)
+            ->with('urgentNoticeCount', $urgentNoticeCount)
+            ->with('isComboStore', $isComboStore);
 
     }
 
