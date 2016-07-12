@@ -57,8 +57,9 @@
                       </div>
                   </div>
                   <div class="ibox-content">
-                     <form method="get" class="form-horizontal" >
-                              <input type="hidden" name="videoID" id="videoID" value="{{ $video->id }}">
+                     
+                     <form class="form-horizontal">
+                              <input type="hidden" name="videoId" id="videoId" value="{{ $video->id }}">
                               <input type="hidden" name="banner_id" value="{{$banner->id}}">
 
                               <div class="form-group"><label class="col-sm-2 control-label"> Title <span class="req">*</span></label>
@@ -77,7 +78,7 @@
                             <div class="form-group">
                                 {!! Form::label('tags[]', 'Tags', ['class'=>'col-sm-2 control-label']) !!}
                                 <div class="col-sm-10">
-                                {!! Form::select('tags[]', $tags, $selected_tags, ['class'=>'chosen', 'multiple'=>'true']) !!}
+                                {!! Form::select('tags[]', $tags, $selected_tags, ['class'=>'chosen', 'multiple'=>'true', 'id'=>'tagsSelected']) !!}
                                 </div>
                             </div>
                               
@@ -100,7 +101,7 @@
                               <div class="form-group">
                                 <div class="col-sm-4 col-sm-offset-2">
                                     <a class="btn btn-white" href="/admin/video"><i class="fa fa-close"></i> Cancel</a>
-                                    <button class="video-edit btn btn-primary" type="submit"><i class="fa fa-check"></i><span> Save changes</span></button>
+                                    <button class="video-update btn btn-primary" type="submit"><i class="fa fa-check"></i><span> Save changes</span></button>
 
                                 </div>
                               </div>
@@ -130,7 +131,8 @@
           });
 
         </script>
-        <script type="text/javascript" src="/js/plugins/chosen/chosen.jquery.js"></script>  
+        <script type="text/javascript" src="/js/plugins/chosen/chosen.jquery.js"></script> 
+        <script type="text/javascript" src="/js/custom/admin/videos/editVideo.js"></script> 
         <script type="text/javascript">
             $(".chosen").chosen({
               width:'75%'

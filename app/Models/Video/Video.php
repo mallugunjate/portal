@@ -74,13 +74,16 @@ class Video extends Model
             
         }
 
-        return ;
+        return $video ;
     }
 
     public static function updateMetaData(Request $request, $id=null)
     {
+        \Log::info('******************************');
+        \Log::info($request->all());
+        \Log::info('******************************');
         if (!isset($id)) {
-            $id = $request->get('file_id');
+            $id = $request->get('video_id');
         }
         
         $tags = $request->get('tags'); 
@@ -90,16 +93,22 @@ class Video extends Model
 
         $title          = $request->get('title');
         $description    = $request->get('description');
+        $featured       = 0;
+        if ( null !== $request->get('featured') ) {
+            $featured = $request->get('featured');
+        }
+
         
         $metadata = array(
             'title'       => $title,
             'description' => $description,
+            'featured'    => $featured
         );
 
-        $document = Video::find($id);
-        $document->update($metadata);
+        $video = Video::find($id);
+        $video->update($metadata);
 
-        return;
+        return $video;
     }
 
     public static function updateTags($id, $tags)

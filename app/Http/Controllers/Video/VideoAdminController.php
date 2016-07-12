@@ -124,8 +124,9 @@ class VideoAdminController extends Controller
         $selected_tags = VideoTag::where('video_id', $id)
                                 ->join('tags', 'tags.id', '=', 'video_tags.tag_id')
                                 ->select('tags.*')
-                                ->get();
-                                
+                                ->get()
+                                ->pluck('id')->toArray();
+                                        
         $tags = Tag::where('banner_id', $banner->id)->lists('name', 'id');
         return view('admin.video.video-manager.edit')->with('video', $video)
                                                     ->with('banner', $banner)
@@ -143,7 +144,7 @@ class VideoAdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Video::updateMetaData($request);
     }
 
     /**
