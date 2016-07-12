@@ -22,10 +22,11 @@ class VideoAdminController extends Controller
      */
     public function index()
     {
-        $videos = Video::all();
+        $videos = Video::getAllVideos();
         $banner = UserSelectedBanner::getBanner();
         
         $banners = Banner::all();
+        
         return view('admin.video.index')->with('banner', $banner)
                                         ->with('banners', $banners)
                                         ->with('videos', $videos);

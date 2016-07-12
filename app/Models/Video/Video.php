@@ -8,6 +8,8 @@ use App\Models\Document\Document;
 use App\Models\UserSelectedBanner;
 use Illuminate\Http\Request;
 use App\Models\Video\VideoTag;
+use App\Models\Utility\Utility;
+use App\User;
 
 class Video extends Model
 {
@@ -19,8 +21,18 @@ class Video extends Model
 
     public static function getAllVideos()
     {
-    	return Video::all();
-    }
+    	$videos = Video::all()
+                        ->each(function($file){
+                            $file->uploaderFirstName = User::find($file->uploader)->firstname;
+                            $file->uploaderLastName = User::find($file->uploader)->lastname;
+                            $file->link = Utility::getModalLink($file->filename, $file->title, $file->original_extension, $file->id, 0);
+                            $file->link_with_icon = Utility::getModalLink($file->filename, $file->title, $file->original_extension, $file->id, 1);
+                            $file->icon = Utility::getIcon($file->original_extension);
+                            $file->prettyDateCreated = Utility::prettifyDate($file->created_at);
+                            $file->prettyDateUpdated = Utility::prettifyDate($file->updated_at);
+                        });
+        return $videos;
+    }           
     
     public static function storeVideo($request)
     {
@@ -67,9 +79,6 @@ class Video extends Model
 
     public static function updateMetaData(Request $request, $id=null)
     {
-        \Log::info('*************************');
-        \Log::info($request->all());
-        \Log::info('*************************');
         if (!isset($id)) {
             $id = $request->get('file_id');
         }

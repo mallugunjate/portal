@@ -60,16 +60,17 @@
 												
 												<td>Title</td>
 												<td>Description</td>
-												
+												<td>Uploader</td>
 												<td>Actions</td>
 											</tr>
 			                            	@foreach($videos as $video)
 			                            	<tr>
 			                            		
-			                            		<td><a href="/admin/video/{{$video->id}}/edit">{{ $video->title }}</a></td>
+			                            		<td>{!! $video->link_with_icon !!}</a></td>
 			                            		<td> {{$video->description}} </td>
-			                            		
+			                            		<td> {{$video->uploaderFirstName}} {{$video->uploaderLastName}} </td>
 			                            		<td>
+			                            			<a href="/admin/video/{{$video->id}}/edit" class=" btn btn-primary btn-sm"><i class="fa fa-pencil"></i></a>
 			                            			<a data-video="{{$video->id}}" id="video{{$video->id}}" class="video-delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
 
 			                            		</td>
@@ -101,9 +102,10 @@
 
 
 				<script type="text/javascript" src="/js/custom/admin/videos/deleteVideo.js"></script>
+				<script type="text/javascript" src="/js/custom/site/launchModal.js" ></script>
 
 				@include('site.includes.bugreport')
-
+				@include('site.includes.modal')
 
 
 			</body>
