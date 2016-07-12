@@ -26,8 +26,8 @@ class VideoAdminController extends Controller
         $banner = UserSelectedBanner::getBanner();
         
         $banners = Banner::all();
-        
-        return view('admin.video.index')->with('banner', $banner)
+
+        return view('admin.video.video-manager.index')->with('banner', $banner)
                                         ->with('banners', $banners)
                                         ->with('videos', $videos);
     }
@@ -105,7 +105,7 @@ class VideoAdminController extends Controller
      */
     public function show($id)
     {
-        var_dump('show video');
+
     }
 
     /**
@@ -116,7 +116,22 @@ class VideoAdminController extends Controller
      */
     public function edit($id)
     {
-        var_dump('edit video');
+        $video = Video::find($id);
+        $banner = UserSelectedBanner::getBanner();
+        
+        $banners = Banner::all();
+        
+        $selected_tags = VideoTag::where('video_id', $id)
+                                ->join('tags', 'tags.id', '=', 'video_tags.tag_id')
+                                ->select('tags.*')
+                                ->get();
+                                
+        $tags = Tag::where('banner_id', $banner->id)->lists('name', 'id');
+        return view('admin.video.video-manager.edit')->with('video', $video)
+                                                    ->with('banner', $banner)
+                                                    ->with('banners', $banners)
+                                                    ->with('tags', $tags)
+                                                    ->with('selected_tags', $selected_tags);
     }
 
     /**
