@@ -237,7 +237,7 @@ See https://github.com/adobe-type-tools/cmap-resources
                 </button> -->
 
                 <button id="print" class="toolbarButton print hiddenMediumView" title="Load Printer Friendly File" tabindex="33" data-l10n-id="print">
-                  <span data-l10n-id="print_label">Print</span>
+                  <span data-l10n-id="print_label">Load Printer Friendly File</span>
                 </button>
 
                 <button id="download" class="toolbarButton download hiddenMediumView" title="Download" tabindex="34" data-l10n-id="download">
@@ -399,10 +399,11 @@ See https://github.com/adobe-type-tools/cmap-resources
 <!--#include viewer-snippet-mozPrintCallback-polyfill.html-->
 <!--#endif-->
 
-    
-    <script>
-   
-  
+
+
+    <script type="text/javascript">
+
+
     function getQueryParams(qs) {
         qs = qs.split('+').join(' ');
         var params = {},
@@ -417,7 +418,10 @@ See https://github.com/adobe-type-tools/cmap-resources
 
       document.getElementById('print').addEventListener('click', function() {
           var query = getQueryParams(document.location.search);
-          window.location.href = query.file;
+          console.log("clicked print: " + query.file);
+         // window.location.href = query.file;
+         // window.location.href = "print.html?file=" query.file;
+         location.assign("print.php?file="+query.file);
       });
 
     </script>
