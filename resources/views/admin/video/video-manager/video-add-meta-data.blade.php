@@ -54,31 +54,46 @@
 
                           <tbody>
 
-                          <tr>
+                         <!--  <tr>
                             <td>File Name</td>
                             <td>Title</td>
                             <td>Description</td>
                             <td>Tags</td>
-                          </tr>
+                          </tr> -->
                       
                   	@foreach($videos as $vid)
-                  		
+                  		<tr> <h4> Add data for <i> {{ $vid->original_filename }} </i></h4> </tr>
                   		<tr>
                   			<form id="metadataform{{ $vid->id }}">
-                  				
+                  				      
+
                                 <input type="hidden" name="file_id" value="{{ $vid->id }}">
 
-                                <td>{{ $vid->original_filename }}</td>
-                                <td><input type="text" style="width: 300px;" class="form-control" name="title{{ $vid->id }}" id="title{{ $vid->id }}" value="{{$vid->title}}"></td>
-                    		    <td><input type="text" style="width: 300px;" class="form-control" name="description{{ $vid->id }}" id="description{{ $vid->id }}" value="{{$vid->description}}"></td>
-                                <td><input type="text" class="chosen" value=></td>
-                                <button type="submit" class="meta-data-add btn btn-success hidden" data-id="{{ $vid->id }}">Update</button>
+                                <div class="row">
+                                  <label class="col-md-2"> Title </label>
+                                  <div class="col-md-10">
+                                  <input type="text" class="form-control" name="title{{ $vid->id }}" id="title{{ $vid->id }}" value="{{$vid->title}}">
+                                  </div>
+                                </div>
+                    		        <div class="row">
+                                  <label class="col-md-2">Description</label>
+                                  <div class="col-md-10">
+                                  <input type="text" class="form-control" name="description{{ $vid->id }}" id="description{{ $vid->id }}" value="{{$vid->description}}">
+                                  </div>
+                                </div>
 
-                            
+                                <div class="row"> 
+                                  <label class="col-md-2"> Tags</label>             
+                                  <div class="col-md-10">
+                                      {!! Form::select('tags[]', $tags, null, ['class'=>'chosen' , 'multiple'=>'true', 'id'=>"select$vid->id"]) !!}
+                                  </div>
+                                </div>
+                                <button type="submit" class="meta-data-add btn btn-success hidden" data-id="{{ $vid->id }}">Update</button>
           
                   			</form>
 
                         </tr>
+                        <div class="hr-line-dashed"></div>
                   	@endforeach
                         </tbody>
                     </table>
@@ -115,7 +130,7 @@
             <script type="text/javascript" src="/js/plugins/steps/jquery.steps.min.js"></script>
             <script type="text/javascript" src="/js/custom/admin/documents/breadcrumb.js"></script>
             <script type="text/javascript" src="/js/custom/tree.js"></script>
-            <script type="text/javascript" src="/js/custom/submitmetadata.js"></script>
+            <script type="text/javascript" src="/js/custom/admin/videos/submitmetadata.js"></script>
             <script src="/js/custom/datetimepicker.js"></script>
             <script type="text/javascript" src="/js/plugins/chosen/chosen.jquery.js"></script>
         
@@ -126,6 +141,9 @@
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         }
+                    });
+                    $(".chosen").chosen({
+                      'width':'100%'
                     });
 
                 </script>

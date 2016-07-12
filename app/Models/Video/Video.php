@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Document\Document;
 use App\Models\UserSelectedBanner;
+use Illuminate\Http\Request;
+use App\Models\Video\VideoTag;
 
 class Video extends Model
 {
@@ -61,5 +63,46 @@ class Video extends Model
         }
 
         return ;
+    }
+
+    public static function updateMetaData(Request $request, $id=null)
+    {
+        \Log::info('*************************');
+        \Log::info($request->all());
+        \Log::info('*************************');
+        if (!isset($id)) {
+            $id = $request->get('file_id');
+        }
+        
+        $tags = $request->get('tags'); 
+        if ($tags != null) {
+            Video::updateTags($id, $tags);
+        }
+
+        $title          = $request->get('title');
+        $description    = $request->get('description');
+        
+        $metadata = array(
+            'title'       => $title,
+            'description' => $description,
+        );
+
+        $document = Video::find($id);
+        $document->update($metadata);
+
+        return;
+    }
+
+    public static function updateTags($id, $tags)
+    {
+        VideoTag::where('video_id', $id)->delete();
+        foreach ($tags as $tag) {
+            VideoTag::create([
+               'video_id'     => $id,
+               'tag_id'         => $tag
+            ]);
+        }
+            
+        return;
     }
 }

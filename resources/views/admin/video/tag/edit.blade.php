@@ -95,7 +95,6 @@
 				</script>
 
 				<script src="/js/custom/tags.js"></script>
-				<script type="text/javascript" src="/js/custom/admin/global/bannerSelector.js"></script>
 
 				@include('site.includes.bugreport')
 

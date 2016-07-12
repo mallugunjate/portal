@@ -11,6 +11,7 @@ use App\Models\Banner;
 use App\Models\StoreInfo;
 use App\Models\Video\Tag;
 use App\Models\Video\Video;
+use App\Models\Video\VideoTag;
 
 class VideoAdminController extends Controller
 {
@@ -21,7 +22,13 @@ class VideoAdminController extends Controller
      */
     public function index()
     {
-        var_dump('show all videos');
+        $videos = Video::all();
+        $banner = UserSelectedBanner::getBanner();
+        
+        $banners = Banner::all();
+        return view('admin.video.index')->with('banner', $banner)
+                                        ->with('banners', $banners)
+                                        ->with('videos', $videos);
     }
 
     /**
@@ -85,7 +92,8 @@ class VideoAdminController extends Controller
      */
     public function updateMetaData(Request $request)
     {
-        Document::updateMetaData($request);
+        Video::updateMetaData($request);
+        return;
     }       
 
     /**
@@ -130,6 +138,8 @@ class VideoAdminController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Video::where('id', $id)->delete();
+        VideoTag::where('video_id', $id)->delete();
+        return;
     }
 }
