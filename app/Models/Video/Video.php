@@ -132,4 +132,28 @@ class Video extends Model
         $featuredVideo->save();
         return;
     }
+
+    public static function getMostLikedVideos()
+    {
+        return Video::orderBy('likes', 'desc')->get();
+    }
+    public static function getMostRecentVideos()
+    {
+        return Video::orderBy('created_at', 'desc')->get();
+    }
+
+    public static function getVideosByUploader($uploaderId)
+    {
+        return Video::where('uploader', $uploaderId)->orderBy('created_at', 'desc')->get();
+    }
+
+    public static function getVideosByTag($tagId)
+    {
+        $videos = Video::join('video_tags', 'video_tags.video_id', '=', 'videos.id')
+                        ->where('video_tags.tag_id', $tagId)
+                        ->where('video_tags.deleted_at', '=', null)
+                        ->select('videos.*')
+                        ->get();
+        return $videos;
+    }
 }
