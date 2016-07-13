@@ -59,7 +59,7 @@ $(document).on('click','.playlist-update',function(){
 	var playlist_videos = [];
 	
 	
-	$(".remove_videos").each(function(){
+	$(".remove_video").each(function(){
 		remove_videos.push($(this).attr('data-video-id'));
 	});
 	

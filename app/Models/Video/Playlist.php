@@ -39,7 +39,7 @@ class Playlist extends Model
     	$playlist = Playlist::find($id);
     	$playlist['title'] = $request['title'];
     	$playlist->save();
-    	Playlist::updatePlaylist($id, $request);
+    	Playlist::updatePlaylistVideos($id, $request);
     	return;
     }
 
