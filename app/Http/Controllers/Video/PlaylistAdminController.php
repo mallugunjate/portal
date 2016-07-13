@@ -81,7 +81,22 @@ class PlaylistAdminController extends Controller
      */
     public function edit($id)
     {
-        //
+        $banner = UserSelectedBanner::getBanner();
+        $banners = Banner::all();
+        $playlist = Playlist::find($id);
+        $videos = Video::getAllVideos();
+        $selectedVideos = PlaylistVideo::join('videos', 'videos.id', '=', 'playlists_video.video_id')
+                                        ->where('playlist_id', $id)
+                                        ->select('videos.*')
+                                        ->get();
+
+        return view('admin.video.playlist-manager.edit')
+                ->with('playlist', $playlist)
+                ->with('videos', $videos)
+                ->with('playlist_videos', $selectedVideos)
+                ->with('banners', $banners)
+                ->with('banner', $banner);
+
     }
 
     /**
@@ -93,7 +108,7 @@ class PlaylistAdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return Playlist::updatePlaylist($id, $request);
     }
 
     /**

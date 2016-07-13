@@ -34,6 +34,15 @@ class Playlist extends Model
 
     }
 
+    public static function updatePlaylist($id, $request)
+    {
+    	$playlist = Playlist::find($id);
+    	$playlist['title'] = $request['title'];
+    	$playlist->save();
+    	Playlist::updatePlaylist($id, $request);
+    	return;
+    }
+
     public static function updatePlaylistVideos($id, $request)
     {
     	$remove_videos = $request["remove_videos"];
