@@ -57,7 +57,7 @@
 		                            <div class="table-responsive">
 		                            	<table class="table table-hover issue-tracker">
 			                            	<tr>
-												
+												<td></td>
 												<td>Title</td>
 												<td>Description</td>
 												<td>Uploader</td>
@@ -65,8 +65,12 @@
 											</tr>
 			                            	@foreach($videos as $video)
 			                            	<tr>
-			                            		
-			                            		<td>{!! $video->link_with_icon !!}</a></td>
+			                            		@if ($video->featured)
+			                            			<td><i class="fa fa-film"></i> </td>
+			                            		@else
+			                            			<td></td>
+			                            		@endif
+			                            		<td>{!! $video->link !!}</a></td>
 			                            		<td> {{$video->description}} </td>
 			                            		<td> {{$video->uploaderFirstName}} {{$video->uploaderLastName}} </td>
 			                            		<td>

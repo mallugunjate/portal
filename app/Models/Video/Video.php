@@ -94,7 +94,8 @@ class Video extends Model
         $title          = $request->get('title');
         $description    = $request->get('description');
         $featured       = 0;
-        if ( null !== $request->get('featured') ) {
+        if ( null !== $request->get('featured') ) {            
+            Video::removeFeaturedVideoFlag();
             $featured = $request->get('featured');
         }
 
@@ -121,6 +122,14 @@ class Video extends Model
             ]);
         }
             
+        return;
+    }
+
+    public static function removeFeaturedVideoFlag()
+    {
+        $featuredVideo = Video::where('featured', 1)->first();
+        $featuredVideo->featured = 0;
+        $featuredVideo->save();
         return;
     }
 }
