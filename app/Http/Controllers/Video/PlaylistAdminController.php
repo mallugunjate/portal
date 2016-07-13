@@ -58,7 +58,7 @@ class PlaylistAdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return Playlist::storePlaylist($request);
     }
 
     /**

@@ -9,7 +9,7 @@ class PlaylistVideo extends Model
 {
     use SoftDeletes;
 
-    protected $table = 'playlist_video';
+    protected $table = 'playlists_video';
     protected $fillable = ['playlist_id', 'video_id'];
     protected $dates = ['deleted_at'];
 }

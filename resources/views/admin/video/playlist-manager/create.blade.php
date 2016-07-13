@@ -65,7 +65,7 @@
 
 										<div class="form-group">
 											<label class="col-sm-2 control-label">Title</label>
-								            <div class="col-sm-10"><input type="text" id="subject" name="subject" class="form-control" value=""></div>
+								            <div class="col-sm-10"><input type="text" id="title" name="title" class="form-control" value=""></div>
 										</div>
 										
 
@@ -118,7 +118,7 @@
 		            </div>
 		            <div class="modal-footer">
 		                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		                <button type="button" class="btn btn-primary" id="attach-selected-files">Select Videos</button>
+		                <button type="button" class="btn btn-primary" id="attach-selected-videos">Select Videos</button>
 		            </div>
 		        </div>
 		    </div>
@@ -139,13 +139,8 @@
 		<script type="text/javascript" src="/js/vendor/bootstrap-datetimepicker.min.js"></script>
 		<script type="text/javascript" src="/js/plugins/ckeditor-standard/ckeditor.js"></script>
 		<script type="text/javascript" src="/js/plugins/chosen/chosen.jquery.js"></script>
-		<script type="text/javascript" src="/js/custom/admin/communications/addCommunication.js"></script>
-		<script type="text/javascript" src="/js/custom/createpackage.js"></script>
+		<script type="text/javascript" src="/js/custom/admin/videos/playlists/addPlaylist.js"></script>
 		<script type="text/javascript" src="/js/custom/tree.js"></script>
-
-		<script src="/js/custom/datetimepicker.js"></script>
-		
-
 		<script type="text/javascript" src="/js/custom/admin/global/storeSelector.js"></script>
 
 
