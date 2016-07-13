@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Models\UserSelectedBanner;
 use App\Models\Banner;
 use App\Models\Video\Playlist;
+use App\Models\Video\PlaylistVideo;
 use App\Models\Video\Video;
 
 class PlaylistAdminController extends Controller
@@ -103,6 +104,8 @@ class PlaylistAdminController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Playlist::where('id', $id)->delete();
+        PlaylistVideo::where('playlist_id', $id)->delete();
+        return;
     }
 }

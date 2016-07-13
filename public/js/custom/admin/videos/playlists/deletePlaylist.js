@@ -1,8 +1,8 @@
-$(".video-delete").on('click', function(){
+$(".playlist-delete").on('click', function(){
 
 
-    var videoId = $(this).attr('data-video');
-    var selector = "#video"+videoId;
+    var playlistId = $(this).attr('data-playlist');
+    var selector = "#playlist"+playlistId;
 
     swal({
         title: "Are you sure?",
@@ -14,11 +14,11 @@ $(".video-delete").on('click', function(){
         closeOnConfirm: false
     }, function () {
     	$.ajax({
-		    url: '/admin/video/'+videoId,
+		    url: '/admin/playlist/'+playlistId,
 		    type: 'DELETE',
 		    success: function(result) {
 		        $(selector).closest('tr').fadeOut(1000);
-		        swal("Deleted!", "This video has been deleted.", "success");
+		        swal("Deleted!", "This playlist has been deleted.", "success");
 		    }
 		});
         

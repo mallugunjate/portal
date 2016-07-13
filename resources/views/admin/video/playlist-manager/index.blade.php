@@ -97,7 +97,7 @@
 				</script>
 
 
-				<script type="text/javascript" src="/js/custom/admin/videos/deletePlaylist.js"></script>
+				<script type="text/javascript" src="/js/custom/admin/videos/playlists/deletePlaylist.js"></script>
 				<script type="text/javascript" src="/js/custom/site/launchModal.js" ></script>
 
 				@include('site.includes.bugreport')
