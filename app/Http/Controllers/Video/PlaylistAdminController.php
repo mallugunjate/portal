@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Models\UserSelectedBanner;
+use App\Models\Banner;
+use App\Models\Video\Playlist;
+use App\Models\Video\Video;
 
 class PlaylistAdminController extends Controller
 {
@@ -16,7 +20,16 @@ class PlaylistAdminController extends Controller
      */
     public function index()
     {
-        //
+        $banner = UserSelectedBanner::getBanner();
+        $banners = Banner::all();
+
+        $playlists =Playlist::where('banner_id', $banner->id)
+                    ->get();
+
+        return view('admin.video.playlist-manager.index')
+                ->with('playlists', $playlists)
+                ->with('banners', $banners)
+                ->with('banner', $banner);
     }
 
     /**
@@ -26,7 +39,15 @@ class PlaylistAdminController extends Controller
      */
     public function create()
     {
-        //
+        $banner = UserSelectedBanner::getBanner();
+        $banners = Banner::all();
+
+        $videos = Video::getAllVideos();
+        return view('admin.video.playlist-manager.create')
+                ->with('videos', $videos)
+                ->with('banners', $banners)
+                ->with('banner', $banner);
+
     }
 
     /**

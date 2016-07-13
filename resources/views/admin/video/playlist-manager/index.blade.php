@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    @section('title', 'Videos')
+    @section('title', 'Playlists')
     @include('admin.includes.head')
 
 	<meta name="csrf-token" content="{!! csrf_token() !!}"/>
@@ -23,13 +23,13 @@
 
 		<div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
-                    <h2>Videos</h2>
+                    <h2>Playlists</h2>
                     <ol class="breadcrumb">
                         <li>
                             <a href="/admin">Home</a>
                         </li>
                         <li class="active">
-                            <strong>Videos</strong>
+                            <strong>Playlists</strong>
                         </li>
                     </ol>
                 </div>
@@ -43,11 +43,11 @@
 		                <div class="col-lg-12">
 		                    <div class="ibox">
 		                        <div class="ibox-title">
-		                            <h5>Videos</h5>
+		                            <h5>Playlists</h5>
 
 		                            <div class="ibox-tools">
 
-		                                <a href="/admin/video/create" class="btn btn-primary btn"><i class="fa fa-plus"></i> Add New Videos</a>
+		                                <a href="/admin/playlist/create" class="btn btn-primary btn"><i class="fa fa-plus"></i> Add New Playlist</a>
 		                            </div>
 		                        </div>
 		                        <div class="ibox-content">
@@ -59,19 +59,15 @@
 			                            	<tr>
 												
 												<td>Title</td>
-												<td>Description</td>
-												<td>Uploader</td>
 												<td>Actions</td>
 											</tr>
-			                            	@foreach($videos as $video)
+			                            	@foreach($playlists as $playlist)
 			                            	<tr>
 			                            		
-			                            		<td>{!! $video->link_with_icon !!}</a></td>
-			                            		<td> {{$video->description}} </td>
-			                            		<td> {{$video->uploaderFirstName}} {{$video->uploaderLastName}} </td>
+			                            		<td>{!! $playlist->title !!}</a></td>
 			                            		<td>
-			                            			<a href="/admin/video/{{$video->id}}/edit" class=" btn btn-primary btn-sm"><i class="fa fa-pencil"></i></a>
-			                            			<a data-video="{{$video->id}}" id="video{{$video->id}}" class="video-delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+			                            			<a href="/admin/playlist/{{$playlist->id}}/edit" class=" btn btn-primary btn-sm"><i class="fa fa-pencil"></i></a>
+			                            			<a data-playlist="{{$playlist->id}}" id="playlist{{$playlist->id}}" class="playlist-delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
 
 			                            		</td>
 			                            	</tr>
@@ -101,7 +97,7 @@
 				</script>
 
 
-				<script type="text/javascript" src="/js/custom/admin/videos/deleteVideo.js"></script>
+				<script type="text/javascript" src="/js/custom/admin/videos/deletePlaylist.js"></script>
 				<script type="text/javascript" src="/js/custom/site/launchModal.js" ></script>
 
 				@include('site.includes.bugreport')
