@@ -5,6 +5,7 @@ namespace App\Models\Video;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Document\Document;
+use App\Models\Validation\VideoValidator;
 use App\Models\UserSelectedBanner;
 use Illuminate\Http\Request;
 use App\Models\Video\VideoTag;
@@ -18,6 +19,23 @@ class Video extends Model
     protected $table = 'videos';
     protected $fillable = ['upload_package_id', 'original_filename', 'original_extension', 'filename', 'title', 'description', 'uploader', 'likes', 'dislikes', 'featured'];
     protected $dates = ['deleted_at'];
+
+    public static function validateCreateVideo($request)
+    {
+        \Log::info($request->all());
+        $validateThis = [
+            
+            'filename'  => $request->file('document')
+            
+        ];
+
+        
+        \Log::info($validateThis);
+        
+        $v = new VideoValidator();
+        $validationResult = $v->validate($validateThis);
+        return $validationResult;
+    }
 
     public static function getAllVideos()
     {
@@ -37,12 +55,12 @@ class Video extends Model
     public static function storeVideo($request)
     {
      	\Log::info($request->all());   
-        // $validate = Document::validateCreateDocument($request);
+        $validate = Video::validateCreateVideo($request);
         
-        // if($validate['validation_result'] == 'false') {
-        //     \Log::info($validate);
-        //     return json_encode($validate);
-        // } 
+        if($validate['validation_result'] == 'false') {
+            \Log::info($validate);
+            return json_encode($validate);
+        } 
 
         $metadata = Document::getDocumentMetaData($request->file('document'));       
 
