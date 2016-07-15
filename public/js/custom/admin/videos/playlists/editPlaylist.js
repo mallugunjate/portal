@@ -106,7 +106,7 @@ $(document).on('click','.playlist-update',function(){
 		}).done(function(response){
 			console.log(response);
 			console.log("********");
-			// $(".existing-files-container").load("/admin/featuredocuments/"+featureID);
+			$(".existing-videos-container").load("/admin/playlistvideos/"+playlistID);
 			$("#videos-staged-to-remove").empty();
 			$("#videos-selected").empty();
 			$("#video-listing").find(".video-checkbox").prop('checked', false);

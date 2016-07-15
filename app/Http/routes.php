@@ -141,7 +141,11 @@ Route::resource('/admin/user', 'User\UserAdminController');
 Route::get('/admin/video/add-meta-data', 'Video\VideoAdminController@showMetaDataForm');
 Route::post('/admin/video/add-meta-data', 'Video\VideoAdminController@updateMetaData');
 Route::resource('/admin/video', 'Video\VideoAdminController');
+
+//Playlist
 Route::resource('/admin/playlist', 'Video\PlaylistAdminController');
+Route::get('/admin/playlistvideos/{playlist_id}', 'Video\PlaylistAdminController@getPlaylistVideoPartial');
+//Video Tags
 Route::resource('/admin/tag', 'Video\TagAdminController');
 
 //Banner selector

@@ -16,6 +16,15 @@ use App\Models\Video\VideoTag;
 class VideoAdminController extends Controller
 {
     /**
+     * Instantiate a new VideoAdminController instance.
+     */
+    public function __construct()
+    {
+        $this->middleware('admin.auth');
+        $this->middleware('banner');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

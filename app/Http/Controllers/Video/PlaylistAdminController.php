@@ -14,6 +14,16 @@ use App\Models\Video\Video;
 
 class PlaylistAdminController extends Controller
 {
+    
+    /**
+     * Instantiate a new PlaylistAdminController instance.
+     */
+    public function __construct()
+    {
+        $this->middleware('admin.auth');
+        $this->middleware('banner');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -122,5 +132,11 @@ class PlaylistAdminController extends Controller
         Playlist::where('id', $id)->delete();
         PlaylistVideo::where('playlist_id', $id)->delete();
         return;
+    }
+
+    public function getPlaylistVideoPartial($id)
+    {
+        $videos = PlaylistVideo::getPlaylistVideos($id);
+        return view('admin.video.playlist-manager.playlist-videos-partial')->with('videos', $videos);
     }
 }
