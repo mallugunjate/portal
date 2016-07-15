@@ -12,7 +12,7 @@ class CreatePlaylistVideoTable extends Migration
      */
     public function up()
     {
-        Schema::create('playlists_video', function (Blueprint $table) {
+        Schema::create('playlist_videos', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('playlist_id')->unsigned();
             $table->integer('video_id')->unsigned();
@@ -30,6 +30,6 @@ class CreatePlaylistVideoTable extends Migration
      */
     public function down()
     {
-        Schema::drop('playlists_video');
+        Schema::drop('playlist_videos');
     }
 }

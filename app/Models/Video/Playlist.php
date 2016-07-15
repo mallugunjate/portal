@@ -63,4 +63,18 @@ class Playlist extends Model
          }
          return;
     }
+
+    public static function getPlaylistByBanner($banner_id)
+    {
+        $playlists = Playlist::join('playlist_videos', 'playlist_videos.playlist_id', '=', 'playlists.id')
+                ->join('videos', 'videos.id', '=', 'playlist_videos.video_id')
+                ->where('banner_id', $banner_id)
+                ->where('playlist_videos.deleted_at', '=', null)
+                ->where('videos.deleted_at', '=', null)
+                ->where('playlists.deleted_at', '=', null)
+                ->select ('playlists.title as playlist_title', 'playlists.banner_id', 'videos.*')
+                ->get();
+        
+        return $playlists;
+    }
 }

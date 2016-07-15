@@ -85,7 +85,7 @@ class PlaylistAdminController extends Controller
         $banners = Banner::all();
         $playlist = Playlist::find($id);
         $videos = Video::getAllVideos();
-        $selectedVideos = PlaylistVideo::join('videos', 'videos.id', '=', 'playlists_video.video_id')
+        $selectedVideos = PlaylistVideo::join('videos', 'videos.id', '=', 'playlist_videos.video_id')
                                         ->where('playlist_id', $id)
                                         ->select('videos.*')
                                         ->get();
