@@ -99,6 +99,7 @@ class Utility extends Model
 			case "mp4":
 			case "avi":
 			case "mov":
+			case "webm":
 				$class = 'launchVideoViewer';
 				$modalTarget = '#videomodal';			
 				break;

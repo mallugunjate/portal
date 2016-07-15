@@ -4,6 +4,7 @@ namespace App\Models\Video;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Validation\PlaylistValidator;
 
 class Playlist extends Model
 {
@@ -13,15 +14,31 @@ class Playlist extends Model
     protected $fillable = ['title', 'banner_id'];
     protected $dates = ['deleted_at'];
 
+    public static function validateCreatePlaylist($request)
+    {
+        \Log::info($request->all());
+        $validateThis = [
+            
+            'title'  => $request['title'],
+            'playlist_videos' => $request['playlist_videos']
+            
+        ];
+
+        \Log::info($validateThis);
+        
+        $v = new PlaylistValidator();
+        $validationResult = $v->validate($validateThis);
+        return $validationResult;
+    }
     public static function storePlaylist($request)
     {
-    	 \Log::info($request->all());
-         // $validate = Communication::validateCreateCommunication($request);
-         // \Log::info($validate);
-         // if($validate['validation_result'] == 'false') {
-           // \Log::info($validate);
-           // return json_encode($validate);
-         // }  
+    	\Log::info($request->all());
+        $validate = Playlist::validateCreatePlaylist($request);
+        \Log::info($validate);
+        if($validate['validation_result'] == 'false') {
+           \Log::info($validate);
+           return json_encode($validate);
+        }  
          
    		
    		$playlist = Playlist::create([

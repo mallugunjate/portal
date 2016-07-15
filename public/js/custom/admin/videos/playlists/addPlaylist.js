@@ -29,11 +29,27 @@ $(document).on('click','.playlist-create',function(){
 	console.log('title: ' + title);
 	console.log(playlist_videos);
 	
+	if(title == ''){
+
+		swal("Oops!", "Title cannot be empty.", "error"); 
+		hasError = true;
+		$(window).scrollTop(0);
+		return false;
+	}
+	if(playlist_videos.length <= 0){
+
+		swal("Oops!", "Playlist cannot be empty.", "error"); 
+		hasError = true;
+		$(window).scrollTop(0);
+		return false;
+	}
+
     if(hasError == false) {
 
 		$.ajax({
 		    url: '/admin/playlist',
 		    type: 'POST',
+		    dataType: 'json',
 		    data: {
 		  		banner_id : banner_id,
 		  		title : title,
@@ -42,11 +58,19 @@ $(document).on('click','.playlist-create',function(){
 		    },
 		    success: function(result) {
 		        console.log(result);
+
 		        if(result.validation_result == 'false') {
+		        	
 		        	var errors = result.errors;
 		        	if(errors.hasOwnProperty("title")) {
 		        		$.each(errors.title, function(index){
 		        			$("#title").parent().append('<div class="req">' + errors.title[index]  + '</div>');	
+		        		}); 	
+		        	}
+
+		        	if(errors.hasOwnProperty("playlist_videos")) {
+		        		$.each(errors.playlist_videos, function(index){
+		        			$("#add-videos").parent().append('<div class="req">' + errors.playlist_videos[index]  + '</div>');	
 		        		}); 	
 		        	}
 			        

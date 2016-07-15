@@ -14,8 +14,6 @@ class VideoValidator extends PortalValidator
     		];
 
     protected $messages = [
-    	'title' 					=> 'Video title required',
-    	'filename'	                => 'Invalid communication type'
 
     ];
 }
