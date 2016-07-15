@@ -417,11 +417,11 @@ See https://github.com/adobe-type-tools/cmap-resources
 
 
       document.getElementById('print').addEventListener('click', function() {
-          var query = getQueryParams(document.location.search);
-          console.log("clicked print: " + query.file);
-         // window.location.href = query.file;
+            var query = getQueryParams(document.location.search);
+            console.log("clicked print: " + query.file);
+            window.location.href = query.file;
          // window.location.href = "print.html?file=" query.file;
-         location.assign("print.php?file="+query.file);
+        //  location.assign("print.php?file="+query.file);
       });
 
     </script>
