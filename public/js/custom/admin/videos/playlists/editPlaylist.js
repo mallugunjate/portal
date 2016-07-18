@@ -76,6 +76,7 @@ $(document).on('click','.playlist-update',function(){
 		$.ajax({
 		    url: '/admin/playlist/' + playlistID ,
 		    type: 'PATCH',
+			dataType: 'json',
 		    data: {
 		    	title : title,
 		    	playlist_videos:  playlist_videos,
@@ -88,13 +89,18 @@ $(document).on('click','.playlist-update',function(){
 		        	var errors = result.errors;
 		        	if(errors.hasOwnProperty("title")) {
 		        		$.each(errors.title, function(index){
-		        			$("#feature_title").parent().append('<div class="req">' + errors.title[index]  + '</div>');	
+		        			$("#title").parent().append('<div class="req">' + errors.title[index]  + '</div>');	
 		        		}); 	
 		        	}
-			        if(errors.hasOwnProperty("videos")) {
+			        if(errors.hasOwnProperty("playlist_videos")) {
 			        	$.each(errors.videos, function(index){
-			        		$("#videos-selected").append('<div class="req">' + errors.videos[index]  + '</div>');
+			        		$(".existing-videos").append('<div class="req">' + errors.playlist_videos[index]  + '</div>');
 			        	});
+			        }
+			        if(errors.hasOwnProperty("videos")) {
+			        		swal("Error!", "'" + errors.videos +"'", "error");
+			        		// $(".existing-videos").append('<div class="req">' + errors.videos  + '</div>');
+			        	
 			        }
 			        
 			    }

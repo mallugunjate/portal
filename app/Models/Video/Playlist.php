@@ -5,6 +5,7 @@ namespace App\Models\Video;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Validation\PlaylistValidator;
+use App\Models\Validation\PlaylistEditValidator;
 
 class Playlist extends Model
 {
@@ -30,9 +31,34 @@ class Playlist extends Model
         $validationResult = $v->validate($validateThis);
         return $validationResult;
     }
+
+    public static function validateEditPlaylist($id, $request)
+    {
+         $validateThis =  [
+
+            'title'  => $request['title'],
+            'playlist_videos' => $request['playlist_videos'],
+            'remove_videos' =>$request['remove_videos']
+
+         ];
+       
+         \Log::info($validateThis);
+         $v = new PlaylistEditValidator();
+         
+         $videoAttachmentValidation  = $v->videoAttachmentValidationRule($id, $request['playlist_videos'], $request['remove_videos']);
+         
+         
+         if($videoAttachmentValidation["validation_result"] == 'true') {   
+            \Log::info('going ahead with more validation');
+            return $v->validate($validateThis); 
+         }
+
+         return $videoAttachmentValidation;  
+    }
+
+
     public static function storePlaylist($request)
     {
-    	\Log::info($request->all());
         $validate = Playlist::validateCreatePlaylist($request);
         \Log::info($validate);
         if($validate['validation_result'] == 'false') {
@@ -53,11 +79,20 @@ class Playlist extends Model
 
     public static function updatePlaylist($id, $request)
     {
-    	$playlist = Playlist::find($id);
+        $validate = Playlist::validateEditPlaylist($id, $request);
+        
+        if($validate['validation_result'] == 'false') {
+           
+           \Log::info($validate);
+           return json_encode($validate);
+
+        } 
+        \Log::info('validation passed: going ahead for editing');
+        $playlist = Playlist::find($id);
     	$playlist['title'] = $request['title'];
     	$playlist->save();
     	Playlist::updatePlaylistVideos($id, $request);
-    	return;
+    	return $playlist;
     }
 
     public static function updatePlaylistVideos($id, $request)
@@ -72,10 +107,20 @@ class Playlist extends Model
          $add_videos = $request["playlist_videos"];
          if (isset($add_videos)) {
             foreach ($add_videos as $video) {
-               PlaylistVideo::create([
-                  'playlist_id'   => $id,
-                  'video_id'      => $video
-               ]);
+                
+                    $video_exists = PlaylistVideo::where('playlist_id', $id)
+                                                    ->where('video_id', $video)
+                                                    ->where('deleted_at', null)
+                                                    ->first();    
+                if( ! $video_exists) {
+
+                    PlaylistVideo::create([
+                        'playlist_id'   => $id,
+                        'video_id'      => $video
+                    ]);  
+                }
+                
+                
             }
          }
          return;

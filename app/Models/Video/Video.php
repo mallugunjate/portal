@@ -97,9 +97,9 @@ class Video extends Model
 
     public static function updateMetaData(Request $request, $id=null)
     {
-        \Log::info('******************************');
-        \Log::info($request->all());
-        \Log::info('******************************');
+        
+        
+        
         if (!isset($id)) {
             $id = $request->get('video_id');
         }

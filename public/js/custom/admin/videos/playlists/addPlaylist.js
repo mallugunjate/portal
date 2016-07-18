@@ -84,7 +84,7 @@ $(document).on('click','.playlist-create',function(){
 
 		        	},
 		        	function(){
-		        		window.location.reload();
+		        		window.location.href = '/admin/playlist';
 		        	})
 					// swal("Nice!", "'" + subject +"' has been created", "success");        
 		        }
