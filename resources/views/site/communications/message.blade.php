@@ -205,6 +205,12 @@
                    $(this).attr('href', href.replace(/&?archives=\d+/, ''));
                 });                                 
             }
+
+            $(".inline-folder-link").click(function(){
+                var folderId = $(this).data('folderid');
+                var storeNumber = localStorage.getItem('userStoreNumber');
+                window.location = "/"+storeNumber+"/document#!/"+folderId;
+            });
         });
 
  

@@ -59,7 +59,7 @@
 
 
 									<form class="form-horizontal" id="createNewCommunicationForm">
-										
+
 
 										<input type="hidden" name="banner_id" value={{$banner->id}} >
 
@@ -79,7 +79,7 @@
 								                    </div>
 								                </div>
 								        </div>
-										
+
 										<div class="form-group" >
 											<label class="col-sm-2 control-label">Type</label>
 												<div class="col-sm-10" id="communication-type-selector">
@@ -89,10 +89,10 @@
 													<label class="btn btn-outline btn-default">
 														@if( ( $banner->id==1 && $ct->id == 1 ) || ($banner->id==2 && $ct->id == 2) )
 														<input type="radio" id="default_communication_type" name="communication_type" value="{{ $ct->id }}"><i class="fa fa-times"></i> {{ $ct->communication_type }}
-														@else 
+														@else
 														<input type="radio" id="" name="communication_type" value="{{ $ct->id }}"><i class="fa fa-circle text-{{ $ct->colour }}"></i> {{ $ct->communication_type }}
 														@endif
-													</label>	
+													</label>
 
 													@endforeach
 													</div>
@@ -106,7 +106,7 @@
 												</div>
 										</div>
 
-										
+
 
 										<div class="form-group">
 											<div class="col-sm-10 col-sm-offset-2">
@@ -119,7 +119,7 @@
 											<div id="packages-selected"></div>
 										</div>
 										<div class="form-group">
-								                                            
+
 								                <label class="col-sm-2 control-label">Target Stores</label>
 								                <div class="col-sm-10">
 								                    {!! Form::select('stores', $storeList, null, [ 'class'=>'chosen', 'id'=> 'storeSelect', 'multiple'=>'true']) !!}
@@ -128,7 +128,7 @@
 								                </div>
 
 								        </div>
-										
+
 
 										<div class="hr-line-dashed"></div>
 										<div class="form-group">
@@ -147,7 +147,7 @@
 
 		                    </div><!-- ibox closes -->
 		                </div>
-		            </div>	
+		            </div>
 
 
 		        </div><!-- wrapper closes -->
@@ -164,12 +164,12 @@
 		            </div>
 		            <div class="modal-body">
 		            	<ul class="tree">
-		            	@foreach ($navigation as $nav) 
-						
+		            	@foreach ($navigation as $nav)
+
 							@if (isset($nav["is_child"]) && ($nav["is_child"] == 0) )
-								
+
 								@include('admin.package.file-folder-structure-partial', ['navigation' =>$navigation, 'currentnode' => $nav])
-								
+
 							@endif
 
 						@endforeach
@@ -183,7 +183,7 @@
 		    </div>
 		</div>
 
-		
+
 
 		<div id="package-listing" class="modal fade">
 		    <div class="modal-dialog">
@@ -211,7 +211,7 @@
 	    @include('admin.includes.scripts')
 
 		@include('site.includes.bugreport')
-		
+
 		<script type="text/javascript" src="/js/vendor/moment.js"></script>
 		<script type="text/javascript" src="/js/vendor/bootstrap-datetimepicker.min.js"></script>
 		<script type="text/javascript" src="/js/plugins/ckeditor-standard/ckeditor.js"></script>
@@ -219,15 +219,11 @@
 		<script type="text/javascript" src="/js/custom/admin/communications/addCommunication.js"></script>
 		<script type="text/javascript" src="/js/custom/createpackage.js"></script>
 		<script type="text/javascript" src="/js/custom/tree.js"></script>
-<<<<<<< HEAD
-		<script src="/js/custom/datetimepicker.js"></script>
-		
-=======
+		<script type="text/javascript" src="/js/custom/datetimepicker.js"></script>
 		<script type="text/javascript" src="/js/custom/admin/global/storeSelector.js"></script>
 
->>>>>>> dev
 		<script type="text/javascript">
-			
+
 			$.ajaxSetup({
 		        headers: {
 		            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -240,8 +236,8 @@
 
 		    $(".chosen").chosen({
 				  width:'75%'
-			});		    
-		    
+			});
+
 		   	CKEDITOR.replace('body', {
 
     		    filebrowserUploadUrl: "{{route('utilities.ckeditorimages.store',['_token' => csrf_token() ])}}"
@@ -254,7 +250,7 @@
 		    	$("#document-listing").modal('show');
 		    });
 		    $("#add-packages").click(function(){
-		    	$("#package-listing").modal('show');	
+		    	$("#package-listing").modal('show');
 		    });
 
 
