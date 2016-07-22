@@ -26,6 +26,7 @@ class Utility extends Model
 
 			case "xls":
 			case "xlsx":
+			case "xlsm":
 				$icon = "<i class='fa fa-file-excel-o'></i>";
 				break;
 
@@ -92,6 +93,7 @@ class Utility extends Model
 
 			case "xls":
 			case "xlsx":
+			case "xlsm":
 				$class = 'download';
 				$modalTarget = 'ExcelDownload';
 				break;
