@@ -23,4 +23,12 @@ class BugReport extends Model
 
  		$bug->save();
     }
+
+    public static function getAllBugReports($banner_id)
+    {
+    	$reports = BugReport::where('banner', $banner_id)
+    						->orderBy('created_at','desc')
+    						->get();
+    	return $reports;    
+    }
 }
