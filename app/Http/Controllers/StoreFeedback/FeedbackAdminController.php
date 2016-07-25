@@ -23,7 +23,7 @@ class FeedbackAdminController extends Controller
         $banner = UserSelectedBanner::getBanner();
         $banners = Banner::all();
         $feedbacks = BugReport::getAllBugReports($banner->id);
-
+        
         return view('admin.storefeedback.index')->with('feedbacks', $feedbacks)
                                                 ->with('banner', $banner)
                                                 ->with('banners', $banners);

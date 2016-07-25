@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    @section('title', 'Communications')
+    @section('title', 'Store Feedback')
     @include('admin.includes.head')
 
 	<meta name="csrf-token" content="{!! csrf_token() !!}"/>
@@ -63,11 +63,17 @@
 										</tr>
 
 										@foreach($feedbacks as $feedback)
-										<tr>
-
-											<!-- <td><a href="/admin/feedback/{{ $feedback->id }}/edit">{{ $feedback->subject }}</a></td> -->
-											<td>{!! $feedback->type !!} </td>
-											<td>{!! $feedback->description !!}</td>
+										<tr class="feedback-list-item" >
+											@if(isset( $feedback->feedback_code->icon ))
+												
+												<td>{!! $feedback->feedback_code->icon !!} </td>
+												<td>{!! $feedback->description !!}</td>	
+											@else
+												
+												<td></td>
+												<td class="unread">{!! $feedback->description !!}</td>	
+											@endif
+											
 											
 											<td>{!! $feedback->store_number !!}</td>
 											

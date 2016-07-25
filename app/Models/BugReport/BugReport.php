@@ -3,6 +3,7 @@
 namespace App\Models\BugReport;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\StoreFeedback\FeedbackCode;
 
 class BugReport extends Model
 {
@@ -28,7 +29,10 @@ class BugReport extends Model
     {
     	$reports = BugReport::where('banner', $banner_id)
     						->orderBy('created_at','desc')
-    						->get();
+    						->get()
+    						->each(function($report){
+    							$report->feedback_code = FeedbackCode::getFeedbackCodes($report->id);
+    						});
     	return $reports;    
     }
 }
