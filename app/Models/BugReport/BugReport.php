@@ -4,6 +4,7 @@ namespace App\Models\BugReport;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\StoreFeedback\FeedbackCode;
+use App\Models\StoreFeedback\FeedbackResponse;
 
 class BugReport extends Model
 {
@@ -32,6 +33,7 @@ class BugReport extends Model
     						->get()
     						->each(function($report){
     							$report->feedback_code = FeedbackCode::getFeedbackCodes($report->id);
+                                $report->response = FeedbackResponse::getFeedbackResponse($report->id);
     						});
     	return $reports;    
     }

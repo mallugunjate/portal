@@ -39,85 +39,106 @@
 		</div>
 
 		<div class="wrapper wrapper-content  animated fadeInRight">
-		            <div class="row">
-		                <div class="col-lg-12">
-		                    <div class="ibox">
-		                        <div class="ibox-title">
-		                            <h5>All Feedback</h5>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h5>All Feedback</h5>
 
-		                        </div>
-		                        <div class="ibox-content">
+                        </div>
+                        <div class="ibox-content">
 
+                            <div class="table-responsive">
 
+								<table class="table table-hover issue-tracker">
 
-		                            <div class="table-responsive">
+								<tr>
+									<td>Type</td>
+									<td>Subject</td>
+									
+									<td>Store Number</td>
+									<td>Action</td>
+								</tr>
 
-										<table class="table table-hover issue-tracker">
-
-										<tr>
-											<td>Type</td>
-											<td>Subject</td>
+								@foreach($feedbacks as $feedback)
+								<tr class="feedback-list-item" >
+									@if(isset( $feedback->feedback_code->icon ))
+										
+										<td title="{!! $feedback->feedback_code->name !!}">
+											{!! $feedback->feedback_code->icon !!}
+										</td>
+										<td>
+											<div>{!! $feedback->description !!}</div>
 											
-											<td>Store Number</td>
-											<td>Action</td>
-										</tr>
+											@if($feedback->follow_up)
+											<div class="feedback-follow-up">
+												
+												@if(isset($feedback->response->followed_up) && $feedback->response->followed_up)
+													<input type="checkbox" name="followed_up" value="1" checked="true" disabled> {{"Followed up"}}
+												@else
+													<input type="checkbox" name="followed_up" value="0" disabled> {{"Followed up"}}
+												@endif
+											</div>
+											@endif
 
-										@foreach($feedbacks as $feedback)
-										<tr class="feedback-list-item" >
-											@if(isset( $feedback->feedback_code->icon ))
-												
-												<td>{!! $feedback->feedback_code->icon !!} </td>
-												<td>{!! $feedback->description !!}</td>	
-											@else
-												
-												<td></td>
-												<td class="unread">{!! $feedback->description !!}</td>	
+
+											@if(isset($feedback->response->closed) && $feedback->response->closed  )
+												<div class="feedback-status">
+													<input type="checkbox" name="closed" value="1" checked="true" disabled> {{"Closed"}}
+												</div>	
 											@endif
 											
-											
-											<td>{!! $feedback->store_number !!}</td>
-											
-											<td>
-												<a href="/admin/feedback/{{ $feedback->id }}/edit" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i></a>
-												<a data-feedback="{{ $feedback->id }}" id="feedback{{ $feedback->id }}" class="delete-feedback btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+										</td>	
+									@else
+										
+										<td></td>
+										<td class="unread">{!! $feedback->description !!}</td>	
+									@endif
+									
+									
+									<td>{!! $feedback->store_number !!}</td>
+									
+									<td>
+										<a href="/admin/feedback/{{ $feedback->id }}/edit" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i></a>
+										<a data-feedback="{{ $feedback->id }}" id="feedback{{ $feedback->id }}" class="delete-feedback btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
 
-											</td>
-										</tr>
-										@endforeach
+									</td>
 
-										</table>
+									
+								</tr>
+								@endforeach
 
-{{-- 										{!! $events->render() !!} --}}
+								</table>
 
-		                            </div>
-		                        </div>
+                            </div>
+                        </div>
 
-		                    </div>
-		                </div>
-		            </div>
-
-
-		        </div>
-
-				@include('site.includes.footer')
-
-			    @include('admin.includes.scripts')
-
-				<script type="text/javascript">
-					$.ajaxSetup({
-				        headers: {
-				            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-				        }
-					});
-
-				</script>
-
-				<script type="text/javascript" src="/js/custom/admin/storefeedback/deleteFeedback.js"></script>
-				
-
-				@include('site.includes.bugreport')
+                    </div>
+                </div>
+            </div>
 
 
+        </div>
 
-			</body>
-			</html>
+		@include('site.includes.footer')
+
+	    @include('admin.includes.scripts')
+
+		<script type="text/javascript">
+			$.ajaxSetup({
+		        headers: {
+		            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		        }
+			});
+
+		</script>
+
+		<script type="text/javascript" src="/js/custom/admin/storefeedback/deleteFeedback.js"></script>
+		
+
+		@include('site.includes.bugreport')
+
+
+
+	</body>
+	</html>
