@@ -50,7 +50,7 @@ class BugReport extends Model
         //                     ->select('bug_reports.*', 'feedback_notes.note', 'feedback_codes_pivot.code_id', 'feedback_response.closed as closed', 'feedback_response.followed_up as followed_up'  )
         //                     ->get();
 
-        $report->response = FeedbackResponse::where('feedback_id', $id)->first();
+        $report->response = FeedbackResponse::getFeedbackResponse($id);
         $report->notes = FeedbackNotes::getFeedbackNotesByFeedbackId($id);
         $report->code = FeedbackCode::getFeedbackCode($id);
         return $report;    

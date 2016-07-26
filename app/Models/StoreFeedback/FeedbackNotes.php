@@ -24,7 +24,8 @@ class FeedbackNotes extends Model
     								$note->displayText = 'Updated at:';
     							}
     							$note->prettyDisplayDate = Utility::prettifyDate($note->displayDate);
-    						});
+    						})
+    						->sortByDesc('displayDate');
     	return $notes;
     }
 }

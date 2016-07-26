@@ -17,8 +17,4 @@ class FeedbackCode extends Model
     	return $codes;
     }
 
-    public static function getFeedbackCodeList()
-    {
-    	return FeedbackCode::all()->lists('name', 'id');
-    }
 }

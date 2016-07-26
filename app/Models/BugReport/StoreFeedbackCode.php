@@ -10,6 +10,6 @@ class StoreFeedbackCode extends Model
 
     public static function getFeedbackCodeList()
     {
-    	return StoreFeedbackCode::all()->lists('name', 'id');
+    	return StoreFeedbackCode::all()->lists('name', 'id')->prepend('');
     }
 }
