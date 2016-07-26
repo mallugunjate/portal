@@ -9,6 +9,7 @@ use App\Models\Banner;
 use App\Http\Controllers\Controller;
 use App\Models\UserSelectedBanner;
 use App\Models\BugReport\BugReport;
+use App\Models\BugReport\StoreFeedbackCode;
 
 class FeedbackAdminController extends Controller
 {
@@ -23,7 +24,7 @@ class FeedbackAdminController extends Controller
         $banner = UserSelectedBanner::getBanner();
         $banners = Banner::all();
         $feedbacks = BugReport::getAllBugReports($banner->id);
-        
+
         return view('admin.storefeedback.index')->with('feedbacks', $feedbacks)
                                                 ->with('banner', $banner)
                                                 ->with('banners', $banners);
@@ -71,7 +72,15 @@ class FeedbackAdminController extends Controller
      */
     public function edit($id)
     {
-        var_dump('update a feedback');
+        $banner = UserSelectedBanner::getBanner();
+        $banners = Banner::all();
+        $feedback = BugReport::getBugReportById($id);
+        $feedback_code_list = StoreFeedbackCode::getFeedbackCodeList();
+        
+        return view('admin.storefeedback.edit')->with('feedback', $feedback)
+                                                ->with('banner', $banner)
+                                                ->with('banners', $banners)
+                                                ->with('feedback_code_list', $feedback_code_list);   
     }
 
     /**

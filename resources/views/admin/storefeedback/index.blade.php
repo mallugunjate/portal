@@ -61,9 +61,9 @@
 								</tr>
 
 								@foreach($feedbacks as $feedback)
-								<tr class="feedback-list-item" >
-									@if(isset( $feedback->feedback_code->icon ))
-										
+								
+								@if(isset( $feedback->feedback_code->icon ))
+								<tr class="feedback-list-item" >		
 										<td title="{!! $feedback->feedback_code->name !!}">
 											{!! $feedback->feedback_code->icon !!}
 										</td>
@@ -90,9 +90,13 @@
 											
 										</td>	
 									@else
-										
+									<tr class="feedback-list-item unread">
 										<td></td>
-										<td class="unread">{!! $feedback->description !!}</td>	
+										<td >
+											<div>
+											{!! $feedback->description !!}
+											</div>
+										</td>	
 									@endif
 									
 									
