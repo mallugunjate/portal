@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Models\UserSelectedBanner;
 use App\Models\BugReport\BugReport;
 use App\Models\StoreFeedback\FeedbackCategoryTypes;
+use App\Models\StoreFeedback\FeedbackStatusTypes;
 
 class FeedbackAdminController extends Controller
 {
@@ -75,12 +76,14 @@ class FeedbackAdminController extends Controller
         $banner = UserSelectedBanner::getBanner();
         $banners = Banner::all();
         $feedback = BugReport::getBugReportById($id);
-        $feedback_code_list = FeedbackCategoryTypes::getFeedbackCategoryList();
+        $feedback_category_list = FeedbackCategoryTypes::getFeedbackCategoryList();
+        $feedback_status_list = FeedbackStatusTypes::getFeedbackStatusList();
         
         return view('admin.storefeedback.edit')->with('feedback', $feedback)
                                                 ->with('banner', $banner)
                                                 ->with('banners', $banners)
-                                                ->with('feedback_code_list', $feedback_code_list);   
+                                                ->with('feedback_category_list', $feedback_category_list)
+                                                ->with('feedback_status_list', $feedback_status_list);     
     }
 
     /**

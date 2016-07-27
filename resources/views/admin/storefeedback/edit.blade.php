@@ -114,15 +114,15 @@
                             	<div class="ibox-content">
                             		<form class="form-horizontal">
                             		<div class="form-group">
-                            			<label class="col-sm-2 col-md-2 col-lg-1 control-label"> Update Feedback Code </label>
+                            			<label class="col-sm-2 col-md-2 col-lg-1 control-label"> Update Feedback Category </label>
                             			
                             			<div class="col-sm-10 col-md-10 col-lg-11 feedback-codes">
                             				@if(isset($feedback->code))
 
-                            					{!! Form::select('feedback_codes', $feedback_code_list, $feedback->code->id ,['class'=>'form-control']) !!}
+                            					{!! Form::select('feedback_category', $feedback_category_list, $feedback->code->id ,['class'=>'form-control']) !!}
                             				@else
 
-                            					{!! Form::select('feedback_codes', $feedback_code_list, null, [
+                            					{!! Form::select('feedback_category', $feedback_category_list, null, [
                             					'class' =>'form-control']) !!}
                             				@endif
                             			</div>
@@ -132,7 +132,7 @@
                             			<label class="col-sm-2 col-md-2 col-lg-1 control-label"> Update Feedback Status </label>
                             			
                             			<div class="col-sm-10 col-md-10 col-lg-11 feedback-codes">
-                            				
+                        				{!! Form::select('feedback_status', $feedback_status_list, $feedback->code->id ,['class'=>'form-control']) !!}
                             			</div>
 
                             		</div>
