@@ -11,6 +11,7 @@ use App\Models\UserSelectedBanner;
 use App\Models\BugReport\BugReport;
 use App\Models\StoreFeedback\FeedbackCategoryTypes;
 use App\Models\StoreFeedback\FeedbackStatusTypes;
+use App\Models\StoreFeedback\FeedbackResponse;
 
 class FeedbackAdminController extends Controller
 {
@@ -95,7 +96,7 @@ class FeedbackAdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        var_dump('save changes to a feedback');
+        FeedbackResponse::updateFeedbackResponse($id, $request);
     }
 
     /**
@@ -108,4 +109,5 @@ class FeedbackAdminController extends Controller
     {
         //
     }
+
 }

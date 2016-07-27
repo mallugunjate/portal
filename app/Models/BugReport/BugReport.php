@@ -44,7 +44,9 @@ class BugReport extends Model
         $report = BugReport::find($id);
         $report->response = FeedbackResponse::getFeedbackResponse($id);
         $report->notes = FeedbackNotes::getFeedbackNotesByFeedbackId($id);
-        $report->code = FeedbackCategory::getFeedbackCategory($id);
+        $report->category = FeedbackCategory::getFeedbackCategory($id);
         return $report;    
     }
+
+    
 }

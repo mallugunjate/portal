@@ -117,13 +117,13 @@
                             			<label class="col-sm-2 col-md-2 col-lg-1 control-label"> Update Feedback Category </label>
                             			
                             			<div class="col-sm-10 col-md-10 col-lg-11 feedback-codes">
-                            				@if(isset($feedback->code))
+                            				@if(isset($feedback->category))
 
-                            					{!! Form::select('feedback_category', $feedback_category_list, $feedback->code->id ,['class'=>'form-control']) !!}
+                            					{!! Form::select('feedback_category', $feedback_category_list, $feedback->category->id ,['class'=>'form-control', 'id'=>'feedback_category']) !!}
                             				@else
 
                             					{!! Form::select('feedback_category', $feedback_category_list, null, [
-                            					'class' =>'form-control']) !!}
+                            					'class' =>'form-control', 'id'=>'feedback_category']) !!}
                             				@endif
                             			</div>
 
@@ -132,7 +132,7 @@
                             			<label class="col-sm-2 col-md-2 col-lg-1 control-label"> Update Feedback Status </label>
                             			
                             			<div class="col-sm-10 col-md-10 col-lg-11 feedback-codes">
-                        				{!! Form::select('feedback_status', $feedback_status_list, $feedback->code->id ,['class'=>'form-control']) !!}
+                        				{!! Form::select('feedback_status', $feedback_status_list, $feedback->response->feedback_status_id ,['class'=>'form-control', 'id'=>'feedback_status']) !!}
                             			</div>
 
                             		</div>
@@ -173,38 +173,7 @@
                                 	</form>
 								</div>		
 
-                            </div>
-
-                            
-
-							<div class="ibox">
-                            	<div class="ibox-title">
-                            		<h5> Notifications </h5>
-                            		
-                            	</div>
-								<div class="ibox-content">
-
-	                                     <div class="latest-updates row" >
-											<div class="form-group"><label class="col-sm-2 control-label">Latest Updates</label>
-												<div class="latest-updates-container col-md-10" >
-													
-													
-													<div class="row">
-
-														
-													</div>
-													
-													
-													
-												</div>
-											</div>
-										</div>
-										
-										
-									</div>
-							</div>
-
-
+                            </div>                    
 
                             <div class="form-group">
                                 <div class="col-sm-4 col-sm-offset-2">
@@ -234,7 +203,7 @@
 	@include('site.includes.bugreport')
 
 
-	<script type="text/javascript" src="/js/custom/admin/features/editFeature.js"></script>
+	<script type="text/javascript" src="/js/custom/admin/feedbacks/editFeedback.js"></script>
 	<script type="text/javascript" src="/js/custom/tree.js"></script>
 	<script src="/js/custom/datetimepicker.js"></script>
 	
