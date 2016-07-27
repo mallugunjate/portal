@@ -42,6 +42,7 @@ return array(
     'CreateFeedbackCodesPivot' => $baseDir . '/database/migrations/2016_07_22_145930_create_feedback_codes_pivot.php',
     'CreateFeedbackNotes' => $baseDir . '/database/migrations/2016_07_22_150351_create_feedback_notes.php',
     'CreateFeedbackResponseTable' => $baseDir . '/database/migrations/2016_07_22_154142_create_feedback_response_table.php',
+    'CreateFeedbackStatusTable' => $baseDir . '/database/migrations/2016_07_27_091556_create_feedback_status_table.php',
     'CreateFiscalYearTable' => $baseDir . '/database/migrations/2015_09_28_215143_create-fiscal-year-table.php',
     'CreateFolderIdsTable' => $baseDir . '/database/migrations/2015_10_28_173427_create_folder_ids_table.php',
     'CreateFolderPackagePivot' => $baseDir . '/database/migrations/2016_01_27_174427_create_folder_package_pivot.php',

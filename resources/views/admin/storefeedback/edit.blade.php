@@ -128,6 +128,14 @@
                             			</div>
 
                             		</div>
+                            		<div class="form-group">
+                            			<label class="col-sm-2 col-md-2 col-lg-1 control-label"> Update Feedback Status </label>
+                            			
+                            			<div class="col-sm-10 col-md-10 col-lg-11 feedback-codes">
+                            				
+                            			</div>
+
+                            		</div>
                             		</form>
 								</div> <!-- ibox content closes -->
 							</div>

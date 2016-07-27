@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFeedbackCodesPivot extends Migration
+class CreateFeedbackCategoryTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,13 +12,13 @@ class CreateFeedbackCodesPivot extends Migration
      */
     public function up()
     {
-        Schema::create('feedback_codes_pivot', function (Blueprint $table) {
+        Schema::create('feedback_category', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('feedback_id')->unsigned();
-            $table->integer('code_id')->unsigned();
+            $table->integer('category_id')->unsigned();
             $table->timestamps();
             $table->foreign('feedback_id')->references('id')->on('bug_reports')->onDelete('cascade');
-            $table->foreign('code_id')->references('id')->on('store_feedback_codes')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('feedback_category_types')->onDelete('cascade');
         });
     }
 
@@ -29,6 +29,6 @@ class CreateFeedbackCodesPivot extends Migration
      */
     public function down()
     {
-        Schema::drop('feedback_codes_pivot');
+        Schema::drop('feedback_category');
     }
 }

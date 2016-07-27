@@ -3,7 +3,7 @@
 namespace App\Models\BugReport;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\StoreFeedback\FeedbackCode;
+use App\Models\StoreFeedback\FeedbackCategory;
 use App\Models\StoreFeedback\FeedbackResponse;
 use App\Models\StoreFeedback\FeedbackNotes;
 
@@ -33,7 +33,7 @@ class BugReport extends Model
     						->orderBy('created_at','desc')
     						->get()
     						->each(function($report){
-    							$report->feedback_code = FeedbackCode::getFeedbackCode($report->id);
+    							$report->feedback_code = FeedbackCategory::getFeedbackCategory($report->id);
                                 $report->response = FeedbackResponse::getFeedbackResponse($report->id);
     						});
     	return $reports;    
@@ -42,17 +42,9 @@ class BugReport extends Model
     public static function getBugReportById($id)
     {
         $report = BugReport::find($id);
-        // $report = BugReport::join('feedback_response', 'feedback_response.feedback_id', '=', 'bug_reports.id')
-        //                     ->join('feedback_notes', 'feedback_notes.feedback_id', '=', 'bug_reports.id')
-        //                     ->join('feedback_codes_pivot', 'feedback_codes_pivot.feedback_id', '=', 'bug_reports.id')
-        //                     // ->join('store_feedback_codes', 'store_feedback_codes.id', '=', 'feedback_codes_pivot.code_id' )
-        //                     ->where('bug_reports.id', $id)
-        //                     ->select('bug_reports.*', 'feedback_notes.note', 'feedback_codes_pivot.code_id', 'feedback_response.closed as closed', 'feedback_response.followed_up as followed_up'  )
-        //                     ->get();
-
         $report->response = FeedbackResponse::getFeedbackResponse($id);
         $report->notes = FeedbackNotes::getFeedbackNotesByFeedbackId($id);
-        $report->code = FeedbackCode::getFeedbackCode($id);
+        $report->code = FeedbackCategory::getFeedbackCategory($id);
         return $report;    
     }
 }

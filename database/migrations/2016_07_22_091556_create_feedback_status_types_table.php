@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStoreFeedbackCodesTable extends Migration
+class CreateFeedbackStatusTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,9 @@ class CreateStoreFeedbackCodesTable extends Migration
      */
     public function up()
     {
-        Schema::create('store_feedback_codes', function (Blueprint $table) {
+        Schema::create('feedback_status_types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('icon');
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ class CreateStoreFeedbackCodesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('store_feedback_codes');
+        Schema::drop('feedback_status_types');
     }
 }

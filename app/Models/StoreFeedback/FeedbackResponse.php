@@ -11,6 +11,11 @@ class FeedbackResponse extends Model
 
     public static function getFeedbackResponse($feedback_id)
     {
-    	return FeedbackResponse::where('feedback_id', $feedback_id)->first();
+    	$response =  FeedbackResponse::where('feedback_id', $feedback_id)->first();
+
+    	// if ($response['closed']) {
+    	// 	$response['status'] = 'Closed';
+    	// }
+
     }
 }
