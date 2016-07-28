@@ -9,6 +9,8 @@ class FeedbackNotes extends Model
 {
     protected $table = 'feedback_notes';
 
+    protected $fillable = ['feedback_id', 'note'];
+    
     public static function getFeedbackNotesByFeedbackId($id)
     {
     	$notes =  FeedbackNotes::where('feedback_id', $id)
@@ -27,5 +29,13 @@ class FeedbackNotes extends Model
     						})
     						->sortByDesc('displayDate');
     	return $notes;
+    }
+
+    public static function addFeedbackNote($feedbackId, $note)
+    {
+        FeedbackNotes::create([
+            'feedback_id' => $feedbackId,
+            'note'         => $note
+        ]);
     }
 }

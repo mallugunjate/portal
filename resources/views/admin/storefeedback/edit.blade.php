@@ -132,10 +132,24 @@
                             			<label class="col-sm-2 col-md-2 col-lg-1 control-label"> Update Feedback Status </label>
                             			
                             			<div class="col-sm-10 col-md-10 col-lg-11 feedback-codes">
-                        				{!! Form::select('feedback_status', $feedback_status_list, $feedback->response->feedback_status_id ,['class'=>'form-control', 'id'=>'feedback_status']) !!}
+                                            @if(isset($feedback->response->feedback_status_id))
+                        				        {!! Form::select('feedback_status', $feedback_status_list, $feedback->response->feedback_status_id ,['class'=>'form-control', 'id'=>'feedback_status']) !!}
+                                            @else
+                                                {!! Form::select('feedback_status', $feedback_status_list, null ,['class'=>'form-control', 'id'=>'feedback_status']) !!}
+                                            @endif
                             			</div>
 
                             		</div>
+                                    @if($feedback->follow_up)
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-md-2 col-lg-1 control-label"> Followed Up </label>
+                                        
+                                        <div class="col-sm-10 col-md-10 col-lg-11 followed_up">
+                                            <input type="checkbox" id="followed_up" name="followed_up" class="form-control"> 
+                                        </div>
+
+                                    </div>
+                                    @endif
                             		</form>
 								</div> <!-- ibox content closes -->
 							</div>
@@ -158,7 +172,7 @@
 	                                		<div class="col-sm-10 col-md-10 col-lg-11 feedback-notes">
 	                                			@if(isset($feedback->notes))
 	                                				@foreach($feedback->notes as $note)
-	                                				<input type="text" class="form-control" value="{{ $note->note }}">
+	                                				<input type="textarea" class="form-control" value="{{ $note->note }}">
 	                                				<div class="col-sm-2 col-sm-offset-10 col-md-2 col-md-offset-10 col-lg-2 col-lg-offset-10">
 	                                					{!! $note->displayText !!}
 	                                					{!! $note->prettyDisplayDate !!}
@@ -177,7 +191,7 @@
 
                             <div class="form-group">
                                 <div class="col-sm-4 col-sm-offset-2">
-                                    <a class="btn btn-white" href="/admin/feature"><i class="fa fa-close"></i> Cancel</a>
+                                    <a class="btn btn-white" href="/admin/feedback"><i class="fa fa-close"></i> Cancel</a>
                                     <button class="feature-update btn btn-primary" type="submit"><i class="fa fa-check"></i> Save changes</button>
 
                                 </div>

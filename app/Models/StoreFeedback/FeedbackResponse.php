@@ -3,6 +3,7 @@
 namespace App\Models\StoreFeedback;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\StoreFeedback\FeedbackNotes;
 
 class FeedbackResponse extends Model
 {
@@ -25,20 +26,54 @@ class FeedbackResponse extends Model
     {
         if (isset($request['feedback_status_id'])) {
 
-            $feedbackResponse = FeedbackResponse::where('feedback_id', $feedbackId)->first();
-            $feedbackResponse['feedback_status_id'] = intval( $request['feedback_status_id'] );
-            $feedbackResponse->save();
+            FeedbackResponse::updateFeedbackStatus($feedbackId, $request['feedback_status_id']);
+            FeedbackNotes::addFeedbackNote($feedbackId, 'Issue closed');
             
         }
 
         if(isset($request['feedback_category_id'])){
+            
+            if (FeedbackCategory::where('feedback_id', '=', $feedbackId)->exists()) {
+                
+                FeedbackResponse::updateFeedbackCategory($feedbackId, $request['feedback_category_id']);
+                FeedbackNotes::addFeedbackNote($feedbackId, 'Category updated to ' . $request['feedback_category_id']);
 
-            \Log::info($request->all());
-            $feedbackCategory = FeedbackCategory::where('feedback_id', $feedbackId)->first();
-            $feedbackCategory['category_id'] = intval($request['feedback_category_id']);
-			$feedbackCategory->save();
-			\Log::info($feedbackCategory);
+            }
+            else{
+
+                FeedbackResponse::addFeedbackCategory($feedbackId, $request['feedback_category_id']);
+                FeedbackResponse::updateFeedbackStatus($feedbackId, 1);
+                FeedbackNotes::addFeedbackNote($feedbackId, 'New category assigned to feedback');
+                
+            }
+            
         }
-        // return;
+        
     }
+
+    public static function updateFeedbackStatus($feedbackId, $statusId)
+    {
+        $feedbackResponse = FeedbackResponse::firstorNew(['feedback_id' => $feedbackId]);
+        $feedbackResponse['feedback_status_id'] = intval( $statusId );
+        $feedbackResponse->save();
+    }
+
+    public static function updateFeedbackCategory($feedbackId, $categoyId)
+    {
+        $feedbackCategory = FeedbackCategory::where('feedback_id' , $feedbackId)->first();
+        $feedbackCategory['category_id'] = intval($categoyId);
+        $feedbackCategory->save();
+    }
+
+    public static function addFeedbackCategory($feedbackId, $categoryId)
+    {
+        FeedbackCategory::create([
+            'feedback_id' => $feedbackId ,
+            'category_id' => intval($categoryId)
+        ]);
+
+    }
+
+   
+
 }
