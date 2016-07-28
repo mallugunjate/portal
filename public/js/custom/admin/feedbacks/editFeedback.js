@@ -12,6 +12,10 @@ $("#feedback_category").on('change', function(){
 	updateCategory();
 });
 
+$("#followed_up").on('change', function(){
+	console.log('updated followed_up');
+	updateFollowup();
+});
 
 var updateStatus = function(){
 	var feedbackId = $("#feedbackID").val();
@@ -43,4 +47,25 @@ var updateCategory = function(){
 			console.log(response);	
 	});
 	return;
+}
+
+var updateFollowup = function(){
+	var feedbackId = $("#feedbackID").val();
+	var followed_up ;
+	if($("#followed_up").prop('checked')){
+		followed_up = 1;
+	}
+	else{
+		followed_up = 0;
+	}
+	
+    console.log(followed_up);
+    $.ajax({
+		type: "PATCH",
+		url: '/admin/feedback/' + feedbackId,
+		data: {'feedback_follow_up' : followed_up },
+		dataType: 'json'
+	}).done(function(response){
+		console.log(response);
+	});
 }

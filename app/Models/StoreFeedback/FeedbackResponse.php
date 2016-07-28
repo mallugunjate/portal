@@ -48,6 +48,13 @@ class FeedbackResponse extends Model
             }
             
         }
+
+        if(isset($request['feedback_follow_up'])){
+            
+            FeedbackResponse::updateFeedbackFollowup($feedbackId, $request['feedback_follow_up']);
+            FeedbackNotes::addFeedbackNote($feedbackId, 'Followed up changed');
+
+        }
         
     }
 
@@ -55,7 +62,7 @@ class FeedbackResponse extends Model
     {
         $feedbackResponse = FeedbackResponse::firstorNew(['feedback_id' => $feedbackId]);
         $feedbackResponse['feedback_status_id'] = intval( $statusId );
-        $feedbackResponse->save();
+        $feedbackResponse->save();$feedbackResponse->save();
     }
 
     public static function updateFeedbackCategory($feedbackId, $categoyId)
@@ -72,6 +79,12 @@ class FeedbackResponse extends Model
             'category_id' => intval($categoryId)
         ]);
 
+    }
+    public static function updateFeedbackFollowup($feedbackId, $followupStatus)
+    {
+        $feedbackResponse = FeedbackResponse::firstorNew(['feedback_id' => $feedbackId]);
+        $feedbackResponse['followed_up'] = intval( $followupStatus );
+        $feedbackResponse->save();
     }
 
    
