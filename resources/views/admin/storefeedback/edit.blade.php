@@ -145,7 +145,7 @@
                                 <label class="col-sm-2 col-md-2 col-lg-1 control-label"> Followed Up </label>
                                 
                                 <div class="col-sm-10 col-md-10 col-lg-11 followed_up">
-                                    @if($feedback->response->followed_up)
+                                    @if(isset($feedback->response) && $feedback->response->followed_up)
                                         <input type="checkbox" id="followed_up" name="followed_up" class="form-control" checked> 
                                     @else
                                         <input type="checkbox" id="followed_up" name="followed_up" class="form-control"> 
@@ -176,7 +176,7 @@
                             		<div class="col-sm-10 col-md-10 col-lg-11 feedback-notes">
                             			@if(isset($feedback->notes))
                             				@foreach($feedback->notes as $note)
-                            				<input type="textarea" class="form-control" value="{{ $note->note }}">
+                            				<input type="textarea" id="note{{$note->id}}" data-note-id ="{{$note->id}}" class="feedback-note form-control" value="{{ $note->note }}">
                             				<div class="col-sm-2 col-sm-offset-10 col-md-2 col-md-offset-10 col-lg-2 col-lg-offset-10">
                             					{!! $note->displayText !!}
                             					{!! $note->prettyDisplayDate !!}
@@ -205,10 +205,42 @@
             </div>
         </div>
 
+        <div class="modal inmodal" id="new-note" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog">
+            <div class="modal-content animated flipInY">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                        <i class="fa fa-note-o modal-icon"></i>
+                        <h4 class="modal-title">Feedback Note</h4>
+                    </div>
+                   <div class="modal-body" style="padding: 10px 10px;">
+                        <div class="form-group">
+                            
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <input type="text" hidden id="feedback_id" name="feedback_id" value= {{$feedback->id}}>
+
+                            <textarea rows="5" class="form-control" name="note" id="note" placeholder="Add a note"></textarea>
+                            <br>
+                            
+
+                        </div>
+                
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary createNote" data-dismiss="modal">Create Note</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
 	@include('site.includes.footer')
 
 	@include('admin.includes.scripts')
     </div>
+
+
 	
     
 	@include('site.includes.bugreport')
@@ -217,6 +249,7 @@
 	<script type="text/javascript" src="/js/custom/admin/feedbacks/editFeedback.js"></script>
 	<script type="text/javascript" src="/js/custom/tree.js"></script>
 	<script src="/js/custom/datetimepicker.js"></script>
+     <script src="/js/custom/sendBugReport.js"></script>
 	
 	<script type="text/javascript">
 		$.ajaxSetup({
@@ -225,7 +258,7 @@
 	        }
 		});
 
-    	$(".tree").treed({openedClass : 'fa fa-folder-open', closedClass : 'fa fa-folder'});    
+    	    
 
 	</script>
 

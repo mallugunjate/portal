@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Models\StoreFeedback\FeedbackNotes;
 
 class NotesAdminController extends Controller
 {
@@ -37,7 +38,11 @@ class NotesAdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        \Log::info($request->all());
+        $feedbackId = $request['feedback_id'];
+        $note = $request['note'];
+        FeedbackNotes::addFeedbackNote($feedbackId, $note);
+        return;
     }
 
     /**
@@ -71,7 +76,9 @@ class NotesAdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        FeedbackNotes::editFeedbackNote($request);
+        
+        return;
     }
 
     /**

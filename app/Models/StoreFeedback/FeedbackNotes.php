@@ -38,4 +38,16 @@ class FeedbackNotes extends Model
             'note'         => $note
         ]);
     }
+
+    public static function editFeedbackNote($request)
+    {
+        \Log::info($request->all());
+        $feedbackId = $request['feedback_id'];
+        $note = $request['note'];
+        $noteId = $request['note_id'];
+        $feedbackNote = FeedbackNotes::where('feedback_id', $feedbackId)->where('id', $noteId)->first();
+        $feedbackNote->note = $note;
+        $feedbackNote->save();
+        return;
+    }
 }

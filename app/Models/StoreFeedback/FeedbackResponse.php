@@ -4,6 +4,7 @@ namespace App\Models\StoreFeedback;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\StoreFeedback\FeedbackNotes;
+use App\Models\StoreFeedback\FeedbackCategoryTypes;
 
 class FeedbackResponse extends Model
 {
@@ -33,17 +34,19 @@ class FeedbackResponse extends Model
 
         if(isset($request['feedback_category_id'])){
             
+            $categoyId = $request['feedback_category_id'];
+            $category = FeedbackCategoryTypes::find($categoyId)->name;
             if (FeedbackCategory::where('feedback_id', '=', $feedbackId)->exists()) {
                 
-                FeedbackResponse::updateFeedbackCategory($feedbackId, $request['feedback_category_id']);
-                FeedbackNotes::addFeedbackNote($feedbackId, 'Category updated to ' . $request['feedback_category_id']);
+                FeedbackResponse::updateFeedbackCategory($feedbackId, $categoyId);
+                FeedbackNotes::addFeedbackNote($feedbackId, 'Category updated to - "' . $category . '"');
 
             }
             else{
 
-                FeedbackResponse::addFeedbackCategory($feedbackId, $request['feedback_category_id']);
+                FeedbackResponse::addFeedbackCategory($feedbackId, $categoyId);
                 FeedbackResponse::updateFeedbackStatus($feedbackId, 1);
-                FeedbackNotes::addFeedbackNote($feedbackId, 'New category assigned to feedback');
+                FeedbackNotes::addFeedbackNote($feedbackId, 'New category assigned - "' . $category . '"');
                 
             }
             
@@ -51,8 +54,11 @@ class FeedbackResponse extends Model
 
         if(isset($request['feedback_follow_up'])){
             
-            FeedbackResponse::updateFeedbackFollowup($feedbackId, $request['feedback_follow_up']);
-            FeedbackNotes::addFeedbackNote($feedbackId, 'Followed up changed');
+            $response = FeedbackResponse::updateFeedbackFollowup($feedbackId, $request['feedback_follow_up']);
+            if($response) {
+                FeedbackNotes::addFeedbackNote($feedbackId, 'Followed up changed');    
+            }
+            
 
         }
         
@@ -62,7 +68,7 @@ class FeedbackResponse extends Model
     {
         $feedbackResponse = FeedbackResponse::firstorNew(['feedback_id' => $feedbackId]);
         $feedbackResponse['feedback_status_id'] = intval( $statusId );
-        $feedbackResponse->save();$feedbackResponse->save();
+        $feedbackResponse->save();
     }
 
     public static function updateFeedbackCategory($feedbackId, $categoyId)
@@ -82,9 +88,15 @@ class FeedbackResponse extends Model
     }
     public static function updateFeedbackFollowup($feedbackId, $followupStatus)
     {
-        $feedbackResponse = FeedbackResponse::firstorNew(['feedback_id' => $feedbackId]);
-        $feedbackResponse['followed_up'] = intval( $followupStatus );
-        $feedbackResponse->save();
+        $feedbackResponse = FeedbackResponse::where(['feedback_id' => $feedbackId]);
+        if ($feedbackResponse->exists()) {
+            $feedbackResponseFirst = $feedbackResponse->first();
+            $feedbackResponseFirst->followed_up = intval( $followupStatus );
+            $feedbackResponseFirst->save();
+            return true;
+            
+        }
+        
     }
 
    

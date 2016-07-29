@@ -1,5 +1,6 @@
 $("#add-more-notes").on('click', function(){
 	console.log('add more notes');
+	$("#new-note").modal('show');
 });
 
 $("#feedback_status").on('change', function(){
@@ -69,3 +70,95 @@ var updateFollowup = function(){
 		console.log(response);
 	});
 }
+
+
+
+$('.createNote').click(function(){
+
+	var note = $("#note").val();
+	var feedback_id = $("#feedback_id").val();
+
+	$.ajax({
+	    url: '/admin/feedback/' + feedback_id + '/note',
+	    type: 'POST',
+	    data: {
+	  		
+	  		note: note,
+	  		feedback_id : feedback_id
+	    },
+	    success: function(result) {
+	        
+			swal({
+		        title: "Nice!",
+		        text: "Note added",
+		        type: "success"
+		    });     
+	    }
+	}).done(function(response){
+		$("#note").val('');
+	}); 
+    
+});
+
+
+
+$('.editNote').click(function(){
+
+	var note = $("#note").val();
+	var feedback_id = $("#feedback_id").val();
+
+	$.ajax({
+	    url: '/admin/feedback/' + feedback_id + '/note',
+	    type: 'POST',
+	    data: {
+	  		
+	  		note: note,
+	  		feedback_id : feedback_id
+	    },
+	    success: function(result) {
+	        
+			swal({
+		        title: "Nice!",
+		        text: "Note added",
+		        type: "success"
+		    });     
+	    }
+	}).done(function(response){
+		$("#note").val('');
+	}); 
+    
+});
+
+$(".feedback-note").bind("enterKey",function(e){
+   var note_id = $(this).data('note-id');
+   var feedback_id = $("#feedback_id").val();
+   console.log(note_id);
+   $.ajax({
+	    url: '/admin/feedback/' + feedback_id + '/note/' + note_id,
+	    type: 'PATCH',
+	    data: {
+	  		
+	  		note: $(this).val(),
+	  		feedback_id : feedback_id,
+	  		note_id : note_id
+	    },
+	    success: function(result) {
+	        
+			swal({
+		        title: "Nice!",
+		        text: "Note added",
+		        type: "success"
+		    });     
+	    }
+	}).done(function(response){
+		$("#note").val('');
+	}); 
+});
+
+$('.feedback-note').keyup(function(e){
+    if(e.keyCode == 13)
+    {
+        $(this).trigger("enterKey");
+    }
+});
+
