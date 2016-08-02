@@ -54,13 +54,14 @@ class FeedbackResponse extends Model
         if(isset($request['feedback_follow_up'])){
             
             $response = FeedbackResponse::updateFeedbackFollowup($feedbackId, $request['feedback_follow_up']);
-            if($request['feedback_follow_up']) {
-                FeedbackNotes::addFeedbackNote($feedbackId, 'Followed up with store');    
+            if ($response) {
+                if($request['feedback_follow_up']) {
+                    FeedbackNotes::addFeedbackNote($feedbackId, 'Followed up with store');    
+                }
+                else{
+                    FeedbackNotes::addFeedbackNote($feedbackId, 'Follow up cancelled');       
+                }    
             }
-            else{
-                FeedbackNotes::addFeedbackNote($feedbackId, 'Follow up cancelled');       
-            }
-            
 
         }
         
