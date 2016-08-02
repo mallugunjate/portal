@@ -11,6 +11,9 @@
     <div class="row">
 
         <div class="col-md-6 col-sm-6">
+            <div class="navbar-minimalize minimalize-styl-2 btn btn-primary ">
+                <i class="fa fa-bars"></i>
+            </div>
             <div class="" style="padding: 15px 10px 0px 20px;">
                 <script>document.write( s );</script> 
                 @if($isComboStore == 1) 
