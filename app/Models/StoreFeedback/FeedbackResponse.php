@@ -5,6 +5,7 @@ namespace App\Models\StoreFeedback;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\StoreFeedback\FeedbackNotes;
 use App\Models\StoreFeedback\FeedbackCategoryTypes;
+use App\Models\StoreFeedback\FeedbackStatusTypes;
 
 class FeedbackResponse extends Model
 {
@@ -17,18 +18,16 @@ class FeedbackResponse extends Model
     {
     	return  FeedbackResponse::where('feedback_id', $feedback_id)->first();
 
-    	// if ($response['closed']) {
-    	// 	$response['status'] = 'Closed';
-    	// }
-
     }
 
     public static function updateFeedbackResponse($feedbackId, $request)
     {
         if (isset($request['feedback_status_id'])) {
 
-            FeedbackResponse::updateFeedbackStatus($feedbackId, $request['feedback_status_id']);
-            FeedbackNotes::addFeedbackNote($feedbackId, 'Issue closed');
+            $statusId = $request['feedback_status_id'];
+            $status = FeedbackStatusTypes::find($statusId)->name;
+            FeedbackResponse::updateFeedbackStatus($feedbackId, $statusId);
+            FeedbackNotes::addFeedbackNote($feedbackId, 'Issue ' . $status);
             
         }
 
@@ -55,8 +54,11 @@ class FeedbackResponse extends Model
         if(isset($request['feedback_follow_up'])){
             
             $response = FeedbackResponse::updateFeedbackFollowup($feedbackId, $request['feedback_follow_up']);
-            if($response) {
-                FeedbackNotes::addFeedbackNote($feedbackId, 'Followed up changed');    
+            if($request['feedback_follow_up']) {
+                FeedbackNotes::addFeedbackNote($feedbackId, 'Followed up with store');    
+            }
+            else{
+                FeedbackNotes::addFeedbackNote($feedbackId, 'Follow up cancelled');       
             }
             
 
