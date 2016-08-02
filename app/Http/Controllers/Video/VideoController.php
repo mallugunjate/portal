@@ -71,7 +71,7 @@ class VideoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -80,9 +80,68 @@ class VideoController extends Controller
      * @param  int  $id
      * @return Response
      */
+
+    private $storeNumber;
+    private $storeInfo;
+    private $banner;
+    private $isComboStore;
+    private $skin;
+    private $communicationCount;
+    private $urgentNoticeCount;
+    private $alertCount;
+
+    public function __construct(){
+        $this->storeNumber = RequestFacade::segment(1);
+
+        $this->storeInfo = StoreInfo::getStoreInfoByStoreId($this->storeNumber);
+
+        $this->storeBanner = $this->storeInfo->banner_id;
+
+        $this->banner = Banner::find($this->storeBanner);
+
+        $this->isComboStore = $this->storeInfo->is_combo_store;
+
+        $this->skin = Skin::getSkin($this->storeBanner);
+
+        $this->communicationCount = DB::table('communications_target')
+            ->where('store_id', $this->storeNumber)
+            ->whereNull('is_read')
+            ->count();
+
+        $this->urgentNoticeCount = UrgentNotice::getUrgentNoticeCount($this->storeNumber);
+
+        $this->alertCount = Alert::getActiveAlertCountByStore($this->storeNumber);
+
+    }
+
     public function show($id)
     {
-        return view('site.video.singlevideo');
+        return view('site.video.singlevideo')
+            ->with('skin', $this->skin)
+            ->with('banner', $this->banner)
+            ->with('communicationCount', $this->communicationCount)
+            ->with('urgentNoticeCount', $this->urgentNoticeCount)
+            ->with('isComboStore', $this->isComboStore);
+    }
+
+    public function showPlaylist($id)
+    {
+        return view('site.video.playlist')
+            ->with('skin', $this->skin)
+            ->with('banner', $this->banner)
+            ->with('communicationCount', $this->communicationCount)
+            ->with('urgentNoticeCount', $this->urgentNoticeCount)
+            ->with('isComboStore', $this->isComboStore);
+    }
+
+    public function showTag($tag)
+    {
+        return view('site.video.tag')
+            ->with('skin', $this->skin)
+            ->with('banner', $this->banner)
+            ->with('communicationCount', $this->communicationCount)
+            ->with('urgentNoticeCount', $this->urgentNoticeCount)
+            ->with('isComboStore', $this->isComboStore);
     }
 
     /**

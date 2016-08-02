@@ -8368,3 +8368,22 @@ body.md-skin {
         padding-top: 3px;
 
     }
+
+    .video-playlist-box{
+        padding: 5px;
+        float: left;
+        /*border: thin solid lime;*/
+        min-height: 150px;
+        clear: both;
+    }
+
+    .video-playlist-box img{
+        float: left;
+        width: 50%;
+    }
+
+    .playlist-meta{
+        float: left;
+        width: 50%;
+        padding: 0px 0px 0px 20px;
+    }
