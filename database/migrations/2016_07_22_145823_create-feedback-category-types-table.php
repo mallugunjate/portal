@@ -16,7 +16,8 @@ class CreateFeedbackCategoryTypesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('icon');
-            $table->timestamps();
+            $table->nullableTimestamps();
+            $table->softDeletes();
         });
     }
 

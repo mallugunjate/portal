@@ -15,7 +15,8 @@ class CreateFeedbackStatusTypesTable extends Migration
         Schema::create('feedback_status_types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->timestamps();
+            $table->nullableTimestamps();
+            $table->softDeletes();
         });
     }
 

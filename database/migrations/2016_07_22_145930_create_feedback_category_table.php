@@ -16,9 +16,10 @@ class CreateFeedbackCategoryTable extends Migration
             $table->increments('id');
             $table->integer('feedback_id')->unsigned();
             $table->integer('category_id')->unsigned();
-            $table->timestamps();
             $table->foreign('feedback_id')->references('id')->on('bug_reports')->onDelete('cascade');
             $table->foreign('category_id')->references('id')->on('feedback_category_types')->onDelete('cascade');
+            $table->nullableTimestamps();
+            $table->softDeletes();
         });
     }
 

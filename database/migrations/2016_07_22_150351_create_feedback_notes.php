@@ -16,8 +16,9 @@ class CreateFeedbackNotes extends Migration
             $table->increments('id');
             $table->integer('feedback_id')->unsigned();
             $table->text('note');
-            $table->timestamps();
             $table->foreign('feedback_id')->references('id')->on('bug_reports')->onDelete('cascade');
+            $table->nullableTimestamps();
+            $table->softDeletes();
         });
     }
 
