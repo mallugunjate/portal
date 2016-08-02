@@ -38,6 +38,7 @@ Route::resource('/communication', 'Communication\CommunicationTargetController')
 
 //VIDEO
 Route::get('/{storeno}/video', array('uses' => 'Video\VideoController@index'));
+Route::get('/{storeno}/video/watch/{id}', array('uses' => 'Video\VideoController@show'));
 
 //FEATURES
 Route::get('/{storeno}/feature/show/{id}', 'Feature\FeatureController@show');

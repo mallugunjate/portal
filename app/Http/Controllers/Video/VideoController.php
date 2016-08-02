@@ -82,7 +82,7 @@ class VideoController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('site.video.singlevideo');
     }
 
     /**

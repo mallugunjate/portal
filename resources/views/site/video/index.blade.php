@@ -98,7 +98,54 @@
                                 <h2>Most Viewed</h2>
                             </div>
                             <div class="ibox-content clearfix">
-                                This is where some videos will go
+                                <div class="col-xs-6 col-sm-4 col-lg-3 video-list-box">
+                                    <img src="/images/video-placeholder.jpg" class="img-responsive" />
+                                    <h4>This is a video title</h4>
+                                    <p>134,093 views &middot; 3 weeks ago</p>
+                                </div>
+
+                                <div class="col-xs-6 col-sm-4 col-lg-3 video-list-box">
+                                    <img src="/images/video-placeholder.jpg" class="img-responsive" />
+                                    <h4>This is a video has a ridiculously long title for no real reason, who would do this? </h4>
+                                    <p>134,093 views &middot; 3 weeks ago</p>
+                                </div>
+
+                                <div class="col-xs-6 col-sm-4 col-lg-3 video-list-box">
+                                    <img src="/images/video-placeholder.jpg" class="img-responsive" />
+                                    <h4>This is a video title</h4>
+                                    <p>134,093 views &middot; 3 weeks ago</p>
+                                </div>
+
+                                <div class="col-xs-6 col-sm-4 col-lg-3 video-list-box">
+                                    <img src="/images/video-placeholder.jpg" class="img-responsive" />
+                                    <h4>This is a video title</h4>
+                                    <p>134,093 views &middot; 3 weeks ago</p>
+                                </div>
+
+                                <div class="col-xs-6 col-sm-4 col-lg-3 video-list-box">
+                                    <img src="/images/video-placeholder.jpg" class="img-responsive" />
+                                    <h4>This is a video title</h4>
+                                    <p>134,093 views &middot; 3 weeks ago</p>
+                                </div>
+
+                                <div class="col-xs-6 col-sm-4 col-lg-3 video-list-box">
+                                    <img src="/images/video-placeholder.jpg" class="img-responsive" />
+                                    <h4>This is a video title</h4>
+                                    <p>134,093 views &middot; 3 weeks ago</p>
+                                </div>
+
+                                <div class="col-xs-6 col-sm-4 col-lg-3 video-list-box">
+                                    <img src="/images/video-placeholder.jpg" class="img-responsive" />
+                                    <h4>This is a video title lkna akl alk alk alka lka lak lak loiiap poia</h4>
+                                    <p>134,093 views &middot; 3 weeks ago</p>
+                                </div>
+
+                                <div class="col-xs-6 col-sm-4 col-lg-3 video-list-box">
+                                    <img src="/images/video-placeholder.jpg" class="img-responsive" />
+                                    <h4>This is a video title</h4>
+                                    <p>134,093 views &middot; 3 weeks ago</p>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -111,7 +158,9 @@
                                 <h2>Most Liked</h2>
                             </div>
                             <div class="ibox-content clearfix">
+
                                 This is where some videos will go
+
                             </div>
                         </div>
                     </div>
