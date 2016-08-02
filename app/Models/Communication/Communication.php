@@ -78,7 +78,7 @@ class Communication extends Model
                             ->where('communications.send_at', '<=', $now )
                             ->where('communications.archive_at', '>=', $now )
                             ->take($maxToFetch)
-                            ->orderBy('communications.updated_at', 'desc')
+                            ->orderBy('communications.send_at', 'desc')
                             ->get();
          foreach($comm as $c){
 
