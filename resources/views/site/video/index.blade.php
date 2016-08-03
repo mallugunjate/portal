@@ -68,19 +68,21 @@
 
                     <div class="ibox float-e-margins">
                         <div class="ibox-title clearfix">
-                            <h1 class="pull-left">This is the video title
-                                <br />
+                            <div class="pull-left">
+                                <h1>This is the video title</h1>
+                                <h6>Tags:</h6>
+                                <span class="label">SOmething</span>
+                                <span class="label">SOm3thing totally different</span>
+                            </div>
 
-
-                            </h1>
-                            <h2 class="pull-right">867,537 views<br />
-                                <div class="progress progress-mini" style="margin-bottom: 10px;">
+                            <div class="pull-right">
+                                    <h2>867,537 views</h2>
+                                    <div class="progress progress-mini" style="margin-bottom: 10px;">
                                         <div style="width: 79%;" class="progress-bar"></div>
-                                </div>
-                                <button class="btn btn-white btn-outline" type="button" data-toggle="tooltip" data-placement="bottom" title="Like this"><i class="fa fa-thumbs-up"></i> 1</button>
-                                <button class="btn btn-white btn-outline" type="button" data-toggle="tooltip" data-placement="bottom" title="Dislike this"><i class="fa fa-thumbs-down"></i> 0</button>
-
-                            </h2>
+                                    </div>
+                                    <button class="btn btn-white btn-outline" type="button" data-toggle="tooltip" data-placement="bottom" title="Like this"><i class="fa fa-thumbs-up"></i> 27</button>
+                                    <button class="btn btn-white btn-outline" type="button" data-toggle="tooltip" data-placement="bottom" title="Dislike this"><i class="fa fa-thumbs-down"></i> 2</button>
+                            </div>
 
                         </div>
                         <div class="ibox-content clearfix">
