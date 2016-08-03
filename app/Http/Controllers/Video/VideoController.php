@@ -17,70 +17,6 @@ use App\Models\StoreInfo;
 
 class VideoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
-    public function index(Request $request)
-    {
-        $storeNumber = RequestFacade::segment(1);
-
-        $storeInfo = StoreInfo::getStoreInfoByStoreId($storeNumber);
-
-        $storeBanner = $storeInfo->banner_id;
-
-        $banner = Banner::find($storeBanner);
-
-        $isComboStore = $storeInfo->is_combo_store;
-
-        $skin = Skin::getSkin($storeBanner);
-
-        $communicationCount = DB::table('communications_target')
-            ->where('store_id', $storeNumber)
-            ->whereNull('is_read')
-            ->count();
-
-        $urgentNoticeCount = UrgentNotice::getUrgentNoticeCount($storeNumber);
-
-        $alertCount = Alert::getActiveAlertCountByStore($storeNumber);
-
-        return view('site.video.index')
-            ->with('skin', $skin)
-            ->with('banner', $banner)
-            ->with('communicationCount', $communicationCount)
-            ->with('urgentNoticeCount', $urgentNoticeCount)
-            ->with('isComboStore', $isComboStore);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  Request  $request
-     * @return Response
-     */
-    public function store(Request $request)
-    {
-
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-
     private $storeNumber;
     private $storeInfo;
     private $banner;
@@ -113,6 +49,51 @@ class VideoController extends Controller
         $this->alertCount = Alert::getActiveAlertCountByStore($this->storeNumber);
 
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function index(Request $request)
+    {
+        return view('site.video.index')
+            ->with('skin', $this->skin)
+            ->with('banner', $this->banner)
+            ->with('communicationCount', $this->communicationCount)
+            ->with('urgentNoticeCount', $this->urgentNoticeCount)
+            ->with('isComboStore', $this->isComboStore);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function store(Request $request)
+    {
+
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+
+
 
     public function show($id)
     {
