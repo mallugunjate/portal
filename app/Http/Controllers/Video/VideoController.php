@@ -15,6 +15,13 @@ use App\Models\UrgentNotice\UrgentNotice;
 use App\Models\Alert\Alert;
 use App\Models\StoreInfo;
 
+use App\Models\Video\Video;
+use App\Models\Video\Tag;
+use App\Models\Video\VideoTag;
+use App\Models\Video\Playlist;
+use App\Models\Video\PlaylistVideo;
+
+
 class VideoController extends Controller
 {
     private $storeNumber;

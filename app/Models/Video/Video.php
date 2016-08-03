@@ -24,14 +24,14 @@ class Video extends Model
     {
         \Log::info($request->all());
         $validateThis = [
-            
+
             'filename'  => $request->file('document')
-            
+
         ];
 
-        
+
         \Log::info($validateThis);
-        
+
         $v = new VideoValidator();
         $validationResult = $v->validate($validateThis);
         return $validationResult;
@@ -50,26 +50,26 @@ class Video extends Model
                             $file->prettyDateUpdated = Utility::prettifyDate($file->updated_at);
                         });
         return $videos;
-    }           
-    
+    }
+
     public static function storeVideo($request)
     {
-     	\Log::info($request->all());   
+     	\Log::info($request->all());
         $validate = Video::validateCreateVideo($request);
-        
+
         if($validate['validation_result'] == 'false') {
             \Log::info($validate);
             return json_encode($validate);
-        } 
+        }
 
-        $metadata = Document::getDocumentMetaData($request->file('document'));       
+        $metadata = Document::getDocumentMetaData($request->file('document'));
 
         $directory = public_path() . '/videos';
         $uniqueHash = sha1(time() . time());
         $filename  = $metadata["modifiedName"] . "_" . $uniqueHash . "." . $metadata["originalExtension"];
 
-        $upload_success = $request->file('document')->move($directory, $filename); //move and rename file        
-        
+        $upload_success = $request->file('document')->move($directory, $filename); //move and rename file
+
         $banner = UserSelectedBanner::getBanner();
 
         if ($upload_success) {
@@ -89,7 +89,7 @@ class Video extends Model
             $video = Video::create($documentdetails);
             $video->save();
             $lastInsertedId= $video->id;
-            
+
         }
 
         return $video ;
@@ -97,14 +97,11 @@ class Video extends Model
 
     public static function updateMetaData(Request $request, $id=null)
     {
-        
-        
-        
         if (!isset($id)) {
             $id = $request->get('video_id');
         }
-        
-        $tags = $request->get('tags'); 
+
+        $tags = $request->get('tags');
         if ($tags != null) {
             Video::updateTags($id, $tags);
         }
@@ -112,12 +109,12 @@ class Video extends Model
         $title          = $request->get('title');
         $description    = $request->get('description');
         $featured       = 0;
-        if ( null !== $request->get('featured') ) {            
+        if ( null !== $request->get('featured') ) {
             Video::removeFeaturedVideoFlag();
             $featured = $request->get('featured');
         }
 
-        
+
         $metadata = array(
             'title'       => $title,
             'description' => $description,
@@ -139,7 +136,7 @@ class Video extends Model
                'tag_id'         => $tag
             ]);
         }
-            
+
         return;
     }
 
@@ -149,6 +146,11 @@ class Video extends Model
         $featuredVideo->featured = 0;
         $featuredVideo->save();
         return;
+    }
+
+    public static function getFeaturedVideo()
+    {
+        return Video::where('featured', 1)->first();
     }
 
     public static function getMostLikedVideos()
