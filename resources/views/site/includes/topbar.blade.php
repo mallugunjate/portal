@@ -10,7 +10,7 @@
     </script>
     <div class="row">
 
-        <div class="col-md-6 col-sm-6">
+        <div class="col-lg-6 col-md-6 col-sm-8 col-xs-8">
             <div class="navbar-minimalize minimalize-styl-2 btn btn-primary ">
                 <i class="fa fa-bars"></i>
             </div>
@@ -41,14 +41,29 @@
             </div>
         </div>
 
-        <div class="col-md-6 col-sm-6">
-            <div class="pull-right" style="padding-right: 20px;">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="pull-right-custom" style="padding-right: 20px;">
                 <form role="form" class="form-inline" style="width: 100%; padding-left: 10px; padding-top: 5px;" method="get" action="/{{ Request::segment(1) }}/search">
-                    <i class="fa fa-search" style="display: inline !important; font-size: 24px; color: #ccc; line-height: 10px; position:relative; top: 12px; width: 10%;"></i>
+                    <div class="row visible-xs visible-sm">
+                        <div class="col-sm-1 col-xs-1">
+                            <i class="fa fa-search" style="font-size: 24px; color: #ccc; line-height: 10px; position:relative; top: 12px;"></i>
+                        </div>
+                        <div class="col-sm-8 col-xs-8">
+                            <input type="text" class="form-control" name="q" id="top-search" placeholder="" id="search" style="border: none; border-bottom: 1px solid #ccc; font-size: 20px; margin:0px 10px; ">
+                        </div>
+                        <div class="col-sm-1 col-xs-1">
+                            <button type="submit" class="btn btn-primary btn-sm" style="display: inline ; ">Search</button>
+                        </div>
+                    </div>
 
-                    <input type="text" class="form-control" name="q" id="top-search" placeholder="" id="search" style="border: none; border-bottom: 1px solid #ccc; font-size: 20px; margin:0px 10px;">
+                    <div class="row hidden-xs hidden-sm">
+                        <i class="fa fa-search" style="display: inline !important; font-size: 24px; color: #ccc; line-height: 10px; position:relative; top: 12px;"></i>
 
-                    <button type="submit" class="btn btn-primary btn-sm" style="display: inline">Search</button>
+                        <input type="text" class="form-control" name="q" id="top-search" placeholder="" id="search" style="border: none; border-bottom: 1px solid #ccc; font-size: 20px; margin:0px 10px;">
+
+                        <button type="submit" class="btn btn-primary btn-sm" style="display: inline ;">Search</button>
+
+                    </div>
                 </form>
 
             </div>

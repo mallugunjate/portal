@@ -8348,3 +8348,14 @@ body.md-skin {
   color: #337ab7;
   cursor: pointer;
 }
+
+/*.pull-right-custom {
+   float: none;
+}
+
+@media only screen and (min-width : 992px) {
+   .pull-right-custom {
+       float: right;
+   }
+}*/
+
