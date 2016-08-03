@@ -28,26 +28,17 @@ class VideoController extends Controller
 
     public function __construct(){
         $this->storeNumber = RequestFacade::segment(1);
-
         $this->storeInfo = StoreInfo::getStoreInfoByStoreId($this->storeNumber);
-
         $this->storeBanner = $this->storeInfo->banner_id;
-
         $this->banner = Banner::find($this->storeBanner);
-
         $this->isComboStore = $this->storeInfo->is_combo_store;
-
         $this->skin = Skin::getSkin($this->storeBanner);
-
+        $this->urgentNoticeCount = UrgentNotice::getUrgentNoticeCount($this->storeNumber);
+        $this->alertCount = Alert::getActiveAlertCountByStore($this->storeNumber);
         $this->communicationCount = DB::table('communications_target')
             ->where('store_id', $this->storeNumber)
             ->whereNull('is_read')
             ->count();
-
-        $this->urgentNoticeCount = UrgentNotice::getUrgentNoticeCount($this->storeNumber);
-
-        $this->alertCount = Alert::getActiveAlertCountByStore($this->storeNumber);
-
     }
 
     /**
@@ -64,36 +55,6 @@ class VideoController extends Controller
             ->with('urgentNoticeCount', $this->urgentNoticeCount)
             ->with('isComboStore', $this->isComboStore);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  Request  $request
-     * @return Response
-     */
-    public function store(Request $request)
-    {
-
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-
-
 
     public function show($id)
     {
@@ -125,37 +86,4 @@ class VideoController extends Controller
             ->with('isComboStore', $this->isComboStore);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  Request  $request
-     * @param  int  $id
-     * @return Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }
