@@ -56,8 +56,10 @@ class VideoController extends Controller
     public function index(Request $request)
     {
         $mostLiked = Video::getMostLikedVideos();
+        $mostRecent = Video::getMostRecentVideos(8);
         return view('site.video.index')
             ->with('mostLiked', $mostLiked)
+            ->with('mostRecent', $mostRecent)
             ->with('skin', $this->skin)
             ->with('banner', $this->banner)
             ->with('communicationCount', $this->communicationCount)
@@ -95,6 +97,27 @@ class VideoController extends Controller
             ->with('communicationCount', $this->communicationCount)
             ->with('urgentNoticeCount', $this->urgentNoticeCount)
             ->with('isComboStore', $this->isComboStore);
+    }
+
+    public function mostViewed()
+    {
+
+    }
+    public function mostRecent()
+    {
+        $mostRecent = Video::getMostRecentVideos();
+        return view('site.video.latest')
+            ->with('mostRecent', $mostRecent)
+            ->with('skin', $this->skin)
+            ->with('banner', $this->banner)
+            ->with('communicationCount', $this->communicationCount)
+            ->with('urgentNoticeCount', $this->urgentNoticeCount)
+            ->with('isComboStore', $this->isComboStore);
+
+    }
+    public function mostLiked()
+    {
+
     }
 
 }

@@ -97,56 +97,10 @@
                     <div class="col-lg-12">
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
-                                <h2>Most Viewed</h2>
+                                <h2><a href="video/popular">Most Viewed</a></h2>
                             </div>
                             <div class="ibox-content clearfix">
-                                <div class="col-xs-6 col-sm-4 col-lg-3 video-list-box">
-                                    <img src="/images/video-placeholder.jpg" class="img-responsive" />
-                                    <h4>This is a video title</h4>
-                                    <p>134,093 views &middot; 3 weeks ago</p>
-                                </div>
 
-                                <div class="col-xs-6 col-sm-4 col-lg-3 video-list-box">
-                                    <img src="/images/video-placeholder.jpg" class="img-responsive" />
-                                    <h4>This is a video has a ridiculously long title for no real reason, who would do this? </h4>
-                                    <p>134,093 views &middot; 3 weeks ago</p>
-                                </div>
-
-                                <div class="col-xs-6 col-sm-4 col-lg-3 video-list-box">
-                                    <img src="/images/video-placeholder.jpg" class="img-responsive" />
-                                    <h4>This is a video title</h4>
-                                    <p>134,093 views &middot; 3 weeks ago</p>
-                                </div>
-
-                                <div class="col-xs-6 col-sm-4 col-lg-3 video-list-box">
-                                    <img src="/images/video-placeholder.jpg" class="img-responsive" />
-                                    <h4>This is a video title</h4>
-                                    <p>134,093 views &middot; 3 weeks ago</p>
-                                </div>
-
-                                <div class="col-xs-6 col-sm-4 col-lg-3 video-list-box">
-                                    <img src="/images/video-placeholder.jpg" class="img-responsive" />
-                                    <h4>This is a video title</h4>
-                                    <p>134,093 views &middot; 3 weeks ago</p>
-                                </div>
-
-                                <div class="col-xs-6 col-sm-4 col-lg-3 video-list-box">
-                                    <img src="/images/video-placeholder.jpg" class="img-responsive" />
-                                    <h4>This is a video title</h4>
-                                    <p>134,093 views &middot; 3 weeks ago</p>
-                                </div>
-
-                                <div class="col-xs-6 col-sm-4 col-lg-3 video-list-box">
-                                    <img src="/images/video-placeholder.jpg" class="img-responsive" />
-                                    <h4>This is a video title lkna akl alk alk alka lka lak lak loiiap poia</h4>
-                                    <p>134,093 views &middot; 3 weeks ago</p>
-                                </div>
-
-                                <div class="col-xs-6 col-sm-4 col-lg-3 video-list-box">
-                                    <img src="/images/video-placeholder.jpg" class="img-responsive" />
-                                    <h4>This is a video title</h4>
-                                    <p>134,093 views &middot; 3 weeks ago</p>
-                                </div>
 
                             </div>
                         </div>
@@ -157,7 +111,7 @@
                     <div class="col-lg-12">
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
-                                <h2>Most Liked</h2>
+                                <h2><a href="video/liked">Most Liked</a></h2>
                             </div>
                             <div class="ibox-content clearfix">
                                 @foreach($mostLiked as $ml)
@@ -166,11 +120,7 @@
                                         <a href="video/watch/{{$ml->id}}"><h4>{{$ml->title}}</h4></a>
                                         <p>{{$ml->likes}} likes &middot; {{$ml->sinceCreated}} ago</p>
                                     </div>
-
-
                                 @endforeach
-
-
                             </div>
                         </div>
                     </div>
@@ -181,10 +131,16 @@
                     <div class="col-lg-12">
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
-                                <h2>Most Recent</h2>
+                                <h2><a href="video/latest">Most Recent</a></h2>
                             </div>
                             <div class="ibox-content clearfix">
-                                This is where some videos will go
+                                @foreach($mostRecent as $mr)
+                                    <div class="col-xs-6 col-sm-4 col-lg-3 video-list-box">
+                                        <a href="video/watch/{{$mr->id}}"><img src="/video/thumbs/{{$mr->thumbnail}}" class="img-responsive" /></a>
+                                        <a href="video/watch/{{$mr->id}}"><h4>{{$mr->title}}</h4></a>
+                                        <p>{{$mr->likes}} likes &middot; {{$mr->sinceCreated}} ago</p>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
