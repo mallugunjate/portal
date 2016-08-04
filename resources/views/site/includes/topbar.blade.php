@@ -25,9 +25,12 @@
             }
         }
         .store-details{
-            font-size: 25px;
+            font-size: 22px;
             position: relative;
             top:12px;
+            right:5px;
+            float: right;
+            
         }
         .form-inline {
 
@@ -61,7 +64,7 @@
                 <i class="fa fa-bars"></i>
         </div>
     
-        <div class="col-lg-6 col-md-6 col-sm-10 col-xs-10">
+        <div class="col-lg-6 col-md-6 col-sm-9 col-xs-8">
             <div class="" style="padding-right: 20px;margin:10px 0px;">
                 @include('site.includes.search')
             </div>
@@ -97,9 +100,9 @@
                 &nbsp;&nbsp;<a id="storeswitch" style="display: inline;"><i class="fa fa-sitemap "></i> Change Store</a>
             </div>
         </div>
-        <div class="visible-xs visible-sm">
-            <div class="store-details">
-                <i class="fa fa-university"></i>
+        <div class="visible-xs visible-sm col-xs-1 col-sm-1">
+            <div class="store-details ">
+                <i class="fa fa-university" style=""></i>
             </div>
             
         </div>
