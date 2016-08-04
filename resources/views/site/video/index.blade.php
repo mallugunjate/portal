@@ -160,8 +160,16 @@
                                 <h2>Most Liked</h2>
                             </div>
                             <div class="ibox-content clearfix">
+                                @foreach($mostLiked as $ml)
+                                    <div class="col-xs-6 col-sm-4 col-lg-3 video-list-box">
+                                        <a href="video/watch/{{$ml->id}}"><img src="/video/thumbs/{{$ml->thumbnail}}" class="img-responsive" /></a>
+                                        <a href="video/watch/{{$ml->id}}"><h4>{{$ml->title}}</h4></a>
+                                        <p>{{$ml->likes}} likes &middot; {{$ml->sinceCreated}} ago</p>
+                                    </div>
 
-                                This is where some videos will go
+
+                                @endforeach
+
 
                             </div>
                         </div>

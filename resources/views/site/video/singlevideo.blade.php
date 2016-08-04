@@ -62,32 +62,32 @@
             <div class="row">
                 <div class="col-lg-12">
 
-                    <video controls="controls" poster="/video/blink.jpg" style="">
-                        <source src="/video/blink.webm" type="video/webm" />
+                    <video controls="controls" poster="/video/thumbs/{{$video[0]->thumbnail}}" style="">
+                        <source src="/video/{{$video[0]->filename}}" type="video/webm" />
                     </video>
 
                     <div class="ibox float-e-margins">
                         <div class="ibox-title clearfix">
 
                             <div class="pull-left">
-                                <h1>This is the video title</h1>
+                                <h1>{{ $video[0]->title }}</h1>
                                 <h6>Tags:</h6>
-                                <span class="label">SOmething</span>
-                                <span class="label">SOm3thing totally different</span>
+                                <a href=""><span class="label">SOmething</span></a>
+                                <a href=""><span class="label">SOm3thing totally different</span></a>
                             </div>
 
                             <div class="pull-right">
                                     <h2>867,537 views</h2>
                                     <div class="progress progress-mini" style="margin-bottom: 10px;">
-                                        <div style="width: 79%;" class="progress-bar"></div>
+                                        <div style="width: {{$video[0]->ratio}}%;" class="progress-bar"></div>
                                     </div>
-                                    <button class="btn btn-white btn-outline" type="button" data-toggle="tooltip" data-placement="bottom" title="Like this"><i class="fa fa-thumbs-up"></i> 27</button>
-                                    <button class="btn btn-white btn-outline" type="button" data-toggle="tooltip" data-placement="bottom" title="Dislike this"><i class="fa fa-thumbs-down"></i> 2</button>
+                                    <button class="btn btn-white btn-outline" type="button" data-toggle="tooltip" data-placement="bottom" title="Like this"><i class="fa fa-thumbs-up"></i> {{$video[0]->likes}}</button>
+                                    <button class="btn btn-white btn-outline" type="button" data-toggle="tooltip" data-placement="bottom" title="Dislike this"><i class="fa fa-thumbs-down"></i> {{$video[0]->dislikes}}</button>
                             </div>
-                            
+
                         </div>
                         <div class="ibox-content clearfix">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            <p>{{$video[0]->description}}</p>
                         </div>
                     </div>
 

@@ -623,6 +623,7 @@ return array(
     'UpdateUrgentnoticesTableAddStartend' => $baseDir . '/database/migrations/2016_03_10_165722_update_urgentnotices_table_add_startend.php',
     'UpdateUrgentnoticesTableDropStartend' => $baseDir . '/database/migrations/2016_03_10_165708_update_urgentnotices_table_drop_startend.php',
     'UpdateUsersTable' => $baseDir . '/database/migrations/2015_12_15_182533_update_users_table.php',
+    'UpdateVideosTableAddThumbnail' => $baseDir . '/database/migrations/2016_08_03_150521_update_videos_table_add_thumbnail.php',
     'UpdateWeeksTable' => $baseDir . '/database/migrations/2015_12_14_180605_update_weeks_table.php',
     'UpdatedDocumentsTableAddSoftDeletes' => $baseDir . '/database/migrations/2016_03_28_110214_updated_documents_table_addSoftDeletes.php',
 );

@@ -17,7 +17,7 @@ class Video extends Model
     use SoftDeletes;
 
     protected $table = 'videos';
-    protected $fillable = ['upload_package_id', 'original_filename', 'original_extension', 'filename', 'title', 'description', 'uploader', 'likes', 'dislikes', 'featured'];
+    protected $fillable = ['upload_package_id', 'original_filename', 'original_extension', 'filename', 'title', 'description', 'uploader', 'likes', 'dislikes', 'featured', 'thumbnail'];
     protected $dates = ['deleted_at'];
 
     public static function validateCreateVideo($request)
@@ -148,6 +148,25 @@ class Video extends Model
         return;
     }
 
+    public static function getSingleVideo($id)
+    {
+        $video = Video::where('id', $id)
+                ->get()
+                ->each(function($video){
+                    $totallikesdislikes = $video->likes + $video->dislikes;
+                    $ratio = ($video->likes / $totallikesdislikes) * 100;
+
+                    $video->ratio = round( $ratio );
+                    $video->likes = number_format($video->likes);
+                    $video->dislikes = number_format($video->dislikes);
+                    //    $video->sinceCreated = Utility::getTimePastSinceDate($video->created_at);
+                    //    $video->prettyDateUpdated = Utility::prettifyDate($video->updated_at);
+                });
+
+        //dd($video);
+        return $video;
+    }
+
     public static function getFeaturedVideo()
     {
         return Video::where('featured', 1)->first();
@@ -155,13 +174,22 @@ class Video extends Model
 
     public static function getMostLikedVideos()
     {
-        return Video::orderBy('likes', 'desc')->get();
+        $videos = Video::orderBy('likes', 'desc')->take(8)->get()->each(function($video){
+            $video->likes = number_format($video->likes);
+            $video->dislikes = number_format($video->dislikes);
+            $video->sinceCreated = Utility::getTimePastSinceDate($video->created_at);
+//            $video->prettyDateUpdated = Utility::prettifyDate($video->updated_at);
+        });
+        return $videos;
     }
     public static function getMostRecentVideos()
     {
-        return Video::orderBy('created_at', 'desc')->get();
+        return Video::orderBy('created_at', 'desc')->take(8)->get();
     }
+    public static function getMostViewedVideos()
+    {
 
+    }
     public static function getVideosByUploader($uploaderId)
     {
         return Video::where('uploader', $uploaderId)->orderBy('created_at', 'desc')->get();

@@ -38,6 +38,11 @@ Route::resource('/communication', 'Communication\CommunicationTargetController')
 
 //VIDEO
 Route::get('/{storeno}/video', array('uses' => 'Video\VideoController@index'));
+
+Route::get('/{storeno}/video/popular', array('uses' => 'Video\VideoController@mostViewed'));
+Route::get('/{storeno}/video/latest', array('uses' => 'Video\VideoController@mostRecent'));
+Route::get('/{storeno}/video/liked', array('uses' => 'Video\VideoController@mostLiked'));
+
 Route::get('/{storeno}/video/watch/{id}', array('uses' => 'Video\VideoController@show'));
 Route::get('/{storeno}/video/playlist/{id}', array('uses' => 'Video\VideoController@showPlaylist'));
 Route::get('/{storeno}/video/tag/{tag}', array('uses' => 'Video\VideoController@showTag'));
