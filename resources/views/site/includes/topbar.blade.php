@@ -3,19 +3,76 @@
 {{-- <div class="navbar-header" style="">
 
 </div> --}}
-    <script>
-        var s = localStorage.getItem('userStoreName');
-        s = s.replace(/^A/, "");
 
-    </script>
+    <style type="text/css">
+    
+        @media (max-width: 767px){
+            .custom-col-xs-1 {
+                width:10%;
+            }
+            .custom-col-xs-10 {
+                width:80%;
+            }
+        }
+
+        @media (max-width: 1045px) and (min-width: 992px)  {
+          .truncate {
+                display:inline-block;
+                width: 120px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+        .store-details{
+            font-size: 25px;
+            position: relative;
+            top:12px;
+        }
+        .form-inline {
+
+            @media (min-width: 768px ) {
+            
+                .form-group {
+                  display: inline-block;
+                  margin-bottom: 0;
+                  vertical-align: middle;
+                }
+
+
+                .form-control {
+                  display: inline-block;
+                  width: auto; 
+                  vertical-align: middle;
+                }
+
+                .input-group > .form-control {
+                  width: 100%;
+                }
+            }
+        }
+
+        input:focus::-webkit-input-placeholder { color:transparent; }
+
+    </style>
+
     <div class="row">
-
-        <div class="col-lg-6 col-md-6 col-sm-8 col-xs-8">
-            <div class="navbar-minimalize minimalize-styl-2 btn btn-primary ">
+        <div class="navbar-minimalize minimalize-styl-2 btn btn-primary ">
                 <i class="fa fa-bars"></i>
+        </div>
+    
+        <div class="col-lg-6 col-md-6 col-sm-10 col-xs-10">
+            <div class="" style="padding-right: 20px;margin:10px 0px;">
+                @include('site.includes.search')
             </div>
-            <div class="" style="padding: 15px 10px 0px 20px;">
-                <script>document.write( s );</script> 
+        </div>
+        
+
+        <div class="hidden-xs hidden-sm">
+            
+            <div class="" style="padding: 15px 30px 0px 0px; float:right">
+                <span class="truncate" id="store-name">
+                </span>
                 @if($isComboStore == 1) 
                 &nbsp;&nbsp;
                 <span class="comboStoreSwitch">
@@ -40,36 +97,20 @@
                 &nbsp;&nbsp;<a id="storeswitch" style="display: inline;"><i class="fa fa-sitemap "></i> Change Store</a>
             </div>
         </div>
-
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-            <div class="pull-right-custom" style="padding-right: 20px;">
-                <form role="form" class="form-inline" style="width: 100%; padding-left: 10px; padding-top: 5px;" method="get" action="/{{ Request::segment(1) }}/search">
-                    <div class="row visible-xs visible-sm">
-                        <div class="col-sm-1 col-xs-1">
-                            <i class="fa fa-search" style="font-size: 24px; color: #ccc; line-height: 10px; position:relative; top: 12px;"></i>
-                        </div>
-                        <div class="col-sm-8 col-xs-8">
-                            <input type="text" class="form-control" name="q" id="top-search" placeholder="" id="search" style="border: none; border-bottom: 1px solid #ccc; font-size: 20px; margin:0px 10px; ">
-                        </div>
-                        <div class="col-sm-1 col-xs-1">
-                            <button type="submit" class="btn btn-primary btn-sm" style="display: inline ; ">Search</button>
-                        </div>
-                    </div>
-
-                    <div class="row hidden-xs hidden-sm">
-                        <i class="fa fa-search" style="display: inline !important; font-size: 24px; color: #ccc; line-height: 10px; position:relative; top: 12px;"></i>
-
-                        <input type="text" class="form-control" name="q" id="top-search" placeholder="" id="search" style="border: none; border-bottom: 1px solid #ccc; font-size: 20px; margin:0px 10px;">
-
-                        <button type="submit" class="btn btn-primary btn-sm" style="display: inline ;">Search</button>
-
-                    </div>
-                </form>
-
+        <div class="visible-xs visible-sm">
+            <div class="store-details">
+                <i class="fa fa-university"></i>
             </div>
-
+            
         </div>
 
-
     </div>
+
+     <script type="text/javascript">
+        var s = localStorage.getItem('userStoreName');
+        s = s.replace(/^A/, "");
+        var storeName = document.getElementById('store-name');
+        storeName.innerHTML = s;
+                
+    </script>
 </nav>
