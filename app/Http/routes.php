@@ -46,7 +46,7 @@ Route::get('/{storeno}/video/liked', array('uses' => 'Video\VideoController@most
 Route::get('/{storeno}/video/watch/{id}', array('uses' => 'Video\VideoController@show'));
 Route::get('/{storeno}/video/playlist/{id}', array('uses' => 'Video\VideoController@showPlaylist'));
 Route::get('/{storeno}/video/tag/{tag}', array('uses' => 'Video\VideoController@showTag'));
-Route::resource('/videocount', 'VideoViewCountController');
+Route::resource('/videocount', 'Video\VideoViewCountController');
 
 //FEATURES
 Route::get('/{storeno}/feature/show/{id}', 'Feature\FeatureController@show');

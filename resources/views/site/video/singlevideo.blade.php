@@ -68,7 +68,7 @@
 
                     <div class="ibox float-e-margins">
                         <div class="ibox-title clearfix">
-
+                            <input type="hidden" id="video_id" value="{{$video[0]->id}}" />
                             <div class="pull-left">
                                 <h1>{{ $video[0]->title }}</h1>
                                 <h6>Tags:</h6>
@@ -77,7 +77,7 @@
                             </div>
 
                             <div class="pull-right">
-                                    <h2>867,537 views</h2>
+                                    <h2>{{$video[0]->views}} views</h2>
                                     <div class="progress progress-mini" style="margin-bottom: 10px;">
                                         <div style="width: {{$video[0]->ratio}}%;" class="progress-bar"></div>
                                     </div>
@@ -168,6 +168,7 @@
 
     <script type="text/javascript" src="/js/vendor/underscore-1.8.3.js"></script>
     <script type="text/javascript" src="/js/vendor/lightbox.min.js"></script>
+    <script type="text/javascript" src="/js/custom/site/video/incrementViewCount.js"></script>
 
     @include('site.includes.modal')
 

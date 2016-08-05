@@ -20,6 +20,15 @@ class Video extends Model
     protected $fillable = ['upload_package_id', 'original_filename', 'original_extension', 'filename', 'title', 'description', 'uploader', 'likes', 'dislikes', 'featured', 'thumbnail', 'views'];
     protected $dates = ['deleted_at'];
 
+    public static function incrementViewCount($id)
+    {
+        $video = Video::find($id);
+        $currentCount = $video->views;
+        $updatedCount = $currentCount + 1;
+	    $video->views = $updatedCount;
+	    $video->save();
+    }
+
     public static function validateCreateVideo($request)
     {
         \Log::info($request->all());
@@ -184,7 +193,7 @@ class Video extends Model
                 }
             return $videos;
         } else {
-            $videos = Video::orderBy('likes', 'desc')->take(8)->get()->each(function($video){
+            $videos = Video::orderBy('likes', 'desc')->take($limit)->get()->each(function($video){
                 $video->likes = number_format($video->likes);
                 $video->dislikes = number_format($video->dislikes);
                 $video->sinceCreated = Utility::getTimePastSinceDate($video->created_at);
@@ -205,7 +214,7 @@ class Video extends Model
             }
             return $videos;
         } else {
-            $videos = Video::orderBy('created_at', 'desc')->take(8)->get()->each(function($video){
+            $videos = Video::orderBy('created_at', 'desc')->take($limit)->get()->each(function($video){
                 $video->likes = number_format($video->likes);
                 $video->dislikes = number_format($video->dislikes);
                 $video->sinceCreated = Utility::getTimePastSinceDate($video->created_at);

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Models\Video\Video;
 
 class VideoViewCountController extends Controller
 {
@@ -71,7 +72,8 @@ class VideoViewCountController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $video_id = $request->id;
+        Video::incrementViewCount($id);
     }
 
     /**

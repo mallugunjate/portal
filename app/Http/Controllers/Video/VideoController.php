@@ -55,8 +55,8 @@ class VideoController extends Controller
      */
     public function index(Request $request)
     {
-        $mostLiked = Video::getMostLikedVideos(8);
-        $mostRecent = Video::getMostRecentVideos(8);
+        $mostLiked = Video::getMostLikedVideos(4);
+        $mostRecent = Video::getMostRecentVideos(4);
         return view('site.video.index')
             ->with('mostLiked', $mostLiked)
             ->with('mostRecent', $mostRecent)
