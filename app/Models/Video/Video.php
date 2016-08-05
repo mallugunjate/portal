@@ -185,12 +185,12 @@ class Video extends Model
     public static function getMostRecentVideos($limit=0)
     {
         if($limit == 0){
-            $videos = Video::orderBy('created_at', 'desc')->paginate(24)->each(function($video){
-                $video->likes = number_format($video->likes);
-                $video->dislikes = number_format($video->dislikes);
-                $video->sinceCreated = Utility::getTimePastSinceDate($video->created_at);
-                // $video->prettyDateCreated = Utility::prettifyDate($video->created_at);
-            });
+            $videos = Video::orderBy('created_at', 'desc')->paginate(24);
+            foreach($videos as $video){
+                    $video->likes = number_format($video->likes);
+                    $video->dislikes = number_format($video->dislikes);
+                    $video->sinceCreated = Utility::getTimePastSinceDate($video->created_at);
+            }
             return $videos;
         } else {
             $videos = Video::orderBy('created_at', 'desc')->take(8)->get()->each(function($video){

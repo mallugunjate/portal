@@ -106,13 +106,14 @@ class VideoController extends Controller
     public function mostRecent()
     {
         $mostRecent = Video::getMostRecentVideos();
+    
         return view('site.video.latest')
-            ->with('mostRecent', $mostRecent)
             ->with('skin', $this->skin)
             ->with('banner', $this->banner)
             ->with('communicationCount', $this->communicationCount)
             ->with('urgentNoticeCount', $this->urgentNoticeCount)
-            ->with('isComboStore', $this->isComboStore);
+            ->with('isComboStore', $this->isComboStore)
+            ->with('mostRecent', $mostRecent);
 
     }
     public function mostLiked()

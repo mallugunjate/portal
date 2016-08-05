@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    @section('title', 'Video Title goes here')
+    @section('title', $video[0]->title)
 
     @include('site.includes.head')
 

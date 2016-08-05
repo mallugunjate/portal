@@ -84,6 +84,7 @@
                 <li>
                 @endif
                     <a href="/{{ Request::segment(1) }}/video"><i class="fa fa-video-camera"></i> <span class="nav-label">Video Library</span></a>
+
                 </li>
 
             </ul>
