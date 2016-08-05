@@ -17,7 +17,7 @@ class Video extends Model
     use SoftDeletes;
 
     protected $table = 'videos';
-    protected $fillable = ['upload_package_id', 'original_filename', 'original_extension', 'filename', 'title', 'description', 'uploader', 'likes', 'dislikes', 'featured', 'thumbnail'];
+    protected $fillable = ['upload_package_id', 'original_filename', 'original_extension', 'filename', 'title', 'description', 'uploader', 'likes', 'dislikes', 'featured', 'thumbnail', 'views'];
     protected $dates = ['deleted_at'];
 
     public static function validateCreateVideo($request)
