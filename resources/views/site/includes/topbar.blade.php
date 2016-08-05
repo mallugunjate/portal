@@ -6,32 +6,76 @@
 
     <style type="text/css">
     
-        @media (max-width: 767px){
-            .custom-col-xs-1 {
-                width:10%;
-            }
-            .custom-col-xs-10 {
-                width:80%;
-            }
-        }
-
-        @media (max-width: 1045px) and (min-width: 992px)  {
+        
+        @media (max-width: 1055px)  {
           .truncate {
                 display:inline-block;
-                width: 120px;
+                width: 100px;
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
             }
         }
+        @media  (max-width: 900px) and (min-width: 681px) {
+            .truncate{
+                width:40px;
+            }
+            .search-submit{
+
+            }
+
+        }
+        @media  (max-width: 680px)  {
+            .truncate{
+                width: 40px;
+            }
+        }
+        @media  (max-width: 597px)  {
+            .truncate{
+                display: none;
+            }
+        }
+        @media  (max-width: 620px)  {
+            .search-submit, .submit-container {
+                width: 40% !important;
+            }
+            .search, .search-container{
+                width:60% !important;
+            }
+
+            .fa-search {
+                width:0% !important;
+            }
+        }
+
+        @media  (max-width: 950px) and (min-width: 768px)  {
+            .search-submit, .submit-container {
+                width: 40% !important;
+            }
+            .search, .search-container{
+                width:60% !important;
+            }
+
+            .fa-search {
+                width:0% !important;
+            }
+        }
+
+
+        @media  (max-width: 511px)  {
+            #storeswitch-text {
+                display: none;
+            }
+        }
         .store-details{
             font-size: 22px;
             position: relative;
-            top:12px;
-            right:5px;
+            top:10px;
+            right:-20px;
             float: right;
             
         }
+
         .form-inline {
 
             @media (min-width: 768px ) {
@@ -64,14 +108,15 @@
                 <i class="fa fa-bars"></i>
         </div>
     
-        <div class="col-lg-6 col-md-6 col-sm-9 col-xs-8">
+        <div class="col-lg-6 col-md-6 col-sm-5 col-xs-6">
             <div class="" style="padding-right: 20px;margin:10px 0px;">
                 @include('site.includes.search')
             </div>
         </div>
         
 
-        <div class="hidden-xs hidden-sm">
+        <!-- <div class="hidden-xs hidden-sm"> -->
+        <div>
             
             <div class="" style="padding: 15px 30px 0px 0px; float:right">
                 <span class="truncate" id="store-name">
@@ -97,23 +142,24 @@
                 </span>
                 @endif
 
-                &nbsp;&nbsp;<a id="storeswitch" style="display: inline;"><i class="fa fa-sitemap "></i> Change Store</a>
+                &nbsp;&nbsp;<a id="storeswitch" style="display: inline;"><i class="fa fa-sitemap "></i><span id="storeswitch-text"> Change Store</span></a>
             </div>
-        </div>
-        <div class="visible-xs visible-sm col-xs-1 col-sm-1">
-            <div class="store-details ">
-                <i class="fa fa-university" style=""></i>
-            </div>
-            
         </div>
 
     </div>
 
      <script type="text/javascript">
-        var s = localStorage.getItem('userStoreName');
-        s = s.replace(/^A/, "");
-        var storeName = document.getElementById('store-name');
-        storeName.innerHTML = s;
+        
+        var storeName = localStorage.getItem('userStoreName');
+        storeName = storeName.replace(/^A/, "");
+        
+        storeNameElement = document.getElementById('store-name');
+        storeNameElement.innerHTML = storeName;
+        storeNameElement.title = storeName;
+        // storeNameElements = document.getElementsByClassName("store-name");  // Find the elements
+        // for(var i = 0; i < storeNameElements.length; i++){
+        //     storeNameElements[i].innerText = storeName;    // Change the content
+        // }
                 
     </script>
 </nav>
