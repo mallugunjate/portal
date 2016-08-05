@@ -614,6 +614,7 @@ return array(
     'UpdateFoldersTableAddSoftDeletes' => $baseDir . '/database/migrations/2016_03_28_114336_update_folders_table_addSoftDeletes.php',
     'UpdatePackageFoldersTableAddSoftdeletes' => $baseDir . '/database/migrations/2016_03_29_164058_update_package_folders_table_add_softdeletes.php',
     'UpdatePackagesTable' => $baseDir . '/database/migrations/2015_12_02_230415_update_packages_table.php',
+    'UpdatePlaylistTableAddDescription' => $baseDir . '/database/migrations/2016_08_05_160241_update_playlist_table_add_description.php',
     'UpdateQuicklinksTable' => $baseDir . '/database/migrations/2016_01_28_180958_update_quicklinks_table.php',
     'UpdateQuicklinksTypesTable' => $baseDir . '/database/migrations/2016_01_27_231623_update_quicklinks_types_table.php',
     'UpdateUrgentNoticeTargetAddStoreIdString' => $baseDir . '/database/migrations/2016_06_21_114555_update_urgent_notice_target_add_Store_id_string.php',

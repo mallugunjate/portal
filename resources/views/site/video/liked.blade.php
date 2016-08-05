@@ -65,7 +65,7 @@
                     <div class="col-lg-12">
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
-                                <h1>Latest Videos</h1>
+                                <h1>Most Liked Videos</h1>
                             </div>
                             <div class="ibox-content clearfix">
                                 @foreach($mostLiked as $ml)

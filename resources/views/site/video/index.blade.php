@@ -59,38 +59,69 @@
 
             </div>
 
+            <br />
             <div class="row">
-                <div class="col-lg-12">
-
-                    <video controls="controls" poster="/video/blink.jpg" style="">
-                        <source src="/video/blink.webm" type="video/webm" />
-                    </video>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 
                     <div class="ibox float-e-margins">
-                        <div class="ibox-title clearfix">
-                            <div class="pull-left">
-                                <h1>This is the video title</h1>
-                                <h6>Tags:</h6>
-                                <span class="label">SOmething</span>
-                                <span class="label">SOm3thing totally different</span>
-                            </div>
-
-                            <div class="pull-right">
-                                    <h2>867,537 views</h2>
-                                    <div class="progress progress-mini" style="margin-bottom: 10px;">
-                                        <div style="width: 79%;" class="progress-bar"></div>
-                                    </div>
-                                    <button class="btn btn-white btn-outline" type="button" data-toggle="tooltip" data-placement="bottom" title="Like this"><i class="fa fa-thumbs-up"></i> 27</button>
-                                    <button class="btn btn-white btn-outline" type="button" data-toggle="tooltip" data-placement="bottom" title="Dislike this"><i class="fa fa-thumbs-down"></i> 2</button>
-                            </div>
-
+                        <div class="ibox-title">
+                            <h2>Featured Video</h2>
                         </div>
-                        <div class="ibox-content clearfix">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+                        <a href="video/watch/{{$featured->id}}"><img src="/video/thumbs/{{$featured->thumbnail}}" class="img-responsive" style="width: 100%" /></a>
+
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title clearfix">
+                                <div class="pull-left">
+                                    <h3><a href="video/watch/{{$featured->id}}">This is the video title</a></h3>
+                                    <h6>Tags:</h6>
+                                    <span class="label">SOmething</span>
+                                    <span class="label">SOm3thing totally different</span>
+                                </div>
+
+                                <div class="pull-right">
+                                        {{-- <h2>867,537 views</h2>
+                                        <div class="progress progress-mini" style="margin-bottom: 10px;">
+                                            <div style="width: 79%;" class="progress-bar"></div>
+                                        </div> --}}
+                                        {{-- <button class="btn btn-white btn-outline" type="button" data-toggle="tooltip" data-placement="bottom" title="Like this"><i class="fa fa-thumbs-up"></i> 27</button>
+                                        <button class="btn btn-white btn-outline" type="button" data-toggle="tooltip" data-placement="bottom" title="Dislike this"><i class="fa fa-thumbs-down"></i> 2</button> --}}
+                                </div>
+
+                            </div>
+                            <div class="ibox-content clearfix">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                            </div>
                         </div>
                     </div>
-
                 </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h2>Latest Playlists</h2>
+                        </div>
+
+                        <div class="ibox-content clearfix playlist-container">
+
+                            @foreach($latestPlaylists as $lp)
+                                <div class="ibox-content clearfix col-xs-12 col-sm-12 col-lg-12 video-playlist-box">
+                                    <a href="video/playlist/{{$lp->id}}"><img src="/video/thumbs/{{$lp->thumbnail}}" class="img-responsive" /></a>
+
+                                    <div class="playlist-meta">
+                                        <h4><a href="video/playlist/{{$lp->id}}">{{$lp->title}}</a></h4>
+                                        <p>{{$lp->description}}</p>
+                                        <p>{{$lp->count}} videos &middot; {{$lp->sinceCreated}} ago</p>
+                                    </div>
+                                </div>
+                            @endforeach
+
+
+                            <a class="pull-right" href="">&raquo; More Playlists</a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
             <div class="row">
@@ -100,7 +131,13 @@
                                 <h2><a href="video/popular">Most Viewed</a></h2>
                             </div>
                             <div class="ibox-content clearfix">
-
+                                @foreach($mostViewed as $mv)
+                                    <div class="col-xs-6 col-sm-4 col-lg-3 video-list-box">
+                                        <a href="video/watch/{{$mv->id}}"><img src="/video/thumbs/{{$mv->thumbnail}}" class="img-responsive" /></a>
+                                        <a href="video/watch/{{$mv->id}}"><h4>{{$mv->title}}</h4></a>
+                                        <p>{{$mv->views}} views &middot; {{$mv->sinceCreated}} ago</p>
+                                    </div>
+                                @endforeach
 
                             </div>
                         </div>
@@ -138,7 +175,7 @@
                                     <div class="col-xs-6 col-sm-4 col-lg-3 video-list-box">
                                         <a href="video/watch/{{$mr->id}}"><img src="/video/thumbs/{{$mr->thumbnail}}" class="img-responsive" /></a>
                                         <a href="video/watch/{{$mr->id}}"><h4>{{$mr->title}}</h4></a>
-                                        <p>{{$mr->likes}} likes &middot; {{$mr->sinceCreated}} ago</p>
+                                        <p>{{$mr->views}} views &middot; {{$mr->sinceCreated}} ago</p>
                                     </div>
                                 @endforeach
                             </div>

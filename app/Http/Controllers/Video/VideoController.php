@@ -55,11 +55,19 @@ class VideoController extends Controller
      */
     public function index(Request $request)
     {
+        $featured = Video::getFeaturedVideo();
+        $mostViewed = Video::getMostViewedVideos(4);
         $mostLiked = Video::getMostLikedVideos(4);
         $mostRecent = Video::getMostRecentVideos(4);
+        $latestPlaylists = Playlist::getLatestPlaylists(3);
+        // dd($featured);
+
         return view('site.video.index')
             ->with('mostLiked', $mostLiked)
             ->with('mostRecent', $mostRecent)
+            ->with('mostViewed', $mostViewed)
+            ->with('latestPlaylists', $latestPlaylists)
+            ->with('featured', $featured)
             ->with('skin', $this->skin)
             ->with('banner', $this->banner)
             ->with('communicationCount', $this->communicationCount)

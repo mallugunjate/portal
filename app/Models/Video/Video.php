@@ -224,9 +224,25 @@ class Video extends Model
         }
 
     }
-    public static function getMostViewedVideos()
+    public static function getMostViewedVideos($limit=0)
     {
-
+        if($limit == 0){
+            $videos = Video::orderBy('views', 'desc')->paginate(24);
+            foreach($videos as $video){
+                    $video->likes = number_format($video->likes);
+                    $video->dislikes = number_format($video->dislikes);
+                    $video->sinceCreated = Utility::getTimePastSinceDate($video->created_at);
+            }
+            return $videos;
+        } else {
+            $videos = Video::orderBy('views', 'desc')->take($limit)->get()->each(function($video){
+                $video->likes = number_format($video->likes);
+                $video->dislikes = number_format($video->dislikes);
+                $video->sinceCreated = Utility::getTimePastSinceDate($video->created_at);
+                $video->prettyDateCreated = Utility::prettifyDate($video->created_at);
+            });
+            return $videos;
+        }
     }
     public static function getVideosByUploader($uploaderId)
     {
@@ -241,5 +257,12 @@ class Video extends Model
                         ->select('videos.*')
                         ->get();
         return $videos;
+    }
+
+    public static function getVideoThumbnail($id)
+    {
+        $video = Video::find($id);
+        $thumbnail = $video->thumbnail;
+        return $thumbnail;
     }
 }
