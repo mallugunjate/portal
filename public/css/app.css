@@ -8349,13 +8349,45 @@ body.md-skin {
   cursor: pointer;
 }
 
-/*.pull-right-custom {
-   float: none;
+@media (max-width : 950px) and (min-width:880px) {
+    #navigation-structure .folder{
+    display:inline-block;
+    width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;  
+    }
 }
 
-@media only screen and (min-width : 992px) {
-   .pull-right-custom {
-       float: right;
-   }
-}*/
+
+
+@media (max-width : 879px) and (min-width:768px) {
+    #navigation-structure .folder{
+        display:inline-block;
+        width: 100px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;  
+    }
+}
+
+@media (max-width : 620px) and (min-width:490px) {
+    #navigation-structure .folder{
+    display:inline-block;
+    width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;  
+    }
+}
+
+@media (max-width : 490px) {
+    #navigation-structure .folder{
+        display:inline-block;
+        width: 80px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;  
+    }
+}
 
