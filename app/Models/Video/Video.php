@@ -185,64 +185,52 @@ class Video extends Model
     {
         if($limit == 0){
             $videos = Video::orderBy('likes', 'desc')->paginate(24);
-                foreach($videos as $video){
-                    $video->likes = number_format($video->likes);
-                    $video->dislikes = number_format($video->dislikes);
-                    $video->sinceCreated = Utility::getTimePastSinceDate($video->created_at);
-                    //$video->prettyDateUpdated = Utility::prettifyDate($video->updated_at);
-                }
-            return $videos;
         } else {
-            $videos = Video::orderBy('likes', 'desc')->take($limit)->get()->each(function($video){
-                $video->likes = number_format($video->likes);
-                $video->dislikes = number_format($video->dislikes);
-                $video->sinceCreated = Utility::getTimePastSinceDate($video->created_at);
-    //            $video->prettyDateUpdated = Utility::prettifyDate($video->updated_at);
-            });
-            return $videos;
+            $videos = Video::orderBy('likes', 'desc')->take($limit)->get();
         }
+
+        foreach($videos as $video){
+            $video->likes = number_format($video->likes);
+            $video->dislikes = number_format($video->dislikes);
+            $video->sinceCreated = Utility::getTimePastSinceDate($video->created_at);
+            $video->prettyDateUpdated = Utility::prettifyDate($video->updated_at);
+        }
+        return $videos;
     }
 
     public static function getMostRecentVideos($limit=0)
     {
         if($limit == 0){
             $videos = Video::orderBy('created_at', 'desc')->paginate(24);
-            foreach($videos as $video){
-                    $video->likes = number_format($video->likes);
-                    $video->dislikes = number_format($video->dislikes);
-                    $video->sinceCreated = Utility::getTimePastSinceDate($video->created_at);
-            }
-            return $videos;
         } else {
-            $videos = Video::orderBy('created_at', 'desc')->take($limit)->get()->each(function($video){
-                $video->likes = number_format($video->likes);
-                $video->dislikes = number_format($video->dislikes);
-                $video->sinceCreated = Utility::getTimePastSinceDate($video->created_at);
-                $video->prettyDateCreated = Utility::prettifyDate($video->created_at);
-            });
-            return $videos;
+            $videos = Video::orderBy('created_at', 'desc')->take($limit)->get();
         }
 
+        foreach($videos as $video){
+            $video->likes = number_format($video->likes);
+            $video->dislikes = number_format($video->dislikes);
+            $video->sinceCreated = Utility::getTimePastSinceDate($video->created_at);
+            $video->prettyDateCreated = Utility::prettifyDate($video->created_at);
+        }
+
+        return $videos;
     }
     public static function getMostViewedVideos($limit=0)
     {
         if($limit == 0){
             $videos = Video::orderBy('views', 'desc')->paginate(24);
-            foreach($videos as $video){
-                    $video->likes = number_format($video->likes);
-                    $video->dislikes = number_format($video->dislikes);
-                    $video->sinceCreated = Utility::getTimePastSinceDate($video->created_at);
-            }
-            return $videos;
         } else {
-            $videos = Video::orderBy('views', 'desc')->take($limit)->get()->each(function($video){
-                $video->likes = number_format($video->likes);
-                $video->dislikes = number_format($video->dislikes);
-                $video->sinceCreated = Utility::getTimePastSinceDate($video->created_at);
-                $video->prettyDateCreated = Utility::prettifyDate($video->created_at);
-            });
-            return $videos;
+            $videos = Video::orderBy('views', 'desc')->take($limit)->get();
         }
+
+        foreach($videos as $video){
+            $video->likes = number_format($video->likes);
+            $video->dislikes = number_format($video->dislikes);
+            $video->sinceCreated = Utility::getTimePastSinceDate($video->created_at);
+            $video->prettyDateCreated = Utility::prettifyDate($video->created_at);
+        }
+
+        return $videos;
     }
     public static function getVideosByUploader($uploaderId)
     {
