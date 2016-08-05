@@ -172,16 +172,28 @@ class Video extends Model
         return Video::where('featured', 1)->first();
     }
 
-    public static function getMostLikedVideos()
+    public static function getMostLikedVideos($limit=0)
     {
-        $videos = Video::orderBy('likes', 'desc')->take(8)->get()->each(function($video){
-            $video->likes = number_format($video->likes);
-            $video->dislikes = number_format($video->dislikes);
-            $video->sinceCreated = Utility::getTimePastSinceDate($video->created_at);
-//            $video->prettyDateUpdated = Utility::prettifyDate($video->updated_at);
-        });
-        return $videos;
+        if($limit == 0){
+            $videos = Video::orderBy('likes', 'desc')->paginate(24);
+                foreach($videos as $video){
+                    $video->likes = number_format($video->likes);
+                    $video->dislikes = number_format($video->dislikes);
+                    $video->sinceCreated = Utility::getTimePastSinceDate($video->created_at);
+                    //$video->prettyDateUpdated = Utility::prettifyDate($video->updated_at);
+                }
+            return $videos;
+        } else {
+            $videos = Video::orderBy('likes', 'desc')->take(8)->get()->each(function($video){
+                $video->likes = number_format($video->likes);
+                $video->dislikes = number_format($video->dislikes);
+                $video->sinceCreated = Utility::getTimePastSinceDate($video->created_at);
+    //            $video->prettyDateUpdated = Utility::prettifyDate($video->updated_at);
+            });
+            return $videos;
+        }
     }
+
     public static function getMostRecentVideos($limit=0)
     {
         if($limit == 0){
