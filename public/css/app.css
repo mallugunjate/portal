@@ -8391,3 +8391,11 @@ body.md-skin {
     }
 }
 
+
+.alert-title{
+    display:inline-block;
+    width: 80px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;  
+}
