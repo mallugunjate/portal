@@ -8,12 +8,8 @@ $( "#videolike" ).on( "click", function() {
 	    	id: videoid,
 	    },
 	}).done(function( data ){
-		console.log(data);
 
         $("#videolike").removeClass('btn-outline');
-
-        // $("#videolike").removeClass('dim');
-        // $("#videodislike").removeClass('dim');
         $( "#videolike" ).html( '<i class="fa fa-thumbs-up"></i> ' + data );
 
         $( "#videodislike" ).unbind();
@@ -23,9 +19,6 @@ $( "#videolike" ).on( "click", function() {
 
         $("#videodislike").removeClass('btn-danger');
         $("#videodislike").addClass('btn-default');
-
-
-        // $("#videolike").disable(true);
 	});
 });
 
@@ -40,11 +33,8 @@ $( "#videodislike" ).on( "click", function() {
 	    	id: videoid,
 	    },
 	}).done(function( data ){
-		// $("#videodislike").disable(true);
-        // $("#videolike").disable(true);
+
         $("#videodislike").removeClass('btn-outline');
-        // $("#videodislike").removeClass('dim');
-        // $("#videolike").removeClass('dim');
         $( "#videodislike" ).html( '<i class="fa fa-thumbs-down"></i> ' + data );
 
         $( "#videodislike" ).unbind();
@@ -54,9 +44,6 @@ $( "#videodislike" ).on( "click", function() {
 
         $("#videolike").removeClass('btn-primary');
         $("#videolike").addClass('btn-default');
-
-        // $("#videodislike").disable(true);
-
 	});
 });
 
