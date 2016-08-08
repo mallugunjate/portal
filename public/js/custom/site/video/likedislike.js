@@ -22,7 +22,6 @@ $( "#videolike" ).on( "click", function() {
 	});
 });
 
-
 $( "#videodislike" ).on( "click", function() {
 
 	var videoid = $("#video_id").val();
@@ -46,7 +45,6 @@ $( "#videodislike" ).on( "click", function() {
         $("#videolike").addClass('btn-default');
 	});
 });
-
 
 jQuery.fn.extend({
     disable: function(state) {

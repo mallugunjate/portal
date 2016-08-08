@@ -278,4 +278,9 @@ class Video extends Model
         $thumbnail = $video->thumbnail;
         return $thumbnail;
     }
+
+    public static function getRelatedVideos($id)
+    {
+        
+    }
 }

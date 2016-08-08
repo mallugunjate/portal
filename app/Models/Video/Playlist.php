@@ -143,24 +143,17 @@ class Playlist extends Model
     {
         if($limit == 0){
             $list = Playlist::orderBy('created_at', 'desc')->paginate(24);
-            foreach($list as $li){
-                $li->count = PlaylistVideo::where('playlist_id', $li->id)->count();
-                $firstVideoinList = PlaylistVideo::where('playlist_id', $li->id)->first();
-                $li->thumbnail = Video::getVideoThumbnail($firstVideoinList->video_id);
-                $li->sinceCreated = Utility::getTimePastSinceDate($li->created_at);
-                $li->prettyDateCreated = Utility::prettifyDate($li->created_at);
-            }
-            return $list;
         } else {
-            $list = Playlist::orderBy('created_at', 'desc')->take($limit)->get()->each(function($li){
-                $li->count = PlaylistVideo::where('playlist_id', $li->id)->count();
-                $firstVideoinList = PlaylistVideo::where('playlist_id', $li->id)->first();
-                $li->thumbnail = Video::getVideoThumbnail($firstVideoinList->video_id);
-                $li->sinceCreated = Utility::getTimePastSinceDate($li->created_at);
-                $li->prettyDateCreated = Utility::prettifyDate($li->created_at);
-            });
-            return $list;
+            $list = Playlist::orderBy('created_at', 'desc')->take($limit)->get();
         }
-    }
 
+        foreach($list as $li){
+            $li->count = PlaylistVideo::where('playlist_id', $li->id)->count();
+            $firstVideoinList = PlaylistVideo::where('playlist_id', $li->id)->first();
+            $li->thumbnail = Video::getVideoThumbnail($firstVideoinList->video_id);
+            $li->sinceCreated = Utility::getTimePastSinceDate($li->created_at);
+            $li->prettyDateCreated = Utility::prettifyDate($li->created_at);
+        }
+        return $list;
+    }
 }

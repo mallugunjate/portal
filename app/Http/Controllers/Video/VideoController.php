@@ -87,9 +87,11 @@ class VideoController extends Controller
             ->with('isComboStore', $this->isComboStore);
     }
 
-    public function showPlaylist($id)
+    public function showPlaylist(Request $request)
     {
+        $videoList = PlaylistVideo::getPlaylistVideos($request->id);
         return view('site.video.playlist')
+            ->with('videoList', $videoList)
             ->with('skin', $this->skin)
             ->with('banner', $this->banner)
             ->with('communicationCount', $this->communicationCount)
