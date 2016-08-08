@@ -65,78 +65,19 @@
                     <div class="col-lg-12">
                         <div class="ibox float-e-margins clearfix">
 
-                                <div class="ibox-content clearfix col-xs-12 col-sm-12 col-lg-12 video-playlist-box">
+                            @foreach($videoList as $vl)
 
-                                    <img src="/images/video-placeholder.jpg" class="img-responsive" />
+                            <div class="ibox-content clearfix col-xs-12 col-sm-12 col-lg-12 video-playlist-box">
 
-                                    <div class="playlist-meta">
-                                        <h4>This is a video title</h4>
-                                        <p>134,093 views &middot; 3 weeks ago</p>
-                                    </div>
+                                <a href="../watch/{{$vl->id}}"><img src="/video/thumbs/{{$vl->thumbnail}}" class="img-responsive" /></a>
 
+                                <div class="playlist-meta">
+                                    <h4>{{$vl->title}}</h4>
+                                    <p>{{$vl->views}} views &middot; {{$vl->sinceCreated}} ago</p>
                                 </div>
 
-                                <div class="ibox-content clearfix col-xs-12 col-sm-12 col-lg-12 video-playlist-box">
-
-                                    <img src="/images/video-placeholder.jpg" class="img-responsive" />
-
-                                    <div class="playlist-meta">
-                                        <h4>This is a video has a ridiculously long title for no real reason, who would do this? </h4>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                        <p>134,093 views &middot; 3 weeks ago</p>
-                                    </div>
-
-                                </div>
-
-                                <div class="ibox-content clearfix col-xs-12 col-sm-12 col-lg-12 video-playlist-box">
-                                    <img src="/images/video-placeholder.jpg" class="img-responsive" />
-
-                                    <div class="playlist-meta">
-                                        <h4>This is a video title</h4>
-                                        <p>134,093 views &middot; 3 weeks ago</p>
-                                    </div>
-                                </div>
-
-                                <div class="ibox-content clearfix col-xs-12 col-sm-12 col-lg-12 video-playlist-box">
-
-                                    <img src="/images/video-placeholder.jpg" class="img-responsive" />
-                                    <div class="playlist-meta">
-                                        <h4>This is a video title</h4>
-                                        <p>134,093 views &middot; 3 weeks ago</p>
-                                    </div>
-                                </div>
-
-                                <div class="ibox-content clearfix col-xs-12 col-sm-12 col-lg-12 video-playlist-box">
-                                    <img src="/images/video-placeholder.jpg" class="img-responsive" />
-                                    <div class="playlist-meta">
-                                        <h4>This is a video title</h4>
-                                        <p>134,093 views &middot; 3 weeks ago</p>
-                                    </div>
-                                </div>
-
-                                <div class="ibox-content clearfix col-xs-12 col-sm-12 col-lg-12 video-playlist-box">
-                                    <img src="/images/video-placeholder.jpg" class="img-responsive" />
-                                    <div class="playlist-meta">
-                                        <h4>This is a video title</h4>
-                                        <p>134,093 views &middot; 3 weeks ago</p>
-                                    </div>
-                                </div>
-
-                                <div class="ibox-content clearfix col-xs-12 col-sm-12 col-lg-12 video-playlist-box">
-                                    <img src="/images/video-placeholder.jpg" class="img-responsive" />
-                                    <div class="playlist-meta">
-                                        <h4>This is a video title</h4>
-                                        <p>134,093 views &middot; 3 weeks ago</p>
-                                    </div>
-                                </div>
-
-                                <div class="ibox-content clearfix col-xs-12 col-sm-12 col-lg-12 video-playlist-box">
-                                    <img src="/images/video-placeholder.jpg" class="img-responsive" />
-                                    <div class="playlist-meta">
-                                        <h4>This is a video title</h4>
-                                        <p>134,093 views &middot; 3 weeks ago</p>
-                                    </div>
-                                </div>
+                            </div>
+                            @endforeach
 
                                 <br class="clearfix" />
 
@@ -144,7 +85,7 @@
                             </div>
                         </div>
                     </div>
-            </div>
+                </div>
 
 
 
