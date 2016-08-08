@@ -81,8 +81,8 @@
                                     <div class="progress progress-mini" style="margin-bottom: 10px;">
                                         <div style="width: {{$video[0]->ratio}}%;" class="progress-bar"></div>
                                     </div>
-                                    <button class="btn btn-white btn-outline" type="button" data-toggle="tooltip" data-placement="bottom" title="Like this"><i class="fa fa-thumbs-up"></i> {{$video[0]->likes}}</button>
-                                    <button class="btn btn-white btn-outline" type="button" data-toggle="tooltip" data-placement="bottom" title="Dislike this"><i class="fa fa-thumbs-down"></i> {{$video[0]->dislikes}}</button>
+                                    <button class="btn btn-primary btn-outline" id="videolike" type="button" data-toggle="tooltip" data-placement="bottom" title="Like this"><i class="fa fa-thumbs-up"></i> {{$video[0]->likes}}</button>
+                                    <button class="btn btn-danger btn-outline" id="videodislike" type="button" data-toggle="tooltip" data-placement="bottom" title="Dislike this"><i class="fa fa-thumbs-down"></i> {{$video[0]->dislikes}}</button>
                             </div>
 
                         </div>
@@ -169,6 +169,7 @@
     <script type="text/javascript" src="/js/vendor/underscore-1.8.3.js"></script>
     <script type="text/javascript" src="/js/vendor/lightbox.min.js"></script>
     <script type="text/javascript" src="/js/custom/site/video/incrementViewCount.js"></script>
+    <script type="text/javascript" src="/js/custom/site/video/likedislike.js"></script>
 
     @include('site.includes.modal')
 

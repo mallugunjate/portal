@@ -27,8 +27,28 @@ class Video extends Model
         $updatedCount = $currentCount + 1;
 	    $video->views = $updatedCount;
 	    $video->save();
+        return $updatedCount;
     }
 
+    public static function incrementLikeCount($id)
+    {
+        $video = Video::find($id);
+        $currentLikes = $video->likes;
+        $updatedLikes = $currentLikes + 1;
+        $video->likes = $updatedLikes;
+        $video->save();
+        return $updatedLikes;
+    }
+
+    public static function incrementDislikeCount($id)
+    {
+        $video = Video::find($id);
+        $currentDislikes = $video->dislikes;
+        $updatedDislikes = $currentDislikes + 1;
+        $video->dislikes = $updatedDislikes;
+        $video->save();
+        return $updatedDislikes;
+    }
     public static function validateCreateVideo($request)
     {
         \Log::info($request->all());
@@ -163,9 +183,14 @@ class Video extends Model
                 ->get()
                 ->each(function($video){
                     $totallikesdislikes = $video->likes + $video->dislikes;
-                    $ratio = ($video->likes / $totallikesdislikes) * 100;
 
-                    $video->ratio = round( $ratio );
+                    if($totallikesdislikes > 0){
+                        $ratio = ($video->likes / $totallikesdislikes) * 100;
+                        $video->ratio = round( $ratio );
+                    } else {
+                        $video->ratio = 0;
+                    }
+
                     $video->likes = number_format($video->likes);
                     $video->dislikes = number_format($video->dislikes);
                     //    $video->sinceCreated = Utility::getTimePastSinceDate($video->created_at);
