@@ -48,7 +48,7 @@
 
             <div class="row">
                 <div class="col-lg-12">
-
+                    <br />
                     <video controls="controls" poster="/video/thumbs/{{$video[0]->thumbnail}}" style="">
                         <source src="/video/{{$video[0]->filename}}" type="video/webm" />
                     </video>
