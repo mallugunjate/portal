@@ -71,9 +71,9 @@
                             <input type="hidden" id="video_id" value="{{$video[0]->id}}" />
                             <div class="pull-left">
                                 <h1>{{ $video[0]->title }}</h1>
-                                <h6>Tags:</h6>
+                                {{-- <h6>Tags:</h6>
                                 <a href=""><span class="label">SOmething</span></a>
-                                <a href=""><span class="label">SOm3thing totally different</span></a>
+                                <a href=""><span class="label">SOm3thing totally different</span></a> --}}
                             </div>
 
                             <div class="pull-right">
