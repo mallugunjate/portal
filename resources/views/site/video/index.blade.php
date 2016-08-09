@@ -68,12 +68,12 @@
                             <h2>Featured Video</h2>
                         </div>
 
-                        <a href="video/watch/{{$featured->id}}"><img src="/video/thumbs/{{$featured->thumbnail}}" data-res-id="{{$featured->id}}" class="trackclick img-responsive" style="width: 100%" /></a>
+                        <a href="video/watch/{{$featured->id}}"><img src="/video/thumbs/{{$featured->thumbnail}}" data-video-id="{{$featured->id}}" class="trackclick img-responsive" style="width: 100%" /></a>
 
                         <div class="ibox float-e-margins">
                             <div class="ibox-title clearfix">
                                 <div class="pull-left">
-                                    <h3><a href="video/watch/{{$featured->id}}" class="trackclick" data-res-id="{{$featured->id}}">{{$featured->title}}</a></h3>
+                                    <h3><a href="video/watch/{{$featured->id}}" class="trackclick" data-video-id="{{$featured->id}}">{{$featured->title}}</a></h3>
                                     <p>{{$featured->views}} views &middot; {{$featured->sinceCreated}} ago</p>
                                     {{-- <h6>Tags:</h6>
                                     <span class="label">SOmething</span>
@@ -102,10 +102,10 @@
 
                             @foreach($latestPlaylists as $lp)
                                 <div class="ibox-content clearfix col-xs-12 col-sm-12 col-lg-12 video-playlist-box">
-                                    <a href="video/playlist/{{$lp->id}}" class="trackclick" data-res-id="{{$lp->id}}"><img src="/video/thumbs/{{$lp->thumbnail}}" class="img-responsive" /></a>
+                                    <a href="video/playlist/{{$lp->id}}" class="trackclick" data-playlist-id="{{$lp->id}}"><img src="/video/thumbs/{{$lp->thumbnail}}" class="img-responsive" /></a>
 
                                     <div class="playlist-meta">
-                                        <h4><a href="video/playlist/{{$lp->id}}" class="trackclick" data-res-id="{{$lp->id}}" data-playlist-id="{{$lp->id}}">{{$lp->title}}</a></h4>
+                                        <h4><a href="video/playlist/{{$lp->id}}" class="trackclick" data-playlist-id="{{$lp->id}}">{{$lp->title}}</a></h4>
                                         <p>{{$lp->description}}</p>
                                         <p>{{$lp->count}} videos &middot; {{$lp->sinceCreated}} ago</p>
                                     </div>
@@ -129,8 +129,8 @@
                             <div class="ibox-content clearfix">
                                 @foreach($mostViewed as $mv)
                                     <div class="col-xs-6 col-sm-4 col-lg-3 video-list-box">
-                                        <a href="video/watch/{{$mv->id}}"><img src="/video/thumbs/{{$mv->thumbnail}}" class="img-responsive" /></a>
-                                        <a href="video/watch/{{$mv->id}}"><h4>{{$mv->title}}</h4></a>
+                                        <a href="video/watch/{{$mv->id}}" class="trackclick" data-video-id="{{$mv->id}}"><img src="/video/thumbs/{{$mv->thumbnail}}" class="img-responsive" /></a>
+                                        <a href="video/watch/{{$mv->id}}" class="trackclick" data-video-id="{{$mv->id}}"><h4>{{$mv->title}}</h4></a>
                                         <p>{{$mv->views}} views &middot; {{$mv->sinceCreated}} ago</p>
                                     </div>
                                 @endforeach
@@ -149,8 +149,8 @@
                             <div class="ibox-content clearfix">
                                 @foreach($mostLiked as $ml)
                                     <div class="col-xs-6 col-sm-4 col-lg-3 video-list-box">
-                                        <a href="video/watch/{{$ml->id}}"><img src="/video/thumbs/{{$ml->thumbnail}}" class="img-responsive" /></a>
-                                        <a href="video/watch/{{$ml->id}}"><h4>{{$ml->title}}</h4></a>
+                                        <a href="video/watch/{{$ml->id}}" class="trackclick" data-video-id="{{$ml->id}}"><img src="/video/thumbs/{{$ml->thumbnail}}" class="img-responsive" /></a>
+                                        <a href="video/watch/{{$ml->id}}" class="trackclick" data-video-id="{{$ml->id}}"><h4>{{$ml->title}}</h4></a>
                                         <p>{{$ml->likes}} likes &middot; {{$ml->sinceCreated}} ago</p>
                                     </div>
                                 @endforeach
@@ -169,8 +169,8 @@
                             <div class="ibox-content clearfix">
                                 @foreach($mostRecent as $mr)
                                     <div class="col-xs-6 col-sm-4 col-lg-3 video-list-box">
-                                        <a href="video/watch/{{$mr->id}}"><img src="/video/thumbs/{{$mr->thumbnail}}" class="img-responsive" /></a>
-                                        <a href="video/watch/{{$mr->id}}"><h4>{{$mr->title}}</h4></a>
+                                        <a href="video/watch/{{$mr->id}}" class="trackclick" data-video-id="{{$mr->id}}"><img src="/video/thumbs/{{$mr->thumbnail}}" class="img-responsive" /></a>
+                                        <a href="video/watch/{{$mr->id}}" class="trackclick" data-video-id="{{$mr->id}}"><h4>{{$mr->title}}</h4></a>
                                         <p>{{$mr->views}} views &middot; {{$mr->sinceCreated}} ago</p>
                                     </div>
                                 @endforeach

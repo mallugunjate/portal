@@ -1,9 +1,9 @@
 $("body").on("click", ".trackclick", function(e){
 // $( "[data-res-id]" ).live( "click", function () {
 	var pathArray = window.location.pathname.split( '/' );
-	console.log('clicked something...');
 
 	fileId = $(this).attr("data-res-id");
+	videoId = $(this).attr("data-video-id");
 	commId = $(this).attr("data-comm-id");
 	urgentnoticeId = $(this).attr("data-urgentnotice-id");
 	externalUrlId = $(this).attr("data-ext-url");
@@ -42,9 +42,14 @@ $("body").on("click", ".trackclick", function(e){
 		return;
 	}
 
-	//external url
+	//play list
 	if(typeof playListId != "undefined"){
-		trackEvent( "playlist", fileId, localStorage.getItem('userStoreNumber'), loc, loc_id );
+		trackEvent( "playlist", playListId, localStorage.getItem('userStoreNumber'), loc, loc_id );
+		return;
+	}
+
+	if(typeof videoId != "undefined"){
+		trackEvent( "video", videoId, localStorage.getItem('userStoreNumber'), loc, loc_id );
 		return;
 	}
 

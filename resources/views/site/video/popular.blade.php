@@ -70,8 +70,8 @@
                             <div class="ibox-content clearfix">
                                 @foreach($mostViewed as $mv)
                                     <div class="col-xs-6 col-sm-4 col-lg-3 video-list-box">
-                                        <a href="watch/{{$mv->id}}"><img src="/video/thumbs/{{$mv->thumbnail}}" class="img-responsive" /></a>
-                                        <a href="watch/{{$mv->id}}"><h4>{{$mv->title}}</h4></a>
+                                        <a href="watch/{{$mv->id}}" class="trackclick" data-video-id="{{$mv->id}}"><img src="/video/thumbs/{{$mv->thumbnail}}" class="img-responsive" /></a>
+                                        <a href="watch/{{$mv->id}}" class="trackclick" data-video-id="{{$mv->id}}"><h4>{{$mv->title}}</h4></a>
                                         <p>{{$mv->views}} views &middot; {{$mv->sinceCreated}} ago</p>
                                     </div>
                                 @endforeach

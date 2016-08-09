@@ -70,13 +70,13 @@
                             <div class="ibox-content clearfix">
                                 @foreach($mostRecent as $mr)
                                     <div class="col-xs-6 col-sm-4 col-lg-3 video-list-box">
-                                        <a href="watch/{{$mr->id}}"><img src="/video/thumbs/{{$mr->thumbnail}}" class="img-responsive" /></a>
-                                        <a href="watch/{{$mr->id}}"><h4>{{$mr->title}}</h4></a>
+                                        <a href="watch/{{$mr->id}}" class="trackclick" data-video-id="{{$mr->id}}"><img src="/video/thumbs/{{$mr->thumbnail}}" class="img-responsive" /></a>
+                                        <a href="watch/{{$mr->id}}" class="trackclick" data-video-id="{{$mr->id}}"><h4>{{$mr->title}}</h4></a>
                                         <p>{{$mr->likes}} likes &middot; {{$mr->sinceCreated}} ago</p>
                                     </div>
                                 @endforeach
                             </div>
-                            
+
                             <center>
                             {!! $mostRecent->render() !!}
                             </center>

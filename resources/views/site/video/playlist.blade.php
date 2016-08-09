@@ -77,7 +77,7 @@
                                 </div>
 
                                 <div class="playlist-meta">
-                                    <h4><a href="../watch/{{$vl->id}}">{{$vl->title}}</a></h4>
+                                    <h4><a href="../watch/{{$vl->id}}" class="trackclick" data-video-id="{{$vl->id}}">{{$vl->title}}</a></h4>
                                     <p>{{$vl->description}}</p>
                                     <p>{{$vl->views}} views &middot; {{$vl->sinceCreated}} ago</p>
                                 </div>
