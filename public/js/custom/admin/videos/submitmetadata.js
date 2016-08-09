@@ -16,7 +16,7 @@ $(document).ready(function() {
         console.log(fileIdVal, titleVal, descriptionVal, selector);
         console.log('am i even here?');
        
-        $.post("/admin/video/add-meta-data",{ file_id: fileIdVal, title: titleVal, description: descriptionVal, _token:token , tags: tags})
+        $.post("/admin/video/add-meta-data",{ video_id: fileIdVal, title: titleVal, description: descriptionVal, _token:token , tags: tags})
             .done( function(data){
                 console.log(data);
                 $(check).fadeIn(1000);

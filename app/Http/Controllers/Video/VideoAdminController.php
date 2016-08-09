@@ -12,6 +12,7 @@ use App\Models\StoreInfo;
 use App\Models\Video\Tag;
 use App\Models\Video\Video;
 use App\Models\Video\VideoTag;
+use App\Jobs\GenerateVideoThumbnail;
 
 class VideoAdminController extends Controller
 {
@@ -153,7 +154,7 @@ class VideoAdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Video::updateMetaData($request);
+        Video::updateMetaData($request, $id);
     }
 
     /**

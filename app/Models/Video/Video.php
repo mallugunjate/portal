@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use App\Models\Video\VideoTag;
 use App\Models\Utility\Utility;
 use App\User;
+use App\Jobs\GenerateVideoThumbnail;
+
 
 class Video extends Model
 {
@@ -93,7 +95,7 @@ class Video extends Model
 
         $metadata = Document::getDocumentMetaData($request->file('document'));
 
-        $directory = public_path() . '/videos';
+        $directory = public_path() . '/video';
         $uniqueHash = sha1(time() . time());
         $filename  = $metadata["modifiedName"] . "_" . $uniqueHash . "." . $metadata["originalExtension"];
 
@@ -118,7 +120,9 @@ class Video extends Model
             $video = Video::create($documentdetails);
             $video->save();
             $lastInsertedId= $video->id;
-
+            
+            $job = (new GenerateVideoThumbnail($filename));
+            dispatch($job);
         }
 
         return $video ;
@@ -126,6 +130,7 @@ class Video extends Model
 
     public static function updateMetaData(Request $request, $id=null)
     {
+        \Log::info($request->all());
         if (!isset($id)) {
             $id = $request->get('video_id');
         }
@@ -172,8 +177,12 @@ class Video extends Model
     public static function removeFeaturedVideoFlag()
     {
         $featuredVideo = Video::where('featured', 1)->first();
-        $featuredVideo->featured = 0;
-        $featuredVideo->save();
+        if( $featuredVideo !== null )
+        {
+            $featuredVideo->featured = 0;
+            $featuredVideo->save();    
+        }
+        
         return;
     }
 

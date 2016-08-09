@@ -67,7 +67,7 @@
                   			<form id="metadataform{{ $vid->id }}">
                   				      
 
-                                <input type="hidden" name="file_id" value="{{ $vid->id }}">
+                                <input type="hidden" name="video_id" value="{{ $vid->id }}">
 
                                 <div class="row">
                                   <label class="col-md-2"> Title </label>
@@ -131,7 +131,6 @@
             <script type="text/javascript" src="/js/custom/admin/documents/breadcrumb.js"></script>
             <script type="text/javascript" src="/js/custom/tree.js"></script>
             <script type="text/javascript" src="/js/custom/admin/videos/submitmetadata.js"></script>
-            <script src="/js/custom/datetimepicker.js"></script>
             <script type="text/javascript" src="/js/plugins/chosen/chosen.jquery.js"></script>
         
                 <script type="text/javascript">
