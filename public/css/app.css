@@ -8382,6 +8382,11 @@ body.md-skin {
         width: 50%;
     }
 
+    .video-playlist-box .video-container{
+        float: left;
+        width: 50%;
+    }
+
     .playlist-meta{
         float: left;
         width: 50%;

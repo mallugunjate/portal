@@ -69,10 +69,16 @@
 
                             <div class="ibox-content clearfix col-xs-12 col-sm-12 col-lg-12 video-playlist-box">
 
-                                <a href="../watch/{{$vl->id}}"><img src="/video/thumbs/{{$vl->thumbnail}}" class="img-responsive" /></a>
+                                <div class="video-container">
+                                    {{-- <a href="../watch/{{$vl->id}}"><img src="/video/thumbs/{{$vl->thumbnail}}" class="img-responsive" /></a> --}}
+                                    <video controls="controls" poster="/video/thumbs/{{$vl->thumbnail}}" class="videoInPlaylist" id="video{{$vl->id}}">
+                                        <source src="/video/{{$vl->filename}}" type="video/webm" />
+                                    </video>
+                                </div>
 
                                 <div class="playlist-meta">
                                     <h4>{{$vl->title}}</h4>
+                                    <p>{{$vl->description}}</p>
                                     <p>{{$vl->views}} views &middot; {{$vl->sinceCreated}} ago</p>
                                 </div>
 
@@ -102,6 +108,7 @@
 
     <script type="text/javascript" src="/js/vendor/underscore-1.8.3.js"></script>
     <script type="text/javascript" src="/js/vendor/lightbox.min.js"></script>
+    <script type="text/javascript" src="/js/custom/site/video/incViewCountFromPlaylist.js"></script>
 
     @include('site.includes.modal')
 
