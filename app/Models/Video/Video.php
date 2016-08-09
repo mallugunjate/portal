@@ -11,7 +11,8 @@ use Illuminate\Http\Request;
 use App\Models\Video\VideoTag;
 use App\Models\Utility\Utility;
 use App\User;
-use App\Jobs\GenerateVideoThumbnail;
+use FFMpeg\FFMpeg;
+use FFMpeg\Coordinate\TimeCode;
 
 
 class Video extends Model
@@ -115,14 +116,12 @@ class Video extends Model
                 'likes'				=> 0,
                 'dislikes'			=> 0,
                 'featured'			=> 0,
+                'thumbnail'         => "video-placeholder_360.jpg"
             );
 
             $video = Video::create($documentdetails);
             $video->save();
             $lastInsertedId= $video->id;
-            
-            $job = (new GenerateVideoThumbnail($filename));
-            dispatch($job);
         }
 
         return $video ;
@@ -291,5 +290,21 @@ class Video extends Model
     public static function getRelatedVideos($id)
     {
         
+    }
+
+    public static function generateThumbnail($id)
+    {
+        $video = Video::find($id);
+
+        $thumbnailFilename = $video->filename . ".jpg";
+        $destinationPath = public_path().'/video/thumbs/'. $thumbnailFilename;
+
+        $ffmpeg =  FFMpeg::create();
+        $videoFile = $ffmpeg->open( public_path()."/video/". $video->filename);
+        $frame = $videoFile->frame(TimeCode::fromSeconds(10));
+        $frame->save( $destinationPath );
+
+        $video->update(['thumbnail' => $thumbnailFilename]);
+        return $video;
     }
 }

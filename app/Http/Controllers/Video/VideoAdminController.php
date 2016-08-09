@@ -12,7 +12,6 @@ use App\Models\StoreInfo;
 use App\Models\Video\Tag;
 use App\Models\Video\Video;
 use App\Models\Video\VideoTag;
-use App\Jobs\GenerateVideoThumbnail;
 
 class VideoAdminController extends Controller
 {
@@ -168,5 +167,10 @@ class VideoAdminController extends Controller
         Video::where('id', $id)->delete();
         VideoTag::where('video_id', $id)->delete();
         return;
+    }
+
+    public function generateThumbnail($id)
+    {
+        return Video::generateThumbnail($id);
     }
 }

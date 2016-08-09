@@ -59,6 +59,7 @@
 			                            	<tr>
 												<td></td>
 												<td>Title</td>
+												<td>Thumbnail</td>
 												<td>Description</td>
 												<td>Uploader</td>
 												<td>Actions</td>
@@ -71,9 +72,11 @@
 			                            			<td></td>
 			                            		@endif
 			                            		<td>{!! $video->link !!}</a></td>
+			                            		<td> <img src="/video/thumbs/{{$video->thumbnail}}" height="75" width="125"> </td>
 			                            		<td> {{$video->description}} </td>
 			                            		<td> {{$video->uploaderFirstName}} {{$video->uploaderLastName}} </td>
 			                            		<td>
+			                            			<a class="btn btn-primary btn-sm  video-thumbnail-create" title="Generate Video Thumbnail" data-videoId = "{{$video->id}}"><i class="fa fa-film"></i></a>
 			                            			<a href="/admin/video/{{$video->id}}/edit" class=" btn btn-primary btn-sm"><i class="fa fa-pencil"></i></a>
 			                            			<a data-video="{{$video->id}}" id="video{{$video->id}}" class="video-delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
 
@@ -106,6 +109,7 @@
 
 
 				<script type="text/javascript" src="/js/custom/admin/videos/deleteVideo.js"></script>
+				<script type="text/javascript" src="/js/custom/admin/videos/createThumbnail.js"></script>
 				<script type="text/javascript" src="/js/custom/site/launchModal.js" ></script>
 
 				@include('site.includes.bugreport')
