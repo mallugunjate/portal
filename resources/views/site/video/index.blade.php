@@ -68,24 +68,20 @@
                             <h2>Featured Video</h2>
                         </div>
 
-                        <a href="video/watch/{{$featured->id}}"><img src="/video/thumbs/{{$featured->thumbnail}}" class="img-responsive" style="width: 100%" /></a>
+                        <a href="video/watch/{{$featured->id}}"><img src="/video/thumbs/{{$featured->thumbnail}}" data-res-id="{{$featured->id}}" class="trackclick img-responsive" style="width: 100%" /></a>
 
                         <div class="ibox float-e-margins">
                             <div class="ibox-title clearfix">
                                 <div class="pull-left">
-                                    <h3><a href="video/watch/{{$featured->id}}">This is the video title</a></h3>
-                                    <h6>Tags:</h6>
+                                    <h3><a href="video/watch/{{$featured->id}}" class="trackclick" data-res-id="{{$featured->id}}">{{$featured->title}}</a></h3>
+                                    <p>{{$featured->views}} views &middot; {{$featured->sinceCreated}} ago</p>
+                                    {{-- <h6>Tags:</h6>
                                     <span class="label">SOmething</span>
-                                    <span class="label">SOm3thing totally different</span>
+                                    <span class="label">SOm3thing totally different</span> --}}
                                 </div>
 
                                 <div class="pull-right">
-                                        {{-- <h2>867,537 views</h2>
-                                        <div class="progress progress-mini" style="margin-bottom: 10px;">
-                                            <div style="width: 79%;" class="progress-bar"></div>
-                                        </div> --}}
-                                        {{-- <button class="btn btn-white btn-outline" type="button" data-toggle="tooltip" data-placement="bottom" title="Like this"><i class="fa fa-thumbs-up"></i> 27</button>
-                                        <button class="btn btn-white btn-outline" type="button" data-toggle="tooltip" data-placement="bottom" title="Dislike this"><i class="fa fa-thumbs-down"></i> 2</button> --}}
+
                                 </div>
 
                             </div>
@@ -106,10 +102,10 @@
 
                             @foreach($latestPlaylists as $lp)
                                 <div class="ibox-content clearfix col-xs-12 col-sm-12 col-lg-12 video-playlist-box">
-                                    <a href="video/playlist/{{$lp->id}}"><img src="/video/thumbs/{{$lp->thumbnail}}" class="img-responsive" /></a>
+                                    <a href="video/playlist/{{$lp->id}}" class="trackclick" data-res-id="{{$lp->id}}"><img src="/video/thumbs/{{$lp->thumbnail}}" class="img-responsive" /></a>
 
                                     <div class="playlist-meta">
-                                        <h4><a href="video/playlist/{{$lp->id}}">{{$lp->title}}</a></h4>
+                                        <h4><a href="video/playlist/{{$lp->id}}" class="trackclick" data-res-id="{{$lp->id}}" data-playlist-id="{{$lp->id}}">{{$lp->title}}</a></h4>
                                         <p>{{$lp->description}}</p>
                                         <p>{{$lp->count}} videos &middot; {{$lp->sinceCreated}} ago</p>
                                     </div>
@@ -196,6 +192,7 @@
 
     <script type="text/javascript" src="/js/vendor/underscore-1.8.3.js"></script>
     <script type="text/javascript" src="/js/vendor/lightbox.min.js"></script>
+    <script type="text/javascript" src="/js/custom/site/video/playPause.js"></script>
 
     @include('site.includes.modal')
 

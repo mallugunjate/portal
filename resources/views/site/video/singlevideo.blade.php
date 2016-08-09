@@ -94,7 +94,7 @@
                 </div>
             </div>
 
-            <div class="row">
+            {{-- <div class="row">
                     <div class="col-lg-12">
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
@@ -108,53 +108,12 @@
                                     <p>134,093 views &middot; 3 weeks ago</p>
                                 </div>
 
-                                <div class="col-xs-6 col-sm-4 col-lg-3 video-list-box">
-                                    <img src="/images/video-placeholder.jpg" class="img-responsive" />
-                                    <h4>This is a video has a ridiculously long title for no real reason, who would do this? </h4>
-                                    <p>134,093 views &middot; 3 weeks ago</p>
-                                </div>
-
-                                <div class="col-xs-6 col-sm-4 col-lg-3 video-list-box">
-                                    <img src="/images/video-placeholder.jpg" class="img-responsive" />
-                                    <h4>This is a video title</h4>
-                                    <p>134,093 views &middot; 3 weeks ago</p>
-                                </div>
-
-                                <div class="col-xs-6 col-sm-4 col-lg-3 video-list-box">
-                                    <img src="/images/video-placeholder.jpg" class="img-responsive" />
-                                    <h4>This is a video title</h4>
-                                    <p>134,093 views &middot; 3 weeks ago</p>
-                                </div>
-
-                                <div class="col-xs-6 col-sm-4 col-lg-3 video-list-box">
-                                    <img src="/images/video-placeholder.jpg" class="img-responsive" />
-                                    <h4>This is a video title</h4>
-                                    <p>134,093 views &middot; 3 weeks ago</p>
-                                </div>
-
-                                <div class="col-xs-6 col-sm-4 col-lg-3 video-list-box">
-                                    <img src="/images/video-placeholder.jpg" class="img-responsive" />
-                                    <h4>This is a video title</h4>
-                                    <p>134,093 views &middot; 3 weeks ago</p>
-                                </div>
-
-                                <div class="col-xs-6 col-sm-4 col-lg-3 video-list-box">
-                                    <img src="/images/video-placeholder.jpg" class="img-responsive" />
-                                    <h4>This is a video title lkna akl alk alk alka lka lak lak loiiap poia</h4>
-                                    <p>134,093 views &middot; 3 weeks ago</p>
-                                </div>
-
-                                <div class="col-xs-6 col-sm-4 col-lg-3 video-list-box">
-                                    <img src="/images/video-placeholder.jpg" class="img-responsive" />
-                                    <h4>This is a video title</h4>
-                                    <p>134,093 views &middot; 3 weeks ago</p>
-                                </div>
 
 
                             </div>
                         </div>
                     </div>
-            </div>
+            </div> --}}
 
 
                 <br class="clearfix" />
@@ -170,6 +129,7 @@
     <script type="text/javascript" src="/js/vendor/lightbox.min.js"></script>
     <script type="text/javascript" src="/js/custom/site/video/incrementViewCount.js"></script>
     <script type="text/javascript" src="/js/custom/site/video/likedislike.js"></script>
+    <script type="text/javascript" src="/js/custom/site/video/playPause.js"></script>
 
     @include('site.includes.modal')
 

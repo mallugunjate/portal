@@ -77,7 +77,7 @@
                                 </div>
 
                                 <div class="playlist-meta">
-                                    <h4>{{$vl->title}}</h4>
+                                    <h4><a href="../watch/{{$vl->id}}">{{$vl->title}}</a></h4>
                                     <p>{{$vl->description}}</p>
                                     <p>{{$vl->views}} views &middot; {{$vl->sinceCreated}} ago</p>
                                 </div>
@@ -109,6 +109,7 @@
     <script type="text/javascript" src="/js/vendor/underscore-1.8.3.js"></script>
     <script type="text/javascript" src="/js/vendor/lightbox.min.js"></script>
     <script type="text/javascript" src="/js/custom/site/video/incViewCountFromPlaylist.js"></script>
+    <script type="text/javascript" src="/js/custom/site/video/playPause.js"></script>
 
     @include('site.includes.modal')
 
