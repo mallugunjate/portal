@@ -388,7 +388,6 @@ class Search extends Model
         $query_terms = explode(' ', $query);
 
         foreach ($query_terms as $term) {
-            var_dump($term);
 
             //search title
             $videos = $videos->merge(
