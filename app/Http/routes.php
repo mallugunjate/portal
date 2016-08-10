@@ -167,6 +167,11 @@ Route::resource('/admin/banner' , 'AdminSelectedBannerController');
 
 //Ckeditor Images
 Route::resource('/utilities/ckeditorimages', 'Utilities\CkeditorImageController');
+
+//Store Feedback
+Route::resource('/admin/feedback' , 'StoreFeedback\FeedbackAdminController');
+Route::resource('/admin/feedback/{id}/note' , 'StoreFeedback\NotesAdminController');
+
 /* API Routes */
 //get navigation
 Route::get('/api/v1/banner/{id}/navigation', 'Api\V1\ApiController@getNavigation');
