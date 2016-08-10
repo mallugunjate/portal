@@ -67,6 +67,13 @@
 											<label class="col-sm-2 control-label">Title</label>
 								            <div class="col-sm-10"><input type="text" id="title" name="title" class="form-control" value=""></div>
 										</div>
+										<div class="form-group">
+											<label class="col-sm-2 control-label"> Description</label>
+											<div class="col-sm-10">
+												<textarea class="description" name="description" cols="50" rows="10" id="description"></textarea>
+											</div>
+
+										</div>
 										
 
 										<div class="form-group">
@@ -152,6 +159,11 @@
 		        }
 			});
 
+			CKEDITOR.replace('description', {
+
+    		    filebrowserUploadUrl: "{{route('utilities.ckeditorimages.store',['_token' => csrf_token() ])}}"
+
+    		});
 
 		    $(".chosen").chosen({
 				  width:'75%'

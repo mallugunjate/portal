@@ -19,6 +19,7 @@ $(document).on('click','.playlist-create',function(){
   	var hasError = false;
  
 	var title = $("#title").val();
+	var description = CKEDITOR.instances['description'].getData();
 	var banner_id = $("input[name='banner_id']").val();
 	var playlist_videos = [];
 
@@ -27,6 +28,7 @@ $(document).on('click','.playlist-create',function(){
 	});
 
 	console.log('title: ' + title);
+	console.log(description);
 	console.log(playlist_videos);
 	
 	if(title == ''){
@@ -44,6 +46,7 @@ $(document).on('click','.playlist-create',function(){
 		return false;
 	}
 
+
     if(hasError == false) {
 
 		$.ajax({
@@ -53,6 +56,7 @@ $(document).on('click','.playlist-create',function(){
 		    data: {
 		  		banner_id : banner_id,
 		  		title : title,
+		  		description : description,
 		  		playlist_videos : playlist_videos
 		  		
 		    },

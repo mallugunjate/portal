@@ -219,13 +219,8 @@
 		<script type="text/javascript" src="/js/custom/admin/communications/addCommunication.js"></script>
 		<script type="text/javascript" src="/js/custom/createpackage.js"></script>
 		<script type="text/javascript" src="/js/custom/tree.js"></script>
-<<<<<<< HEAD
-		<script src="/js/custom/datetimepicker.js"></script>
-		
-=======
+		<script type="text/javascript" src="/js/custom/datetimepicker.js"></script>
 		<script type="text/javascript" src="/js/custom/admin/global/storeSelector.js"></script>
-
->>>>>>> dev
 		<script type="text/javascript">
 			
 			$.ajaxSetup({

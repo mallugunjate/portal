@@ -211,11 +211,8 @@
             <script type="text/javascript" src="/js/custom/admin/documents/showPackage.js"></script>
             <script type="text/javascript" src="/js/custom/admin/documents/breadcrumb.js"></script>
             <script type="text/javascript" src="/js/custom/admin/documents/uploadDocument.js"></script>
-<<<<<<< HEAD
-            <script src="/js/custom/datetimepicker.js"></script>
-=======
+            <script type="text/javascript" src="/js/custom/datetimepicker.js"></script>
             <script type="text/javascript" src="/js/custom/admin/global/storeSelector.js"></script>
->>>>>>> dev
             
             <script type="text/javascript">
             $.ajaxSetup({

@@ -54,6 +54,7 @@ $(document).on('click','.playlist-update',function(){
  	var playlistID = $("#playlistID").val();
  	
 	var title = $("#playlist_title").val();
+	var description = CKEDITOR.instances['description'].getData();
 	
 	var remove_videos = [];
 	var playlist_videos = [];
@@ -79,6 +80,7 @@ $(document).on('click','.playlist-update',function(){
 			dataType: 'json',
 		    data: {
 		    	title : title,
+		    	description : description,
 		    	playlist_videos:  playlist_videos,
 		    	remove_videos: remove_videos
 

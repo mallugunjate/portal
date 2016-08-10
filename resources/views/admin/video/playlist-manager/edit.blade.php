@@ -64,6 +64,17 @@
                                             <div class="col-sm-10"><input type="text" id="playlist_title" name="playlist_title" class="form-control" value="{{ $playlist->title }}"></div>
                                         </div>
 
+                                        <div class="form-group">
+											<label class="col-sm-2 control-label">Body</label>
+												<div class="col-sm-10">
+													<textarea class="description" name="description" cols="50" rows="10" id="description">
+														{{ $playlist->description }}
+
+													</textarea>
+														
+												</div>
+										</div>
+
                                     </form>
                                        
                                 </div>
@@ -144,6 +155,7 @@
 	</div>
 
 	<script type="text/javascript" src="/js/custom/admin/videos/playlists/editPlaylist.js"></script>
+	<script type="text/javascript" src="/js/plugins/ckeditor-standard/ckeditor.js"></script>
 	
 	
 	
@@ -153,7 +165,9 @@
 	            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 	        }
 		});
-
+		CKEDITOR.replace('description', {
+    		filebrowserUploadUrl: "{{route('utilities.ckeditorimages.store',['_token' => csrf_token() ])}}"
+    	});
 	</script>
 
 	

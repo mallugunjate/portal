@@ -15,7 +15,7 @@ class Playlist extends Model
     use SoftDeletes;
 
     protected $table = 'playlists';
-    protected $fillable = ['title', 'banner_id'];
+    protected $fillable = ['title', 'banner_id', 'description'];
     protected $dates = ['deleted_at'];
 
     public static function validateCreatePlaylist($request)
@@ -72,7 +72,8 @@ class Playlist extends Model
 
    		$playlist = Playlist::create([
    			'title' 	=> $request["title"],
-   			'banner_id' => $request["banner_id"]
+   			'banner_id' => $request["banner_id"],
+            'description' => $request["description"]
    		]);
 
    		Playlist::updatePlaylistVideos($playlist->id, $request);
@@ -93,6 +94,7 @@ class Playlist extends Model
         \Log::info('validation passed: going ahead for editing');
         $playlist = Playlist::find($id);
     	$playlist['title'] = $request['title'];
+        $playlist['description'] = $request['description'];
     	$playlist->save();
     	Playlist::updatePlaylistVideos($id, $request);
     	return $playlist;
