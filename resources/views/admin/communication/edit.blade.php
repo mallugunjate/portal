@@ -62,7 +62,7 @@
 							<form class="form-horizontal" id="updateCommunicationForm">
 
 								<input type="hidden" name="banner_id" value={{$banner->id}} >
-								<input type="hidden" id="communicationId" name="communicationId" value={{$communication->id}}> 
+								<input type="hidden" id="communicationId" name="communicationId" value={{$communication->id}}>
 
 								<div class="form-group">
 									<label class="col-sm-2 control-label">Title</label>
@@ -90,16 +90,16 @@
 
 												@if($communication->communication_type_id == $ct->id)
 												<label class="btn btn-outline btn-default active">
-												@else 
+												@else
 												<label class="btn btn-outline btn-default">
 												@endif
 
 												@if( $ct->id == 1)
 												<input type="radio" id="" name="communication_type" value="{{ $ct->id }}"><i class="fa fa-times"></i> {{ $ct->communication_type }}
-												@else 
+												@else
 												<input type="radio" id="" name="communication_type" value="{{ $ct->id }}"><i class="fa fa-circle text-{{ $ct->colour }}"></i> {{ $ct->communication_type }}
 												@endif
-											</label>	
+											</label>
 
 											@endforeach
 											</div>
@@ -113,7 +113,7 @@
 												{{ $communication->body }}
 
 											</textarea>
-												
+
 										</div>
 								</div>
 
@@ -123,37 +123,37 @@
 										<label class="col-sm-2 control-label">Attachments</label>
 										<div class="existing-files-container col-md-10">
 											@include('admin.communication.document-partial', ['communication_documents'=>$communication_documents])
-											
-												
+
+
 										</div>
 
 
 									</div>
 								<!-- </div> -->
 								<div id="files-staged-to-remove"></div>
-								<div id="files-selected" class="row"></div>		
+								<div id="files-selected" class="row"></div>
 
 								<!-- <div class="existing-folders row"> -->
 									{{-- <div class="form-group">
 											<label class="col-sm-2 control-label">Packages Attached</label>
 											<div class="existing-folders-container col-md-10" >
-												
+
 												@foreach($communication_packages as $package)
 												<div class="row">
 													<div class="communication_packages col-md-8">
 														<div class="feature-packagename" data-folderid = {{$package->id}}> <i class="fa fa-folder-o"></i> {{$package->package_name}} </div>
-														
+
 														<div class="package-timestamp"> Updated At : {{$package->updated_at}}</div>
 													</div>
-	
-													
+
+
 													<a data-package-id="{{ $package->id }}" id="package{{$package->id}}" class="remove-package btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
 												</div>
 												@endforeach
-												
-												
+
+
 											</div>
-											
+
 										</div> --}}
 								<!-- </div>	 -->
 								<div id="packages-selected" class="row"></div>
@@ -171,7 +171,7 @@
 								</div>
 
 								<div class="form-group">
-						                                            
+
 						                <label class="col-sm-2 control-label">Target Stores</label>
 						                <div class="col-sm-10">
 						                	@if($all_stores)
@@ -221,12 +221,12 @@
 		            </div>
 		            <div class="modal-body">
 		            	<ul class="tree">
-		            	@foreach ($navigation as $nav) 
-						
+		            	@foreach ($navigation as $nav)
+
 							@if (isset($nav["is_child"]) && ($nav["is_child"] == 0) )
-								
+
 								@include('admin.package.file-folder-structure-partial', ['navigation' =>$navigation, 'currentnode' => $nav])
-								
+
 							@endif
 
 						@endforeach
@@ -240,7 +240,7 @@
 		    </div>
 		</div>
 
-		
+
 
 		<div id="package-listing" class="modal fade">
 		    <div class="modal-dialog">
@@ -278,6 +278,10 @@
 		<script type="text/javascript" src="/js/custom/tree.js"></script>
 		<script type="text/javascript" src="/js/custom/datetimepicker.js"></script>
 		<script type="text/javascript" src="/js/custom/admin/global/storeSelector.js"></script>
+<<<<<<< HEAD
+=======
+
+>>>>>>> ed4b6fd8d4c61705898213e0758d2d6cd4eb031b
 
 		<script type="text/javascript">
 			$.ajaxSetup({
@@ -303,7 +307,3 @@
 
 	</body>
 	</html>
-
-
-
-
