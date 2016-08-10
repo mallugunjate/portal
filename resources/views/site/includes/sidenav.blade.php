@@ -7,7 +7,7 @@
                     </div> -->
                 </li>
                 </a>
-                
+
 
                 @if($urgentNoticeCount > 0)
                 <li class="urgetnNoticeNav">
@@ -23,7 +23,7 @@
                 <li class="active">
                 @else
                 <li>
-                @endif 
+                @endif
                     <a href="/{{ Request::segment(1) }}"><i class="fa fa-home"></i> <span class="nav-label">Dashboard</span></a>
                 </li>
 
@@ -32,49 +32,59 @@
                 <li class="active">
                 @else
                 <li>
-                @endif                
+                @endif
                     <a href="/{{ Request::segment(1) }}/calendar"><i class="fa fa-calendar"></i> <span class="nav-label">Calendar</span></a>
-                </li>                
+                </li>
 
 
                 @if (Request::segment(2) == 'communication')
                 <li class="active">
                 @else
                 <li>
-                @endif 
-                    <a href="/{{ Request::segment(1) }}/communication"><i class="fa fa-bullhorn"></i> <span class="nav-label">Communications</span> 
-                    @if( isset($communicationCount) ) 
+                @endif
+                    <a href="/{{ Request::segment(1) }}/communication"><i class="fa fa-bullhorn"></i> <span class="nav-label">Communications</span>
+                    @if( isset($communicationCount) )
                     <span class="label label-inverse pull-right">{{ $communicationCount }}</span>
                     @endif
                     </a>
-                </li>            
+                </li>
 
 
-                
-        
+
+
                 @if (Request::segment(2) == 'alerts')
                 <li class="active">
-                @else 
+                @else
                 <li>
                 @endif
                     <a href="/{{ Request::segment(1) }}/alerts"><i class="fa fa-bell"></i> <span class="nav-label">Alerts</span>
-                    @if( isset($alertCount) ) 
+                    @if( isset($alertCount) )
                         @if( $alertCount > 0)
                             <span class="label label-primary pull-right">{{ $alertCount }}</span>
-                        @else 
+                        @else
                             <span class="label label-inverse pull-right">{{ $alertCount }}</span>
                         @endif
                     @endif
                     </a>
-                </li>   
-                    
+                </li>
+
 
                 @if (Request::segment(2) == 'document')
                 <li class="active">
                 @else
                 <li>
-                @endif 
+                @endif
                     <a href="/{{ Request::segment(1) }}/document"><i class="fa fa-book"></i> <span class="nav-label">Library</span></a>
-                </li>                
+                </li>
+
+
+                @if (Request::segment(2) == 'video')
+                <li class="active">
+                @else
+                <li>
+                @endif
+                    <a href="/{{ Request::segment(1) }}/video"><i class="fa fa-video-camera"></i> <span class="nav-label">Video Library</span></a>
+
+                </li>
 
             </ul>
