@@ -26,6 +26,7 @@ class Utility extends Model
 
 			case "xls":
 			case "xlsx":
+			case "xlsm":
 				$icon = "<i class='fa fa-file-excel-o'></i>";
 				break;
 
@@ -92,6 +93,7 @@ class Utility extends Model
 
 			case "xls":
 			case "xlsx":
+			case "xlsm":
 				$class = 'download';
 				$modalTarget = 'ExcelDownload';
 				break;
@@ -150,6 +152,8 @@ class Utility extends Model
 			case  "launchPDFViewer":
 				$link = '<a href="#" class="launchPDFViewer trackclick" data-res-id="'.$id.'" data-toggle="modal" data-file="/viewer/?file=/files/'.$file.'" data-target="#fileviewmodal">'.$icon.$anchortext.'</a>';
 				$anchorOnly = '<a href="#" class="launchPDFViewer trackclick" data-res-id="'.$id.'" data-toggle="modal" data-file="/viewer/?file=/files/'.$file.'" data-target="#fileviewmodal">';	
+				// $link = '<a href="#" class="launchPDFViewer trackclick" data-res-id="'.$id.'" data-toggle="modal" data-file="/files/'.$file.'" data-target="#fileviewmodal">'.$icon.$anchortext.'</a>';
+				// $anchorOnly = '<a href="#" class="launchPDFViewer trackclick" data-res-id="'.$id.'" data-toggle="modal" data-file="/viewer/?file=/files/'.$file.'" data-target="#fileviewmodal">';	
 				break;
 
 			case "launchVideoViewer":

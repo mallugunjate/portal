@@ -2,9 +2,9 @@
             <ul class="nav metismenu" id="side-menu">
                 <a href="/{{ Request::segment(1) }}">
                 <li class="nav-header">
-                    <div class="logo-element">
-                        P
-                    </div>
+                    <!-- <div class="logo-element">
+                        
+                    </div> -->
                 </li>
                 </a>
 
