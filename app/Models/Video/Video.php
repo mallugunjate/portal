@@ -12,6 +12,7 @@ use App\Models\Video\VideoTag;
 use App\Models\Utility\Utility;
 use App\User;
 use FFMpeg\FFMpeg;
+use FFMpeg\FFProbe;
 use FFMpeg\Coordinate\TimeCode;
 
 
@@ -297,11 +298,19 @@ class Video extends Model
         $video = Video::find($id);
 
         $thumbnailFilename = $video->filename . ".jpg";
+        $sourcePath = public_path()."/video/". $video->filename;
         $destinationPath = public_path().'/video/thumbs/'. $thumbnailFilename;
 
+
+        $ffprobe = FFProbe::create();
+        $duration = $ffprobe
+                            ->format($sourcePath) // extracts file informations
+                            ->get('duration'); 
+    
+
         $ffmpeg =  FFMpeg::create();
-        $videoFile = $ffmpeg->open( public_path()."/video/". $video->filename);
-        $frame = $videoFile->frame(TimeCode::fromSeconds(10));
+        $videoFile = $ffmpeg->open( $sourcePath);
+        $frame = $videoFile->frame(TimeCode::fromSeconds(ceil($duration/2)));
         $frame->save( $destinationPath );
 
         $video->update(['thumbnail' => $thumbnailFilename]);
