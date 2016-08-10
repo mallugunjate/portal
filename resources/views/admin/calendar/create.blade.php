@@ -155,10 +155,7 @@
                 <script type="text/javascript" src="/js/plugins/ckeditor-standard/ckeditor.js"></script>
                 <script type="text/javascript" src="/js/custom/datetimepicker.js"></script>
                 <script type="text/javascript" src="/js/custom/admin/global/storeSelector.js"></script>
-<<<<<<< HEAD
 
-=======
->>>>>>> ed4b6fd8d4c61705898213e0758d2d6cd4eb031b
                 <script type="text/javascript">
                     $.ajaxSetup({
                         headers: {
