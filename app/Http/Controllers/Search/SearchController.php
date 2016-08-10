@@ -38,6 +38,7 @@ class SearchController extends Controller
         $communications = [];
         $alerts = [];
         $events = [];
+        $videos = [];
 
         $query = ltrim(rtrim($query));
         if ( isset($query) && ($query != '')){
@@ -70,7 +71,7 @@ class SearchController extends Controller
         $skin = Skin::getSkin($storeBanner);
 
         $urgentNoticeCount = UrgentNotice::getUrgentNoticeCount($storeNumber);
-        
+
         return view('site.search.index')
             ->with('skin', $skin)
             ->with('urgentNoticeCount', $urgentNoticeCount)
