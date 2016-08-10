@@ -158,4 +158,10 @@ class Playlist extends Model
         }
         return $list;
     }
+
+    public static function getPlaylistMetaData($id)
+    {
+            $playlistMeta = Playlist::find($id);
+            return $playlistMeta;
+    }
 }

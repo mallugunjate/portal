@@ -90,7 +90,10 @@ class VideoController extends Controller
     public function showPlaylist(Request $request)
     {
         $videoList = PlaylistVideo::getPlaylistVideos($request->id);
+        $playlistMeta = Playlist::getPlaylistMetaData($request->id);
+        
         return view('site.video.playlist')
+            ->with('playlistMeta', $playlistMeta)
             ->with('videoList', $videoList)
             ->with('skin', $this->skin)
             ->with('banner', $this->banner)

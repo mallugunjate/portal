@@ -55,8 +55,8 @@
 
                 </div> --}}
 
-                <h2>Video Playlist: <i>Name of Playlist</i></h2>
-
+                <h1>{{$playlistMeta->title}}</h1>
+                {!! $playlistMeta->description !!}
             </div>
 
 

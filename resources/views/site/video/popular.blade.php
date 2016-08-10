@@ -46,16 +46,7 @@
 
             <div class="row wrapper border-bottom white-bg page-heading">
 
-                {{-- <h1 style="color: #333; font-size: 65px; text-transform: uppercase; font-family: GalaxiePolarisCondensed-Bold;padding-bottom: 0px; line-height: 50px;">Video Library</h1> --}}
-                {{-- <div class="col-lg-10">
-                    <h2>Video</h2>
-                </div> --}}
-
-                {{-- <div class="col-lg-2">
-
-                </div> --}}
-
-
+                <h1>Most Viewed Videos</h1>
 
             </div>
 
@@ -64,9 +55,7 @@
             <div class="row">
                     <div class="col-lg-12">
                         <div class="ibox float-e-margins">
-                            <div class="ibox-title">
-                                <h1>Most Viewed Videos</h1>
-                            </div>
+
                             <div class="ibox-content clearfix">
                                 @foreach($mostViewed as $mv)
                                     <div class="col-xs-6 col-sm-4 col-lg-3 video-list-box">
