@@ -70,7 +70,7 @@ class SearchController extends Controller
         $skin = Skin::getSkin($storeBanner);
 
         $urgentNoticeCount = UrgentNotice::getUrgentNoticeCount($storeNumber);
-
+        
         return view('site.search.index')
             ->with('skin', $skin)
             ->with('urgentNoticeCount', $urgentNoticeCount)
@@ -79,6 +79,7 @@ class SearchController extends Controller
             ->with('communications', $communications)
             ->with('alerts', $alerts)
             ->with('events', $events)
+            ->with('videos', $videos)
             ->with('communicationCount', $communicationCount)
             ->with('isComboStore', $isComboStore)
             ->with('banner', $banner)
