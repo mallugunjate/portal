@@ -1,13 +1,14 @@
 $("body").on("click", ".trackclick", function(e){
 // $( "[data-res-id]" ).live( "click", function () {
 	var pathArray = window.location.pathname.split( '/' );
-	console.log('clicked something...');
 
 	fileId = $(this).attr("data-res-id");
+	videoId = $(this).attr("data-video-id");
 	commId = $(this).attr("data-comm-id");
 	urgentnoticeId = $(this).attr("data-urgentnotice-id");
 	externalUrlId = $(this).attr("data-ext-url");
-	
+	playListId = $(this).attr("data-playlist-id");
+
 	loc = pathArray[2];
 	loc_id = pathArray[4];
 
@@ -23,7 +24,7 @@ $("body").on("click", ".trackclick", function(e){
 		loc = "library";
 	}
 
-	//communication 
+	//communication
 	if(typeof commId != "undefined" ){
 		trackEvent( "communication", commId, localStorage.getItem('userStoreNumber'), loc, loc_id );
 		return;
@@ -34,11 +35,22 @@ $("body").on("click", ".trackclick", function(e){
 		trackEvent( "urgentnotice", urgentnoticeId, localStorage.getItem('userStoreNumber'), loc, loc_id );
 		return;
 	}
-	 
+
 	//external url
 	if(typeof externalUrlId != "undefined"){
 		trackEvent( "external_url", externalUrlId, localStorage.getItem('userStoreNumber'), loc, loc_id );
-		return;	
+		return;
+	}
+
+	//play list
+	if(typeof playListId != "undefined"){
+		trackEvent( "playlist", playListId, localStorage.getItem('userStoreNumber'), loc, loc_id );
+		return;
+	}
+
+	if(typeof videoId != "undefined"){
+		trackEvent( "video", videoId, localStorage.getItem('userStoreNumber'), loc, loc_id );
+		return;
 	}
 
 	trackEvent( "file", fileId, localStorage.getItem('userStoreNumber'), loc, loc_id );
@@ -58,19 +70,19 @@ function trackEvent( type, resource, store, location, location_id)
 	  		resource_id: resource,
 	  		store_number: store,
 	  		location: loc,
-	  		location_id: loc_id	
+	  		location_id: loc_id
 	    },
 	    success: function(result) {
-	      console.log('click as been tracked');   
-	    }	
+	      console.log('click as been tracked');
+	    }
 
 	});
 	// .done(function(response){
 
 
-	// }); 
+	// });
 
-		
+
 
 
 }

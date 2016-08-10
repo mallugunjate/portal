@@ -46,6 +46,7 @@ class SearchController extends Controller
             $communications = Search::searchCommunications($query, $store);
             $alerts = Search::searchAlerts($query, $store);
             $events = Search::searchEvents($query, $store);
+            $videos = Search::searchVideos($query);
 
             if( isset($request['archives']) && $request['archives'])
             {
