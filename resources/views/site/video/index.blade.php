@@ -106,7 +106,7 @@
 
                                     <div class="playlist-meta">
                                         <h4><a href="video/playlist/{{$lp->id}}" class="trackclick" data-playlist-id="{{$lp->id}}">{{$lp->title}}</a></h4>
-                                        <p>{{$lp->description}}</p>
+                                        {!! $lp->description !!}
                                         <p>{{$lp->count}} videos &middot; {{$lp->sinceCreated}} ago</p>
                                     </div>
                                 </div>
