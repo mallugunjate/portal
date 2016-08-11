@@ -8343,6 +8343,62 @@ body.md-skin {
     font-weight: normal;
     padding-left: 15px;
   }
+  
+.inline-folder-link{
+  color: #337ab7;
+  cursor: pointer;
+}
+
+@media (max-width : 950px) and (min-width:880px) {
+    #navigation-structure .folder{
+    display:inline-block;
+    width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;  
+    }
+}
+
+
+
+@media (max-width : 879px) and (min-width:768px) {
+    #navigation-structure .folder{
+        display:inline-block;
+        width: 100px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;  
+    }
+}
+
+@media (max-width : 620px) and (min-width:490px) {
+    #navigation-structure .folder{
+    display:inline-block;
+    width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;  
+    }
+}
+
+@media (max-width : 490px) {
+    #navigation-structure .folder{
+        display:inline-block;
+        width: 80px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;  
+    }
+}
+
+
+.alert-title{
+    display:inline-block;
+    width: 80px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;  
+}
 
 
   .video-list-box{
@@ -8382,8 +8438,14 @@ body.md-skin {
         width: 50%;
     }
 
+    .video-playlist-box .video-container{
+        float: left;
+        width: 50%;
+    }
+
     .playlist-meta{
         float: left;
         width: 50%;
         padding: 0px 0px 0px 20px;
     }
+

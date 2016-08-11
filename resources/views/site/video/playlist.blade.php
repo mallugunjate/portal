@@ -65,78 +65,28 @@
                     <div class="col-lg-12">
                         <div class="ibox float-e-margins clearfix">
 
-                                <div class="ibox-content clearfix col-xs-12 col-sm-12 col-lg-12 video-playlist-box">
+                            @foreach($videoList as $vl)
 
-                                    <img src="/images/video-placeholder.jpg" class="img-responsive" />
+                            <div class="ibox-content clearfix col-xs-12 col-sm-12 col-lg-12 video-playlist-box">
 
-                                    <div class="playlist-meta">
-                                        <h4>This is a video title</h4>
-                                        <p>134,093 views &middot; 3 weeks ago</p>
-                                    </div>
+                                <div class="video-container">
+                                    {{-- <a href="../watch/{{$vl->id}}"><img src="/video/thumbs/{{$vl->thumbnail}}" class="img-responsive" /></a> --}}
+                                    <video controls="controls" poster="/video/thumbs/{{$vl->thumbnail}}" class="videoInPlaylist" id="video{{$vl->id}}">
+                                        <source src="/video/{{$vl->filename}}" type="video/webm" />
+                                    </video>
+                                </div>
+
+                                <div class="playlist-meta">
+                                    <h4><a href="../watch/{{$vl->id}}" class="trackclick" data-video-id="{{$vl->id}}">{{$vl->title}}</a></h4>
+                                    <p>{{$vl->description}}</p>
+                                    <p>{{$vl->views}} views &middot; {{$vl->sinceCreated}} ago</p>
+                                    <button class="btn btn-primary btn-outline videolikeplaylist" data-video-id="{{$vl->id}}" type="button" data-toggle="tooltip" data-placement="bottom" title="Like this"><i class="fa fa-thumbs-up"></i> {{$vl->likes}}</button>
+                                    <button class="btn btn-danger btn-outline videodislikeplaylist" data-video-id="{{$vl->id}}" type="button" data-toggle="tooltip" data-placement="bottom" title="Dislike this"><i class="fa fa-thumbs-down"></i> {{$vl->dislikes}}</button>
 
                                 </div>
 
-                                <div class="ibox-content clearfix col-xs-12 col-sm-12 col-lg-12 video-playlist-box">
-
-                                    <img src="/images/video-placeholder.jpg" class="img-responsive" />
-
-                                    <div class="playlist-meta">
-                                        <h4>This is a video has a ridiculously long title for no real reason, who would do this? </h4>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                        <p>134,093 views &middot; 3 weeks ago</p>
-                                    </div>
-
-                                </div>
-
-                                <div class="ibox-content clearfix col-xs-12 col-sm-12 col-lg-12 video-playlist-box">
-                                    <img src="/images/video-placeholder.jpg" class="img-responsive" />
-
-                                    <div class="playlist-meta">
-                                        <h4>This is a video title</h4>
-                                        <p>134,093 views &middot; 3 weeks ago</p>
-                                    </div>
-                                </div>
-
-                                <div class="ibox-content clearfix col-xs-12 col-sm-12 col-lg-12 video-playlist-box">
-
-                                    <img src="/images/video-placeholder.jpg" class="img-responsive" />
-                                    <div class="playlist-meta">
-                                        <h4>This is a video title</h4>
-                                        <p>134,093 views &middot; 3 weeks ago</p>
-                                    </div>
-                                </div>
-
-                                <div class="ibox-content clearfix col-xs-12 col-sm-12 col-lg-12 video-playlist-box">
-                                    <img src="/images/video-placeholder.jpg" class="img-responsive" />
-                                    <div class="playlist-meta">
-                                        <h4>This is a video title</h4>
-                                        <p>134,093 views &middot; 3 weeks ago</p>
-                                    </div>
-                                </div>
-
-                                <div class="ibox-content clearfix col-xs-12 col-sm-12 col-lg-12 video-playlist-box">
-                                    <img src="/images/video-placeholder.jpg" class="img-responsive" />
-                                    <div class="playlist-meta">
-                                        <h4>This is a video title</h4>
-                                        <p>134,093 views &middot; 3 weeks ago</p>
-                                    </div>
-                                </div>
-
-                                <div class="ibox-content clearfix col-xs-12 col-sm-12 col-lg-12 video-playlist-box">
-                                    <img src="/images/video-placeholder.jpg" class="img-responsive" />
-                                    <div class="playlist-meta">
-                                        <h4>This is a video title</h4>
-                                        <p>134,093 views &middot; 3 weeks ago</p>
-                                    </div>
-                                </div>
-
-                                <div class="ibox-content clearfix col-xs-12 col-sm-12 col-lg-12 video-playlist-box">
-                                    <img src="/images/video-placeholder.jpg" class="img-responsive" />
-                                    <div class="playlist-meta">
-                                        <h4>This is a video title</h4>
-                                        <p>134,093 views &middot; 3 weeks ago</p>
-                                    </div>
-                                </div>
+                            </div>
+                            @endforeach
 
                                 <br class="clearfix" />
 
@@ -144,7 +94,7 @@
                             </div>
                         </div>
                     </div>
-            </div>
+                </div>
 
 
 
@@ -161,6 +111,9 @@
 
     <script type="text/javascript" src="/js/vendor/underscore-1.8.3.js"></script>
     <script type="text/javascript" src="/js/vendor/lightbox.min.js"></script>
+    <script type="text/javascript" src="/js/custom/site/video/incViewCountFromPlaylist.js"></script>
+    <script type="text/javascript" src="/js/custom/site/video/likedislike.js"></script>
+    <script type="text/javascript" src="/js/custom/site/video/playPause.js"></script>
 
     @include('site.includes.modal')
 

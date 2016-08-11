@@ -212,7 +212,14 @@ class Video extends Model
 
     public static function getFeaturedVideo()
     {
-        return Video::where('featured', 1)->first();
+
+        $video = Video::where('featured', 1)->first();
+        $video->likes = number_format($video->likes);
+        $video->dislikes = number_format($video->dislikes);
+        $video->sinceCreated = Utility::getTimePastSinceDate($video->created_at);
+        $video->prettyDateUpdated = Utility::prettifyDate($video->updated_at);
+        return $video;
+
     }
 
     public static function getMostLikedVideos($limit=0)
@@ -290,7 +297,7 @@ class Video extends Model
 
     public static function getRelatedVideos($id)
     {
-        
+
     }
 
     public static function generateThumbnail($id)

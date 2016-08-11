@@ -44,24 +44,11 @@
                 @include('site.includes.topbar')
             </div>
 
-            <div class="row wrapper border-bottom white-bg page-heading">
 
-                {{-- <h1 style="color: #333; font-size: 65px; text-transform: uppercase; font-family: GalaxiePolarisCondensed-Bold;padding-bottom: 0px; line-height: 50px;">Video Library</h1> --}}
-                {{-- <div class="col-lg-10">
-                    <h2>Video</h2>
-                </div> --}}
-
-                {{-- <div class="col-lg-2">
-
-                </div> --}}
-
-
-
-            </div>
 
             <div class="row">
                 <div class="col-lg-12">
-
+                    <br />
                     <video controls="controls" poster="/video/thumbs/{{$video[0]->thumbnail}}" style="">
                         <source src="/video/{{$video[0]->filename}}" type="video/webm" />
                     </video>
@@ -71,9 +58,9 @@
                             <input type="hidden" id="video_id" value="{{$video[0]->id}}" />
                             <div class="pull-left">
                                 <h1>{{ $video[0]->title }}</h1>
-                                <h6>Tags:</h6>
+                                {{-- <h6>Tags:</h6>
                                 <a href=""><span class="label">SOmething</span></a>
-                                <a href=""><span class="label">SOm3thing totally different</span></a>
+                                <a href=""><span class="label">SOm3thing totally different</span></a> --}}
                             </div>
 
                             <div class="pull-right">
@@ -94,7 +81,7 @@
                 </div>
             </div>
 
-            <div class="row">
+            {{-- <div class="row">
                     <div class="col-lg-12">
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
@@ -108,53 +95,12 @@
                                     <p>134,093 views &middot; 3 weeks ago</p>
                                 </div>
 
-                                <div class="col-xs-6 col-sm-4 col-lg-3 video-list-box">
-                                    <img src="/images/video-placeholder.jpg" class="img-responsive" />
-                                    <h4>This is a video has a ridiculously long title for no real reason, who would do this? </h4>
-                                    <p>134,093 views &middot; 3 weeks ago</p>
-                                </div>
-
-                                <div class="col-xs-6 col-sm-4 col-lg-3 video-list-box">
-                                    <img src="/images/video-placeholder.jpg" class="img-responsive" />
-                                    <h4>This is a video title</h4>
-                                    <p>134,093 views &middot; 3 weeks ago</p>
-                                </div>
-
-                                <div class="col-xs-6 col-sm-4 col-lg-3 video-list-box">
-                                    <img src="/images/video-placeholder.jpg" class="img-responsive" />
-                                    <h4>This is a video title</h4>
-                                    <p>134,093 views &middot; 3 weeks ago</p>
-                                </div>
-
-                                <div class="col-xs-6 col-sm-4 col-lg-3 video-list-box">
-                                    <img src="/images/video-placeholder.jpg" class="img-responsive" />
-                                    <h4>This is a video title</h4>
-                                    <p>134,093 views &middot; 3 weeks ago</p>
-                                </div>
-
-                                <div class="col-xs-6 col-sm-4 col-lg-3 video-list-box">
-                                    <img src="/images/video-placeholder.jpg" class="img-responsive" />
-                                    <h4>This is a video title</h4>
-                                    <p>134,093 views &middot; 3 weeks ago</p>
-                                </div>
-
-                                <div class="col-xs-6 col-sm-4 col-lg-3 video-list-box">
-                                    <img src="/images/video-placeholder.jpg" class="img-responsive" />
-                                    <h4>This is a video title lkna akl alk alk alka lka lak lak loiiap poia</h4>
-                                    <p>134,093 views &middot; 3 weeks ago</p>
-                                </div>
-
-                                <div class="col-xs-6 col-sm-4 col-lg-3 video-list-box">
-                                    <img src="/images/video-placeholder.jpg" class="img-responsive" />
-                                    <h4>This is a video title</h4>
-                                    <p>134,093 views &middot; 3 weeks ago</p>
-                                </div>
 
 
                             </div>
                         </div>
                     </div>
-            </div>
+            </div> --}}
 
 
                 <br class="clearfix" />
@@ -170,6 +116,7 @@
     <script type="text/javascript" src="/js/vendor/lightbox.min.js"></script>
     <script type="text/javascript" src="/js/custom/site/video/incrementViewCount.js"></script>
     <script type="text/javascript" src="/js/custom/site/video/likedislike.js"></script>
+    <script type="text/javascript" src="/js/custom/site/video/playPause.js"></script>
 
     @include('site.includes.modal')
 

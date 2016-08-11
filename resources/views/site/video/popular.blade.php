@@ -68,17 +68,17 @@
                                 <h1>Most Viewed Videos</h1>
                             </div>
                             <div class="ibox-content clearfix">
-                                @foreach($mostLiked as $ml)
+                                @foreach($mostViewed as $mv)
                                     <div class="col-xs-6 col-sm-4 col-lg-3 video-list-box">
-                                        <a href="watch/{{$ml->id}}"><img src="/video/thumbs/{{$ml->thumbnail}}" class="img-responsive" /></a>
-                                        <a href="watch/{{$ml->id}}"><h4>{{$ml->title}}</h4></a>
-                                        <p>{{$ml->likes}} likes &middot; {{$ml->sinceCreated}} ago</p>
+                                        <a href="watch/{{$mv->id}}" class="trackclick" data-video-id="{{$mv->id}}"><img src="/video/thumbs/{{$mv->thumbnail}}" class="img-responsive" /></a>
+                                        <a href="watch/{{$mv->id}}" class="trackclick" data-video-id="{{$mv->id}}"><h4>{{$mv->title}}</h4></a>
+                                        <p>{{$mv->views}} views &middot; {{$mv->sinceCreated}} ago</p>
                                     </div>
                                 @endforeach
                             </div>
 
                             <center>
-                            {!! $mostLiked->render() !!}
+                            {!! $mostViewed->render() !!}
                             </center>
 
                         </div>

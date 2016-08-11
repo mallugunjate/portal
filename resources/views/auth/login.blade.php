@@ -4,21 +4,24 @@
 <head>
     @section('title', 'Admin Login')
     @include('site.includes.head')
-</head> 
+</head>
 
 <body class="gray-bg">
 
     <div class="middle-box text-center loginscreen animated fadeInDown">
         <div>
             <div>
-                <h1 class="logo-name">MW</h1>
+                <p>&nbsp;</p>
+                <img src="/images/fgl.png" />
             </div>
-
-            <h3>Welcome to Manager Web</h3>
+{{--
+            <h3>Welcome to the Store Operations Portal</h3> --}}
             <p>
                 <!--Continually expanded and constantly improved Inspinia Admin Them (IN+)-->
             </p>
-            <p>Admin Login</p>
+            {{-- <p>Admin Login</p> --}}
+
+            <p>&nbsp;</p>
             <form class="m-t" role="form" method="POST" action="{{ url('/admin/login') }}" autocomplete="off">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 @if (count($errors))
@@ -40,7 +43,7 @@
 {{--                 <p class="text-muted text-center"><small>Do not have an account?</small></p>
                 <a class="btn btn-sm btn-white btn-block" href="register.html">Create an account</a> --}}
             </form>
-            
+
         </div>
     </div>
 
@@ -52,4 +55,3 @@
 </body>
 
 </html>
-
