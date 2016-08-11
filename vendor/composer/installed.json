@@ -2901,91 +2901,6 @@
         ]
     },
     {
-        "name": "league/flysystem",
-        "version": "1.0.26",
-        "version_normalized": "1.0.26.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/thephpleague/flysystem.git",
-            "reference": "fb3b30dca320b36931ea878fea17ebe136fba1b0"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/fb3b30dca320b36931ea878fea17ebe136fba1b0",
-            "reference": "fb3b30dca320b36931ea878fea17ebe136fba1b0",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.4.0"
-        },
-        "conflict": {
-            "league/flysystem-sftp": "<1.0.6"
-        },
-        "require-dev": {
-            "ext-fileinfo": "*",
-            "mockery/mockery": "~0.9",
-            "phpspec/phpspec": "^2.2",
-            "phpunit/phpunit": "~4.8"
-        },
-        "suggest": {
-            "ext-fileinfo": "Required for MimeType",
-            "league/flysystem-aws-s3-v2": "Allows you to use S3 storage with AWS SDK v2",
-            "league/flysystem-aws-s3-v3": "Allows you to use S3 storage with AWS SDK v3",
-            "league/flysystem-azure": "Allows you to use Windows Azure Blob storage",
-            "league/flysystem-cached-adapter": "Flysystem adapter decorator for metadata caching",
-            "league/flysystem-copy": "Allows you to use Copy.com storage",
-            "league/flysystem-dropbox": "Allows you to use Dropbox storage",
-            "league/flysystem-eventable-filesystem": "Allows you to use EventableFilesystem",
-            "league/flysystem-rackspace": "Allows you to use Rackspace Cloud Files",
-            "league/flysystem-sftp": "Allows you to use SFTP server storage via phpseclib",
-            "league/flysystem-webdav": "Allows you to use WebDAV storage",
-            "league/flysystem-ziparchive": "Allows you to use ZipArchive adapter"
-        },
-        "time": "2016-08-03 09:49:11",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.1-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "League\\Flysystem\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Frank de Jonge",
-                "email": "info@frenky.net"
-            }
-        ],
-        "description": "Filesystem abstraction: Many filesystems, one API.",
-        "keywords": [
-            "Cloud Files",
-            "WebDAV",
-            "abstraction",
-            "aws",
-            "cloud",
-            "copy.com",
-            "dropbox",
-            "file systems",
-            "files",
-            "filesystem",
-            "filesystems",
-            "ftp",
-            "rackspace",
-            "remote",
-            "s3",
-            "sftp",
-            "storage"
-        ]
-    },
-    {
         "name": "symfony/polyfill-util",
         "version": "v1.2.0",
         "version_normalized": "1.2.0.0",
@@ -3095,137 +3010,6 @@
             "polyfill",
             "portable",
             "shim"
-        ]
-    },
-    {
-        "name": "laravel/framework",
-        "version": "v5.1.40",
-        "version_normalized": "5.1.40.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/laravel/framework.git",
-            "reference": "555269ee07cfe4e966ad16b394c89fa0b586d8b0"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/laravel/framework/zipball/555269ee07cfe4e966ad16b394c89fa0b586d8b0",
-            "reference": "555269ee07cfe4e966ad16b394c89fa0b586d8b0",
-            "shasum": ""
-        },
-        "require": {
-            "classpreloader/classpreloader": "~2.0|~3.0",
-            "danielstjules/stringy": "~1.8",
-            "doctrine/inflector": "~1.0",
-            "ext-mbstring": "*",
-            "ext-openssl": "*",
-            "jeremeamia/superclosure": "~2.0",
-            "league/flysystem": "~1.0",
-            "monolog/monolog": "~1.11",
-            "mtdowling/cron-expression": "~1.0",
-            "nesbot/carbon": "~1.19",
-            "paragonie/random_compat": "~1.4",
-            "php": ">=5.5.9",
-            "psy/psysh": "0.7.*",
-            "swiftmailer/swiftmailer": "~5.1",
-            "symfony/console": "2.7.*",
-            "symfony/css-selector": "2.7.*",
-            "symfony/debug": "2.7.*",
-            "symfony/dom-crawler": "2.7.*",
-            "symfony/finder": "2.7.*",
-            "symfony/http-foundation": "2.7.*",
-            "symfony/http-kernel": "2.7.*",
-            "symfony/process": "2.7.*",
-            "symfony/routing": "2.7.*",
-            "symfony/translation": "2.7.*",
-            "symfony/var-dumper": "2.7.*",
-            "vlucas/phpdotenv": "~1.0"
-        },
-        "replace": {
-            "illuminate/auth": "self.version",
-            "illuminate/broadcasting": "self.version",
-            "illuminate/bus": "self.version",
-            "illuminate/cache": "self.version",
-            "illuminate/config": "self.version",
-            "illuminate/console": "self.version",
-            "illuminate/container": "self.version",
-            "illuminate/contracts": "self.version",
-            "illuminate/cookie": "self.version",
-            "illuminate/database": "self.version",
-            "illuminate/encryption": "self.version",
-            "illuminate/events": "self.version",
-            "illuminate/exception": "self.version",
-            "illuminate/filesystem": "self.version",
-            "illuminate/hashing": "self.version",
-            "illuminate/http": "self.version",
-            "illuminate/log": "self.version",
-            "illuminate/mail": "self.version",
-            "illuminate/pagination": "self.version",
-            "illuminate/pipeline": "self.version",
-            "illuminate/queue": "self.version",
-            "illuminate/redis": "self.version",
-            "illuminate/routing": "self.version",
-            "illuminate/session": "self.version",
-            "illuminate/support": "self.version",
-            "illuminate/translation": "self.version",
-            "illuminate/validation": "self.version",
-            "illuminate/view": "self.version"
-        },
-        "require-dev": {
-            "aws/aws-sdk-php": "~3.0",
-            "iron-io/iron_mq": "~2.0",
-            "mockery/mockery": "~0.9.4",
-            "pda/pheanstalk": "~3.0",
-            "phpunit/phpunit": "~4.0",
-            "predis/predis": "~1.0"
-        },
-        "suggest": {
-            "aws/aws-sdk-php": "Required to use the SQS queue driver and SES mail driver (~3.0).",
-            "doctrine/dbal": "Required to rename columns and drop SQLite columns (~2.4).",
-            "fzaninotto/faker": "Required to use the eloquent factory builder (~1.4).",
-            "guzzlehttp/guzzle": "Required to use the Mailgun and Mandrill mail drivers and the ping methods on schedules (~5.3|~6.0).",
-            "iron-io/iron_mq": "Required to use the iron queue driver (~2.0).",
-            "league/flysystem-aws-s3-v3": "Required to use the Flysystem S3 driver (~1.0).",
-            "league/flysystem-rackspace": "Required to use the Flysystem Rackspace driver (~1.0).",
-            "pda/pheanstalk": "Required to use the beanstalk queue driver (~3.0).",
-            "predis/predis": "Required to use the redis cache and queue drivers (~1.0).",
-            "pusher/pusher-php-server": "Required to use the Pusher broadcast driver (~2.0).",
-            "symfony/psr-http-message-bridge": "Required to psr7 bridging features (0.2.*)."
-        },
-        "time": "2016-06-17 19:23:17",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "5.1-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "classmap": [
-                "src/Illuminate/Queue/IlluminateQueueClosure.php"
-            ],
-            "files": [
-                "src/Illuminate/Foundation/helpers.php",
-                "src/Illuminate/Support/helpers.php"
-            ],
-            "psr-4": {
-                "Illuminate\\": "src/Illuminate/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Taylor Otwell",
-                "email": "taylorotwell@gmail.com"
-            }
-        ],
-        "description": "The Laravel Framework.",
-        "homepage": "http://laravel.com",
-        "keywords": [
-            "framework",
-            "laravel"
         ]
     },
     {
@@ -3631,57 +3415,6 @@
         ]
     },
     {
-        "name": "webmozart/assert",
-        "version": "1.0.2",
-        "version_normalized": "1.0.2.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/webmozart/assert.git",
-            "reference": "30eed06dd6bc88410a4ff7f77b6d22f3ce13dbde"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/webmozart/assert/zipball/30eed06dd6bc88410a4ff7f77b6d22f3ce13dbde",
-            "reference": "30eed06dd6bc88410a4ff7f77b6d22f3ce13dbde",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.3"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "^4.6"
-        },
-        "time": "2015-08-24 13:29:44",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.0-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Webmozart\\Assert\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Bernhard Schussek",
-                "email": "bschussek@gmail.com"
-            }
-        ],
-        "description": "Assertions to validate method input/output with nice error messages.",
-        "keywords": [
-            "assert",
-            "check",
-            "validate"
-        ]
-    },
-    {
         "name": "phpdocumentor/reflection-common",
         "version": "1.0",
         "version_normalized": "1.0.0.0",
@@ -4049,6 +3782,550 @@
             "specification",
             "testing",
             "tests"
+        ]
+    },
+    {
+        "name": "league/flysystem",
+        "version": "1.0.27",
+        "version_normalized": "1.0.27.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/thephpleague/flysystem.git",
+            "reference": "50e2045ed70a7e75a5e30bc3662904f3b67af8a9"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/50e2045ed70a7e75a5e30bc3662904f3b67af8a9",
+            "reference": "50e2045ed70a7e75a5e30bc3662904f3b67af8a9",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4.0"
+        },
+        "conflict": {
+            "league/flysystem-sftp": "<1.0.6"
+        },
+        "require-dev": {
+            "ext-fileinfo": "*",
+            "mockery/mockery": "~0.9",
+            "phpspec/phpspec": "^2.2",
+            "phpunit/phpunit": "~4.8"
+        },
+        "suggest": {
+            "ext-fileinfo": "Required for MimeType",
+            "league/flysystem-aws-s3-v2": "Allows you to use S3 storage with AWS SDK v2",
+            "league/flysystem-aws-s3-v3": "Allows you to use S3 storage with AWS SDK v3",
+            "league/flysystem-azure": "Allows you to use Windows Azure Blob storage",
+            "league/flysystem-cached-adapter": "Flysystem adapter decorator for metadata caching",
+            "league/flysystem-copy": "Allows you to use Copy.com storage",
+            "league/flysystem-dropbox": "Allows you to use Dropbox storage",
+            "league/flysystem-eventable-filesystem": "Allows you to use EventableFilesystem",
+            "league/flysystem-rackspace": "Allows you to use Rackspace Cloud Files",
+            "league/flysystem-sftp": "Allows you to use SFTP server storage via phpseclib",
+            "league/flysystem-webdav": "Allows you to use WebDAV storage",
+            "league/flysystem-ziparchive": "Allows you to use ZipArchive adapter"
+        },
+        "time": "2016-08-10 08:55:11",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.1-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "League\\Flysystem\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Frank de Jonge",
+                "email": "info@frenky.net"
+            }
+        ],
+        "description": "Filesystem abstraction: Many filesystems, one API.",
+        "keywords": [
+            "Cloud Files",
+            "WebDAV",
+            "abstraction",
+            "aws",
+            "cloud",
+            "copy.com",
+            "dropbox",
+            "file systems",
+            "files",
+            "filesystem",
+            "filesystems",
+            "ftp",
+            "rackspace",
+            "remote",
+            "s3",
+            "sftp",
+            "storage"
+        ]
+    },
+    {
+        "name": "laravel/framework",
+        "version": "v5.1.41",
+        "version_normalized": "5.1.41.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/laravel/framework.git",
+            "reference": "4f338f494ee2fffe6605f70a7cb8a36c93da95b6"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/laravel/framework/zipball/4f338f494ee2fffe6605f70a7cb8a36c93da95b6",
+            "reference": "4f338f494ee2fffe6605f70a7cb8a36c93da95b6",
+            "shasum": ""
+        },
+        "require": {
+            "classpreloader/classpreloader": "~2.0|~3.0",
+            "danielstjules/stringy": "~1.8",
+            "doctrine/inflector": "~1.0",
+            "ext-mbstring": "*",
+            "ext-openssl": "*",
+            "jeremeamia/superclosure": "~2.0",
+            "league/flysystem": "~1.0",
+            "monolog/monolog": "~1.11",
+            "mtdowling/cron-expression": "~1.0",
+            "nesbot/carbon": "~1.19",
+            "paragonie/random_compat": "~1.4",
+            "php": ">=5.5.9",
+            "psy/psysh": "0.7.*",
+            "swiftmailer/swiftmailer": "~5.1",
+            "symfony/console": "2.7.*",
+            "symfony/css-selector": "2.7.*",
+            "symfony/debug": "2.7.*",
+            "symfony/dom-crawler": "2.7.*",
+            "symfony/finder": "2.7.*",
+            "symfony/http-foundation": "2.7.*",
+            "symfony/http-kernel": "2.7.*",
+            "symfony/process": "2.7.*",
+            "symfony/routing": "2.7.*",
+            "symfony/translation": "2.7.*",
+            "symfony/var-dumper": "2.7.*",
+            "vlucas/phpdotenv": "~1.0"
+        },
+        "replace": {
+            "illuminate/auth": "self.version",
+            "illuminate/broadcasting": "self.version",
+            "illuminate/bus": "self.version",
+            "illuminate/cache": "self.version",
+            "illuminate/config": "self.version",
+            "illuminate/console": "self.version",
+            "illuminate/container": "self.version",
+            "illuminate/contracts": "self.version",
+            "illuminate/cookie": "self.version",
+            "illuminate/database": "self.version",
+            "illuminate/encryption": "self.version",
+            "illuminate/events": "self.version",
+            "illuminate/exception": "self.version",
+            "illuminate/filesystem": "self.version",
+            "illuminate/hashing": "self.version",
+            "illuminate/http": "self.version",
+            "illuminate/log": "self.version",
+            "illuminate/mail": "self.version",
+            "illuminate/pagination": "self.version",
+            "illuminate/pipeline": "self.version",
+            "illuminate/queue": "self.version",
+            "illuminate/redis": "self.version",
+            "illuminate/routing": "self.version",
+            "illuminate/session": "self.version",
+            "illuminate/support": "self.version",
+            "illuminate/translation": "self.version",
+            "illuminate/validation": "self.version",
+            "illuminate/view": "self.version"
+        },
+        "require-dev": {
+            "aws/aws-sdk-php": "~3.0",
+            "iron-io/iron_mq": "~2.0",
+            "mockery/mockery": "~0.9.4",
+            "pda/pheanstalk": "~3.0",
+            "phpunit/phpunit": "~4.0",
+            "predis/predis": "~1.0"
+        },
+        "suggest": {
+            "aws/aws-sdk-php": "Required to use the SQS queue driver and SES mail driver (~3.0).",
+            "doctrine/dbal": "Required to rename columns and drop SQLite columns (~2.4).",
+            "fzaninotto/faker": "Required to use the eloquent factory builder (~1.4).",
+            "guzzlehttp/guzzle": "Required to use the Mailgun and Mandrill mail drivers and the ping methods on schedules (~5.3|~6.0).",
+            "iron-io/iron_mq": "Required to use the iron queue driver (~2.0).",
+            "league/flysystem-aws-s3-v3": "Required to use the Flysystem S3 driver (~1.0).",
+            "league/flysystem-rackspace": "Required to use the Flysystem Rackspace driver (~1.0).",
+            "pda/pheanstalk": "Required to use the beanstalk queue driver (~3.0).",
+            "predis/predis": "Required to use the redis cache and queue drivers (~1.0).",
+            "pusher/pusher-php-server": "Required to use the Pusher broadcast driver (~2.0).",
+            "symfony/psr-http-message-bridge": "Required to psr7 bridging features (0.2.*)."
+        },
+        "time": "2016-08-10 12:23:27",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "5.1-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "src/Illuminate/Queue/IlluminateQueueClosure.php"
+            ],
+            "files": [
+                "src/Illuminate/Foundation/helpers.php",
+                "src/Illuminate/Support/helpers.php"
+            ],
+            "psr-4": {
+                "Illuminate\\": "src/Illuminate/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Taylor Otwell",
+                "email": "taylorotwell@gmail.com"
+            }
+        ],
+        "description": "The Laravel Framework.",
+        "homepage": "http://laravel.com",
+        "keywords": [
+            "framework",
+            "laravel"
+        ]
+    },
+    {
+        "name": "webmozart/assert",
+        "version": "1.1.0",
+        "version_normalized": "1.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/webmozart/assert.git",
+            "reference": "bb2d123231c095735130cc8f6d31385a44c7b308"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/webmozart/assert/zipball/bb2d123231c095735130cc8f6d31385a44c7b308",
+            "reference": "bb2d123231c095735130cc8f6d31385a44c7b308",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^5.3.3|^7.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^4.6",
+            "sebastian/version": "^1.0.1"
+        },
+        "time": "2016-08-09 15:02:57",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.2-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Webmozart\\Assert\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Bernhard Schussek",
+                "email": "bschussek@gmail.com"
+            }
+        ],
+        "description": "Assertions to validate method input/output with nice error messages.",
+        "keywords": [
+            "assert",
+            "check",
+            "validate"
+        ]
+    },
+    {
+        "name": "symfony/filesystem",
+        "version": "v3.1.3",
+        "version_normalized": "3.1.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/filesystem.git",
+            "reference": "bb29adceb552d202b6416ede373529338136e84f"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/filesystem/zipball/bb29adceb552d202b6416ede373529338136e84f",
+            "reference": "bb29adceb552d202b6416ede373529338136e84f",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.5.9"
+        },
+        "time": "2016-07-20 05:44:26",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "3.1-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Symfony\\Component\\Filesystem\\": ""
+            },
+            "exclude-from-classmap": [
+                "/Tests/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony Filesystem Component",
+        "homepage": "https://symfony.com"
+    },
+    {
+        "name": "neutron/temporary-filesystem",
+        "version": "2.2.0",
+        "version_normalized": "2.2.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/romainneutron/Temporary-Filesystem.git",
+            "reference": "0a72a1c858b95fd469d87baa333f627978504ea8"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/romainneutron/Temporary-Filesystem/zipball/0a72a1c858b95fd469d87baa333f627978504ea8",
+            "reference": "0a72a1c858b95fd469d87baa333f627978504ea8",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^5.3.9 || ^7.0",
+            "symfony/filesystem": "^2.3 || ^3.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^4.8"
+        },
+        "time": "2016-03-05 10:22:50",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Neutron": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Romain Neutron",
+                "email": "imprec@gmail.com"
+            }
+        ],
+        "description": "Symfony filesystem extension to handle temporary files"
+    },
+    {
+        "name": "evenement/evenement",
+        "version": "v2.0.0",
+        "version_normalized": "2.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/igorw/evenement.git",
+            "reference": "f6e843799fd4f4184d54d8fc7b5b3551c9fa803e"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/igorw/evenement/zipball/f6e843799fd4f4184d54d8fc7b5b3551c9fa803e",
+            "reference": "f6e843799fd4f4184d54d8fc7b5b3551c9fa803e",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4.0"
+        },
+        "time": "2012-11-02 14:49:47",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.0-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Evenement": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Igor Wiedler",
+                "email": "igor@wiedler.ch",
+                "homepage": "http://wiedler.ch/igor/"
+            }
+        ],
+        "description": "Événement is a very simple event dispatching library for PHP",
+        "keywords": [
+            "event-dispatcher",
+            "event-emitter"
+        ]
+    },
+    {
+        "name": "alchemy/binary-driver",
+        "version": "1.6.0",
+        "version_normalized": "1.6.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/alchemy-fr/BinaryDriver.git",
+            "reference": "80c6633890afb71d2417ae851d0ad167d8b00b95"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/alchemy-fr/BinaryDriver/zipball/80c6633890afb71d2417ae851d0ad167d8b00b95",
+            "reference": "80c6633890afb71d2417ae851d0ad167d8b00b95",
+            "shasum": ""
+        },
+        "require": {
+            "evenement/evenement": "^2.0|^1.0",
+            "monolog/monolog": "^1.3",
+            "php": ">=5.5",
+            "psr/log": "^1.0",
+            "symfony/process": "^2.0|^3.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^4.0|^5.0"
+        },
+        "time": "2016-03-02 13:49:15",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Alchemy": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Romain Neutron",
+                "email": "imprec@gmail.com",
+                "homepage": "http://www.lickmychip.com/"
+            },
+            {
+                "name": "Phraseanet Team",
+                "email": "info@alchemy.fr",
+                "homepage": "http://www.phraseanet.com/"
+            },
+            {
+                "name": "Nicolas Le Goff",
+                "email": "legoff.n@gmail.com"
+            }
+        ],
+        "description": "A set of tools to build binary drivers",
+        "keywords": [
+            "binary",
+            "driver"
+        ]
+    },
+    {
+        "name": "php-ffmpeg/php-ffmpeg",
+        "version": "0.6.1",
+        "version_normalized": "0.6.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/PHP-FFMpeg/PHP-FFMpeg.git",
+            "reference": "7687be530c0bb22ee92ee8924cb0ff0e5edd5e5d"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/PHP-FFMpeg/PHP-FFMpeg/zipball/7687be530c0bb22ee92ee8924cb0ff0e5edd5e5d",
+            "reference": "7687be530c0bb22ee92ee8924cb0ff0e5edd5e5d",
+            "shasum": ""
+        },
+        "require": {
+            "alchemy/binary-driver": "^1.5",
+            "doctrine/cache": "^1.0",
+            "evenement/evenement": "^2.0 || ^1.0",
+            "neutron/temporary-filesystem": "^2.1.1",
+            "php": "^5.3.9 || ^7.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^4.8",
+            "sami/sami": "~1.0",
+            "silex/silex": "~1.0"
+        },
+        "suggest": {
+            "php-ffmpeg/extras": "A compilation of common audio & video drivers for PHP-FFMpeg"
+        },
+        "time": "2016-03-08 00:47:06",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "0.6-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "FFMpeg": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Romain Neutron",
+                "email": "imprec@gmail.com",
+                "homepage": "http://www.lickmychip.com/"
+            },
+            {
+                "name": "Phraseanet Team",
+                "email": "info@alchemy.fr",
+                "homepage": "http://www.phraseanet.com/"
+            },
+            {
+                "name": "Patrik Karisch",
+                "email": "patrik@karisch.guru",
+                "homepage": "http://www.karisch.guru"
+            }
+        ],
+        "description": "FFMpeg PHP, an Object Oriented library to communicate with AVconv / ffmpeg",
+        "keywords": [
+            "audio",
+            "audio processing",
+            "avconv",
+            "avprobe",
+            "ffmpeg",
+            "ffprobe",
+            "video",
+            "video processing"
         ]
     }
 ]
