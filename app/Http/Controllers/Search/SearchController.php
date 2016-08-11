@@ -38,6 +38,7 @@ class SearchController extends Controller
         $communications = [];
         $alerts = [];
         $events = [];
+        $videos = [];
 
         $query = ltrim(rtrim($query));
         if ( isset($query) && ($query != '')){
@@ -79,6 +80,7 @@ class SearchController extends Controller
             ->with('communications', $communications)
             ->with('alerts', $alerts)
             ->with('events', $events)
+            ->with('videos', $videos)
             ->with('communicationCount', $communicationCount)
             ->with('isComboStore', $isComboStore)
             ->with('banner', $banner)

@@ -398,6 +398,7 @@ class Search extends Model
                         ->get()
                         ->each(function($video){
                             $video->rank = 1;
+                            $video->since = Utility::getTimePastSinceDate($video->updated_at);
                         })
 
                 );
@@ -410,6 +411,7 @@ class Search extends Model
                     ->get()
                     ->each(function($video){
                         $video->rank = 1;
+                        $video->since = Utility::getTimePastSinceDate($video->updated_at);
                     })
                 );
 
@@ -424,6 +426,7 @@ class Search extends Model
                     ->get()
                     ->each(function($video){
                         $video->rank = 1;
+                        $video->since = Utility::getTimePastSinceDate($video->updated_at);
                     })
                 );
         }
