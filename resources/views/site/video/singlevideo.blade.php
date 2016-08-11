@@ -75,6 +75,16 @@
                         </div>
                         <div class="ibox-content clearfix">
                             <p>{{$video[0]->description}}</p>
+
+                            @if( count($playlists) > 0)
+                                <hr />
+                                <h2>Related Playlists</h2>
+                                @foreach($playlists as $playlist)
+                                    <h4><i class="fa fa-list" aria-hidden="true"></i> <a href="../playlist/{{$playlist->id}}">{{ $playlist->title }}</a></h4>
+                                @endforeach
+
+                            @endif
+
                         </div>
                     </div>
 

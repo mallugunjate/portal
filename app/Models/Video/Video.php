@@ -186,6 +186,20 @@ class Video extends Model
         return;
     }
 
+    public static function getPlaylistsThatContainSpecificVideo($id)
+    {
+        $playlistMeta = [];
+
+        $lists = PlaylistVideo::where('video_id', $id)->get();
+
+        $i=0;
+        foreach($lists as $list){
+            $playlistMeta[$i] = Playlist::getPlaylistMetaData($list->playlist_id);
+            $i++;
+        }
+        return $playlistMeta;
+    }
+
     public static function getSingleVideo($id)
     {
         $video = Video::where('id', $id)

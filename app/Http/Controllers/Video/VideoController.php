@@ -78,8 +78,11 @@ class VideoController extends Controller
     public function show(Request $request)
     {
         $video = Video::getSingleVideo($request->id);
+        $playlists = Video::getPlaylistsThatContainSpecificVideo($request->id);
+        
         return view('site.video.singlevideo')
             ->with('video', $video)
+            ->with('playlists', $playlists)
             ->with('skin', $this->skin)
             ->with('banner', $this->banner)
             ->with('communicationCount', $this->communicationCount)
@@ -90,7 +93,10 @@ class VideoController extends Controller
     public function showPlaylist(Request $request)
     {
         $videoList = PlaylistVideo::getPlaylistVideos($request->id);
+        $playlistMeta = Playlist::getPlaylistMetaData($request->id);
+
         return view('site.video.playlist')
+            ->with('playlistMeta', $playlistMeta)
             ->with('videoList', $videoList)
             ->with('skin', $this->skin)
             ->with('banner', $this->banner)
