@@ -11,6 +11,10 @@ use Illuminate\Http\Request;
 use App\Models\Video\VideoTag;
 use App\Models\Utility\Utility;
 use App\User;
+use FFMpeg\FFMpeg;
+use FFMpeg\FFProbe;
+use FFMpeg\Coordinate\TimeCode;
+
 
 class Video extends Model
 {
@@ -113,12 +117,12 @@ class Video extends Model
                 'likes'				=> 0,
                 'dislikes'			=> 0,
                 'featured'			=> 0,
+                'thumbnail'         => "video-placeholder_360.jpg"
             );
 
             $video = Video::create($documentdetails);
             $video->save();
             $lastInsertedId= $video->id;
-
         }
 
         return $video ;
@@ -126,6 +130,7 @@ class Video extends Model
 
     public static function updateMetaData(Request $request, $id=null)
     {
+        \Log::info($request->all());
         if (!isset($id)) {
             $id = $request->get('video_id');
         }
@@ -172,8 +177,12 @@ class Video extends Model
     public static function removeFeaturedVideoFlag()
     {
         $featuredVideo = Video::where('featured', 1)->first();
-        $featuredVideo->featured = 0;
-        $featuredVideo->save();
+        if( $featuredVideo !== null )
+        {
+            $featuredVideo->featured = 0;
+            $featuredVideo->save();    
+        }
+        
         return;
     }
 
@@ -303,5 +312,29 @@ class Video extends Model
     public static function getRelatedVideos($id)
     {
 
+    }
+
+    public static function generateThumbnail($id)
+    {
+        $video = Video::find($id);
+
+        $thumbnailFilename = $video->filename . ".jpg";
+        $sourcePath = public_path()."/video/". $video->filename;
+        $destinationPath = public_path().'/video/thumbs/'. $thumbnailFilename;
+
+
+        $ffprobe = FFProbe::create();
+        $duration = $ffprobe
+                            ->format($sourcePath) // extracts file informations
+                            ->get('duration'); 
+    
+
+        $ffmpeg =  FFMpeg::create();
+        $videoFile = $ffmpeg->open( $sourcePath);
+        $frame = $videoFile->frame(TimeCode::fromSeconds(ceil($duration/2)));
+        $frame->save( $destinationPath );
+
+        $video->update(['thumbnail' => $thumbnailFilename]);
+        return $video;
     }
 }

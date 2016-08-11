@@ -153,7 +153,7 @@ class VideoAdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Video::updateMetaData($request);
+        Video::updateMetaData($request, $id);
     }
 
     /**
@@ -167,5 +167,10 @@ class VideoAdminController extends Controller
         Video::where('id', $id)->delete();
         VideoTag::where('video_id', $id)->delete();
         return;
+    }
+
+    public function generateThumbnail($id)
+    {
+        return Video::generateThumbnail($id);
     }
 }
