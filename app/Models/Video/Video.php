@@ -93,7 +93,7 @@ class Video extends Model
 
         $metadata = Document::getDocumentMetaData($request->file('document'));
 
-        $directory = public_path() . '/videos';
+        $directory = public_path() . '/video';
         $uniqueHash = sha1(time() . time());
         $filename  = $metadata["modifiedName"] . "_" . $uniqueHash . "." . $metadata["originalExtension"];
 
@@ -182,7 +182,7 @@ class Video extends Model
         $playlistMeta = [];
 
         $lists = PlaylistVideo::where('video_id', $id)->get();
-        
+
         $i=0;
         foreach($lists as $list){
             $playlistMeta[$i] = Playlist::getPlaylistMetaData($list->playlist_id);
