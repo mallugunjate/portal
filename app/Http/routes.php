@@ -53,7 +53,7 @@ Route::post('/{storeno}/search', array('uses' => 'Search\SearchController@index'
 Route::post('/bugreport', 'BugReport\BugReportController@store');
 
 //ANALYTICS
-Route::resource('/clicktrack', 'Analytics\AnalyticsController');
+Route::post('/clicktrack', 'Analytics\AnalyticsController@store');
 
 //Authentication Routes
 Route::get('/admin/login', 'Auth\AuthController@getLogin');

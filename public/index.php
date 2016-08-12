@@ -1,6 +1,5 @@
 <?php
-
-header('Access-Control-Allow-Origin: *');
+//header('Access-Control-Allow-Origin: *');
 
 /**
  * Laravel - A PHP Framework For Web Artisans
@@ -58,5 +57,3 @@ $response = $kernel->handle(
 $response->send();
 
 $kernel->terminate($request, $response);
-
-
