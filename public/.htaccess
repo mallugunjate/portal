@@ -1,4 +1,3 @@
-
 Header append X-FRAME-OPTIONS "SAMEORIGIN"
 
 <IfModule mod_rewrite.c>
