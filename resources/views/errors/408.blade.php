@@ -19,14 +19,14 @@
 
     <div class=" text-center animated fadeInDown" style="width: 90% !important; margin: 0 auto; padding-top: 100px;">
         <h1 style="font-size: 60px;">NOPE</h1>
-        <h3 class="font-bold">This is what we call a 403 error, folks.</h3>
+        <h3 class="font-bold">This is what we call a 408 error, folks.</h3>
 
 
 
 
 
         <div class="error-desc">
-            <p>You're trying to go somewhere you are not supposed to go.</p>
+            <p>The server timed out waiting for the request.</p>
             <img src="/images/bloopers/<?php echo $images[$i]; ?>" alt="" />
         </div>
 
