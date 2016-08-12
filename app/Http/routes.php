@@ -50,7 +50,7 @@ Route::get('/{storeno}/urgentnotice/show/{id}', array('uses' => 'UrgentNotice\Ur
 Route::post('/{storeno}/search', array('uses' => 'Search\SearchController@index'));
 
 //BUG REPORTER
-Route::resource('/bugreport', 'BugReport\BugReportController');
+Route::post('/bugreport', 'BugReport\BugReportController@store');
 
 //ANALYTICS
 Route::resource('/clicktrack', 'Analytics\AnalyticsController');
