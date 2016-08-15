@@ -46,6 +46,11 @@ class Handler extends ExceptionHandler
             $e = new NotFoundHttpException($e->getMessage(), $e);
         }
 
+        // Custom error 500 view on production
+        if (app()->environment() == 'production') {
+            return response()->view('errors.500', [], 500);
+        }
+        
         return parent::render($request, $e);
     }
 }
