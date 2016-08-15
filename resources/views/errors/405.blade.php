@@ -19,14 +19,15 @@
 
     <div class=" text-center animated fadeInDown" style="width: 90% !important; margin: 0 auto; padding-top: 100px;">
         <h1 style="font-size: 60px;">NOPE</h1>
-        <h3 class="font-bold">This is what we call a 503 error, folks.</h3>
+        <h3 class="font-bold">This is what we call a 405 error, folks.</h3>
 
 
 
 
 
         <div class="error-desc">
-            <p>Service Unavailable... We could be experiencing high traffic at the momment.</p>
+            <p>You tried to do something that isn't allowed. But it's not your fault.</p>
+            {{-- <p>You've made a typo or we did. <br />Either way, this is a <strong>fail</strong>.</p> --}}
             <img src="/images/bloopers/<?php echo $images[$i]; ?>" alt="" />
         </div>
 

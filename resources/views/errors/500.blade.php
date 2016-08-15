@@ -19,14 +19,14 @@
 
     <div class=" text-center animated fadeInDown" style="width: 90% !important; margin: 0 auto; padding-top: 100px;">
         <h1 style="font-size: 60px;">NOPE</h1>
-        <h3 class="font-bold">This is what we call a 503 error, folks.</h3>
+        <h3 class="font-bold">This is what we call a 500 error, folks.</h3>
 
 
 
 
 
         <div class="error-desc">
-            <p>Service Unavailable... We could be experiencing high traffic at the momment.</p>
+            <p>Internal Server Error. This one is on us. We are working on it.</p>
             <img src="/images/bloopers/<?php echo $images[$i]; ?>" alt="" />
         </div>
 

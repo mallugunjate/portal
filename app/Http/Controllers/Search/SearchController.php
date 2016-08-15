@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Search;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Request as RequestFacade; 
+use Illuminate\Support\Facades\Request as RequestFacade;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -31,8 +31,8 @@ class SearchController extends Controller
         $store = RequestFacade::segment(1);
 
         $alertCount = Alert::getActiveAlertCountByStore($store);
-        $communicationCount = Communication::getActiveCommunicationCount($store); 
-        
+        $communicationCount = Communication::getActiveCommunicationCount($store);
+
         $docs = [];
         $folders = [];
         $communications = [];
@@ -81,7 +81,7 @@ class SearchController extends Controller
             ->with('communicationCount', $communicationCount)
             ->with('isComboStore', $isComboStore)
             ->with('banner', $banner)
-            ->with('alertCount', $alertCount)               
+            ->with('alertCount', $alertCount)
             ->with('query', $query)
             ->with('archives', $request['archives']);
     }
