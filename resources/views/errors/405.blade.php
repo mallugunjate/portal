@@ -11,7 +11,7 @@
         $images = scandir($dir);
         $i = rand(2, sizeof($images)-1);
         ?>
-        @section('title', '404')
+        @section('title', '405')
         @include('site.includes.head')
     </head>
 
