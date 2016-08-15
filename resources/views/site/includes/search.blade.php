@@ -1,5 +1,7 @@
 <div class="row" style="border:thin solid #ccc; position:relative; top:2px;">
-	<form role="form" class="form-inline" style="width: 100%; padding-left: 10px; " method="get" action="/{{ Request::segment(1) }}/search">
+	<form role="form" class="form-inline" style="width: 100%; padding-left: 10px; " method="post" action="/{{ Request::segment(1) }}/search">
+		{{ csrf_field() }}
+		
 	    <div class="visible-xs visible-sm">
 	    	<i class="fa fa-search" style="display: inline !important; font-size: 12px; color: #ccc; line-height: 12px; position:relative; top:9px; float:left ; width:5%"></i>
 	    	<span style="width:75%; float:left" class="search-container"> <input type="text" name="q" id="top-search" placeholder="Search . . . " id="search" style="border: none;font-size: 12px; position:relative; width:75%; top:6px;"></span>
