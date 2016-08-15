@@ -36,6 +36,20 @@ Route::get('/{storeno}/communication', array('uses' => 'Communication\Communicat
 Route::get('/{storeno}/communication/show/{id}', 'Communication\CommunicationController@show');
 Route::resource('/communication', 'Communication\CommunicationTargetController');
 
+//VIDEO
+Route::get('/{storeno}/video', array('uses' => 'Video\VideoController@index'));
+
+Route::get('/{storeno}/video/popular', array('uses' => 'Video\VideoController@mostViewed'));
+Route::get('/{storeno}/video/latest', array('uses' => 'Video\VideoController@mostRecent'));
+Route::get('/{storeno}/video/liked', array('uses' => 'Video\VideoController@mostLiked'));
+
+Route::get('/{storeno}/video/watch/{id}', array('uses' => 'Video\VideoController@show'));
+Route::get('/{storeno}/video/playlist/{id}', array('uses' => 'Video\VideoController@showPlaylist'));
+Route::get('/{storeno}/video/tag/{tag}', array('uses' => 'Video\VideoController@showTag'));
+Route::resource('/videocount', 'Video\VideoViewCountController');
+Route::resource('/videolike', 'Video\LikeController');
+Route::resource('/videodislike', 'Video\DislikeController');
+
 //FEATURES
 Route::get('/{storeno}/feature/show/{id}', 'Feature\FeatureController@show');
 
@@ -137,11 +151,28 @@ Route::resource('/admin/alert', 'Alert\AlertAdminController' );
 //Users
 Route::resource('/admin/user', 'User\UserAdminController');
 
+//Videos
+Route::get('/admin/video/add-meta-data', 'Video\VideoAdminController@showMetaDataForm');
+Route::post('/admin/video/add-meta-data', 'Video\VideoAdminController@updateMetaData');
+Route::get('/admin/video/{video_id}/generatethumbnail', 'Video\VideoAdminController@generateThumbnail');
+Route::resource('/admin/video', 'Video\VideoAdminController');
+
+//Playlist
+Route::resource('/admin/playlist', 'Video\PlaylistAdminController');
+Route::get('/admin/playlistvideos/{playlist_id}', 'Video\PlaylistAdminController@getPlaylistVideoPartial');
+//Video Tags
+Route::resource('/admin/tag', 'Video\TagAdminController');
+
 //Banner selector
 Route::resource('/admin/banner' , 'AdminSelectedBannerController');
 
 //Ckeditor Images
 Route::resource('/utilities/ckeditorimages', 'Utilities\CkeditorImageController');
+
+//Store Feedback
+Route::resource('/admin/feedback' , 'StoreFeedback\FeedbackAdminController');
+Route::resource('/admin/feedback/{id}/note' , 'StoreFeedback\NotesAdminController');
+
 /* API Routes */
 //get navigation
 Route::get('/api/v1/banner/{id}/navigation', 'Api\V1\ApiController@getNavigation');
