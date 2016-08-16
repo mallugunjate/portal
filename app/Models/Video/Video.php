@@ -180,9 +180,9 @@ class Video extends Model
         if( $featuredVideo !== null )
         {
             $featuredVideo->featured = 0;
-            $featuredVideo->save();    
+            $featuredVideo->save();
         }
-        
+
         return;
     }
 
@@ -226,14 +226,14 @@ class Video extends Model
 
     public static function getFeaturedVideo()
     {
-
         $video = Video::where('featured', 1)->first();
-        $video->likes = number_format($video->likes);
-        $video->dislikes = number_format($video->dislikes);
-        $video->sinceCreated = Utility::getTimePastSinceDate($video->created_at);
-        $video->prettyDateUpdated = Utility::prettifyDate($video->updated_at);
+        if(count($video) > 0){
+            $video->likes = number_format($video->likes);
+            $video->dislikes = number_format($video->dislikes);
+            $video->sinceCreated = Utility::getTimePastSinceDate($video->created_at);
+            $video->prettyDateUpdated = Utility::prettifyDate($video->updated_at);
+        }
         return $video;
-
     }
 
     public static function getMostLikedVideos($limit=0)
@@ -326,8 +326,8 @@ class Video extends Model
         $ffprobe = FFProbe::create();
         $duration = $ffprobe
                             ->format($sourcePath) // extracts file informations
-                            ->get('duration'); 
-    
+                            ->get('duration');
+
 
         $ffmpeg =  FFMpeg::create();
         $videoFile = $ffmpeg->open( $sourcePath);
