@@ -36,6 +36,20 @@ Route::get('/{storeno}/communication', array('uses' => 'Communication\Communicat
 Route::get('/{storeno}/communication/show/{id}', 'Communication\CommunicationController@show');
 Route::resource('/communication', 'Communication\CommunicationTargetController');
 
+//VIDEO
+Route::get('/{storeno}/video', array('uses' => 'Video\VideoController@index'));
+
+Route::get('/{storeno}/video/popular', array('uses' => 'Video\VideoController@mostViewed'));
+Route::get('/{storeno}/video/latest', array('uses' => 'Video\VideoController@mostRecent'));
+Route::get('/{storeno}/video/liked', array('uses' => 'Video\VideoController@mostLiked'));
+
+Route::get('/{storeno}/video/watch/{id}', array('uses' => 'Video\VideoController@show'));
+Route::get('/{storeno}/video/playlist/{id}', array('uses' => 'Video\VideoController@showPlaylist'));
+Route::get('/{storeno}/video/tag/{tag}', array('uses' => 'Video\VideoController@showTag'));
+Route::resource('/videocount', 'Video\VideoViewCountController');
+Route::resource('/videolike', 'Video\LikeController');
+Route::resource('/videodislike', 'Video\DislikeController');
+
 //FEATURES
 Route::get('/{storeno}/feature/show/{id}', 'Feature\FeatureController@show');
 
@@ -47,13 +61,13 @@ Route::get('/{storeno}/urgentnotice', array('uses' => 'UrgentNotice\UrgentNotice
 Route::get('/{storeno}/urgentnotice/show/{id}', array('uses' => 'UrgentNotice\UrgentNoticeController@show'));
 
 //Search
-Route::get('/{storeno}/search', array('uses' => 'Search\SearchController@index'));
+Route::post('/{storeno}/search', array('uses' => 'Search\SearchController@index'));
 
 //BUG REPORTER
-Route::resource('/bugreport', 'BugReport\BugReportController');
+Route::post('/bugreport', 'BugReport\BugReportController@store');
 
 //ANALYTICS
-Route::resource('/clicktrack', 'Analytics\AnalyticsController');
+Route::post('/clicktrack', 'Analytics\AnalyticsController@store');
 
 //Authentication Routes
 Route::get('/admin/login', 'Auth\AuthController@getLogin');
@@ -68,9 +82,9 @@ Route::get('/admin/logout', 'Auth\AuthController@getLogout');
 
 
 //Password reset routes
-Route::controllers([
-	'password' => 'Auth\PasswordController',
-]);
+// Route::controllers([
+// 	'password' => 'Auth\PasswordController',
+// ]);
 
 
 //list of admin functions
@@ -100,10 +114,10 @@ Route::resource('/admin/package', 'Document\PackageAdminController');
 Route::get('/admin/packagedocuments/{package_id}', 'Document\PackagePartialController@getPackageDocumentPartial');
 Route::get('/admin/packagefolders/{package_id}', 'Document\PackagePartialController@getPackageFolderPartial');
 
-//FEATURES 
+//FEATURES
 Route::resource('/admin/feature', 'Feature\FeatureAdminController');
 Route::resource('/admin/feature/thumbnail', 'Feature\FeatureThumbnailAdminController');
-Route::resource('/admin/feature/background', 'Feature\FeatureBackgroundAdminController'); 
+Route::resource('/admin/feature/background', 'Feature\FeatureBackgroundAdminController');
 Route::resource('/admin/featureOrder', 'Feature\FeatureOrderAdminController');
 Route::get('/admin/featuredocuments/{feature_id}', 'Feature\FeatureAdminController@getFeatureDocumentPartial');
 Route::get('/admin/featurepackages/{feature_id}', 'Feature\FeatureAdminController@getFeaturePackagePartial');
@@ -137,21 +151,38 @@ Route::resource('/admin/alert', 'Alert\AlertAdminController' );
 //Users
 Route::resource('/admin/user', 'User\UserAdminController');
 
+//Videos
+Route::get('/admin/video/add-meta-data', 'Video\VideoAdminController@showMetaDataForm');
+Route::post('/admin/video/add-meta-data', 'Video\VideoAdminController@updateMetaData');
+Route::get('/admin/video/{video_id}/generatethumbnail', 'Video\VideoAdminController@generateThumbnail');
+Route::resource('/admin/video', 'Video\VideoAdminController');
+
+//Playlist
+Route::resource('/admin/playlist', 'Video\PlaylistAdminController');
+Route::get('/admin/playlistvideos/{playlist_id}', 'Video\PlaylistAdminController@getPlaylistVideoPartial');
+//Video Tags
+Route::resource('/admin/tag', 'Video\TagAdminController');
+
 //Banner selector
 Route::resource('/admin/banner' , 'AdminSelectedBannerController');
 
 //Ckeditor Images
 Route::resource('/utilities/ckeditorimages', 'Utilities\CkeditorImageController');
+
+//Store Feedback
+Route::resource('/admin/feedback' , 'StoreFeedback\FeedbackAdminController');
+Route::resource('/admin/feedback/{id}/note' , 'StoreFeedback\NotesAdminController');
+
 /* API Routes */
 //get navigation
 Route::get('/api/v1/banner/{id}/navigation', 'Api\V1\ApiController@getNavigation');
-//get files in folder : query parameter (boolean)isWeek e.g. ?isWeek=false 
+//get files in folder : query parameter (boolean)isWeek e.g. ?isWeek=false
 Route::get('/api/v1/folder/{id}', 'Api\V1\ApiController@getDocumentsInFolder');
 //get document by id
 Route::get('/api/v1/document/{id}', 'Api\V1\ApiController@getDocumentById');
 //get recent documents
 Route::get('/api/v1/banner/{id}/document/recent/{days}', 'Api\V1\ApiController@getRecentDocuments');
-//get all douments in a folder 
+//get all douments in a folder
 Route::get('/api/v1/folder/{id}/archived', 'Api\V1\ApiController@getArchivedDocuments');
 
 
