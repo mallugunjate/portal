@@ -172,7 +172,7 @@
 
                 </div>
 
-
+                @if(isset($featuredVideo->id))
                 <div class="col-lg-4">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
@@ -205,6 +205,9 @@
                     </div>
 
                 </div>
+
+            @endif
+
             </div>
 
 
