@@ -76,3 +76,12 @@ body{
 
 
 .product-box{ padding: 1px !important; margin: 10px !important; height: 168px; width: 168px; float: left;}
+
+body.mini-navbar .logo-element {
+  background:  #2B2B2B;
+}
+
+/*.nav-header{
+	background: #2B2B2B url('/images/skin/sc.png') top center no-repeat !important;
+	margin: 20px 0px;
+}*/
