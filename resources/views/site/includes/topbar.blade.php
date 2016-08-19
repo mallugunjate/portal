@@ -156,10 +156,7 @@
         storeNameElement = document.getElementById('store-name');
         storeNameElement.innerHTML = storeName;
         storeNameElement.title = storeName;
-        // storeNameElements = document.getElementsByClassName("store-name");  // Find the elements
-        // for(var i = 0; i < storeNameElements.length; i++){
-        //     storeNameElements[i].innerText = storeName;    // Change the content
-        // }
+        
                 
     </script>
 </nav>

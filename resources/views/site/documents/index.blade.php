@@ -39,7 +39,7 @@
                 </ol>
             </div>
 
-            <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6 col-lg-offset-2 hidden document-archive" id="archive-switch">
+            <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6 col-lg-offset-2 document-archive" id="archive-switch">
                 <form class="form-inline" >
                     <div class="pull-right">
                         
