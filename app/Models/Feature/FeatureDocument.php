@@ -15,17 +15,20 @@ class FeatureDocument extends Model
     protected $fillable = ['document_id', 'feature_id'];
     protected $dates = ['deleted_at'];
     
-    public static function getFeaturedDocuments($feature_id)
+    public static function getFeaturedDocuments($feature_id, $store_number)
     {
     	
     	$now = Carbon::now()->toDatetimeString();
     	$featuredDocuments = FeatureDocument::join('documents', 'feature_document.document_id', '=', 'documents.id')
+                                ->join('document_target', 'document_target.document_id', '=', 'documents.id')
     							->where('feature_id', $feature_id)
     							->where('documents.start', '<=', $now )
 	                            ->where(function($query) use ($now) {
 	                                $query->where('documents.end', '>=', $now)
 	                                    ->orWhere('documents.end', '=', '0000-00-00 00:00:00' ); 
 	                            })
+                                ->where('document_target.store_id', $store_number)
+                                ->where('document_target.deleted_at', null)
     							->select('documents.*')
     							->get()
     							->each(function($doc){
@@ -40,4 +43,15 @@ class FeatureDocument extends Model
     							});
     	return $featuredDocuments;
     }
+
+    public static function getFeaturedDocumentArray($feature_id, $store_number)
+    {
+        return self::join('document_target', 'document_target.document_id', '=', 'feature_document.document_id')
+                                ->where('feature_id', $feature_id)
+                                ->where('document_target.store_id', $store_number)
+                                ->where('document_target.deleted_at', null)
+                                ->get()->pluck('document_id')->toArray();
+    }
+
+
 }
