@@ -76,7 +76,7 @@
 			                            		<td> {{$video->description}} </td>
 			                            		<td> {{$video->uploaderFirstName}} {{$video->uploaderLastName}} </td>
 			                            		<td>
-			                            			<a class="btn btn-primary btn-sm  video-thumbnail-create" title="Generate Video Thumbnail" data-videoId = "{{$video->id}}"><i class="fa fa-film"></i></a>
+			                            			<a href="/admin/video/{{$video->id}}/uploadthumbnail" class="btn btn-primary btn-sm " title="Upload Video Thumbnail" data-videoId = "{{$video->id}}"><i class="fa fa-film"></i></a>
 			                            			<a href="/admin/video/{{$video->id}}/edit" class=" btn btn-primary btn-sm"><i class="fa fa-pencil"></i></a>
 			                            			<a data-video="{{$video->id}}" id="video{{$video->id}}" class="video-delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
 

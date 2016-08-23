@@ -173,4 +173,23 @@ class VideoAdminController extends Controller
     {
         return Video::generateThumbnail($id);
     }
+
+
+    public function uploadThumbnail($id)
+    {
+        $banner = UserSelectedBanner::getBanner();
+        $banners = Banner::all();     
+        $video = Video::find($id);
+        
+        return view('admin.video.video-manager.thumbnail-upload')
+            ->with('video', $video)
+            ->with('banner', $banner)
+            ->with('banners', $banners); 
+    }
+
+
+    public function storeThumbnail($id, Request $request)
+    {
+        return Video::storeThumbnail($id, $request);
+    }
 }

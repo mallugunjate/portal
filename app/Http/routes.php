@@ -154,7 +154,8 @@ Route::resource('/admin/user', 'User\UserAdminController');
 //Videos
 Route::get('/admin/video/add-meta-data', 'Video\VideoAdminController@showMetaDataForm');
 Route::post('/admin/video/add-meta-data', 'Video\VideoAdminController@updateMetaData');
-Route::get('/admin/video/{video_id}/generatethumbnail', 'Video\VideoAdminController@generateThumbnail');
+Route::get('/admin/video/{video_id}/uploadthumbnail', 'Video\VideoAdminController@uploadThumbnail');
+Route::post('/admin/video/{video_id}/storethumbnail', 'Video\VideoAdminController@storeThumbnail');
 Route::resource('/admin/video', 'Video\VideoAdminController');
 
 //Playlist

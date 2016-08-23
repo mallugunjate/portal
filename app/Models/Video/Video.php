@@ -337,4 +337,20 @@ class Video extends Model
         $video->update(['thumbnail' => $thumbnailFilename]);
         return $video;
     }
+
+
+    public static function storeThumbnail($video_id, $request)
+    {
+        $metadata = Document::getDocumentMetaData($request->file('document'));
+
+        $directory = public_path() . '/video/thumbs';
+        $uniqueHash = sha1(time() . time());
+        $filename  = $metadata["modifiedName"] . "_" . $uniqueHash . "." . $metadata["originalExtension"];
+
+        $upload_success = $request->file('document')->move($directory, $filename); //move and rename file
+
+        Video::find($video_id)->update(['thumbnail'=>$filename]);
+
+        return;
+    }
 }
