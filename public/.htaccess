@@ -16,9 +16,3 @@ Header append X-FRAME-OPTIONS "SAMEORIGIN"
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
-
-<IfModule mod_headers.c>
-    SetEnvIf Origin "http(s)?://(www\.)?(localhost:8000|localhost|portal.fglsports.com|fdms1ap01.unix.ctcwest.ctc|fdms1ap01q.unix.ctcwest.ctc)$" AccessControlAllowOrigin=$0$1
-    Header add Access-Control-Allow-Origin %{AccessControlAllowOrigin}e env=AccessControlAllowOrigin
-    Header set Access-Control-Allow-Credentials true
-</IfModule>
