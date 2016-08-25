@@ -17,20 +17,21 @@ use App\Models\UrgentNotice\UrgentNoticeTarget;
 class Analytics extends Model
 {
     protected $table = 'analytics';
-    protected $fillable = ['type', 'resource_id', 'store_number', 'location', 'location_id'];
+    protected $fillable = ['device', 'type', 'resource_id', 'store_number', 'location', 'location_id'];
 
     public static function store($request)
     {
     	$event = Analytics::create([
+            'device' => $request->device,
     		'type' => $request->type,
- 			'resource_id' => $request->resource_id,    		
-    		'store_number' => $request->store_number,	
+ 			'resource_id' => $request->resource_id,
+    		'store_number' => $request->store_number,
  			'location' => $request->location,
  			'location_id' => $request->location_id
  		]);
 
  		$event->save();
-    }    
+    }
 
 
     public static function getTrafficLast24hrs()
@@ -40,12 +41,12 @@ class Analytics extends Model
 			->orderBy('created_at', 'ASC')
 		    ->get()
 		    ->groupBy(function($date) {
-		        return Carbon::parse($date->created_at)->format('D g a'); 
-		    });    	
+		        return Carbon::parse($date->created_at)->format('D g a');
+		    });
 
 		    $now = Carbon::now();
 		    foreach($visitorTraffic as $t){
-						   		
+
 
 		   	}
 		   //	dd($now);
@@ -61,9 +62,9 @@ class Analytics extends Model
 			->where('created_at', '>=', Carbon::now()->subMonth())
 		    ->get()
 		    ->groupBy(function($date) {
-		        return Carbon::parse($date->created_at)->format('D M d'); 
-		    });    	
-           
+		        return Carbon::parse($date->created_at)->format('D M d');
+		    });
+
         return $visitorTraffic;
     }
 
@@ -76,10 +77,10 @@ class Analytics extends Model
     		->orderBy('send_at', 'DESC')
     		->get();
     		// ->groupBy(function($date) {
-		    //     return Carbon::parse($date->created_at)->format('D M d'); 
-		    // });  
-	
-    	//figure out target stores for each 
+		    //     return Carbon::parse($date->created_at)->format('D M d');
+		    // });
+
+    	//figure out target stores for each
         foreach($comms as $c){
             $targetCount = DB::table('communications_target')->where('communication_id', '=', $c->id)->count();
 
@@ -94,9 +95,9 @@ class Analytics extends Model
             $c->openCount = count($openCount);
             $c->unreadCount = $targetCount - count($openCount);
             $c->readPerc = round(( count($openCount) / $targetCount ) * 100);
-        }    	
+        }
     	//figure out what stores opened it
-    	
+
     	//calculate a percentage
 
     	//format a list of stores +/-
@@ -111,8 +112,8 @@ class Analytics extends Model
     		->orderBy('start')
     		->get();
     		// ->groupBy(function($date) {
-		    //     return Carbon::parse($date->created_at)->format('D M d'); 
-		    // });  
+		    //     return Carbon::parse($date->created_at)->format('D M d');
+		    // });
 
     	return $notices;
     }
