@@ -158,6 +158,7 @@ Route::post('/admin/video/add-meta-data', 'Video\VideoAdminController@updateMeta
 Route::get('/admin/video/{video_id}/uploadthumbnail', 'Video\VideoAdminController@uploadThumbnail');
 Route::post('/admin/video/{video_id}/storethumbnail', 'Video\VideoAdminController@storeThumbnail');
 Route::resource('/admin/video', 'Video\VideoAdminController');
+Route::resource('/admin/playlistorder', 'Video\PlaylistVideoOrderController');
 
 //Playlist
 Route::resource('/admin/playlist', 'Video\PlaylistAdminController');
