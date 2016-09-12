@@ -14,7 +14,7 @@ use App\Models\Video\Video;
 
 class PlaylistAdminController extends Controller
 {
-    
+
     /**
      * Instantiate a new PlaylistAdminController instance.
      */
@@ -98,6 +98,7 @@ class PlaylistAdminController extends Controller
         $selectedVideos = PlaylistVideo::join('videos', 'videos.id', '=', 'playlist_videos.video_id')
                                         ->where('playlist_id', $id)
                                         ->select('videos.*')
+                                        ->orderBy('order')
                                         ->get();
 
         return view('admin.video.playlist-manager.edit')

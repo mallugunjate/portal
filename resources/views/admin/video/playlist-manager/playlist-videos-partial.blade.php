@@ -3,6 +3,9 @@
 	<small>Drag Videos to reorder</small>
 		<div class="dd" id="videoplaylist">
 			<ol class="dd-list">
+				<?php
+				//	dd($videos);
+				 ?>
 				{{-- <div class="dd-placeholder" style="height: 42px;"></div> --}}
 				@foreach($videos as $video)
 
