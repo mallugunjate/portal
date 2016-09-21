@@ -1,4 +1,4 @@
-function updateQuicklinksOrder(data){
+function updateVideoOrder(data){
 	// console.log("made it over here");
 	// console.log(data);
 
@@ -11,7 +11,7 @@ function updateQuicklinksOrder(data){
             console.log("pos:"+ i + ", name:" + attrName + ", value:"+ attrValue);
 
 			$.ajax({
-			    url: '/admin/quicklink/' + attrValue ,
+			    url: '/admin/playlistorder/' + attrValue ,
 			    type: 'PATCH',
 			    data: {
 			  		order: i

@@ -4,9 +4,9 @@
 <head>
     @section('title', 'Playlist')
     @include('admin.includes.head')
-    
+
     <link rel="stylesheet" type="text/css" href="/css/plugins/chosen/chosen.css">
-	
+
 	<meta name="csrf-token" content="{!! csrf_token() !!}"/>
 </head>
 
@@ -51,7 +51,7 @@
 		                            <h5>Edit Playlist: {{ $playlist->title }}</h5>
 		                            <div class="ibox-tools">
 		                                <a href="/admin/playlist/create" class="btn btn-primary" role="button"><i class="fa fa-plus"></i> Add New Playlist</a>
-                                        
+
 		                            </div>
 		                        </div>
 		                        <div class="ibox-content">
@@ -71,12 +71,12 @@
 														{{ $playlist->description }}
 
 													</textarea>
-														
+
 												</div>
 										</div>
 
                                     </form>
-                                       
+
                                 </div>
                             </div>
 
@@ -84,27 +84,27 @@
                             	<div class="ibox-title">
                             		<h5> Videos </h5>
                             		<div class="ibox-tools">
-                            			
+
                             			<div id="add-more-videos" class="btn btn-primary btn-outline col-md-offset-8" role="button" ><i class="fa fa-plus"></i> Add More Videos</div>
                             		</div>
 
                             	</div>
                             	<div class="ibox-content">
                                 <div class="existing-videos row" >
-                                	
+
 									<!-- <div class="form-group"><label class="col-sm-2 control-label">videos Attached</label> -->
 										<div class="existing-videos-container">
 											@include('admin.video.playlist-manager.playlist-videos-partial', ['videos'=>$playlist_videos])
-											
+
 										</div>
 									<!-- </div> -->
 									<div id="videos-staged-to-remove"></div>
-									
+
 								</div>
 								<div id="videos-selected" class="row"></div>
-								</div>		
+								</div>
 
-                            </div>                            
+                            </div>
 
                             <div class="form-group">
                                 <div class="col-sm-4 col-sm-offset-2">
@@ -113,7 +113,7 @@
 
                                 </div>
                             </div>
-                                    
+
 
 
                     </div>
@@ -124,16 +124,16 @@
 
 			    @include('admin.includes.scripts')
             </div>
-	
 
 
-		     
 
 
-    
+
+
+
 	@include('site.includes.bugreport')
 
-	
+
 	<div id="video-listing" class="modal fade">
 	    <div class="modal-dialog">
 	        <div class="modal-content">
@@ -156,9 +156,9 @@
 
 	<script type="text/javascript" src="/js/custom/admin/videos/playlists/editPlaylist.js"></script>
 	<script type="text/javascript" src="/js/plugins/ckeditor-standard/ckeditor.js"></script>
-	
-	
-	
+    <script src="/js/plugins/nestable/jquery.nestable.js"></script>
+    <script src="/js/custom/admin/videos/playlists/changeVideoOrder.js"></script>
+
 	<script type="text/javascript">
 		$.ajaxSetup({
 	        headers: {
@@ -170,6 +170,23 @@
     	});
 	</script>
 
-	
+
+    <script type="text/javascript">
+
+    	 $(document).ready(function(){
+
+    		var serializeVideoData = function (e) {
+    			 var list = e.length ? e : $(e.target);
+    			 var data = list.nestable('serialize');
+    			 updateVideoOrder(data);
+    		 };
+
+    		 $('#videoplaylist').nestable({
+    			 group: 1
+    		 }).on('change', serializeVideoData);
+
+    	 });
+    </script>
+
 </body>
 </html>

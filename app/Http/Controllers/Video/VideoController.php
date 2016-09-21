@@ -79,9 +79,21 @@ class VideoController extends Controller
     {
         $video = Video::getSingleVideo($request->id);
         $playlists = Video::getPlaylistsThatContainSpecificVideo($request->id);
-        
+
         return view('site.video.singlevideo')
             ->with('video', $video)
+            ->with('playlists', $playlists)
+            ->with('skin', $this->skin)
+            ->with('banner', $this->banner)
+            ->with('communicationCount', $this->communicationCount)
+            ->with('urgentNoticeCount', $this->urgentNoticeCount)
+            ->with('isComboStore', $this->isComboStore);
+    }
+
+    public function allPlaylists()
+    {
+        $playlists = Playlist::getLatestPlaylists();
+        return view('site.video.allPlaylists')
             ->with('playlists', $playlists)
             ->with('skin', $this->skin)
             ->with('banner', $this->banner)

@@ -70,9 +70,9 @@ class VideoViewCountController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $video_id = $request->id;
+        $id = $request->id;
         Video::incrementViewCount($id);
     }
 

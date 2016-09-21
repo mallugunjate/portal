@@ -8343,7 +8343,7 @@ body.md-skin {
     font-weight: normal;
     padding-left: 15px;
   }
-  
+
 .inline-folder-link{
   color: #337ab7;
   cursor: pointer;
@@ -8355,7 +8355,7 @@ body.md-skin {
     width: 150px;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;  
+    text-overflow: ellipsis;
     }
 }
 
@@ -8367,7 +8367,7 @@ body.md-skin {
         width: 100px;
         white-space: nowrap;
         overflow: hidden;
-        text-overflow: ellipsis;  
+        text-overflow: ellipsis;
     }
 }
 
@@ -8377,7 +8377,7 @@ body.md-skin {
     width: 150px;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;  
+    text-overflow: ellipsis;
     }
 }
 
@@ -8387,7 +8387,7 @@ body.md-skin {
         width: 80px;
         white-space: nowrap;
         overflow: hidden;
-        text-overflow: ellipsis;  
+        text-overflow: ellipsis;
     }
 }
 
@@ -8397,7 +8397,7 @@ body.md-skin {
     width: 80px;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;  
+    text-overflow: ellipsis;
 }
 
 
@@ -8448,4 +8448,3 @@ body.md-skin {
         width: 50%;
         padding: 0px 0px 0px 20px;
     }
-

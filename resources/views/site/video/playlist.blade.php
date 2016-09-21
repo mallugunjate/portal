@@ -70,8 +70,10 @@
                             <div class="ibox-content clearfix col-xs-12 col-sm-12 col-lg-12 video-playlist-box">
 
                                 <div class="video-container">
+    
                                     {{-- <a href="../watch/{{$vl->id}}"><img src="/video/thumbs/{{$vl->thumbnail}}" class="img-responsive" /></a> --}}
-                                    <video controls="controls" poster="/video/thumbs/{{$vl->thumbnail}}" class="videoInPlaylist" id="video{{$vl->id}}">
+                                    <video class="video-overlay" controls="controls" poster="/video/thumbs/{{$vl->thumbnail}}" class="videoInPlaylist" id="video{{$vl->id}}">
+
                                         <source src="/video/{{$vl->filename}}" type="video/webm" />
                                     </video>
                                 </div>

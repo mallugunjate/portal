@@ -14,7 +14,7 @@ use App\Models\Video\Video;
 
 class PlaylistAdminController extends Controller
 {
-    
+
     /**
      * Instantiate a new PlaylistAdminController instance.
      */
@@ -95,11 +95,21 @@ class PlaylistAdminController extends Controller
         $banners = Banner::all();
         $playlist = Playlist::find($id);
         $videos = Video::getAllVideos();
-        $selectedVideos = PlaylistVideo::join('videos', 'videos.id', '=', 'playlist_videos.video_id')
-                                        ->where('playlist_id', $id)
-                                        ->select('videos.*')
-                                        ->get();
 
+        $selectedVideos = PlaylistVideo::where('playlist_id', $id)->orderBy('order')->get();
+        // $selectedVideos = PlaylistVideo::join('videos', 'videos.id', '=', 'playlist_videos.video_id')
+        //                                 ->where('playlist_id', $id)
+        //                                 ->select('videos.*')
+        //                                 ->select('playlist_videos.playlist_id')
+        //                                 ->orderBy('order')
+        //                                 ->get();
+
+        foreach($selectedVideos as $sv){
+            $video_info = Video::find($sv->video_id);
+            $sv->title = $video_info->title;
+            $sv->thumbnail =  $video_info->thumbnail;
+        }
+    //    dd($selectedVideos);
         return view('admin.video.playlist-manager.edit')
                 ->with('playlist', $playlist)
                 ->with('videos', $videos)

@@ -20,6 +20,7 @@ class PlaylistVideo extends Model
         								->where('playlist_id', $playlistId)
         								->where('playlist_videos.deleted_at', '=', null)
         								->select('videos.*')
+                                        ->orderBy('playlist_videos.order')
         								->get();
 
         foreach($playlist_videos as $video){

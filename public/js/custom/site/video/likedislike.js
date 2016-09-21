@@ -10,8 +10,8 @@ $( "#videolike" ).on( "click", function() {
 
 	var videoid = $("#video_id").val();
 	$.ajax({
-		url : "/videolike/" + videoid,
-	    type: 'PATCH',
+		url : '/videolike',
+	    type: 'POST',
 	    data: {
 	    	id: videoid,
 	    },
@@ -34,8 +34,8 @@ $( "#videodislike" ).on( "click", function() {
 
 	var videoid = $("#video_id").val();
 	$.ajax({
-		url : "/videodislike/" + videoid,
-	    type: 'PATCH',
+		url : '/videodislike',
+	    type: 'POST',
 	    data: {
 	    	id: videoid,
 	    },
@@ -63,8 +63,8 @@ $( ".videodislikeplaylist" ).on( "click", function() {
 
 	var videoid = $(this).attr("data-video-id");
 	$.ajax({
-		url : "/videodislike/" + videoid,
-	    type: 'PATCH',
+		url : "/videodislike",
+	    type: 'POST',
 	    data: {
 	    	id: videoid,
 	    },
@@ -91,8 +91,8 @@ $( ".videolikeplaylist" ).on( "click", function() {
 
 	var videoid = $(this).attr("data-video-id");
 	$.ajax({
-		url : "/videolike/" + videoid,
-	    type: 'PATCH',
+		url : "/videolike",
+	    type: 'POST',
 	    data: {
 	    	id: videoid,
 	    },

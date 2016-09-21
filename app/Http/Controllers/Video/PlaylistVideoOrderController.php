@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Models\Video\Video;
+use App\Models\Video\PlaylistVideo;
 
-class DislikeController extends Controller
+class PlaylistVideoOrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -70,11 +70,12 @@ class DislikeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-     public function update(Request $request)
-     {
-         $dislikeCount = Video::incrementDislikeCount($request->id);
-         return number_format($dislikeCount);
-     }
+    public function update(Request $request, $id)
+    {
+        $playlistitem = PlaylistVideo::find($id);
+        $playlistitem->order = $request['order'];
+        $playlistitem->save();
+    }
 
     /**
      * Remove the specified resource from storage.

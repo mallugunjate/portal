@@ -2,8 +2,8 @@ $( document ).ready(function() {
 
 	var videoid = $("#video_id").val();
 	$.ajax({
-		url : "/videocount/" + videoid,
-	    type: 'PATCH',
+		url : '/videocount',
+	    type: 'POST',
 	    data: {
 	    	id: videoid,
 	    },

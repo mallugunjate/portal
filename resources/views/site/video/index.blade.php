@@ -113,7 +113,7 @@
                             @endforeach
 
 
-                            <a class="pull-right" href="">&raquo; More Playlists</a>
+                            <a class="pull-right" href="video/playlists">&raquo; More Playlists</a>
                         </div>
                     </div>
                 </div>
