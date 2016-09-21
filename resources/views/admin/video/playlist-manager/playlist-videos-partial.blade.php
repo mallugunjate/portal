@@ -13,7 +13,7 @@
 						<span class="pull-left"><div class="dd-handle"><i class="fa fa-bars"></i></div></span>
 						{{-- <span class="pull-right"><a data-event="" id="" class="event-delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a></span> --}}
 						<img src="/video/thumbs/{{ $video->thumbnail }}" height="30" width="30" /><span class="client-link" style="margin:0px 10px;">{{ $video->title }}</span>
-						<a data-video-id="{{$video->id}}" id="file{{$video->id}}" class="remove-video btn btn-danger btn-sm pull-right" style="margin: 0px 10px;"><i class="fa fa-trash"></i></a>
+						<a data-video-id="{{$video->video_id}}" id="file{{$video->video_id}}" class="remove-video btn btn-danger btn-sm pull-right" style="margin: 0px 10px;"><i class="fa fa-trash"></i></a>
 				 </li>
 				@endforeach
 			</ol>
