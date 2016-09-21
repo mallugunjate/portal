@@ -47,9 +47,11 @@ Route::get('/{storeno}/video/playlists', array('uses' => 'Video\VideoController@
 Route::get('/{storeno}/video/watch/{id}', array('uses' => 'Video\VideoController@show'));
 Route::get('/{storeno}/video/playlist/{id}', array('uses' => 'Video\VideoController@showPlaylist'));
 Route::get('/{storeno}/video/tag/{tag}', array('uses' => 'Video\VideoController@showTag'));
-Route::resource('/videocount', 'Video\VideoViewCountController');
-Route::resource('/videolike', 'Video\LikeController');
-Route::resource('/videodislike', 'Video\DislikeController');
+
+
+Route::post('/videocount', 'Video\VideoViewCountController@update');
+Route::post('/videolike', 'Video\LikeController@update');
+Route::post('/videodislike', 'Video\DislikeController@update');
 
 //FEATURES
 Route::get('/{storeno}/feature/show/{id}', 'Feature\FeatureController@show');

@@ -70,10 +70,9 @@ class DislikeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-     public function update(Request $request, $id)
+     public function update(Request $request)
      {
-         $video_id = $request->id;
-         $dislikeCount = Video::incrementDislikeCount($id);
+         $dislikeCount = Video::incrementDislikeCount($request->id);
          return number_format($dislikeCount);
      }
 
