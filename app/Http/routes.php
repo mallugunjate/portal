@@ -53,6 +53,9 @@ Route::post('/videocount', 'Video\VideoViewCountController@update');
 Route::post('/videolike', 'Video\LikeController@update');
 Route::post('/videodislike', 'Video\DislikeController@update');
 
+//audit
+Route::get('/{storeno}/audit', array('uses' => 'Audit\AuditController@index'));
+
 //FEATURES
 Route::get('/{storeno}/feature/show/{id}', 'Feature\FeatureController@show');
 
