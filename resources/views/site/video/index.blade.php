@@ -192,7 +192,7 @@
 
     <script type="text/javascript" src="/js/vendor/underscore-1.8.3.js"></script>
     <script type="text/javascript" src="/js/vendor/lightbox.min.js"></script>
-    <script type="text/javascript" src="/js/custom/site/video/playPause.js"></script>
+    <script type="text/javascript" src="/js/custom/site/video/playPause.js?<?php echo time();?>"></script>
 
     @include('site.includes.modal')
 

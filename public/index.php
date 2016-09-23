@@ -1,6 +1,7 @@
 <?php
 
 header('Access-Control-Allow-Methods: GET POST PATCH PUT DELETE');
+header("Cache-Control: no-cache, must-revalidate");
 
 /**
  * Laravel - A PHP Framework For Web Artisans
