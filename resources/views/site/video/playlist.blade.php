@@ -70,7 +70,7 @@
                             <div class="ibox-content clearfix col-xs-12 col-sm-12 col-lg-12 video-playlist-box">
 
                                 <div class="video-container">
-    
+
                                     {{-- <a href="../watch/{{$vl->id}}"><img src="/video/thumbs/{{$vl->thumbnail}}" class="img-responsive" /></a> --}}
                                     <video class="video-overlay" controls="controls" poster="/video/thumbs/{{$vl->thumbnail}}" class="videoInPlaylist" id="video{{$vl->id}}">
 
@@ -113,9 +113,9 @@
 
     <script type="text/javascript" src="/js/vendor/underscore-1.8.3.js"></script>
     <script type="text/javascript" src="/js/vendor/lightbox.min.js"></script>
-    <script type="text/javascript" src="/js/custom/site/video/incViewCountFromPlaylist.js"></script>
-    <script type="text/javascript" src="/js/custom/site/video/likedislike.js"></script>
-    <script type="text/javascript" src="/js/custom/site/video/playPause.js"></script>
+    <script type="text/javascript" src="/js/custom/site/video/incViewCountFromPlaylist.js?<?php echo time();?>"></script>
+    <script type="text/javascript" src="/js/custom/site/video/likedislike.js?<?php echo time();?>"></script>
+    <script type="text/javascript" src="/js/custom/site/video/playPause.js?<?php echo time();?>"></script>
 
     @include('site.includes.modal')
 
