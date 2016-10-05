@@ -56,7 +56,9 @@
                             <div class="ibox-content clearfix">
                                 @foreach($playlists as $pl)
                                     <div class="col-xs-6 col-sm-4 col-lg-3 video-list-box">
-                                        <a href="playlist/{{$pl->id}}" class="trackclick" data-video-id="{{$pl->id}}"><img src="/video/thumbs/{{$pl->thumbnail}}" class="img-responsive" /></a>
+                                        <div class="embed-responsive embed-responsive-16by9">
+                                        <a href="playlist/{{$pl->id}}" class="trackclick" data-video-id="{{$pl->id}}"><img src="/video/thumbs/{{$pl->thumbnail}}" class="embed-responsive-item img-responsive" /></a>
+                                        </div>
                                         <a href="playlist/{{$pl->id}}" class="trackclick" data-video-id="{{$pl->id}}"><h4>{{$pl->title}}</h4></a>
                                         <p>{{$pl->count}} videos &middot; {{$pl->sinceCreated}} ago</p>
                                     </div>
