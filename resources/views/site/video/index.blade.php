@@ -129,7 +129,9 @@
                             <div class="ibox-content clearfix">
                                 @foreach($mostViewed as $mv)
                                     <div class="col-xs-6 col-sm-4 col-lg-3 video-list-box">
-                                        <a href="video/watch/{{$mv->id}}" class="trackclick" data-video-id="{{$mv->id}}"><img src="/video/thumbs/{{$mv->thumbnail}}" class="img-responsive" /></a>
+                                        <div class="embed-responsive embed-responsive-16by9">
+                                        <a href="video/watch/{{$mv->id}}" class="trackclick" data-video-id="{{$mv->id}}"><img src="/video/thumbs/{{$mv->thumbnail}}" class="embed-responsive-item img-responsive" /></a>
+                                        </div>
                                         <a href="video/watch/{{$mv->id}}" class="trackclick" data-video-id="{{$mv->id}}"><h4>{{$mv->title}}</h4></a>
                                         <p>{{$mv->views}} views &middot; {{$mv->sinceCreated}} ago</p>
                                     </div>
@@ -149,7 +151,9 @@
                             <div class="ibox-content clearfix">
                                 @foreach($mostLiked as $ml)
                                     <div class="col-xs-6 col-sm-4 col-lg-3 video-list-box">
-                                        <a href="video/watch/{{$ml->id}}" class="trackclick" data-video-id="{{$ml->id}}"><img src="/video/thumbs/{{$ml->thumbnail}}" class="img-responsive" /></a>
+                                        <div class="embed-responsive embed-responsive-16by9">
+                                        <a href="video/watch/{{$ml->id}}" class="trackclick" data-video-id="{{$ml->id}}"><img src="/video/thumbs/{{$ml->thumbnail}}" class="embed-responsive-item img-responsive" /></a>
+                                        </div>
                                         <a href="video/watch/{{$ml->id}}" class="trackclick" data-video-id="{{$ml->id}}"><h4>{{$ml->title}}</h4></a>
                                         <p>{{$ml->likes}} likes &middot; {{$ml->sinceCreated}} ago</p>
                                     </div>
@@ -169,7 +173,9 @@
                             <div class="ibox-content clearfix">
                                 @foreach($mostRecent as $mr)
                                     <div class="col-xs-6 col-sm-4 col-lg-3 video-list-box">
-                                        <a href="video/watch/{{$mr->id}}" class="trackclick" data-video-id="{{$mr->id}}"><img src="/video/thumbs/{{$mr->thumbnail}}" class="img-responsive" /></a>
+                                        <div class="embed-responsive embed-responsive-16by9">
+                                        <a href="video/watch/{{$mr->id}}" class="trackclick" data-video-id="{{$mr->id}}"><img src="/video/thumbs/{{$mr->thumbnail}}" class="embed-responsive-item img-responsive" /></a>
+                                        </div>
                                         <a href="video/watch/{{$mr->id}}" class="trackclick" data-video-id="{{$mr->id}}"><h4>{{$mr->title}}</h4></a>
                                         <p>{{$mr->views}} views &middot; {{$mr->sinceCreated}} ago</p>
                                     </div>
