@@ -27,6 +27,19 @@
         width: 1%
     }
 
+/*    .video-thumb {
+          display: block;
+          max-width:360px;
+          max-height:640px;
+          width: auto;
+          height: auto;
+        }
+
+        .video-thumb img{
+          display: block;
+          width: 100% !important;
+          height: auto !important;
+        }*/
     </style>
 </head>
 
@@ -56,7 +69,9 @@
                             <div class="ibox-content clearfix">
                                 @foreach($mostRecent as $mr)
                                     <div class="col-xs-6 col-sm-4 col-lg-3 video-list-box">
-                                        <a href="watch/{{$mr->id}}" class="trackclick" data-video-id="{{$mr->id}}"><img src="/video/thumbs/{{$mr->thumbnail}}" class="img-responsive" /></a>
+                                        <div class="embed-responsive embed-responsive-16by9">
+                                        <a href="watch/{{$mr->id}}" class="trackclick" data-video-id="{{$mr->id}}"><img src="/video/thumbs/{{$mr->thumbnail}}" class="embed-responsive-item img-responsive" /></a>
+                                        </div>
                                         <a href="watch/{{$mr->id}}" class="trackclick" data-video-id="{{$mr->id}}"><h4>{{$mr->title}}</h4></a>
                                         <p>{{$mr->likes}} likes &middot; {{$mr->sinceCreated}} ago</p>
                                     </div>

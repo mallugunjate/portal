@@ -55,7 +55,9 @@
                             <div class="ibox-content clearfix">
                                 @foreach($mostLiked as $ml)
                                     <div class="col-xs-6 col-sm-4 col-lg-3 video-list-box">
-                                        <a href="watch/{{$ml->id}}" class="trackclick" data-video-id="{{$ml->id}}"><img src="/video/thumbs/{{$ml->thumbnail}}" class="img-responsive" /></a>
+                                        <div class="embed-responsive embed-responsive-16by9">
+                                        <a href="watch/{{$ml->id}}" class="trackclick" data-video-id="{{$ml->id}}"><img src="/video/thumbs/{{$ml->thumbnail}}" class="embed-responsive-item img-responsive" /></a>
+                                        </div>
                                         <a href="watch/{{$ml->id}}" class="trackclick" data-video-id="{{$ml->id}}"><h4>{{$ml->title}}</h4></a>
                                         <p>{{$ml->likes}} likes &middot; {{$ml->sinceCreated}} ago</p>
                                     </div>
