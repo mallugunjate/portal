@@ -68,13 +68,13 @@
                             <h2>Featured Video</h2>
                         </div>
 
-                        <a href="video/watch/{{$featured->id}}"><img src="/video/thumbs/{{$featured->thumbnail}}" data-video-id="{{$featured->id}}" class="trackclick img-responsive" style="width: 100%" /></a>
+                       <a href="video/watch/{{$featured['id']}}"><img src="/video/thumbs/{{$featured['thumbnail']}}" data-video-id="{{$featured['id']}}" class="trackclick img-responsive" style="width: 100%" /></a>
 
                         <div class="ibox float-e-margins">
                             <div class="ibox-title clearfix">
                                 <div class="pull-left">
-                                    <h3><a href="video/watch/{{$featured->id}}" class="trackclick" data-video-id="{{$featured->id}}">{{$featured->title}}</a></h3>
-                                    <p>{{$featured->views}} views &middot; {{$featured->sinceCreated}} ago</p>
+                                    <h3><a href="video/watch/{{$featured['id']}}" class="trackclick" data-video-id="{{$featured['id']}}">{{$featured['title']}}</a></h3>
+                                    <p>{{$featured['views']}} views &middot; {{$featured['sinceCreated']}} ago</p>
                                     {{-- <h6>Tags:</h6>
                                     <span class="label">SOmething</span>
                                     <span class="label">SOm3thing totally different</span> --}}
@@ -86,7 +86,7 @@
 
                             </div>
                             <div class="ibox-content clearfix">
-                                <p>{{$featured->description}}</p>
+                                <p>{{$featured['description']}}</p>
                             </div>
                         </div>
                     </div>

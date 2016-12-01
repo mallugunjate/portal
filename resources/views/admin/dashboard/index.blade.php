@@ -53,8 +53,7 @@
 			                            </div>
 			                        </div>
 			                        <div class="ibox-content">
-
-			                       		<input type="text" id="dashboard_title" hidden value="{{$banner->title}}">
+                                                      	<input type="text" id="dashboard_title" hidden value="{{$banner->title}}">
 										<input type="text" id="dashboard_subtitle" hidden value="{{$banner->subtitle}}">
 										<div class="row">
 

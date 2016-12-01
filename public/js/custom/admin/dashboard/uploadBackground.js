@@ -2,8 +2,8 @@ var banner_id = $('#banner_id').val();
 
 $("body").on("click", ".fileinput-upload-button", function(e) {
 
-	event.stopPropagation(); 
-	event.preventDefault(); 
+	e.stopPropagation(); 
+	e.preventDefault(); 
 
 	var file = $('input[id="dashboardbackground"]')[0].files[0];
 

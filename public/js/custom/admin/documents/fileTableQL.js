@@ -103,7 +103,7 @@ var selectDocument = function(id)
 	console.log(files);
 	var fileSelected = _.where(files, {id: id});
 	console.log(fileSelected);
-	$("#ql-doc-selected").html(fileSelected[0].icon + " " + fileSelected[0].title);
+	$("#ql-doc-selected").html(files[0].icon + " " + files[0].title);
 	//id = id.toString();
 	console.log("mehahjhdasda: " + id );
 	$("input[id=selected_file_id]").val(id);

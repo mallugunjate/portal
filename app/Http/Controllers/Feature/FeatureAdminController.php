@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Banner;
 use App\Models\UserSelectedBanner;
 use App\Models\Feature\Feature;
+use App\Models\Feature\FeatureCategory;
 use App\Models\Document\FileFolder;
 use App\Models\Document\Package;
 use App\Models\Document\Document;
@@ -50,6 +51,7 @@ class FeatureAdminController extends Controller
     {
         $banner = UserSelectedBanner::getBanner();
         $banners = Banner::all();
+        $feature_cat = FeatureCategory::getFeatureCategories();
 
         $packages = Package::where('banner_id', $banner->id)->get();
         $fileFolderStructure = FileFolder::getFileFolderStructure($banner->id);
@@ -57,7 +59,8 @@ class FeatureAdminController extends Controller
                 ->with('banner', $banner)
                 ->with('banners', $banners)
                 ->with('navigation', $fileFolderStructure)
-                ->with('packages', $packages);
+                ->with('packages', $packages)
+                ->with('feature_cat','feature_cat');
     }
 
     /**

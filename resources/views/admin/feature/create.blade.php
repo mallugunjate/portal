@@ -75,6 +75,15 @@
                                                     </div>
                                                 </div>
                                         </div>
+                                         <div class="form-group"><label class="col-sm-2 control-label">Select Category</label>
+                                            <div class="col-sm-10">
+                                              <select class="form-control">
+                                                   @foreach ($feature_cat as $fc)
+                                                   <option value="{{$fc->category_type}}">$fc->category_type<option/>
+                                                   @endforeach
+                                              </select>
+                                           </div>
+                                        </div>
 
                                         <div class="hr-line-dashed"></div>
                                         <div class="form-group">

@@ -12,6 +12,7 @@ return [
     | application. If disabled, a simple generic error page is shown.
     |
     */
+   // 'env' =>('APP_ENV','production'),
 
     'debug' => env('APP_DEBUG', false),
 
@@ -26,7 +27,7 @@ return [
     |
     */
 
-    'url' => 'http://localhost',
+    'url' => 'http://139.59.36.190',
 
     /*
     |--------------------------------------------------------------------------
@@ -39,7 +40,7 @@ return [
     |
     */
 
-    'timezone' => 'America/Edmonton',
+    'timezone' => 'America/Denver',
 
     /*
     |--------------------------------------------------------------------------
